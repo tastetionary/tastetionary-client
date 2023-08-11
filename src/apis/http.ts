@@ -1,31 +1,64 @@
-import axios, { AxiosInstance, AxiosRequestConfig, AxiosResponse } from 'axios';
+import axios, { AxiosInstance, AxiosRequestConfig, AxiosResponse, InternalAxiosRequestConfig } from 'axios';
 
 class HttpClient {
   private client: AxiosInstance;
 
   constructor() {
-    this.client = axios;
+    this.client = axios.create(this.axiosConfig());
+    this.requestInterceptors();
+    this.responseInterceptors();
   }
 
-  responseBody<T>(response: AxiosResponse<T>) {
-    return response.data;
+  axiosConfig() {
+    return {
+      baseURL: '',
+      headers: {},
+    };
   }
 
-  get<T>(url: string, config?: AxiosRequestConfig) {
-    return this.client.get<T>(url, config).then(this.responseBody);
+  requestInterceptors() {
+    return this.client.interceptors.request.use(
+      (request: InternalAxiosRequestConfig) => {
+        console.log('axios request!!!!');
+        return request;
+      },
+      (error: any) => {
+        return Promise.reject(error);
+      }
+    );
   }
 
-  post<T, D>(url: string, data?: D, config?: AxiosRequestConfig) {
-    return this.client.post<T>(url, data, config).then(this.responseBody);
+  responseInterceptors() {
+    return this.client.interceptors.response.use(
+      (response: AxiosResponse) => {
+        console.log('axios response!!!!');
+        return response;
+      },
+      (error: any) => {
+        return Promise.reject(error);
+      }
+    );
   }
 
-  put<T, D>(url: string, data?: D, config?: AxiosRequestConfig) {
-    return this.client.put<T>(url, data, config).then(this.responseBody);
+  responseBody(response: AxiosResponse) {
+    return response.data.result;
   }
 
-  delete<T>(url: string, config?: AxiosRequestConfig) {
-    return this.client.delete<T>(url, config).then(this.responseBody);
+  async get<R>(url: string, config?: AxiosRequestConfig) {
+    return this.client.get<R>(url, config).then(this.responseBody);
+  }
+
+  async post<R, D>(url: string, data?: D, config?: AxiosRequestConfig) {
+    return this.client.post<R>(url, data, config).then(this.responseBody);
+  }
+
+  async put<R, D>(url: string, data?: D, config?: AxiosRequestConfig) {
+    return this.client.put<R>(url, data, config).then(this.responseBody);
+  }
+
+  async delete<R>(url: string, config?: AxiosRequestConfig) {
+    return this.client.delete<R>(url, config).then(this.responseBody);
   }
 }
 
-export default HttpClient;
+export default new HttpClient();
