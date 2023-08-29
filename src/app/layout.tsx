@@ -1,5 +1,6 @@
 'use client';
 
+import ReactQueryProvider from '@/lib/react-query/ReactQueryProvider';
 import StyledComponentsRegistry from '@/lib/registry';
 import { GlobalStyle } from '@/styles/GlobalStyle';
 import { theme } from '@/styles/theme';
@@ -19,7 +20,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
                 <StyledComponentsRegistry>
                     <ThemeProvider theme={theme}>
                         <GlobalStyle />
-                        {children}
+                        <ReactQueryProvider>{children}</ReactQueryProvider>
                     </ThemeProvider>
                 </StyledComponentsRegistry>
             </body>
