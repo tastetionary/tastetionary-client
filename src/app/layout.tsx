@@ -15,6 +15,14 @@ const metadata: Metadata = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
     return (
         <html lang="en">
+            <head>
+                <link
+                    rel="stylesheet"
+                    as="style"
+                    crossOrigin=""
+                    href="https://cdn.jsdelivr.net/npm/galmuri/dist/galmuri.css"
+                />
+            </head>
             <body>
                 <StyledComponentsRegistry>
                     <ThemeProvider theme={theme}>
