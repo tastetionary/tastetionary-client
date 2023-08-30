@@ -32,7 +32,7 @@ export default function Home() {
 }
 
 const Main = styled.div`
-    background-color: #d0dbf2;
-    width: 100vw;
-    min-height: 100vh;
+  background-color: #d0dbf2;
+  width: 100vw;
+  min-height: 100vh;
 `;
