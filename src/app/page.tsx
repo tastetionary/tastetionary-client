@@ -2,7 +2,6 @@
 
 import HORIZONTAL_LOGO from '@/assets/logo/horizontal_logo.svg';
 import VERTICAL_LOGO from '@/assets/logo/vertical_logo.svg';
-
 import styled from 'styled-components';
 
 export default function Home() {
