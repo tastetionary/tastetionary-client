@@ -36,7 +36,7 @@ export default function Home() {
 }
 
 const Main = styled.div`
-  background-color: ${({ theme }) => theme.colors.primary[20]};
+  background-color: ${({ theme }) => theme.colors.primary.y05};
   width: 100vw;
   min-height: 100vh;
   display: flex;
