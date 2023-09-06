@@ -1,7 +1,7 @@
 'use client';
 
 import GlobalModal from '@/components/Modal/GlobalModal';
-import MobileLayout from '@/components/layout/mobile/mobileLayout';
+import MobileLayout from '@/components/layout/mobile-layout';
 import ReactQueryProvider from '@/lib/react-query/ReactQueryProvider';
 import StyledComponentsRegistry from '@/lib/registry';
 import { GlobalStyle } from '@/styles/GlobalStyle';
