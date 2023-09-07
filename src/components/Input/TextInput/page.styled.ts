@@ -9,7 +9,7 @@ export const Label = styled.label`
   font-size: 12px;
   font-style: normal;
   font-weight: 400;
-  color: #37474f;
+  color: ${({ theme }) => theme.colors.neutral.bg80};
   margin-bottom: 6px;
 `;
 
@@ -17,8 +17,10 @@ export const InputContainer = styled.div<{ $focused: boolean; $hasError: boolean
   position: relative;
   width: 100%;
   padding: 13px 12px;
-  border: 2px solid ${({ $focused, $hasError }) => ($hasError ? '#E53835' : $focused ? '#b0bec5' : '#CFD8DB')};
-  background: ${({ $hasError }) => ($hasError ? '#FCE9E6' : '#fff')};
+  border: 2px solid
+    ${({ $focused, $hasError, theme }) =>
+      $hasError ? theme.colors.simentic.r60 : $focused ? theme.colors.neutral.bg20 : theme.colors.neutral.bg10};
+  background: ${({ $hasError, theme }) => ($hasError ? theme.colors.secondary.o05 : theme.colors.white)};
 
   svg {
     position: absolute;
@@ -32,11 +34,11 @@ export const Input = styled.input<{ $hasError: boolean }>`
   font-size: 14px;
   font-style: normal;
   font-weight: 400;
-  color: #37474f;
-  background: ${({ $hasError }) => ($hasError ? '#FCE9E6' : '#fff')};
+  color: ${({ theme }) => theme.colors.neutral.bg80};
+  background: ${({ $hasError, theme }) => ($hasError ? theme.colors.secondary.o05 : theme.colors.white)};
 
   &::placeholder {
-    color: #b0bec5;
+    color: ${({ theme }) => theme.colors.neutral.bg20};
     font-size: 14px;
     font-style: normal;
     font-weight: 400;
@@ -50,5 +52,5 @@ export const ErrorMsg = styled.div`
   font-size: 12px;
   font-style: normal;
   font-weight: 400;
-  color: #cb2528;
+  color: ${({ theme }) => theme.colors.simentic.r90};
 `;
