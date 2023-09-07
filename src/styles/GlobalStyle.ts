@@ -5,6 +5,7 @@ export const GlobalStyle = createGlobalStyle`
     ${reset};
 
     * {
+        font-family: var(--Galmuri-9) !important;
         box-sizing: border-box;
     }
 
@@ -17,6 +18,7 @@ export const GlobalStyle = createGlobalStyle`
     }
 
     input, textarea {
+        font-family: var(--Pretendard-Variable) !important;
         outline: none;
         border: none;
     }
