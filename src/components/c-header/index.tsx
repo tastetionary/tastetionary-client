@@ -1,5 +1,6 @@
 import ISBACK_BTN from '@/assets/logo/back_btn.svg';
 import MAIN_LOGO from '@/assets/logo/main_logo.svg';
+import { useRouter } from 'next/navigation';
 import { styled } from 'styled-components';
 
 interface Props {
@@ -9,11 +10,13 @@ interface Props {
 }
 
 export default function CHeader({ isLogo = false, isBackBtn = false, title }: Props) {
+  const router = useRouter();
+
   return (
     <>
       <S.Wrapper>
         <S.Container>
-          <S.BackBtnContainer>{isBackBtn && <ISBACK_BTN />}</S.BackBtnContainer>
+          <S.BackBtnContainer>{isBackBtn && <ISBACK_BTN onClick={() => router.back()} />}</S.BackBtnContainer>
           <S.TitleContainer>
             {isLogo && <MAIN_LOGO />}
             <S.Title>{title}</S.Title>
