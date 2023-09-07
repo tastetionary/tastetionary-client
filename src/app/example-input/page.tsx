@@ -1,5 +1,6 @@
 'use client';
 
+import MainButton from '@/components/Button/MainButton';
 import TextInput from '@/components/Input/TextInput';
 import { SetStateAction, useState } from 'react';
 import styled from 'styled-components';
@@ -28,13 +29,16 @@ export default function ExampleInput() {
         value={text}
         onChange={(e: { target: { value: SetStateAction<string> } }) => setText(e.target.value)}
       />
+
+      <MainButton btnText="테스트" />
+
+      <MainButton btnText="disabled btn" disabled={true} />
     </Main>
   );
 }
 
 const Main = styled.div`
-  background-color: #edeff1;
-  width: 100vw;
+  background-color: white;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
