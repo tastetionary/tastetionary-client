@@ -1,0 +1,8 @@
+<svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M2 2H18V18H2V2Z" fill="#EDEFF1"/>
+<path d="M2 0H18V2H2V0Z" fill="#CFD8DB"/>
+<path d="M2 18H18V20H2V18Z" fill="#CFD8DB"/>
+<path d="M20 2V18H18V2H20Z" fill="#CFD8DB"/>
+<path d="M2 2V18H0L6.99382e-07 2L2 2Z" fill="#CFD8DB"/>
+<rect x="2" y="2" width="16" height="16" fill="white"/>
+</svg>
