@@ -1,6 +1,7 @@
+import { ButtonHTMLAttributes } from 'react';
 import * as S from './page.styled';
 
-interface Props {
+interface Props extends ButtonHTMLAttributes<HTMLButtonElement> {
   btnText: string;
   [key: string]: any;
 }
