@@ -6,7 +6,6 @@ interface Props extends InputHTMLAttributes<HTMLInputElement> {
   checked: boolean;
   onChangeEvent: (checked: boolean) => void;
   label?: string;
-  [key: string]: any;
 }
 
 export default function CheckBox2({ checkBoxId, checked, onChangeEvent, label, ...rest }: Props) {
@@ -17,6 +16,7 @@ export default function CheckBox2({ checkBoxId, checked, onChangeEvent, label, .
         id={checkBoxId}
         checked={checked}
         onChange={({ target: { checked } }) => onChangeEvent(checked)}
+        {...rest}
       />
 
       <S.Label htmlFor={checkBoxId}>{label}</S.Label>
