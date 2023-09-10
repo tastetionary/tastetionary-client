@@ -10,10 +10,10 @@ export default function GridLayout({ children }: Props) {
 const S = {
   Wrapper: styled.div`
     background-size:
-      10px,
-      10px,
-      10px 10px,
-      10px 10px;
+      20px,
+      20px,
+      20px 20px,
+      20px 20px;
     background-image: linear-gradient(90deg, #00000004 1px, transparent 1px),
       linear-gradient(90deg, #00000004 1px, transparent 1px), linear-gradient(#00000004 1px, transparent 1px),
       linear-gradient(#00000004 1px, transparent 1px);
