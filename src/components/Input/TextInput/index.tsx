@@ -1,13 +1,12 @@
 import INPUT_ERROR from '@/assets/Input/InputError.svg';
 import INPUT_INACTIVE from '@/assets/Input/InputInactive.svg';
 import INPUT_TYPED from '@/assets/Input/InputTyped.svg';
-import { useState } from 'react';
+import { InputHTMLAttributes, useState } from 'react';
 import * as S from './page.styled';
 
-interface TextInputProps {
+interface TextInputProps extends InputHTMLAttributes<HTMLInputElement> {
   label?: string;
   errorMsg?: string;
-  [key: string]: any;
 }
 
 export default function TextInput({ label, errorMsg, ...rest }: TextInputProps) {

@@ -1,7 +1,8 @@
 'use client';
 
+import MainButton from '@/components/Button/MainButton';
 import TextInput from '@/components/Input/TextInput';
-import { SetStateAction, useState } from 'react';
+import { useState } from 'react';
 import styled from 'styled-components';
 
 export default function ExampleInput() {
@@ -9,32 +10,31 @@ export default function ExampleInput() {
 
   return (
     <Main>
-      <TextInput
-        placeholder="아이디를 입력해 주세요"
-        value={text}
-        onChange={(e: { target: { value: SetStateAction<string> } }) => setText(e.target.value)}
-      />
+      <TextInput placeholder="아이디를 입력해 주세요" value={text} onChange={e => setText(e.target.value)} />
 
       <TextInput
         label="아이디"
         placeholder="아이디를 입력해 주세요"
         value={text}
-        onChange={(e: { target: { value: SetStateAction<string> } }) => setText(e.target.value)}
+        onChange={e => setText(e.target.value)}
       />
 
       <TextInput
         errorMsg="ERROR TEXT ERROR TEXT ERROR"
         placeholder="아이디를 입력해 주세요"
         value={text}
-        onChange={(e: { target: { value: SetStateAction<string> } }) => setText(e.target.value)}
+        onChange={e => setText(e.target.value)}
       />
+
+      <MainButton btnText="테스트" />
+
+      <MainButton btnText="disabled btn" disabled={true} />
     </Main>
   );
 }
 
 const Main = styled.div`
-  background-color: #edeff1;
-  width: 100vw;
+  background-color: white;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
