@@ -3,7 +3,6 @@ import * as S from './page.styled';
 
 interface Props extends ButtonHTMLAttributes<HTMLButtonElement> {
   btnText: string;
-  [key: string]: any;
 }
 
 export default function MainButton({ btnText, ...rest }: Props) {
