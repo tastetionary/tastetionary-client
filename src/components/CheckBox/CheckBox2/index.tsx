@@ -1,20 +1,22 @@
+import { InputHTMLAttributes } from 'react';
 import * as S from './page.styled';
 
-interface Props {
+interface Props extends InputHTMLAttributes<HTMLInputElement> {
   checkBoxId: string;
   checked: boolean;
-  onChange: (checked: boolean) => void;
+  onChangeEvent: (checked: boolean) => void;
   label?: string;
+  [key: string]: any;
 }
 
-export default function CheckBox2({ checkBoxId, checked, onChange, label }: Props) {
+export default function CheckBox2({ checkBoxId, checked, onChangeEvent, label, ...rest }: Props) {
   return (
     <S.Container>
       <S.Checkbox
         type="checkbox"
         id={checkBoxId}
         checked={checked}
-        onChange={({ target: { checked } }) => onChange(checked)}
+        onChange={({ target: { checked } }) => onChangeEvent(checked)}
       />
 
       <S.Label htmlFor={checkBoxId}>{label}</S.Label>
