@@ -9,14 +9,8 @@ export default function GridLayout({ children }: Props) {
 
 const S = {
   Wrapper: styled.div`
-    background-size:
-      20px,
-      20px,
-      20px 20px,
-      20px 20px;
-    background-image: linear-gradient(90deg, #00000004 1px, transparent 1px),
-      linear-gradient(90deg, #00000004 1px, transparent 1px), linear-gradient(#00000004 1px, transparent 1px),
-      linear-gradient(#00000004 1px, transparent 1px);
-    z-index: -100;
+    background-size: 20px 20px;
+    background-image: ${({ theme }) => `linear-gradient(to right, ${theme.colors.neutral.bg05} 1px, transparent 1px),
+      linear-gradient(to bottom, ${theme.colors.neutral.bg05} 1px, transparent 1px);`};
   `,
 };
