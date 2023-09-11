@@ -10,17 +10,9 @@ export default function HorizontalLayout({ children, subject }: Props) {
 
 const S = {
   Wrapper: styled.div<{ subject: 'menu' | 'restaurant' }>`
-    background-size:
-      20px,
-      20px,
-      20px 20px,
-      20px 20px;
-    background-image: linear-gradient(90deg, transparent 1px, transparent 1px),
-      linear-gradient(90deg, transparent 1px, transparent 1px),
-      ${({ theme, subject }) =>
-        subject === 'menu'
-          ? `linear-gradient(${theme.colors.secondary.o10} 0.5px, transparent 0.5px)`
-          : `linear-gradient(${theme.colors.primary.y10} 0.5px, transparent 0.5px)`},
-      linear-gradient(#00000004 1px, transparent 1px);
+    background: ${({ theme, subject }) =>
+      subject === 'menu'
+        ? `radial-gradient(circle at bottom , ${theme.colors.secondary.o10} 0.5px, transparent 0) top/1px 20px;`
+        : `radial-gradient(circle at bottom , ${theme.colors.primary.y10} 0.5px, transparent 0) top/1px 20px;`};
   `,
 };
