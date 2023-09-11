@@ -1,5 +1,4 @@
-import MenuIcon from '@/assets/logo/menu_icon.svg';
-import RestaurantIcon from '@/assets/logo/restaurant_icon.svg';
+// import MenuIcon from '@/assets/logo/menu_icon.svg';
 import { styled } from 'styled-components';
 import HorizontalLayout from '../layout/horizontal-layout';
 
@@ -17,8 +16,8 @@ export default function CPickerButton({ title, desc, subject }: Props) {
           <S.Header></S.Header>
           <S.Content>
             <S.Icon>
-              {subject === 'menu' && <MenuIcon />}
-              {subject === 'restaurant' && <RestaurantIcon />}
+              {/* {subject === 'menu' && <MenuIcon />} */}
+              {/* {subject === 'restaurant' && <RestaurantIcon />} */}
             </S.Icon>
             <S.Title>{title}</S.Title>
             <S.Description subject={subject}>{desc}</S.Description>
@@ -41,6 +40,13 @@ const S = {
           : `${theme.colors.primary.y20}, ${theme.colors.primary.y20} 20px, ${theme.colors.primary.y05} 0, ${theme.colors.primary.y05} 100%`}
     );
 
+    & button {
+      background-image: ${({ subject }) =>
+        subject === 'menu'
+          ? `url('./image/PickerButton/menu_icon.svg')`
+          : `url('./image/PickerButton/restaurant_icon.svg')`};
+    }
+
     &:active {
       background: repeating-linear-gradient(
         ${({ theme, subject }) =>
@@ -48,6 +54,13 @@ const S = {
             ? `${theme.colors.secondary.o40}, ${theme.colors.secondary.o40} 20px, ${theme.colors.secondary.o05} 0, ${theme.colors.secondary.o05} 100%`
             : `${theme.colors.primary.y40}, ${theme.colors.primary.y40} 20px, ${theme.colors.primary.y05} 0, ${theme.colors.primary.y05} 100%`}
       );
+
+      & button {
+        background-image: ${({ subject }) =>
+          subject === 'menu'
+            ? `url('./image/PickerButton/menu_pressed_icon.svg')`
+            : `url('./image/PickerButton/restaurant_pressed_icon.svg')`};
+      }
     }
   `,
   Header: styled.div`
@@ -55,7 +68,10 @@ const S = {
     height: 20px;
   `,
   Content: styled.div``,
-  Icon: styled.div``,
+  Icon: styled.button`
+    width: 72px;
+    height: 72px;
+  `,
   Title: styled.p`
     font-size: 20px;
     -webkit-text-stroke: 0.7px white;
