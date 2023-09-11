@@ -58,6 +58,8 @@ const S = {
   Icon: styled.div``,
   Title: styled.p`
     font-size: 20px;
+    -webkit-text-stroke: 0.7px white;
+    font-weight: 400;
   `,
   Description: styled.p<{ subject: 'menu' | 'restaurant' }>`
     color: ${({ subject, theme }) => (subject === 'menu' ? theme.colors.secondary.o30 : theme.colors.primary.y50)};
