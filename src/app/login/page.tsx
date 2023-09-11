@@ -6,14 +6,30 @@ import TextInput from '@/components/Input/TextInput';
 import CHeader from '@/components/c-header';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
+import { SubmitHandler, useForm } from 'react-hook-form';
 import * as S from './pagd.styled';
+
+interface FormValue {
+  email: string;
+  password: string;
+}
 
 export default function Login() {
   const router = useRouter();
+  const {
+    register,
+    handleSubmit,
 
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+    formState: { errors, isDirty, isValid },
+  } = useForm<FormValue>({
+    mode: 'onSubmit',
+  });
+
   const [loginState, setLoginState] = useState(false);
+
+  const onSubmitHandler: SubmitHandler<FormValue> = data => {
+    console.log(data);
+  };
 
   return (
     <>
@@ -24,26 +40,24 @@ export default function Login() {
           <S.FormShadow />
 
           <S.FormHeader></S.FormHeader>
-          <S.Form>
+          <S.Form onSubmit={handleSubmit(onSubmitHandler)}>
             <TextInput
               type="email"
               label="아이디"
               placeholder="아이디 입력"
-              value={email}
-              onChange={e => setEmail(e.target.value)}
+              {...register('email', { required: true, pattern: /^\S+@\S+$/i })}
             />
-
-            <div style={{ width: '100%', height: 20 }} />
 
             <TextInput
               type="password"
               label="비밀번호"
               placeholder="비밀번호 입력"
-              value={password}
-              onChange={e => setPassword(e.target.value)}
+              errorMsg={errors?.password?.message}
+              {...register('password', {
+                required: true,
+                minLength: { value: 8, message: '8글자 이상 입력해 주세요.' },
+              })}
             />
-
-            <div style={{ width: '100%', height: 20 }} />
 
             <CheckBox2
               checkBoxId="login-state"
@@ -52,9 +66,7 @@ export default function Login() {
               onChangeEvent={checked => setLoginState(checked)}
             />
 
-            <div style={{ width: '100%', height: 40 }} />
-
-            <MainButton type="button" btnText="로그인" disabled={email === '' || password.length < 8} />
+            <MainButton btnText="로그인" disabled={!isDirty || !isValid} />
           </S.Form>
         </S.FormContainer>
 

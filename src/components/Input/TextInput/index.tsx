@@ -1,7 +1,7 @@
 import INPUT_ERROR from '@/assets/Input/InputError.svg';
 import INPUT_INACTIVE from '@/assets/Input/InputInactive.svg';
 import INPUT_TYPED from '@/assets/Input/InputTyped.svg';
-import { InputHTMLAttributes, useState } from 'react';
+import { ForwardedRef, InputHTMLAttributes, forwardRef, useState } from 'react';
 import * as S from './page.styled';
 
 interface TextInputProps extends InputHTMLAttributes<HTMLInputElement> {
@@ -9,7 +9,7 @@ interface TextInputProps extends InputHTMLAttributes<HTMLInputElement> {
   errorMsg?: string;
 }
 
-export default function TextInput({ label, errorMsg, ...rest }: TextInputProps) {
+function TextInput({ label, errorMsg, ...rest }: TextInputProps, ref: ForwardedRef<HTMLInputElement>) {
   const [focused, setFocused] = useState(false);
 
   const hasError = Boolean(errorMsg);
@@ -24,7 +24,7 @@ export default function TextInput({ label, errorMsg, ...rest }: TextInputProps) 
         onFocus={() => setFocused(true)}
         onBlur={() => setFocused(false)}
       >
-        <S.Input $hasError={hasError} {...rest} />
+        <S.Input $hasError={hasError} ref={ref} {...rest} />
 
         {hasError ? <INPUT_ERROR /> : focused ? <INPUT_TYPED /> : <INPUT_INACTIVE />}
       </S.InputContainer>
@@ -33,3 +33,5 @@ export default function TextInput({ label, errorMsg, ...rest }: TextInputProps) 
     </S.Container>
   );
 }
+
+export default forwardRef<HTMLInputElement, TextInputProps>(TextInput);

@@ -20,6 +20,14 @@ export const FormHeader = styled.div`
 export const Form = styled.form`
   padding: 20px;
   background-color: ${({ theme }) => theme.colors.neutral.bg05};
+
+  div:nth-child(-n + 2) {
+    margin-bottom: 20px;
+  }
+
+  button {
+    margin-top: 40px;
+  }
 `;
 
 export const FormShadow = styled.div`
