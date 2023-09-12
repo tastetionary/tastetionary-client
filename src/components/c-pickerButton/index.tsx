@@ -15,10 +15,7 @@ export default function CPickerButton({ title, desc, subject }: Props) {
         <HorizontalLayout subject={subject}>
           <S.Header></S.Header>
           <S.Content>
-            <S.Icon>
-              {/* {subject === 'menu' && <MenuIcon />} */}
-              {/* {subject === 'restaurant' && <RestaurantIcon />} */}
-            </S.Icon>
+            <S.Icon></S.Icon>
             <S.Title>{title}</S.Title>
             <S.Description subject={subject}>{desc}</S.Description>
           </S.Content>
@@ -74,7 +71,11 @@ const S = {
   `,
   Title: styled.p`
     font-size: 20px;
-    -webkit-text-stroke: 0.7px white;
+    text-shadow:
+      -1px 0 white,
+      0 1px white,
+      1px 0 white,
+      0 -1px white;
     font-weight: 400;
   `,
   Description: styled.p<{ subject: 'menu' | 'restaurant' }>`
