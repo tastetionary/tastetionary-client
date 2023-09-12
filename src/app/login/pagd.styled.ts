@@ -32,10 +32,10 @@ export const Form = styled.form`
 
 export const FormShadow = styled.div`
   position: absolute;
-  top: 10px;
-  left: 30px;
-  width: calc(100% - 40px - 6px);
-  height: calc(100% - 6px);
+  top: 4px;
+  left: 24px;
+  width: calc(100% - 40px);
+  height: 100%;
   background-color: rgba(0, 0, 0, 0.1);
   z-index: -1;
 `;
