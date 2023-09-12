@@ -7,6 +7,7 @@ export const GlobalStyle = createGlobalStyle`
     * {
         font-family: var(--Galmuri-9) !important;
         box-sizing: border-box;
+        color: ${({ theme }) => theme.colors.neutral.bg80};
     }
 
     body {
