@@ -7,3 +7,8 @@ export const MainContent = styled.main`
     margin-top: 36px;
   }
 `;
+
+export const NavContainer = styled.div`
+  display: flex;
+  justify-content: space-around;
+`;
