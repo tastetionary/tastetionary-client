@@ -36,6 +36,7 @@ const S = {
     position: fixed;
     top: 44px;
     width: 360px;
+    z-index: 1;
 
     @media screen and (max-width: 768px) {
       width: 100%;
