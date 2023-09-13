@@ -1,6 +1,7 @@
 'use client';
 
 import GlobalModal from '@/components/Modal/GlobalModal';
+import GridLayout from '@/components/layout/grid-layout';
 import MobileLayout from '@/components/layout/mobile-layout';
 import ReactQueryProvider from '@/lib/react-query/ReactQueryProvider';
 import StyledComponentsRegistry from '@/lib/registry';
@@ -38,7 +39,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
               <GlobalStyle />
               <GlobalModal />
               <ReactQueryProvider>
-                <MobileLayout>{children}</MobileLayout>
+                <MobileLayout>
+                  <GridLayout>{children}</GridLayout>
+                </MobileLayout>
               </ReactQueryProvider>
             </ThemeProvider>
           </RecoilRoot>
