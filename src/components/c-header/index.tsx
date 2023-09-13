@@ -16,7 +16,9 @@ export default function CHeader({ isLogo = false, isBackBtn = false, title }: Pr
     <>
       <S.Wrapper>
         <S.Container>
-          <S.BackBtnContainer>{isBackBtn && <ISBACK_BTN onClick={() => router.back()} />}</S.BackBtnContainer>
+          <S.BackBtnContainer isBackBtn={isBackBtn}>
+            {isBackBtn && <ISBACK_BTN onClick={() => router.back()} />}
+          </S.BackBtnContainer>
           <S.TitleContainer>
             {isLogo && <MAIN_LOGO />}
             <S.Title>{title}</S.Title>
@@ -29,14 +31,25 @@ export default function CHeader({ isLogo = false, isBackBtn = false, title }: Pr
 
 const S = {
   Wrapper: styled.div`
-    padding: 20px 16px;
+    height: 56px;
     background-color: ${({ theme }) => theme.colors.white};
-    border-bottom: 1px solid ${({ theme }) => theme.colors.neutral.bg05};
   `,
-  Container: styled.div``,
-  BackBtnContainer: styled.div`
+  Container: styled.div`
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+  `,
+  BackBtnContainer: styled.div<{ isBackBtn?: boolean }>`
     position: absolute;
-    cursor: pointer;
+    left: 0;
+    cursor: ${({ isBackBtn }) => (isBackBtn ? 'pointer' : 'auto')};
+    width: 56px;
+    height: 56px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
   `,
   TitleContainer: styled.div`
     display: flex;
