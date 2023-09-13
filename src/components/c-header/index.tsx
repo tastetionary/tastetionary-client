@@ -30,6 +30,8 @@ export default function CHeader({ isLogo = false, isBackBtn = false, title }: Pr
 const S = {
   Wrapper: styled.div`
     padding: 20px 16px;
+    background-color: ${({ theme }) => theme.colors.white};
+    border-bottom: 1px solid ${({ theme }) => theme.colors.neutral.bg05};
   `,
   Container: styled.div``,
   BackBtnContainer: styled.div`
