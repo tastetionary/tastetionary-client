@@ -28,9 +28,12 @@ const useFunnel = <T extends string[]>(steps: T, defaultStep: T[number]) => {
   const router = useRouter();
   const pathname = usePathname();
 
-  const setStep = useCallback(() => {
-    router.push(`${pathname}?${params.toString()}`);
-  }, [params]);
+  const setStep = useCallback(
+    (step: T[number]) => {
+      router.push(`${pathname}?step=${step}`);
+    },
+    [params]
+  );
 
   const FunnelComponent = Object.assign(
     (props: Omit<FunnelProps<T>, 'step' | 'steps'>) => {

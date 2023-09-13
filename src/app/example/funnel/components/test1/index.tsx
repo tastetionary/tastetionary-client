@@ -1,3 +1,7 @@
-export default function Test1() {
-  return <div>Test1</div>;
+export default function Test1({ setStep }: any) {
+  return (
+    <>
+      <button onClick={setStep}>TEST2로 가라</button>
+    </>
+  );
 }

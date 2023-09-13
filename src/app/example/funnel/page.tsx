@@ -11,10 +11,10 @@ export default function FunnelExample() {
     <>
       <Funnel>
         <Funnel.Step name="test1">
-          <Test1 />
+          <Test1 setStep={() => setStep('test2')} />
         </Funnel.Step>
         <Funnel.Step name="test2">
-          <Test2 />
+          <Test2 setStep={() => setStep('test1')} />
         </Funnel.Step>
       </Funnel>
     </>
