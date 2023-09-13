@@ -30,6 +30,13 @@ export default function CHeader({ isLogo = false, isBackBtn = false, title }: Pr
 const S = {
   Wrapper: styled.div`
     padding: 20px 16px;
+    position: fixed;
+    top: 44px;
+    width: 360px;
+
+    @media screen and (max-width: 768px) {
+      width: 100%;
+    }
   `,
   Container: styled.div``,
   BackBtnContainer: styled.div`
