@@ -16,7 +16,7 @@ export default function CHeader({ isLogo = false, isBackBtn = false, title }: Pr
     <>
       <S.Wrapper>
         <S.Container>
-          <S.BackBtnContainer isBackBtn={isBackBtn}>
+          <S.BackBtnContainer $isBackBtn={isBackBtn}>
             {isBackBtn && <ISBACK_BTN onClick={() => router.back()} />}
           </S.BackBtnContainer>
           <S.TitleContainer>
@@ -49,10 +49,10 @@ const S = {
     align-items: center;
     height: 100%;
   `,
-  BackBtnContainer: styled.div<{ isBackBtn?: boolean }>`
+  BackBtnContainer: styled.div<{ $isBackBtn?: boolean }>`
     position: absolute;
     left: 0;
-    cursor: ${({ isBackBtn }) => (isBackBtn ? 'pointer' : 'auto')};
+    cursor: ${({ $isBackBtn }) => ($isBackBtn ? 'pointer' : 'auto')};
     width: 56px;
     height: 56px;
     display: flex;
