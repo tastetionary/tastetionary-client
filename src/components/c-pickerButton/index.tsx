@@ -6,12 +6,18 @@ interface Props {
   title: string;
   desc: string;
   subject: 'menu' | 'restaurant';
+  clickEvent?: () => void;
 }
 
-export default function CPickerButton({ title, desc, subject }: Props) {
+export default function CPickerButton({ title, desc, subject, clickEvent }: Props) {
   return (
     <>
-      <S.Button subject={subject}>
+      <S.Button
+        subject={subject}
+        onClick={() => {
+          if (clickEvent) clickEvent();
+        }}
+      >
         <HorizontalLayout subject={subject}>
           <S.Header></S.Header>
           <S.Content>
