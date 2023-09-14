@@ -12,8 +12,12 @@ export default function SelectMenu() {
   const keywordData = menu_set?.keyword;
 
   const [selectedCategory, setSelectedCategory] = useState<string[]>([]);
+  const [selectedKeyword, setSelectedKeyword] = useState<string[]>([]);
+
+  const btnDisabled = selectedCategory.length === 0 || selectedKeyword.length === 0;
 
   console.log(selectedCategory);
+  console.log(selectedKeyword);
 
   return (
     <>
@@ -68,6 +72,52 @@ export default function SelectMenu() {
             );
           })}
         </S.MenuContainer>
+      </S.Section>
+
+      <S.Section>
+        <S.SectionTitleContainer>
+          <IC_PIN2 />
+          <S.SectionTitle>키워드</S.SectionTitle>
+          <S.SectionDesc>(복수 선택 가능)</S.SectionDesc>
+        </S.SectionTitleContainer>
+
+        <S.KeywordContainer>
+          {keywordData?.map((k, i) => {
+            const isSelected = selectedKeyword?.includes(k?.name);
+
+            return (
+              <S.KeywordBtn
+                key={k.id}
+                $isSelected={isSelected}
+                onClick={() => {
+                  if (selectedKeyword?.length > 0 && isSelected) {
+                    // 이미 선택된 경우
+                    if (i === 0) {
+                      setSelectedKeyword([]);
+                    } else {
+                      setSelectedKeyword(prev => {
+                        const filtered: string[] = prev.filter(p => p !== k?.name);
+
+                        return [...filtered];
+                      });
+                    }
+                  } else {
+                    // 새롭게 추가하는 경우
+                    if (i === 0) {
+                      const allKeywordName = keywordData?.map(k => k.name);
+
+                      setSelectedKeyword(allKeywordName);
+                    } else {
+                      setSelectedKeyword(prev => [...prev, k?.name]);
+                    }
+                  }
+                }}
+              >
+                {k.name}
+              </S.KeywordBtn>
+            );
+          })}
+        </S.KeywordContainer>
       </S.Section>
     </>
   );
