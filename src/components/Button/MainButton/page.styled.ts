@@ -3,6 +3,7 @@ import styled from 'styled-components';
 export const Button = styled.button`
   max-width: 360px;
   width: 100%;
+  height: 60px;
   aspect-ratio: 4;
   background: url('./image/Button/Main_Button_default.svg') center no-repeat;
   background-size: cover;
