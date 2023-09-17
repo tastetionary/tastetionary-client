@@ -1,3 +1,4 @@
+import MainButton from '@/components/Button/MainButton';
 import CheckBox2 from '@/components/CheckBox/CheckBox2';
 import CHeader from '@/components/c-header';
 import * as S from './page.styled';
@@ -17,19 +18,19 @@ export default function Terms() {
           </S.SubTitle>
         </S.TitleContainer>
         <S.CheckboxWrapper>
-          <S.Divider></S.Divider>
-          <S.CheckboxContainer>
+          <S.Divider isActive></S.Divider>
+          <S.CheckboxContainer isActive>
             <CheckBox2
               checkBoxId="terms-of-agree"
               label="이용 약관 전체 동의"
               onChangeEvent={() => console.log('click')}
-              checked={false}
+              checked={true}
             />
           </S.CheckboxContainer>
         </S.CheckboxWrapper>
         <S.PrivacyNoticeWrapper>
           <S.PrivacyNoticeCheckboxContainer>
-            <CheckBox2 checkBoxId="privacy-notice" onChangeEvent={() => console.log('click')} checked={false} />
+            <CheckBox2 checkBoxId="privacy-notice" onChangeEvent={() => console.log('click')} checked={true} />
           </S.PrivacyNoticeCheckboxContainer>
           <S.PrivacyNoticeContainer>
             <S.PrivacyNoticeTitle>[필수] 개인정보 처리방침</S.PrivacyNoticeTitle>
@@ -39,13 +40,17 @@ export default function Terms() {
 
         <S.MarketingWrapper>
           <S.MarketingCheckboxContainer>
-            <CheckBox2 checkBoxId="privacy-notice" onChangeEvent={() => console.log('click')} checked={false} />
+            <CheckBox2 checkBoxId="marketing" onChangeEvent={() => console.log('click')} checked={true} />
           </S.MarketingCheckboxContainer>
           <S.MarketingContainer>
             <S.MarketingTitle>[필수] 마케팅 활용 정보 수신 제공</S.MarketingTitle>
             <S.MarketingLook>보기</S.MarketingLook>
           </S.MarketingContainer>
         </S.MarketingWrapper>
+
+        <S.NextButtonWrapper>
+          <MainButton btnText="다음" disabled={false} />
+        </S.NextButtonWrapper>
       </S.Wrapper>
     </>
   );

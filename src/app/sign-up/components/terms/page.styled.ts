@@ -28,17 +28,17 @@ export const CheckboxWrapper = styled.div`
   box-shadow: 4px 4px 0px 0px rgba(0, 0, 0, 0.1);
 `;
 
-export const CheckboxContainer = styled.div`
+export const CheckboxContainer = styled.div<{ isActive: boolean }>`
   display: flex;
   width: 100%;
-  background-color: ${({ theme }) => theme.colors.neutral.bg05};
+  background-color: ${({ theme, isActive }) => (isActive ? theme.colors.primary.y05 : theme.colors.neutral.bg05)};
   align-items: center;
   padding-left: 10px;
 `;
 
-export const Divider = styled.div`
+export const Divider = styled.div<{ isActive: boolean }>`
   width: 10px;
-  background-color: ${({ theme }) => theme.colors.neutral.bg10};
+  background-color: ${({ theme, isActive }) => (isActive ? theme.colors.primary.y20 : theme.colors.neutral.bg10)};
 `;
 
 export const PrivacyNoticeWrapper = styled.div`
@@ -90,4 +90,8 @@ export const MarketingLook = styled.p`
   font-weight: 400;
   text-decoration-line: underline;
   color: ${({ theme }) => theme.colors.neutral.bg40};
+`;
+
+export const NextButtonWrapper = styled.div`
+  margin-top: 122px;
 `;
