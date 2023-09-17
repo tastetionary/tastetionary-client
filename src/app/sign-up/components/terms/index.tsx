@@ -27,6 +27,25 @@ export default function Terms() {
             />
           </S.CheckboxContainer>
         </S.CheckboxWrapper>
+        <S.PrivacyNoticeWrapper>
+          <S.PrivacyNoticeCheckboxContainer>
+            <CheckBox2 checkBoxId="privacy-notice" onChangeEvent={() => console.log('click')} checked={false} />
+          </S.PrivacyNoticeCheckboxContainer>
+          <S.PrivacyNoticeContainer>
+            <S.PrivacyNoticeTitle>[필수] 개인정보 처리방침</S.PrivacyNoticeTitle>
+            <S.PrivacyNoticeLook>보기</S.PrivacyNoticeLook>
+          </S.PrivacyNoticeContainer>
+        </S.PrivacyNoticeWrapper>
+
+        <S.MarketingWrapper>
+          <S.MarketingCheckboxContainer>
+            <CheckBox2 checkBoxId="privacy-notice" onChangeEvent={() => console.log('click')} checked={false} />
+          </S.MarketingCheckboxContainer>
+          <S.MarketingContainer>
+            <S.MarketingTitle>[필수] 마케팅 활용 정보 수신 제공</S.MarketingTitle>
+            <S.MarketingLook>보기</S.MarketingLook>
+          </S.MarketingContainer>
+        </S.MarketingWrapper>
       </S.Wrapper>
     </>
   );

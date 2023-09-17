@@ -40,3 +40,54 @@ export const Divider = styled.div`
   width: 10px;
   background-color: ${({ theme }) => theme.colors.neutral.bg10};
 `;
+
+export const PrivacyNoticeWrapper = styled.div`
+  display: flex;
+  padding: 10px 16px;
+  margin-top: 20px;
+  align-items: center;
+`;
+
+export const PrivacyNoticeCheckboxContainer = styled.div``;
+
+export const PrivacyNoticeContainer = styled.div`
+  display: flex;
+  width: 100%;
+  font-size: 12px;
+  font-weight: 400;
+  color: ${({ theme }) => theme.colors.neutral.bg80};
+  justify-content: space-between;
+`;
+
+export const PrivacyNoticeTitle = styled.p``;
+export const PrivacyNoticeLook = styled.p`
+  font-size: 12px;
+  font-weight: 400;
+  text-decoration-line: underline;
+  color: ${({ theme }) => theme.colors.neutral.bg40};
+`;
+
+export const MarketingWrapper = styled.div`
+  display: flex;
+  padding: 10px 16px;
+  align-items: center;
+`;
+
+export const MarketingCheckboxContainer = styled.div``;
+
+export const MarketingContainer = styled.div`
+  display: flex;
+  width: 100%;
+  font-size: 12px;
+  font-weight: 400;
+  color: ${({ theme }) => theme.colors.neutral.bg80};
+  justify-content: space-between;
+`;
+
+export const MarketingTitle = styled.p``;
+export const MarketingLook = styled.p`
+  font-size: 12px;
+  font-weight: 400;
+  text-decoration-line: underline;
+  color: ${({ theme }) => theme.colors.neutral.bg40};
+`;
