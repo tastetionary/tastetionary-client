@@ -4,7 +4,11 @@ import CHeader from '@/components/c-header';
 import { useRouter } from 'next/navigation';
 import * as S from './page.styled';
 
-export default function Terms() {
+interface Props {
+  onNext: () => void;
+}
+
+export default function Terms({ onNext }: Props) {
   const router = useRouter();
 
   return (
@@ -52,7 +56,7 @@ export default function Terms() {
         </S.MarketingWrapper>
 
         <S.NextButtonWrapper>
-          <MainButton btnText="다음" disabled={false} />
+          <MainButton btnText="다음" disabled={false} onClick={onNext} />
         </S.NextButtonWrapper>
       </S.Wrapper>
     </>
