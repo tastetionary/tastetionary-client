@@ -45,7 +45,7 @@ export default function VerifyCompany({ setStep }: { setStep: () => void }) {
               label="회사 이메일"
               placeholder="이메일 주소 입력"
               type="email"
-              {...register('email', { required: true, pattern: /^\S+@\S+$/i })}
+              {...register('email', { required: true, pattern: /^[a-z0-9]+@[a-z]+\.[a-z]{2,3}/i })}
             />
           </S.InputContainer>
 
