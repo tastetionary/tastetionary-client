@@ -7,6 +7,7 @@ import EmailForm from '../email-form';
 import OptInMarketing from '../opt-in-marketing';
 import PrivacyNotice from '../privacy-notice';
 import Terms from '../terms';
+import UserInfoForm from '../user-info-form';
 
 export default function SignUpComponent() {
   const [Funnel, setStep] = useFunnel(
@@ -31,11 +32,14 @@ export default function SignUpComponent() {
           <Funnel.Step name="opt-in-marketing">
             <OptInMarketing />
           </Funnel.Step>
-          <Funnel.Step name="complete">
-            <SignUpComplete />
-          </Funnel.Step>
           <Funnel.Step name="email-form">
             <EmailForm onNext={() => setStep('email-form')} />
+          </Funnel.Step>
+          <Funnel.Step name="user-info">
+            <UserInfoForm />
+          </Funnel.Step>
+          <Funnel.Step name="complete">
+            <SignUpComplete />
           </Funnel.Step>
         </Funnel>
       </form>
