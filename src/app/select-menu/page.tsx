@@ -2,6 +2,8 @@
 
 import IC_PIN2 from '@/assets/common/Pin2.svg';
 import menu_set from '@/assets/data/menu_set.json';
+import MainButton from '@/components/Button/MainButton';
+import RefreshButton from '@/components/Button/RefreshButton';
 import CHeader from '@/components/c-header';
 import Image from 'next/image';
 import { useState } from 'react';
@@ -119,6 +121,17 @@ export default function SelectMenu() {
           })}
         </S.KeywordContainer>
       </S.Section>
+
+      <MainButton btnText="메뉴 추첨 시작" disabled={btnDisabled} style={{ maxWidth: 240, margin: '48px auto 0' }} />
+
+      <RefreshButton
+        btnText="선택 초기화"
+        disabled={btnDisabled}
+        onClick={() => {
+          setSelectedCategory([]);
+          setSelectedKeyword([]);
+        }}
+      />
     </>
   );
 }
