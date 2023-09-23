@@ -8,10 +8,12 @@ import OptInMarketing from '../opt-in-marketing';
 import PrivacyNotice from '../privacy-notice';
 import Terms from '../terms';
 import UserInfoForm from '../user-info-form';
+import VerifyCompany from '../verify-company';
+import VerifyNumber from '../verify-number';
 
 export default function SignUpComponent() {
   const [Funnel, setStep] = useFunnel(
-    ['terms', 'privacy-notice', 'opt-in-marketing', 'complete', 'email-form'],
+    ['terms', 'privacy-notice', 'opt-in-marketing', 'complete', 'email-form', 'verify-company', 'verify-number'],
     'terms'
   );
 
@@ -37,6 +39,12 @@ export default function SignUpComponent() {
           </Funnel.Step>
           <Funnel.Step name="user-info">
             <UserInfoForm />
+          </Funnel.Step>
+          <Funnel.Step name="verify-company">
+            <VerifyCompany setStep={() => setStep('verify-number')} />
+          </Funnel.Step>
+          <Funnel.Step name="verify-number">
+            <VerifyNumber />
           </Funnel.Step>
           <Funnel.Step name="complete">
             <SignUpComplete />
