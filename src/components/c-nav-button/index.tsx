@@ -1,4 +1,4 @@
-import { styled } from 'styled-components';
+import * as S from './page.styled';
 
 interface Props {
   title: string;
@@ -16,16 +16,3 @@ export default function CNavButton({ title, icon, isActive }: Props) {
     </>
   );
 }
-
-const S = {
-  Button: styled.button<{ isActive: Boolean }>`
-    width: 120px;
-    height: 60px;
-    background-color: ${({ theme, isActive }) => (isActive ? 'white' : theme.colors.neutral.bg05)};
-    border: 1px solid #ced9db;
-  `,
-  Icon: styled.div``,
-  Title: styled.p`
-    font-size: 14px;
-  `,
-};
