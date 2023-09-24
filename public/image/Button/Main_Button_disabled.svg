@@ -1,5 +1,5 @@
-<svg width="240" height="60" viewBox="0 0 240 60" fill="none" xmlns="http://www.w3.org/2000/svg">
-<rect x="2" y="2" width="236" height="56" fill="#FFEDB3"/>
+<svg width="320" height="60" viewBox="0 0 320 60" fill="none" xmlns="http://www.w3.org/2000/svg">
+<rect x="2" y="2" width="316" height="56" fill="#FFEDB3"/>
 <rect x="4" width="2" height="2" fill="#CFD8DB"/>
 <rect width="2" height="2" transform="matrix(1 0 0 -1 4 60)" fill="#CFD8DB"/>
 <rect x="6" width="2" height="2" fill="#CFD8DB"/>
@@ -837,91 +837,331 @@
 <rect width="2" height="2" transform="matrix(-1 0 0 1 204 4)" fill="#FED750"/>
 <rect width="2" height="2" transform="matrix(-1 0 0 1 210 4)" fill="#FED750"/>
 <rect width="2" height="2" transform="matrix(-1 0 0 1 216 4)" fill="#FED750"/>
-<rect width="2" height="2" transform="matrix(-1 0 0 1 236 0)" fill="#CFD8DB"/>
-<rect x="236" y="60" width="2" height="2" transform="rotate(180 236 60)" fill="#CFD8DB"/>
-<rect width="2" height="2" transform="matrix(-1 0 0 1 234 0)" fill="#CFD8DB"/>
-<rect x="234" y="60" width="2" height="2" transform="rotate(180 234 60)" fill="#CFD8DB"/>
-<rect width="2" height="2" transform="matrix(-1 0 0 1 232 0)" fill="#CFD8DB"/>
-<rect x="232" y="60" width="2" height="2" transform="rotate(180 232 60)" fill="#CFD8DB"/>
-<rect width="2" height="2" transform="matrix(-1 0 0 1 230 0)" fill="#CFD8DB"/>
-<rect x="230" y="60" width="2" height="2" transform="rotate(180 230 60)" fill="#CFD8DB"/>
-<rect width="2" height="2" transform="matrix(-1 0 0 1 228 0)" fill="#CFD8DB"/>
-<rect x="228" y="60" width="2" height="2" transform="rotate(180 228 60)" fill="#CFD8DB"/>
 <rect width="2" height="2" transform="matrix(-1 0 0 1 226 0)" fill="#CFD8DB"/>
+<rect width="2" height="2" transform="matrix(-1 0 0 1 228 0)" fill="#CFD8DB"/>
+<rect width="2" height="2" transform="matrix(-1 0 0 1 230 0)" fill="#CFD8DB"/>
+<rect width="2" height="2" transform="matrix(-1 0 0 1 232 0)" fill="#CFD8DB"/>
+<rect width="2" height="2" transform="matrix(-1 0 0 1 234 0)" fill="#CFD8DB"/>
+<rect width="2" height="2" transform="matrix(-1 0 0 1 236 0)" fill="#CFD8DB"/>
+<rect width="2" height="2" transform="matrix(-1 0 0 1 238 0)" fill="#CFD8DB"/>
+<rect width="2" height="2" transform="matrix(-1 0 0 1 240 0)" fill="#CFD8DB"/>
+<rect width="2" height="2" transform="matrix(-1 0 0 1 242 0)" fill="#CFD8DB"/>
+<rect width="2" height="2" transform="matrix(-1 0 0 1 244 0)" fill="#CFD8DB"/>
+<rect width="2" height="2" transform="matrix(-1 0 0 1 246 0)" fill="#CFD8DB"/>
+<rect width="2" height="2" transform="matrix(-1 0 0 1 248 0)" fill="#CFD8DB"/>
+<rect width="2" height="2" transform="matrix(-1 0 0 1 250 0)" fill="#CFD8DB"/>
+<rect width="2" height="2" transform="matrix(-1 0 0 1 252 0)" fill="#CFD8DB"/>
+<rect width="2" height="2" transform="matrix(-1 0 0 1 254 0)" fill="#CFD8DB"/>
+<rect width="2" height="2" transform="matrix(-1 0 0 1 256 0)" fill="#CFD8DB"/>
+<rect width="2" height="2" transform="matrix(-1 0 0 1 258 0)" fill="#CFD8DB"/>
+<rect width="2" height="2" transform="matrix(-1 0 0 1 260 0)" fill="#CFD8DB"/>
+<rect width="2" height="2" transform="matrix(-1 0 0 1 262 0)" fill="#CFD8DB"/>
+<rect width="2" height="2" transform="matrix(-1 0 0 1 264 0)" fill="#CFD8DB"/>
+<rect width="2" height="2" transform="matrix(-1 0 0 1 266 0)" fill="#CFD8DB"/>
+<rect width="2" height="2" transform="matrix(-1 0 0 1 268 0)" fill="#CFD8DB"/>
+<rect width="2" height="2" transform="matrix(-1 0 0 1 270 0)" fill="#CFD8DB"/>
+<rect width="2" height="2" transform="matrix(-1 0 0 1 272 0)" fill="#CFD8DB"/>
+<rect width="2" height="2" transform="matrix(-1 0 0 1 274 0)" fill="#CFD8DB"/>
+<rect width="2" height="2" transform="matrix(-1 0 0 1 276 0)" fill="#CFD8DB"/>
+<rect width="2" height="2" transform="matrix(-1 0 0 1 278 0)" fill="#CFD8DB"/>
+<rect width="2" height="2" transform="matrix(-1 0 0 1 280 0)" fill="#CFD8DB"/>
+<rect width="2" height="2" transform="matrix(-1 0 0 1 282 0)" fill="#CFD8DB"/>
+<rect width="2" height="2" transform="matrix(-1 0 0 1 284 0)" fill="#CFD8DB"/>
+<rect width="2" height="2" transform="matrix(-1 0 0 1 286 0)" fill="#CFD8DB"/>
+<rect width="2" height="2" transform="matrix(-1 0 0 1 288 0)" fill="#CFD8DB"/>
+<rect width="2" height="2" transform="matrix(-1 0 0 1 290 0)" fill="#CFD8DB"/>
+<rect width="2" height="2" transform="matrix(-1 0 0 1 292 0)" fill="#CFD8DB"/>
+<rect width="2" height="2" transform="matrix(-1 0 0 1 294 0)" fill="#CFD8DB"/>
+<rect width="2" height="2" transform="matrix(-1 0 0 1 296 0)" fill="#CFD8DB"/>
+<rect width="2" height="2" transform="matrix(-1 0 0 1 298 0)" fill="#CFD8DB"/>
+<rect width="2" height="2" transform="matrix(-1 0 0 1 300 0)" fill="#CFD8DB"/>
+<rect width="2" height="2" transform="matrix(-1 0 0 1 302 0)" fill="#CFD8DB"/>
+<rect width="2" height="2" transform="matrix(-1 0 0 1 304 0)" fill="#CFD8DB"/>
+<rect width="2" height="2" transform="matrix(-1 0 0 1 306 0)" fill="#CFD8DB"/>
 <rect x="226" y="60" width="2" height="2" transform="rotate(180 226 60)" fill="#CFD8DB"/>
-<rect width="2" height="2" transform="matrix(-1 0 0 1 238 2)" fill="#CFD8DB"/>
-<rect x="238" y="58" width="2" height="2" transform="rotate(180 238 58)" fill="#CFD8DB"/>
-<rect width="2" height="2" transform="matrix(-1 0 0 1 238 4)" fill="#CFD8DB"/>
-<rect x="238" y="56" width="2" height="2" transform="rotate(180 238 56)" fill="#CFD8DB"/>
-<rect opacity="0.5" width="2" height="2" transform="matrix(-1 0 0 1 234 2)" fill="#FFEDB3"/>
-<rect opacity="0.5" width="2" height="2" transform="matrix(-1 0 0 1 232 2)" fill="#FFEDB3"/>
-<rect opacity="0.5" width="2" height="2" transform="matrix(-1 0 0 1 230 2)" fill="#FFEDB3"/>
-<rect opacity="0.5" width="2" height="2" transform="matrix(-1 0 0 1 228 2)" fill="#FFEDB3"/>
+<rect x="228" y="60" width="2" height="2" transform="rotate(180 228 60)" fill="#CFD8DB"/>
+<rect x="230" y="60" width="2" height="2" transform="rotate(180 230 60)" fill="#CFD8DB"/>
+<rect x="232" y="60" width="2" height="2" transform="rotate(180 232 60)" fill="#CFD8DB"/>
+<rect x="234" y="60" width="2" height="2" transform="rotate(180 234 60)" fill="#CFD8DB"/>
+<rect x="236" y="60" width="2" height="2" transform="rotate(180 236 60)" fill="#CFD8DB"/>
+<rect x="238" y="60" width="2" height="2" transform="rotate(180 238 60)" fill="#CFD8DB"/>
+<rect x="240" y="60" width="2" height="2" transform="rotate(180 240 60)" fill="#CFD8DB"/>
+<rect x="242" y="60" width="2" height="2" transform="rotate(180 242 60)" fill="#CFD8DB"/>
+<rect x="244" y="60" width="2" height="2" transform="rotate(180 244 60)" fill="#CFD8DB"/>
+<rect x="246" y="60" width="2" height="2" transform="rotate(180 246 60)" fill="#CFD8DB"/>
+<rect x="248" y="60" width="2" height="2" transform="rotate(180 248 60)" fill="#CFD8DB"/>
+<rect x="250" y="60" width="2" height="2" transform="rotate(180 250 60)" fill="#CFD8DB"/>
+<rect x="252" y="60" width="2" height="2" transform="rotate(180 252 60)" fill="#CFD8DB"/>
+<rect x="254" y="60" width="2" height="2" transform="rotate(180 254 60)" fill="#CFD8DB"/>
+<rect x="256" y="60" width="2" height="2" transform="rotate(180 256 60)" fill="#CFD8DB"/>
+<rect x="258" y="60" width="2" height="2" transform="rotate(180 258 60)" fill="#CFD8DB"/>
+<rect x="260" y="60" width="2" height="2" transform="rotate(180 260 60)" fill="#CFD8DB"/>
+<rect x="262" y="60" width="2" height="2" transform="rotate(180 262 60)" fill="#CFD8DB"/>
+<rect x="264" y="60" width="2" height="2" transform="rotate(180 264 60)" fill="#CFD8DB"/>
+<rect x="266" y="60" width="2" height="2" transform="rotate(180 266 60)" fill="#CFD8DB"/>
+<rect x="268" y="60" width="2" height="2" transform="rotate(180 268 60)" fill="#CFD8DB"/>
+<rect x="270" y="60" width="2" height="2" transform="rotate(180 270 60)" fill="#CFD8DB"/>
+<rect x="272" y="60" width="2" height="2" transform="rotate(180 272 60)" fill="#CFD8DB"/>
+<rect x="274" y="60" width="2" height="2" transform="rotate(180 274 60)" fill="#CFD8DB"/>
+<rect x="276" y="60" width="2" height="2" transform="rotate(180 276 60)" fill="#CFD8DB"/>
+<rect x="278" y="60" width="2" height="2" transform="rotate(180 278 60)" fill="#CFD8DB"/>
+<rect x="280" y="60" width="2" height="2" transform="rotate(180 280 60)" fill="#CFD8DB"/>
+<rect x="282" y="60" width="2" height="2" transform="rotate(180 282 60)" fill="#CFD8DB"/>
+<rect x="284" y="60" width="2" height="2" transform="rotate(180 284 60)" fill="#CFD8DB"/>
+<rect x="286" y="60" width="2" height="2" transform="rotate(180 286 60)" fill="#CFD8DB"/>
+<rect x="288" y="60" width="2" height="2" transform="rotate(180 288 60)" fill="#CFD8DB"/>
+<rect x="290" y="60" width="2" height="2" transform="rotate(180 290 60)" fill="#CFD8DB"/>
+<rect x="292" y="60" width="2" height="2" transform="rotate(180 292 60)" fill="#CFD8DB"/>
+<rect x="294" y="60" width="2" height="2" transform="rotate(180 294 60)" fill="#CFD8DB"/>
+<rect x="296" y="60" width="2" height="2" transform="rotate(180 296 60)" fill="#CFD8DB"/>
+<rect x="298" y="60" width="2" height="2" transform="rotate(180 298 60)" fill="#CFD8DB"/>
+<rect x="300" y="60" width="2" height="2" transform="rotate(180 300 60)" fill="#CFD8DB"/>
+<rect x="302" y="60" width="2" height="2" transform="rotate(180 302 60)" fill="#CFD8DB"/>
+<rect x="304" y="60" width="2" height="2" transform="rotate(180 304 60)" fill="#CFD8DB"/>
+<rect x="306" y="60" width="2" height="2" transform="rotate(180 306 60)" fill="#CFD8DB"/>
 <rect width="2" height="2" transform="matrix(1 0 0 -1 224 58)" fill="#FED750"/>
 <rect width="2" height="2" transform="matrix(1 0 0 -1 226 58)" fill="#FED750"/>
 <rect width="2" height="2" transform="matrix(1 0 0 -1 228 58)" fill="#FED750"/>
 <rect width="2" height="2" transform="matrix(1 0 0 -1 230 58)" fill="#FED750"/>
 <rect width="2" height="2" transform="matrix(1 0 0 -1 232 58)" fill="#FED750"/>
-<rect width="2" height="2" transform="matrix(1 0 0 -1 234 56)" fill="#FED750"/>
-<rect width="2" height="2" transform="matrix(1 0 0 -1 236 54)" fill="#FED750"/>
+<rect width="2" height="2" transform="matrix(1 0 0 -1 234 58)" fill="#FED750"/>
+<rect width="2" height="2" transform="matrix(1 0 0 -1 236 58)" fill="#FED750"/>
+<rect width="2" height="2" transform="matrix(1 0 0 -1 238 58)" fill="#FED750"/>
+<rect width="2" height="2" transform="matrix(1 0 0 -1 240 58)" fill="#FED750"/>
+<rect width="2" height="2" transform="matrix(1 0 0 -1 242 58)" fill="#FED750"/>
+<rect width="2" height="2" transform="matrix(1 0 0 -1 244 58)" fill="#FED750"/>
+<rect width="2" height="2" transform="matrix(1 0 0 -1 246 58)" fill="#FED750"/>
+<rect width="2" height="2" transform="matrix(1 0 0 -1 248 58)" fill="#FED750"/>
+<rect width="2" height="2" transform="matrix(1 0 0 -1 250 58)" fill="#FED750"/>
+<rect width="2" height="2" transform="matrix(1 0 0 -1 252 58)" fill="#FED750"/>
+<rect width="2" height="2" transform="matrix(1 0 0 -1 254 58)" fill="#FED750"/>
+<rect width="2" height="2" transform="matrix(1 0 0 -1 256 58)" fill="#FED750"/>
+<rect width="2" height="2" transform="matrix(1 0 0 -1 258 58)" fill="#FED750"/>
+<rect width="2" height="2" transform="matrix(1 0 0 -1 260 58)" fill="#FED750"/>
+<rect width="2" height="2" transform="matrix(1 0 0 -1 262 58)" fill="#FED750"/>
+<rect width="2" height="2" transform="matrix(1 0 0 -1 264 58)" fill="#FED750"/>
+<rect width="2" height="2" transform="matrix(1 0 0 -1 266 58)" fill="#FED750"/>
+<rect width="2" height="2" transform="matrix(1 0 0 -1 268 58)" fill="#FED750"/>
+<rect width="2" height="2" transform="matrix(1 0 0 -1 270 58)" fill="#FED750"/>
+<rect width="2" height="2" transform="matrix(1 0 0 -1 272 58)" fill="#FED750"/>
+<rect width="2" height="2" transform="matrix(1 0 0 -1 274 58)" fill="#FED750"/>
+<rect width="2" height="2" transform="matrix(1 0 0 -1 276 58)" fill="#FED750"/>
+<rect width="2" height="2" transform="matrix(1 0 0 -1 278 58)" fill="#FED750"/>
+<rect width="2" height="2" transform="matrix(1 0 0 -1 280 58)" fill="#FED750"/>
+<rect width="2" height="2" transform="matrix(1 0 0 -1 282 58)" fill="#FED750"/>
+<rect width="2" height="2" transform="matrix(1 0 0 -1 284 58)" fill="#FED750"/>
+<rect width="2" height="2" transform="matrix(1 0 0 -1 286 58)" fill="#FED750"/>
+<rect width="2" height="2" transform="matrix(1 0 0 -1 288 58)" fill="#FED750"/>
+<rect width="2" height="2" transform="matrix(1 0 0 -1 290 58)" fill="#FED750"/>
+<rect width="2" height="2" transform="matrix(1 0 0 -1 292 58)" fill="#FED750"/>
+<rect width="2" height="2" transform="matrix(1 0 0 -1 294 58)" fill="#FED750"/>
+<rect width="2" height="2" transform="matrix(1 0 0 -1 296 58)" fill="#FED750"/>
+<rect width="2" height="2" transform="matrix(1 0 0 -1 298 58)" fill="#FED750"/>
+<rect width="2" height="2" transform="matrix(1 0 0 -1 300 58)" fill="#FED750"/>
+<rect width="2" height="2" transform="matrix(1 0 0 -1 302 58)" fill="#FED750"/>
+<rect width="2" height="2" transform="matrix(1 0 0 -1 304 58)" fill="#FED750"/>
 <rect opacity="0.5" width="2" height="2" transform="matrix(-1 0 0 1 226 2)" fill="#FFEDB3"/>
-<rect opacity="0.5" width="2" height="2" transform="matrix(-1 0 0 1 236 4)" fill="#FFEDB3"/>
 <rect opacity="0.5" width="2" height="2" transform="matrix(1 0 0 -1 224 52)" fill="#FFEDB3"/>
-<rect opacity="0.5" width="2" height="2" transform="matrix(1 0 0 -1 226 52)" fill="#FFEDB3"/>
-<rect opacity="0.5" width="2" height="2" transform="matrix(1 0 0 -1 228 52)" fill="#FFEDB3"/>
-<rect opacity="0.5" width="2" height="2" transform="matrix(1 0 0 -1 230 52)" fill="#FFEDB3"/>
-<rect opacity="0.5" width="2" height="2" transform="matrix(1 0 0 -1 232 52)" fill="#FFEDB3"/>
-<rect opacity="0.5" width="2" height="2" transform="matrix(1 0 0 -1 234 50)" fill="#FFEDB3"/>
-<rect opacity="0.5" width="2" height="2" transform="matrix(1 0 0 -1 236 48)" fill="#FFEDB3"/>
 <rect width="2" height="2" transform="matrix(1 0 0 -1 224 54)" fill="#FED750"/>
 <rect width="2" height="2" transform="matrix(1 0 0 -1 226 54)" fill="#FED750"/>
 <rect width="2" height="2" transform="matrix(1 0 0 -1 228 54)" fill="#FED750"/>
 <rect width="2" height="2" transform="matrix(1 0 0 -1 230 54)" fill="#FED750"/>
 <rect width="2" height="2" transform="matrix(1 0 0 -1 232 54)" fill="#FED750"/>
 <rect width="2" height="2" transform="matrix(1 0 0 -1 234 54)" fill="#FED750"/>
-<rect width="2" height="2" transform="matrix(1 0 0 -1 236 52)" fill="#FED750"/>
+<rect width="2" height="2" transform="matrix(1 0 0 -1 236 54)" fill="#FED750"/>
+<rect width="2" height="2" transform="matrix(1 0 0 -1 238 54)" fill="#FED750"/>
+<rect width="2" height="2" transform="matrix(1 0 0 -1 240 54)" fill="#FED750"/>
+<rect width="2" height="2" transform="matrix(1 0 0 -1 242 54)" fill="#FED750"/>
+<rect width="2" height="2" transform="matrix(1 0 0 -1 244 54)" fill="#FED750"/>
+<rect width="2" height="2" transform="matrix(1 0 0 -1 246 54)" fill="#FED750"/>
+<rect width="2" height="2" transform="matrix(1 0 0 -1 248 54)" fill="#FED750"/>
+<rect width="2" height="2" transform="matrix(1 0 0 -1 250 54)" fill="#FED750"/>
+<rect width="2" height="2" transform="matrix(1 0 0 -1 252 54)" fill="#FED750"/>
+<rect width="2" height="2" transform="matrix(1 0 0 -1 254 54)" fill="#FED750"/>
+<rect width="2" height="2" transform="matrix(1 0 0 -1 256 54)" fill="#FED750"/>
+<rect width="2" height="2" transform="matrix(1 0 0 -1 258 54)" fill="#FED750"/>
+<rect width="2" height="2" transform="matrix(1 0 0 -1 260 54)" fill="#FED750"/>
+<rect width="2" height="2" transform="matrix(1 0 0 -1 262 54)" fill="#FED750"/>
+<rect width="2" height="2" transform="matrix(1 0 0 -1 264 54)" fill="#FED750"/>
+<rect width="2" height="2" transform="matrix(1 0 0 -1 266 54)" fill="#FED750"/>
+<rect width="2" height="2" transform="matrix(1 0 0 -1 268 54)" fill="#FED750"/>
+<rect width="2" height="2" transform="matrix(1 0 0 -1 270 54)" fill="#FED750"/>
+<rect width="2" height="2" transform="matrix(1 0 0 -1 272 54)" fill="#FED750"/>
+<rect width="2" height="2" transform="matrix(1 0 0 -1 274 54)" fill="#FED750"/>
+<rect width="2" height="2" transform="matrix(1 0 0 -1 276 54)" fill="#FED750"/>
+<rect width="2" height="2" transform="matrix(1 0 0 -1 278 54)" fill="#FED750"/>
+<rect width="2" height="2" transform="matrix(1 0 0 -1 280 54)" fill="#FED750"/>
+<rect width="2" height="2" transform="matrix(1 0 0 -1 282 54)" fill="#FED750"/>
+<rect width="2" height="2" transform="matrix(1 0 0 -1 284 54)" fill="#FED750"/>
+<rect width="2" height="2" transform="matrix(1 0 0 -1 286 54)" fill="#FED750"/>
+<rect width="2" height="2" transform="matrix(1 0 0 -1 288 54)" fill="#FED750"/>
+<rect width="2" height="2" transform="matrix(1 0 0 -1 290 54)" fill="#FED750"/>
+<rect width="2" height="2" transform="matrix(1 0 0 -1 292 54)" fill="#FED750"/>
+<rect width="2" height="2" transform="matrix(1 0 0 -1 294 54)" fill="#FED750"/>
+<rect width="2" height="2" transform="matrix(1 0 0 -1 296 54)" fill="#FED750"/>
+<rect width="2" height="2" transform="matrix(1 0 0 -1 298 54)" fill="#FED750"/>
+<rect width="2" height="2" transform="matrix(1 0 0 -1 300 54)" fill="#FED750"/>
+<rect width="2" height="2" transform="matrix(1 0 0 -1 302 54)" fill="#FED750"/>
+<rect width="2" height="2" transform="matrix(1 0 0 -1 304 54)" fill="#FED750"/>
 <rect width="2" height="2" transform="matrix(1 0 0 -1 224 56)" fill="#FED750"/>
 <rect width="2" height="2" transform="matrix(1 0 0 -1 226 56)" fill="#FED750"/>
 <rect width="2" height="2" transform="matrix(1 0 0 -1 228 56)" fill="#FED750"/>
 <rect width="2" height="2" transform="matrix(1 0 0 -1 230 56)" fill="#FED750"/>
 <rect width="2" height="2" transform="matrix(1 0 0 -1 232 56)" fill="#FED750"/>
-<rect opacity="0.5" width="2" height="2" transform="matrix(-1 0 0 1 238 6)" fill="#FFEDB3"/>
+<rect width="2" height="2" transform="matrix(1 0 0 -1 234 56)" fill="#FED750"/>
+<rect width="2" height="2" transform="matrix(1 0 0 -1 236 56)" fill="#FED750"/>
+<rect width="2" height="2" transform="matrix(1 0 0 -1 238 56)" fill="#FED750"/>
+<rect width="2" height="2" transform="matrix(1 0 0 -1 240 56)" fill="#FED750"/>
+<rect width="2" height="2" transform="matrix(1 0 0 -1 242 56)" fill="#FED750"/>
+<rect width="2" height="2" transform="matrix(1 0 0 -1 244 56)" fill="#FED750"/>
+<rect width="2" height="2" transform="matrix(1 0 0 -1 246 56)" fill="#FED750"/>
+<rect width="2" height="2" transform="matrix(1 0 0 -1 248 56)" fill="#FED750"/>
+<rect width="2" height="2" transform="matrix(1 0 0 -1 250 56)" fill="#FED750"/>
+<rect width="2" height="2" transform="matrix(1 0 0 -1 252 56)" fill="#FED750"/>
+<rect width="2" height="2" transform="matrix(1 0 0 -1 254 56)" fill="#FED750"/>
+<rect width="2" height="2" transform="matrix(1 0 0 -1 256 56)" fill="#FED750"/>
+<rect width="2" height="2" transform="matrix(1 0 0 -1 258 56)" fill="#FED750"/>
+<rect width="2" height="2" transform="matrix(1 0 0 -1 260 56)" fill="#FED750"/>
+<rect width="2" height="2" transform="matrix(1 0 0 -1 262 56)" fill="#FED750"/>
+<rect width="2" height="2" transform="matrix(1 0 0 -1 264 56)" fill="#FED750"/>
+<rect width="2" height="2" transform="matrix(1 0 0 -1 266 56)" fill="#FED750"/>
+<rect width="2" height="2" transform="matrix(1 0 0 -1 268 56)" fill="#FED750"/>
+<rect width="2" height="2" transform="matrix(1 0 0 -1 270 56)" fill="#FED750"/>
+<rect width="2" height="2" transform="matrix(1 0 0 -1 272 56)" fill="#FED750"/>
+<rect width="2" height="2" transform="matrix(1 0 0 -1 274 56)" fill="#FED750"/>
+<rect width="2" height="2" transform="matrix(1 0 0 -1 276 56)" fill="#FED750"/>
+<rect width="2" height="2" transform="matrix(1 0 0 -1 278 56)" fill="#FED750"/>
+<rect width="2" height="2" transform="matrix(1 0 0 -1 280 56)" fill="#FED750"/>
+<rect width="2" height="2" transform="matrix(1 0 0 -1 282 56)" fill="#FED750"/>
+<rect width="2" height="2" transform="matrix(1 0 0 -1 284 56)" fill="#FED750"/>
+<rect width="2" height="2" transform="matrix(1 0 0 -1 286 56)" fill="#FED750"/>
+<rect width="2" height="2" transform="matrix(1 0 0 -1 288 56)" fill="#FED750"/>
+<rect width="2" height="2" transform="matrix(1 0 0 -1 290 56)" fill="#FED750"/>
+<rect width="2" height="2" transform="matrix(1 0 0 -1 292 56)" fill="#FED750"/>
+<rect width="2" height="2" transform="matrix(1 0 0 -1 294 56)" fill="#FED750"/>
+<rect width="2" height="2" transform="matrix(1 0 0 -1 296 56)" fill="#FED750"/>
+<rect width="2" height="2" transform="matrix(1 0 0 -1 298 56)" fill="#FED750"/>
+<rect width="2" height="2" transform="matrix(1 0 0 -1 300 56)" fill="#FED750"/>
+<rect width="2" height="2" transform="matrix(1 0 0 -1 302 56)" fill="#FED750"/>
+<rect width="2" height="2" transform="matrix(1 0 0 -1 304 56)" fill="#FED750"/>
+<rect width="2" height="2" transform="matrix(-1 0 0 1 226 4)" fill="#FED750"/>
+<rect width="2" height="2" transform="matrix(-1 0 0 1 228 4)" fill="#FED750"/>
+<rect width="2" height="2" transform="matrix(-1 0 0 1 230 4)" fill="#FED750"/>
 <rect width="2" height="2" transform="matrix(-1 0 0 1 232 4)" fill="#FED750"/>
 <rect width="2" height="2" transform="matrix(-1 0 0 1 234 4)" fill="#FED750"/>
-<rect width="2" height="2" transform="matrix(-1 0 0 1 234 6)" fill="#FED750"/>
-<rect width="2" height="2" transform="matrix(-1 0 0 1 236 6)" fill="#FED750"/>
-<rect width="2" height="2" transform="matrix(-1 0 0 1 236 8)" fill="#FED750"/>
-<rect width="2" height="2" transform="matrix(-1 0 0 1 236 10)" fill="#FED750"/>
-<rect width="2" height="2" transform="matrix(-1 0 0 1 236 12)" fill="#FED750"/>
-<rect width="2" height="2" transform="matrix(-1 0 0 1 230 4)" fill="#FED750"/>
-<rect width="2" height="2" transform="matrix(-1 0 0 1 228 4)" fill="#FED750"/>
-<rect width="2" height="2" transform="matrix(-1 0 0 1 226 4)" fill="#FED750"/>
-<rect width="2" height="2" transform="matrix(-1 0 0 1 236 2)" fill="#CFD8DB"/>
-<rect x="236" y="58" width="2" height="2" transform="rotate(180 236 58)" fill="#CFD8DB"/>
-<rect width="2" height="2" transform="matrix(-1 0 0 1 240 4)" fill="#CFD8DB"/>
-<rect x="240" y="56" width="2" height="2" transform="rotate(180 240 56)" fill="#CFD8DB"/>
-<rect width="2" height="2" transform="matrix(-1 0 0 1 240 6)" fill="#CFD8DB"/>
-<rect x="240" y="54" width="2" height="2" transform="rotate(180 240 54)" fill="#CFD8DB"/>
-<rect width="2" height="2" transform="matrix(-1 0 0 1 240 8)" fill="#CFD8DB"/>
-<rect x="240" y="52" width="2" height="2" transform="rotate(180 240 52)" fill="#CFD8DB"/>
-<rect width="2" height="2" transform="matrix(-1 0 0 1 240 10)" fill="#CFD8DB"/>
-<rect x="240" y="50" width="2" height="2" transform="rotate(180 240 50)" fill="#CFD8DB"/>
-<rect width="2" height="2" transform="matrix(-1 0 0 1 240 12)" fill="#CFD8DB"/>
-<rect x="240" y="48" width="2" height="2" transform="rotate(180 240 48)" fill="#CFD8DB"/>
-<rect width="2" height="2" transform="matrix(-1 0 0 1 240 14)" fill="#CFD8DB"/>
-<rect width="2" height="2" transform="matrix(-1 0 0 1 240 16)" fill="#CFD8DB"/>
-<rect x="240" y="46" width="2" height="2" transform="rotate(180 240 46)" fill="#CFD8DB"/>
-<rect width="2" height="2" transform="matrix(-1 0 0 1 240 18)" fill="#CFD8DB"/>
-<rect x="240" y="44" width="2" height="2" transform="rotate(180 240 44)" fill="#CFD8DB"/>
-<rect width="2" height="2" transform="matrix(-1 0 0 1 240 20)" fill="#CFD8DB"/>
-<rect x="240" y="42" width="2" height="2" transform="rotate(180 240 42)" fill="#CFD8DB"/>
-<rect width="2" height="2" transform="matrix(-1 0 0 1 240 22)" fill="#CFD8DB"/>
-<rect x="240" y="40" width="2" height="2" transform="rotate(180 240 40)" fill="#CFD8DB"/>
-<rect width="2" height="2" transform="matrix(-1 0 0 1 240 24)" fill="#CFD8DB"/>
-<rect x="240" y="38" width="2" height="2" transform="rotate(180 240 38)" fill="#CFD8DB"/>
-<rect width="2" height="2" transform="matrix(-1 0 0 1 240 26)" fill="#CFD8DB"/>
-<rect x="240" y="36" width="2" height="2" transform="rotate(180 240 36)" fill="#CFD8DB"/>
-<rect width="2" height="2" transform="matrix(-1 0 0 1 240 28)" fill="#CFD8DB"/>
-<rect x="240" y="34" width="2" height="2" transform="rotate(180 240 34)" fill="#CFD8DB"/>
-<rect width="2" height="2" transform="matrix(-1 0 0 1 240 30)" fill="#CFD8DB"/>
+<rect width="2" height="2" transform="matrix(-1 0 0 1 236 4)" fill="#FED750"/>
+<rect width="2" height="2" transform="matrix(-1 0 0 1 238 4)" fill="#FED750"/>
+<rect width="2" height="2" transform="matrix(-1 0 0 1 240 4)" fill="#FED750"/>
+<rect width="2" height="2" transform="matrix(-1 0 0 1 242 4)" fill="#FED750"/>
+<rect width="2" height="2" transform="matrix(-1 0 0 1 244 4)" fill="#FED750"/>
+<rect width="2" height="2" transform="matrix(-1 0 0 1 246 4)" fill="#FED750"/>
+<rect width="2" height="2" transform="matrix(-1 0 0 1 248 4)" fill="#FED750"/>
+<rect width="2" height="2" transform="matrix(-1 0 0 1 250 4)" fill="#FED750"/>
+<rect width="2" height="2" transform="matrix(-1 0 0 1 252 4)" fill="#FED750"/>
+<rect width="2" height="2" transform="matrix(-1 0 0 1 254 4)" fill="#FED750"/>
+<rect width="2" height="2" transform="matrix(-1 0 0 1 256 4)" fill="#FED750"/>
+<rect width="2" height="2" transform="matrix(-1 0 0 1 258 4)" fill="#FED750"/>
+<rect width="2" height="2" transform="matrix(-1 0 0 1 260 4)" fill="#FED750"/>
+<rect width="2" height="2" transform="matrix(-1 0 0 1 262 4)" fill="#FED750"/>
+<rect width="2" height="2" transform="matrix(-1 0 0 1 264 4)" fill="#FED750"/>
+<rect width="2" height="2" transform="matrix(-1 0 0 1 266 4)" fill="#FED750"/>
+<rect width="2" height="2" transform="matrix(-1 0 0 1 268 4)" fill="#FED750"/>
+<rect width="2" height="2" transform="matrix(-1 0 0 1 270 4)" fill="#FED750"/>
+<rect width="2" height="2" transform="matrix(-1 0 0 1 272 4)" fill="#FED750"/>
+<rect width="2" height="2" transform="matrix(-1 0 0 1 274 4)" fill="#FED750"/>
+<rect width="2" height="2" transform="matrix(-1 0 0 1 276 4)" fill="#FED750"/>
+<rect width="2" height="2" transform="matrix(-1 0 0 1 278 4)" fill="#FED750"/>
+<rect width="2" height="2" transform="matrix(-1 0 0 1 280 4)" fill="#FED750"/>
+<rect width="2" height="2" transform="matrix(-1 0 0 1 282 4)" fill="#FED750"/>
+<rect width="2" height="2" transform="matrix(-1 0 0 1 284 4)" fill="#FED750"/>
+<rect width="2" height="2" transform="matrix(-1 0 0 1 286 4)" fill="#FED750"/>
+<rect width="2" height="2" transform="matrix(-1 0 0 1 288 4)" fill="#FED750"/>
+<rect width="2" height="2" transform="matrix(-1 0 0 1 290 4)" fill="#FED750"/>
+<rect width="2" height="2" transform="matrix(-1 0 0 1 292 4)" fill="#FED750"/>
+<rect width="2" height="2" transform="matrix(-1 0 0 1 294 4)" fill="#FED750"/>
+<rect width="2" height="2" transform="matrix(-1 0 0 1 296 4)" fill="#FED750"/>
+<rect width="2" height="2" transform="matrix(-1 0 0 1 298 4)" fill="#FED750"/>
+<rect width="2" height="2" transform="matrix(-1 0 0 1 300 4)" fill="#FED750"/>
+<rect width="2" height="2" transform="matrix(-1 0 0 1 302 4)" fill="#FED750"/>
+<rect width="2" height="2" transform="matrix(-1 0 0 1 304 4)" fill="#FED750"/>
+<rect width="2" height="2" transform="matrix(-1 0 0 1 306 4)" fill="#FED750"/>
+<rect width="2" height="2" transform="matrix(-1 0 0 1 316 0)" fill="#CFD8DB"/>
+<rect x="316" y="60" width="2" height="2" transform="rotate(180 316 60)" fill="#CFD8DB"/>
+<rect width="2" height="2" transform="matrix(-1 0 0 1 314 0)" fill="#CFD8DB"/>
+<rect x="314" y="60" width="2" height="2" transform="rotate(180 314 60)" fill="#CFD8DB"/>
+<rect width="2" height="2" transform="matrix(-1 0 0 1 312 0)" fill="#CFD8DB"/>
+<rect x="312" y="60" width="2" height="2" transform="rotate(180 312 60)" fill="#CFD8DB"/>
+<rect width="2" height="2" transform="matrix(-1 0 0 1 310 0)" fill="#CFD8DB"/>
+<rect x="310" y="60" width="2" height="2" transform="rotate(180 310 60)" fill="#CFD8DB"/>
+<rect width="2" height="2" transform="matrix(-1 0 0 1 308 0)" fill="#CFD8DB"/>
+<rect x="308" y="60" width="2" height="2" transform="rotate(180 308 60)" fill="#CFD8DB"/>
+<rect width="2" height="2" transform="matrix(-1 0 0 1 318 2)" fill="#CFD8DB"/>
+<rect x="318" y="58" width="2" height="2" transform="rotate(180 318 58)" fill="#CFD8DB"/>
+<rect width="2" height="2" transform="matrix(-1 0 0 1 318 4)" fill="#CFD8DB"/>
+<rect x="318" y="56" width="2" height="2" transform="rotate(180 318 56)" fill="#CFD8DB"/>
+<rect opacity="0.5" width="2" height="2" transform="matrix(-1 0 0 1 314 2)" fill="#FFEDB3"/>
+<rect opacity="0.5" width="2" height="2" transform="matrix(-1 0 0 1 312 2)" fill="#FFEDB3"/>
+<rect opacity="0.5" width="2" height="2" transform="matrix(-1 0 0 1 310 2)" fill="#FFEDB3"/>
+<rect opacity="0.5" width="2" height="2" transform="matrix(-1 0 0 1 308 2)" fill="#FFEDB3"/>
+<rect width="2" height="2" transform="matrix(1 0 0 -1 306 58)" fill="#FED750"/>
+<rect width="2" height="2" transform="matrix(1 0 0 -1 308 58)" fill="#FED750"/>
+<rect width="2" height="2" transform="matrix(1 0 0 -1 310 58)" fill="#FED750"/>
+<rect width="2" height="2" transform="matrix(1 0 0 -1 312 58)" fill="#FED750"/>
+<rect width="2" height="2" transform="matrix(1 0 0 -1 314 56)" fill="#FED750"/>
+<rect width="2" height="2" transform="matrix(1 0 0 -1 316 54)" fill="#FED750"/>
+<rect opacity="0.5" width="2" height="2" transform="matrix(-1 0 0 1 316 4)" fill="#FFEDB3"/>
+<rect opacity="0.5" width="2" height="2" transform="matrix(1 0 0 -1 306 52)" fill="#FFEDB3"/>
+<rect opacity="0.5" width="2" height="2" transform="matrix(1 0 0 -1 308 52)" fill="#FFEDB3"/>
+<rect opacity="0.5" width="2" height="2" transform="matrix(1 0 0 -1 310 52)" fill="#FFEDB3"/>
+<rect opacity="0.5" width="2" height="2" transform="matrix(1 0 0 -1 312 52)" fill="#FFEDB3"/>
+<rect opacity="0.5" width="2" height="2" transform="matrix(1 0 0 -1 314 50)" fill="#FFEDB3"/>
+<rect opacity="0.5" width="2" height="2" transform="matrix(1 0 0 -1 316 48)" fill="#FFEDB3"/>
+<rect width="2" height="2" transform="matrix(1 0 0 -1 306 54)" fill="#FED750"/>
+<rect width="2" height="2" transform="matrix(1 0 0 -1 308 54)" fill="#FED750"/>
+<rect width="2" height="2" transform="matrix(1 0 0 -1 310 54)" fill="#FED750"/>
+<rect width="2" height="2" transform="matrix(1 0 0 -1 312 54)" fill="#FED750"/>
+<rect width="2" height="2" transform="matrix(1 0 0 -1 314 54)" fill="#FED750"/>
+<rect width="2" height="2" transform="matrix(1 0 0 -1 316 52)" fill="#FED750"/>
+<rect width="2" height="2" transform="matrix(1 0 0 -1 306 56)" fill="#FED750"/>
+<rect width="2" height="2" transform="matrix(1 0 0 -1 308 56)" fill="#FED750"/>
+<rect width="2" height="2" transform="matrix(1 0 0 -1 310 56)" fill="#FED750"/>
+<rect width="2" height="2" transform="matrix(1 0 0 -1 312 56)" fill="#FED750"/>
+<rect opacity="0.5" width="2" height="2" transform="matrix(-1 0 0 1 318 6)" fill="#FFEDB3"/>
+<rect width="2" height="2" transform="matrix(-1 0 0 1 312 4)" fill="#FED750"/>
+<rect width="2" height="2" transform="matrix(-1 0 0 1 314 4)" fill="#FED750"/>
+<rect width="2" height="2" transform="matrix(-1 0 0 1 314 6)" fill="#FED750"/>
+<rect width="2" height="2" transform="matrix(-1 0 0 1 316 6)" fill="#FED750"/>
+<rect width="2" height="2" transform="matrix(-1 0 0 1 316 8)" fill="#FED750"/>
+<rect width="2" height="2" transform="matrix(-1 0 0 1 316 10)" fill="#FED750"/>
+<rect width="2" height="2" transform="matrix(-1 0 0 1 316 12)" fill="#FED750"/>
+<rect width="2" height="2" transform="matrix(-1 0 0 1 310 4)" fill="#FED750"/>
+<rect width="2" height="2" transform="matrix(-1 0 0 1 308 4)" fill="#FED750"/>
+<rect width="2" height="2" transform="matrix(-1 0 0 1 316 2)" fill="#CFD8DB"/>
+<rect x="316" y="58" width="2" height="2" transform="rotate(180 316 58)" fill="#CFD8DB"/>
+<rect width="2" height="2" transform="matrix(-1 0 0 1 320 4)" fill="#CFD8DB"/>
+<rect x="320" y="56" width="2" height="2" transform="rotate(180 320 56)" fill="#CFD8DB"/>
+<rect width="2" height="2" transform="matrix(-1 0 0 1 320 6)" fill="#CFD8DB"/>
+<rect x="320" y="54" width="2" height="2" transform="rotate(180 320 54)" fill="#CFD8DB"/>
+<rect width="2" height="2" transform="matrix(-1 0 0 1 320 8)" fill="#CFD8DB"/>
+<rect x="320" y="52" width="2" height="2" transform="rotate(180 320 52)" fill="#CFD8DB"/>
+<rect width="2" height="2" transform="matrix(-1 0 0 1 320 10)" fill="#CFD8DB"/>
+<rect x="320" y="50" width="2" height="2" transform="rotate(180 320 50)" fill="#CFD8DB"/>
+<rect width="2" height="2" transform="matrix(-1 0 0 1 320 12)" fill="#CFD8DB"/>
+<rect x="320" y="48" width="2" height="2" transform="rotate(180 320 48)" fill="#CFD8DB"/>
+<rect width="2" height="2" transform="matrix(-1 0 0 1 320 14)" fill="#CFD8DB"/>
+<rect width="2" height="2" transform="matrix(-1 0 0 1 320 16)" fill="#CFD8DB"/>
+<rect x="320" y="46" width="2" height="2" transform="rotate(180 320 46)" fill="#CFD8DB"/>
+<rect width="2" height="2" transform="matrix(-1 0 0 1 320 18)" fill="#CFD8DB"/>
+<rect x="320" y="44" width="2" height="2" transform="rotate(180 320 44)" fill="#CFD8DB"/>
+<rect width="2" height="2" transform="matrix(-1 0 0 1 320 20)" fill="#CFD8DB"/>
+<rect x="320" y="42" width="2" height="2" transform="rotate(180 320 42)" fill="#CFD8DB"/>
+<rect width="2" height="2" transform="matrix(-1 0 0 1 320 22)" fill="#CFD8DB"/>
+<rect x="320" y="40" width="2" height="2" transform="rotate(180 320 40)" fill="#CFD8DB"/>
+<rect width="2" height="2" transform="matrix(-1 0 0 1 320 24)" fill="#CFD8DB"/>
+<rect x="320" y="38" width="2" height="2" transform="rotate(180 320 38)" fill="#CFD8DB"/>
+<rect width="2" height="2" transform="matrix(-1 0 0 1 320 26)" fill="#CFD8DB"/>
+<rect x="320" y="36" width="2" height="2" transform="rotate(180 320 36)" fill="#CFD8DB"/>
+<rect width="2" height="2" transform="matrix(-1 0 0 1 320 28)" fill="#CFD8DB"/>
+<rect x="320" y="34" width="2" height="2" transform="rotate(180 320 34)" fill="#CFD8DB"/>
+<rect width="2" height="2" transform="matrix(-1 0 0 1 320 30)" fill="#CFD8DB"/>
 </svg>
