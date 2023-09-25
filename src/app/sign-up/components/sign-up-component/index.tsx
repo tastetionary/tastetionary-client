@@ -6,6 +6,7 @@ import SignUpComplete from '../complete';
 import EmailForm from '../email-form';
 import OptInMarketing from '../opt-in-marketing';
 import PrivacyNotice from '../privacy-notice';
+import RegionSetting from '../region-setting';
 import Terms from '../terms';
 import UserInfoForm from '../user-info-form';
 import VerifyCompany from '../verify-company';
@@ -39,6 +40,9 @@ export default function SignUpComponent() {
           </Funnel.Step>
           <Funnel.Step name="user-info">
             <UserInfoForm />
+          </Funnel.Step>
+          <Funnel.Step name="region-setting">
+            <RegionSetting />
           </Funnel.Step>
           <Funnel.Step name="verify-company">
             <VerifyCompany setStep={() => setStep('verify-number')} />
