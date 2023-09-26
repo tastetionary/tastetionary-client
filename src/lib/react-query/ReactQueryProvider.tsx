@@ -23,7 +23,7 @@ function ReactQueryProvider({ children }: React.PropsWithChildren) {
   );
 
   const persister = createSyncStoragePersister({
-    storage: window.localStorage,
+    storage: typeof window !== 'undefined' ? window.localStorage : undefined,
   });
 
   return (
