@@ -56,7 +56,7 @@ export default function SelectRestaurant() {
         </CSelectSection>
 
         <CSelectSection title="가격">
-          <CSlider changeEvent={value => setPrice(value)} />
+          <CSlider value={price} changeEvent={value => setPrice(value)} />
         </CSelectSection>
       </S.SectionContainer>
 
@@ -68,6 +68,7 @@ export default function SelectRestaurant() {
         onClick={() => {
           setSelectedCategory([]);
           setSelectedKeyword([]);
+          setPrice(0);
         }}
       />
     </>
