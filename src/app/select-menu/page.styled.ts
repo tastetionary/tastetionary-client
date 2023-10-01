@@ -1,32 +1,8 @@
 import styled from 'styled-components';
 
-export const Section = styled.section`
-  margin-top: 24px;
-  width: 100%;
-  padding: 0 16px;
-`;
-
-export const SectionTitleContainer = styled.div`
-  display: flex;
-  align-items: center;
-  gap: 8px;
-`;
-
-export const SectionTitle = styled.div`
-  font-size: 20px;
-  font-style: normal;
-  font-weight: 700;
-`;
-
-export const SectionDesc = styled.span`
-  font-size: 12px;
-  font-style: normal;
-  font-weight: 400;
-  color: ${({ theme }) => theme.colors.neutral.bg30};
-`;
+export const Container = styled.div``;
 
 export const MenuContainer = styled.div`
-  padding: 24px 0;
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   grid-row-gap: 24px;
@@ -68,7 +44,7 @@ export const KeywordBtn = styled.button<{ $isSelected: boolean }>`
 `;
 
 export const RefreshContainer = styled.div<{ disabled: boolean }>`
-  cursor: ${({disabled}) => disabled ? "not-allowed" : "pointer"};
+  cursor: ${({ disabled }) => (disabled ? 'not-allowed' : 'pointer')};
   max-width: 166px;
   margin: 24px auto 18px;
   padding: 12px 32px;
