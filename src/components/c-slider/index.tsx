@@ -1,18 +1,12 @@
 import 'rc-slider/assets/index.css';
-import { useEffect, useState } from 'react';
 import { StyledSlider } from './page.styled';
 
 interface Props {
+  value: number;
   changeEvent: (value: number) => void;
 }
 
-export default function CSlider({ changeEvent }: Props) {
-  const [value, setValue] = useState<number>(0);
-
-  useEffect(() => {
-    changeEvent(value);
-  }, [value]);
-
+export default function CSlider({ value, changeEvent }: Props) {
   return (
     <StyledSlider
       marks={{
@@ -29,7 +23,7 @@ export default function CSlider({ changeEvent }: Props) {
       allowCross={false}
       onChange={value => {
         if (typeof value === 'number') {
-          setValue(value);
+          changeEvent(value);
         }
       }}
     />
