@@ -4,7 +4,7 @@ export const RefreshContainer = styled.button<{ disabled?: boolean }>`
   cursor: ${({ disabled }) => (disabled ? 'not-allowed' : 'pointer')};
   max-width: 166px;
   margin: 24px auto 18px;
-  padding: 12px 32px;
+  padding: 12px 26px;
   width: 100%;
   display: flex;
   align-items: center;
@@ -17,4 +17,8 @@ export const RefreshText = styled.span`
   font-size: 14px;
   font-style: normal;
   font-weight: 400;
+
+  &:active {
+    color: ${({ theme }) => theme.colors.secondary.o50};
+  }
 `;
