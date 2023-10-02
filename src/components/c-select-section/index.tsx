@@ -5,17 +5,22 @@ import * as S from './page.styled';
 interface Props {
   title: string;
   subtitle?: string;
+  value?: string;
   children: ReactNode;
 }
 
-export default function CSelectSection({ title, subtitle, children }: Props) {
+export default function CSelectSection({ title, subtitle, value, children }: Props) {
   return (
     <S.Section>
-      <S.SectionTitleContainer>
-        <IC_PIN2 />
-        <S.SectionTitle>{title}</S.SectionTitle>
-        {subtitle && <S.SectionSubTitle>{subtitle}</S.SectionSubTitle>}
-      </S.SectionTitleContainer>
+      <S.SectionHeader>
+        <S.SectionTitleContainer>
+          <IC_PIN2 />
+          <S.SectionTitle>{title}</S.SectionTitle>
+          {subtitle && <S.SectionSubTitle>{subtitle}</S.SectionSubTitle>}
+        </S.SectionTitleContainer>
+
+        {value && <S.SectionHeaderValue as={'span'}>{value}</S.SectionHeaderValue>}
+      </S.SectionHeader>
 
       {children}
     </S.Section>
