@@ -7,7 +7,7 @@ export const KeywordContainer = styled.div`
   flex-wrap: wrap;
 `;
 
-export const KeywordBtn = styled.button<{ $isSelected: boolean }>`
+export const KeywordBtn = styled.button<{ $isSelected?: boolean }>`
   padding: 13px 16px;
   border: 2px solid
     ${({ theme, $isSelected }) => ($isSelected ? theme.colors.secondary.o70 : theme.colors.neutral.bg20)};

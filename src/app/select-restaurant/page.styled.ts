@@ -17,6 +17,7 @@ export const ChangeRegionContainer = styled.div`
 export const FlexBox = styled.div`
   display: flex;
   align-items: center;
+  gap: 4px;
 `;
 
 export const Region = styled.span`
