@@ -39,7 +39,7 @@ export default function CSelectCategory({ data, selectedCategory, setSelectedCat
         };
 
         return (
-          <S.MenuItem key={m.id} onClick={() => onMenuItemClick()}>
+          <S.MenuItem key={m.id} onClick={onMenuItemClick}>
             <Image
               src={`./image/Menu/${m?.icon}${isSelected ? '_selected' : ''}.svg`}
               alt={m?.icon}
