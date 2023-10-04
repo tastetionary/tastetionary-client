@@ -17,6 +17,9 @@ export default function Home() {
   const router = useRouter();
   const { openModal, closeModal } = useModal();
 
+  const isLoggedIn = true;
+  const hasActivityArea = false;
+
   const loginInfoModal = () => {
     openModal(MODAL_TYPES.dialog, {
       title: '로그인 안내',
@@ -27,6 +30,26 @@ export default function Home() {
       confirmText: '로그인 하기',
       needClose: true,
     });
+  };
+
+  const needRegisterActivityAreaModal = () => {
+    openModal(MODAL_TYPES.dialog, {
+      title: '활동 지역 등록 안내',
+      message: '활동 지역을 등록한 회원만\n리뷰 등록이 가능해요.',
+      handleConfirm: () => router.push('/'),
+      handleClose: () => closeModal(MODAL_TYPES.dialog),
+      cancelText: '취소',
+      confirmText: '등록하기',
+      needClose: true,
+    });
+  };
+
+  const onReviewClick = () => {
+    if (!isLoggedIn) {
+      loginInfoModal();
+    } else if (!hasActivityArea) {
+      needRegisterActivityAreaModal();
+    }
   };
 
   return (
@@ -48,7 +71,7 @@ export default function Home() {
       </S.MainContent>
 
       <S.NavContainer>
-        <CNavButton title="리뷰" icon={<ReviewIcon />} isActive={false} />
+        <CNavButton title="리뷰" icon={<ReviewIcon />} isActive={false} clickEvent={() => onReviewClick()} />
         <CNavButton title="홈" icon={<HomeIcon />} isActive={pathName === '/'} />
         <CNavButton title="마이페이지" icon={<MypageIcon />} isActive={false} />
       </S.NavContainer>
