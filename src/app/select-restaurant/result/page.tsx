@@ -8,18 +8,12 @@ import CBarGraph from '@/components/c-bar-graph';
 import CHeader from '@/components/c-header';
 import { KeywordBtn } from '@/components/c-select-keyword/page.styled';
 import CSelectSection from '@/components/c-select-section';
+import { getMoneyValue } from '@/utils';
 import axios from 'axios';
 import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import { FlexBox } from '../page.styled';
 import * as S from './page.styled';
-
-/** 돈 표시 */
-export const getMoneyValue = (money: number | string, removeCurrency?: boolean) => {
-  const commaMoney = money.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
-
-  return commaMoney ? `${commaMoney}${removeCurrency ? '' : '원'}` : `${money}`;
-};
 
 export default function SelectRestaurantResult() {
   const router = useRouter();
