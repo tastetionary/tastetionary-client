@@ -22,8 +22,6 @@ export default function SelectRestaurant() {
 
   const btnDisabled = selectedCategory.length === 0 || selectedKeyword.length === 0;
 
-  console.log(price);
-
   return (
     <>
       <CHeader title="식당 고르기" isBackBtn />

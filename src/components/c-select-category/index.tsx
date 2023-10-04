@@ -14,33 +14,32 @@ export default function CSelectCategory({ data, selectedCategory, setSelectedCat
       {data?.map((m: { id: number; name: string; icon: string }, i: number) => {
         const isSelected = selectedCategory?.includes(m?.name);
 
+        const onMenuItemClick = () => {
+          if (selectedCategory?.length > 0 && isSelected) {
+            // 이미 선택된 경우
+            if (i === 0) {
+              setSelectedCategory([]);
+            } else {
+              setSelectedCategory(prev => {
+                const filtered: string[] = prev.filter(p => p !== m?.name);
+
+                return [...filtered];
+              });
+            }
+          } else {
+            // 새롭게 추가하는 경우
+            if (i === 0) {
+              const allCatgoryName = data?.map(m => m.name);
+
+              setSelectedCategory(allCatgoryName);
+            } else {
+              setSelectedCategory(prev => [...prev, m?.name]);
+            }
+          }
+        };
+
         return (
-          <S.MenuItem
-            key={m.id}
-            onClick={() => {
-              if (selectedCategory?.length > 0 && isSelected) {
-                // 이미 선택된 경우
-                if (i === 0) {
-                  setSelectedCategory([]);
-                } else {
-                  setSelectedCategory(prev => {
-                    const filtered: string[] = prev.filter(p => p !== m?.name);
-
-                    return [...filtered];
-                  });
-                }
-              } else {
-                // 새롭게 추가하는 경우
-                if (i === 0) {
-                  const allCatgoryName = data?.map(m => m.name);
-
-                  setSelectedCategory(allCatgoryName);
-                } else {
-                  setSelectedCategory(prev => [...prev, m?.name]);
-                }
-              }
-            }}
-          >
+          <S.MenuItem key={m.id} onClick={onMenuItemClick}>
             <Image
               src={`./image/Menu/${m?.icon}${isSelected ? '_selected' : ''}.svg`}
               alt={m?.icon}
