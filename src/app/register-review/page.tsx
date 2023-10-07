@@ -86,7 +86,7 @@ export default function RegisterReview() {
             placeholder={`좋은 표현을 사용하여 작성해 주세요.\n좋은 정보가 있다면 함께 남겨 주세요.`}
           />
 
-          <S.Byte>{getByte(watch('review'))} / 100byte</S.Byte>
+          <S.Byte>{getByte(watch('review')) ?? 0} / 100byte</S.Byte>
         </CSelectSection>
 
         <CSelectSection title="재방문 의사">
