@@ -73,7 +73,7 @@ export default function Login() {
         <S.NavContainer>
           <S.NavItem onClick={() => router.push('/')}>아이디 찾기</S.NavItem>
           <S.NavDivider />
-          <S.NavItem onClick={() => router.push('/')}>비밀번호 찾기</S.NavItem>
+          <S.NavItem onClick={() => router.push('/find-password')}>비밀번호 찾기</S.NavItem>
           <S.NavDivider />
           <S.NavItem onClick={() => router.push('/')}>회원가입</S.NavItem>
         </S.NavContainer>
