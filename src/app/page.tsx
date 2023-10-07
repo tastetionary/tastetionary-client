@@ -45,11 +45,11 @@ export default function Home() {
   };
 
   const onReviewClick = () => {
-    if (!isLoggedIn) {
-      loginInfoModal();
-    } else if (!hasActivityArea) {
-      needRegisterActivityAreaModal();
-    }
+    if (!isLoggedIn) return loginInfoModal();
+
+    if (!hasActivityArea) return needRegisterActivityAreaModal();
+
+    router.push('/register-review');
   };
 
   return (
