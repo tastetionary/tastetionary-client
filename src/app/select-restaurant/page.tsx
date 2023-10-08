@@ -4,11 +4,14 @@ import IC_MAP from '@/assets/common/map.svg';
 import restaurant_set from '@/assets/data/restaurant_set.json';
 import MainButton from '@/components/Button/MainButton';
 import RefreshButton from '@/components/Button/RefreshButton';
+import { MODAL_TYPES } from '@/components/Modal/GlobalModal';
+import useModal from '@/components/Modal/GlobalModal/hooks/useModal';
 import CHeader from '@/components/c-header';
 import CSelectCategory from '@/components/c-select-category';
 import CSelectKeyword from '@/components/c-select-keyword';
 import CSelectSection from '@/components/c-select-section';
 import CSlider from '@/components/c-slider';
+import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 import * as S from './page.styled';
 
@@ -16,11 +19,20 @@ export default function SelectRestaurant() {
   const categoryData = restaurant_set?.category;
   const keywordData = restaurant_set?.keyword;
 
+  const { openModal } = useModal();
+  const router = useRouter();
+
   const [selectedCategory, setSelectedCategory] = useState<string[]>([]);
   const [selectedKeyword, setSelectedKeyword] = useState<string[]>([]);
   const [price, setPrice] = useState<number>(0);
 
   const btnDisabled = selectedCategory.length === 0 || selectedKeyword.length === 0;
+
+  const loadingModal = () => {
+    openModal(MODAL_TYPES.loading, {
+      handleClose: () => router.push('/select-restaurant/result'),
+    });
+  };
 
   return (
     <>
@@ -58,7 +70,12 @@ export default function SelectRestaurant() {
         </CSelectSection>
       </S.SectionContainer>
 
-      <MainButton btnText="추첨 시작" disabled={btnDisabled} style={{ maxWidth: 240, margin: '48px auto 0' }} />
+      <MainButton
+        btnText="추첨 시작"
+        disabled={btnDisabled}
+        style={{ maxWidth: 240, margin: '48px auto 0' }}
+        onClick={loadingModal}
+      />
 
       <RefreshButton
         btnText="선택 초기화"
