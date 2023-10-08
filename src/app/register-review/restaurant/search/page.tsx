@@ -4,6 +4,7 @@ import TextInput from '@/components/Input/TextInput';
 import CHeader from '@/components/c-header';
 import { useMutation } from '@tanstack/react-query';
 import axios from 'axios';
+import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import * as S from './page.styled';
@@ -28,6 +29,7 @@ interface ISearchKeyword {
 }
 
 export default function RestaurantSearch() {
+  const router = useRouter();
   const [address, setAddress] = useState('');
 
   const {
@@ -117,7 +119,7 @@ export default function RestaurantSearch() {
 
       <S.Form onSubmit={handleSubmit(onSubmitHandler)}>
         <S.InputContainer>
-          <TextInput placeholder="식당 이름 검색" {...register('name', { required: true })} />
+          <TextInput id="keyword" placeholder="식당 이름 검색" {...register('name', { required: true })} />
         </S.InputContainer>
 
         <S.SearchButton disabled={!isValid}>검색</S.SearchButton>
@@ -138,6 +140,10 @@ export default function RestaurantSearch() {
 
                 <S.SelectButton
                   onClick={() => {
+                    // 지도를 확인한 상태에서 버튼 클릭했을 경우
+                    if (placeAddress !== '' && placeAddress === address)
+                      return router.push(`/register-review?name=${d?.place_name}&address=${placeAddress}`);
+
                     setAddress(placeAddress);
                     getKakaoMap(placeAddress);
                   }}

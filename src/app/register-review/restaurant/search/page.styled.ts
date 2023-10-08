@@ -29,6 +29,7 @@ export const SearchButton = styled.button`
 
   &:disabled {
     cursor: not-allowed;
+    border-color: ${({ theme }) => theme.colors.neutral.bg20};
     background-color: ${({ theme }) => theme.colors.primary.y10};
   }
 `;
@@ -37,7 +38,7 @@ export const PlaceList = styled.ul`
   width: 100%;
 `;
 
-export const PlaceListItem = styled.div`
+export const PlaceListItem = styled.li`
   width: 100%;
   padding: 10px 20px;
   border-bottom: 1px solid ${({ theme }) => theme.colors.neutral.bg40};
@@ -73,7 +74,6 @@ export const SelectButton = styled.button`
 `;
 
 export const MapContainer = styled.div`
-  max-width: 320px;
   width: 100%;
   height: 320px;
   margin-top: 20px;
