@@ -18,9 +18,15 @@ interface FormValue {
   review: string;
 }
 
-export default function RegisterReview() {
+export default function RegisterReview({
+  searchParams,
+}: {
+  searchParams?: { [key: string]: string | string[] | undefined };
+}) {
   const categoryData = restaurant_set?.category;
   const keywordData = restaurant_set?.keyword;
+
+  console.log(searchParams);
 
   const [selectedCategory, setSelectedCategory] = useState<string[]>([]);
   const [selectedKeyword, setSelectedKeyword] = useState<string[]>([]);
@@ -40,13 +46,13 @@ export default function RegisterReview() {
       <CHeader title="식당 리뷰 작성" isBackBtn />
 
       <S.TitleSection>
-        <S.RestaurantName>롤링파스타 종로점</S.RestaurantName>
+        <S.RestaurantName>{searchParams?.name ?? '롤링파스타 종로점'}</S.RestaurantName>
       </S.TitleSection>
 
       <S.AddressSection>
         <IC_MAP width={12} height={12} />
 
-        <S.Address>서울 종로구 삼일대로 392</S.Address>
+        <S.Address>{searchParams?.address ?? '서울 종로구 삼일대로 392'}</S.Address>
       </S.AddressSection>
 
       <S.Form id="register-review-form" onSubmit={handleSubmit(onSubmitHandler)}>
@@ -70,7 +76,14 @@ export default function RegisterReview() {
           <CSlider value={price} changeEvent={value => setPrice(value)} />
         </CSelectSection>
 
-        <CSelectSection title="한 줄 리뷰" subtitle="(선택)">
+        <CSelectSection
+          title="한 줄 리뷰"
+          subtitle="(선택)"
+          link={{
+            text: '리뷰 작성 시 유의사항 >',
+            route: '/register-review/caution',
+          }}
+        >
           <TextArea
             {...register('review', {
               onChange: e => {
