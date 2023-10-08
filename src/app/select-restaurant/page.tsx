@@ -1,9 +1,9 @@
 'use client';
 
-import IC_MAP from '@/assets/common/map.svg';
 import restaurant_set from '@/assets/data/restaurant_set.json';
 import MainButton from '@/components/Button/MainButton';
 import RefreshButton from '@/components/Button/RefreshButton';
+import CChangeRegion from '@/components/c-change-region';
 import CHeader from '@/components/c-header';
 import CSelectCategory from '@/components/c-select-category';
 import CSelectKeyword from '@/components/c-select-keyword';
@@ -26,15 +26,7 @@ export default function SelectRestaurant() {
     <>
       <CHeader title="식당 고르기" isBackBtn />
 
-      <S.ChangeRegionContainer>
-        <S.FlexBox>
-          <IC_MAP width={24} height={24} />
-
-          <S.Region>논현동</S.Region>
-        </S.FlexBox>
-
-        <S.ChangeText>식사 지역 변경 &gt;</S.ChangeText>
-      </S.ChangeRegionContainer>
+      <CChangeRegion region="논현동" type="dining_area" />
 
       <S.SectionContainer>
         <CSelectSection title="음식 종류" subtitle="(복수 선택 가능)">
