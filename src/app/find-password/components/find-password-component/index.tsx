@@ -14,7 +14,7 @@ export default function FindPasswordComponent() {
         <VerifyEmail onNext={() => setStep('verify-auth-number')} />
       </Funnel.Step>
       <Funnel.Step name="verify-auth-number">
-        <VerifyAuthNumber />
+        <VerifyAuthNumber onNext={() => setStep('password-complete')} />
       </Funnel.Step>
       <Funnel.Step name="password-complete">
         <PasswordComplete />

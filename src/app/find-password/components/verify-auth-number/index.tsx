@@ -1,5 +1,7 @@
 import MainButton from '@/components/Button/MainButton';
 import TextInput from '@/components/Input/TextInput';
+import { MODAL_TYPES } from '@/components/Modal/GlobalModal';
+import useModal from '@/components/Modal/GlobalModal/hooks/useModal';
 import CHeader from '@/components/c-header';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import * as S from './page.styled';
@@ -14,8 +16,23 @@ interface FormValue {
 
 export default function VerifyEmail({ onNext }: Props) {
   const { register, handleSubmit } = useForm<FormValue>();
+  const { openModal, closeModal } = useModal();
 
-  const onSubmit: SubmitHandler<FormValue> = data => console.log(data);
+  const onSubmit: SubmitHandler<FormValue> = data => {
+    console.log('data', data);
+    authCompleteModal();
+  };
+
+  const authCompleteModal = () => {
+    openModal(MODAL_TYPES.dialog, {
+      title: '인증 완료',
+      message: '이메일 인증이 완료되었습니다.',
+      handleConfirm: () => onNext(),
+      handleClose: () => closeModal(MODAL_TYPES.dialog),
+      confirmText: '임시 비밀번호 받기',
+      needClose: true,
+    });
+  };
 
   return (
     <>
@@ -45,7 +62,7 @@ export default function VerifyEmail({ onNext }: Props) {
 
               <S.SubButton type="button">메일 재전송</S.SubButton>
             </S.SubButtonContainer>
-            <MainButton btnText="다음" disabled={false} onClick={onNext} type="submit" />
+            <MainButton btnText="다음" disabled={false} type="submit" />
           </S.NextButtonWrapper>
         </S.Form>
       </S.Wrapper>
