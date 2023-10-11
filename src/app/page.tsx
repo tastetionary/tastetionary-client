@@ -66,7 +66,7 @@ export default function Home() {
           title={'식당 고르기'}
           desc={'오늘은 어떤 식당에 가볼까?'}
           subject={'restaurant'}
-          clickEvent={() => loginInfoModal()}
+          clickEvent={() => router.push('select-restaurant')}
         />
       </S.MainContent>
 
