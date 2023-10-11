@@ -10,6 +10,7 @@
         "lint-fix": "lint-staged"
     },
     "dependencies": {
+        "@homekeeper89/taste_dict": "^0.2.1",
         "@loadable/component": "^5.15.3",
         "@svgr/webpack": "^8.1.0",
         "@tanstack/query-sync-storage-persister": "^4.33.0",
@@ -28,6 +29,7 @@
         "react-dom": "18.2.0",
         "react-hook-form": "^7.46.1",
         "recoil": "^0.7.7",
+        "recoil-persist": "^5.1.0",
         "styled-components": "^6.0.5",
         "styled-reset": "^4.5.1",
         "typescript": "5.1.6"
