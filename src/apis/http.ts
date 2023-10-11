@@ -41,7 +41,7 @@ class HttpClient {
   }
 
   responseBody(response: AxiosResponse) {
-    return response.data.result;
+    return response.data;
   }
 
   async get<R>(url: string, config?: AxiosRequestConfig) {
