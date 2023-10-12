@@ -8,6 +8,7 @@ export const LayoutWrapper = styled.div`
   min-height: 100vh;
 `;
 export const Layout = styled.div`
+  position: relative;
   max-width: 360px;
   margin: 0 auto;
   width: 100%;

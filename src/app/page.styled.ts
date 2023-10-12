@@ -9,6 +9,12 @@ export const MainContent = styled.main`
 `;
 
 export const NavContainer = styled.div`
+  position: absolute;
   display: flex;
-  justify-content: space-around;
+  width: 100%;
+  bottom: 0;
+
+  & > button {
+    flex-grow: 1;
+  }
 `;

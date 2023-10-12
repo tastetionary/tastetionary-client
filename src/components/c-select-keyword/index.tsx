@@ -16,6 +16,7 @@ export default function CSelectKeyword({ data, selectedKeyword, setSelectedKeywo
         return (
           <S.KeywordBtn
             key={k.id}
+            type="button"
             $isSelected={isSelected}
             onClick={() => {
               if (selectedKeyword?.length > 0 && isSelected) {
