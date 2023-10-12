@@ -15,7 +15,7 @@ interface Props extends MainButtonProps {
   selectType: 'food' | 'restaurant';
 }
 
-export default function CSelectButton({ selectType, btnText, ...rest }: Props) {
+export default function CRecommendButton({ selectType, btnText, ...rest }: Props) {
   const router = useRouter();
   const { openModal, closeModal } = useModal();
 
