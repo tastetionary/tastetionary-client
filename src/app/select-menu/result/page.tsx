@@ -2,7 +2,7 @@
 
 import RefreshButton from '@/components/Button/RefreshButton';
 import CHeader from '@/components/c-header';
-import CSelectButton from '@/components/c-select-button';
+import CRecommendButton from '@/components/c-recommend-button';
 import CStickyMemo from '@/components/c-sticky-memo';
 import { selectResultState } from '@/lib/atom';
 import { useRouter } from 'next/navigation';
@@ -29,7 +29,7 @@ export default function SelectMenuResult() {
         </CStickyMemo>
 
         <S.ButtonContainer>
-          <CSelectButton btnText="다시 선택하기" selectType="food" />
+          <CRecommendButton btnText="다시 선택하기" selectType="food" />
 
           <RefreshButton btnText="조건 재설정" onClick={() => router.push('/select-menu')} />
         </S.ButtonContainer>

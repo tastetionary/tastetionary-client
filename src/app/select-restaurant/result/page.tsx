@@ -5,7 +5,7 @@ import IC_REVIEW from '@/assets/common/review.svg';
 import RefreshButton from '@/components/Button/RefreshButton';
 import CBarGraph from '@/components/c-bar-graph';
 import CHeader from '@/components/c-header';
-import CSelectButton from '@/components/c-select-button';
+import CRecommendButton from '@/components/c-recommend-button';
 import { KeywordBtn } from '@/components/c-select-keyword/page.styled';
 import CSelectSection from '@/components/c-select-section';
 import { selectResultState } from '@/lib/atom';
@@ -212,7 +212,7 @@ export default function SelectRestaurantResult() {
         <div />
       </CSelectSection>
 
-      <CSelectButton btnText="다시 추첨하기" selectType="restaurant" />
+      <CRecommendButton btnText="다시 추첨하기" selectType="restaurant" />
 
       <S.ButtonsContainer>
         <RefreshButton btnText="조건 재설정" onClick={() => router.push('/select-restaurant')} />

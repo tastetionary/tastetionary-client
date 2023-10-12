@@ -3,17 +3,17 @@
 import { getFoodOption } from '@/apis/food/option';
 import RefreshButton from '@/components/Button/RefreshButton';
 import CHeader from '@/components/c-header';
-import CSelectButton from '@/components/c-select-button';
+import CRecommendButton from '@/components/c-recommend-button';
 import CSelectCategory from '@/components/c-select-category';
 import CSelectKeyword from '@/components/c-select-keyword';
 import CSelectSection from '@/components/c-select-section';
 import { selectFoodState } from '@/lib/atom';
 import { useQuery } from '@tanstack/react-query';
-import { useRecoilValue } from 'recoil';
+import { useRecoilState } from 'recoil';
 import * as S from './page.styled';
 
 export default function SelectMenu() {
-  const foodState = useRecoilValue(selectFoodState);
+  const [foodState, setFoodState] = useRecoilState(selectFoodState);
 
   const btnDisabled = foodState?.category?.length === 0 || foodState?.keyword?.length === 0;
 
@@ -36,14 +36,23 @@ export default function SelectMenu() {
         </CSelectSection>
       </S.Container>
 
-      <CSelectButton
+      <CRecommendButton
         btnText="메뉴 추첨 시작"
         selectType="food"
         disabled={btnDisabled}
         style={{ maxWidth: 240, margin: '48px auto 0' }}
       />
 
-      <RefreshButton btnText="선택 초기화" disabled={btnDisabled} onClick={() => {}} />
+      <RefreshButton
+        btnText="선택 초기화"
+        disabled={btnDisabled}
+        onClick={() =>
+          setFoodState({
+            category: [],
+            keyword: [],
+          })
+        }
+      />
     </>
   );
 }

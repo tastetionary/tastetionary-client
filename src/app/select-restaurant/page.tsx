@@ -4,18 +4,18 @@ import { getRestaurantOption } from '@/apis/restaurant/option';
 import IC_MAP from '@/assets/common/map.svg';
 import RefreshButton from '@/components/Button/RefreshButton';
 import CHeader from '@/components/c-header';
-import CSelectButton from '@/components/c-select-button';
+import CRecommendButton from '@/components/c-recommend-button';
 import CSelectCategory from '@/components/c-select-category';
 import CSelectKeyword from '@/components/c-select-keyword';
 import CSelectSection from '@/components/c-select-section';
 import CSlider from '@/components/c-slider';
 import { selectRestaurantState } from '@/lib/atom';
 import { useQuery } from '@tanstack/react-query';
-import { useRecoilValue } from 'recoil';
+import { useRecoilState } from 'recoil';
 import * as S from './page.styled';
 
 export default function SelectRestaurant() {
-  const restaurantState = useRecoilValue(selectRestaurantState);
+  const [restaurantState, setRestaurantState] = useRecoilState(selectRestaurantState);
 
   const btnDisabled = restaurantState?.category?.length === 0 || restaurantState?.keyword?.length === 0;
 
@@ -27,7 +27,6 @@ export default function SelectRestaurant() {
   return (
     <>
       <CHeader title="식당 고르기" isBackBtn />
-
       <S.ChangeRegionContainer>
         <S.FlexBox>
           <IC_MAP width={24} height={24} />
@@ -52,14 +51,24 @@ export default function SelectRestaurant() {
         </CSelectSection>
       </S.SectionContainer>
 
-      <CSelectButton
+      <CRecommendButton
         btnText="추첨 시작"
         selectType="restaurant"
         disabled={btnDisabled}
         style={{ maxWidth: 240, margin: '48px auto 0' }}
       />
 
-      <RefreshButton btnText="선택 초기화" disabled={btnDisabled} onClick={() => {}} />
+      <RefreshButton
+        btnText="선택 초기화"
+        disabled={btnDisabled}
+        onClick={() =>
+          setRestaurantState({
+            category: [],
+            keyword: [],
+            price: 0,
+          })
+        }
+      />
     </>
   );
 }
