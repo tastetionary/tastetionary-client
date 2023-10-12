@@ -36,6 +36,7 @@ export default function CSelectKeyword({ data, selectType }: Props) {
         return (
           <S.KeywordBtn
             key={k.id}
+            type="button"
             $isSelected={isSelected}
             onClick={() => {
               if (selectedKeyword?.length > 0 && isSelected) {

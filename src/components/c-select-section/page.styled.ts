@@ -42,3 +42,12 @@ export const SectionHeaderValue = styled(SectionTitle)`
   color: ${({ theme }) => theme.colors.primary.y70};
   text-align: right;
 `;
+
+export const SectionLink = styled.span`
+  cursor: pointer;
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 100%;
+  color: ${({ theme }) => theme.colors.neutral.bg60};
+`;
