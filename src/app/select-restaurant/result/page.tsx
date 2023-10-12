@@ -133,10 +133,10 @@ export default function SelectRestaurantResult() {
       </S.ResultContainer>
 
       <S.AddressContainer>
-        <FlexBox>
+        <S.FlexBox>
           <IC_MAP width={12} height={12} />
           <S.AddressText>성남시 분당구 분당내곡로 131 판교테크원 2층 3호</S.AddressText>
-        </FlexBox>
+        </S.FlexBox>
 
         <S.MapText>지도 보기 &gt;</S.MapText>
       </S.AddressContainer>
