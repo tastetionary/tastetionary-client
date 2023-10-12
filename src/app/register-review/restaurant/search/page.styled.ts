@@ -40,36 +40,84 @@ export const PlaceList = styled.ul`
 
 export const PlaceListItem = styled.li`
   width: 100%;
-  padding: 10px 20px;
-  border-bottom: 1px solid ${({ theme }) => theme.colors.neutral.bg40};
+  padding: 16px 20px;
+  border-bottom: 1px solid ${({ theme }) => theme.colors.neutral.bg10};
+  background-color: ${({ theme }) => theme.colors.white};
 `;
 
 export const PlaceContainer = styled.div`
   width: 100%;
   display: flex;
   justify-content: space-between;
+  align-items: flex-start;
+`;
+
+export const FlexBox = styled.div`
+  display: flex;
   align-items: center;
+  gap: 6px;
 `;
 
 export const PlaceName = styled.div`
   font-size: 14px;
   font-weight: 700;
-  margin-bottom: 4px;
+  line-height: 160%;
+  font-family: var(--Pretendard-Variable) !important;
+`;
+
+export const Distance = styled.span`
+  color: ${({ theme }) => theme.colors.secondary.o50};
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 700;
+  font-family: var(--Pretendard-Variable) !important;
 `;
 
 export const PlaceAddress = styled.span`
+  margin-top: 6px;
+  display: block;
   font-size: 12px;
-  color: ${({ theme }) => theme.colors.neutral.bg60};
+  font-style: normal;
+  font-weight: 400;
+  line-height: 160%;
+  font-family: var(--Pretendard-Variable) !important;
+`;
+
+export const RoadAddressFlexBox = styled.div`
+  margin-top: 2px;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+`;
+
+export const RoadAddress = styled(PlaceAddress)`
+  margin-top: 0px;
+  color: ${({ theme }) => theme.colors.neutral.bg40};
+`;
+
+export const RoadAddressTag = styled.div`
+  padding: 3px 4px;
+  border-radius: 2px;
+  background-color: ${({ theme }) => theme.colors.neutral.bg20};
+  font-size: 11px;
+  font-style: normal;
+  font-weight: 400;
+  color: ${({ theme }) => theme.colors.white};
+  font-family: var(--Pretendard-Variable) !important;
+`;
+
+export const Phone = styled(RoadAddress)`
+  color: ${({ theme }) => theme.colors.primary.y90};
 `;
 
 export const SelectButton = styled.button`
-  padding: 4px 8px;
-  border: 1px solid ${({ theme }) => theme.colors.neutral.bg60};
-  background-color: ${({ theme }) => theme.colors.primary.y70};
-  color: ${({ theme }) => theme.colors.white};
+  padding: 10px;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
 
   &:active {
-    background-color: ${({ theme }) => theme.colors.primary.y90};
+    text-decoration: underline;
   }
 `;
 

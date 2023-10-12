@@ -133,9 +133,22 @@ export default function RestaurantSearch() {
             <S.PlaceListItem key={d.id}>
               <S.PlaceContainer>
                 <div>
-                  <S.PlaceName>{d.place_name}</S.PlaceName>
+                  <S.FlexBox>
+                    <S.PlaceName>{d.place_name}</S.PlaceName>
+                    <S.Distance>{d?.distance}</S.Distance>
+                  </S.FlexBox>
 
-                  <S.PlaceAddress>{placeAddress}</S.PlaceAddress>
+                  <S.PlaceAddress>{d.road_address_name}</S.PlaceAddress>
+
+                  <S.RoadAddressFlexBox>
+                    <S.RoadAddressTag>지번</S.RoadAddressTag>
+
+                    <S.RoadAddress>{d?.address_name}</S.RoadAddress>
+                  </S.RoadAddressFlexBox>
+
+                  <S.Phone as="a" href={`tel:${d?.phone}`}>
+                    {d?.phone}
+                  </S.Phone>
                 </div>
 
                 <S.SelectButton

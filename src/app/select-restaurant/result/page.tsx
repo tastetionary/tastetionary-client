@@ -12,7 +12,6 @@ import { getMoneyValue } from '@/utils';
 import axios from 'axios';
 import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
-import { FlexBox } from '../page.styled';
 import * as S from './page.styled';
 
 export default function SelectRestaurantResult() {
@@ -149,10 +148,10 @@ export default function SelectRestaurantResult() {
       </S.ImageContainer>
 
       <S.ReviewContainer>
-        <FlexBox>
+        <S.FlexBox>
           <IC_REVIEW width={12} height={12} />
           <S.MapText>리뷰 N건</S.MapText>
-        </FlexBox>
+        </S.FlexBox>
 
         <S.MapText>리뷰 자세히 보기 &gt;</S.MapText>
       </S.ReviewContainer>
