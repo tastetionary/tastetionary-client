@@ -36,6 +36,30 @@ export default function CRecommendButton({ selectType, btnText, ...rest }: Props
     });
   };
 
+  const loadingModal = (res: FoodRecommendRes | RestaurantRecommendRes) => {
+    openModal(MODAL_TYPES.loading, {
+      handleClose: () => {
+        if (selectType === 'food') {
+          setResult({
+            food: {
+              name: res?.name,
+            },
+          });
+        } else {
+          setResult({
+            restaurant: {
+              name: res?.name,
+              latitude: 33.450701, // res?.latitude,
+              longitude: 126.570667, // res?.longitude,
+            },
+          });
+        }
+
+        router.push(selectType === 'food' ? `/select-menu/result` : `/select-restaurant/result`);
+      },
+    });
+  };
+
   const { mutate: getFood } = useMutation<FoodRecommendRes, AxiosError>(
     () =>
       postFoodRecommend(
@@ -47,12 +71,7 @@ export default function CRecommendButton({ selectType, btnText, ...rest }: Props
       ),
     {
       onSuccess: res => {
-        setResult({
-          food: {
-            name: res?.name,
-          },
-        });
-        router.push(`/select-menu/result`);
+        loadingModal(res);
       },
       onError: err => {
         if (err?.response?.status === 401) {
@@ -75,15 +94,7 @@ export default function CRecommendButton({ selectType, btnText, ...rest }: Props
       ),
     {
       onSuccess: res => {
-        setResult({
-          restaurant: {
-            name: res?.name,
-            latitude: 33.450701, // res?.latitude,
-            longitude: 126.570667, // res?.longitude,
-          },
-        });
-
-        router.push(`/select-restaurant/result`);
+        loadingModal(res);
       },
       onError: err => {
         if (err?.response?.status === 401) {
