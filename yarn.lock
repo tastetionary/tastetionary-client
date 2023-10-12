@@ -1034,7 +1034,7 @@
   dependencies:
     regenerator-runtime "^0.14.0"
 
-"@babel/runtime@^7.20.7", "@babel/runtime@^7.7.7", "@babel/runtime@^7.8.4":
+"@babel/runtime@^7.20.7", "@babel/runtime@^7.8.4":
   version "7.22.15"
   resolved "https://registry.yarnpkg.com/@babel/runtime/-/runtime-7.22.15.tgz#38f46494ccf6cf020bd4eed7124b425e83e523b8"
   integrity sha512-T0O+aa+4w0u06iNmapipJXMV4HoUir03hpx3/YqXXhu9xim3w+dVphjFWl1OH8NbZHw5Lbm9k45drDkgq2VNNA==
@@ -1174,15 +1174,6 @@
   dependencies:
     "@jridgewell/resolve-uri" "^3.1.0"
     "@jridgewell/sourcemap-codec" "^1.4.14"
-
-"@loadable/component@^5.15.3":
-  version "5.15.3"
-  resolved "https://registry.yarnpkg.com/@loadable/component/-/component-5.15.3.tgz#7de7dcbdbf3db3799bf48d58cfcbae7a18d1818c"
-  integrity sha512-VOgYgCABn6+/7aGIpg7m0Ruj34tGetaJzt4bQ345FwEovDQZ+dua+NWLmuJKv8rWZyxOUSfoJkmGnzyDXH2BAQ==
-  dependencies:
-    "@babel/runtime" "^7.7.7"
-    hoist-non-react-statics "^3.3.1"
-    react-is "^16.12.0"
 
 "@mole-inc/bin-wrapper@^8.0.1":
   version "8.0.1"
@@ -3300,7 +3291,7 @@ has@^1.0.3:
   dependencies:
     function-bind "^1.1.1"
 
-hoist-non-react-statics@^3.3.0, hoist-non-react-statics@^3.3.1:
+hoist-non-react-statics@^3.3.0:
   version "3.3.2"
   resolved "https://registry.yarnpkg.com/hoist-non-react-statics/-/hoist-non-react-statics-3.3.2.tgz#ece0acaf71d62c2969c2ec59feff42a4b1a85b45"
   integrity sha512-/gGivxi8JPKWNm/W0jSmzcMPpfpPLc3dY/6GxhX2hQ9iGj3aDfklV4ET7NjKpSinLpJ5vafa9iiGIEZg10SfBw==

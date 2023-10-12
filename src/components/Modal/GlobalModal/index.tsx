@@ -1,10 +1,10 @@
-import loadable from '@loadable/component';
+import dynamic from 'next/dynamic';
 import { ComponentProps, FunctionComponent, useEffect } from 'react';
 import useModal from './hooks/useModal';
 
-const ExampleModal = loadable(() => import('../ExampleModal'), { ssr: false });
-const DialogModal = loadable(() => import('../DialogModal'), { ssr: false });
-const LoadingModal = loadable(() => import('../LoadingModal'), { ssr: false });
+const ExampleModal = dynamic(() => import('../ExampleModal'), { ssr: false });
+const DialogModal = dynamic(() => import('../DialogModal'), { ssr: false });
+const LoadingModal = dynamic(() => import('../LoadingModal'), { ssr: false });
 
 // 사용할 모달 컴포넌트들을 담은 Object
 export const MODAL_TYPES = {
