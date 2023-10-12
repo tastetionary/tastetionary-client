@@ -47,7 +47,7 @@ export default function SelectRestaurant() {
         </CSelectSection>
 
         <CSelectSection title="가격">
-          <CSlider markData={data?.prices ?? []} />
+          <CSlider markData={data?.prices ?? []} type="restaurant" />
         </CSelectSection>
       </S.SectionContainer>
 

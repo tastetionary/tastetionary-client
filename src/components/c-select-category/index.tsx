@@ -1,11 +1,11 @@
-import { selectFoodState, selectRestaurantState } from '@/lib/atom';
+import { reviewState, selectFoodState, selectRestaurantState } from '@/lib/atom';
 import Image from 'next/image';
 import { useEffect, useState } from 'react';
 import { useSetRecoilState } from 'recoil';
 import * as S from './page.styled';
 
 interface Props {
-  selectType: 'food' | 'restaurant';
+  selectType: 'food' | 'restaurant' | 'review';
   data?: { id: number; name: string; icon: string }[];
   isDuplicate?: boolean;
 }
@@ -15,6 +15,7 @@ export default function CSelectCategory({ selectType, data, isDuplicate = true }
 
   const setFoodState = useSetRecoilState(selectFoodState);
   const setRestaurantState = useSetRecoilState(selectRestaurantState);
+  const setReviewState = useSetRecoilState(reviewState);
 
   useEffect(() => {
     if (selectType === 'food') {
@@ -22,8 +23,13 @@ export default function CSelectCategory({ selectType, data, isDuplicate = true }
         ...prev,
         category: selectedCategory,
       }));
-    } else {
+    } else if (selectType === 'restaurant') {
       setRestaurantState(prev => ({
+        ...prev,
+        category: selectedCategory,
+      }));
+    } else {
+      setReviewState(prev => ({
         ...prev,
         category: selectedCategory,
       }));

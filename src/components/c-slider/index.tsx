@@ -1,4 +1,4 @@
-import { selectRestaurantState } from '@/lib/atom';
+import { reviewState, selectRestaurantState } from '@/lib/atom';
 import 'rc-slider/assets/index.css';
 import { useEffect, useState } from 'react';
 import { useSetRecoilState } from 'recoil';
@@ -9,20 +9,29 @@ interface Props {
     id: number;
     name: string;
   }[];
+  type: 'restaurant' | 'review';
 }
 
-export default function CSlider({ markData }: Props) {
+export default function CSlider({ markData, type }: Props) {
   const [value, setValue] = useState<number>(0);
   const setRestaurant = useSetRecoilState(selectRestaurantState);
+  const setReview = useSetRecoilState(reviewState);
 
   const marks = markData?.reduce((obj, item) => Object.assign(obj, { [item.id]: item.name }), {});
 
   useEffect(() => {
-    setRestaurant(prev => ({
-      ...prev,
-      price: value,
-    }));
-  }, [value]);
+    if (type === 'restaurant') {
+      setRestaurant(prev => ({
+        ...prev,
+        price: value,
+      }));
+    } else {
+      setReview(prev => ({
+        ...prev,
+        price: value,
+      }));
+    }
+  }, [value, type]);
 
   return (
     <StyledSlider

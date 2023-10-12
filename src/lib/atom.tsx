@@ -44,3 +44,12 @@ export const selectResultState = atom<{
   },
   effects_UNSTABLE: [persistAtom],
 });
+
+export const reviewState = atom<{ category: string[]; keyword: string[]; price: number }>({
+  key: 'reviewState',
+  default: {
+    category: [],
+    keyword: [],
+    price: 0,
+  },
+});
