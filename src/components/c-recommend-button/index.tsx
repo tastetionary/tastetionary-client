@@ -42,6 +42,7 @@ export default function CRecommendButton({ selectType, btnText, ...rest }: Props
         if (selectType === 'food') {
           setResult({
             food: {
+              id: +res?.id,
               name: res?.name,
             },
           });

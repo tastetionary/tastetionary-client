@@ -23,6 +23,7 @@ export const selectRestaurantState = atom<{ category: string[]; keyword: string[
 
 export const selectResultState = atom<{
   food?: {
+    id: number;
     name?: string;
   };
   restaurant?: {
@@ -34,6 +35,7 @@ export const selectResultState = atom<{
   key: 'selectResultState',
   default: {
     food: {
+      id: 0,
       name: undefined,
     },
     restaurant: {
