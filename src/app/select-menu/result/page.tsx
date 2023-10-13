@@ -5,6 +5,7 @@ import CHeader from '@/components/c-header';
 import CRecommendButton from '@/components/c-recommend-button';
 import CStickyMemo from '@/components/c-sticky-memo';
 import { selectResultState } from '@/lib/atom';
+import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 import { useRecoilValue } from 'recoil';
 import MENU_KOREAN from '../../../../public/image/Menu/menu_korean.svg';
@@ -13,7 +14,8 @@ import * as S from './page.styled';
 export default function SelectMenuResult() {
   const router = useRouter();
 
-  const food = useRecoilValue(selectResultState)?.food?.name;
+  const result = useRecoilValue(selectResultState)?.food;
+  const food = result?.name;
 
   return (
     <>
@@ -25,7 +27,11 @@ export default function SelectMenuResult() {
         <CStickyMemo>
           <S.MemoTitle>{food ? `${food}!` : ''}</S.MemoTitle>
 
-          <MENU_KOREAN width={160} height={160} />
+          {result?.id && result?.id > 0 ? (
+            <Image src={`../image/Food/food_${result.id}.svg`} alt={'menu-result'} width={160} height={160} />
+          ) : (
+            <MENU_KOREAN width={160} height={160} />
+          )}
         </CStickyMemo>
 
         <S.ButtonContainer>
