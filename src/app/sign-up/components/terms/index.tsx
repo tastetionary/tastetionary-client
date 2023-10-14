@@ -101,7 +101,12 @@ export default function Terms({ onNext }: Props) {
         </S.MarketingWrapper>
 
         <S.NextButtonWrapper>
-          <MainButton btnText="다음" disabled={!(agreeTerms.marketing && agreeTerms.privacy)} onClick={onNext} />
+          <MainButton
+            type="button"
+            btnText="다음"
+            disabled={!(agreeTerms.marketing && agreeTerms.privacy)}
+            onClick={onNext}
+          />
         </S.NextButtonWrapper>
       </S.Wrapper>
     </>

@@ -9,11 +9,10 @@ interface Props {
 }
 
 export default function EmailForm({ onNext }: Props) {
-  const {
-    register,
-    formState: { errors },
-  } = useFormContext<{
-    email: string;
+  const { register } = useFormContext<{
+    account: {
+      identification: string;
+    };
   }>();
 
   return (
@@ -34,11 +33,11 @@ export default function EmailForm({ onNext }: Props) {
             type="email"
             label="이메일 주소"
             placeholder="이메일 주소 입력"
-            {...register('email', { required: true, pattern: /^\S+@\S+$/i })}
+            {...register('account.identification', { required: true, pattern: /^\S+@\S+$/i })}
           />
         </S.MainContainer>
         <S.NextButtonWrapper>
-          <MainButton btnText="다음" disabled={false} onClick={onNext} />
+          <MainButton btnText="다음" disabled={false} onClick={onNext} type="button" />
         </S.NextButtonWrapper>
       </S.Wrapper>
     </>

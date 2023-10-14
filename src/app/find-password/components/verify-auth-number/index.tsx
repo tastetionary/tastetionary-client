@@ -14,7 +14,7 @@ interface FormValue {
   authNumber: number;
 }
 
-export default function VerifyEmail({ onNext }: Props) {
+export default function VerifyAuthNumber({ onNext }: Props) {
   const { register, handleSubmit } = useForm<FormValue>();
   const { openModal, closeModal } = useModal();
 

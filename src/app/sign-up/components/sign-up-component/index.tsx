@@ -1,6 +1,7 @@
 'use client';
-
+import VerifyAuthNumber from '@/app/find-password/components/verify-auth-number';
 import useFunnel from '@/hooks/useFunnel';
+import * as api from '@homekeeper89/taste_dict/lib/api';
 import { FormProvider, useForm } from 'react-hook-form';
 import SignUpComplete from '../complete';
 import EmailForm from '../email-form';
@@ -12,15 +13,80 @@ import UserInfoForm from '../user-info-form';
 import VerifyCompany from '../verify-company';
 import VerifyNumber from '../verify-number';
 
+interface FormValue {
+  userProperty: {
+    companyName?: string;
+  };
+  areas: [
+    {
+      category: string;
+      //'activity_area' | 'dining_area'
+      address: '';
+      latitude: number;
+      longitude: number;
+    },
+  ];
+  account: {
+    identification: string;
+    password: string;
+    category: 'email';
+  };
+  agreements: [
+    {
+      category: 'personal_information';
+      is_agree: boolean;
+    },
+  ];
+}
+
 export default function SignUpComponent() {
   const [Funnel, setStep] = useFunnel(
-    ['terms', 'privacy-notice', 'opt-in-marketing', 'complete', 'email-form', 'verify-company', 'verify-number'],
+    [
+      'terms',
+      'privacy-notice',
+      'opt-in-marketing',
+      'verify-auth-number',
+      'complete',
+      'email-form',
+      'verify-company',
+      'verify-number',
+    ],
     'terms'
   );
 
-  const methods = useForm();
+  api.functional.v1.configuration;
 
-  const onSubmit = (data: any) => console.log(data);
+  const methods = useForm<FormValue>({
+    defaultValues: {
+      userProperty: {
+        companyName: '',
+      },
+      areas: [
+        {
+          category: '',
+          address: '',
+          latitude: 0,
+          longitude: 0,
+        },
+      ],
+      account: {
+        identification: '',
+        password: '',
+        category: 'email',
+      },
+      agreements: [
+        {
+          category: 'personal_information',
+          is_agree: true,
+        },
+      ],
+    },
+  });
+
+  const onSubmit = (data: any) => {
+    console.log('form 동작!!');
+    console.log(data);
+  };
 
   return (
     <FormProvider {...methods}>
@@ -36,7 +102,10 @@ export default function SignUpComponent() {
             <OptInMarketing />
           </Funnel.Step>
           <Funnel.Step name="email-form">
-            <EmailForm onNext={() => setStep('email-form')} />
+            <EmailForm onNext={() => setStep('verify-auth-number')} />
+          </Funnel.Step>
+          <Funnel.Step name="verify-auth-number">
+            <VerifyAuthNumber onNext={() => setStep('user-info')} />
           </Funnel.Step>
           <Funnel.Step name="user-info">
             <UserInfoForm />
