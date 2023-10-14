@@ -21,11 +21,7 @@ interface FormValue {
   review: string;
 }
 
-export default function RegisterReview({
-  searchParams,
-}: {
-  searchParams?: { [key: string]: string | string[] | undefined };
-}) {
+export default function RegisterReview() {
   const { data } = useQuery(['restaurant-option'], () => getRestaurantOption(), {
     cacheTime: 0,
     staleTime: 0,
