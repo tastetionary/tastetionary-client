@@ -2,11 +2,13 @@
 
 import TextInput from '@/components/Input/TextInput';
 import CHeader from '@/components/c-header';
+import { reviewPlaceInfoState } from '@/lib/atom';
 import { useMutation } from '@tanstack/react-query';
 import axios from 'axios';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
+import { useSetRecoilState } from 'recoil';
 import * as S from './page.styled';
 
 interface FormValue {
@@ -31,6 +33,7 @@ interface ISearchKeyword {
 export default function RestaurantSearch() {
   const router = useRouter();
   const [address, setAddress] = useState('');
+  const setReviewPlaceInfo = useSetRecoilState(reviewPlaceInfoState);
 
   const {
     register,
@@ -154,8 +157,17 @@ export default function RestaurantSearch() {
                 <S.SelectButton
                   onClick={() => {
                     // 지도를 확인한 상태에서 버튼 클릭했을 경우
-                    if (placeAddress !== '' && placeAddress === address)
-                      return router.push(`/register-review?name=${d?.place_name}&address=${placeAddress}`);
+                    if (placeAddress !== '' && placeAddress === address) {
+                      setReviewPlaceInfo({
+                        address: placeAddress,
+                        id: d?.id,
+                        latitude: d?.y,
+                        longitude: d?.x,
+                        placeName: d?.place_name,
+                        place_url: d?.place_url,
+                      });
+                      return router.push(`/register-review`);
+                    }
 
                     setAddress(placeAddress);
                     getKakaoMap(placeAddress);

@@ -19,6 +19,7 @@ export const selectRestaurantState = atom<{ category: string[]; keyword: string[
     keyword: [],
     price: 0,
   },
+  effects_UNSTABLE: [persistAtom],
 });
 
 export const selectResultState = atom<{
@@ -54,4 +55,23 @@ export const reviewState = atom<{ category: string[]; keyword: string[]; price: 
     keyword: [],
     price: 0,
   },
+});
+
+export const reviewPlaceInfoState = atom<{
+  id: string;
+  placeName: string;
+  address: string;
+  latitude: string;
+  longitude: string;
+  place_url?: string;
+}>({
+  key: 'reviewPlaceInfoState',
+  default: {
+    id: '',
+    placeName: '',
+    address: '',
+    latitude: '',
+    longitude: '',
+  },
+  effects_UNSTABLE: [persistAtom],
 });

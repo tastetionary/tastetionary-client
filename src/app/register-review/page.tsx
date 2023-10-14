@@ -9,7 +9,7 @@ import CSelectCategory from '@/components/c-select-category';
 import CSelectKeyword from '@/components/c-select-keyword';
 import CSelectSection from '@/components/c-select-section';
 import CSlider from '@/components/c-slider';
-import { reviewState } from '@/lib/atom';
+import { reviewPlaceInfoState, reviewState } from '@/lib/atom';
 import { getByte, getLimitedByteText } from '@/utils';
 import { useQuery } from '@tanstack/react-query';
 import { useState } from 'react';
@@ -32,6 +32,7 @@ export default function RegisterReview({
   });
 
   const reviewValue = useRecoilValue(reviewState);
+  const reviewPlaceInfoValue = useRecoilValue(reviewPlaceInfoState);
   const [revisit, setRevisit] = useState<null | boolean>(null);
 
   const { register, handleSubmit, watch, setValue } = useForm<FormValue>({
@@ -47,13 +48,13 @@ export default function RegisterReview({
       <CHeader title="식당 리뷰 작성" isBackBtn />
 
       <S.TitleSection>
-        <S.RestaurantName>{searchParams?.name ?? '롤링파스타 종로점'}</S.RestaurantName>
+        <S.RestaurantName>{reviewPlaceInfoValue?.placeName ?? '롤링파스타 종로점'}</S.RestaurantName>
       </S.TitleSection>
 
       <S.AddressSection>
         <IC_MAP width={12} height={12} />
 
-        <S.Address>{searchParams?.address ?? '서울 종로구 삼일대로 392'}</S.Address>
+        <S.Address>{reviewPlaceInfoValue?.address ?? '서울 종로구 삼일대로 392'}</S.Address>
       </S.AddressSection>
 
       <S.Form id="register-review-form" onSubmit={handleSubmit(onSubmitHandler)}>
