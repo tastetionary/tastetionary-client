@@ -1,29 +1,49 @@
+import { reviewState, selectRestaurantState } from '@/lib/atom';
 import 'rc-slider/assets/index.css';
+import { useEffect, useState } from 'react';
+import { useSetRecoilState } from 'recoil';
 import { StyledSlider } from './page.styled';
 
 interface Props {
-  value: number;
-  changeEvent: (value: number) => void;
+  markData: {
+    id: number;
+    name: string;
+  }[];
+  type: 'restaurant' | 'review';
 }
 
-export default function CSlider({ value, changeEvent }: Props) {
+export default function CSlider({ markData, type }: Props) {
+  const [value, setValue] = useState<number>(0);
+  const setRestaurant = useSetRecoilState(selectRestaurantState);
+  const setReview = useSetRecoilState(reviewState);
+
+  const marks = markData?.reduce((obj, item) => Object.assign(obj, { [item.id]: item.name }), {});
+
+  useEffect(() => {
+    if (type === 'restaurant') {
+      setRestaurant(prev => ({
+        ...prev,
+        price: value,
+      }));
+    } else {
+      setReview(prev => ({
+        ...prev,
+        price: value,
+      }));
+    }
+  }, [value, type]);
+
   return (
     <StyledSlider
-      marks={{
-        0: '~10,000원',
-        1: '~11,000원',
-        2: '~12,000원',
-        3: '~13,000원',
-        4: '13,000원~',
-      }}
-      min={0}
-      max={4}
+      marks={marks}
+      min={markData?.[0]?.id ?? 0}
+      max={markData?.[markData?.length - 1]?.id ?? 4}
       dots={true}
       value={value}
       allowCross={false}
       onChange={value => {
         if (typeof value === 'number') {
-          changeEvent(value);
+          setValue(value);
         }
       }}
     />

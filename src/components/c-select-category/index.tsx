@@ -1,20 +1,49 @@
+import { reviewState, selectFoodState, selectRestaurantState } from '@/lib/atom';
 import Image from 'next/image';
-import { Dispatch, SetStateAction } from 'react';
+import { useEffect, useState } from 'react';
+import { useSetRecoilState } from 'recoil';
 import * as S from './page.styled';
 
 interface Props {
-  data: { id: number; name: string; icon: string }[];
-  selectedCategory: string[];
-  setSelectedCategory: Dispatch<SetStateAction<string[]>>;
+  selectType: 'food' | 'restaurant' | 'review';
+  data?: { id: number; name: string; icon: string }[];
+  isDuplicate?: boolean;
 }
 
-export default function CSelectCategory({ data, selectedCategory, setSelectedCategory }: Props) {
+export default function CSelectCategory({ selectType, data, isDuplicate = true }: Props) {
+  const [selectedCategory, setSelectedCategory] = useState<string[]>([]);
+
+  const setFoodState = useSetRecoilState(selectFoodState);
+  const setRestaurantState = useSetRecoilState(selectRestaurantState);
+  const setReviewState = useSetRecoilState(reviewState);
+
+  useEffect(() => {
+    if (selectType === 'food') {
+      setFoodState(prev => ({
+        ...prev,
+        category: selectedCategory,
+      }));
+    } else if (selectType === 'restaurant') {
+      setRestaurantState(prev => ({
+        ...prev,
+        category: selectedCategory,
+      }));
+    } else {
+      setReviewState(prev => ({
+        ...prev,
+        category: selectedCategory,
+      }));
+    }
+  }, [selectedCategory, selectType]);
+
   return (
     <S.MenuContainer>
       {data?.map((m: { id: number; name: string; icon: string }, i: number) => {
         const isSelected = selectedCategory?.includes(m?.name);
 
         const onMenuItemClick = () => {
+          if (!isDuplicate) return setSelectedCategory([m?.name]);
+
           if (selectedCategory?.length > 0 && isSelected) {
             // 이미 선택된 경우
             if (i === 0) {

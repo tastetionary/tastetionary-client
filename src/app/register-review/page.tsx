@@ -1,7 +1,7 @@
 'use client';
 
+import { getRestaurantOption } from '@/apis/restaurant/option';
 import IC_MAP from '@/assets/common/map.svg';
-import restaurant_set from '@/assets/data/restaurant_set.json';
 import MainButton from '@/components/Button/MainButton';
 import TextArea from '@/components/Input/TextArea';
 import CHeader from '@/components/c-header';
@@ -9,9 +9,12 @@ import CSelectCategory from '@/components/c-select-category';
 import CSelectKeyword from '@/components/c-select-keyword';
 import CSelectSection from '@/components/c-select-section';
 import CSlider from '@/components/c-slider';
+import { reviewState } from '@/lib/atom';
 import { getByte, getLimitedByteText } from '@/utils';
+import { useQuery } from '@tanstack/react-query';
 import { useState } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
+import { useRecoilValue } from 'recoil';
 import * as S from './page.styled';
 
 interface FormValue {
@@ -23,14 +26,12 @@ export default function RegisterReview({
 }: {
   searchParams?: { [key: string]: string | string[] | undefined };
 }) {
-  const categoryData = restaurant_set?.category;
-  const keywordData = restaurant_set?.keyword;
+  const { data } = useQuery(['restaurant-option'], () => getRestaurantOption(), {
+    cacheTime: 0,
+    staleTime: 0,
+  });
 
-  console.log(searchParams);
-
-  const [selectedCategory, setSelectedCategory] = useState<string[]>([]);
-  const [selectedKeyword, setSelectedKeyword] = useState<string[]>([]);
-  const [price, setPrice] = useState<number>(0);
+  const reviewValue = useRecoilValue(reviewState);
   const [revisit, setRevisit] = useState<null | boolean>(null);
 
   const { register, handleSubmit, watch, setValue } = useForm<FormValue>({
@@ -38,7 +39,7 @@ export default function RegisterReview({
   });
 
   const onSubmitHandler: SubmitHandler<FormValue> = data => {
-    console.log(selectedCategory, selectedKeyword, price, data?.review, revisit);
+    console.log(data?.review);
   };
 
   return (
@@ -57,23 +58,15 @@ export default function RegisterReview({
 
       <S.Form id="register-review-form" onSubmit={handleSubmit(onSubmitHandler)}>
         <CSelectSection title="음식 종류" subtitle="(복수 선택 가능)">
-          <CSelectCategory
-            data={categoryData}
-            selectedCategory={selectedCategory}
-            setSelectedCategory={setSelectedCategory}
-          />
+          <CSelectCategory data={data?.categories} selectType="restaurant" />
         </CSelectSection>
 
         <CSelectSection title="키워드" subtitle="(복수 선택 가능)">
-          <CSelectKeyword
-            data={keywordData}
-            selectedKeyword={selectedKeyword}
-            setSelectedKeyword={setSelectedKeyword}
-          />
+          <CSelectKeyword data={data?.keywords} selectType="restaurant" />
         </CSelectSection>
 
         <CSelectSection title="가격">
-          <CSlider value={price} changeEvent={value => setPrice(value)} />
+          <CSlider markData={data?.prices ?? []} type="review" />
         </CSelectSection>
 
         <CSelectSection
@@ -117,7 +110,7 @@ export default function RegisterReview({
           <MainButton
             btnText="리뷰 등록하기"
             form="register-review-form"
-            disabled={revisit === null || selectedCategory?.length === 0 || selectedKeyword?.length === 0}
+            disabled={revisit === null || reviewValue?.category?.length === 0 || reviewValue?.keyword?.length === 0}
           />
         </S.ButtonContainer>
       </S.Form>

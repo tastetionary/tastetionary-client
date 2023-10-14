@@ -1,13 +1,39 @@
-import { Dispatch, SetStateAction } from 'react';
+import { reviewState, selectFoodState, selectRestaurantState } from '@/lib/atom';
+import { useEffect, useState } from 'react';
+import { useSetRecoilState } from 'recoil';
 import * as S from './page.styled';
 
 interface Props {
-  data: { id: number; name: string }[];
-  selectedKeyword: string[];
-  setSelectedKeyword: Dispatch<SetStateAction<string[]>>;
+  selectType: 'food' | 'restaurant' | 'review';
+  data?: { id: number; name: string }[];
 }
 
-export default function CSelectKeyword({ data, selectedKeyword, setSelectedKeyword }: Props) {
+export default function CSelectKeyword({ data, selectType }: Props) {
+  const [selectedKeyword, setSelectedKeyword] = useState<string[]>([]);
+
+  const setFoodState = useSetRecoilState(selectFoodState);
+  const setRestaurantState = useSetRecoilState(selectRestaurantState);
+  const setReviewState = useSetRecoilState(reviewState);
+
+  useEffect(() => {
+    if (selectType === 'food') {
+      setFoodState(prev => ({
+        ...prev,
+        keyword: selectedKeyword,
+      }));
+    } else if (selectType === 'restaurant') {
+      setRestaurantState(prev => ({
+        ...prev,
+        keyword: selectedKeyword,
+      }));
+    } else {
+      setReviewState(prev => ({
+        ...prev,
+        keyword: selectedKeyword,
+      }));
+    }
+  }, [selectedKeyword, selectType]);
+
   return (
     <S.KeywordContainer>
       {data?.map((k, i) => {

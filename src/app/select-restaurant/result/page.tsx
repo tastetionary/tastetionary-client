@@ -2,26 +2,32 @@
 
 import IC_MAP from '@/assets/common/map.svg';
 import IC_REVIEW from '@/assets/common/review.svg';
-import MainButton from '@/components/Button/MainButton';
 import RefreshButton from '@/components/Button/RefreshButton';
 import CBarGraph from '@/components/c-bar-graph';
 import CHeader from '@/components/c-header';
+import CRecommendButton from '@/components/c-recommend-button';
 import { KeywordBtn } from '@/components/c-select-keyword/page.styled';
 import CSelectSection from '@/components/c-select-section';
+import { selectResultState } from '@/lib/atom';
 import { getMoneyValue } from '@/utils';
 import axios from 'axios';
 import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
+import { useRecoilValue } from 'recoil';
 import * as S from './page.styled';
 
 export default function SelectRestaurantResult() {
   const router = useRouter();
 
+  const [address, setAddress] = useState('');
   const [imageUrl, setImageUrl] = useState<string[]>([]);
   const [price, setPrice] = useState<{ portion: number; rank: string }[]>([]);
   const [averagePrice, setAveragePrice] = useState(0);
 
-  const restaurant = '오복수산 판교점';
+  const result = useRecoilValue(selectResultState)?.restaurant;
+  const restaurant = result?.name;
+  const lat = result?.latitude;
+  const lng = result?.longitude;
 
   useEffect(() => {
     const getImage = async () => {
@@ -43,6 +49,26 @@ export default function SelectRestaurantResult() {
       getImage();
     }
   }, [restaurant]);
+
+  useEffect(() => {
+    const getAddress = async () => {
+      const res = await axios.get(`https://dapi.kakao.com/v2/local/geo/coord2address.json?x=${lng}&y=${lat}`, {
+        headers: {
+          Authorization: `KakaoAK ${process.env.NEXT_PUBLIC_KAKAO_REST_API_KEY}`,
+        },
+      });
+
+      const data = res?.data?.documents?.[0];
+
+      if (data) {
+        setAddress(data?.road_address?.address_name ?? data?.address?.address_name);
+      }
+    };
+
+    if (lat && lng) {
+      getAddress();
+    }
+  }, [lat, lng]);
 
   useEffect(() => {
     const price = {
@@ -135,7 +161,7 @@ export default function SelectRestaurantResult() {
       <S.AddressContainer>
         <S.FlexBox>
           <IC_MAP width={12} height={12} />
-          <S.AddressText>성남시 분당구 분당내곡로 131 판교테크원 2층 3호</S.AddressText>
+          <S.AddressText>{address}</S.AddressText>
         </S.FlexBox>
 
         <S.MapText>지도 보기 &gt;</S.MapText>
@@ -185,7 +211,7 @@ export default function SelectRestaurantResult() {
         <div />
       </CSelectSection>
 
-      <MainButton btnText="다시 추첨하기" onClick={() => router.push('/select-restaurant')} />
+      <CRecommendButton btnText="다시 추첨하기" selectType="restaurant" />
 
       <S.ButtonsContainer>
         <RefreshButton btnText="조건 재설정" onClick={() => router.push('/select-restaurant')} />

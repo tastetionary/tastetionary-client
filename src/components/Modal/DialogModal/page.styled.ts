@@ -73,7 +73,9 @@ export const Title = styled.div`
   font-size: 16px;
   font-style: normal;
   font-weight: 700;
-  line-height: 100%;
+  line-height: 140%;
+  white-space: pre-line;
+  word-break: keep-all;
 `;
 
 export const Message = styled.p`
@@ -83,6 +85,8 @@ export const Message = styled.p`
   font-weight: 400;
   line-height: 160%;
   color: ${({ theme }) => theme.colors.neutral.bg40};
+  white-space: pre-line;
+  word-break: keep-all;
 `;
 
 export const ButtonContainer = styled.div`
