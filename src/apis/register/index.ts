@@ -17,7 +17,7 @@ interface GetPostRepository {
 export const getRegisterRepository = (): GetPostRepository => {
   return {
     postAccountAuthCode: async ({ identification, type }: PostAccountAuthParams) =>
-      await http.post<PostAccountAuthCodeRes, PostAccountAuthParams>('/v1/authentification/account', {
+      await http.post<PostAccountAuthCodeRes, PostAccountAuthParams>('/v1/authentication/account', {
         identification,
         type,
       }),

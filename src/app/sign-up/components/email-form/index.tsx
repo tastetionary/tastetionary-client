@@ -2,6 +2,7 @@ import MainButton from '@/components/Button/MainButton';
 import TextInput from '@/components/Input/TextInput';
 import CHeader from '@/components/c-header';
 import { Controller, useFormContext } from 'react-hook-form';
+import useAccountAuthCodeMutate from '../../hooks/query/useAccountAuthCodeMutate';
 import * as S from './page.styled';
 
 interface Props {
@@ -12,12 +13,19 @@ export default function EmailForm({ onNext }: Props) {
   const {
     register,
     control,
+    getValues,
     formState: { errors, isDirty, isValid },
   } = useFormContext<{
     account: {
       identification: string;
     };
   }>();
+
+  const { mutate: accountAuthCodeMutate } = useAccountAuthCodeMutate({ onNext });
+
+  const onEmailAuthRequest = () => {
+    accountAuthCodeMutate({ identification: getValues('account.identification'), type: 'email' });
+  };
 
   return (
     <>
@@ -50,7 +58,7 @@ export default function EmailForm({ onNext }: Props) {
           />
         </S.MainContainer>
         <S.NextButtonWrapper>
-          <MainButton btnText="다음" disabled={!isDirty || !isValid} type="button" onClick={onNext} />
+          <MainButton btnText="다음" disabled={!isDirty || !isValid} type="button" onClick={onEmailAuthRequest} />
         </S.NextButtonWrapper>
       </S.Wrapper>
     </>

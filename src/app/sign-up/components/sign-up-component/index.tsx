@@ -55,20 +55,20 @@ export default function SignUpComponent() {
   const methods = useForm<FormValue>({
     mode: 'all',
     defaultValues: {
-      userProperty: {
-        companyName: '',
-      },
+      // userProperty: {
+      //   companyName: '',
+      // },
       areas: [
         {
           category: 'dining_area',
-          address: '',
-          latitude: 0,
-          longitude: 0,
+          // address: '',
+          // latitude: 0,
+          // longitude: 0,
         },
       ],
       account: {
-        identification: '',
-        password: '',
+        // identification: '',
+        // password: '',
         category: 'email',
       },
       agreements: [
