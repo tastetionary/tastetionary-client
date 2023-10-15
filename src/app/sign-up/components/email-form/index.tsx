@@ -12,7 +12,6 @@ export default function EmailForm({ onNext }: Props) {
   const {
     register,
     control,
-    watch,
     formState: { errors },
   } = useFormContext<{
     account: {

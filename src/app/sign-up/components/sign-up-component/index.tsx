@@ -105,7 +105,7 @@ export default function SignUpComponent() {
             <EmailForm onNext={() => setStep('verify-auth-number')} />
           </Funnel.Step>
           <Funnel.Step name="verify-auth-number">
-            <VerifyAuthNumber onNext={() => setStep('user-info')} />
+            <VerifyAuthNumber onNext={() => setStep('user-info')} type="register" />
           </Funnel.Step>
           <Funnel.Step name="user-info">
             <UserInfoForm onNext={() => setStep('region-setting')} />
