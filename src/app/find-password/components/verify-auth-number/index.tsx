@@ -1,9 +1,9 @@
+import useAccountAuthCodeMutate from '@/app/sign-up/hooks/query/useAccountAuthCodeMutate';
 import MainButton from '@/components/Button/MainButton';
 import TextInput from '@/components/Input/TextInput';
-import { MODAL_TYPES } from '@/components/Modal/GlobalModal';
-import useModal from '@/components/Modal/GlobalModal/hooks/useModal';
 import CHeader from '@/components/c-header';
 import { ChangeEvent, useState } from 'react';
+import { useFormContext } from 'react-hook-form';
 import * as S from './page.styled';
 
 interface Props {
@@ -12,35 +12,13 @@ interface Props {
 }
 
 export default function VerifyAuthNumber({ onNext, type }: Props) {
-  const { openModal, closeModal } = useModal();
   const [authNumber, setAuthNumber] = useState('');
+  const { getValues } = useFormContext();
 
-  const authCompleteModal = (type: 'register' | 'find-password') => {
-    if (type === 'register') {
-      openModal(MODAL_TYPES.dialog, {
-        title: '인증 완료',
-        message: '이메일 인증이 완료되었습니다.',
-        handleConfirm: () => onNext(),
-        handleClose: () => closeModal(MODAL_TYPES.dialog),
-        confirmText: '다음',
-        needClose: true,
-      });
+  const { mutate: accountAuthCodeMutate } = useAccountAuthCodeMutate({ onNext, type });
 
-      return;
-    }
-
-    if (type === 'find-password') {
-      openModal(MODAL_TYPES.dialog, {
-        title: '인증 완료',
-        message: '이메일 인증이 완료되었습니다.',
-        handleConfirm: () => onNext(),
-        handleClose: () => closeModal(MODAL_TYPES.dialog),
-        confirmText: '임시 비밀번호 받기',
-        needClose: true,
-      });
-
-      return;
-    }
+  const handleSubmit = () => {
+    accountAuthCodeMutate({ identification: getValues('account.identification'), type: 'email' });
   };
 
   const handleChangeAuthNumber = (e: ChangeEvent<HTMLInputElement>) => {
@@ -75,12 +53,7 @@ export default function VerifyAuthNumber({ onNext, type }: Props) {
 
             <S.SubButton type="button">메일 재전송</S.SubButton>
           </S.SubButtonContainer>
-          <MainButton
-            btnText="다음"
-            disabled={authNumber.length === 0 || false}
-            type="button"
-            onClick={() => authCompleteModal(type)}
-          />
+          <MainButton btnText="다음" disabled={authNumber.length === 0 || false} type="button" onClick={handleSubmit} />
         </S.NextButtonWrapper>
       </S.Wrapper>
     </>

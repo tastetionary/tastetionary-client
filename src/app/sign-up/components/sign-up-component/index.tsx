@@ -1,7 +1,6 @@
 'use client';
 import VerifyAuthNumber from '@/app/find-password/components/verify-auth-number';
 import useFunnel from '@/hooks/useFunnel';
-import * as api from '@homekeeper89/taste_dict/lib/api';
 import { FormProvider, useForm } from 'react-hook-form';
 import SignUpComplete from '../complete';
 import EmailForm from '../email-form';
@@ -53,10 +52,8 @@ export default function SignUpComponent() {
     'terms'
   );
 
-  api.functional.v1.configuration;
-
   const methods = useForm<FormValue>({
-    mode: 'onBlur',
+    mode: 'all',
     defaultValues: {
       userProperty: {
         companyName: '',

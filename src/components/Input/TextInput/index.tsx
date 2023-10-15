@@ -10,11 +10,10 @@ interface TextInputProps extends InputHTMLAttributes<HTMLInputElement> {
 }
 
 function TextInput({ label, errorMsg, ...rest }: TextInputProps, ref: ForwardedRef<HTMLInputElement>) {
-  const [focused, setFocused] = useState(true);
+  const [focused, setFocused] = useState(false);
 
   const hasError = Boolean(errorMsg);
 
-  console.log('focused', focused);
   return (
     <S.Container>
       {label && <S.Label>{label}</S.Label>}
@@ -25,7 +24,7 @@ function TextInput({ label, errorMsg, ...rest }: TextInputProps, ref: ForwardedR
         onFocus={() => setFocused(true)}
         onBlur={() => setFocused(false)}
       >
-        <S.Input $hasError={hasError} ref={ref} {...rest} />
+        <S.Input $hasError={hasError} ref={ref} autoFocus={true} {...rest} />
 
         {hasError ? <INPUT_ERROR /> : focused ? <INPUT_TYPED /> : <INPUT_INACTIVE />}
       </S.InputContainer>
