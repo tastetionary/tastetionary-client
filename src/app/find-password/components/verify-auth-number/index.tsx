@@ -1,7 +1,6 @@
+import useConfirmAuthCodeMutate from '@/app/sign-up/hooks/query/useConfirmAuthCodeMutate';
 import MainButton from '@/components/Button/MainButton';
 import TextInput from '@/components/Input/TextInput';
-import { MODAL_TYPES } from '@/components/Modal/GlobalModal';
-import useModal from '@/components/Modal/GlobalModal/hooks/useModal';
 import CHeader from '@/components/c-header';
 import { ChangeEvent, useState } from 'react';
 import * as S from './page.styled';
@@ -14,38 +13,14 @@ interface Props {
 export default function VerifyAuthNumber({ onNext, type }: Props) {
   const [authNumber, setAuthNumber] = useState('');
 
-  const { openModal, closeModal } = useModal();
-
-  const authCompleteModal = (type: 'register' | 'find-password') => {
-    if (type === 'register') {
-      openModal(MODAL_TYPES.dialog, {
-        title: '인증 완료',
-        message: '이메일 인증이 완료되었습니다.',
-        handleConfirm: () => onNext(),
-        handleClose: () => closeModal(MODAL_TYPES.dialog),
-        confirmText: '다음',
-        needClose: true,
-      });
-
-      return;
-    }
-
-    if (type === 'find-password') {
-      openModal(MODAL_TYPES.dialog, {
-        title: '인증 완료',
-        message: '이메일 인증이 완료되었습니다.',
-        handleConfirm: () => onNext(),
-        handleClose: () => closeModal(MODAL_TYPES.dialog),
-        confirmText: '임시 비밀번호 받기',
-        needClose: true,
-      });
-
-      return;
-    }
-  };
+  const { mutate: confirmAuthCodeMutate } = useConfirmAuthCodeMutate({ onNext, type });
 
   const handleChangeAuthNumber = (e: ChangeEvent<HTMLInputElement>) => {
     setAuthNumber(e.target.value);
+  };
+
+  const onConfirmAuthCode = () => {
+    confirmAuthCodeMutate({ historyId: 4, code: authNumber });
   };
 
   return (
@@ -80,7 +55,7 @@ export default function VerifyAuthNumber({ onNext, type }: Props) {
             btnText="다음"
             disabled={authNumber.length === 0 || false}
             type="button"
-            onClick={() => authCompleteModal(type)}
+            onClick={onConfirmAuthCode}
           />
         </S.NextButtonWrapper>
       </S.Wrapper>

@@ -12,7 +12,7 @@ export default function UserInfoForm({ onNext }: Props) {
   const {
     register,
     getValues,
-    formState: { errors },
+    formState: { errors, isDirty, isValid },
   } = useFormContext<{
     account: {
       identification: string;
@@ -50,7 +50,7 @@ export default function UserInfoForm({ onNext }: Props) {
             render={() => {
               return (
                 <TextInput
-                  id="password"
+                  // id="password"
                   label="비밀번호"
                   placeholder="영문, 숫자, 특수문자를 조합하여 8자 이상"
                   type="password"
@@ -71,6 +71,7 @@ export default function UserInfoForm({ onNext }: Props) {
             render={() => {
               return (
                 <TextInput
+                  // id="password_confirm"
                   label="비밀번호 확인"
                   placeholder="비밀번호 재입력"
                   type="password"
@@ -87,7 +88,7 @@ export default function UserInfoForm({ onNext }: Props) {
         </S.MainContainer>
 
         <S.NextButtonWrapper>
-          <MainButton btnText="다음" disabled={false} type="button" onClick={onNext} />
+          <MainButton btnText="다음" disabled={!isDirty || !isValid} type="button" onClick={onNext} />
         </S.NextButtonWrapper>
       </S.Wrapper>
     </>

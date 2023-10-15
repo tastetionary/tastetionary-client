@@ -5,21 +5,36 @@ interface PostAccountAuthCodeRes {
   expiredAt: string;
 }
 
+interface PostConfirmAuthCodeRes {
+  data: string;
+}
+
 interface PostAccountAuthParams {
   identification: string;
   type: 'email';
 }
 
-interface GetPostRepository {
-  postAccountAuthCode: ({ identification, type }: PostAccountAuthParams) => Promise<PostAccountAuthCodeRes>;
+interface PostConfirmAuthCodeParams {
+  historyId: number;
+  code: string;
 }
 
-export const getRegisterRepository = (): GetPostRepository => {
+interface GetRegisterRepository {
+  postAccountAuthCode: ({ identification, type }: PostAccountAuthParams) => Promise<PostAccountAuthCodeRes>;
+  postConfirmAuthCode: ({ historyId, code }: PostConfirmAuthCodeParams) => Promise<PostConfirmAuthCodeParams>;
+}
+
+export const getRegisterRepository = (): GetRegisterRepository => {
   return {
     postAccountAuthCode: async ({ identification, type }: PostAccountAuthParams) =>
-      await http.post<PostAccountAuthCodeRes, PostAccountAuthParams>('/v1/authentication/account', {
+      await http.post<PostAccountAuthCodeRes, PostAccountAuthParams>('/apis/v1/authentication/account', {
         identification,
         type,
+      }),
+    postConfirmAuthCode: async ({ historyId, code }: PostConfirmAuthCodeParams) =>
+      await http.post<PostConfirmAuthCodeRes, PostConfirmAuthCodeParams>('/apis/v1/authentication/status/done', {
+        historyId,
+        code,
       }),
   };
 };
