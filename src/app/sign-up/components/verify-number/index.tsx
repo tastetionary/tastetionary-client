@@ -6,7 +6,11 @@ import CHeader from '@/components/c-header';
 import { ChangeEvent, useState } from 'react';
 import * as S from './page.styled';
 
-export default function VerifyNumber() {
+interface Props {
+  onNext: () => void;
+}
+
+export default function VerifyNumber({ onNext }: Props) {
   const [authNumber, setAuthNumber] = useState('');
 
   const handleChangeAuthNumber = (e: ChangeEvent<HTMLInputElement>) => {
@@ -45,7 +49,7 @@ export default function VerifyNumber() {
           <S.SubButton type="button">메일 재전송</S.SubButton>
         </S.SubButtonContainer>
 
-        <MainButton btnText="다음" disabled={authNumber.length === 0 || false} />
+        <MainButton btnText="다음" disabled={authNumber.length === 0 || false} onClick={onNext} />
       </S.Wrapper>
     </>
   );

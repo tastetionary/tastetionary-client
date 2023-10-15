@@ -114,7 +114,7 @@ export default function SignUpComponent() {
             <VerifyCompany onNext={() => setStep('verify-number')} />
           </Funnel.Step>
           <Funnel.Step name="verify-number">
-            <VerifyNumber />
+            <VerifyNumber onNext={() => setStep('complete')} />
           </Funnel.Step>
           <Funnel.Step name="complete">
             <SignUpComplete />
