@@ -1,8 +1,9 @@
 import MainButton from '@/components/Button/MainButton';
 import CheckBox2 from '@/components/CheckBox/CheckBox2';
 import CHeader from '@/components/c-header';
+import { agreeTermState } from '@/lib/atom';
 import { useRouter } from 'next/navigation';
-import { useState } from 'react';
+import { useRecoilState } from 'recoil';
 import * as S from './page.styled';
 
 interface Props {
@@ -12,11 +13,7 @@ interface Props {
 export default function Terms({ onNext }: Props) {
   const router = useRouter();
 
-  const [agreeTerms, setAgreeTerms] = useState({
-    all: false,
-    privacy: false,
-    marketing: false,
-  });
+  const [agreeTerms, setAgreeTerms] = useRecoilState(agreeTermState);
 
   const handleChangeAgreeTerms = (checked: boolean, type: 'all' | 'privacy' | 'marketing') => {
     if (type === 'all') {
