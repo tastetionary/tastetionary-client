@@ -56,6 +56,7 @@ export default function SignUpComponent() {
   api.functional.v1.configuration;
 
   const methods = useForm<FormValue>({
+    mode: 'onBlur',
     defaultValues: {
       userProperty: {
         companyName: '',

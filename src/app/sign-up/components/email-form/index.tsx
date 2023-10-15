@@ -12,14 +12,13 @@ export default function EmailForm({ onNext }: Props) {
   const {
     register,
     control,
+    watch,
     formState: { errors },
   } = useFormContext<{
     account: {
       identification: string;
     };
   }>();
-
-  console.log('errors', errors);
 
   return (
     <>
@@ -38,14 +37,13 @@ export default function EmailForm({ onNext }: Props) {
           <Controller
             control={control}
             name="account.identification"
-            render={props => {
-              console.log('props', props);
+            render={() => {
               return (
                 <TextInput
                   type="text"
                   label="이메일 주소"
                   placeholder="이메일 주소 입력"
-                  errorMsg={errors.account?.identification ? '에러가 발생했습니다.' : ''}
+                  errorMsg={errors.account?.identification ? '이메일 형식이 맞지 않습니다.' : undefined}
                   {...register('account.identification', { required: true, pattern: /^\S+@\S+$/i })}
                 />
               );
@@ -53,7 +51,7 @@ export default function EmailForm({ onNext }: Props) {
           />
         </S.MainContainer>
         <S.NextButtonWrapper>
-          <MainButton btnText="다음" disabled={false} type="submit" />
+          <MainButton btnText="다음" disabled={false} type="button" onClick={onNext} />
         </S.NextButtonWrapper>
       </S.Wrapper>
     </>
