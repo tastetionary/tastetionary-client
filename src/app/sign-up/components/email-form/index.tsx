@@ -12,7 +12,7 @@ export default function EmailForm({ onNext }: Props) {
   const {
     register,
     control,
-    formState: { errors },
+    formState: { errors, isDirty, isValid },
   } = useFormContext<{
     account: {
       identification: string;
@@ -50,7 +50,7 @@ export default function EmailForm({ onNext }: Props) {
           />
         </S.MainContainer>
         <S.NextButtonWrapper>
-          <MainButton btnText="다음" disabled={false} type="button" onClick={onNext} />
+          <MainButton btnText="다음" disabled={!isDirty || !isValid} type="button" onClick={onNext} />
         </S.NextButtonWrapper>
       </S.Wrapper>
     </>

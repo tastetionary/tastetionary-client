@@ -3,25 +3,14 @@
 import MainButton from '@/components/Button/MainButton';
 import TextInput from '@/components/Input/TextInput';
 import CHeader from '@/components/c-header';
-import { ChangeEvent } from 'react';
-import { SubmitHandler, useForm } from 'react-hook-form';
+import { ChangeEvent, useState } from 'react';
 import * as S from './page.styled';
 
-interface FormValue {
-  authNum: string;
-}
-
 export default function VerifyNumber() {
-  const {
-    register,
-    handleSubmit,
-    formState: { errors, isDirty, isValid },
-  } = useForm<FormValue>({
-    mode: 'onSubmit',
-  });
+  const [authNumber, setAuthNumber] = useState('');
 
-  const onSubmitHandler: SubmitHandler<FormValue> = data => {
-    console.log(data);
+  const handleChangeAuthNumber = (e: ChangeEvent<HTMLInputElement>) => {
+    setAuthNumber(e.target.value);
   };
 
   return (
@@ -40,29 +29,23 @@ export default function VerifyNumber() {
           인증코드를 입력해주세요.
         </S.SubTitle>
 
-        <S.Form onSubmit={handleSubmit(onSubmitHandler)}>
-          <S.InputContainer>
-            <TextInput
-              label="인증코드 6자리"
-              placeholder="인증코드 6자리 숫자 입력"
-              type="number"
-              maxLength={6}
-              onInput={(e: ChangeEvent<HTMLInputElement>) => {
-                if (e.target.value.length > e.target.maxLength)
-                  e.target.value = e.target.value.slice(0, e.target.maxLength);
-              }}
-              {...register('authNum', { required: true, pattern: /[0-9]{6}/, maxLength: 6 })}
-            />
-          </S.InputContainer>
+        <S.InputContainer>
+          <TextInput
+            label="인증코드 6자리"
+            placeholder="인증코드 6자리 숫자 입력"
+            type="text"
+            maxLength={6}
+            onChange={handleChangeAuthNumber}
+          />
+        </S.InputContainer>
 
-          <S.SubButtonContainer>
-            <span>인증메일을 받지 못하셨나요?</span>
+        <S.SubButtonContainer>
+          <span>인증메일을 받지 못하셨나요?</span>
 
-            <S.SubButton type="button">메일 재전송</S.SubButton>
-          </S.SubButtonContainer>
+          <S.SubButton type="button">메일 재전송</S.SubButton>
+        </S.SubButtonContainer>
 
-          <MainButton btnText="다음" disabled={!isDirty || !isValid} />
-        </S.Form>
+        <MainButton btnText="다음" disabled={authNumber.length === 0 || false} />
       </S.Wrapper>
     </>
   );

@@ -63,6 +63,7 @@ export default function RegionSetting({ onNext }: Props) {
 
               setValue('areas[0].latitude', coords.La);
               setValue('areas[0].longitude', coords.Ma);
+              setValue('areas[0].address', address);
 
               // 결과값으로 받은 위치를 마커로 표시합니다
               var marker = new window.kakao.maps.Marker({

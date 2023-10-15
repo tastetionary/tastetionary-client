@@ -3,6 +3,7 @@ import TextInput from '@/components/Input/TextInput';
 import { MODAL_TYPES } from '@/components/Modal/GlobalModal';
 import useModal from '@/components/Modal/GlobalModal/hooks/useModal';
 import CHeader from '@/components/c-header';
+import { ChangeEvent, useState } from 'react';
 import * as S from './page.styled';
 
 interface Props {
@@ -12,6 +13,7 @@ interface Props {
 
 export default function VerifyAuthNumber({ onNext, type }: Props) {
   const { openModal, closeModal } = useModal();
+  const [authNumber, setAuthNumber] = useState('');
 
   const authCompleteModal = (type: 'register' | 'find-password') => {
     if (type === 'register') {
@@ -41,6 +43,10 @@ export default function VerifyAuthNumber({ onNext, type }: Props) {
     }
   };
 
+  const handleChangeAuthNumber = (e: ChangeEvent<HTMLInputElement>) => {
+    setAuthNumber(e.target.value);
+  };
+
   return (
     <>
       <CHeader title="인증코드 입력" isBackBtn />
@@ -54,7 +60,13 @@ export default function VerifyAuthNumber({ onNext, type }: Props) {
           재전송 버튼을 통해 인증 코드를 다시 받으세요.
         </S.SubTitle>
         <S.MainContainer>
-          <TextInput type="text" label="인증코드 6자리" placeholder="인증코드 6자리 숫자입력" maxLength={6} />
+          <TextInput
+            type="text"
+            label="인증코드 6자리"
+            placeholder="인증코드 6자리 숫자입력"
+            maxLength={6}
+            onChange={handleChangeAuthNumber}
+          />
         </S.MainContainer>
 
         <S.NextButtonWrapper>
@@ -63,7 +75,12 @@ export default function VerifyAuthNumber({ onNext, type }: Props) {
 
             <S.SubButton type="button">메일 재전송</S.SubButton>
           </S.SubButtonContainer>
-          <MainButton btnText="다음" disabled={false} type="button" onClick={() => authCompleteModal(type)} />
+          <MainButton
+            btnText="다음"
+            disabled={authNumber.length === 0 || false}
+            type="button"
+            onClick={() => authCompleteModal(type)}
+          />
         </S.NextButtonWrapper>
       </S.Wrapper>
     </>

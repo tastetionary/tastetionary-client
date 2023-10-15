@@ -114,7 +114,7 @@ export default function SignUpComponent() {
             <RegionSetting onNext={() => setStep('verify-company')} />
           </Funnel.Step>
           <Funnel.Step name="verify-company">
-            <VerifyCompany setStep={() => setStep('verify-number')} />
+            <VerifyCompany onNext={() => setStep('verify-number')} />
           </Funnel.Step>
           <Funnel.Step name="verify-number">
             <VerifyNumber />
