@@ -1,20 +1,32 @@
 import MainButton from '@/components/Button/MainButton';
 import TextInput from '@/components/Input/TextInput';
 import CHeader from '@/components/c-header';
+import { useState } from 'react';
 import { useFormContext } from 'react-hook-form';
 import * as S from './page.styled';
 
-interface FormValue {
-  email: string;
-  password: string;
-  passwordConfirm: string;
+interface Props {
+  onNext: () => void;
 }
 
-export default function UserInfoForm() {
+export default function UserInfoForm({ onNext }: Props) {
   const {
     register,
+    getValues,
     formState: { errors },
-  } = useFormContext<FormValue>();
+  } = useFormContext<{
+    account: {
+      identification: '';
+      password: '';
+      category: 'email';
+      passwordConfirm: '';
+    };
+  }>();
+
+  const [errorState, setErrorState] = useState({
+    password: false,
+    checkPassword: false,
+  });
 
   return (
     <>
@@ -28,21 +40,26 @@ export default function UserInfoForm() {
             label="이메일 주소"
             placeholder="이메일 주소를 입력해주세요."
             type="text"
-            {...register('email', { required: true })}
+            value={getValues('account.identification')}
+            disabled
           />
 
           <TextInput
+            id="password"
             label="비밀번호"
             placeholder="영문, 숫자, 특수문자를 조합하여 8자 이상"
-            type="text"
-            {...register('password', { required: true, pattern: /^(?=.*[a-zA-Z])(?=.*\d)(?=.*[@#$%^&+=!]).{8,}$/ })}
+            type="password"
+            {...register('account.password', {
+              required: true,
+              pattern: /^(?=.*[a-zA-Z])(?=.*\d)(?=.*[@#$%^&+=!]).{8,}$/,
+            })}
           />
 
           <TextInput
             label="비밀번호 확인"
             placeholder="비밀번호 재입력"
-            type="text"
-            {...register('passwordConfirm', {
+            type="password"
+            {...register('account.passwordConfirm', {
               required: true,
               pattern: /^(?=.*[a-zA-Z])(?=.*\d)(?=.*[@#$%^&+=!]).{8,}$/,
             })}
@@ -50,7 +67,7 @@ export default function UserInfoForm() {
         </S.MainContainer>
 
         <S.NextButtonWrapper>
-          <MainButton btnText="다음" disabled />
+          <MainButton btnText="다음" disabled={false} type="button" onClick={onNext} />
         </S.NextButtonWrapper>
       </S.Wrapper>
     </>

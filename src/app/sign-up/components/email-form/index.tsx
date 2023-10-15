@@ -1,7 +1,7 @@
 import MainButton from '@/components/Button/MainButton';
 import TextInput from '@/components/Input/TextInput';
 import CHeader from '@/components/c-header';
-import { useFormContext } from 'react-hook-form';
+import { Controller, useFormContext } from 'react-hook-form';
 import * as S from './page.styled';
 
 interface Props {
@@ -9,11 +9,17 @@ interface Props {
 }
 
 export default function EmailForm({ onNext }: Props) {
-  const { register } = useFormContext<{
+  const {
+    register,
+    control,
+    formState: { errors },
+  } = useFormContext<{
     account: {
       identification: string;
     };
   }>();
+
+  console.log('errors', errors);
 
   return (
     <>
@@ -29,15 +35,25 @@ export default function EmailForm({ onNext }: Props) {
           TEXTTEXTTEXTTEXTTEXTTEXTTEXTTEXT
         </S.SubTitle>
         <S.MainContainer>
-          <TextInput
-            type="email"
-            label="이메일 주소"
-            placeholder="이메일 주소 입력"
-            {...register('account.identification', { required: true, pattern: /^\S+@\S+$/i })}
+          <Controller
+            control={control}
+            name="account.identification"
+            render={props => {
+              console.log('props', props);
+              return (
+                <TextInput
+                  type="text"
+                  label="이메일 주소"
+                  placeholder="이메일 주소 입력"
+                  errorMsg={errors.account?.identification ? '에러가 발생했습니다.' : ''}
+                  {...register('account.identification', { required: true, pattern: /^\S+@\S+$/i })}
+                />
+              );
+            }}
           />
         </S.MainContainer>
         <S.NextButtonWrapper>
-          <MainButton btnText="다음" disabled={false} onClick={onNext} type="button" />
+          <MainButton btnText="다음" disabled={false} type="submit" />
         </S.NextButtonWrapper>
       </S.Wrapper>
     </>

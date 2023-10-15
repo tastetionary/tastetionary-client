@@ -19,8 +19,7 @@ interface FormValue {
   };
   areas: [
     {
-      category: string;
-      //'activity_area' | 'dining_area'
+      category: 'dining_area' | 'activity_area';
       address: '';
       latitude: number;
       longitude: number;
@@ -63,7 +62,7 @@ export default function SignUpComponent() {
       },
       areas: [
         {
-          category: '',
+          category: 'dining_area',
           address: '',
           latitude: 0,
           longitude: 0,
@@ -108,10 +107,10 @@ export default function SignUpComponent() {
             <VerifyAuthNumber onNext={() => setStep('user-info')} />
           </Funnel.Step>
           <Funnel.Step name="user-info">
-            <UserInfoForm />
+            <UserInfoForm onNext={() => setStep('region-setting')} />
           </Funnel.Step>
           <Funnel.Step name="region-setting">
-            <RegionSetting />
+            <RegionSetting onNext={() => setStep('verify-company')} />
           </Funnel.Step>
           <Funnel.Step name="verify-company">
             <VerifyCompany setStep={() => setStep('verify-number')} />
