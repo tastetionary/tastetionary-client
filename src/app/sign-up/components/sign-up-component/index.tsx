@@ -1,6 +1,7 @@
 'use client';
 import VerifyAuthNumber from '@/app/find-password/components/verify-auth-number';
 import useFunnel from '@/hooks/useFunnel';
+import { useState } from 'react';
 import { FormProvider, useForm } from 'react-hook-form';
 import SignUpComplete from '../complete';
 import EmailForm from '../email-form';
@@ -38,6 +39,8 @@ interface FormValue {
 }
 
 export default function SignUpComponent() {
+  const [emailAuthId, setEmailAuthId] = useState(0);
+
   const [Funnel, setStep] = useFunnel(
     [
       'terms',
@@ -99,10 +102,10 @@ export default function SignUpComponent() {
             <OptInMarketing />
           </Funnel.Step>
           <Funnel.Step name="email-form">
-            <EmailForm onNext={() => setStep('verify-auth-number')} />
+            <EmailForm onNext={() => setStep('verify-auth-number')} setEmailAuthId={setEmailAuthId} />
           </Funnel.Step>
           <Funnel.Step name="verify-auth-number">
-            <VerifyAuthNumber onNext={() => setStep('user-info')} type="register" />
+            <VerifyAuthNumber onNext={() => setStep('user-info')} type="register" emailAuthId={emailAuthId} />
           </Funnel.Step>
           <Funnel.Step name="user-info">
             <UserInfoForm onNext={() => setStep('region-setting')} />

@@ -14,7 +14,6 @@ function TextInput({ label, errorMsg, ...rest }: TextInputProps, ref: ForwardedR
 
   const hasError = Boolean(errorMsg);
 
-  console.log('focused', focused);
   return (
     <S.Container>
       {label && <S.Label>{label}</S.Label>}

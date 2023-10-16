@@ -49,7 +49,7 @@ export default function VerifyNumber({ onNext }: Props) {
           <S.SubButton type="button">메일 재전송</S.SubButton>
         </S.SubButtonContainer>
 
-        <MainButton btnText="다음" disabled={authNumber.length === 0 || false} onClick={onNext} />
+        <MainButton btnText="다음" disabled={authNumber.length === 0 || false} onClick={onNext} type="submit" />
       </S.Wrapper>
     </>
   );

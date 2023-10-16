@@ -69,7 +69,7 @@ export default function VerifyCompany({ onNext }: Props) {
           />
         </S.InputContainer>
 
-        <S.SubButton type="button">회사 인증 다음에 하기</S.SubButton>
+        <S.SubButton type="submit">회사 인증 다음에 하기</S.SubButton>
 
         <MainButton btnText="다음" disabled={!isDirty || !isValid} onClick={onNext} />
       </S.Wrapper>

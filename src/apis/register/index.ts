@@ -1,8 +1,10 @@
 import http from '../http';
 
 interface PostAccountAuthCodeRes {
-  id: number;
-  expiredAt: string;
+  data: {
+    id: number;
+    expiredAt: string;
+  };
 }
 
 interface PostConfirmAuthCodeRes {

@@ -7,9 +7,10 @@ import * as S from './page.styled';
 
 interface Props {
   onNext: () => void;
+  setEmailAuthId: (value: number) => void;
 }
 
-export default function EmailForm({ onNext }: Props) {
+export default function EmailForm({ onNext, setEmailAuthId }: Props) {
   const {
     register,
     control,
@@ -21,11 +22,19 @@ export default function EmailForm({ onNext }: Props) {
     };
   }>();
 
-  const { mutate: accountAuthCodeMutate } = useAccountAuthCodeMutate({ onNext });
+  const { data, mutate: accountAuthCodeMutate } = useAccountAuthCodeMutate({ onNext, setEmailAuthId });
 
   const onEmailAuthRequest = () => {
     accountAuthCodeMutate({ identification: getValues('account.identification'), type: 'email' });
   };
+
+  // useEffect(() => {
+  //   console.log('data', data?.data.id);
+
+  //   setEmailAuthId(data?.data.id as number);
+  // }, [data]);
+
+  console.log('data', data?.data.id);
 
   return (
     <>

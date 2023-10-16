@@ -8,9 +8,10 @@ import * as S from './page.styled';
 interface Props {
   onNext: () => void;
   type: 'register' | 'find-password';
+  emailAuthId: number;
 }
 
-export default function VerifyAuthNumber({ onNext, type }: Props) {
+export default function VerifyAuthNumber({ onNext, type, emailAuthId }: Props) {
   const [authNumber, setAuthNumber] = useState('');
 
   const { mutate: confirmAuthCodeMutate } = useConfirmAuthCodeMutate({ onNext, type });
@@ -20,7 +21,7 @@ export default function VerifyAuthNumber({ onNext, type }: Props) {
   };
 
   const onConfirmAuthCode = () => {
-    confirmAuthCodeMutate({ historyId: 4, code: authNumber });
+    confirmAuthCodeMutate({ historyId: emailAuthId, code: authNumber });
   };
 
   return (
