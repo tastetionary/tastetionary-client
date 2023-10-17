@@ -1,5 +1,6 @@
 'use client';
 
+import MainButton from '@/components/Button/MainButton';
 import TextInput from '@/components/Input/TextInput';
 import CHeader from '@/components/c-header';
 import { reviewPlaceInfoState } from '@/lib/atom';
@@ -131,9 +132,16 @@ export default function RestaurantSearch() {
       <S.PlaceList>
         {data?.documents?.map((d: ISearchKeyword) => {
           const placeAddress = d.road_address_name !== '' ? d.road_address_name : d.address_name;
+          const showMap = placeAddress !== '' && placeAddress === address;
 
           return (
-            <S.PlaceListItem key={d.id}>
+            <S.PlaceListItem
+              key={d.id}
+              onClick={() => {
+                setAddress(placeAddress);
+                getKakaoMap(placeAddress);
+              }}
+            >
               <S.PlaceContainer>
                 <div>
                   <S.FlexBox>
@@ -153,11 +161,18 @@ export default function RestaurantSearch() {
                     {d?.phone}
                   </S.Phone>
                 </div>
+              </S.PlaceContainer>
 
-                <S.SelectButton
-                  onClick={() => {
-                    // 지도를 확인한 상태에서 버튼 클릭했을 경우
-                    if (placeAddress !== '' && placeAddress === address) {
+              {placeAddress !== '' && placeAddress === address && (
+                <>
+                  <S.MapContainer>
+                    <div id="map" style={{ width: placeAddress?.length > 0 ? '100%' : 0, height: '100%' }}></div>
+                  </S.MapContainer>
+
+                  <MainButton
+                    btnText="식당 선택"
+                    style={{ marginTop: 16 }}
+                    onClick={() => {
                       setReviewPlaceInfo({
                         address: placeAddress,
                         id: d?.id,
@@ -166,21 +181,12 @@ export default function RestaurantSearch() {
                         placeName: d?.place_name,
                         place_url: d?.place_url,
                       });
-                      return router.push(`/register-review`);
-                    }
-
-                    setAddress(placeAddress);
-                    getKakaoMap(placeAddress);
-                  }}
-                >
-                  선택
-                </S.SelectButton>
-              </S.PlaceContainer>
-
-              {placeAddress !== '' && placeAddress === address && (
-                <S.MapContainer>
-                  <div id="map" style={{ width: placeAddress?.length > 0 ? '100%' : 0, height: '100%' }}></div>
-                </S.MapContainer>
+                      return router.push(`/register-review`, {
+                        scroll: true,
+                      });
+                    }}
+                  />
+                </>
               )}
             </S.PlaceListItem>
           );

@@ -46,6 +46,7 @@ export const PlaceListItem = styled.li`
 `;
 
 export const PlaceContainer = styled.div`
+  cursor: pointer;
   width: 100%;
   display: flex;
   justify-content: space-between;
@@ -123,6 +124,6 @@ export const SelectButton = styled.button`
 
 export const MapContainer = styled.div`
   width: 100%;
-  height: 320px;
+  height: 160px;
   margin-top: 20px;
 `;
