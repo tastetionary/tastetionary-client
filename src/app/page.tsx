@@ -71,7 +71,12 @@ export default function Home() {
       </S.MainContent>
 
       <S.NavContainer>
-        <CNavButton title="리뷰" icon={<ReviewIcon />} isActive={false} clickEvent={() => onReviewClick()} />
+        <CNavButton
+          title="리뷰"
+          icon={<ReviewIcon />}
+          isActive={false}
+          clickEvent={() => router.push('/register-review/restaurant')}
+        />
         <CNavButton title="홈" icon={<HomeIcon />} isActive={pathName === '/'} />
         <CNavButton title="마이페이지" icon={<MypageIcon />} isActive={false} />
       </S.NavContainer>

@@ -46,7 +46,7 @@ export default function CSelectCategory({ selectType, data, isDuplicate = true }
         const onMenuItemClick = () => {
           if (!isDuplicate) {
             if (i === 0) {
-              setSelectedCategory(allCatgoryName);
+              return setSelectedCategory(allCatgoryName);
             } else {
               return setSelectedCategory([m?.name]);
             }
