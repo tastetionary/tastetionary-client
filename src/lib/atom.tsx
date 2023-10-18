@@ -88,3 +88,14 @@ export const agreeTermState = atom<{
     marketing: false,
   },
 });
+
+export const companyInfoState = atom<{
+  companyName: string;
+  companyEmail: string;
+}>({
+  key: 'companyInfoState',
+  default: {
+    companyName: '',
+    companyEmail: '',
+  },
+});

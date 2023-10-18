@@ -56,7 +56,7 @@ export default function SignUpComponent() {
   );
 
   const methods = useForm<FormValue>({
-    mode: 'all',
+    mode: 'onChange',
     defaultValues: {
       // userProperty: {
       //   companyName: '',

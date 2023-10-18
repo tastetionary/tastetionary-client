@@ -22,19 +22,11 @@ export default function EmailForm({ onNext, setEmailAuthId }: Props) {
     };
   }>();
 
-  const { data, mutate: accountAuthCodeMutate } = useAccountAuthCodeMutate({ onNext, setEmailAuthId });
+  const { mutate: accountAuthCodeMutate } = useAccountAuthCodeMutate({ onNext, setEmailAuthId });
 
   const onEmailAuthRequest = () => {
     accountAuthCodeMutate({ identification: getValues('account.identification'), type: 'email' });
   };
-
-  // useEffect(() => {
-  //   console.log('data', data?.data.id);
-
-  //   setEmailAuthId(data?.data.id as number);
-  // }, [data]);
-
-  console.log('data', data?.data.id);
 
   return (
     <>
