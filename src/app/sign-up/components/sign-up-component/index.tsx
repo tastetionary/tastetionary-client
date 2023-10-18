@@ -1,10 +1,9 @@
 'use client';
 import VerifyAuthNumber from '@/app/find-password/components/verify-auth-number';
-import { companyInfoState } from '@/lib/atom';
 import { usePathname, useRouter, useSearchParams } from 'next/navigation';
 import { useState } from 'react';
-import { FormProvider, useForm } from 'react-hook-form';
-import { useRecoilValue } from 'recoil';
+import { FormProvider, SubmitHandler, useForm } from 'react-hook-form';
+import useRegisterUserMutate from '../../hooks/query/useRegisterUserMutate';
 import SignUpComplete from '../complete';
 import EmailForm from '../email-form';
 import OptInMarketing from '../opt-in-marketing';
@@ -18,6 +17,7 @@ import VerifyNumber from '../verify-number';
 interface FormValue {
   userProperty: {
     companyName?: string;
+    companyEmail?: string;
   };
   areas: [
     {
@@ -30,6 +30,7 @@ interface FormValue {
   account: {
     identification: string;
     password: string;
+    passwordConfirm?: string;
     category: 'email';
   };
   agreements: [
@@ -43,7 +44,6 @@ interface FormValue {
 export default function SignUpComponent() {
   const [emailAuthId, setEmailAuthId] = useState(0);
   const [companyEmailAuthId, setCompanyEmailAuthId] = useState(0);
-  const { companyName } = useRecoilValue(companyInfoState);
 
   const { push } = useRouter();
   const params = useSearchParams();
@@ -55,8 +55,10 @@ export default function SignUpComponent() {
     push(`${pathname}?step=${step}`);
   };
 
+  const { mutate: registerUserMutate } = useRegisterUserMutate({ onNext: () => setStep('complete') });
+
   const methods = useForm<FormValue>({
-    mode: 'all',
+    mode: 'onBlur',
     defaultValues: {
       areas: [
         {
@@ -75,10 +77,12 @@ export default function SignUpComponent() {
     },
   });
 
-  const onSubmit = (data: any) => {
+  const onSubmit: SubmitHandler<FormValue> = data => {
     console.log('form 동작!!');
     console.log('서버에 보낼 data', data);
-    console.log('회사 이름', companyName);
+    delete data.userProperty.companyEmail;
+    delete data.account.passwordConfirm;
+    registerUserMutate(data);
   };
 
   return (

@@ -1,10 +1,8 @@
 import MainButton from '@/components/Button/MainButton';
 import TextInput from '@/components/Input/TextInput';
 import CHeader from '@/components/c-header';
-import { companyInfoState } from '@/lib/atom';
-import { ChangeEvent } from 'react';
-import { useRecoilState } from 'recoil';
-import useCompanyAuthCodeMutate from '../../hooks/query/useCompanyAuthCodeMutate';
+import { useFormContext } from 'react-hook-form';
+import useAccountAuthCodeMutate from '../../hooks/query/useAccountAuthCodeMutate';
 import * as S from './page.styled';
 
 interface Props {
@@ -13,20 +11,28 @@ interface Props {
 }
 
 export default function VerifyCompany({ onNext, setCompanyEmailAuthId }: Props) {
-  const [companyInfo, setCompanyInfo] = useRecoilState(companyInfoState);
-  const { mutate: companyAuthCodeMutate } = useCompanyAuthCodeMutate({ onNext, setCompanyEmailAuthId });
+  const {
+    register,
+    getValues,
+    formState: { errors, isDirty, isValid },
+  } = useFormContext<{
+    userProperty: {
+      companyName: string;
+      companyEmail: string;
+    };
+  }>();
 
-  const enableButtonState = companyInfo.companyEmail.length > 0 && companyInfo.companyName.length > 0;
+  const { mutate: accountAuthCodeMutate } = useAccountAuthCodeMutate({
+    onNext,
+    setCompanyEmailAuthId,
+    category: 'company',
+  });
 
   const onCompanyEmailAuthRequest = () => {
-    companyAuthCodeMutate({ identification: companyInfo.companyEmail, type: 'email' });
-  };
-
-  const handleChangeCompanyInfo = (e: ChangeEvent<HTMLInputElement>) => {
-    const { name, value } = e.target;
-    setCompanyInfo({
-      ...companyInfo,
-      [name]: value,
+    accountAuthCodeMutate({
+      identification: getValues('userProperty.companyEmail'),
+      type: 'email',
+      category: 'company',
     });
   };
 
@@ -43,22 +49,23 @@ export default function VerifyCompany({ onNext, setCompanyEmailAuthId }: Props) 
             label="회사명"
             placeholder="회사명"
             type="text"
-            name="companyName"
-            onChange={handleChangeCompanyInfo}
+            {...register('userProperty.companyName', {
+              required: false,
+            })}
           />
 
           <TextInput
             label="회사 이메일"
             placeholder="이메일 주소 입력"
             type="text"
-            name="companyEmail"
-            onChange={handleChangeCompanyInfo}
+            errorMsg={errors.userProperty?.companyEmail ? '이메일 형식이 맞지 않습니다.' : undefined}
+            {...register('userProperty.companyEmail', { required: false, pattern: /^\S+@\S+$/i })}
           />
         </S.InputContainer>
 
         <S.SubButton type="submit">회사 인증 다음에 하기</S.SubButton>
 
-        <MainButton btnText="다음" disabled={enableButtonState === false} onClick={onCompanyEmailAuthRequest} />
+        <MainButton btnText="다음" disabled={!isDirty || !isValid} onClick={onCompanyEmailAuthRequest} />
       </S.Wrapper>
     </>
   );

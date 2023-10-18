@@ -4,17 +4,20 @@ import { useEffect } from 'react';
 
 interface Props {
   onNext: () => void;
-  setEmailAuthId: (value: number) => void;
+  setEmailAuthId?: (value: number) => void;
+  setCompanyEmailAuthId?: (value: number) => void;
+  category: 'account' | 'company';
 }
 
-const useAccountAuthCodeMutate = ({ onNext, setEmailAuthId }: Props) => {
+const useAccountAuthCodeMutate = ({ onNext, setEmailAuthId, setCompanyEmailAuthId, category }: Props) => {
   const { data, mutate } = useMutation(getRegisterRepository().postAccountAuthCode, {
     onSuccess: () => onNext(),
   });
 
   useEffect(() => {
     if (data) {
-      setEmailAuthId(data?.data.id as number);
+      const authId = data?.data.id as number;
+      category === 'account' ? setEmailAuthId?.(authId) : setCompanyEmailAuthId?.(authId);
     }
   }, [data]);
 
