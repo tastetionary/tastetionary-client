@@ -4,16 +4,23 @@ import CHeader from '@/components/c-header';
 import { companyInfoState } from '@/lib/atom';
 import { ChangeEvent } from 'react';
 import { useRecoilState } from 'recoil';
+import useCompanyAuthCodeMutate from '../../hooks/query/useCompanyAuthCodeMutate';
 import * as S from './page.styled';
 
 interface Props {
   onNext: () => void;
+  setCompanyEmailAuthId: (value: number) => void;
 }
 
-export default function VerifyCompany({ onNext }: Props) {
+export default function VerifyCompany({ onNext, setCompanyEmailAuthId }: Props) {
   const [companyInfo, setCompanyInfo] = useRecoilState(companyInfoState);
+  const { mutate: companyAuthCodeMutate } = useCompanyAuthCodeMutate({ onNext, setCompanyEmailAuthId });
 
   const enableButtonState = companyInfo.companyEmail.length > 0 && companyInfo.companyName.length > 0;
+
+  const onCompanyEmailAuthRequest = () => {
+    companyAuthCodeMutate({ identification: companyInfo.companyEmail, type: 'email' });
+  };
 
   const handleChangeCompanyInfo = (e: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
@@ -51,7 +58,7 @@ export default function VerifyCompany({ onNext }: Props) {
 
         <S.SubButton type="submit">회사 인증 다음에 하기</S.SubButton>
 
-        <MainButton btnText="다음" disabled={enableButtonState === false} onClick={onNext} />
+        <MainButton btnText="다음" disabled={enableButtonState === false} onClick={onCompanyEmailAuthRequest} />
       </S.Wrapper>
     </>
   );

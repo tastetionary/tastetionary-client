@@ -1,8 +1,10 @@
 'use client';
 import VerifyAuthNumber from '@/app/find-password/components/verify-auth-number';
 import useFunnel from '@/hooks/useFunnel';
+import { companyInfoState } from '@/lib/atom';
 import { useState } from 'react';
 import { FormProvider, useForm } from 'react-hook-form';
+import { useRecoilValue } from 'recoil';
 import SignUpComplete from '../complete';
 import EmailForm from '../email-form';
 import OptInMarketing from '../opt-in-marketing';
@@ -40,6 +42,8 @@ interface FormValue {
 
 export default function SignUpComponent() {
   const [emailAuthId, setEmailAuthId] = useState(0);
+  const [companyEmailAuthId, setCompanyEmailAuthId] = useState(0);
+  const { companyName } = useRecoilValue(companyInfoState);
 
   const [Funnel, setStep] = useFunnel(
     [
@@ -83,9 +87,12 @@ export default function SignUpComponent() {
     },
   });
 
+  console.log('companyEmailAuthId', companyEmailAuthId);
+
   const onSubmit = (data: any) => {
     console.log('form 동작!!');
-    console.log(data);
+    console.log('서버에 보낼 data', data);
+    console.log('회사 이름', companyName);
   };
 
   return (
@@ -114,7 +121,7 @@ export default function SignUpComponent() {
             <RegionSetting onNext={() => setStep('verify-company')} />
           </Funnel.Step>
           <Funnel.Step name="verify-company">
-            <VerifyCompany onNext={() => setStep('verify-number')} />
+            <VerifyCompany onNext={() => setStep('verify-number')} setCompanyEmailAuthId={setCompanyEmailAuthId} />
           </Funnel.Step>
           <Funnel.Step name="verify-number">
             <VerifyNumber onNext={() => setStep('complete')} />
