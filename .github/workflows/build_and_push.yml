@@ -47,7 +47,7 @@ jobs:
           file: ./Dockerfile
           push: true
           secret-files: |
-            .npmrc=${{ github.workspace }}/.npmrc
+            npmrc=${{ github.workspace }}/.npmrc
           tags: |
             ${{ secrets.DOCKER_REGISTRY }}/taste-client:latest
           cache-from: type=registry,ref=${{ secrets.DOCKER_REGISTRY }}/taste-client:latest
