@@ -51,6 +51,6 @@ jobs:
           file: ./Dockerfile
           push: true
           tags: |
-            ${{ secrets.DOCKER_REGISTRY }}/taste-server:latest
+            ${{ secrets.DOCKER_REGISTRY }}/taste-client:latest
           cache-from: type=registry,ref=${{ secrets.DOCKER_REGISTRY }}/taste-client:latest
           cache-to: type=inline
