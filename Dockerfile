@@ -6,7 +6,7 @@ WORKDIR /app
 COPY package.json /app
 COPY yarn.lock /app
 
-RUN --mount=type=secret,id=npmrc,target=/root/.npmrc yarn install
+RUN --mount=type=secret,id=npmrc,target=$HOME/.npmrc yarn install
 
 COPY . /app
 
