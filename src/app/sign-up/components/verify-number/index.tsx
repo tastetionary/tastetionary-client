@@ -4,17 +4,26 @@ import MainButton from '@/components/Button/MainButton';
 import TextInput from '@/components/Input/TextInput';
 import CHeader from '@/components/c-header';
 import { ChangeEvent, useState } from 'react';
+import useConfirmAuthCodeMutate from '../../hooks/query/useConfirmAuthCodeMutate';
 import * as S from './page.styled';
 
 interface Props {
   onNext: () => void;
+  type: 'register';
+  companyEmailAuthId: number;
 }
 
-export default function VerifyNumber({ onNext }: Props) {
+export default function VerifyNumber({ onNext, type, companyEmailAuthId }: Props) {
   const [authNumber, setAuthNumber] = useState('');
+
+  const { mutate: confirmAuthCodeMutate } = useConfirmAuthCodeMutate({ onNext, type });
 
   const handleChangeAuthNumber = (e: ChangeEvent<HTMLInputElement>) => {
     setAuthNumber(e.target.value);
+  };
+
+  const onConfirmAuthCode = () => {
+    confirmAuthCodeMutate({ historyId: companyEmailAuthId, code: authNumber });
   };
 
   return (
@@ -49,7 +58,12 @@ export default function VerifyNumber({ onNext }: Props) {
           <S.SubButton type="button">메일 재전송</S.SubButton>
         </S.SubButtonContainer>
 
-        <MainButton btnText="다음" disabled={authNumber.length === 0 || false} onClick={onNext} type="submit" />
+        <MainButton
+          btnText="다음"
+          disabled={authNumber.length === 0 || false}
+          onClick={onConfirmAuthCode}
+          type="submit"
+        />
       </S.Wrapper>
     </>
   );
