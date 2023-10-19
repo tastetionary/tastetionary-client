@@ -24,7 +24,7 @@ function TextInput({ label, errorMsg, ...rest }: TextInputProps, ref: ForwardedR
         onFocus={() => setFocused(true)}
         onBlur={() => setFocused(false)}
       >
-        <S.Input $hasError={hasError} ref={ref} autoFocus={true} {...rest} />
+        <S.Input $hasError={hasError} ref={ref} {...rest} />
 
         {hasError ? <INPUT_ERROR /> : focused ? <INPUT_TYPED /> : <INPUT_INACTIVE />}
       </S.InputContainer>

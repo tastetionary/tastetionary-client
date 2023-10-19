@@ -16,7 +16,7 @@ const useAccountAuthCodeMutate = ({ onNext, setEmailAuthId, setCompanyEmailAuthI
 
   useEffect(() => {
     if (data) {
-      const authId = data?.data.id as number;
+      const authId = data.data.id as number;
       category === 'account' ? setEmailAuthId?.(authId) : setCompanyEmailAuthId?.(authId);
     }
   }, [data]);

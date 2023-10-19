@@ -65,7 +65,7 @@ export default function VerifyCompany({ onNext, setCompanyEmailAuthId }: Props) 
 
         <S.SubButton type="submit">회사 인증 다음에 하기</S.SubButton>
 
-        <MainButton btnText="다음" disabled={!isDirty || !isValid} onClick={onCompanyEmailAuthRequest} />
+        <MainButton btnText="다음" disabled={!isDirty || !isValid} onClick={onCompanyEmailAuthRequest} type="button" />
       </S.Wrapper>
     </>
   );

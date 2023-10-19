@@ -78,7 +78,6 @@ export default function SignUpComponent() {
   });
 
   const onSubmit: SubmitHandler<FormValue> = data => {
-    console.log('form 동작!!');
     console.log('서버에 보낼 data', data);
     delete data.userProperty.companyEmail;
     delete data.account.passwordConfirm;
