@@ -94,7 +94,12 @@ export default function SignUpComponent() {
           <EmailForm onNext={() => setStep('verify-auth-number')} setEmailAuthId={setEmailAuthId} />
         )}
         {step === 'verify-auth-number' && (
-          <VerifyAuthNumber onNext={() => setStep('user-info')} type="register" emailAuthId={emailAuthId} />
+          <VerifyAuthNumber
+            onNext={() => setStep('user-info')}
+            type="register"
+            emailAuthId={emailAuthId}
+            setEmailAuthId={setEmailAuthId}
+          />
         )}
         {step === 'user-info' && <UserInfoForm onNext={() => setStep('region-setting')} />}
         {step === 'region-setting' && <RegionSetting onNext={() => setStep('verify-company')} />}

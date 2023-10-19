@@ -1,19 +1,29 @@
+import useAccountAuthCodeMutate from '@/app/sign-up/hooks/query/useAccountAuthCodeMutate';
 import useConfirmAuthCodeMutate from '@/app/sign-up/hooks/query/useConfirmAuthCodeMutate';
 import MainButton from '@/components/Button/MainButton';
 import TextInput from '@/components/Input/TextInput';
 import CHeader from '@/components/c-header';
 import { ChangeEvent, useState } from 'react';
+import { useFormContext } from 'react-hook-form';
 import * as S from './page.styled';
 
 interface Props {
   onNext: () => void;
   type: 'register' | 'find-password';
   emailAuthId: number;
+  setEmailAuthId: (value: number) => void;
 }
 
-export default function VerifyAuthNumber({ onNext, type, emailAuthId }: Props) {
+export default function VerifyAuthNumber({ onNext, type, setEmailAuthId, emailAuthId }: Props) {
+  const { getValues } = useFormContext();
   const [authNumber, setAuthNumber] = useState('');
 
+  const { mutate: accountAuthCodeMutate } = useAccountAuthCodeMutate({
+    onNext,
+    setEmailAuthId,
+    category: 'account',
+    type: 'retry',
+  });
   const { mutate: confirmAuthCodeMutate } = useConfirmAuthCodeMutate({ onNext, type });
 
   const handleChangeAuthNumber = (e: ChangeEvent<HTMLInputElement>) => {
@@ -22,6 +32,11 @@ export default function VerifyAuthNumber({ onNext, type, emailAuthId }: Props) {
 
   const onConfirmAuthCode = () => {
     confirmAuthCodeMutate({ historyId: emailAuthId, code: authNumber });
+  };
+
+  const onEmailAuthRequest = () => {
+    console.log('클릭했습니다.');
+    accountAuthCodeMutate({ identification: getValues('account.identification'), type: 'email', category: 'account' });
   };
 
   return (
@@ -50,7 +65,9 @@ export default function VerifyAuthNumber({ onNext, type, emailAuthId }: Props) {
           <S.SubButtonContainer>
             <span>인증 메일을 받지 못하셨나요?</span>
 
-            <S.SubButton type="button">메일 재전송</S.SubButton>
+            <S.SubButton type="button" onClick={onEmailAuthRequest}>
+              메일 재전송
+            </S.SubButton>
           </S.SubButtonContainer>
           <MainButton
             btnText="다음"
