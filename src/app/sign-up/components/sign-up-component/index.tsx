@@ -107,7 +107,12 @@ export default function SignUpComponent() {
           <VerifyCompany onNext={() => setStep('verify-number')} setCompanyEmailAuthId={setCompanyEmailAuthId} />
         )}
         {step === 'verify-number' && (
-          <VerifyNumber onNext={() => setStep('complete')} type="register" companyEmailAuthId={companyEmailAuthId} />
+          <VerifyNumber
+            onNext={() => setStep('complete')}
+            type="register"
+            companyEmailAuthId={companyEmailAuthId}
+            setCompanyEmailAuthId={setCompanyEmailAuthId}
+          />
         )}
         {step === 'complete' && <SignUpComplete />}
       </form>

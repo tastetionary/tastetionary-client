@@ -4,6 +4,8 @@ import MainButton from '@/components/Button/MainButton';
 import TextInput from '@/components/Input/TextInput';
 import CHeader from '@/components/c-header';
 import { ChangeEvent, useState } from 'react';
+import { useFormContext } from 'react-hook-form';
+import useAccountAuthCodeMutate from '../../hooks/query/useAccountAuthCodeMutate';
 import useConfirmAuthCodeMutate from '../../hooks/query/useConfirmAuthCodeMutate';
 import * as S from './page.styled';
 
@@ -11,9 +13,11 @@ interface Props {
   onNext: () => void;
   type: 'register';
   companyEmailAuthId: number;
+  setCompanyEmailAuthId: (value: number) => void;
 }
 
-export default function VerifyNumber({ onNext, type, companyEmailAuthId }: Props) {
+export default function VerifyNumber({ onNext, type, companyEmailAuthId, setCompanyEmailAuthId }: Props) {
+  const { getValues } = useFormContext();
   const [authNumber, setAuthNumber] = useState('');
 
   const { mutate: confirmAuthCodeMutate } = useConfirmAuthCodeMutate({ onNext, type });
@@ -24,6 +28,21 @@ export default function VerifyNumber({ onNext, type, companyEmailAuthId }: Props
 
   const onConfirmAuthCode = () => {
     confirmAuthCodeMutate({ historyId: companyEmailAuthId, code: authNumber });
+  };
+
+  const { mutate: accountAuthCodeMutate } = useAccountAuthCodeMutate({
+    onNext,
+    setCompanyEmailAuthId,
+    category: 'company',
+    type: 'retry',
+  });
+
+  const onCompanyEmailAuthRequest = () => {
+    accountAuthCodeMutate({
+      identification: getValues('userProperty.companyEmail'),
+      type: 'email',
+      category: 'company',
+    });
   };
 
   return (
@@ -55,7 +74,9 @@ export default function VerifyNumber({ onNext, type, companyEmailAuthId }: Props
         <S.SubButtonContainer>
           <span>인증메일을 받지 못하셨나요?</span>
 
-          <S.SubButton type="button">메일 재전송</S.SubButton>
+          <S.SubButton type="button" onClick={onCompanyEmailAuthRequest}>
+            메일 재전송
+          </S.SubButton>
         </S.SubButtonContainer>
 
         <MainButton

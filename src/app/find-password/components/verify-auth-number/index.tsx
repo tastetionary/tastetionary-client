@@ -35,7 +35,6 @@ export default function VerifyAuthNumber({ onNext, type, setEmailAuthId, emailAu
   };
 
   const onEmailAuthRequest = () => {
-    console.log('클릭했습니다.');
     accountAuthCodeMutate({ identification: getValues('account.identification'), type: 'email', category: 'account' });
   };
 
