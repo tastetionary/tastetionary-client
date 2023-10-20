@@ -5,13 +5,19 @@ import TextInput from '@/components/Input/TextInput';
 import CHeader from '@/components/c-header';
 import { useEffect, useRef, useState } from 'react';
 import DaumPostcodeEmbed from 'react-daum-postcode';
+import { useFormContext } from 'react-hook-form';
 import * as S from './page.styled';
 
 interface FormValue {
   region: string;
 }
 
-export default function RegionSetting() {
+interface Props {
+  onNext: () => void;
+}
+
+export default function RegionSetting({ onNext }: Props) {
+  const { setValue } = useFormContext();
   const mapRef = useRef<HTMLDivElement>(null);
   const [address, setAddress] = useState('');
   const [openPostCode, setOpenPostCode] = useState(false);
@@ -54,6 +60,10 @@ export default function RegionSetting() {
             // 정상적으로 검색이 완료됐으면
             if (status === window.kakao.maps.services.Status.OK) {
               var coords = new window.kakao.maps.LatLng(result[0].y, result[0].x);
+
+              setValue('areas[0].latitude', coords.La);
+              setValue('areas[0].longitude', coords.Ma);
+              setValue('areas[0].address', address);
 
               // 결과값으로 받은 위치를 마커로 표시합니다
               var marker = new window.kakao.maps.Marker({
@@ -118,7 +128,7 @@ export default function RegionSetting() {
           </S.MapContainer>
 
           <S.ButtonContainer>
-            <MainButton btnText="다음" disabled={address === ''} />
+            <MainButton btnText="다음" disabled={address === ''} type="button" onClick={onNext} />
           </S.ButtonContainer>
         </S.Form>
       </S.Wrapper>
