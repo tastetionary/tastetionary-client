@@ -38,7 +38,9 @@ export const Header = styled.div`
   width: 100%;
   height: 20px;
 `;
-export const Content = styled.div``;
+export const Content = styled.div`
+  padding-top: 12px;
+`;
 export const Icon = styled.button`
   width: 72px;
   height: 72px;
