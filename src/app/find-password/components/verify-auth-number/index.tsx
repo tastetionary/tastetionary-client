@@ -11,7 +11,7 @@ interface Props {
   onNext: () => void;
   type: 'register' | 'find-password';
   emailAuthId: number;
-  setEmailAuthId: (value: number) => void;
+  setEmailAuthId?: (value: number) => void;
 }
 
 export default function VerifyAuthNumber({ onNext, type, setEmailAuthId, emailAuthId }: Props) {
