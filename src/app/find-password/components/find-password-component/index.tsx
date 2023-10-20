@@ -3,7 +3,6 @@
 import { usePathname, useRouter } from 'next/navigation';
 import { useState } from 'react';
 import PasswordComplete from '../password-complete';
-import VerifyAuthNumber from '../verify-auth-number';
 import VerifyEmail from '../verify-email';
 
 export default function FindPasswordComponent() {
@@ -18,7 +17,12 @@ export default function FindPasswordComponent() {
   return (
     <>
       <VerifyEmail onNext={() => setStep('verify-auth-number')} />
-      <VerifyAuthNumber onNext={() => setStep('password-complete')} type="find-password" emailAuthId={emailAuthId} />
+      {/* <VerifyAuthNumber
+        onNext={() => setStep('password-complete')}
+        type="find-password"
+        emailAuthId={emailAuthId}
+        setEmailAuthId={setEmailAuthId}
+      /> */}
       <PasswordComplete />
     </>
   );
