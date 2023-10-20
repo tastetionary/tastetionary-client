@@ -7,10 +7,11 @@ import CHeader from '@/components/c-header';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
+import useLoginMutate from './hooks/useLoginMutate';
 import * as S from './pagd.styled';
 
 interface FormValue {
-  email: string;
+  identification: string;
   password: string;
 }
 
@@ -19,16 +20,16 @@ export default function Login() {
   const {
     register,
     handleSubmit,
-
     formState: { errors, isDirty, isValid },
   } = useForm<FormValue>({
     mode: 'onSubmit',
   });
 
   const [loginState, setLoginState] = useState(false);
+  const { mutate: loginMutate } = useLoginMutate();
 
   const onSubmitHandler: SubmitHandler<FormValue> = data => {
-    console.log(data);
+    loginMutate({ ...data, category: 'email' });
   };
 
   return (
@@ -42,10 +43,17 @@ export default function Login() {
           <S.FormHeader></S.FormHeader>
           <S.Form onSubmit={handleSubmit(onSubmitHandler)}>
             <TextInput
-              type="email"
+              type="text"
               label="아이디"
               placeholder="아이디 입력"
-              {...register('email', { required: true, pattern: /^\S+@\S+$/i })}
+              errorMsg={errors?.identification?.message}
+              {...register('identification', {
+                required: true,
+                pattern: {
+                  value: /^\S+@\S+$/i,
+                  message: '이메일 형식이 맞지 않습니다.',
+                },
+              })}
             />
 
             <TextInput
@@ -55,7 +63,10 @@ export default function Login() {
               errorMsg={errors?.password?.message}
               {...register('password', {
                 required: true,
-                minLength: { value: 8, message: '8글자 이상 입력해 주세요.' },
+                pattern: {
+                  value: /^(?=.*[a-zA-Z])(?=.*\d)(?=.*[@#$%^&+=!]).{8,}$/,
+                  message: '영문, 숫자, 특수문자를 조합하여 8자 이상 입력해주세요.',
+                },
               })}
             />
 
@@ -66,7 +77,7 @@ export default function Login() {
               onChangeEvent={checked => setLoginState(checked)}
             />
 
-            <MainButton btnText="로그인" disabled={!isDirty || !isValid} />
+            <MainButton btnText="로그인" disabled={!isDirty} />
           </S.Form>
         </S.FormContainer>
 
@@ -75,7 +86,7 @@ export default function Login() {
           <S.NavDivider />
           <S.NavItem onClick={() => router.push('/find-password')}>비밀번호 찾기</S.NavItem>
           <S.NavDivider />
-          <S.NavItem onClick={() => router.push('/')}>회원가입</S.NavItem>
+          <S.NavItem onClick={() => router.push('/sign-up')}>회원가입</S.NavItem>
         </S.NavContainer>
       </S.Container>
     </>
