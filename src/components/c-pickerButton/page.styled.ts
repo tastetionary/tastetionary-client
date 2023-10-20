@@ -46,10 +46,10 @@ export const Icon = styled.button`
 export const Title = styled.p`
   font-size: 20px;
   text-shadow:
-    -1px 0 white,
-    0 1px white,
-    1px 0 white,
-    0 -1px white;
+    -2px 0 white,
+    0 2px white,
+    2px 0 white,
+    0 -2px white;
   font-weight: 400;
 `;
 export const Description = styled.p<{ subject: 'menu' | 'restaurant' }>`
