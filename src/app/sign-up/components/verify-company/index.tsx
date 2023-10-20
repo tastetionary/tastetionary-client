@@ -36,6 +36,9 @@ export default function VerifyCompany({ onNext, setCompanyEmailAuthId }: Props) 
     });
   };
 
+  const buttonDisabledState =
+    getValues('userProperty.companyEmail')?.length > 0 && getValues('userProperty.companyName')?.length > 0;
+
   return (
     <>
       <CHeader title="회사 인증" isBackBtn />
@@ -50,7 +53,7 @@ export default function VerifyCompany({ onNext, setCompanyEmailAuthId }: Props) 
             placeholder="회사명"
             type="text"
             {...register('userProperty.companyName', {
-              required: false,
+              required: true,
             })}
           />
 
@@ -59,13 +62,13 @@ export default function VerifyCompany({ onNext, setCompanyEmailAuthId }: Props) 
             placeholder="이메일 주소 입력"
             type="text"
             errorMsg={errors.userProperty?.companyEmail ? '이메일 형식이 맞지 않습니다.' : undefined}
-            {...register('userProperty.companyEmail', { required: false, pattern: /^\S+@\S+$/i })}
+            {...register('userProperty.companyEmail', { required: true, pattern: /^\S+@\S+$/i })}
           />
         </S.InputContainer>
 
         <S.SubButton type="submit">회사 인증 다음에 하기</S.SubButton>
 
-        <MainButton btnText="다음" disabled={!isDirty || !isValid} onClick={onCompanyEmailAuthRequest} type="button" />
+        <MainButton btnText="다음" disabled={!buttonDisabledState} onClick={onCompanyEmailAuthRequest} type="button" />
       </S.Wrapper>
     </>
   );
