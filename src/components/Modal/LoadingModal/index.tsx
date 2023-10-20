@@ -19,7 +19,7 @@ export default function LoadingModal({ handleClose }: LoadingModalProps) {
         setAnimate(false);
         if (handleClose) handleClose();
         closeModal(MODAL_TYPES.loading);
-      }, 3000);
+      }, 1000);
 
       return () => clearTimeout(closeEvent);
     }
