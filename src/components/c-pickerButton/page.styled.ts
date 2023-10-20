@@ -1,7 +1,7 @@
-import { styled } from 'styled-components';
+import styled from 'styled-components';
 
 export const Button = styled.button<{ subject: 'menu' | 'restaurant' }>`
-  width: 280px;
+  width: 100%;
   box-shadow: 4px 4px 0px 0px rgba(0, 0, 0, 0.1);
   padding: 0px;
   background: repeating-linear-gradient(
@@ -35,7 +35,7 @@ export const Button = styled.button<{ subject: 'menu' | 'restaurant' }>`
   }
 `;
 export const Header = styled.div`
-  width: 280px;
+  width: 100%;
   height: 20px;
 `;
 export const Content = styled.div``;
