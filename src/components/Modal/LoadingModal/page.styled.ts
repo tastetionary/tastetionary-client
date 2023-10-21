@@ -37,7 +37,7 @@ export const Overlay = styled.div<{
   background-color: rgba(0, 0, 0, 0.5);
 
   width: 100%;
-  height: -webkit-fill-available;
+  height: 100vh;
   display: flex;
   align-items: center;
   justify-content: center;
