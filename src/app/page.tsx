@@ -10,6 +10,7 @@ import MypageIcon from '@/assets/logo/my-page.svg';
 import ReviewIcon from '@/assets/logo/review.svg';
 import { MODAL_TYPES } from '@/components/Modal/GlobalModal';
 import useModal from '@/components/Modal/GlobalModal/hooks/useModal';
+import useUser from '@/hooks/useUser';
 import { usePathname, useRouter } from 'next/navigation';
 
 export default function Home() {
@@ -17,8 +18,7 @@ export default function Home() {
   const router = useRouter();
   const { openModal, closeModal } = useModal();
 
-  const isLoggedIn = true;
-  const hasActivityArea = false;
+  const { isLoggedIn, hasActivityArea } = useUser();
 
   const loginInfoModal = () => {
     openModal(MODAL_TYPES.dialog, {
@@ -36,7 +36,7 @@ export default function Home() {
     openModal(MODAL_TYPES.dialog, {
       title: '활동 지역 등록 안내',
       message: '활동 지역을 등록한 회원만\n리뷰 등록이 가능해요.',
-      handleConfirm: () => router.push('/'),
+      handleConfirm: () => router.push('/register-review/region-setting'),
       handleClose: () => closeModal(MODAL_TYPES.dialog),
       cancelText: '취소',
       confirmText: '등록하기',
@@ -50,6 +50,12 @@ export default function Home() {
     if (!hasActivityArea) return needRegisterActivityAreaModal();
 
     router.push('/register-review');
+  };
+
+  const onRestaurantClick = () => {
+    if (!isLoggedIn) return loginInfoModal();
+
+    router.push('/select-restaurant');
   };
 
   return (
@@ -66,19 +72,19 @@ export default function Home() {
           title={'식당 고르기'}
           desc={'오늘은 어떤 식당에 가볼까?'}
           subject={'restaurant'}
-          clickEvent={() => router.push('select-restaurant')}
+          clickEvent={onRestaurantClick}
         />
       </S.MainContent>
 
       <S.NavContainer>
-        <CNavButton
-          title="리뷰"
-          icon={<ReviewIcon />}
-          isActive={false}
-          clickEvent={() => router.push('/register-review/restaurant')}
-        />
+        <CNavButton title="리뷰" icon={<ReviewIcon />} isActive={false} clickEvent={onReviewClick} />
         <CNavButton title="홈" icon={<HomeIcon />} isActive={pathName === '/'} />
-        <CNavButton title="마이페이지" icon={<MypageIcon />} isActive={false} />
+        <CNavButton
+          title="마이페이지"
+          icon={<MypageIcon />}
+          isActive={false}
+          clickEvent={() => router.push('/ready')}
+        />
       </S.NavContainer>
     </>
   );
