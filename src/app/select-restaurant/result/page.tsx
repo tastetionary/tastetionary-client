@@ -130,8 +130,6 @@ export default function SelectRestaurantResult() {
       });
     });
 
-    console.log(result);
-
     setPrice(result);
 
     // 각 가격과 수량을 배열로 표현
