@@ -1,6 +1,6 @@
 import axios, { AxiosInstance, AxiosRequestConfig, AxiosResponse, InternalAxiosRequestConfig } from 'axios';
 
-const sessionStorage = typeof window !== undefined && window.sessionStorage;
+const sessionStorage = typeof window !== undefined ? window.sessionStorage : undefined;
 class HttpClient {
   private client: AxiosInstance;
 
