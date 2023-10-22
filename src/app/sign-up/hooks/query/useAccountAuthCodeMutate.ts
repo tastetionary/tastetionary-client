@@ -20,7 +20,7 @@ const useAccountAuthCodeMutate = ({ onNext, setEmailAuthId, setCompanyEmailAuthI
       title: '이메일 전송 완료',
       message: '이메일을 다시 전송하였습니다.',
       handleConfirm: () => closeModal(MODAL_TYPES.dialog),
-      confirmText: '다음',
+      confirmText: '확인',
       needClose: true,
     });
   };
