@@ -1,6 +1,6 @@
 import { reviewState, selectFoodState, selectRestaurantState } from '@/lib/atom';
 import { useEffect, useState } from 'react';
-import { useSetRecoilState } from 'recoil';
+import { useRecoilState } from 'recoil';
 import * as S from './page.styled';
 
 interface Props {
@@ -11,9 +11,9 @@ interface Props {
 export default function CSelectKeyword({ data, selectType }: Props) {
   const [selectedKeyword, setSelectedKeyword] = useState<string[]>([]);
 
-  const setFoodState = useSetRecoilState(selectFoodState);
-  const setRestaurantState = useSetRecoilState(selectRestaurantState);
-  const setReviewState = useSetRecoilState(reviewState);
+  const [foodState, setFoodState] = useRecoilState(selectFoodState);
+  const [restaurantState, setRestaurantState] = useRecoilState(selectRestaurantState);
+  const [review, setReviewState] = useRecoilState(reviewState);
 
   useEffect(() => {
     if (selectType === 'food') {
@@ -33,6 +33,16 @@ export default function CSelectKeyword({ data, selectType }: Props) {
       }));
     }
   }, [selectedKeyword, selectType]);
+
+  useEffect(() => {
+    setSelectedKeyword(
+      selectType === 'food'
+        ? foodState?.keyword
+        : selectType === 'restaurant'
+        ? restaurantState?.keyword
+        : review?.keyword
+    );
+  }, [foodState?.keyword, restaurantState?.keyword, review?.keyword, selectType]);
 
   return (
     <S.KeywordContainer>

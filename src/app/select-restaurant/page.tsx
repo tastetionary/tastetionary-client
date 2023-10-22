@@ -17,7 +17,8 @@ import * as S from './page.styled';
 export default function SelectRestaurant() {
   const [restaurantState, setRestaurantState] = useRecoilState(selectRestaurantState);
 
-  const btnDisabled = restaurantState?.category?.length === 0 || restaurantState?.keyword?.length === 0;
+  const recommendBtnDisabled = restaurantState?.category?.length === 0 || restaurantState?.keyword?.length === 0;
+  const refreshBtnDisabled = restaurantState?.category?.length === 0 && restaurantState?.keyword?.length === 0;
 
   const { data } = useQuery(['restaurant-option'], () => getRestaurantOption(), {
     cacheTime: 0,
@@ -47,13 +48,13 @@ export default function SelectRestaurant() {
       <CRecommendButton
         btnText="추첨 시작"
         selectType="restaurant"
-        disabled={btnDisabled}
-        style={{ margin: '48px auto 0' }}
+        disabled={recommendBtnDisabled}
+        style={{ maxWidth: 240, margin: '48px auto 0' }}
       />
 
       <RefreshButton
         btnText="선택 초기화"
-        disabled={btnDisabled}
+        disabled={refreshBtnDisabled}
         onClick={() =>
           setRestaurantState({
             category: [],
