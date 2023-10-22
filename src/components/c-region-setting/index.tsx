@@ -1,5 +1,6 @@
 import { putSaveRegion } from '@/apis/user/saveRegion';
 import RegionSetting from '@/app/sign-up/components/region-setting';
+import useUser from '@/hooks/useUser';
 import { queryClient } from '@/lib/react-query/ReactQueryProvider';
 import { useMutation } from '@tanstack/react-query';
 import { useRouter } from 'next/navigation';
@@ -22,6 +23,7 @@ interface Props {
 
 export default function CRegionSetting({ category }: Props) {
   const router = useRouter();
+  const { token } = useUser();
   const methods = useForm<FormValue>({
     mode: 'onBlur',
     defaultValues: {
@@ -42,7 +44,7 @@ export default function CRegionSetting({ category }: Props) {
           latitude: data?.latitude,
           longitude: data?.longitude,
         },
-        process.env.NEXT_PUBLIC_ACCESS_TOKEN
+        token
       ),
     {
       onSuccess: (res, data) => {
