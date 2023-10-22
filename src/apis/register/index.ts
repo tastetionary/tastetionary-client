@@ -26,7 +26,7 @@ interface PostRegisterUserParams {
   userProperty: {
     companyData?: {
       companyName: string;
-      companyEmail: string;
+      companyEmail?: string;
     };
   };
   areas: [

@@ -18,7 +18,8 @@ interface FormValue {
   userProperty: {
     companyData?: {
       companyName: string;
-      companyEmail: string;
+      companyEmail?: string;
+      authenticationId?: number;
     };
   };
   areas: [
@@ -81,8 +82,15 @@ export default function SignUpComponent() {
 
   const onSubmit: SubmitHandler<FormValue> = data => {
     const { companyData } = data.userProperty;
+    // Case : 회사 인증을 하지 않고 회원가입 시도
     if (companyData && companyData.companyName === '' && companyData.companyEmail === '') {
       delete data.userProperty.companyData;
+    }
+
+    // Case : 회사 인증을 하고 회원가입 시도
+    if (companyData && companyData.companyName !== '' && companyData.companyEmail !== '') {
+      data.userProperty.companyData!.authenticationId = companyEmailAuthId;
+      delete data.userProperty.companyData?.companyEmail;
     }
 
     delete data.account.passwordConfirm;
