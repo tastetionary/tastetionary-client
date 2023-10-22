@@ -7,7 +7,8 @@ const useLoginMutate = () => {
 
   const { mutate } = useMutation(authRepository().postLogin, {
     onSuccess: value => {
-      sessionStorage.setItem('token', value.data.accessToken);
+      const sessionStorage = typeof window !== undefined && window.sessionStorage;
+      (sessionStorage as Storage).setItem('token', value.data.accessToken);
       push('/');
     },
   });

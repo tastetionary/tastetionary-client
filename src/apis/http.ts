@@ -21,9 +21,10 @@ class HttpClient {
   requestInterceptors() {
     return this.client.interceptors.request.use(
       (request: InternalAxiosRequestConfig) => {
+        const sessionStorage = typeof window !== undefined && window.sessionStorage;
         // 토큰이 없을때 타는 로직
         if (request.headers.Authorization?.toString().split(' ')[1] === 'null') {
-          const token = sessionStorage.getItem('token');
+          const token = (sessionStorage as Storage).getItem('token');
           request.headers.Authorization = `Bearer ${token}`;
           return { ...request };
         }
