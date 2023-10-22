@@ -1,5 +1,4 @@
 import axios, { AxiosInstance, AxiosRequestConfig, AxiosResponse, InternalAxiosRequestConfig } from 'axios';
-
 class HttpClient {
   private client: AxiosInstance;
 
@@ -19,7 +18,15 @@ class HttpClient {
   requestInterceptors() {
     return this.client.interceptors.request.use(
       (request: InternalAxiosRequestConfig) => {
-        console.log('axios request!!!!');
+        // 토큰이 없을때 타는 로직
+        if (typeof window === 'undefined') return request;
+
+        if (request.headers.Authorization?.toString().split(' ')[1] === 'null') {
+          const token = (sessionStorage as Storage).getItem('token');
+          request.headers.Authorization = `Bearer ${token}`;
+          return { ...request };
+        }
+
         return request;
       },
       (error: any) => {

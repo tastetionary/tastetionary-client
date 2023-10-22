@@ -6,7 +6,11 @@ const useLoginMutate = () => {
   const { push } = useRouter();
 
   const { mutate } = useMutation(authRepository().postLogin, {
-    onSuccess: () => push('/'),
+    onSuccess: value => {
+      if (typeof window === undefined) return;
+      (sessionStorage as Storage).setItem('token', value.data.accessToken);
+      push('/');
+    },
   });
 
   return { mutate };
