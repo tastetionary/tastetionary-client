@@ -16,8 +16,11 @@ import VerifyNumber from '../verify-number';
 
 interface FormValue {
   userProperty: {
-    companyName?: string;
-    companyEmail?: string;
+    companyData?: {
+      companyName: string;
+      companyEmail?: string;
+      authenticationId?: number;
+    };
   };
   areas: [
     {
@@ -78,7 +81,18 @@ export default function SignUpComponent() {
   });
 
   const onSubmit: SubmitHandler<FormValue> = data => {
-    delete data.userProperty.companyEmail;
+    const { companyData } = data.userProperty;
+    // Case : 회사 인증을 하지 않고 회원가입 시도
+    if (companyData && companyData.companyName === '' && companyData.companyEmail === '') {
+      delete data.userProperty.companyData;
+    }
+
+    // Case : 회사 인증을 하고 회원가입 시도
+    if (companyData && companyData.companyName !== '' && companyData.companyEmail !== '') {
+      data.userProperty.companyData!.authenticationId = companyEmailAuthId;
+      delete data.userProperty.companyData?.companyEmail;
+    }
+
     delete data.account.passwordConfirm;
     registerUserMutate(data);
   };
