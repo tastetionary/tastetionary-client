@@ -81,7 +81,7 @@ export default function CSelectCategory({ selectType, data, isDuplicate = true }
               width={64}
               height={64}
             />
-            <S.MenuItemTitle>{m?.name}</S.MenuItemTitle>
+            <S.MenuItemTitle isSelected={isSelected}>{m?.name}</S.MenuItemTitle>
           </S.MenuItem>
         );
       })}

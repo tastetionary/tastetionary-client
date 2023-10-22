@@ -2,7 +2,7 @@ import styled from 'styled-components';
 
 export const Button = styled.button`
   width: 100%;
-  height: 60px;
+  height: 56px;
   background: url(/image/Button/Main_Button_default.svg) center no-repeat;
   background-size: contain;
   display: flex;

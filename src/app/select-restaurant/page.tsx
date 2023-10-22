@@ -48,7 +48,7 @@ export default function SelectRestaurant() {
         btnText="추첨 시작"
         selectType="restaurant"
         disabled={btnDisabled}
-        style={{ maxWidth: 240, margin: '48px auto 0' }}
+        style={{ margin: '48px auto 0' }}
       />
 
       <RefreshButton

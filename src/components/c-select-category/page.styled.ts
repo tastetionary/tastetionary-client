@@ -15,7 +15,8 @@ export const MenuItem = styled.div`
   gap: 8px;
 `;
 
-export const MenuItemTitle = styled.span`
+export const MenuItemTitle = styled.span<{ isSelected: boolean }>`
+  color: ${({ isSelected, theme }) => (isSelected ? theme.colors.secondary.o50 : theme.colors.neutral.bg80)};
   font-size: 14px;
   font-style: normal;
   font-weight: 400;
