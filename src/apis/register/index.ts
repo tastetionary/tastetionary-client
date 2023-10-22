@@ -24,7 +24,10 @@ interface PostConfirmAuthCodeParams {
 
 interface PostRegisterUserParams {
   userProperty: {
-    companyName?: string;
+    companyData?: {
+      companyName: string;
+      companyEmail: string;
+    };
   };
   areas: [
     {

@@ -16,8 +16,10 @@ import VerifyNumber from '../verify-number';
 
 interface FormValue {
   userProperty: {
-    companyName?: string;
-    companyEmail?: string;
+    companyData?: {
+      companyName: string;
+      companyEmail: string;
+    };
   };
   areas: [
     {
@@ -78,7 +80,11 @@ export default function SignUpComponent() {
   });
 
   const onSubmit: SubmitHandler<FormValue> = data => {
-    delete data.userProperty.companyEmail;
+    const { companyData } = data.userProperty;
+    if (companyData && companyData.companyName === '' && companyData.companyEmail === '') {
+      delete data.userProperty.companyData;
+    }
+
     delete data.account.passwordConfirm;
     registerUserMutate(data);
   };
