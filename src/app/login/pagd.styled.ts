@@ -44,6 +44,7 @@ export const NavContainer = styled.div`
   margin-top: 30px;
   display: flex;
   align-items: center;
+  justify-content: center;
 `;
 
 export const NavItem = styled.div`
