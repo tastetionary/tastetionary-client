@@ -19,6 +19,8 @@ export const MemoTitle = styled.div`
   font-weight: 700;
   margin-bottom: 20px;
   text-align: center;
+  line-height: 150%;
+  white-space: pre-line;
 `;
 
 export const ButtonContainer = styled.div`

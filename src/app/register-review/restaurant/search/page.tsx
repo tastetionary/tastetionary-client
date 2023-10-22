@@ -3,6 +3,7 @@
 import MainButton from '@/components/Button/MainButton';
 import TextInput from '@/components/Input/TextInput';
 import CHeader from '@/components/c-header';
+import useUser from '@/hooks/useUser';
 import { reviewPlaceInfoState } from '@/lib/atom';
 import { useMutation } from '@tanstack/react-query';
 import axios from 'axios';
@@ -33,6 +34,7 @@ interface ISearchKeyword {
 
 export default function RestaurantSearch() {
   const router = useRouter();
+  const { data: userData } = useUser();
   const [address, setAddress] = useState('');
   const setReviewPlaceInfo = useSetRecoilState(reviewPlaceInfoState);
 
@@ -45,11 +47,14 @@ export default function RestaurantSearch() {
   });
 
   const searchByKeyword = async (keyword: string) => {
-    const { data } = await axios.get(`https://dapi.kakao.com/v2/local/search/keyword.json?query=${keyword}`, {
-      headers: {
-        Authorization: `KakaoAK ${process.env.NEXT_PUBLIC_KAKAO_REST_API_KEY}`,
-      },
-    });
+    const { data } = await axios.get(
+      `https://dapi.kakao.com/v2/local/search/keyword.json?query=${keyword}&category_group_code=FD6&x=${userData?.activity_area?.longitude}&y=${userData?.activity_area?.latitude}&radius=10`,
+      {
+        headers: {
+          Authorization: `KakaoAK ${process.env.NEXT_PUBLIC_KAKAO_REST_API_KEY}`,
+        },
+      }
+    );
 
     return data;
   };
@@ -117,6 +122,23 @@ export default function RestaurantSearch() {
     });
   };
 
+  const getDistance = (lat1: number, lng1: number, lat2: number, lng2: number) => {
+    function deg2rad(deg: number) {
+      return deg * (Math.PI / 180);
+    }
+
+    var R = 6371; // Radius of the earth in km
+    var dLat = deg2rad(lat2 - lat1); // deg2rad below
+    var dLon = deg2rad(lng2 - lng1);
+    var a =
+      Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+      Math.cos(deg2rad(lat1)) * Math.cos(deg2rad(lat2)) * Math.sin(dLon / 2) * Math.sin(dLon / 2);
+    var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+    var d = R * c; // Distance in km
+
+    return Math.round(d * 10) / 10;
+  };
+
   return (
     <>
       <CHeader title="식당 검색" isBackBtn />
@@ -134,6 +156,13 @@ export default function RestaurantSearch() {
           const placeAddress = d.road_address_name !== '' ? d.road_address_name : d.address_name;
           const showMap = placeAddress !== '' && placeAddress === address;
 
+          const distance = getDistance(
+            userData?.activity_area?.latitude ?? 0,
+            userData?.activity_area?.longitude ?? 0,
+            +d?.x,
+            +d?.y
+          );
+
           return (
             <S.PlaceListItem
               key={d.id}
@@ -146,7 +175,7 @@ export default function RestaurantSearch() {
                 <div>
                   <S.FlexBox>
                     <S.PlaceName>{d.place_name}</S.PlaceName>
-                    <S.Distance>{d?.distance}</S.Distance>
+                    <S.Distance>{distance ? `${distance}km` : ''}</S.Distance>
                   </S.FlexBox>
 
                   <S.PlaceAddress>{d.road_address_name}</S.PlaceAddress>

@@ -1,5 +1,6 @@
 'use client';
 
+import FOOD_NO_RESULT from '@/assets/common/food_no_result.svg';
 import RefreshButton from '@/components/Button/RefreshButton';
 import CHeader from '@/components/c-header';
 import CRecommendButton from '@/components/c-recommend-button';
@@ -8,7 +9,6 @@ import { selectResultState } from '@/lib/atom';
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 import { useRecoilValue } from 'recoil';
-import MENU_KOREAN from '../../../../public/image/Menu/menu_korean.svg';
 import * as S from './page.styled';
 
 export default function SelectMenuResult() {
@@ -25,12 +25,12 @@ export default function SelectMenuResult() {
         <S.ResultTitle>오늘의 점심 메뉴는...</S.ResultTitle>
 
         <CStickyMemo>
-          <S.MemoTitle>{food ? `${food}!` : ''}</S.MemoTitle>
+          <S.MemoTitle>{food ? `${food}!` : '조건에 맞는\n메뉴가 없어요'}</S.MemoTitle>
 
           {result?.id && result?.id > 0 ? (
             <Image src={`../image/Food/food_${result.id}.svg`} alt={'menu-result'} width={160} height={160} />
           ) : (
-            <MENU_KOREAN width={160} height={160} />
+            <FOOD_NO_RESULT width={160} height={160} />
           )}
         </CStickyMemo>
 

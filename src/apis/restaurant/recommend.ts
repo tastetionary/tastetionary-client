@@ -30,7 +30,7 @@ export const postRestaurantRecommend = async (req: Req, token?: string) => {
       : undefined
   );
 
-  if (res?.data) {
-    return res?.data;
+  if (res) {
+    return res?.data ?? null;
   }
 };

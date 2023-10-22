@@ -13,7 +13,7 @@ export default function RegisterReviewRestaurant() {
     <>
       <CHeader isLogo={true} title="맛셔너리" />
 
-      <CChangeRegion region="논현동" type="activity_area" />
+      <CChangeRegion type="activity_area" />
 
       <S.Container>
         <S.Title>

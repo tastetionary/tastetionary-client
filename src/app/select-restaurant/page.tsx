@@ -29,7 +29,7 @@ export default function SelectRestaurant() {
     <>
       <CHeader title="식당 고르기" isBackBtn />
 
-      <CChangeRegion region="논현동" type="dining_area" />
+      <CChangeRegion type="dining_area" />
 
       <S.SectionContainer>
         <CSelectSection title="음식 종류">
