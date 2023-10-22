@@ -1,5 +1,6 @@
 import axios, { AxiosInstance, AxiosRequestConfig, AxiosResponse, InternalAxiosRequestConfig } from 'axios';
 
+const sessionStorage = typeof window !== undefined && window.sessionStorage;
 class HttpClient {
   private client: AxiosInstance;
 
@@ -13,7 +14,7 @@ class HttpClient {
     return {
       baseURL: '',
       headers: {
-        Authorization: `Bearer ${sessionStorage.getItem('token')}`,
+        Authorization: `Bearer ${(sessionStorage as Storage).getItem('token')}`,
       },
     };
   }
@@ -21,7 +22,6 @@ class HttpClient {
   requestInterceptors() {
     return this.client.interceptors.request.use(
       (request: InternalAxiosRequestConfig) => {
-        const sessionStorage = typeof window !== undefined && window.sessionStorage;
         // 토큰이 없을때 타는 로직
         if (request.headers.Authorization?.toString().split(' ')[1] === 'null') {
           const token = (sessionStorage as Storage).getItem('token');
