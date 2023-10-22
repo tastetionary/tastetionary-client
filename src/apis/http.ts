@@ -12,14 +12,22 @@ class HttpClient {
   axiosConfig() {
     return {
       baseURL: '',
-      headers: {},
+      headers: {
+        Authorization: `Bearer ${sessionStorage.getItem('token')}`,
+      },
     };
   }
 
   requestInterceptors() {
     return this.client.interceptors.request.use(
       (request: InternalAxiosRequestConfig) => {
-        console.log('axios request!!!!');
+        // 토큰이 없을때 타는 로직
+        if (request.headers.Authorization?.toString().split(' ')[1] === 'null') {
+          const token = sessionStorage.getItem('token');
+          request.headers.Authorization = `Bearer ${token}`;
+          return { ...request };
+        }
+
         return request;
       },
       (error: any) => {
