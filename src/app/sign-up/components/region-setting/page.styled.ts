@@ -14,6 +14,7 @@ export const Title = styled.div`
   font-style: normal;
   font-weight: 700;
   line-height: 150%;
+  white-space: pre-wrap;
 `;
 
 export const SubTitle = styled.p`
@@ -49,6 +50,10 @@ export const MapContainer = styled.div`
   width: 100%;
   height: 320px;
   margin-top: 20px;
+
+  @media screen and (max-width: 768px) {
+    max-width: 100%;
+  }
 `;
 
 export const ButtonContainer = styled.div`

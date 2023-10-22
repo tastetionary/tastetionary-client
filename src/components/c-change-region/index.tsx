@@ -1,18 +1,36 @@
 import IC_MAP from '@/assets/common/map.svg';
+import useUser from '@/hooks/useUser';
+import { useRouter } from 'next/navigation';
 import * as S from './page.styled';
 
 interface Props {
   type: 'activity_area' | 'dining_area';
-  region: string;
 }
 
-export default function CChangeRegion({ type, region }: Props) {
+export default function CChangeRegion({ type }: Props) {
+  const router = useRouter();
+  const { data } = useUser();
+
+  const onClickEvent = () => {
+    if (type === 'dining_area') {
+      router.push('/select-restaurant/region-setting');
+    } else {
+      router.push('/register-review/region-setting');
+    }
+  };
+
   return (
-    <S.ChangeRegionContainer>
+    <S.ChangeRegionContainer onClick={onClickEvent}>
       <S.FlexBox>
         <IC_MAP width={24} height={24} />
 
-        <S.Region>{region}</S.Region>
+        <S.Region>
+          {type === 'dining_area'
+            ? data?.dining_area?.address
+            : type === 'activity_area'
+            ? data?.activity_area?.address
+            : ''}
+        </S.Region>
       </S.FlexBox>
 
       <S.ChangeText>{type === 'dining_area' ? '식사' : '활동'} 지역 변경 &gt;</S.ChangeText>

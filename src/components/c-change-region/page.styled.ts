@@ -25,6 +25,7 @@ export const Region = styled.span`
   font-size: 14px;
   font-style: normal;
   font-weight: 400;
+  word-break: keep-all;
 `;
 
 export const ChangeText = styled(Region)`
