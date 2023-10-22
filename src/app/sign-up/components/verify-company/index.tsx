@@ -17,8 +17,8 @@ export default function VerifyCompany({ onNext, setCompanyEmailAuthId }: Props) 
     formState: { errors, isDirty, isValid },
   } = useFormContext<{
     userProperty: {
-      companyName: string;
       companyEmail: string;
+      companyName: string;
     };
   }>();
 
@@ -53,7 +53,7 @@ export default function VerifyCompany({ onNext, setCompanyEmailAuthId }: Props) 
             placeholder="회사명"
             type="text"
             {...register('userProperty.companyName', {
-              required: true,
+              required: false,
             })}
           />
 
@@ -62,7 +62,7 @@ export default function VerifyCompany({ onNext, setCompanyEmailAuthId }: Props) 
             placeholder="이메일 주소 입력"
             type="text"
             errorMsg={errors.userProperty?.companyEmail ? '이메일 형식이 맞지 않습니다.' : undefined}
-            {...register('userProperty.companyEmail', { required: true, pattern: /^\S+@\S+$/i })}
+            {...register('userProperty.companyEmail', { required: false, pattern: /^\S+@\S+$/i })}
           />
         </S.InputContainer>
 
