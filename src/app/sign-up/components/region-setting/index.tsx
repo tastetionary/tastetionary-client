@@ -21,8 +21,8 @@ export default function RegionSetting({ onNext, category = 'dining_area' }: Prop
 
   const completeHandler = (data: any) => {
     setOpenPostCode(false);
-    console.log(data);
     setAddress(data?.address);
+    console.log(data);
   };
 
   useEffect(() => {
