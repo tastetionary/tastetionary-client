@@ -17,8 +17,10 @@ export default function VerifyCompany({ onNext, setCompanyEmailAuthId }: Props) 
     formState: { errors, isDirty, isValid },
   } = useFormContext<{
     userProperty: {
-      companyName: string;
-      companyEmail: string;
+      companyData: {
+        companyName: string;
+        companyEmail: string;
+      };
     };
   }>();
 
@@ -30,14 +32,15 @@ export default function VerifyCompany({ onNext, setCompanyEmailAuthId }: Props) 
 
   const onCompanyEmailAuthRequest = () => {
     accountAuthCodeMutate({
-      identification: getValues('userProperty.companyEmail'),
+      identification: getValues('userProperty.companyData.companyEmail'),
       type: 'email',
       category: 'company',
     });
   };
 
   const buttonDisabledState =
-    getValues('userProperty.companyEmail')?.length > 0 && getValues('userProperty.companyName')?.length > 0;
+    getValues('userProperty.companyData.companyEmail')?.length > 0 &&
+    getValues('userProperty.companyData.companyName')?.length > 0;
 
   return (
     <>
@@ -52,8 +55,8 @@ export default function VerifyCompany({ onNext, setCompanyEmailAuthId }: Props) 
             label="회사명"
             placeholder="회사명"
             type="text"
-            {...register('userProperty.companyName', {
-              required: true,
+            {...register('userProperty.companyData.companyName', {
+              required: false,
             })}
           />
 
@@ -61,8 +64,8 @@ export default function VerifyCompany({ onNext, setCompanyEmailAuthId }: Props) 
             label="회사 이메일"
             placeholder="이메일 주소 입력"
             type="text"
-            errorMsg={errors.userProperty?.companyEmail ? '이메일 형식이 맞지 않습니다.' : undefined}
-            {...register('userProperty.companyEmail', { required: true, pattern: /^\S+@\S+$/i })}
+            errorMsg={errors.userProperty?.companyData?.companyEmail ? '이메일 형식이 맞지 않습니다.' : undefined}
+            {...register('userProperty.companyData.companyEmail', { required: false, pattern: /^\S+@\S+$/i })}
           />
         </S.InputContainer>
 
