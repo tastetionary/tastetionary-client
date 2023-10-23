@@ -87,8 +87,8 @@ export default function CRecommendButton({ selectType, btnText, ...rest }: Props
           setResult({
             restaurant: {
               name: res?.name,
-              latitude: 33.450701, // res?.latitude,
-              longitude: 126.570667, // res?.longitude,
+              latitude: res?.latitude ?? 33.450701,
+              longitude: res?.longitude ?? 126.570667,
             },
           });
         }
