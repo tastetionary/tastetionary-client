@@ -41,7 +41,7 @@ export default function SelectMenu() {
         btnText="메뉴 추첨 시작"
         selectType="food"
         disabled={recommendBtnDisabled}
-        style={{ maxWidth: 240, margin: '48px auto 0' }}
+        style={{ margin: '48px auto 0' }}
       />
 
       <RefreshButton
