@@ -195,7 +195,7 @@ export default function SelectRestaurantResult() {
         <S.PriceGraphContainer>
           {price?.map((p, i) => {
             const label =
-              i === 0 ? '~10,000원' : i === 1 ? '11,000원' : i === 2 ? '12,000d원' : i === 3 ? '13,000원' : '13,000원~';
+              i === 0 ? '~10,000원' : i === 1 ? '11,000원' : i === 2 ? '12,000원' : i === 3 ? '13,000원' : '13,000원~';
 
             return (
               <S.PriceGraphItem key={i}>
