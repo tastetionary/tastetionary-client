@@ -1,6 +1,7 @@
 'use client';
 
 import GlobalModal from '@/components/Modal/GlobalModal';
+import Toast from '@/components/Toast';
 import GridLayout from '@/components/layout/grid-layout';
 import MobileLayout from '@/components/layout/mobile-layout';
 import ReactQueryProvider from '@/lib/react-query/ReactQueryProvider';
@@ -38,6 +39,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             <ThemeProvider theme={theme}>
               <GlobalStyle />
               <GlobalModal />
+              <Toast />
               <ReactQueryProvider>
                 <MobileLayout>
                   <GridLayout>{children}</GridLayout>
