@@ -64,7 +64,7 @@ export default function Login() {
               {...register('password', {
                 required: true,
                 pattern: {
-                  value: /^(?=.*[a-zA-Z])(?=.*\d)(?=.*[@#$%^&+=!]).{8,}$/,
+                  value: /^(?=.*[a-zA-Z])(?=.*\d)(?=.*[@#$%^&+=!?]).{8,}$/,
                   message: '영문, 숫자, 특수문자를 조합하여 8자 이상 입력해주세요.',
                 },
               })}

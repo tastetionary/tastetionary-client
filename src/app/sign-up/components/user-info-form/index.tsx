@@ -44,7 +44,7 @@ export default function UserInfoForm({ onNext }: Props) {
             errorMsg={errors.account?.password ? '영문, 숫자, 특수문자를 조합하여 8자 이상 입력해주세요.' : undefined}
             {...register('account.password', {
               required: '비밀번호를 입력해주세요',
-              pattern: /^(?=.*[a-zA-Z])(?=.*\d)(?=.*[@#$%^&+=!]).{8,}$/,
+              pattern: /^(?=.*[a-zA-Z])(?=.*\d)(?=.*[@#$%^&+=!?]).{8,}$/,
             })}
           />
           <TextInput
@@ -54,7 +54,7 @@ export default function UserInfoForm({ onNext }: Props) {
             errorMsg={errors.account?.passwordConfirm ? '비밀번호가 일치하지 않습니다.' : undefined}
             {...register('account.passwordConfirm', {
               required: true,
-              pattern: /^(?=.*[a-zA-Z])(?=.*\d)(?=.*[@#$%^&+=!]).{8,}$/,
+              pattern: /^(?=.*[a-zA-Z])(?=.*\d)(?=.*[@#$%^&+=!?]).{8,}$/,
               validate: value => getValues('account.password') === value || '비밀번호가 일치하지 않습니다.',
             })}
           />
