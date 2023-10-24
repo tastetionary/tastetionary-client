@@ -31,6 +31,15 @@ export const selectResultState = atom<{
     name?: string;
     latitude: number;
     longitude: number;
+    review?: {
+      total: number;
+      keywords: string[];
+      aggregatePrice: {
+        avg: number;
+        [key: string]: number;
+      };
+      revisitRatio: number;
+    };
   };
 }>({
   key: 'selectResultState',

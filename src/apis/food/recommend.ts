@@ -9,8 +9,6 @@ interface Req {
 export interface FoodRecommendRes {
   id: number;
   name: string;
-  latitude?: number;
-  longitude?: number;
 }
 
 export const postFoodRecommend = async (req: Req, token?: string) => {

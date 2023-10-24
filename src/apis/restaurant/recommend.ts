@@ -15,6 +15,19 @@ export interface RestaurantRecommendRes {
   latitude: number;
   longitude: number;
   distance: number;
+  aggregateReviews?: {
+    categories: string[];
+    summaries: string[];
+    opinions: string;
+    keywords: string[];
+    prices: number;
+    aggregatePrice: {
+      avg: number;
+      [key: string]: number;
+    };
+    revisitRatio: number;
+    totalCount: number;
+  };
 }
 
 export const postRestaurantRecommend = async (req: Req, token?: string) => {

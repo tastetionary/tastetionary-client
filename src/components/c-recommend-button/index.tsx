@@ -65,7 +65,7 @@ export default function CRecommendButton({ selectType, btnText, ...rest }: Props
     }, 500);
   };
 
-  const loadingModal = (res: FoodRecommendRes | RestaurantRecommendRes | null) => {
+  const loadingModal = (res: RestaurantRecommendRes | FoodRecommendRes) => {
     openModal(MODAL_TYPES.loading, {
       handleClose: () => {
         if (!res && selectType === 'restaurant') {
@@ -76,19 +76,29 @@ export default function CRecommendButton({ selectType, btnText, ...rest }: Props
           return router.push('/select-menu/result');
         }
 
-        if (selectType === 'food') {
-          setResult({
-            food: {
-              id: +res?.id! ?? 0,
-              name: res?.name,
-            },
-          });
-        } else {
+        if ('aggregateReviews' in res) {
           setResult({
             restaurant: {
               name: res?.name,
               latitude: res?.latitude ?? 33.450701,
               longitude: res?.longitude ?? 126.570667,
+              ...(res?.aggregateReviews
+                ? {
+                    review: {
+                      total: res?.aggregateReviews?.totalCount ?? 0,
+                      revisitRatio: res?.aggregateReviews?.revisitRatio ?? 0,
+                      aggregatePrice: res?.aggregateReviews?.aggregatePrice,
+                      keywords: res?.aggregateReviews?.keywords ?? [],
+                    },
+                  }
+                : {}),
+            },
+          });
+        } else {
+          setResult({
+            food: {
+              id: +res?.id ?? 0,
+              name: res?.name,
             },
           });
         }
