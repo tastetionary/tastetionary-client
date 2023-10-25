@@ -38,7 +38,7 @@ export default function SelectRestaurantResult() {
         },
       });
 
-      if (res?.data?.total >= 100) {
+      if (res?.data?.total >= 30) {
         setImageUrl([res?.data?.items?.[0]?.link, res?.data?.items?.[1]?.link, res?.data?.items?.[2]?.link]);
       } else {
         setImageUrl([]);
