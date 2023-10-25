@@ -54,14 +54,6 @@ export default function CSelectCategory({ selectType, data, isDuplicate = true }
         const allCatgoryName = data?.map(m => m.name);
 
         const onMenuItemClick = () => {
-          if (!isDuplicate) {
-            if (i === 0) {
-              return setSelectedCategory(allCatgoryName);
-            } else {
-              return setSelectedCategory([m?.name]);
-            }
-          }
-
           if (selectedCategory?.length > 0 && isSelected) {
             // 이미 선택된 경우
             if (i === 0) {
@@ -77,8 +69,10 @@ export default function CSelectCategory({ selectType, data, isDuplicate = true }
             // 새롭게 추가하는 경우
             if (i === 0) {
               setSelectedCategory(allCatgoryName);
-            } else {
+            } else if (isDuplicate) {
               setSelectedCategory(prev => [...prev, m?.name]);
+            } else {
+              setSelectedCategory([m?.name]);
             }
           }
         };
