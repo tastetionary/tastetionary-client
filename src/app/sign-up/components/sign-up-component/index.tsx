@@ -1,5 +1,6 @@
 'use client';
 import VerifyAuthNumber from '@/app/find-password/components/verify-auth-number';
+import { SHA256 } from 'crypto-js';
 import { usePathname, useRouter, useSearchParams } from 'next/navigation';
 import { useState } from 'react';
 import { FormProvider, SubmitHandler, useForm } from 'react-hook-form';
@@ -93,7 +94,9 @@ export default function SignUpComponent() {
       delete data.userProperty.companyData?.companyEmail;
     }
 
+    // 비밀번호를 Hash하고 패스워드 체크를 지움
     delete data.account.passwordConfirm;
+    data.account.password = SHA256(data.account.password).toString();
     registerUserMutate(data);
   };
 

@@ -4,6 +4,7 @@ import MainButton from '@/components/Button/MainButton';
 import CheckBox2 from '@/components/CheckBox/CheckBox2';
 import TextInput from '@/components/Input/TextInput';
 import CHeader from '@/components/c-header';
+import { SHA256 } from 'crypto-js';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
@@ -29,6 +30,7 @@ export default function Login() {
   const { mutate: loginMutate } = useLoginMutate();
 
   const onSubmitHandler: SubmitHandler<FormValue> = data => {
+    data.password = SHA256(data.password).toString();
     loginMutate({ ...data, category: 'email' });
   };
 
@@ -64,7 +66,7 @@ export default function Login() {
               {...register('password', {
                 required: true,
                 pattern: {
-                  value: /^(?=.*[a-zA-Z])(?=.*\d)(?=.*[@#$%^&+=!]).{8,}$/,
+                  value: /^(?=.*[a-zA-Z])(?=.*\d)(?=.*[@#$%^&+=!?]).{8,}$/,
                   message: '영문, 숫자, 특수문자를 조합하여 8자 이상 입력해주세요.',
                 },
               })}
@@ -84,7 +86,7 @@ export default function Login() {
         <S.NavContainer>
           <S.NavItem onClick={() => router.push('/ready')}>아이디 찾기</S.NavItem>
           <S.NavDivider />
-          <S.NavItem onClick={() => router.push('/find-password')}>비밀번호 찾기</S.NavItem>
+          <S.NavItem onClick={() => router.push('/ready')}>비밀번호 찾기</S.NavItem>
           <S.NavDivider />
           <S.NavItem onClick={() => router.push('/sign-up')}>회원가입</S.NavItem>
         </S.NavContainer>
