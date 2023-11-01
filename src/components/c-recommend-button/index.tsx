@@ -1,12 +1,13 @@
 import { FoodRecommendRes, postFoodRecommend } from '@/apis/food/recommend';
 import { RestaurantRecommendRes, postRestaurantRecommend } from '@/apis/restaurant/recommend';
+import useUser from '@/hooks/useUser';
 import { selectFoodState, selectRestaurantState, selectResultState } from '@/lib/atom';
 import { FoodCategory, FoodKeyword } from '@homekeeper89/taste_dict/lib/domain/food/food.enum';
 import { RestaurantCategory } from '@homekeeper89/taste_dict/lib/domain/restaurant/restaurant.enum';
 import { useMutation } from '@tanstack/react-query';
 import { AxiosError } from 'axios';
-import { useRouter } from 'next/navigation';
-import { useRecoilValue, useSetRecoilState } from 'recoil';
+import { usePathname, useRouter } from 'next/navigation';
+import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil';
 import MainButton, { MainButtonProps } from '../Button/MainButton';
 import { MODAL_TYPES } from '../Modal/GlobalModal';
 import useModal from '../Modal/GlobalModal/hooks/useModal';
@@ -17,13 +18,17 @@ interface Props extends MainButtonProps {
 
 export default function CRecommendButton({ selectType, btnText, ...rest }: Props) {
   const router = useRouter();
+  const { token } = useUser();
   const { openModal, closeModal } = useModal();
+  const pathname = usePathname();
 
   const foodState = useRecoilValue(selectFoodState);
-  const restaurantState = useRecoilValue(selectRestaurantState);
+  const [restaurantState, setRestaurantState] = useRecoilState(selectRestaurantState);
   const setResult = useSetRecoilState(selectResultState);
 
-  const token = process.env.NEXT_PUBLIC_ACCESS_TOKEN;
+  const isResultPage = pathname?.includes('result');
+
+  const testToken = process.env.NEXT_PUBLIC_ACCESS_TOKEN;
 
   const loginModal = () => {
     openModal(MODAL_TYPES.dialog, {
@@ -36,21 +41,64 @@ export default function CRecommendButton({ selectType, btnText, ...rest }: Props
     });
   };
 
-  const loadingModal = (res: FoodRecommendRes | RestaurantRecommendRes) => {
+  const noResultModal = () => {
+    setTimeout(() => {
+      openModal(MODAL_TYPES.dialog, {
+        title: isResultPage ? '더 이상 추첨할 식당이 없어요.' : '선택하신 조건으로 추첨할 식당이 없어요.',
+        message: isResultPage
+          ? '더 이상 추첨할 식당이 없습니다.\n다른 조건으로 추첨해보세요!'
+          : '다른 조건으로 추첨해 보세요!',
+        handleConfirm: () => {
+          setRestaurantState({
+            category: [],
+            keyword: [],
+            price: 0,
+          });
+
+          router.push('/select-restaurant');
+        },
+        handleClose: () => closeModal(MODAL_TYPES.dialog),
+        cancelText: '닫기',
+        confirmText: '조건 재설정',
+        needClose: true,
+      });
+    }, 500);
+  };
+
+  const loadingModal = (res: RestaurantRecommendRes | FoodRecommendRes) => {
     openModal(MODAL_TYPES.loading, {
       handleClose: () => {
-        if (selectType === 'food') {
+        if (!res && selectType === 'restaurant') {
+          return noResultModal();
+        }
+
+        if (!res && selectType === 'food') {
+          return router.push('/select-menu/result');
+        }
+
+        if ('aggregateReviews' in res) {
           setResult({
-            food: {
+            restaurant: {
               name: res?.name,
+              latitude: res?.latitude ?? 33.450701,
+              longitude: res?.longitude ?? 126.570667,
+              ...(res?.aggregateReviews
+                ? {
+                    review: {
+                      total: res?.aggregateReviews?.totalCount ?? 0,
+                      revisitRatio: res?.aggregateReviews?.revisitRatio ?? 0,
+                      aggregatePrice: res?.aggregateReviews?.aggregatePrice,
+                      keywords: res?.aggregateReviews?.keywords ?? [],
+                    },
+                  }
+                : {}),
             },
           });
         } else {
           setResult({
-            restaurant: {
+            food: {
+              id: +res?.id ?? 0,
               name: res?.name,
-              latitude: 33.450701, // res?.latitude,
-              longitude: 126.570667, // res?.longitude,
             },
           });
         }

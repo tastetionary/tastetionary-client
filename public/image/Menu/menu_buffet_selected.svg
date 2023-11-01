@@ -23,18 +23,18 @@
 <rect x="50" y="44" width="2" height="2" fill="black"/>
 <rect x="48" y="46" width="2" height="2" fill="black"/>
 <rect x="52" y="42" width="2" height="2" fill="black"/>
-<rect width="2" height="2" transform="matrix(-1 0 0 1 56 32)" fill="#B0B6B8"/>
+<rect width="2" height="2" transform="matrix(-1 0 0 1 56 32)" fill="black"/>
 <rect width="2" height="2" transform="matrix(-1 0 0 1 6 32)" fill="black"/>
-<rect width="2" height="2" transform="matrix(-1 0 0 1 56 34)" fill="#B0B6B8"/>
+<rect width="2" height="2" transform="matrix(-1 0 0 1 56 34)" fill="black"/>
 <rect width="2" height="2" transform="matrix(-1 0 0 1 6 34)" fill="black"/>
 <rect width="2" height="2" transform="matrix(-1 0 0 1 56 36)" fill="black"/>
 <rect width="2" height="2" transform="matrix(-1 0 0 1 6 36)" fill="black"/>
 <rect x="54" y="28" width="2" height="2" fill="black"/>
 <rect x="4" y="28" width="2" height="2" fill="black"/>
-<rect x="54" y="30" width="2" height="2" fill="#B0B6B8"/>
-<rect x="56" y="30" width="2" height="2" fill="black"/>
-<rect x="56" y="32" width="2" height="2" fill="black"/>
-<rect x="56" y="34" width="2" height="2" fill="black"/>
+<rect x="54" y="30" width="2" height="2" fill="black"/>
+<rect x="56" y="30" width="2" height="2" fill="#FFCBB8"/>
+<rect x="56" y="32" width="2" height="2" fill="#FFCBB8"/>
+<rect x="56" y="34" width="2" height="2" fill="#FFCBB8"/>
 <rect x="4" y="30" width="2" height="2" fill="black"/>
 <rect x="54" y="38" width="2" height="2" fill="black"/>
 <rect x="4" y="38" width="2" height="2" fill="black"/>
@@ -174,7 +174,7 @@
 <rect x="50" y="32" width="2" height="2" fill="#DEE2E3"/>
 <rect x="8" y="32" width="2" height="2" fill="#DEE2E3"/>
 <rect x="6" y="32" width="2" height="2" fill="#DEE2E3"/>
-<rect x="52" y="32" width="2" height="2" fill="#DEE2E3"/>
+<rect x="52" y="32" width="2" height="2" fill="#B0B6B8"/>
 <rect x="20" y="30" width="2" height="2" fill="#DEE2E3"/>
 <rect x="18" y="30" width="2" height="2" fill="#DEE2E3"/>
 <rect x="16" y="30" width="2" height="2" fill="#F5F5F5"/>
@@ -189,7 +189,7 @@
 <rect x="50" y="30" width="2" height="2" fill="#F5F5F5"/>
 <rect x="8" y="30" width="2" height="2" fill="#DEE2E3"/>
 <rect x="6" y="30" width="2" height="2" fill="#DEE2E3"/>
-<rect x="52" y="30" width="2" height="2" fill="#F5F5F5"/>
+<rect x="52" y="30" width="2" height="2" fill="#B0B6B8"/>
 <rect x="20" y="28" width="2" height="2" fill="#DEE2E3"/>
 <rect x="18" y="28" width="2" height="2" fill="#DEE2E3"/>
 <rect x="16" y="28" width="2" height="2" fill="#F5F5F5"/>
@@ -492,12 +492,13 @@
 <rect x="56" y="28" width="2" height="2" fill="#FFCBB8"/>
 <rect x="56" y="26" width="2" height="2" fill="#FFCBB8"/>
 <rect x="56" y="24" width="2" height="2" fill="#FF7002"/>
-<rect x="58" y="28" width="2" height="2" fill="#FFCBB8"/>
+<rect x="56" y="22" width="2" height="2" fill="#FF7002"/>
+<rect x="58" y="28" width="2" height="2" fill="#FF7002"/>
 <rect x="58" y="26" width="2" height="2" fill="#FF7002"/>
-<rect x="58" y="30" width="2" height="2" fill="#FFCBB8"/>
-<rect x="58" y="32" width="2" height="2" fill="#FFCBB8"/>
-<rect x="58" y="34" width="2" height="2" fill="#FFCBB8"/>
-<rect x="58" y="36" width="2" height="2" fill="#FFCBB8"/>
+<rect x="58" y="30" width="2" height="2" fill="#FF7002"/>
+<rect x="58" y="32" width="2" height="2" fill="#FF7002"/>
+<rect x="58" y="34" width="2" height="2" fill="#FF7002"/>
+<rect x="58" y="36" width="2" height="2" fill="#FF7002"/>
 <rect x="56" y="36" width="2" height="2" fill="#FFCBB8"/>
 <rect x="56" y="38" width="2" height="2" fill="#FFCBB8"/>
 <rect x="56" y="40" width="2" height="2" fill="#FFCBB8"/>
@@ -507,8 +508,16 @@
 <rect x="50" y="48" width="2" height="2" fill="#FFCBB8"/>
 <rect x="48" y="50" width="2" height="2" fill="#FFCBB8"/>
 <rect x="48" y="52" width="2" height="2" fill="#FF7002"/>
+<rect x="50" y="50" width="2" height="2" fill="#FF7002"/>
+<rect x="52" y="48" width="2" height="2" fill="#FF7002"/>
+<rect x="54" y="46" width="2" height="2" fill="#FF7002"/>
+<rect x="56" y="44" width="2" height="2" fill="#FF7002"/>
+<rect x="58" y="42" width="2" height="2" fill="#FF7002"/>
+<rect x="58" y="40" width="2" height="2" fill="#FF7002"/>
+<rect x="58" y="38" width="2" height="2" fill="#FF7002"/>
 <rect x="44" y="52" width="2" height="2" fill="#FFCBB8"/>
 <rect x="44" y="54" width="2" height="2" fill="#FF7002"/>
+<rect x="46" y="52" width="2" height="2" fill="#FF7002"/>
 <rect x="40" y="54" width="2" height="2" fill="#FFCBB8"/>
 <rect x="40" y="56" width="2" height="2" fill="#FF7002"/>
 <rect x="54" y="42" width="2" height="2" fill="#FFCBB8"/>

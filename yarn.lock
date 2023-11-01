@@ -1124,10 +1124,10 @@
   resolved "https://registry.yarnpkg.com/@eslint/js/-/js-8.48.0.tgz#642633964e217905436033a2bd08bf322849b7fb"
   integrity sha512-ZSjtmelB7IJfWD2Fvb7+Z+ChTIKWq6kjda95fLcQKNS5aheVHn4IkfgRQE3sIIzTcSLwLcLZUD9UBt+V7+h+Pw==
 
-"@homekeeper89/taste_dict@^0.2.3":
-  version "0.2.3"
-  resolved "https://npm.pkg.github.com/download/@homekeeper89/taste_dict/0.2.3/fbfccf1b6d54ad4a37bd29f938c91779b23cf712#fbfccf1b6d54ad4a37bd29f938c91779b23cf712"
-  integrity sha512-9nB6WrDqIisDZTZDRy8dsh+XUWjNXztHJZGXdDB3IAnuZYNIDrtQtifDdn7UDMmx0SfBgWR93fMEjqdGkVB1Wg==
+"@homekeeper89/taste_dict@0.3.0":
+  version "0.3.0"
+  resolved "https://npm.pkg.github.com/download/@homekeeper89/taste_dict/0.3.0/7a365d9f1b96750e3c048a19e6d16d00d7f0ac3b#7a365d9f1b96750e3c048a19e6d16d00d7f0ac3b"
+  integrity sha512-g0gjIqe27XRGXrH6Ka3u8aAqAztJ/3Cy5I86z9fA8XU+Z0BBdNgPvR54+x+WBvXwbcY3sPy3KShaQ08Q2X1UIw==
   dependencies:
     "@nestia/fetcher" "^1.6.5"
     typescript-transform-paths "^3.4.6"
@@ -1572,6 +1572,11 @@
     "@types/keyv" "^3.1.4"
     "@types/node" "*"
     "@types/responselike" "^1.0.0"
+
+"@types/crypto-js@^4.1.3":
+  version "4.1.3"
+  resolved "https://registry.yarnpkg.com/@types/crypto-js/-/crypto-js-4.1.3.tgz#7f2fa22857ae2b5d3221edcba9644f67f8ea984c"
+  integrity sha512-YP1sYYayLe7Eg5oXyLLvOLfxBfZ5Fgpz6sVWkpB18wDMywCLPWmqzRz+9gyuOoLF0fzDTTFwlyNbx7koONUwqA==
 
 "@types/hoist-non-react-statics@*":
   version "3.3.1"
@@ -2223,6 +2228,11 @@ clone-response@^1.0.2:
   dependencies:
     mimic-response "^1.0.0"
 
+clsx@^1.1.1:
+  version "1.2.1"
+  resolved "https://registry.yarnpkg.com/clsx/-/clsx-1.2.1.tgz#0ddc4a20a549b59c93a4116bb26f5294ca17dc12"
+  integrity sha512-EcR6r5a8bj6pu3ycsa/E/cKVGuTgZJZdsyUYHOksG/UHIiKfjxzRxYJpyVBwYaQeOvghal9fcc4PidlgzugAQg==
+
 color-convert@^1.9.0:
   version "1.9.3"
   resolved "https://registry.yarnpkg.com/color-convert/-/color-convert-1.9.3.tgz#bb71850690e1f136567de629d2d5471deda4c1e8"
@@ -2332,6 +2342,11 @@ cross-spawn@^7.0.2, cross-spawn@^7.0.3:
     path-key "^3.1.0"
     shebang-command "^2.0.0"
     which "^2.0.1"
+
+crypto-js@^4.1.1:
+  version "4.1.1"
+  resolved "https://registry.yarnpkg.com/crypto-js/-/crypto-js-4.1.1.tgz#9e485bcf03521041bd85844786b83fb7619736cf"
+  integrity sha512-o2JlM7ydqd3Qk9CA0L4NL6mTzU2sdx96a+oOfPu8Mkl/PK51vSyoi8/rQ8NknZtk44vq15lmhAj9CIAGwgeWKw==
 
 css-color-keywords@^1.0.0:
   version "1.0.0"
@@ -4340,6 +4355,13 @@ react-is@^16.12.0, react-is@^16.13.1, react-is@^16.7.0:
   version "16.13.1"
   resolved "https://registry.yarnpkg.com/react-is/-/react-is-16.13.1.tgz#789729a4dc36de2999dc156dd6c1d9c18cea56a4"
   integrity sha512-24e6ynE2H+OKt4kqsOvNd8kBpV65zoxbA4BVsEOB3ARVWQki/DHzaUoC5KuON/BiccDaCCTZBuOcfZs70kR8bQ==
+
+react-toastify@^9.1.3:
+  version "9.1.3"
+  resolved "https://registry.yarnpkg.com/react-toastify/-/react-toastify-9.1.3.tgz#1e798d260d606f50e0fab5ee31daaae1d628c5ff"
+  integrity sha512-fPfb8ghtn/XMxw3LkxQBk3IyagNpF/LIKjOBflbexr2AWxAH1MJgvnESwEwBn9liLFXgTKWgBSdZpw9m4OTHTg==
+  dependencies:
+    clsx "^1.1.1"
 
 react@18.2.0:
   version "18.2.0"

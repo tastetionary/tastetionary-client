@@ -15,12 +15,15 @@ export const ResultTitle = styled.div`
 `;
 
 export const MemoTitle = styled.div`
-  font-size: 32px;
+  font-size: 20px;
   font-weight: 700;
-  margin-bottom: 4px;
+  margin-bottom: 20px;
+  text-align: center;
+  line-height: 150%;
+  white-space: pre-line;
 `;
 
 export const ButtonContainer = styled.div`
   width: 100%;
-  margin-top: 20px;
+  margin-top: 48px;
 `;

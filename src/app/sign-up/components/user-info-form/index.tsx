@@ -4,17 +4,23 @@ import CHeader from '@/components/c-header';
 import { useFormContext } from 'react-hook-form';
 import * as S from './page.styled';
 
-interface FormValue {
-  email: string;
-  password: string;
-  passwordConfirm: string;
+interface Props {
+  onNext: () => void;
 }
 
-export default function UserInfoForm() {
+export default function UserInfoForm({ onNext }: Props) {
   const {
     register,
-    formState: { errors },
-  } = useFormContext<FormValue>();
+    getValues,
+    formState: { errors, isDirty, isValid },
+  } = useFormContext<{
+    account: {
+      identification: string;
+      password: string;
+      category: 'email';
+      passwordConfirm: string;
+    };
+  }>();
 
   return (
     <>
@@ -28,29 +34,34 @@ export default function UserInfoForm() {
             label="이메일 주소"
             placeholder="이메일 주소를 입력해주세요."
             type="text"
-            {...register('email', { required: true })}
+            value={getValues('account.identification')}
+            disabled
           />
-
           <TextInput
             label="비밀번호"
             placeholder="영문, 숫자, 특수문자를 조합하여 8자 이상"
-            type="text"
-            {...register('password', { required: true, pattern: /^(?=.*[a-zA-Z])(?=.*\d)(?=.*[@#$%^&+=!]).{8,}$/ })}
+            type="password"
+            errorMsg={errors.account?.password ? '영문, 숫자, 특수문자를 조합하여 8자 이상 입력해주세요.' : undefined}
+            {...register('account.password', {
+              required: '비밀번호를 입력해주세요',
+              pattern: /^(?=.*[a-zA-Z])(?=.*\d)(?=.*[@#$%^&+=!?]).{8,}$/,
+            })}
           />
-
           <TextInput
             label="비밀번호 확인"
             placeholder="비밀번호 재입력"
-            type="text"
-            {...register('passwordConfirm', {
+            type="password"
+            errorMsg={errors.account?.passwordConfirm ? '비밀번호가 일치하지 않습니다.' : undefined}
+            {...register('account.passwordConfirm', {
               required: true,
-              pattern: /^(?=.*[a-zA-Z])(?=.*\d)(?=.*[@#$%^&+=!]).{8,}$/,
+              pattern: /^(?=.*[a-zA-Z])(?=.*\d)(?=.*[@#$%^&+=!?]).{8,}$/,
+              validate: value => getValues('account.password') === value || '비밀번호가 일치하지 않습니다.',
             })}
           />
         </S.MainContainer>
 
         <S.NextButtonWrapper>
-          <MainButton btnText="다음" disabled />
+          <MainButton btnText="다음" disabled={!isDirty || !isValid} type="button" onClick={onNext} />
         </S.NextButtonWrapper>
       </S.Wrapper>
     </>

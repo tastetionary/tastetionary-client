@@ -1,7 +1,7 @@
 import { reviewState, selectFoodState, selectRestaurantState } from '@/lib/atom';
 import Image from 'next/image';
 import { useEffect, useState } from 'react';
-import { useSetRecoilState } from 'recoil';
+import { useRecoilState } from 'recoil';
 import * as S from './page.styled';
 
 interface Props {
@@ -13,9 +13,9 @@ interface Props {
 export default function CSelectCategory({ selectType, data, isDuplicate = true }: Props) {
   const [selectedCategory, setSelectedCategory] = useState<string[]>([]);
 
-  const setFoodState = useSetRecoilState(selectFoodState);
-  const setRestaurantState = useSetRecoilState(selectRestaurantState);
-  const setReviewState = useSetRecoilState(reviewState);
+  const [foodState, setFoodState] = useRecoilState(selectFoodState);
+  const [restaurantState, setRestaurantState] = useRecoilState(selectRestaurantState);
+  const [review, setReviewState] = useRecoilState(reviewState);
 
   useEffect(() => {
     if (selectType === 'food') {
@@ -36,14 +36,24 @@ export default function CSelectCategory({ selectType, data, isDuplicate = true }
     }
   }, [selectedCategory, selectType]);
 
+  useEffect(() => {
+    setSelectedCategory(
+      selectType === 'food'
+        ? foodState?.category
+        : selectType === 'restaurant'
+        ? restaurantState?.category
+        : review?.category
+    );
+  }, [foodState?.category, restaurantState?.category, review?.category, selectType]);
+
   return (
     <S.MenuContainer>
       {data?.map((m: { id: number; name: string; icon: string }, i: number) => {
         const isSelected = selectedCategory?.includes(m?.name);
 
-        const onMenuItemClick = () => {
-          if (!isDuplicate) return setSelectedCategory([m?.name]);
+        const allCatgoryName = data?.map(m => m.name);
 
+        const onMenuItemClick = () => {
           if (selectedCategory?.length > 0 && isSelected) {
             // 이미 선택된 경우
             if (i === 0) {
@@ -58,11 +68,11 @@ export default function CSelectCategory({ selectType, data, isDuplicate = true }
           } else {
             // 새롭게 추가하는 경우
             if (i === 0) {
-              const allCatgoryName = data?.map(m => m.name);
-
               setSelectedCategory(allCatgoryName);
-            } else {
+            } else if (isDuplicate) {
               setSelectedCategory(prev => [...prev, m?.name]);
+            } else {
+              setSelectedCategory([m?.name]);
             }
           }
         };
@@ -75,7 +85,7 @@ export default function CSelectCategory({ selectType, data, isDuplicate = true }
               width={64}
               height={64}
             />
-            <S.MenuItemTitle>{m?.name}</S.MenuItemTitle>
+            <S.MenuItemTitle isSelected={isSelected}>{m?.name}</S.MenuItemTitle>
           </S.MenuItem>
         );
       })}

@@ -1,4 +1,4 @@
-import { styled } from 'styled-components';
+import styled from 'styled-components';
 
 export const Wrapper = styled.div`
   padding: 20px;
@@ -17,4 +17,20 @@ export const SubTitle = styled.p`
   font-weight: 400;
   line-height: 170%;
   color: ${({ theme }) => theme.colors.neutral.bg40};
+`;
+
+export const Description = styled.p`
+  margin-top: 40px;
+  font-size: 11px;
+  font-weight: 400;
+  line-height: 200%;
+  color: ${({ theme }) => theme.colors.neutral.bg80};
+`;
+
+export const First = styled.span`
+  white-space: pre-wrap;
+`;
+export const Section = styled.p`
+  white-space: pre-wrap;
+  padding-left: 15px;
 `;

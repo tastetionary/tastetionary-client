@@ -15,7 +15,8 @@ import * as S from './page.styled';
 export default function SelectMenu() {
   const [foodState, setFoodState] = useRecoilState(selectFoodState);
 
-  const btnDisabled = foodState?.category?.length === 0 || foodState?.keyword?.length === 0;
+  const recommendBtnDisabled = foodState?.category?.length === 0 || foodState?.keyword?.length === 0;
+  const refreshBtnDisabled = foodState?.category?.length === 0 && foodState?.keyword?.length === 0;
 
   const { data } = useQuery(['food-option'], () => getFoodOption(), {
     cacheTime: 0,
@@ -39,13 +40,13 @@ export default function SelectMenu() {
       <CRecommendButton
         btnText="메뉴 추첨 시작"
         selectType="food"
-        disabled={btnDisabled}
-        style={{ maxWidth: 240, margin: '48px auto 0' }}
+        disabled={recommendBtnDisabled}
+        style={{ margin: '48px auto 0' }}
       />
 
       <RefreshButton
         btnText="선택 초기화"
-        disabled={btnDisabled}
+        disabled={refreshBtnDisabled}
         onClick={() =>
           setFoodState({
             category: [],

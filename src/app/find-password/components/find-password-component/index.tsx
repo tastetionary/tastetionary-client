@@ -1,24 +1,29 @@
 'use client';
 
-import useFunnel from '@/hooks/useFunnel';
+import { usePathname, useRouter } from 'next/navigation';
+import { useState } from 'react';
 import PasswordComplete from '../password-complete';
-import VerifyAuthNumber from '../verify-auth-number';
 import VerifyEmail from '../verify-email';
 
 export default function FindPasswordComponent() {
-  const [Funnel, setStep] = useFunnel(['verify-email', 'verify-auth-number', 'password-complete'], 'verify-email');
+  const [emailAuthId, setEmailAuthId] = useState(0);
+
+  const { push } = useRouter();
+  const pathname = usePathname();
+  const setStep = (step: string) => {
+    push(`${pathname}?step=${step}`);
+  };
 
   return (
-    <Funnel>
-      <Funnel.Step name="verify-email">
-        <VerifyEmail onNext={() => setStep('verify-auth-number')} />
-      </Funnel.Step>
-      <Funnel.Step name="verify-auth-number">
-        <VerifyAuthNumber onNext={() => setStep('password-complete')} />
-      </Funnel.Step>
-      <Funnel.Step name="password-complete">
-        <PasswordComplete />
-      </Funnel.Step>
-    </Funnel>
+    <>
+      <VerifyEmail onNext={() => setStep('verify-auth-number')} />
+      {/* <VerifyAuthNumber
+        onNext={() => setStep('password-complete')}
+        type="find-password"
+        emailAuthId={emailAuthId}
+        setEmailAuthId={setEmailAuthId}
+      /> */}
+      <PasswordComplete />
+    </>
   );
 }

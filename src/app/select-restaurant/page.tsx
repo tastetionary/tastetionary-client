@@ -1,8 +1,8 @@
 'use client';
 
 import { getRestaurantOption } from '@/apis/restaurant/option';
-import IC_MAP from '@/assets/common/map.svg';
 import RefreshButton from '@/components/Button/RefreshButton';
+import CChangeRegion from '@/components/c-change-region';
 import CHeader from '@/components/c-header';
 import CRecommendButton from '@/components/c-recommend-button';
 import CSelectCategory from '@/components/c-select-category';
@@ -17,7 +17,8 @@ import * as S from './page.styled';
 export default function SelectRestaurant() {
   const [restaurantState, setRestaurantState] = useRecoilState(selectRestaurantState);
 
-  const btnDisabled = restaurantState?.category?.length === 0 || restaurantState?.keyword?.length === 0;
+  const recommendBtnDisabled = restaurantState?.category?.length === 0 || restaurantState?.keyword?.length === 0;
+  const refreshBtnDisabled = restaurantState?.category?.length === 0 && restaurantState?.keyword?.length === 0;
 
   const { data } = useQuery(['restaurant-option'], () => getRestaurantOption(), {
     cacheTime: 0,
@@ -27,15 +28,8 @@ export default function SelectRestaurant() {
   return (
     <>
       <CHeader title="식당 고르기" isBackBtn />
-      <S.ChangeRegionContainer>
-        <S.FlexBox>
-          <IC_MAP width={24} height={24} />
 
-          <S.Region>논현동</S.Region>
-        </S.FlexBox>
-
-        <S.ChangeText>식사 지역 변경 &gt;</S.ChangeText>
-      </S.ChangeRegionContainer>
+      <CChangeRegion type="dining_area" />
 
       <S.SectionContainer>
         <CSelectSection title="음식 종류">
@@ -54,13 +48,13 @@ export default function SelectRestaurant() {
       <CRecommendButton
         btnText="추첨 시작"
         selectType="restaurant"
-        disabled={btnDisabled}
-        style={{ maxWidth: 240, margin: '48px auto 0' }}
+        disabled={recommendBtnDisabled}
+        style={{ margin: '48px auto 0' }}
       />
 
       <RefreshButton
         btnText="선택 초기화"
-        disabled={btnDisabled}
+        disabled={refreshBtnDisabled}
         onClick={() =>
           setRestaurantState({
             category: [],

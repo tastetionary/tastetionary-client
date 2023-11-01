@@ -5,21 +5,24 @@ import TextInput from '@/components/Input/TextInput';
 import CHeader from '@/components/c-header';
 import { useEffect, useRef, useState } from 'react';
 import DaumPostcodeEmbed from 'react-daum-postcode';
+import { useFormContext } from 'react-hook-form';
 import * as S from './page.styled';
 
-interface FormValue {
-  region: string;
+interface Props {
+  onNext: () => void;
+  category?: 'activity_area' | 'dining_area';
 }
 
-export default function RegionSetting() {
+export default function RegionSetting({ onNext, category = 'dining_area' }: Props) {
+  const { setValue } = useFormContext();
   const mapRef = useRef<HTMLDivElement>(null);
   const [address, setAddress] = useState('');
   const [openPostCode, setOpenPostCode] = useState(false);
 
   const completeHandler = (data: any) => {
     setOpenPostCode(false);
-    console.log(data);
     setAddress(data?.address);
+    console.log(data);
   };
 
   useEffect(() => {
@@ -55,6 +58,10 @@ export default function RegionSetting() {
             if (status === window.kakao.maps.services.Status.OK) {
               var coords = new window.kakao.maps.LatLng(result[0].y, result[0].x);
 
+              setValue('areas[0].latitude', coords.La);
+              setValue('areas[0].longitude', coords.Ma);
+              setValue('areas[0].address', address);
+
               // 결과값으로 받은 위치를 마커로 표시합니다
               var marker = new window.kakao.maps.Marker({
                 map: map,
@@ -77,13 +84,13 @@ export default function RegionSetting() {
 
   return (
     <>
-      <CHeader title="식사 지역 설정" isBackBtn />
+      <CHeader title={category === 'activity_area' ? '활동 지역 설정' : '식사 지역 설정'} isBackBtn />
 
       <S.Wrapper>
         <S.Title>
-          식사 지역 설정을 하면
-          <br />
-          식당을 추천받을 수 있어요.
+          {category === 'activity_area'
+            ? '활동 지역 설정을 하면\n식당 리뷰를 작성할 수 있어요.'
+            : '식사 지역 설정을 하면\n식당을 추천받을 수 있어요.'}
         </S.Title>
 
         <S.SubTitle>회사 주소를 자세히 설정하면 근처의 식당을 구체적으로 추천해드릴 수 있어요.</S.SubTitle>
@@ -91,7 +98,7 @@ export default function RegionSetting() {
         <S.Form>
           {!openPostCode && (
             <TextInput
-              label="식사 지역 검색"
+              label={category === 'activity_area' ? '활동 지역 검색' : '식사 지역 검색'}
               readOnly={true}
               value={address}
               placeholder="이곳을 눌러 지역을 설정해주세요."
@@ -118,7 +125,7 @@ export default function RegionSetting() {
           </S.MapContainer>
 
           <S.ButtonContainer>
-            <MainButton btnText="다음" disabled={address === ''} />
+            <MainButton btnText="다음" disabled={address === ''} type="button" onClick={onNext} />
           </S.ButtonContainer>
         </S.Form>
       </S.Wrapper>

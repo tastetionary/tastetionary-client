@@ -7,6 +7,7 @@ interface Req {
 }
 
 export interface FoodRecommendRes {
+  id: number;
   name: string;
 }
 

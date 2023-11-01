@@ -1,5 +1,6 @@
 'use client';
 
+import COMPLETE from '@/assets/logo/complete.svg';
 import MainButton from '@/components/Button/MainButton';
 import CHeader from '@/components/c-header';
 import { useRouter } from 'next/navigation';
@@ -12,7 +13,7 @@ export default function SignUpComplete() {
     <>
       <CHeader title="회원가입 완료" />
       <S.Wrapper>
-        <S.Box />
+        <COMPLETE />
         <S.Title>
           맛셔너리 회원가입이
           <br />
@@ -23,8 +24,7 @@ export default function SignUpComplete() {
           <br />
           오늘의 점심 메뉴와 식당을 골라보세요.
         </S.SubTitle>
-
-        <MainButton btnText="홈 화면으로" onClick={() => router.push('/')} />
+        <MainButton type="button" btnText="로그인" onClick={() => router.push('/login')} />
       </S.Wrapper>
     </>
   );

@@ -114,3 +114,9 @@ export const ButtonDivider = styled.div`
   background-color: ${({ theme }) => theme.colors.neutral.bg20};
   margin: 0 5px;
 `;
+
+export const FlexBox = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 4px;
+`;

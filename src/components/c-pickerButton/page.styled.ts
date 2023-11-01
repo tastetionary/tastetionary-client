@@ -1,7 +1,7 @@
-import { styled } from 'styled-components';
+import styled from 'styled-components';
 
 export const Button = styled.button<{ subject: 'menu' | 'restaurant' }>`
-  width: 280px;
+  width: 100%;
   box-shadow: 4px 4px 0px 0px rgba(0, 0, 0, 0.1);
   padding: 0px;
   background: repeating-linear-gradient(
@@ -35,10 +35,12 @@ export const Button = styled.button<{ subject: 'menu' | 'restaurant' }>`
   }
 `;
 export const Header = styled.div`
-  width: 280px;
+  width: 100%;
   height: 20px;
 `;
-export const Content = styled.div``;
+export const Content = styled.div`
+  padding-top: 12px;
+`;
 export const Icon = styled.button`
   width: 72px;
   height: 72px;
@@ -46,10 +48,10 @@ export const Icon = styled.button`
 export const Title = styled.p`
   font-size: 20px;
   text-shadow:
-    -1px 0 white,
-    0 1px white,
-    1px 0 white,
-    0 -1px white;
+    -2px 0 white,
+    0 2px white,
+    2px 0 white,
+    0 -2px white;
   font-weight: 400;
 `;
 export const Description = styled.p<{ subject: 'menu' | 'restaurant' }>`
