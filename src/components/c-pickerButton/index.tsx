@@ -14,7 +14,7 @@ export default function CPickerButton({ title, desc, subject, clickEvent }: Prop
   return (
     <>
       <S.Button
-        subject={subject}
+        $subject={subject}
         onClick={() => {
           if (clickEvent) clickEvent();
         }}
@@ -22,9 +22,9 @@ export default function CPickerButton({ title, desc, subject, clickEvent }: Prop
         <HorizontalLayout subject={subject}>
           <S.Header></S.Header>
           <S.Content>
-            <S.Icon></S.Icon>
+            <S.Icon $subject={subject}></S.Icon>
             <S.Title>{title}</S.Title>
-            <S.Description subject={subject}>{desc}</S.Description>
+            <S.Description $subject={subject}>{desc}</S.Description>
           </S.Content>
         </HorizontalLayout>
       </S.Button>

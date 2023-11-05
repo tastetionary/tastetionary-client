@@ -11,7 +11,7 @@ export default function CNavButton({ title, icon, isActive, clickEvent }: Props)
   return (
     <>
       <S.Button
-        isActive={isActive}
+        $isActive={isActive}
         onClick={() => {
           if (clickEvent) clickEvent();
         }}

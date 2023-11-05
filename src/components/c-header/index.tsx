@@ -20,7 +20,7 @@ export default function CHeader({ isLogo = false, isBackBtn = false, title }: Pr
             {isBackBtn && <ISBACK_BTN onClick={() => router.back()} />}
           </S.BackBtnContainer>
           <S.TitleContainer
-            isLogo={isLogo}
+            $isLogo={isLogo}
             onClick={() => {
               if (isLogo) {
                 router.push('/');

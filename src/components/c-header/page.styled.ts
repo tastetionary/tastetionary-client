@@ -30,12 +30,12 @@ export const BackBtnContainer = styled.div<{ $isBackBtn?: boolean }>`
   align-items: center;
   justify-content: center;
 `;
-export const TitleContainer = styled.div<{ isLogo: boolean }>`
+export const TitleContainer = styled.div<{ $isLogo: boolean }>`
   display: flex;
   justify-content: center;
   align-items: center;
   height: 24px;
-  cursor: ${({ isLogo }) => (isLogo ? 'pointer' : 'auto')};
+  cursor: ${({ $isLogo }) => ($isLogo ? 'pointer' : 'auto')};
 `;
 export const Title = styled.p`
   margin-left: 8px;
