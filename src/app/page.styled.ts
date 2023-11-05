@@ -9,8 +9,9 @@ export const MainContent = styled.main`
 `;
 
 export const NavContainer = styled.div`
-  position: absolute;
+  position: fixed;
   display: flex;
+  max-width: 360px;
   width: 100%;
   bottom: 0;
 
@@ -19,6 +20,6 @@ export const NavContainer = styled.div`
   }
 
   @media screen and (max-width: 768px) {
-    position: fixed;
+    max-width: 100%;
   }
 `;
