@@ -1,16 +1,7 @@
-'use client';
-
-import GlobalModal from '@/components/Modal/GlobalModal';
-import Toast from '@/components/Toast';
-import GridLayout from '@/components/layout/grid-layout';
-import MobileLayout from '@/components/layout/mobile-layout';
-import ReactQueryProvider from '@/lib/react-query/ReactQueryProvider';
+import RecoilRootWrapper from '@/lib/recoil/RecoilRootWrapper';
 import StyledComponentsRegistry from '@/lib/registry';
-import { GlobalStyle } from '@/styles/GlobalStyle';
-import { theme } from '@/styles/theme';
+import StyledComponentsWrapper from '@/lib/styled-components/StyledComponentsWrapper';
 import localFont from 'next/font/local';
-import { RecoilRoot } from 'recoil';
-import { ThemeProvider } from 'styled-components';
 
 const mainFont = localFont({
   src: '../assets/fonts/Galmuri9.woff2',
@@ -35,18 +26,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       </head>
       <body className={`${subFont.variable} ${mainFont.variable}`}>
         <StyledComponentsRegistry>
-          <RecoilRoot>
-            <ThemeProvider theme={theme}>
-              <GlobalStyle />
-              <GlobalModal />
-              <Toast />
-              <ReactQueryProvider>
-                <MobileLayout>
-                  <GridLayout>{children}</GridLayout>
-                </MobileLayout>
-              </ReactQueryProvider>
-            </ThemeProvider>
-          </RecoilRoot>
+          <RecoilRootWrapper>
+            <StyledComponentsWrapper>{children}</StyledComponentsWrapper>
+          </RecoilRootWrapper>
         </StyledComponentsRegistry>
       </body>
     </html>

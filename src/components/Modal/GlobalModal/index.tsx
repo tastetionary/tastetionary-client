@@ -1,3 +1,5 @@
+'use client';
+
 import dynamic from 'next/dynamic';
 import { ComponentProps, FunctionComponent, useEffect } from 'react';
 import useModal from './hooks/useModal';
