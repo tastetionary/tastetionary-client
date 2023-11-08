@@ -1,6 +1,7 @@
 import RecoilRootWrapper from '@/lib/recoil/RecoilRootWrapper';
 import StyledComponentsRegistry from '@/lib/registry';
 import StyledComponentsWrapper from '@/lib/styled-components/StyledComponentsWrapper';
+import { Metadata } from 'next';
 import localFont from 'next/font/local';
 
 const mainFont = localFont({
@@ -15,15 +16,15 @@ const subFont = localFont({
   variable: '--Pretendard-Variable',
 });
 
+export const metadata: Metadata = {
+  title: '맛셔너리',
+  description: '직장인 점심 메뉴 & 식당 추첨 서비스 (우리회사 근처 맛집 나무위키)',
+};
+
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en">
-      <head>
-        <title>맛셔너리</title>
-        <meta name="description" content="직장인 점심 메뉴 & 식당 추첨 서비스 (우리회사 근처 맛집 나무위키)" />
-        {/* <link rel="icon" type="image/png" href="%PUBLIC_URL%/favivon/favicon-32x32.png" sizes="32x32" />
-        <link rel="icon" type="image/png" href="%PUBLIC_URL%/favivon/favicon-16x16.png" sizes="16x16" /> */}
-      </head>
+      <head></head>
       <body className={`${subFont.variable} ${mainFont.variable}`}>
         <StyledComponentsRegistry>
           <RecoilRootWrapper>
