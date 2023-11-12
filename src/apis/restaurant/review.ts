@@ -7,6 +7,7 @@ interface Req {
     keywords: RestaurantKeyword[];
     price: number;
     summary: string;
+    opinion: string;
   };
   external: {
     externalUUID: number;

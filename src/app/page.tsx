@@ -48,7 +48,7 @@ export default function Home() {
 
     if (!hasActivityArea) return needRegisterActivityAreaModal();
 
-    router.push('/register-review');
+    router.push('/register-review/restaurant');
   };
 
   const onRestaurantClick = () => {

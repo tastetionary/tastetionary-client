@@ -1,3 +1,5 @@
+'use client';
+
 import { FoodRecommendRes, postFoodRecommend } from '@/apis/food/recommend';
 import { RestaurantRecommendRes, postRestaurantRecommend } from '@/apis/restaurant/recommend';
 import useUser from '@/hooks/useUser';
@@ -29,6 +31,15 @@ export default function CRecommendButton({ selectType, btnText, ...rest }: Props
   const isResultPage = pathname?.includes('result');
 
   const testToken = process.env.NEXT_PUBLIC_ACCESS_TOKEN;
+
+  const goScrollToTop = () => {
+    if (typeof window === undefined) return;
+
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth',
+    });
+  };
 
   const loginModal = () => {
     openModal(MODAL_TYPES.dialog, {
@@ -102,6 +113,8 @@ export default function CRecommendButton({ selectType, btnText, ...rest }: Props
             },
           });
         }
+
+        goScrollToTop();
 
         router.push(selectType === 'food' ? `/select-menu/result` : `/select-restaurant/result`);
       },

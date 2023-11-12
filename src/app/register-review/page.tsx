@@ -51,6 +51,7 @@ export default function RegisterReview() {
             keywords: reviewValue?.keyword as RestaurantKeyword[],
             price: 10000 + 1000 * reviewValue?.price,
             summary,
+            opinion: revisit === true ? 'Y' : 'N',
           },
           external: {
             externalUUID: +reviewPlaceInfoValue?.id,
