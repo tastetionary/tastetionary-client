@@ -1,3 +1,4 @@
+import * as Sentry from '@sentry/nextjs';
 import axios, { AxiosInstance, AxiosRequestConfig, AxiosResponse, InternalAxiosRequestConfig } from 'axios';
 class HttpClient {
   private client: AxiosInstance;
@@ -30,6 +31,7 @@ class HttpClient {
         return request;
       },
       (error: any) => {
+        Sentry.captureException(error);
         return Promise.reject(error);
       }
     );
@@ -42,6 +44,7 @@ class HttpClient {
         return response;
       },
       (error: any) => {
+        Sentry.captureException(error);
         return Promise.reject(error);
       }
     );

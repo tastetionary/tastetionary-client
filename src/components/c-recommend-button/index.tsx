@@ -6,6 +6,7 @@ import useUser from '@/hooks/useUser';
 import { selectFoodState, selectRestaurantState, selectResultState } from '@/lib/atom';
 import { FoodCategory, FoodKeyword } from '@homekeeper89/taste_dict/lib/domain/food/food.enum';
 import { RestaurantCategory } from '@homekeeper89/taste_dict/lib/domain/restaurant/restaurant.enum';
+import * as Sentry from '@sentry/nextjs';
 import { useMutation } from '@tanstack/react-query';
 import { AxiosError } from 'axios';
 import { usePathname, useRouter } from 'next/navigation';
@@ -166,6 +167,8 @@ export default function CRecommendButton({ selectType, btnText, ...rest }: Props
   );
 
   const onButtonClick = () => {
+    Sentry.captureMessage(`${selectType} recommend button click`);
+
     if (selectType === 'food') return getFood();
 
     if (selectType === 'restaurant') return getRestaurant();
