@@ -1,9 +1,8 @@
 name: build_and_push_dev
 
 on:
-  push:
-    branches:
-      - dev
+  release:
+    types: [published]
 
 jobs:
   build_and_push:
@@ -15,8 +14,9 @@ jobs:
 
       - name: Create .npmrc
         run: |
-          echo "//npm.pkg.github.com/:_authToken=\${{ secrets.NPM_AUTH_TOKEN }}" >> ${{ github.workspace }}/.npmrc
-          echo "@homekeeper89:registry=https://npm.pkg.github.com" > ${{ github.workspace }}/.npmrc
+          echo "//npm.pkg.github.com/:_authToken=${{ secrets.NPM_AUTH_TOKEN }}" > $HOME/.npmrc
+          echo "@homekeeper89:registry=https://npm.pkg.github.com" >> $HOME/.npmrc
+          echo "npmrc_path=$HOME/.npmrc" >> "$GITHUB_ENV"
 
       - name: inject env
         run: |
@@ -40,8 +40,16 @@ jobs:
           username: ${{ secrets.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKER_PASSWORD }}
 
-      - name: Build image
-        run: docker build . -f Dockerfile -t ${{ secrets.DOCKER_REGISTRY }}/taste-client:latest --secret id=npmrc,src=${{ github.workspace }}/.npmrc
-
-      - name: Push the Docker image
-        run: docker push ${{ secrets.DOCKER_REGISTRY }}/taste-client:latest
+      - name: Build and push
+        uses: docker/build-push-action@v4
+        with:
+          context: .
+          file: ./Dockerfile
+          push: true
+          tags: |
+            ${{ secrets.DOCKER_REGISTRY }}/taste-client:latest
+            ${{ secrets.DOCKER_REGISTRY }}/taste-client:${{ github.REF_NAME }}
+          cache-from: type=registry,ref=${{ secrets.DOCKER_REGISTRY }}/taste-client:latest
+          secret-files: |
+            npmrc=${{ env.npmrc_path }}
+          cache-to: type=inline
