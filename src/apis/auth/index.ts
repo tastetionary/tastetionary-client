@@ -8,6 +8,7 @@ interface PostLoginParams {
 
 interface AuthRepository {
   postLogin: ({ identification, password, category }: PostLoginParams) => Promise<any>;
+  postLogout: ({ token }: { token: string }) => Promise<any>;
 }
 
 const authRepository = (): AuthRepository => {
@@ -17,6 +18,12 @@ const authRepository = (): AuthRepository => {
         identification,
         password,
         category,
+      }),
+    postLogout: async ({ token }) =>
+      await http.delete('/apis/v1/account/tokens', {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
       }),
   };
 };

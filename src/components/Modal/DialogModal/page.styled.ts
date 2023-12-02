@@ -78,8 +78,11 @@ export const Title = styled.div`
   word-break: keep-all;
 `;
 
-export const Message = styled.p`
+export const MessageContainer = styled.div`
   padding: 8px 24px;
+`;
+
+export const Message = styled.p`
   font-size: 14px;
   font-style: normal;
   font-weight: 400;

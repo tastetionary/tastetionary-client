@@ -10,6 +10,10 @@ interface IRegion {
 export interface UserRes {
   id: number;
   nickname: string;
+  authentication: {
+    company_email: string;
+    account_email: string;
+  };
   activity_area: IRegion;
   dining_area: IRegion;
 }

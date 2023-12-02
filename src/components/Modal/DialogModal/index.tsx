@@ -1,9 +1,10 @@
-import { useEffect, useState } from 'react';
+import { ReactNode, useEffect, useState } from 'react';
 import * as S from './page.styled';
 
 export interface DialogModalProps {
   title: string;
   message?: string;
+  elementMessage?: ReactNode;
   cancelText?: string;
   confirmText?: string;
   handleClose?: (...arg: any[]) => any;
@@ -14,6 +15,7 @@ export interface DialogModalProps {
 export default function DialogModal({
   title,
   message,
+  elementMessage,
   cancelText,
   confirmText = '확인',
   handleClose,
@@ -53,7 +55,13 @@ export default function DialogModal({
       <S.Container $visible={animate}>
         <S.TextContainer>
           <S.Title>{title}</S.Title>
-          {message && <S.Message>{message}</S.Message>}
+
+          {(message || elementMessage) && (
+            <S.MessageContainer>
+              {message && <S.Message>{message}</S.Message>}
+              {elementMessage ?? null}
+            </S.MessageContainer>
+          )}
         </S.TextContainer>
 
         <S.ButtonContainer>
