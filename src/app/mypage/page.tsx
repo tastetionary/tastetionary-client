@@ -12,7 +12,7 @@ export default function MyPage() {
 
   return (
     <>
-      <CHeader title="마이페이지" isLogo />
+      <CHeader title="맛셔너리" isLogo />
 
       <GNBLayout>
         {isLoggedIn && <CMyPageUserInfo />}
@@ -22,7 +22,7 @@ export default function MyPage() {
             <CMypageMenu
               title="계정"
               items={[
-                { name: '개인정보 관리', hasArrow: true },
+                { name: '개인정보 관리', hasArrow: true, pathname: '/mypage/user/manage-info' },
                 { name: '내 리뷰 관리' },
                 { name: '북마크 목록' },
                 { name: '추천 제외 식당 보기' },
