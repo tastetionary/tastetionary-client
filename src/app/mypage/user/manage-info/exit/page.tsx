@@ -2,6 +2,7 @@
 
 import { CheckboxContainer, Divider } from '@/app/sign-up/components/terms/page.styled';
 import MainButton from '@/components/Button/MainButton';
+import CheckBox2 from '@/components/CheckBox/CheckBox2';
 import CHeader from '@/components/c-header';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
@@ -52,14 +53,12 @@ export default function MyPageUserExit() {
             <S.ReasonItem key={i}>
               <Divider isActive={reason[i]}></Divider>
               <CheckboxContainer isActive={reason[i]}>
-                <S.ReasonCheckBoxContainer>
-                  <S.ReasonCheckBox
-                    id={`reason-${i}`}
-                    checked={reason[i]}
-                    onChange={({ target: { checked } }) => onReasonClick(i, checked)}
-                  />
-                  <S.ReasonLabel htmlFor={`reason-${i}`}>{r}</S.ReasonLabel>
-                </S.ReasonCheckBoxContainer>
+                <CheckBox2
+                  label={r}
+                  checkBoxId={`reason-${i}`}
+                  checked={reason[i]}
+                  onChangeEvent={checked => onReasonClick(i, checked)}
+                />
               </CheckboxContainer>
             </S.ReasonItem>
           ))}
