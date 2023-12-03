@@ -7,5 +7,5 @@ export default function RegionSetting() {
   const params = useSearchParams();
   const category = params.get('category') as 'activity_area' | 'dining_area';
 
-  return <CRegionSetting category={category} />;
+  return <CRegionSetting category={category} onNextPage={'/mypage'} />;
 }

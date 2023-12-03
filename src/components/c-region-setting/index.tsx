@@ -5,6 +5,8 @@ import { queryClient } from '@/lib/react-query/ReactQueryProvider';
 import { useMutation } from '@tanstack/react-query';
 import { useRouter } from 'next/navigation';
 import { FormProvider, useForm } from 'react-hook-form';
+import { MODAL_TYPES } from '../Modal/GlobalModal';
+import useModal from '../Modal/GlobalModal/hooks/useModal';
 
 interface FormValue {
   areas: [
@@ -19,9 +21,10 @@ interface FormValue {
 
 interface Props {
   category: 'dining_area' | 'activity_area';
+  onNextPage: '/register-review/restaurant' | '/select-restaurant' | '/mypage';
 }
 
-export default function CRegionSetting({ category }: Props) {
+export default function CRegionSetting({ category, onNextPage }: Props) {
   const router = useRouter();
   const { token } = useUser();
   const methods = useForm<FormValue>({
@@ -35,6 +38,16 @@ export default function CRegionSetting({ category }: Props) {
     },
   });
 
+  const { openModal } = useModal();
+
+  const handleCompleteRegionSetting = () => {
+    openModal(MODAL_TYPES.dialog, {
+      title: category === 'activity_area' ? '활동 지역 변경 완료' : '식사 지역 변경 완료',
+      message: category === 'activity_area' ? '활동 지역이 변경되었습니다.' : '식사 지역이 변경되었습니다.',
+      handleConfirm: () => router.push(onNextPage),
+    });
+  };
+
   const { mutate: saveRegion } = useMutation(
     (data: { address: string; latitude: number; longitude: number }) =>
       putSaveRegion(
@@ -47,7 +60,7 @@ export default function CRegionSetting({ category }: Props) {
         token
       ),
     {
-      onSuccess: (res, data) => {
+      onSuccess: (_, data) => {
         queryClient.setQueryData(['user'], (prev: any) => {
           let oldData = prev;
 
@@ -58,7 +71,8 @@ export default function CRegionSetting({ category }: Props) {
               latitude: data?.latitude,
               longitude: data?.longitude,
             };
-          } else {
+          }
+          if (category === 'dining_area') {
             oldData.dining_area = {
               address: data?.address,
               category,
@@ -70,11 +84,7 @@ export default function CRegionSetting({ category }: Props) {
           return oldData;
         });
 
-        if (category === 'activity_area') {
-          router.push('/register-review/restaurant');
-        } else {
-          router.push('/select-restaurant');
-        }
+        handleCompleteRegionSetting();
       },
     }
   );
