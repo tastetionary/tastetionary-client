@@ -11,6 +11,7 @@ import OptInMarketing from '../opt-in-marketing';
 import PrivacyNotice from '../privacy-notice';
 import RegionSetting from '../region-setting';
 import Terms from '../terms';
+import TermsOfService from '../terms-of-service';
 import UserInfoForm from '../user-info-form';
 import VerifyCompany from '../verify-company';
 import VerifyNumber from '../verify-number';
@@ -106,6 +107,7 @@ export default function SignUpComponent() {
         {step === null && <Terms onNext={() => setStep('email-form')} />}
         {step === 'privacy-notice' && <PrivacyNotice />}
         {step === 'opt-in-marketing' && <OptInMarketing />}
+        {step === 'terms-of-service' && <TermsOfService />}
         {step === 'email-form' && (
           <EmailForm onNext={() => setStep('verify-auth-number')} setEmailAuthId={setEmailAuthId} />
         )}
