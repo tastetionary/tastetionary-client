@@ -48,7 +48,7 @@ export default function RestaurantSearch() {
 
   const searchByKeyword = async (keyword: string) => {
     const { data } = await axios.get(
-      `https://dapi.kakao.com/v2/local/search/keyword.json?query=${keyword}&category_group_code=FD6&x=${userData?.activity_area?.latitude}&y=${userData?.activity_area?.longitude}&radius=1000`,
+      `https://dapi.kakao.com/v2/local/search/keyword.json?query=${keyword}&x=${userData?.activity_area?.latitude}&y=${userData?.activity_area?.longitude}&radius=1000`,
       {
         headers: {
           Authorization: `KakaoAK ${process.env.NEXT_PUBLIC_KAKAO_REST_API_KEY}`,
