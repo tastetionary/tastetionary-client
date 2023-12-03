@@ -20,6 +20,12 @@ const SentryOptions = {
 
     // Automatically tree-shake Sentry logger statements to reduce bundle size
     disableLogger: true,
+
+    // Enables automatic instrumentation of Vercel Cron Monitors.
+    // See the following for more information:
+    // https://docs.sentry.io/product/crons/
+    // https://vercel.com/docs/cron-jobs
+    automaticVercelMonitors: true,
   },
 };
 
@@ -29,8 +35,8 @@ const SentryWebpackPluginOptions = {
 
   // Suppresses source map uploading logs during build
   silent: true,
-  org: 'tastetionary',
-  project: 'tastetionary-client',
+  org: 'tastetionary-client',
+  project: 'tastetionary',
   authToken: process.env.NEXT_PUBLIC_SENTRY_AUTH_KEY, // An auth token is required for uploading source maps.
 };
 
