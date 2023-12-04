@@ -2,6 +2,7 @@
 
 import GlobalModal from '@/components/Modal/GlobalModal';
 import Toast from '@/components/Toast';
+import GoogleAnalytics from '@/components/google-analytics';
 import GridLayout from '@/components/layout/grid-layout';
 import MobileLayout from '@/components/layout/mobile-layout';
 import { GlobalStyle } from '@/styles/GlobalStyle';
@@ -16,6 +17,7 @@ export default function StyledComponentsWrapper({ children }: { children: ReactN
       <GlobalStyle />
       <GlobalModal />
       <Toast />
+      <GoogleAnalytics />
       <ReactQueryProvider>
         <MobileLayout>
           <GridLayout>{children}</GridLayout>

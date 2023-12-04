@@ -3,7 +3,6 @@ import StyledComponentsRegistry from '@/lib/registry';
 import StyledComponentsWrapper from '@/lib/styled-components/StyledComponentsWrapper';
 import { Metadata } from 'next';
 import localFont from 'next/font/local';
-import Script from 'next/script';
 
 const mainFont = localFont({
   src: '../assets/fonts/Galmuri9.woff2',
@@ -23,24 +22,9 @@ export const metadata: Metadata = {
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
-  const GA_MEASUREMENT_ID = process.env.NEXT_PUBLIC_GA_ID;
-
   return (
     <html lang="en">
-      <head>
-        <Script src={`https://www.googletagmanager.com/gtag/js?id=${GA_MEASUREMENT_ID}`} />
-        <Script id="google-analytics">
-          {`
-          window.dataLayer = window.dataLayer || [];
-          function gtag(){dataLayer.push(arguments);}
-          gtag('js', new Date());
- 
-          gtag('config', ${GA_MEASUREMENT_ID},{
-             page_path: window.location.pathname
-          });
-        `}
-        </Script>
-      </head>
+      <head></head>
 
       <body className={`${subFont.variable} ${mainFont.variable}`}>
         <StyledComponentsRegistry>
