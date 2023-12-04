@@ -9,6 +9,12 @@ export default function CMyPageUserInfo() {
   const { openModal, closeModal } = useModal();
   const { mutate: logoutMutate } = useLogoutMutate();
 
+  const getShortAddress = (address?: string) => {
+    if (!address) return;
+
+    return address?.split(' ')?.slice(0, 2)?.join(' ');
+  };
+
   const logoutModal = () => {
     openModal(MODAL_TYPES.dialog, {
       title: '로그아웃 하시겠습니까?',
@@ -54,13 +60,13 @@ export default function CMyPageUserInfo() {
         <S.AreaBox>
           <S.AreaBoxLValue>식사 지역</S.AreaBoxLValue>
 
-          <S.AreaBoxLValue></S.AreaBoxLValue>
+          <S.AreaBoxLValue>{getShortAddress(data?.dining_area?.address)}</S.AreaBoxLValue>
         </S.AreaBox>
 
         <S.AreaBox>
           <S.AreaBoxLValue>활동 지역</S.AreaBoxLValue>
 
-          <S.AreaBoxLValue></S.AreaBoxLValue>
+          <S.AreaBoxLValue>{getShortAddress(data?.activity_area?.address)}</S.AreaBoxLValue>
         </S.AreaBox>
       </S.AreaContainer>
 
