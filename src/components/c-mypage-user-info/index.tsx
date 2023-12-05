@@ -12,7 +12,7 @@ export default function CMyPageUserInfo() {
   const getShortAddress = (address?: string) => {
     if (!address) return;
 
-    return address?.split(' ')?.slice(0, 2)?.join(' ');
+    return address.split(' ').slice(0, 2).join(' ');
   };
 
   const logoutModal = () => {
