@@ -29,6 +29,8 @@ export default function SelectRestaurantResult() {
   const lng = result?.longitude;
   const review = result?.review;
 
+  const uniqueReviewKeyword = review?.keywords?.filter((k, i) => review?.keywords.indexOf(k) === i);
+
   useEffect(() => {
     const getImage = async () => {
       const res = await axios.get(`/search-image-api?query=${restaurant}`, {
@@ -170,7 +172,7 @@ export default function SelectRestaurantResult() {
 
       <CSelectSection title="리뷰 키워드">
         <S.ReviewKeywordContainer>
-          {review?.keywords?.map((k, i) => (
+          {uniqueReviewKeyword?.map((k, i) => (
             <KeywordBtn as="div" key={i}>
               {k}
             </KeywordBtn>
