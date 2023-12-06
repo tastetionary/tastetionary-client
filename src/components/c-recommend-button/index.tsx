@@ -30,8 +30,6 @@ export default function CRecommendButton({ selectType, btnText, ...rest }: Props
 
   const isResultPage = pathname?.includes('result');
 
-  const testToken = process.env.NEXT_PUBLIC_ACCESS_TOKEN;
-
   const goScrollToTop = () => {
     if (typeof window === undefined) return;
 
@@ -151,7 +149,7 @@ export default function CRecommendButton({ selectType, btnText, ...rest }: Props
           price: 10000 + 1000 * restaurantState?.price,
           excludeIds: [],
         },
-        process.env.NEXT_PUBLIC_ACCESS_TOKEN
+        token
       ),
     {
       onSuccess: res => {
