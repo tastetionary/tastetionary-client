@@ -144,7 +144,7 @@ export default function CRecommendButton({ selectType, btnText, ...rest }: Props
     () =>
       postRestaurantRecommend(
         {
-          category: restaurantState?.category?.filter(c => c !== '전체')[0] as RestaurantCategory,
+          category: restaurantState?.category?.filter(c => c !== '전체') as RestaurantCategory[],
           keywords: restaurantState?.keyword?.filter(c => c !== '전체'),
           price: 10000 + 1000 * restaurantState?.price,
           excludeIds: [],

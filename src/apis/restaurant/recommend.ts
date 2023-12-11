@@ -3,7 +3,7 @@ import http from '../http';
 
 interface Req {
   excludeIds: number[];
-  category: RestaurantCategory;
+  category: RestaurantCategory[];
   keywords: string[];
   price: number;
 }
