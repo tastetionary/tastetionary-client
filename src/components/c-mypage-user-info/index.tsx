@@ -58,13 +58,13 @@ export default function CMyPageUserInfo() {
 
       <S.AreaContainer>
         <S.AreaBox>
-          <S.AreaBoxLValue>식사 지역</S.AreaBoxLValue>
+          <S.AreaBoxLabel>식사 지역</S.AreaBoxLabel>
 
           <S.AreaBoxLValue>{getShortAddress(data?.dining_area?.address)}</S.AreaBoxLValue>
         </S.AreaBox>
 
         <S.AreaBox>
-          <S.AreaBoxLValue>활동 지역</S.AreaBoxLValue>
+          <S.AreaBoxLabel>활동 지역</S.AreaBoxLabel>
 
           <S.AreaBoxLValue>{getShortAddress(data?.activity_area?.address)}</S.AreaBoxLValue>
         </S.AreaBox>
