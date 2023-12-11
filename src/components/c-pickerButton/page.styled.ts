@@ -10,8 +10,8 @@ export const Icon = styled.div<SPickerButton>`
 
   background-image: ${({ $subject }) =>
     $subject === 'menu'
-      ? `url('./image/PickerButton/menu_icon.svg')`
-      : `url('./image/PickerButton/restaurant_icon.svg')`};
+      ? `url('/image/PickerButton/menu_icon.svg')`
+      : `url('/image/PickerButton/restaurant_icon.svg')`};
 `;
 
 export const Button = styled.button<SPickerButton>`
@@ -36,8 +36,8 @@ export const Button = styled.button<SPickerButton>`
     ${Icon} {
       background-image: ${({ $subject }) =>
         $subject === 'menu'
-          ? `url('./image/PickerButton/menu_pressed_icon.svg')`
-          : `url('./image/PickerButton/restaurant_pressed_icon.svg')`};
+          ? `url('/image/PickerButton/menu_pressed_icon.svg')`
+          : `url('/image/PickerButton/restaurant_pressed_icon.svg')`};
     }
   }
 `;
