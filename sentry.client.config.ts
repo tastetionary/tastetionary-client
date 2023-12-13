@@ -25,6 +25,9 @@ Sentry.init({
       // Additional Replay configuration goes in here, for example:
       maskAllText: true,
       blockAllMedia: true,
+      networkDetailAllowUrls: [window.location.origin, /^\/apis\/v1\/[^\/]+(\/[^\/]+)*$/],
+      networkRequestHeaders: ['X-Custom-Header'],
+      networkResponseHeaders: ['X-Custom-Header'],
     }),
   ],
 });
