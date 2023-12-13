@@ -12,6 +12,7 @@ import CSelectCategory from '@/components/c-select-category';
 import CSelectKeyword from '@/components/c-select-keyword';
 import CSelectSection from '@/components/c-select-section';
 import CSlider from '@/components/c-slider';
+import useUser from '@/hooks/useUser';
 import { reviewPlaceInfoState, reviewState } from '@/lib/atom';
 import { getByte, getLimitedByteText } from '@/utils';
 import { RestaurantCategory, RestaurantKeyword } from '@homekeeper89/taste_dict/lib/domain/restaurant/restaurant.enum';
@@ -29,6 +30,7 @@ interface FormValue {
 export default function RegisterReview() {
   const router = useRouter();
   const { openModal, closeModal } = useModal();
+  const { token } = useUser();
   const { data } = useQuery(['restaurant-option'], () => getRestaurantOption(), {
     cacheTime: 0,
     staleTime: 0,
@@ -65,7 +67,7 @@ export default function RegisterReview() {
               : {}),
           },
         },
-        process.env.NEXT_PUBLIC_ACCESS_TOKEN
+        token
       ),
     {
       onSuccess: () => {
