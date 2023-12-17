@@ -51,7 +51,12 @@ export default function GNB() {
     <S.NavContainer>
       <CNavButton title="리뷰" icon={<ReviewIcon />} isActive={false} clickEvent={onReviewClick} />
       <CNavButton title="홈" icon={<HomeIcon />} isActive={pathName === '/'} clickEvent={() => router.push('/')} />
-      <CNavButton title="마이페이지" icon={<MypageIcon />} isActive={false} clickEvent={() => router.push('/mypage')} />
+      <CNavButton
+        title="마이페이지"
+        icon={<MypageIcon />}
+        isActive={pathName === '/mypage'}
+        clickEvent={() => router.push('/mypage')}
+      />
     </S.NavContainer>
   );
 }

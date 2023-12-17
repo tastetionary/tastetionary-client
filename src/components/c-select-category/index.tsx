@@ -80,7 +80,7 @@ export default function CSelectCategory({ selectType, data, isDuplicate = true }
         return (
           <S.MenuItem key={m.id} onClick={onMenuItemClick}>
             <Image
-              src={`./image/Menu/${m?.icon}${isSelected ? '_selected' : ''}.svg`}
+              src={`/image/Menu/${m?.icon}${isSelected ? '_selected' : ''}.svg`}
               alt={m?.icon}
               width={64}
               height={64}

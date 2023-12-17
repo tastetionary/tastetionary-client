@@ -15,12 +15,13 @@ export default function Terms({ onNext }: Props) {
 
   const [agreeTerms, setAgreeTerms] = useRecoilState(agreeTermState);
 
-  const handleChangeAgreeTerms = (checked: boolean, type: 'all' | 'privacy' | 'marketing') => {
+  const handleChangeAgreeTerms = (checked: boolean, type: 'all' | 'privacy' | 'marketing' | 'service') => {
     if (type === 'all') {
       setAgreeTerms({
         all: checked,
         privacy: checked,
         marketing: checked,
+        service: checked,
       });
 
       return;
@@ -39,6 +40,15 @@ export default function Terms({ onNext }: Props) {
       setAgreeTerms({
         ...agreeTerms,
         privacy: checked,
+      });
+
+      return;
+    }
+
+    if (type === 'service') {
+      setAgreeTerms({
+        ...agreeTerms,
+        service: checked,
       });
 
       return;
@@ -97,11 +107,25 @@ export default function Terms({ onNext }: Props) {
           </S.MarketingContainer>
         </S.MarketingWrapper>
 
+        <S.MarketingWrapper>
+          <S.MarketingCheckboxContainer>
+            <CheckBox2
+              checkBoxId="service"
+              onChangeEvent={checked => handleChangeAgreeTerms(checked, 'service')}
+              checked={agreeTerms.service}
+            />
+          </S.MarketingCheckboxContainer>
+          <S.MarketingContainer>
+            <S.MarketingTitle>[필수] 서비스 이용약관</S.MarketingTitle>
+            <S.MarketingLook onClick={() => router.push('/sign-up?step=terms-of-service')}>보기</S.MarketingLook>
+          </S.MarketingContainer>
+        </S.MarketingWrapper>
+
         <S.NextButtonWrapper>
           <MainButton
             type="button"
             btnText="다음"
-            disabled={!(agreeTerms.marketing && agreeTerms.privacy)}
+            disabled={!(agreeTerms.marketing && agreeTerms.privacy && agreeTerms.service)}
             onClick={onNext}
           />
         </S.NextButtonWrapper>

@@ -11,6 +11,12 @@ export default function CMyPageUserInfo() {
   const { mutate: logoutMutate } = useLogoutMutate();
   const router = useRouter();
 
+  const getShortAddress = (address?: string) => {
+    if (!address) return;
+
+    return address.split(' ').slice(0, 2).join(' ');
+  };
+
   const logoutModal = () => {
     openModal(MODAL_TYPES.dialog, {
       title: '로그아웃 하시겠습니까?',
@@ -57,16 +63,18 @@ export default function CMyPageUserInfo() {
           <S.AreaBoxLValue onClick={() => router.push('mypage/region-setting?category=dining_area')}>
             식사 지역
           </S.AreaBoxLValue>
+          <S.AreaBoxLabel>식사 지역</S.AreaBoxLabel>
 
-          <S.AreaBoxLValue></S.AreaBoxLValue>
+          <S.AreaBoxLValue>{getShortAddress(data?.dining_area?.address)}</S.AreaBoxLValue>
         </S.AreaBox>
 
         <S.AreaBox>
           <S.AreaBoxLValue onClick={() => router.push('mypage/region-setting?category=activity_area')}>
             활동 지역
           </S.AreaBoxLValue>
+          <S.AreaBoxLabel>활동 지역</S.AreaBoxLabel>
 
-          <S.AreaBoxLValue></S.AreaBoxLValue>
+          <S.AreaBoxLValue>{getShortAddress(data?.activity_area?.address)}</S.AreaBoxLValue>
         </S.AreaBox>
       </S.AreaContainer>
 

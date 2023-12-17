@@ -48,7 +48,7 @@ export default function RestaurantSearch() {
 
   const searchByKeyword = async (keyword: string) => {
     const { data } = await axios.get(
-      `https://dapi.kakao.com/v2/local/search/keyword.json?query=${keyword}&x=${userData?.activity_area?.latitude}&y=${userData?.activity_area?.longitude}&radius=1000`,
+      `https://dapi.kakao.com/v2/local/search/keyword.json?query=${keyword}&x=${userData?.activity_area?.longitude}&y=${userData?.activity_area?.latitude}&radius=1000`,
       {
         headers: {
           Authorization: `KakaoAK ${process.env.NEXT_PUBLIC_KAKAO_REST_API_KEY}`,
@@ -154,13 +154,12 @@ export default function RestaurantSearch() {
       <S.PlaceList>
         {data?.documents?.map((d: ISearchKeyword) => {
           const placeAddress = d.road_address_name !== '' ? d.road_address_name : d.address_name;
-          const showMap = placeAddress !== '' && placeAddress === address;
 
           const distance = getDistance(
             userData?.activity_area?.latitude ?? 0,
             userData?.activity_area?.longitude ?? 0,
-            +d?.x,
-            +d?.y
+            +d?.y,
+            +d?.x
           );
 
           return (
