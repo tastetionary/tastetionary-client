@@ -3,5 +3,5 @@
 import CRegionSetting from '@/components/c-region-setting';
 
 export default function SelectRestaurantRegionSetting() {
-  return <CRegionSetting category="dining_area" />;
+  return <CRegionSetting category="dining_area" onNextPage={'/select-restaurant'} />;
 }
