@@ -3,6 +3,8 @@
 // https://docs.sentry.io/platforms/javascript/guides/nextjs/
 
 import * as Sentry from '@sentry/nextjs';
+import { ErrorEvent } from '@sentry/types';
+import axios from 'axios';
 
 Sentry.init({
   dsn: process.env.NEXT_PUBLIC_SENTRY_DSN,
@@ -30,4 +32,34 @@ Sentry.init({
       networkResponseHeaders: ['X-Custom-Header'],
     }),
   ],
+  beforeSend: (event, hint) => sendErrorMessage(event, hint), // 에러를 Sentry에게 전달하기 전 처리할 수 있는 hook
 });
+
+const sendErrorMessage = (event: ErrorEvent, hint: Sentry.EventHint) => {
+  let errorMsg = '';
+
+  const hintMsg: any = hint.originalException || hint.syntheticException;
+
+  errorMsg = `*🚨 Error*
+  - [${event.request?.url}](${event.request?.url})
+  - ${hintMsg?.message ?? ''}`;
+
+  const body = {
+    chat_id: process.env.NEXT_PUBLIC_TELEGRAM_CHAT_ID, // 텔레그램의 CHAT_ID
+    text: errorMsg,
+    parse_mode: 'Markdown',
+  };
+
+  axios({
+    method: 'POST',
+    url: `https://api.telegram.org/bot${process.env.NEXT_PUBLIC_TELEGRAM_TOKEN}/sendMessage`,
+    headers: {
+      'Content-Type': 'application/json;charset=UTF-8',
+    },
+    data: body,
+  }).then(() => {
+    console.log('Error logged!', hint.originalException || hint.syntheticException);
+  });
+
+  return event;
+};
