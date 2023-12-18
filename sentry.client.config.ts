@@ -32,7 +32,7 @@ Sentry.init({
       networkResponseHeaders: ['X-Custom-Header'],
     }),
   ],
-  beforeSend: process.env.NODE_ENV === 'development' ? (event, hint) => sendErrorMessage(event, hint) : undefined, // 에러를 Sentry에게 전달하기 전 처리할 수 있는 hook
+  beforeSend: process.env.NODE_ENV === 'production' ? (event, hint) => sendErrorMessage(event, hint) : undefined, // 에러를 Sentry에게 전달하기 전 처리할 수 있는 hook
 });
 
 const sendErrorMessage = (event: ErrorEvent, hint: Sentry.EventHint) => {
