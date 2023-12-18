@@ -1,5 +1,5 @@
 import * as Sentry from '@sentry/nextjs';
-import axios, { AxiosInstance, AxiosRequestConfig, AxiosResponse, InternalAxiosRequestConfig } from 'axios';
+import axios, { AxiosError, AxiosInstance, AxiosRequestConfig, AxiosResponse, InternalAxiosRequestConfig } from 'axios';
 class HttpClient {
   private client: AxiosInstance;
 
@@ -43,8 +43,26 @@ class HttpClient {
         console.log('axios response!!!!');
         return response;
       },
-      (error: any) => {
+      (error: AxiosError) => {
+        const { method, url, params, data: requestData, headers } = error.config ?? {};
+        Sentry.setContext('API Request Detail', {
+          method,
+          url,
+          params,
+          requestData,
+          headers,
+        });
+
+        if (error.response) {
+          const { data, status } = error.response;
+          Sentry.setContext('API Response Detail', {
+            status,
+            data,
+          });
+        }
+
         Sentry.captureException(error);
+
         return Promise.reject(error);
       }
     );
