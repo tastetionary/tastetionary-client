@@ -25,8 +25,6 @@ interface Props {
 }
 
 export default function CRegionSetting({ category, onNextPage }: Props) {
-  console.log('onNextPage', onNextPage);
-
   const router = useRouter();
   const { token } = useUser();
   const methods = useForm<FormValue>({
@@ -49,8 +47,6 @@ export default function CRegionSetting({ category, onNextPage }: Props) {
       handleConfirm: () => router.push(onNextPage),
     });
   };
-
-  console.log('category', category);
 
   const { mutate: saveRegion } = useMutation(
     (data: { address: string; latitude: number; longitude: number }) =>
@@ -87,7 +83,6 @@ export default function CRegionSetting({ category, onNextPage }: Props) {
 
           return oldData;
         });
-        console.log('여기가 실행되나??');
 
         handleCompleteRegionSetting();
       },
@@ -101,7 +96,6 @@ export default function CRegionSetting({ category, onNextPage }: Props) {
           category={category}
           onNext={() => {
             const data = methods.watch('areas')[0];
-            console.log('data.', data);
 
             if (data) {
               saveRegion(data);
