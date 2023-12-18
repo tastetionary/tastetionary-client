@@ -32,7 +32,7 @@ Sentry.init({
       networkResponseHeaders: ['X-Custom-Header'],
     }),
   ],
-  beforeSend: process.env.NODE_ENV === 'production' ? (event, hint) => sendErrorMessage(event, hint) : undefined, // 에러를 Sentry에게 전달하기 전 처리할 수 있는 hook
+  beforeSend: process.env.NODE_ENV === 'development' ? (event, hint) => sendErrorMessage(event, hint) : undefined, // 에러를 Sentry에게 전달하기 전 처리할 수 있는 hook
 });
 
 const sendErrorMessage = (event: ErrorEvent, hint: Sentry.EventHint) => {
@@ -48,6 +48,7 @@ const sendErrorMessage = (event: ErrorEvent, hint: Sentry.EventHint) => {
     chat_id: process.env.NEXT_PUBLIC_TELEGRAM_CHAT_ID, // 텔레그램의 CHAT_ID
     text: errorMsg,
     parse_mode: 'Markdown',
+    disable_web_page_preview: true,
   };
 
   axios({
