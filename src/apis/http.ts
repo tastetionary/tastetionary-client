@@ -1,4 +1,6 @@
 import axios, { AxiosInstance, AxiosRequestConfig, AxiosResponse } from 'axios';
+
+// 호진TODO: 해당 부분 주석은 잠시 놔두겠습니다!
 class HttpClient {
   public client: AxiosInstance;
 
