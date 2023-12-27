@@ -1,26 +1,31 @@
 import http from '../http';
 
 interface IRegion {
+  category: 'activity_area' | 'dining_area';
+  id: number;
+  userId: number;
+  order: number;
+  address: string;
   latitude: number;
   longitude: number;
-  category: 'activity_area' | 'dining_area';
-  address: string;
 }
 
 export interface UserRes {
   id: number;
   nickname: string;
-  authentication: {
-    company_email: string;
-    account_email: string;
+  area: {
+    activityArea: IRegion;
+    diningArea: IRegion;
   };
-  activity_area: IRegion;
-  dining_area: IRegion;
+  account: {
+    companyEmail?: string;
+    accountEmail: string;
+  };
 }
 
 export const getUser = async (token?: string) => {
   const res = await http.get<{ data?: UserRes }>(
-    '/apis/v1/user',
+    '/apis/v1/user/profile',
     token
       ? {
           headers: {
