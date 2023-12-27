@@ -26,9 +26,9 @@ export default function CChangeRegion({ type }: Props) {
 
         <S.Region>
           {type === 'dining_area'
-            ? data.area.diningArea?.address
+            ? data?.area?.diningArea?.address
             : type === 'activity_area'
-            ? data.area.activityArea?.address
+            ? data?.area?.activityArea?.address
             : ''}
         </S.Region>
       </S.FlexBox>
