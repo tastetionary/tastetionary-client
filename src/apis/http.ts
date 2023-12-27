@@ -1,12 +1,13 @@
-import * as Sentry from '@sentry/nextjs';
-import axios, { AxiosError, AxiosInstance, AxiosRequestConfig, AxiosResponse, InternalAxiosRequestConfig } from 'axios';
+import axios, { AxiosInstance, AxiosRequestConfig, AxiosResponse } from 'axios';
+
+// 호진TODO: 해당 부분 주석은 잠시 놔두겠습니다!
 class HttpClient {
-  private client: AxiosInstance;
+  public client: AxiosInstance;
 
   constructor() {
     this.client = axios.create(this.axiosConfig());
-    this.requestInterceptors();
-    this.responseInterceptors();
+    // this.requestInterceptors();
+    // this.responseInterceptors();
   }
 
   axiosConfig() {
@@ -16,57 +17,47 @@ class HttpClient {
     };
   }
 
-  requestInterceptors() {
-    return this.client.interceptors.request.use(
-      (request: InternalAxiosRequestConfig) => {
-        // 토큰이 없을때 타는 로직
-        if (typeof window === undefined) return request;
+  // requestInterceptors() {
+  //   return this.client.interceptors.request.use(
+  //     (request: InternalAxiosRequestConfig) => {
+  //       // 토큰이 없을때 타는 로직
+  //       if (typeof window === undefined) return request;
 
-        if (request.headers.Authorization?.toString().split(' ')[1] === 'null') {
-          const token = (sessionStorage as Storage).getItem('token');
-          request.headers.Authorization = `Bearer ${token}`;
-          return { ...request };
-        }
+  //       if (request.headers.Authorization?.toString().split(' ')[1] === 'null') {
+  //         const token = (sessionStorage as Storage).getItem('token');
+  //         request.headers.Authorization = `Bearer ${token}`;
+  //         return { ...request };
+  //       }
 
-        return request;
-      },
-      (error: any) => {
-        Sentry.captureException(error);
-        return Promise.reject(error);
-      }
-    );
-  }
+  //       return request;
+  //     },
+  //     (error: any) => {
+  //       console.log('error', error);
 
-  responseInterceptors() {
-    return this.client.interceptors.response.use(
-      (response: AxiosResponse) => {
-        console.log('axios response!!!!');
-        return response;
-      },
-      (error: AxiosError) => {
-        const { method, url, params, data: requestData, headers } = error.config ?? {};
-        Sentry.setContext('API Request Detail', {
-          method,
-          url,
-          params,
-          requestData,
-          headers,
-        });
+  //       Sentry.captureException(error);
+  //       return Promise.reject(error);
+  //     }
+  //   );
+  // }
 
-        if (error.response) {
-          const { data, status } = error.response;
-          Sentry.setContext('API Response Detail', {
-            status,
-            data,
-          });
-        }
+  // responseInterceptors() {
+  //   return this.client.interceptors.response.use(
+  //     (response: AxiosResponse) => {
+  //       console.log('axios response!!!!');
+  //       return response;
+  //     },
+  //     (error: any) => {
+  //       console.log('error', error.response.data.statusCode);
 
-        Sentry.captureException(error);
+  //       if (error.response.data.statusCode >= 400) {
+  //         alert('에러가 발생했습니다.');
+  //       }
 
-        return Promise.reject(error);
-      }
-    );
-  }
+  //       Sentry.captureException(error);
+  //       return Promise.reject(error);
+  //     }
+  //   );
+  // }
 
   responseBody(response: AxiosResponse) {
     return response.data;
