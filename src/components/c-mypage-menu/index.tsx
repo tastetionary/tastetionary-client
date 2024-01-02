@@ -12,7 +12,6 @@ interface Props {
 
 export default function CMypageMenu({ title, items }: Props) {
   const router = useRouter();
-
   return (
     <S.Menu>
       <S.MenuTitle>{title}</S.MenuTitle>
@@ -21,9 +20,7 @@ export default function CMypageMenu({ title, items }: Props) {
         <S.MenuItem
           key={i}
           onClick={() => {
-            if (!d?.pathname) return;
-
-            router.push(d.pathname);
+            router.push(d.pathname as string);
           }}
         >
           <span>{d.name}</span>
