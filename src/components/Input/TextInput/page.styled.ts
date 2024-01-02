@@ -32,7 +32,7 @@ export const InputContainer = styled.div<{ $focused: boolean; $hasError: boolean
 
 export const Input = styled.input<{ $hasError: boolean; disabled: boolean }>`
   width: calc(100% - 24px);
-  font-size: 14px;
+  font-size: 16px;
   font-style: normal;
   font-weight: 400;
   color: ${({ theme }) => theme.colors.neutral.bg80};
