@@ -5,9 +5,11 @@ import CMypageMenu from '@/components/c-mypage-menu';
 import CMyPageUserInfo from '@/components/c-mypage-user-info';
 import GNBLayout from '@/components/layout/gnb-layout';
 import useUser from '@/hooks/useUser';
+import { useRouter } from 'next/navigation';
 import * as S from './page.styled';
 
 export default function MyPage() {
+  const { push } = useRouter();
   const { isLoggedIn } = useUser();
 
   return (
@@ -15,7 +17,15 @@ export default function MyPage() {
       <CHeader title="맛셔너리" isLogo />
 
       <GNBLayout>
-        {isLoggedIn && <CMyPageUserInfo />}
+        {isLoggedIn ? (
+          <CMyPageUserInfo />
+        ) : (
+          <S.NotLogInContainer>
+            <S.NotLoginText onClick={() => push('/login')}>로그인하기</S.NotLoginText>
+
+            <S.NotLoginText onClick={() => push('/login')}>{'>'}</S.NotLoginText>
+          </S.NotLogInContainer>
+        )}
 
         <S.MenuList>
           {isLoggedIn && (

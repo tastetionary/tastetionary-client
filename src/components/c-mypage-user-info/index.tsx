@@ -1,5 +1,6 @@
 import useLogoutMutate from '@/app/login/hooks/useLogoutMutate';
 import useUser from '@/hooks/useUser';
+import { useRouter } from 'next/navigation';
 import { MODAL_TYPES } from '../Modal/GlobalModal';
 import useModal from '../Modal/GlobalModal/hooks/useModal';
 import * as S from './page.styeld';
@@ -8,6 +9,13 @@ export default function CMyPageUserInfo() {
   const { data, token } = useUser();
   const { openModal, closeModal } = useModal();
   const { mutate: logoutMutate } = useLogoutMutate();
+  const router = useRouter();
+
+  const getShortAddress = (address?: string) => {
+    if (!address) return;
+
+    return address.split(' ').slice(0, 2).join(' ');
+  };
 
   const logoutModal = () => {
     openModal(MODAL_TYPES.dialog, {
@@ -52,15 +60,19 @@ export default function CMyPageUserInfo() {
 
       <S.AreaContainer>
         <S.AreaBox>
-          <S.AreaBoxLValue>식사 지역</S.AreaBoxLValue>
+          <S.AreaBoxLabel onClick={() => router.push('mypage/region-setting?category=dining_area')}>
+            식사 지역
+          </S.AreaBoxLabel>
 
-          <S.AreaBoxLValue></S.AreaBoxLValue>
+          <S.AreaBoxLValue>{getShortAddress(data?.dining_area?.address)}</S.AreaBoxLValue>
         </S.AreaBox>
 
         <S.AreaBox>
-          <S.AreaBoxLValue>활동 지역</S.AreaBoxLValue>
+          <S.AreaBoxLabel onClick={() => router.push('mypage/region-setting?category=activity_area')}>
+            활동 지역
+          </S.AreaBoxLabel>
 
-          <S.AreaBoxLValue></S.AreaBoxLValue>
+          <S.AreaBoxLValue>{getShortAddress(data?.activity_area?.address)}</S.AreaBoxLValue>
         </S.AreaBox>
       </S.AreaContainer>
 

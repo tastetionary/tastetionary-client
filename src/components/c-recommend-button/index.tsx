@@ -30,8 +30,6 @@ export default function CRecommendButton({ selectType, btnText, ...rest }: Props
 
   const isResultPage = pathname?.includes('result');
 
-  const testToken = process.env.NEXT_PUBLIC_ACCESS_TOKEN;
-
   const goScrollToTop = () => {
     if (typeof window === undefined) return;
 
@@ -146,12 +144,12 @@ export default function CRecommendButton({ selectType, btnText, ...rest }: Props
     () =>
       postRestaurantRecommend(
         {
-          category: restaurantState?.category?.filter(c => c !== '전체')[0] as RestaurantCategory,
+          category: restaurantState?.category?.filter(c => c !== '전체') as RestaurantCategory[],
           keywords: restaurantState?.keyword?.filter(c => c !== '전체'),
           price: 10000 + 1000 * restaurantState?.price,
           excludeIds: [],
         },
-        process.env.NEXT_PUBLIC_ACCESS_TOKEN
+        token
       ),
     {
       onSuccess: res => {

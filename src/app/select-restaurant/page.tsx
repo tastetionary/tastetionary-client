@@ -33,7 +33,7 @@ export default function SelectRestaurant() {
 
       <S.SectionContainer>
         <CSelectSection title="음식 종류">
-          <CSelectCategory data={data?.categories} selectType="restaurant" isDuplicate={false} />
+          <CSelectCategory data={data?.categories} selectType="restaurant" isDuplicate />
         </CSelectSection>
 
         <CSelectSection title="키워드" subtitle="(복수 선택 가능)">

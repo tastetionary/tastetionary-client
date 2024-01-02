@@ -5,6 +5,7 @@ import Toast from '@/components/Toast';
 import GoogleAnalytics from '@/components/google-analytics';
 import GridLayout from '@/components/layout/grid-layout';
 import MobileLayout from '@/components/layout/mobile-layout';
+import { useAxiosInterceptor } from '@/hooks/useAxiosInterceptor';
 import { GlobalStyle } from '@/styles/GlobalStyle';
 import { theme } from '@/styles/theme';
 import { ReactNode } from 'react';
@@ -12,6 +13,8 @@ import { ThemeProvider } from 'styled-components';
 import ReactQueryProvider from '../react-query/ReactQueryProvider';
 
 export default function StyledComponentsWrapper({ children }: { children: ReactNode }) {
+  useAxiosInterceptor();
+
   return (
     <ThemeProvider theme={theme}>
       <GlobalStyle />

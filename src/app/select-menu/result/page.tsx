@@ -28,7 +28,7 @@ export default function SelectMenuResult() {
           <S.MemoTitle>{food ? `${food}!` : '조건에 맞는\n메뉴가 없어요'}</S.MemoTitle>
 
           {result?.id && result?.id > 0 ? (
-            <Image src={`../image/Food/food_${result.id}.svg`} alt={'menu-result'} width={160} height={160} />
+            <Image src={`/image/Food/food_${result.id}.svg`} alt={'menu-result'} width={160} height={160} />
           ) : (
             <FOOD_NO_RESULT width={160} height={160} />
           )}
