@@ -58,20 +58,20 @@ jobs:
             npmrc=${{ env.npmrc_path }}
           cache-to: type=inline
 
-    deploy:
-      runs-on: self-hosted
-      if: success()
-      needs: [ build_and_push ]
-      steps:
-        - name: Checkout
-          uses: actions/checkout@v3
+  deploy:
+    runs-on: self-hosted
+    if: success()
+    needs: [ build_and_push ]
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
 
-        - name: SSH and run docker container
-          uses: appleboy/ssh-action@master
-          with:
-            host: ${{ secrets.SSH_HOST }}
-            username: ${{ secrets.SSH_USERNAME }}
-            password: ${{ secrets.SSH_PASSWORD }}
-            port: ${{ secrets.SSH_PORT }}
-            script: |
-              ./init.sh
+      - name: SSH and run docker container
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.SSH_HOST }}
+          username: ${{ secrets.SSH_USERNAME }}
+          password: ${{ secrets.SSH_PASSWORD }}
+          port: ${{ secrets.SSH_PORT }}
+          script: |
+            ./init.sh
