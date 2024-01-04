@@ -65,7 +65,7 @@ export default function CRegionSetting({ category, onNextPage }: Props) {
           let oldData = prev;
 
           if (category === 'activity_area') {
-            oldData.activity_area = {
+            oldData.area.activityArea = {
               address: data?.address,
               category,
               latitude: data?.latitude,
@@ -73,7 +73,7 @@ export default function CRegionSetting({ category, onNextPage }: Props) {
             };
           }
           if (category === 'dining_area') {
-            oldData.dining_area = {
+            oldData.area.diningArea = {
               address: data?.address,
               category,
               latitude: data?.latitude,

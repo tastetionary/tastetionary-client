@@ -79,7 +79,7 @@ export default function Login() {
               onChangeEvent={checked => setLoginState(checked)}
             />
 
-            <MainButton btnText="로그인" disabled={!isDirty} />
+            <MainButton btnText="로그인" disabled={!isDirty || !isValid} />
           </S.Form>
         </S.FormContainer>
 
