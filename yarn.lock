@@ -1124,10 +1124,10 @@
   resolved "https://registry.yarnpkg.com/@eslint/js/-/js-8.48.0.tgz#642633964e217905436033a2bd08bf322849b7fb"
   integrity sha512-ZSjtmelB7IJfWD2Fvb7+Z+ChTIKWq6kjda95fLcQKNS5aheVHn4IkfgRQE3sIIzTcSLwLcLZUD9UBt+V7+h+Pw==
 
-"@homekeeper89/taste_dict@0.3.0":
-  version "0.3.0"
-  resolved "https://npm.pkg.github.com/download/@homekeeper89/taste_dict/0.3.0/7a365d9f1b96750e3c048a19e6d16d00d7f0ac3b#7a365d9f1b96750e3c048a19e6d16d00d7f0ac3b"
-  integrity sha512-g0gjIqe27XRGXrH6Ka3u8aAqAztJ/3Cy5I86z9fA8XU+Z0BBdNgPvR54+x+WBvXwbcY3sPy3KShaQ08Q2X1UIw==
+"@homekeeper89/taste_dict@^0.7.14":
+  version "0.7.14"
+  resolved "https://npm.pkg.github.com/download/@homekeeper89/taste_dict/0.7.14/ef63c7faa96c2c3eb5cd74b5342aecdd04447667#ef63c7faa96c2c3eb5cd74b5342aecdd04447667"
+  integrity sha512-UQ8BGbYRYTEpEDMmWa308hN1grzGV0UXRqE0en9LoE1CDvAGSbpkkb0eo4YnVbDKPotjSaMyMGHniW+zoj2I4Q==
   dependencies:
     "@nestia/fetcher" "^1.6.5"
     typescript-transform-paths "^3.4.6"

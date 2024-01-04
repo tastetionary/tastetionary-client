@@ -1,16 +1,23 @@
 'use client';
 
+import { deleteUser } from '@/apis/user/deleteUser';
 import { CheckboxContainer, Divider } from '@/app/sign-up/components/terms/page.styled';
 import MainButton from '@/components/Button/MainButton';
 import CheckBox2 from '@/components/CheckBox/CheckBox2';
 import CHeader from '@/components/c-header';
 import { userExitReasonList } from '@/constants/user-exit';
+import useUser from '@/hooks/useUser';
+import { queryClient } from '@/lib/react-query/ReactQueryProvider';
+import { WithdrawalTypeEnum } from '@homekeeper89/taste_dict/lib/domain/user/user.enum';
+import * as Sentry from '@sentry/nextjs';
+import { useMutation } from '@tanstack/react-query';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 import * as S from './page.styled';
 
 export default function MyPageUserExit() {
   const { push } = useRouter();
+  const { token } = useUser();
 
   const defaultReasonState = userExitReasonList.reduce(
     (acc, _, index) => ({
@@ -20,7 +27,22 @@ export default function MyPageUserExit() {
     {}
   );
 
+  const type = Object.values(WithdrawalTypeEnum);
+
   const [reason, setReason] = useState<{ [key: string]: boolean }>(defaultReasonState);
+
+  const selectedReasonIndex = Object.keys(reason).find(key => reason[key]) as string;
+
+  const { mutate: exitUser } = useMutation(() => deleteUser({ type: type[+selectedReasonIndex] }, token), {
+    onSuccess: () => {
+      queryClient.removeQueries();
+      Sentry.configureScope(scope => scope.clear());
+
+      if (typeof window === undefined) return;
+      (sessionStorage as Storage).removeItem('token');
+      push('/mypage/user/manage-info/exit/success');
+    },
+  });
 
   const onReasonClick = (i: number, checked: boolean) => {
     setReason({
@@ -58,11 +80,7 @@ export default function MyPageUserExit() {
           ))}
         </S.ReasonList>
 
-        <MainButton
-          btnText="탈퇴하기"
-          disabled={exitBtnDisabled}
-          onClick={() => push('/mypage/user/manage-info/exit/success')}
-        />
+        <MainButton btnText="탈퇴하기" disabled={exitBtnDisabled} onClick={() => exitUser()} />
       </S.Container>
     </>
   );
