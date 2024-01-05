@@ -1,8 +1,7 @@
-import { WithdrawalTypeEnum } from '@homekeeper89/taste_dict/lib/domain/user/user.enum';
 import http from '../http';
 
 interface IDeleteUserReq {
-  type: WithdrawalTypeEnum;
+  type: string;
 }
 
 export const deleteUser = async (req: IDeleteUserReq, token?: string) => {
