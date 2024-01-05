@@ -61,7 +61,7 @@ export const StyledSlider = styled(Slider)`
     top: 42px;
 
     span {
-      width: 100%;
+      width: max-content;
       font-size: 11px;
       font-style: normal;
       font-weight: 400;
