@@ -36,8 +36,7 @@ export default function MyPageUserExit() {
     }
   );
 
-  // 호진TODO: 해당 부분 타입을 수정하지 못했습니다,,
-  const onReasonClick = (type: any, checked: boolean) => {
+  const onReasonClick = (type: WithdrawalType, checked: boolean) => {
     if (checked) {
       setUserDeleteType(type);
     }
@@ -66,7 +65,7 @@ export default function MyPageUserExit() {
                   label={text}
                   checkBoxId={`reason-${i}`}
                   checked={type === userDeleteType}
-                  onChangeEvent={checked => onReasonClick(type, checked)}
+                  onChangeEvent={checked => onReasonClick(type as WithdrawalType, checked)}
                 />
               </CheckboxContainer>
             </S.ReasonItem>
