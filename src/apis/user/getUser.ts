@@ -25,7 +25,7 @@ export interface UserRes {
 
 export const getUser = async (token?: string) => {
   const res = await http.get<{ data?: UserRes }>(
-    '/apis/v1/user/profile',
+    '/apis/v1/user',
     token
       ? {
           headers: {

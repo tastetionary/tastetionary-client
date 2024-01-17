@@ -14,13 +14,14 @@ interface Props {
   type: 'register';
   companyEmailAuthId: number;
   setCompanyEmailAuthId: (value: number) => void;
+  saveAuthId?: (authenticationId: number) => void;
 }
 
-export default function VerifyNumber({ onNext, type, companyEmailAuthId, setCompanyEmailAuthId }: Props) {
+export default function VerifyNumber({ onNext, type, companyEmailAuthId, setCompanyEmailAuthId, saveAuthId }: Props) {
   const { getValues } = useFormContext();
   const [authNumber, setAuthNumber] = useState('');
 
-  const { mutate: confirmAuthCodeMutate } = useConfirmAuthCodeMutate({ onNext, type });
+  const { mutate: confirmAuthCodeMutate } = useConfirmAuthCodeMutate({ onNext, type, saveAuthId });
 
   const handleChangeAuthNumber = (e: ChangeEvent<HTMLInputElement>) => {
     setAuthNumber(e.target.value);
@@ -39,7 +40,7 @@ export default function VerifyNumber({ onNext, type, companyEmailAuthId, setComp
 
   const onCompanyEmailAuthRequest = () => {
     accountAuthCodeMutate({
-      identification: getValues('userProperty.companyEmail'),
+      identification: getValues('userProperty.identification'),
       type: 'email',
       category: 'company',
     });
@@ -83,7 +84,7 @@ export default function VerifyNumber({ onNext, type, companyEmailAuthId, setComp
           btnText="다음"
           disabled={authNumber.length === 0 || false}
           onClick={onConfirmAuthCode}
-          type="submit"
+          type="button"
         />
       </S.Wrapper>
     </>

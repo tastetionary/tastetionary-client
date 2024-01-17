@@ -19,7 +19,7 @@ export default function VerifyCompany({ onNext, setCompanyEmailAuthId }: Props) 
     userProperty: {
       companyData: {
         companyName: string;
-        companyEmail: string;
+        identification: string;
       };
     };
   }>();
@@ -32,14 +32,14 @@ export default function VerifyCompany({ onNext, setCompanyEmailAuthId }: Props) 
 
   const onCompanyEmailAuthRequest = () => {
     accountAuthCodeMutate({
-      identification: getValues('userProperty.companyData.companyEmail'),
+      identification: getValues('userProperty.companyData.identification'),
       type: 'email',
       category: 'company',
     });
   };
 
   const buttonDisabledState =
-    getValues('userProperty.companyData.companyEmail')?.length > 0 &&
+    getValues('userProperty.companyData.identification')?.length > 0 &&
     getValues('userProperty.companyData.companyName')?.length > 0;
 
   return (
@@ -64,8 +64,8 @@ export default function VerifyCompany({ onNext, setCompanyEmailAuthId }: Props) 
             label="회사 이메일"
             placeholder="이메일 주소 입력"
             type="text"
-            errorMsg={errors.userProperty?.companyData?.companyEmail ? '이메일 형식이 맞지 않습니다.' : undefined}
-            {...register('userProperty.companyData.companyEmail', { required: false, pattern: /^\S+@\S+$/i })}
+            errorMsg={errors.userProperty?.companyData?.identification ? '이메일 형식이 맞지 않습니다.' : undefined}
+            {...register('userProperty.companyData.identification', { required: false, pattern: /^\S+@\S+$/i })}
           />
         </S.InputContainer>
 

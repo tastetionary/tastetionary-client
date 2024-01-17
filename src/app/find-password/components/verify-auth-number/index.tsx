@@ -12,9 +12,10 @@ interface Props {
   type: 'register' | 'find-password';
   emailAuthId: number;
   setEmailAuthId?: (value: number) => void;
+  saveAuthId?: (authenticationId: number) => void;
 }
 
-export default function VerifyAuthNumber({ onNext, type, setEmailAuthId, emailAuthId }: Props) {
+export default function VerifyAuthNumber({ onNext, type, setEmailAuthId, emailAuthId, saveAuthId }: Props) {
   const { getValues } = useFormContext();
   const [authNumber, setAuthNumber] = useState('');
 
@@ -24,7 +25,7 @@ export default function VerifyAuthNumber({ onNext, type, setEmailAuthId, emailAu
     category: 'account',
     type: 'retry',
   });
-  const { mutate: confirmAuthCodeMutate } = useConfirmAuthCodeMutate({ onNext, type });
+  const { mutate: confirmAuthCodeMutate } = useConfirmAuthCodeMutate({ onNext, type, saveAuthId });
 
   const handleChangeAuthNumber = (e: ChangeEvent<HTMLInputElement>) => {
     setAuthNumber(e.target.value);

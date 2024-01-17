@@ -2,7 +2,7 @@
 import VerifyAuthNumber from '@/app/find-password/components/verify-auth-number';
 import { SHA256 } from 'crypto-js';
 import { usePathname, useRouter, useSearchParams } from 'next/navigation';
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 import { FormProvider, SubmitHandler, useForm } from 'react-hook-form';
 import useRegisterUserMutate from '../../hooks/query/useRegisterUserMutate';
 import SignUpComplete from '../complete';
@@ -20,8 +20,9 @@ interface FormValue {
   userProperty: {
     companyData?: {
       companyName: string;
-      companyEmail?: string;
-      authenticationId?: number;
+      authenticationId: number;
+      identification: string;
+      category: 'email';
     };
   };
   areas: [
@@ -37,6 +38,7 @@ interface FormValue {
     password: string;
     passwordConfirm?: string;
     category: 'email';
+    authenticationId: number;
   };
   agreements: [
     {
@@ -53,6 +55,7 @@ export default function SignUpComponent() {
   const { push } = useRouter();
   const params = useSearchParams();
   const pathname = usePathname();
+  const formRef = useRef<HTMLFormElement>(null);
 
   const step = params.get('step');
 
@@ -85,25 +88,20 @@ export default function SignUpComponent() {
   const onSubmit: SubmitHandler<FormValue> = data => {
     const { companyData } = data.userProperty;
     // Case : 회사 인증을 하지 않고 회원가입 시도
-    if (companyData && companyData.companyName === '' && companyData.companyEmail === '') {
+    if (companyData && companyData.companyName === '' && companyData.identification === '') {
       delete data.userProperty.companyData;
-    }
-
-    // Case : 회사 인증을 하고 회원가입 시도
-    if (companyData && companyData.companyName !== '' && companyData.companyEmail !== '') {
-      data.userProperty.companyData!.authenticationId = companyEmailAuthId;
-      delete data.userProperty.companyData?.companyEmail;
     }
 
     // 비밀번호를 Hash하고 패스워드 체크를 지움
     delete data.account.passwordConfirm;
     data.account.password = SHA256(data.account.password).toString();
+
     registerUserMutate(data);
   };
 
   return (
     <FormProvider {...methods}>
-      <form onSubmit={methods.handleSubmit(onSubmit)}>
+      <form onSubmit={methods.handleSubmit(onSubmit)} ref={formRef}>
         {step === null && <Terms onNext={() => setStep('email-form')} />}
         {step === 'privacy-notice' && <PrivacyNotice />}
         {step === 'opt-in-marketing' && <OptInMarketing />}
@@ -117,6 +115,7 @@ export default function SignUpComponent() {
             type="register"
             emailAuthId={emailAuthId}
             setEmailAuthId={setEmailAuthId}
+            saveAuthId={authId => methods.setValue('account.authenticationId', authId)}
           />
         )}
         {step === 'user-info' && <UserInfoForm onNext={() => setStep('region-setting')} />}
@@ -126,10 +125,14 @@ export default function SignUpComponent() {
         )}
         {step === 'verify-number' && (
           <VerifyNumber
-            onNext={() => setStep('complete')}
+            onNext={() => formRef.current?.dispatchEvent(new Event('submit', { cancelable: true, bubbles: true }))}
             type="register"
             companyEmailAuthId={companyEmailAuthId}
             setCompanyEmailAuthId={setCompanyEmailAuthId}
+            saveAuthId={authId => {
+              methods.setValue('userProperty.companyData.category', 'email');
+              methods.setValue('userProperty.companyData.authenticationId', authId);
+            }}
           />
         )}
         {step === 'complete' && <SignUpComplete />}

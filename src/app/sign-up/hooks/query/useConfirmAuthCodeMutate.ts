@@ -6,9 +6,10 @@ import { useMutation } from '@tanstack/react-query';
 interface Props {
   onNext: () => void;
   type: 'register' | 'find-password';
+  saveAuthId?: (authenticationId: number) => void;
 }
 
-const useConfirmAuthCodeMutate = ({ onNext, type }: Props) => {
+const useConfirmAuthCodeMutate = ({ onNext, type, saveAuthId }: Props) => {
   const { openModal, closeModal } = useModal();
 
   const authCompleteModal = (type: 'register' | 'find-password') => {
@@ -40,7 +41,10 @@ const useConfirmAuthCodeMutate = ({ onNext, type }: Props) => {
   };
 
   const { mutate } = useMutation(getRegisterRepository().postConfirmAuthCode, {
-    onSuccess: () => authCompleteModal(type),
+    onSuccess: data => {
+      saveAuthId?.(data.data.authenticationId);
+      authCompleteModal(type);
+    },
   });
 
   return { mutate };

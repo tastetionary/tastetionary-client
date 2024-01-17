@@ -8,7 +8,9 @@ interface PostAccountAuthCodeRes {
 }
 
 interface PostConfirmAuthCodeRes {
-  data: string;
+  data: {
+    authenticationId: number;
+  };
 }
 
 interface PostAccountAuthParams {
@@ -41,6 +43,7 @@ interface PostRegisterUserParams {
     identification: string;
     password: string;
     category: 'email';
+    authenticationId: number;
   };
   agreements: [
     {
@@ -52,7 +55,7 @@ interface PostRegisterUserParams {
 
 interface GetRegisterRepository {
   postAccountAuthCode: ({ identification, type }: PostAccountAuthParams) => Promise<PostAccountAuthCodeRes>;
-  postConfirmAuthCode: ({ historyId, code }: PostConfirmAuthCodeParams) => Promise<PostConfirmAuthCodeParams>;
+  postConfirmAuthCode: ({ historyId, code }: PostConfirmAuthCodeParams) => Promise<PostConfirmAuthCodeRes>;
   postCompanyAuthCode: ({ identification, type }: PostAccountAuthParams) => Promise<PostAccountAuthCodeRes>;
   postRegisterUser: (payload: PostRegisterUserParams) => Promise<any>;
 }
@@ -60,18 +63,18 @@ interface GetRegisterRepository {
 export const getRegisterRepository = (): GetRegisterRepository => {
   return {
     postAccountAuthCode: async ({ identification, type, category }: PostAccountAuthParams) =>
-      await http.post<PostAccountAuthCodeRes, PostAccountAuthParams>('/apis/v1/authentication/account', {
+      await http.post<PostAccountAuthCodeRes, PostAccountAuthParams>('/apis/v1/authentication/public/account', {
         identification,
         type,
         category,
       }),
     postConfirmAuthCode: async ({ historyId, code }: PostConfirmAuthCodeParams) =>
-      await http.post<PostConfirmAuthCodeRes, PostConfirmAuthCodeParams>('/apis/v1/authentication/status/done', {
+      await http.post<PostConfirmAuthCodeRes, PostConfirmAuthCodeParams>('/apis/v1/authentication/public/status/done', {
         historyId,
         code,
       }),
     postCompanyAuthCode: async ({ identification, type }: PostAccountAuthParams) =>
-      await http.post<PostAccountAuthCodeRes, PostAccountAuthParams>('/apis/v1/authentication/company', {
+      await http.post<PostAccountAuthCodeRes, PostAccountAuthParams>('/apis/v1/authentication/public/company', {
         identification,
         type,
       }),
