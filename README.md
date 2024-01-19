@@ -4,7 +4,7 @@ TBD
 
 ## Getting Startedssssssssssss
 
-## Installationsssssssss
+## Installationsssssssssssss
 
 ```bash
 $ yarn install
