@@ -52,7 +52,7 @@ export default function Login() {
               {...register('identification', {
                 required: true,
                 pattern: {
-                  value: /^\S+@\S+$/i,
+                  value: /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,8}$/,
                   message: '이메일 형식이 맞지 않습니다.',
                 },
               })}
@@ -79,7 +79,7 @@ export default function Login() {
               onChangeEvent={checked => setLoginState(checked)}
             />
 
-            <MainButton btnText="로그인" disabled={!isDirty || !isValid} />
+            <MainButton btnText="로그인" />
           </S.Form>
         </S.FormContainer>
 
