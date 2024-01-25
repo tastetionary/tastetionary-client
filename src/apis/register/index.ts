@@ -63,7 +63,7 @@ interface GetRegisterRepository {
 export const getRegisterRepository = (): GetRegisterRepository => {
   return {
     postAccountAuthCode: async ({ identification, type, category }: PostAccountAuthParams) =>
-      await http.post<PostAccountAuthCodeRes, PostAccountAuthParams>('/apis/v1/authentication/public/account', {
+      await http.post<PostAccountAuthCodeRes, PostAccountAuthParams>(`/apis/v1/authentication/public/${category}`, {
         identification,
         type,
         category,
