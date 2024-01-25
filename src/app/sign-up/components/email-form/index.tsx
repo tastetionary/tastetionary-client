@@ -1,6 +1,7 @@
 import MainButton from '@/components/Button/MainButton';
 import TextInput from '@/components/Input/TextInput';
 import CHeader from '@/components/c-header';
+import { emailRegex } from '@/constants';
 import { useFormContext } from 'react-hook-form';
 import useAccountAuthCodeMutate from '../../hooks/query/useAccountAuthCodeMutate';
 import * as S from './page.styled';
@@ -41,7 +42,7 @@ export default function EmailForm({ onNext, setEmailAuthId }: Props) {
             label="이메일 주소"
             placeholder="이메일 주소 입력"
             errorMsg={errors.account?.identification ? '이메일 형식이 맞지 않습니다.' : undefined}
-            {...register('account.identification', { required: true, pattern: /^\S+@\S+$/i })}
+            {...register('account.identification', { required: true, pattern: emailRegex })}
           />
         </S.MainContainer>
         <S.NextButtonWrapper>
