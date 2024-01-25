@@ -38,13 +38,14 @@ export default function CRegionSetting({ category, onNextPage }: Props) {
     },
   });
 
-  const { openModal } = useModal();
+  const { openModal, closeModal } = useModal();
 
   const handleCompleteRegionSetting = () => {
     openModal(MODAL_TYPES.dialog, {
       title: category === 'activity_area' ? '활동 지역 변경 완료' : '식사 지역 변경 완료',
       message: category === 'activity_area' ? '활동 지역이 변경되었습니다.' : '식사 지역이 변경되었습니다.',
       handleConfirm: () => router.push(onNextPage),
+      handleClose: () => closeModal(MODAL_TYPES.dialog),
     });
   };
 

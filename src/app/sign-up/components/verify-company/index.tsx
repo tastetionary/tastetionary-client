@@ -1,6 +1,7 @@
 import MainButton from '@/components/Button/MainButton';
 import TextInput from '@/components/Input/TextInput';
 import CHeader from '@/components/c-header';
+import { emailRegex } from '@/constants';
 import { useFormContext } from 'react-hook-form';
 import useAccountAuthCodeMutate from '../../hooks/query/useAccountAuthCodeMutate';
 import * as S from './page.styled';
@@ -65,7 +66,7 @@ export default function VerifyCompany({ onNext, setCompanyEmailAuthId }: Props) 
             placeholder="이메일 주소 입력"
             type="text"
             errorMsg={errors.userProperty?.companyData?.identification ? '이메일 형식이 맞지 않습니다.' : undefined}
-            {...register('userProperty.companyData.identification', { required: false, pattern: /^\S+@\S+$/i })}
+            {...register('userProperty.companyData.identification', { required: false, pattern: emailRegex })}
           />
         </S.InputContainer>
 

@@ -1,6 +1,7 @@
 import MainButton from '@/components/Button/MainButton';
 import TextInput from '@/components/Input/TextInput';
 import CHeader from '@/components/c-header';
+import { emailRegex } from '@/constants';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import * as S from './page.styled';
 
@@ -35,7 +36,7 @@ export default function VerifyEmail({ onNext }: Props) {
               type="email"
               label="이메일 주소"
               placeholder="이메일 주소 입력"
-              {...register('email', { required: true, pattern: /^[a-z0-9]+@[a-z]+\.[a-z]{2,3}/i })}
+              {...register('email', { required: true, pattern: emailRegex })}
             />
           </S.MainContainer>
           <S.NextButtonWrapper>

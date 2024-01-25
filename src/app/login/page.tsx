@@ -4,6 +4,7 @@ import MainButton from '@/components/Button/MainButton';
 import CheckBox2 from '@/components/CheckBox/CheckBox2';
 import TextInput from '@/components/Input/TextInput';
 import CHeader from '@/components/c-header';
+import { emailRegex } from '@/constants';
 import { SHA256 } from 'crypto-js';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
@@ -52,7 +53,7 @@ export default function Login() {
               {...register('identification', {
                 required: true,
                 pattern: {
-                  value: /^\S+@\S+$/i,
+                  value: emailRegex,
                   message: '이메일 형식이 맞지 않습니다.',
                 },
               })}
@@ -79,7 +80,7 @@ export default function Login() {
               onChangeEvent={checked => setLoginState(checked)}
             />
 
-            <MainButton btnText="로그인" disabled={!isDirty || !isValid} />
+            <MainButton btnText="로그인" />
           </S.Form>
         </S.FormContainer>
 
