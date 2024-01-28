@@ -1,9 +1,8 @@
 import MainButton from '@/components/Button/MainButton';
 import CheckBox2 from '@/components/CheckBox/CheckBox2';
 import CHeader from '@/components/c-header';
-import { agreeTermState } from '@/lib/atom';
+import { useAgreeTermStore } from '@/store/useAgreeTermStore';
 import { useRouter } from 'next/navigation';
-import { useRecoilState } from 'recoil';
 import * as S from './page.styled';
 
 interface Props {
@@ -13,46 +12,14 @@ interface Props {
 export default function Terms({ onNext }: Props) {
   const router = useRouter();
 
-  const [agreeTerms, setAgreeTerms] = useRecoilState(agreeTermState);
+  const { marketing, privacy, service, setAllToggle, setToggle } = useAgreeTermStore();
 
   const handleChangeAgreeTerms = (checked: boolean, type: 'all' | 'privacy' | 'marketing' | 'service') => {
     if (type === 'all') {
-      setAgreeTerms({
-        all: checked,
-        privacy: checked,
-        marketing: checked,
-        service: checked,
-      });
-
-      return;
+      return setAllToggle(checked);
     }
 
-    if (type === 'marketing') {
-      setAgreeTerms({
-        ...agreeTerms,
-        marketing: checked,
-      });
-
-      return;
-    }
-
-    if (type === 'privacy') {
-      setAgreeTerms({
-        ...agreeTerms,
-        privacy: checked,
-      });
-
-      return;
-    }
-
-    if (type === 'service') {
-      setAgreeTerms({
-        ...agreeTerms,
-        service: checked,
-      });
-
-      return;
-    }
+    return setToggle(type, checked);
   };
 
   return (
@@ -75,7 +42,7 @@ export default function Terms({ onNext }: Props) {
               checkBoxId="all"
               label="이용 약관 전체 동의"
               onChangeEvent={checked => handleChangeAgreeTerms(checked, 'all')}
-              checked={agreeTerms.privacy && agreeTerms.marketing}
+              checked={privacy && marketing}
             />
           </S.CheckboxContainer>
         </S.CheckboxWrapper>
@@ -84,7 +51,7 @@ export default function Terms({ onNext }: Props) {
             <CheckBox2
               checkBoxId="privacy"
               onChangeEvent={checked => handleChangeAgreeTerms(checked, 'privacy')}
-              checked={agreeTerms.privacy}
+              checked={privacy}
             />
           </S.PrivacyNoticeCheckboxContainer>
           <S.PrivacyNoticeContainer>
@@ -98,7 +65,7 @@ export default function Terms({ onNext }: Props) {
             <CheckBox2
               checkBoxId="marketing"
               onChangeEvent={checked => handleChangeAgreeTerms(checked, 'marketing')}
-              checked={agreeTerms.marketing}
+              checked={marketing}
             />
           </S.MarketingCheckboxContainer>
           <S.MarketingContainer>
@@ -112,7 +79,7 @@ export default function Terms({ onNext }: Props) {
             <CheckBox2
               checkBoxId="service"
               onChangeEvent={checked => handleChangeAgreeTerms(checked, 'service')}
-              checked={agreeTerms.service}
+              checked={service}
             />
           </S.MarketingCheckboxContainer>
           <S.MarketingContainer>
@@ -122,12 +89,7 @@ export default function Terms({ onNext }: Props) {
         </S.MarketingWrapper>
 
         <S.NextButtonWrapper>
-          <MainButton
-            type="button"
-            btnText="다음"
-            disabled={!(agreeTerms.marketing && agreeTerms.privacy && agreeTerms.service)}
-            onClick={onNext}
-          />
+          <MainButton type="button" btnText="다음" disabled={!(marketing && privacy && service)} onClick={onNext} />
         </S.NextButtonWrapper>
       </S.Wrapper>
     </>

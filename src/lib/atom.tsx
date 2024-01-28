@@ -30,18 +30,3 @@ export const reviewPlaceInfoState = atom<{
   },
   effects_UNSTABLE: [persistAtom],
 });
-
-export const agreeTermState = atom<{
-  all: boolean;
-  privacy: boolean;
-  marketing: boolean;
-  service: boolean;
-}>({
-  key: 'agreeTermState',
-  default: {
-    all: false,
-    privacy: false,
-    marketing: false,
-    service: false,
-  },
-});
