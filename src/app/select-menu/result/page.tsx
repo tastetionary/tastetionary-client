@@ -5,17 +5,16 @@ import RefreshButton from '@/components/Button/RefreshButton';
 import CHeader from '@/components/c-header';
 import CRecommendButton from '@/components/c-recommend-button';
 import CStickyMemo from '@/components/c-sticky-memo';
-import { selectResultState } from '@/lib/atom';
+import { useSelectResultStore } from '@/store/useSelectResultStore';
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
-import { useRecoilValue } from 'recoil';
 import * as S from './page.styled';
 
 export default function SelectMenuResult() {
   const router = useRouter();
 
-  const result = useRecoilValue(selectResultState)?.food;
-  const food = result?.name;
+  const { food } = useSelectResultStore();
+  const foodName = food?.name;
 
   return (
     <>
@@ -25,10 +24,10 @@ export default function SelectMenuResult() {
         <S.ResultTitle>오늘의 점심 메뉴는...</S.ResultTitle>
 
         <CStickyMemo>
-          <S.MemoTitle>{food ? `${food}!` : '조건에 맞는\n메뉴가 없어요'}</S.MemoTitle>
+          <S.MemoTitle>{foodName ? `${foodName}!` : '조건에 맞는\n메뉴가 없어요'}</S.MemoTitle>
 
-          {result?.id && result?.id > 0 ? (
-            <Image src={`/image/Food/food_${result.id}.svg`} alt={'menu-result'} width={160} height={160} />
+          {food?.id && food?.id > 0 ? (
+            <Image src={`/image/Food/food_${food.id}.svg`} alt={'menu-result'} width={160} height={160} />
           ) : (
             <FOOD_NO_RESULT width={160} height={160} />
           )}
