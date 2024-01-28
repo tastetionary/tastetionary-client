@@ -46,6 +46,7 @@ export default function CRegionSetting({ category, onNextPage }: Props) {
       message: category === 'activity_area' ? '활동 지역이 변경되었습니다.' : '식사 지역이 변경되었습니다.',
       handleConfirm: () => router.push(onNextPage),
       handleClose: () => closeModal(MODAL_TYPES.dialog),
+      needClose: true,
     });
   };
 
