@@ -1,9 +1,8 @@
-import { reviewState } from '@/lib/atom';
+import { useReviewStore } from '@/store/useReviewStore';
 import { useSelectFoodStore } from '@/store/useSelectFoodStore';
 import { useSelectRestaurantStore } from '@/store/useSelectRestaurantStore';
 import Image from 'next/image';
 import { useEffect, useState } from 'react';
-import { useRecoilState } from 'recoil';
 import * as S from './page.styled';
 
 interface Props {
@@ -17,8 +16,7 @@ export default function CSelectCategory({ selectType, data, isDuplicate = true }
 
   const { category: foodCategory, setFoodCategory } = useSelectFoodStore();
   const { category: restaurantCategory, setRestaurantCategory } = useSelectRestaurantStore();
-
-  const [review, setReviewState] = useRecoilState(reviewState);
+  const { category: reviewCategory, setReviewCategory } = useReviewStore();
 
   useEffect(() => {
     if (selectType === 'food') {
@@ -26,18 +24,15 @@ export default function CSelectCategory({ selectType, data, isDuplicate = true }
     } else if (selectType === 'restaurant') {
       setRestaurantCategory(selectedCategory);
     } else {
-      setReviewState(prev => ({
-        ...prev,
-        category: selectedCategory,
-      }));
+      setReviewCategory(selectedCategory);
     }
   }, [selectedCategory, selectType]);
 
   useEffect(() => {
     setSelectedCategory(
-      selectType === 'food' ? foodCategory : selectType === 'restaurant' ? restaurantCategory : review?.category
+      selectType === 'food' ? foodCategory : selectType === 'restaurant' ? restaurantCategory : reviewCategory
     );
-  }, [foodCategory, restaurantCategory, review?.category, selectType]);
+  }, [foodCategory, restaurantCategory, reviewCategory, selectType]);
 
   return (
     <S.MenuContainer>

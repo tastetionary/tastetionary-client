@@ -4,13 +4,12 @@ import MainButton from '@/components/Button/MainButton';
 import TextInput from '@/components/Input/TextInput';
 import CHeader from '@/components/c-header';
 import useUser from '@/hooks/useUser';
-import { reviewPlaceInfoState } from '@/lib/atom';
+import { useReviewPlaceInfoStore } from '@/store/useReviewPlaceInfoStore';
 import { useMutation } from '@tanstack/react-query';
 import axios from 'axios';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
-import { useSetRecoilState } from 'recoil';
 import * as S from './page.styled';
 
 interface FormValue {
@@ -36,7 +35,7 @@ export default function RestaurantSearch() {
   const router = useRouter();
   const { data: userData } = useUser();
   const [address, setAddress] = useState('');
-  const setReviewPlaceInfo = useSetRecoilState(reviewPlaceInfoState);
+  const { setReviewPlaceInfo } = useReviewPlaceInfoStore();
 
   const {
     register,
