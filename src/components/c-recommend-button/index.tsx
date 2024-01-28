@@ -3,13 +3,14 @@
 import { FoodRecommendRes, postFoodRecommend } from '@/apis/food/recommend';
 import { RestaurantRecommendRes, postRestaurantRecommend } from '@/apis/restaurant/recommend';
 import useUser from '@/hooks/useUser';
-import { selectFoodState, selectRestaurantState, selectResultState } from '@/lib/atom';
+import { selectRestaurantState, selectResultState } from '@/lib/atom';
+import { useSelectFoodStore } from '@/store/useSelectFoodStore';
 import { FoodCategory, FoodKeyword } from '@homekeeper89/taste_dict/lib/domain/food/food.enum';
 import { RestaurantCategory } from '@homekeeper89/taste_dict/lib/domain/restaurant/restaurant.enum';
 import { useMutation } from '@tanstack/react-query';
 import { AxiosError } from 'axios';
 import { usePathname, useRouter } from 'next/navigation';
-import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil';
+import { useRecoilState, useSetRecoilState } from 'recoil';
 import MainButton, { MainButtonProps } from '../Button/MainButton';
 import { MODAL_TYPES } from '../Modal/GlobalModal';
 import useModal from '../Modal/GlobalModal/hooks/useModal';
@@ -24,7 +25,7 @@ export default function CRecommendButton({ selectType, btnText, ...rest }: Props
   const { openModal, closeModal } = useModal();
   const pathname = usePathname();
 
-  const foodState = useRecoilValue(selectFoodState);
+  const { category: foodCategory, keyword: foodKeyword } = useSelectFoodStore();
   const [restaurantState, setRestaurantState] = useRecoilState(selectRestaurantState);
   const setResult = useSetRecoilState(selectResultState);
 
@@ -123,8 +124,8 @@ export default function CRecommendButton({ selectType, btnText, ...rest }: Props
     () =>
       postFoodRecommend(
         {
-          categories: foodState?.category?.filter(c => c !== '전체') as FoodCategory[],
-          keywords: foodState?.keyword?.filter(c => c !== '전체') as FoodKeyword[],
+          categories: foodCategory?.filter(c => c !== '전체') as FoodCategory[],
+          keywords: foodKeyword?.filter(c => c !== '전체') as FoodKeyword[],
         },
         token
       ),

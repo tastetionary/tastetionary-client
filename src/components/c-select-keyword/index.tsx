@@ -1,4 +1,5 @@
-import { reviewState, selectFoodState, selectRestaurantState } from '@/lib/atom';
+import { reviewState, selectRestaurantState } from '@/lib/atom';
+import { useSelectFoodStore } from '@/store/useSelectFoodStore';
 import { useEffect, useState } from 'react';
 import { useRecoilState } from 'recoil';
 import * as S from './page.styled';
@@ -11,16 +12,14 @@ interface Props {
 export default function CSelectKeyword({ data, selectType }: Props) {
   const [selectedKeyword, setSelectedKeyword] = useState<string[]>([]);
 
-  const [foodState, setFoodState] = useRecoilState(selectFoodState);
+  const { keyword: foodKeyword, setFoodKeyword } = useSelectFoodStore();
+
   const [restaurantState, setRestaurantState] = useRecoilState(selectRestaurantState);
   const [review, setReviewState] = useRecoilState(reviewState);
 
   useEffect(() => {
     if (selectType === 'food') {
-      setFoodState(prev => ({
-        ...prev,
-        keyword: selectedKeyword,
-      }));
+      setFoodKeyword(selectedKeyword);
     } else if (selectType === 'restaurant') {
       setRestaurantState(prev => ({
         ...prev,
@@ -36,13 +35,9 @@ export default function CSelectKeyword({ data, selectType }: Props) {
 
   useEffect(() => {
     setSelectedKeyword(
-      selectType === 'food'
-        ? foodState?.keyword
-        : selectType === 'restaurant'
-        ? restaurantState?.keyword
-        : review?.keyword
+      selectType === 'food' ? foodKeyword : selectType === 'restaurant' ? restaurantState?.keyword : review?.keyword
     );
-  }, [foodState?.keyword, restaurantState?.keyword, review?.keyword, selectType]);
+  }, [foodKeyword, restaurantState?.keyword, review?.keyword, selectType]);
 
   return (
     <S.KeywordContainer>

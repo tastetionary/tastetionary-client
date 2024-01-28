@@ -7,16 +7,15 @@ import CRecommendButton from '@/components/c-recommend-button';
 import CSelectCategory from '@/components/c-select-category';
 import CSelectKeyword from '@/components/c-select-keyword';
 import CSelectSection from '@/components/c-select-section';
-import { selectFoodState } from '@/lib/atom';
+import { useSelectFoodStore } from '@/store/useSelectFoodStore';
 import { useQuery } from '@tanstack/react-query';
-import { useRecoilState } from 'recoil';
 import * as S from './page.styled';
 
 export default function SelectMenu() {
-  const [foodState, setFoodState] = useRecoilState(selectFoodState);
+  const { category, keyword, resetSelectFood } = useSelectFoodStore();
 
-  const recommendBtnDisabled = foodState?.category?.length === 0 || foodState?.keyword?.length === 0;
-  const refreshBtnDisabled = foodState?.category?.length === 0 && foodState?.keyword?.length === 0;
+  const recommendBtnDisabled = category?.length === 0 || keyword?.length === 0;
+  const refreshBtnDisabled = category?.length === 0 && keyword?.length === 0;
 
   const { data } = useQuery(['food-option'], () => getFoodOption(), {
     cacheTime: 0,
@@ -44,16 +43,7 @@ export default function SelectMenu() {
         style={{ margin: '48px auto 0' }}
       />
 
-      <RefreshButton
-        btnText="선택 초기화"
-        disabled={refreshBtnDisabled}
-        onClick={() =>
-          setFoodState({
-            category: [],
-            keyword: [],
-          })
-        }
-      />
+      <RefreshButton btnText="선택 초기화" disabled={refreshBtnDisabled} onClick={resetSelectFood} />
     </>
   );
 }
