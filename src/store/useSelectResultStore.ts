@@ -1,40 +1,29 @@
 import { create } from 'zustand';
 import { devtools, persist } from 'zustand/middleware';
 
+interface RestaurantInfo {
+  name?: string;
+  latitude: number;
+  longitude: number;
+  review?: {
+    total: number;
+    keywords: string[];
+    aggregatePrice: {
+      avg: number;
+      [key: string]: number;
+    };
+    revisitRatio: number;
+  };
+}
+
 interface SelectResultState {
   food?: {
     id: number;
     name?: string;
   };
-  restaurant?: {
-    name?: string;
-    latitude: number;
-    longitude: number;
-    review?: {
-      total: number;
-      keywords: string[];
-      aggregatePrice: {
-        avg: number;
-        [key: string]: number;
-      };
-      revisitRatio: number;
-    };
-  };
+  restaurant?: RestaurantInfo;
   setSelectFoodResult: (value: { id: number; name?: string }) => void;
-  setSelectRestaurantResult: (value: {
-    name?: string;
-    latitude: number;
-    longitude: number;
-    review?: {
-      total: number;
-      keywords: string[];
-      aggregatePrice: {
-        avg: number;
-        [key: string]: number;
-      };
-      revisitRatio: number;
-    };
-  }) => void;
+  setSelectRestaurantResult: (value: RestaurantInfo) => void;
 }
 
 export const useSelectResultStore = create<SelectResultState>()(

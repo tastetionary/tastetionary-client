@@ -1,21 +1,17 @@
 import { create } from 'zustand';
 import { devtools, persist } from 'zustand/middleware';
 
-interface ReviewPlaceInfoState {
+interface ReviewType {
   id: string;
   placeName: string;
   address: string;
   latitude: string;
   longitude: string;
   place_url?: string;
-  setReviewPlaceInfo: (value: {
-    id: string;
-    placeName: string;
-    address: string;
-    latitude: string;
-    longitude: string;
-    place_url?: string;
-  }) => void;
+}
+
+interface ReviewPlaceInfoState extends ReviewType {
+  setReviewPlaceInfo: (value: ReviewType) => void;
   resetReviewPlaceInfo: () => void;
 }
 
