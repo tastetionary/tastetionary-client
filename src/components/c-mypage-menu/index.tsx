@@ -1,4 +1,3 @@
-import { useRouter } from 'next/navigation';
 import * as S from './page.styled';
 
 interface Props {
@@ -6,12 +5,12 @@ interface Props {
   items: {
     name: string;
     hasArrow?: boolean;
-    pathname?: string;
+    clickEvent?: () => void;
+    mail?: string;
   }[];
 }
 
 export default function CMypageMenu({ title, items }: Props) {
-  const router = useRouter();
   return (
     <S.Menu>
       <S.MenuTitle>{title}</S.MenuTitle>
@@ -20,8 +19,10 @@ export default function CMypageMenu({ title, items }: Props) {
         <S.MenuItem
           key={i}
           onClick={() => {
-            router.push(d.pathname as string);
+            if(d.clickEvent) d.clickEvent();
           }}
+          as={d.mail ? "a" : undefined}
+          href={d.mail ? "mailto:tastetionary@gmail.com" : undefined}
         >
           <span>{d.name}</span>
 
