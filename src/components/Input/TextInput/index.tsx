@@ -22,7 +22,7 @@ function TextInput(
       {label && <S.Label>{label}</S.Label>}
 
       <S.InputContainer
-        disabled={disabled}
+        $disabled={disabled}
         $focused={focused}
         $hasError={hasError}
         onFocus={() => setFocused(true)}
