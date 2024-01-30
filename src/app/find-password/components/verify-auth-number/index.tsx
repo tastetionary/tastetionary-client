@@ -27,6 +27,8 @@ export default function VerifyAuthNumber({ onNext, type, setEmailAuthId, emailAu
   });
   const { mutate: confirmAuthCodeMutate } = useConfirmAuthCodeMutate({ onNext, type, saveAuthId });
 
+  const accountEmail = getValues('account.identification');
+
   const handleChangeAuthNumber = (e: ChangeEvent<HTMLInputElement>) => {
     setAuthNumber(e.target.value);
   };
@@ -36,7 +38,7 @@ export default function VerifyAuthNumber({ onNext, type, setEmailAuthId, emailAu
   };
 
   const onEmailAuthRequest = () => {
-    accountAuthCodeMutate({ identification: getValues('account.identification'), type: 'email', category: 'account' });
+    accountAuthCodeMutate({ identification: accountEmail, type: 'email', category: 'account' });
   };
 
   return (
@@ -52,6 +54,8 @@ export default function VerifyAuthNumber({ onNext, type, setEmailAuthId, emailAu
           재전송 버튼을 통해 인증 코드를 다시 받으세요.
         </S.SubTitle>
         <S.MainContainer>
+          <TextInput label="이메일 주소" disabled={true} value={accountEmail} />
+
           <TextInput
             type="text"
             label="인증코드 6자리"

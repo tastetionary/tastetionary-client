@@ -23,6 +23,15 @@ export default function VerifyNumber({ onNext, type, companyEmailAuthId, setComp
 
   const { mutate: confirmAuthCodeMutate } = useConfirmAuthCodeMutate({ onNext, type, saveAuthId });
 
+  const { mutate: accountAuthCodeMutate } = useAccountAuthCodeMutate({
+    onNext,
+    setCompanyEmailAuthId,
+    category: 'company',
+    type: 'retry',
+  });
+
+  const companyEmail = getValues('userProperty.companyData.identification');
+
   const handleChangeAuthNumber = (e: ChangeEvent<HTMLInputElement>) => {
     setAuthNumber(e.target.value);
   };
@@ -31,16 +40,9 @@ export default function VerifyNumber({ onNext, type, companyEmailAuthId, setComp
     confirmAuthCodeMutate({ historyId: companyEmailAuthId, code: authNumber });
   };
 
-  const { mutate: accountAuthCodeMutate } = useAccountAuthCodeMutate({
-    onNext,
-    setCompanyEmailAuthId,
-    category: 'company',
-    type: 'retry',
-  });
-
   const onCompanyEmailAuthRequest = () => {
     accountAuthCodeMutate({
-      identification: getValues('userProperty.identification'),
+      identification: companyEmail,
       type: 'email',
       category: 'company',
     });
@@ -63,6 +65,8 @@ export default function VerifyNumber({ onNext, type, companyEmailAuthId, setComp
         </S.SubTitle>
 
         <S.InputContainer>
+          <TextInput label="이메일 주소" disabled={true} value={companyEmail} />
+
           <TextInput
             label="인증코드 6자리"
             placeholder="인증코드 6자리 숫자 입력"

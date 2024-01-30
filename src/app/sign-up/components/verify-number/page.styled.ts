@@ -34,7 +34,7 @@ export const Form = styled.form`
 `;
 
 export const InputContainer = styled.div`
-  margin-top: 37px;
+  margin-top: 30px;
   margin-bottom: 115px;
   width: 100%;
 
