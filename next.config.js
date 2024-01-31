@@ -42,6 +42,7 @@ const SentryWebpackPluginOptions = {
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  output: 'standalone',
   swcMinify: true,
   experimental: {
     appDir: true,
