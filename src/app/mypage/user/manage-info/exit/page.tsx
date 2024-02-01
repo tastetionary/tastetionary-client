@@ -72,7 +72,9 @@ export default function MyPageUserExit() {
           ))}
         </S.ReasonList>
 
-        <MainButton btnText="탈퇴하기" disabled={userDeleteType === ''} onClick={() => exitUser()} />
+        <S.NextButtonWrapper>
+          <MainButton btnText="탈퇴하기" disabled={userDeleteType === ''} onClick={() => exitUser()} />
+        </S.NextButtonWrapper>
       </S.Container>
     </>
   );
