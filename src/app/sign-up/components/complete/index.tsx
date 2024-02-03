@@ -24,8 +24,11 @@ export default function SignUpComplete() {
           <br />
           오늘의 점심 메뉴와 식당을 골라보세요.
         </S.SubTitle>
-        <MainButton type="button" btnText="로그인" onClick={() => router.push('/login')} />
       </S.Wrapper>
+
+      <S.NextButtonWrapper>
+        <MainButton type="button" btnText="로그인" onClick={() => router.push('/login')} />
+      </S.NextButtonWrapper>
     </>
   );
 }

@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 export const Wrapper = styled.div`
-  padding: 20px;
+  padding: 20px 20px 120px;
 `;
 
 export const TitleContainer = styled.div``;
@@ -94,4 +94,14 @@ export const MarketingLook = styled.p`
 
 export const NextButtonWrapper = styled.div`
   margin-top: 122px;
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  background-color: ${({ theme }) => theme.colors.white};
+  width: 100%;
+  padding: 20px 20px 40px;
+
+  @media screen and (max-width: 768px) {
+    position: fixed;
+  }
 `;

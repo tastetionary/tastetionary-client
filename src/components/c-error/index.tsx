@@ -14,7 +14,7 @@ export default function CError({ type }: Props) {
 
   return (
     <>
-      <CHeader title="" />
+      <CHeader title="" isBackBtn />
 
       <S.Container>
         {type === '404' ? <IC_ERROR /> : <IC_READY />}
@@ -28,9 +28,11 @@ export default function CError({ type }: Props) {
               : '현재 페이지는 서비스를 준비하고 있어요.\n빠른 시일 내에 만나뵐 수 있도록\n최선을 다 할게요 :)'}
           </S.Desc>
         </S.TextContainer>
-
-        <MainButton btnText="홈 화면으로" onClick={() => router.push('/')} />
       </S.Container>
+
+      <S.NextButtonWrapper>
+        <MainButton btnText="홈 화면으로" onClick={() => router.push('/')} />
+      </S.NextButtonWrapper>
     </>
   );
 }

@@ -21,7 +21,9 @@ export default function MyPageUserExitSuccess() {
           지금까지 맛셔너리를 이용해주셔서 감사합니다. <br />더 나은 서비스를 위해 노력하겠습니다.
         </S.SubTitle>
 
-        <MainButton type="button" btnText="홈 화면으로" onClick={() => push('/')} />
+        <S.NextButtonWrapper>
+          <MainButton type="button" btnText="홈 화면으로" onClick={() => push('/')} />
+        </S.NextButtonWrapper>
       </S.Wrapper>
     </>
   );

@@ -69,11 +69,13 @@ export default function VerifyCompany({ onNext, setCompanyEmailAuthId }: Props) 
             {...register('userProperty.companyData.identification', { required: false, pattern: emailRegex })}
           />
         </S.InputContainer>
+      </S.Wrapper>
 
+      <S.NextButtonWrapper>
         <S.SubButton type="submit">회사 인증 다음에 하기</S.SubButton>
 
         <MainButton btnText="다음" disabled={!buttonDisabledState} onClick={onCompanyEmailAuthRequest} type="button" />
-      </S.Wrapper>
+      </S.NextButtonWrapper>
     </>
   );
 }

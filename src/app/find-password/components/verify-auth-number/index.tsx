@@ -64,23 +64,23 @@ export default function VerifyAuthNumber({ onNext, type, setEmailAuthId, emailAu
             onChange={handleChangeAuthNumber}
           />
         </S.MainContainer>
-
-        <S.NextButtonWrapper>
-          <S.SubButtonContainer>
-            <span>인증 메일을 받지 못하셨나요?</span>
-
-            <S.SubButton type="button" onClick={onEmailAuthRequest}>
-              메일 재전송
-            </S.SubButton>
-          </S.SubButtonContainer>
-          <MainButton
-            btnText="다음"
-            disabled={authNumber.length === 0 || false}
-            type="button"
-            onClick={onConfirmAuthCode}
-          />
-        </S.NextButtonWrapper>
       </S.Wrapper>
+
+      <S.NextButtonWrapper>
+        <S.SubButtonContainer>
+          <span>인증 메일을 받지 못하셨나요?</span>
+
+          <S.SubButton type="button" onClick={onEmailAuthRequest}>
+            메일 재전송
+          </S.SubButton>
+        </S.SubButtonContainer>
+        <MainButton
+          btnText="다음"
+          disabled={authNumber.length === 0 || false}
+          type="button"
+          onClick={onConfirmAuthCode}
+        />
+      </S.NextButtonWrapper>
     </>
   );
 }

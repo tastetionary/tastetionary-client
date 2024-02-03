@@ -75,7 +75,9 @@ export default function VerifyNumber({ onNext, type, companyEmailAuthId, setComp
             onChange={handleChangeAuthNumber}
           />
         </S.InputContainer>
+      </S.Wrapper>
 
+      <S.NextButtonWrapper>
         <S.SubButtonContainer>
           <span>인증메일을 받지 못하셨나요?</span>
 
@@ -90,7 +92,7 @@ export default function VerifyNumber({ onNext, type, companyEmailAuthId, setComp
           onClick={onConfirmAuthCode}
           type="button"
         />
-      </S.Wrapper>
+      </S.NextButtonWrapper>
     </>
   );
 }
