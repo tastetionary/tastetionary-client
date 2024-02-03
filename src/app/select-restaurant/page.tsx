@@ -9,16 +9,15 @@ import CSelectCategory from '@/components/c-select-category';
 import CSelectKeyword from '@/components/c-select-keyword';
 import CSelectSection from '@/components/c-select-section';
 import CSlider from '@/components/c-slider';
-import { selectRestaurantState } from '@/lib/atom';
+import { useSelectRestaurantStore } from '@/store/useSelectRestaurantStore';
 import { useQuery } from '@tanstack/react-query';
-import { useRecoilState } from 'recoil';
 import * as S from './page.styled';
 
 export default function SelectRestaurant() {
-  const [restaurantState, setRestaurantState] = useRecoilState(selectRestaurantState);
+  const { category, keyword, resetSelectRestaurant } = useSelectRestaurantStore();
 
-  const recommendBtnDisabled = restaurantState?.category?.length === 0 || restaurantState?.keyword?.length === 0;
-  const refreshBtnDisabled = restaurantState?.category?.length === 0 && restaurantState?.keyword?.length === 0;
+  const recommendBtnDisabled = category?.length === 0 || keyword?.length === 0;
+  const refreshBtnDisabled = category?.length === 0 && keyword?.length === 0;
 
   const { data } = useQuery(['restaurant-option'], () => getRestaurantOption(), {
     cacheTime: 0,
@@ -52,17 +51,7 @@ export default function SelectRestaurant() {
         style={{ margin: '48px auto 0' }}
       />
 
-      <RefreshButton
-        btnText="선택 초기화"
-        disabled={refreshBtnDisabled}
-        onClick={() =>
-          setRestaurantState({
-            category: [],
-            keyword: [],
-            price: 0,
-          })
-        }
-      />
+      <RefreshButton btnText="선택 초기화" disabled={refreshBtnDisabled} onClick={resetSelectRestaurant} />
     </>
   );
 }

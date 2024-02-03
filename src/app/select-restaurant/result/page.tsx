@@ -8,12 +8,11 @@ import CHeader from '@/components/c-header';
 import CRecommendButton from '@/components/c-recommend-button';
 import { KeywordBtn } from '@/components/c-select-keyword/page.styled';
 import CSelectSection from '@/components/c-select-section';
-import { selectResultState } from '@/lib/atom';
+import { useSelectResultStore } from '@/store/useSelectResultStore';
 import { getMoneyValue } from '@/utils';
 import axios from 'axios';
 import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
-import { useRecoilValue } from 'recoil';
 import * as S from './page.styled';
 
 export default function SelectRestaurantResult() {
@@ -23,11 +22,11 @@ export default function SelectRestaurantResult() {
   const [imageUrl, setImageUrl] = useState<string[]>([]);
   const [price, setPrice] = useState<{ portion: number; rank: string; label: number }[]>([]);
 
-  const result = useRecoilValue(selectResultState)?.restaurant;
-  const restaurant = result?.name;
-  const lat = result?.latitude;
-  const lng = result?.longitude;
-  const review = result?.review;
+  const { restaurant } = useSelectResultStore();
+  const restaurantName = restaurant?.name;
+  const lat = restaurant?.latitude;
+  const lng = restaurant?.longitude;
+  const review = restaurant?.review;
 
   const uniqueReviewKeyword = review?.keywords?.filter((k, i) => review?.keywords.indexOf(k) === i);
 
@@ -47,7 +46,7 @@ export default function SelectRestaurantResult() {
       }
     };
 
-    if (restaurant && restaurant?.length > 0) {
+    if (restaurantName && restaurantName?.length > 0) {
       getImage();
     }
   }, [restaurant]);
@@ -143,7 +142,7 @@ export default function SelectRestaurantResult() {
 
       <S.ResultContainer>
         <S.ResultLabel>조건에 맞는 23,000개의 식당 중에서 오늘 점심은...</S.ResultLabel>
-        <S.ResultValue>{restaurant}</S.ResultValue>
+        <S.ResultValue>{restaurantName}</S.ResultValue>
       </S.ResultContainer>
 
       <S.AddressContainer>

@@ -3,13 +3,14 @@
 import { FoodRecommendRes, postFoodRecommend } from '@/apis/food/recommend';
 import { RestaurantRecommendRes, postRestaurantRecommend } from '@/apis/restaurant/recommend';
 import useUser from '@/hooks/useUser';
-import { selectFoodState, selectRestaurantState, selectResultState } from '@/lib/atom';
+import { useSelectFoodStore } from '@/store/useSelectFoodStore';
+import { useSelectRestaurantStore } from '@/store/useSelectRestaurantStore';
+import { useSelectResultStore } from '@/store/useSelectResultStore';
 import { FoodCategory, FoodKeyword } from '@homekeeper89/taste_dict/lib/domain/food/food.enum';
 import { RestaurantCategory } from '@homekeeper89/taste_dict/lib/domain/restaurant/restaurant.enum';
 import { useMutation } from '@tanstack/react-query';
 import { AxiosError } from 'axios';
 import { usePathname, useRouter } from 'next/navigation';
-import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil';
 import MainButton, { MainButtonProps } from '../Button/MainButton';
 import { MODAL_TYPES } from '../Modal/GlobalModal';
 import useModal from '../Modal/GlobalModal/hooks/useModal';
@@ -24,9 +25,14 @@ export default function CRecommendButton({ selectType, btnText, ...rest }: Props
   const { openModal, closeModal } = useModal();
   const pathname = usePathname();
 
-  const foodState = useRecoilValue(selectFoodState);
-  const [restaurantState, setRestaurantState] = useRecoilState(selectRestaurantState);
-  const setResult = useSetRecoilState(selectResultState);
+  const { category: foodCategory, keyword: foodKeyword } = useSelectFoodStore();
+  const {
+    category: restaurantCategory,
+    keyword: restaurantKeyword,
+    price: restaurantPrice,
+    resetSelectRestaurant,
+  } = useSelectRestaurantStore();
+  const { setSelectFoodResult, setSelectRestaurantResult } = useSelectResultStore();
 
   const isResultPage = pathname?.includes('result');
 
@@ -58,11 +64,7 @@ export default function CRecommendButton({ selectType, btnText, ...rest }: Props
           ? '더 이상 추첨할 식당이 없습니다.\n다른 조건으로 추첨해보세요!'
           : '다른 조건으로 추첨해 보세요!',
         handleConfirm: () => {
-          setRestaurantState({
-            category: [],
-            keyword: [],
-            price: 0,
-          });
+          resetSelectRestaurant();
 
           router.push('/select-restaurant');
         },
@@ -86,29 +88,25 @@ export default function CRecommendButton({ selectType, btnText, ...rest }: Props
         }
 
         if ('aggregateReviews' in res) {
-          setResult({
-            restaurant: {
-              name: res?.name,
-              latitude: res?.latitude ?? 33.450701,
-              longitude: res?.longitude ?? 126.570667,
-              ...(res?.aggregateReviews
-                ? {
-                    review: {
-                      total: res?.aggregateReviews?.totalCount ?? 0,
-                      revisitRatio: res?.aggregateReviews?.revisitRatio ?? 0,
-                      aggregatePrice: res?.aggregateReviews?.aggregatePrice,
-                      keywords: res?.aggregateReviews?.keywords ?? [],
-                    },
-                  }
-                : {}),
-            },
+          setSelectRestaurantResult({
+            name: res?.name,
+            latitude: res?.latitude ?? 33.450701,
+            longitude: res?.longitude ?? 126.570667,
+            ...(res?.aggregateReviews
+              ? {
+                  review: {
+                    total: res?.aggregateReviews?.totalCount ?? 0,
+                    revisitRatio: res?.aggregateReviews?.revisitRatio ?? 0,
+                    aggregatePrice: res?.aggregateReviews?.aggregatePrice,
+                    keywords: res?.aggregateReviews?.keywords ?? [],
+                  },
+                }
+              : {}),
           });
         } else {
-          setResult({
-            food: {
-              id: +res?.id ?? 0,
-              name: res?.name,
-            },
+          setSelectFoodResult({
+            id: +res?.id ?? 0,
+            name: res?.name,
           });
         }
 
@@ -123,8 +121,8 @@ export default function CRecommendButton({ selectType, btnText, ...rest }: Props
     () =>
       postFoodRecommend(
         {
-          categories: foodState?.category?.filter(c => c !== '전체') as FoodCategory[],
-          keywords: foodState?.keyword?.filter(c => c !== '전체') as FoodKeyword[],
+          categories: foodCategory?.filter(c => c !== '전체') as FoodCategory[],
+          keywords: foodKeyword?.filter(c => c !== '전체') as FoodKeyword[],
         },
         token
       ),
@@ -144,9 +142,9 @@ export default function CRecommendButton({ selectType, btnText, ...rest }: Props
     () =>
       postRestaurantRecommend(
         {
-          category: restaurantState?.category?.filter(c => c !== '전체') as RestaurantCategory[],
-          keywords: restaurantState?.keyword?.filter(c => c !== '전체'),
-          price: 10000 + 1000 * restaurantState?.price,
+          category: restaurantCategory?.filter(c => c !== '전체') as RestaurantCategory[],
+          keywords: restaurantKeyword?.filter(c => c !== '전체'),
+          price: 10000 + 1000 * restaurantPrice,
           excludeIds: [],
         },
         token

@@ -13,14 +13,14 @@ import CSelectKeyword from '@/components/c-select-keyword';
 import CSelectSection from '@/components/c-select-section';
 import CSlider from '@/components/c-slider';
 import useUser from '@/hooks/useUser';
-import { reviewPlaceInfoState, reviewState } from '@/lib/atom';
+import { useReviewPlaceInfoStore } from '@/store/useReviewPlaceInfoStore';
+import { useReviewStore } from '@/store/useReviewStore';
 import { getByte, getLimitedByteText } from '@/utils';
 import { RestaurantCategory, RestaurantKeyword } from '@homekeeper89/taste_dict/lib/domain/restaurant/restaurant.enum';
 import { useMutation, useQuery } from '@tanstack/react-query';
 import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
-import { useRecoilState } from 'recoil';
 import * as S from './page.styled';
 
 interface FormValue {
@@ -36,8 +36,8 @@ export default function RegisterReview() {
     staleTime: 0,
   });
 
-  const [reviewValue, setReviewValue] = useRecoilState(reviewState);
-  const [reviewPlaceInfoValue, setReviewPlaceInfoValue] = useRecoilState(reviewPlaceInfoState);
+  const { resetReviewState, category: reviewCategory, keyword: reviewKeyword, price: ReviewPrice } = useReviewStore();
+  const { resetReviewPlaceInfo, id, latitude, longitude, placeName, place_url, address } = useReviewPlaceInfoStore();
   const [revisit, setRevisit] = useState<null | boolean>(null);
 
   const { register, handleSubmit, watch, setValue } = useForm<FormValue>({
@@ -49,20 +49,20 @@ export default function RegisterReview() {
       postRestarantReview(
         {
           review: {
-            category: reviewValue?.category[0] as RestaurantCategory,
-            keywords: reviewValue?.keyword as RestaurantKeyword[],
-            price: 10000 + 1000 * reviewValue?.price,
+            category: reviewCategory[0] as RestaurantCategory,
+            keywords: reviewKeyword as RestaurantKeyword[],
+            price: 10000 + 1000 * ReviewPrice,
             summary,
             opinion: revisit === true ? 'Y' : 'N',
           },
           external: {
-            externalUUID: +reviewPlaceInfoValue?.id,
-            name: reviewPlaceInfoValue?.placeName,
-            latitude: +reviewPlaceInfoValue?.latitude,
-            longitude: +reviewPlaceInfoValue?.longitude,
-            ...(reviewPlaceInfoValue?.place_url
+            externalUUID: +id,
+            name: placeName,
+            latitude: +latitude,
+            longitude: +longitude,
+            ...(place_url
               ? {
-                  referenceLink: reviewPlaceInfoValue?.place_url,
+                  referenceLink: place_url,
                 }
               : {}),
           },
@@ -72,19 +72,8 @@ export default function RegisterReview() {
     {
       onSuccess: () => {
         const clickEvent = () => {
-          setReviewValue({
-            category: [], // review 데이터 recoil 저장 값 초기화
-            keyword: [],
-            price: 0,
-          });
-
-          setReviewPlaceInfoValue({
-            id: '', // review 식당 검색 결과 recoil 저장 값 초기화
-            placeName: '',
-            address: '',
-            latitude: '',
-            longitude: '',
-          });
+          resetReviewState();
+          resetReviewPlaceInfo();
         };
 
         openModal(MODAL_TYPES.dialog, {
@@ -112,7 +101,7 @@ export default function RegisterReview() {
   };
 
   useEffect(() => {
-    if (reviewPlaceInfoValue?.id === '' && !isSuccess) {
+    if (id === '' && !isSuccess) {
       return openModal(MODAL_TYPES.dialog, {
         title: '페이지 이동 오류',
         message: '먼저 식당을 선택한 후 리뷰등록 페이지로 이동해주세요.',
@@ -123,20 +112,20 @@ export default function RegisterReview() {
         },
       });
     }
-  }, [reviewPlaceInfoValue, isSuccess]);
+  }, [id, isSuccess]);
 
   return (
     <>
       <CHeader title="식당 리뷰 작성" isBackBtn />
 
       <S.TitleSection>
-        <S.RestaurantName>{reviewPlaceInfoValue?.placeName ?? '롤링파스타 종로점'}</S.RestaurantName>
+        <S.RestaurantName>{placeName ?? '롤링파스타 종로점'}</S.RestaurantName>
       </S.TitleSection>
 
       <S.AddressSection>
         <IC_MAP width={12} height={12} />
 
-        <S.Address>{reviewPlaceInfoValue?.address ?? '서울 종로구 삼일대로 392'}</S.Address>
+        <S.Address>{address ?? '서울 종로구 삼일대로 392'}</S.Address>
       </S.AddressSection>
 
       <S.Form id="register-review-form" onSubmit={handleSubmit(onSubmitHandler)}>
@@ -193,7 +182,7 @@ export default function RegisterReview() {
           <MainButton
             btnText="리뷰 등록하기"
             form="register-review-form"
-            disabled={revisit === null || reviewValue?.category?.length === 0 || reviewValue?.keyword?.length === 0}
+            disabled={revisit === null || reviewCategory?.length === 0 || reviewKeyword?.length === 0}
           />
         </S.ButtonContainer>
       </S.Form>

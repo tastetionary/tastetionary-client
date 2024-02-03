@@ -1,4 +1,3 @@
-import RecoilRootWrapper from '@/lib/recoil/RecoilRootWrapper';
 import StyledComponentsRegistry from '@/lib/registry';
 import StyledComponentsWrapper from '@/lib/styled-components/StyledComponentsWrapper';
 import { Metadata } from 'next';
@@ -29,9 +28,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       </head>
       <body className={`${subFont.variable} ${mainFont.variable}`} suppressHydrationWarning>
         <StyledComponentsRegistry>
-          <RecoilRootWrapper>
-            <StyledComponentsWrapper>{children}</StyledComponentsWrapper>
-          </RecoilRootWrapper>
+          <StyledComponentsWrapper>{children}</StyledComponentsWrapper>
         </StyledComponentsRegistry>
       </body>
     </html>

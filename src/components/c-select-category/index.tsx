@@ -1,7 +1,8 @@
-import { reviewState, selectFoodState, selectRestaurantState } from '@/lib/atom';
+import { useReviewStore } from '@/store/useReviewStore';
+import { useSelectFoodStore } from '@/store/useSelectFoodStore';
+import { useSelectRestaurantStore } from '@/store/useSelectRestaurantStore';
 import Image from 'next/image';
 import { useEffect, useState } from 'react';
-import { useRecoilState } from 'recoil';
 import * as S from './page.styled';
 
 interface Props {
@@ -13,38 +14,25 @@ interface Props {
 export default function CSelectCategory({ selectType, data, isDuplicate = true }: Props) {
   const [selectedCategory, setSelectedCategory] = useState<string[]>([]);
 
-  const [foodState, setFoodState] = useRecoilState(selectFoodState);
-  const [restaurantState, setRestaurantState] = useRecoilState(selectRestaurantState);
-  const [review, setReviewState] = useRecoilState(reviewState);
+  const { category: foodCategory, setFoodCategory } = useSelectFoodStore();
+  const { category: restaurantCategory, setRestaurantCategory } = useSelectRestaurantStore();
+  const { category: reviewCategory, setReviewCategory } = useReviewStore();
 
   useEffect(() => {
     if (selectType === 'food') {
-      setFoodState(prev => ({
-        ...prev,
-        category: selectedCategory,
-      }));
+      setFoodCategory(selectedCategory);
     } else if (selectType === 'restaurant') {
-      setRestaurantState(prev => ({
-        ...prev,
-        category: selectedCategory,
-      }));
+      setRestaurantCategory(selectedCategory);
     } else {
-      setReviewState(prev => ({
-        ...prev,
-        category: selectedCategory,
-      }));
+      setReviewCategory(selectedCategory);
     }
   }, [selectedCategory, selectType]);
 
   useEffect(() => {
     setSelectedCategory(
-      selectType === 'food'
-        ? foodState?.category
-        : selectType === 'restaurant'
-        ? restaurantState?.category
-        : review?.category
+      selectType === 'food' ? foodCategory : selectType === 'restaurant' ? restaurantCategory : reviewCategory
     );
-  }, [foodState?.category, restaurantState?.category, review?.category, selectType]);
+  }, [foodCategory, restaurantCategory, reviewCategory, selectType]);
 
   return (
     <S.MenuContainer>

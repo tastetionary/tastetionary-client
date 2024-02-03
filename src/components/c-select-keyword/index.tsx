@@ -1,6 +1,7 @@
-import { reviewState, selectFoodState, selectRestaurantState } from '@/lib/atom';
+import { useReviewStore } from '@/store/useReviewStore';
+import { useSelectFoodStore } from '@/store/useSelectFoodStore';
+import { useSelectRestaurantStore } from '@/store/useSelectRestaurantStore';
 import { useEffect, useState } from 'react';
-import { useRecoilState } from 'recoil';
 import * as S from './page.styled';
 
 interface Props {
@@ -11,38 +12,25 @@ interface Props {
 export default function CSelectKeyword({ data, selectType }: Props) {
   const [selectedKeyword, setSelectedKeyword] = useState<string[]>([]);
 
-  const [foodState, setFoodState] = useRecoilState(selectFoodState);
-  const [restaurantState, setRestaurantState] = useRecoilState(selectRestaurantState);
-  const [review, setReviewState] = useRecoilState(reviewState);
+  const { keyword: foodKeyword, setFoodKeyword } = useSelectFoodStore();
+  const { keyword: restaurantKeyword, setRestaurantKeyword } = useSelectRestaurantStore();
+  const { keyword: reviewKeyword, setReviewKeyword } = useReviewStore();
 
   useEffect(() => {
     if (selectType === 'food') {
-      setFoodState(prev => ({
-        ...prev,
-        keyword: selectedKeyword,
-      }));
+      setFoodKeyword(selectedKeyword);
     } else if (selectType === 'restaurant') {
-      setRestaurantState(prev => ({
-        ...prev,
-        keyword: selectedKeyword,
-      }));
+      setRestaurantKeyword(selectedKeyword);
     } else {
-      setReviewState(prev => ({
-        ...prev,
-        keyword: selectedKeyword,
-      }));
+      setReviewKeyword(selectedKeyword);
     }
   }, [selectedKeyword, selectType]);
 
   useEffect(() => {
     setSelectedKeyword(
-      selectType === 'food'
-        ? foodState?.keyword
-        : selectType === 'restaurant'
-        ? restaurantState?.keyword
-        : review?.keyword
+      selectType === 'food' ? foodKeyword : selectType === 'restaurant' ? restaurantKeyword : reviewKeyword
     );
-  }, [foodState?.keyword, restaurantState?.keyword, review?.keyword, selectType]);
+  }, [foodKeyword, restaurantKeyword, reviewKeyword, selectType]);
 
   return (
     <S.KeywordContainer>
