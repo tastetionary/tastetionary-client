@@ -24,7 +24,10 @@ export const NextButtonWrapper = styled.div`
 `;
 
 export const MainContainer = styled.div`
-  margin-top: 37px;
+  margin-top: 30px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
 `;
 
 export const Form = styled.form``;

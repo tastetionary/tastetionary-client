@@ -13,15 +13,15 @@ export const Label = styled.label`
   margin-bottom: 6px;
 `;
 
-export const InputContainer = styled.div<{ $focused: boolean; $hasError: boolean; disabled: boolean }>`
+export const InputContainer = styled.div<{ $focused: boolean; $hasError: boolean; $disabled: boolean }>`
   position: relative;
   width: 100%;
   padding: 13px 12px;
   border: 2px solid
     ${({ $focused, $hasError, theme }) =>
       $hasError ? theme.colors.simentic.r60 : $focused ? theme.colors.neutral.bg20 : theme.colors.neutral.bg10};
-  background: ${({ $hasError, theme, disabled }) =>
-    $hasError ? theme.colors.secondary.o05 : disabled ? theme.colors.neutral.bg05 : theme.colors.white};
+  background: ${({ $hasError, theme, $disabled }) =>
+    $hasError ? theme.colors.secondary.o05 : $disabled ? theme.colors.neutral.bg05 : theme.colors.white};
 
   svg {
     position: absolute;
@@ -35,7 +35,7 @@ export const Input = styled.input<{ $hasError: boolean; disabled: boolean }>`
   font-size: 16px;
   font-style: normal;
   font-weight: 400;
-  color: ${({ theme }) => theme.colors.neutral.bg80};
+  color: ${({ theme, disabled }) => (disabled ? theme.colors.neutral.bg30 : theme.colors.neutral.bg80)};
   background: ${({ $hasError, theme, disabled }) =>
     $hasError ? theme.colors.secondary.o05 : disabled ? theme.colors.neutral.bg05 : theme.colors.white};
 
