@@ -18,7 +18,7 @@ export default function Terms({ onNext }: Props) {
     if (type === 'all') {
       return setAllToggle(checked);
     }
-
+    console.log('type', type);
     return setToggle(type, checked);
   };
 
@@ -42,7 +42,7 @@ export default function Terms({ onNext }: Props) {
               checkBoxId="all"
               label="이용 약관 전체 동의"
               onChangeEvent={checked => handleChangeAgreeTerms(checked, 'all')}
-              checked={privacy && marketing}
+              checked={privacy && marketing && service}
             />
           </S.CheckboxContainer>
         </S.CheckboxWrapper>
