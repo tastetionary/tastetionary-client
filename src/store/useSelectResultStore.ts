@@ -24,21 +24,27 @@ interface SelectResultState {
   restaurant?: RestaurantInfo;
   setSelectFoodResult: (value: { id: number; name?: string }) => void;
   setSelectRestaurantResult: (value: RestaurantInfo) => void;
+  resetFoodResult: () => void;
+  resetRestaurantResult: () => void;
 }
+
+const defaultFood = {
+  id: 0,
+  name: undefined,
+};
+
+const defaultRestaurant = {
+  name: undefined,
+  latitude: 0,
+  longitude: 0,
+};
 
 export const useSelectResultStore = create<SelectResultState>()(
   devtools(
     persist(
       set => ({
-        food: {
-          id: 0,
-          name: undefined,
-        },
-        restaurant: {
-          name: undefined,
-          latitude: 0,
-          longitude: 0,
-        },
+        food: defaultFood,
+        restaurant: defaultRestaurant,
         setSelectFoodResult: value =>
           set({
             food: {
@@ -66,6 +72,14 @@ export const useSelectResultStore = create<SelectResultState>()(
                   }
                 : {}),
             },
+          }),
+        resetFoodResult: () =>
+          set({
+            food: defaultFood,
+          }),
+        resetRestaurantResult: () =>
+          set({
+            restaurant: defaultRestaurant,
           }),
       }),
       {
