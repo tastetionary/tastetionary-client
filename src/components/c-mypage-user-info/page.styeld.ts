@@ -42,6 +42,7 @@ export const AreaContainer = styled.div`
 `;
 
 export const AreaBox = styled.div`
+  cursor: pointer;
   width: 100%;
   border: 1px solid ${({ theme }) => theme.colors.neutral.bg10};
   background-color: ${({ theme }) => theme.colors.neutral.bg05};
