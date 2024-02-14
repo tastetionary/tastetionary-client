@@ -32,7 +32,8 @@ export default function CRecommendButton({ selectType, btnText, ...rest }: Props
     price: restaurantPrice,
     resetSelectRestaurant,
   } = useSelectRestaurantStore();
-  const { setSelectFoodResult, setSelectRestaurantResult } = useSelectResultStore();
+  const { setSelectFoodResult, setSelectRestaurantResult, resetFoodResult, resetRestaurantResult } =
+    useSelectResultStore();
 
   const isResultPage = pathname?.includes('result');
 
@@ -128,6 +129,8 @@ export default function CRecommendButton({ selectType, btnText, ...rest }: Props
       ),
     {
       onSuccess: res => {
+        resetFoodResult(); // 메뉴 검색 결과 저장 값 초기화
+
         loadingModal(res);
       },
       onError: err => {
@@ -151,6 +154,8 @@ export default function CRecommendButton({ selectType, btnText, ...rest }: Props
       ),
     {
       onSuccess: res => {
+        resetRestaurantResult(); // 식당 검색 결고 저장 값 초기화
+
         loadingModal(res);
       },
       onError: err => {
@@ -162,8 +167,6 @@ export default function CRecommendButton({ selectType, btnText, ...rest }: Props
   );
 
   const onButtonClick = () => {
-    // Sentry.captureMessage(`${selectType} recommend button click`);
-
     if (selectType === 'food') return getFood();
 
     if (selectType === 'restaurant') return getRestaurant();
