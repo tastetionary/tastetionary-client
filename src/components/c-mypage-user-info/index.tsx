@@ -59,18 +59,14 @@ export default function CMyPageUserInfo() {
       <S.Email>{data?.account?.accountEmail}</S.Email>
 
       <S.AreaContainer>
-        <S.AreaBox>
-          <S.AreaBoxLabel onClick={() => router.push('mypage/region-setting?category=dining_area')}>
-            식사 지역
-          </S.AreaBoxLabel>
+        <S.AreaBox onClick={() => router.push('mypage/region-setting?category=dining_area')}>
+          <S.AreaBoxLabel>식사 지역</S.AreaBoxLabel>
 
           <S.AreaBoxLValue>{getShortAddress(data?.area?.diningArea?.address)}</S.AreaBoxLValue>
         </S.AreaBox>
 
-        <S.AreaBox>
-          <S.AreaBoxLabel onClick={() => router.push('mypage/region-setting?category=activity_area')}>
-            활동 지역
-          </S.AreaBoxLabel>
+        <S.AreaBox onClick={() => router.push('mypage/region-setting?category=activity_area')}>
+          <S.AreaBoxLabel>활동 지역</S.AreaBoxLabel>
 
           <S.AreaBoxLValue>{getShortAddress(data?.area?.activityArea?.address)}</S.AreaBoxLValue>
         </S.AreaBox>
