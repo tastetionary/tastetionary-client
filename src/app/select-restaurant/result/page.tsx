@@ -32,14 +32,14 @@ export default function SelectRestaurantResult() {
 
   useEffect(() => {
     const getImage = async () => {
-      const res = await axios.get(`/search-image-api?query=${restaurant}`, {
+      const res = await axios.get(`/search-image-api?query=${restaurantName}`, {
         headers: {
           'X-Naver-Client-Id': process.env.NEXT_PUBLIC_NAVER_CLIENT_ID,
           'X-Naver-Client-Secret': process.env.NEXT_PUBLIC_NAVER_CLIENT_SECRET,
         },
       });
 
-      if (res?.data?.total >= 30) {
+      if (res?.data?.total >= 15) {
         setImageUrl([res?.data?.items?.[0]?.link, res?.data?.items?.[1]?.link, res?.data?.items?.[2]?.link]);
       } else {
         setImageUrl([]);
@@ -187,7 +187,7 @@ export default function SelectRestaurantResult() {
                 <S.PriceGraphLabel>
                   {i === 0 && '~'}
                   {getMoneyValue(p?.label)}
-                  {i === price?.length - 1 && '~'}
+                  {i > 0 && i === price?.length - 1 && '~'}
                 </S.PriceGraphLabel>
                 <CBarGraph $trackRank={p.rank} $trackWidth={p.portion} />
               </S.PriceGraphItem>
