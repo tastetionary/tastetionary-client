@@ -61,7 +61,8 @@ export const useAxiosInterceptor = () => {
         });
       }
 
-      if (error.response.data.statusCode >= 400) {
+      // 호진FIXME: 해당 부분에서 400이상의 모든 에러를 처리하면 컴포넌트 레벨에서 에러를 추가할때 에러가 2번 발생함 ( 해당 파일에서 발생 + 컴포넌트에서 에러 팝업 발생)
+      if (error.response.data.statusCode === 404) {
         errorTrigger();
       }
 

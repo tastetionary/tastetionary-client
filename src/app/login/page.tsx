@@ -22,7 +22,7 @@ export default function Login() {
   const {
     register,
     handleSubmit,
-    formState: { errors, isDirty, isValid },
+    formState: { errors },
   } = useForm<FormValue>({
     mode: 'onSubmit',
   });
