@@ -88,7 +88,7 @@ export default function SignUpComponent() {
   const onSubmit: SubmitHandler<FormValue> = data => {
     const { companyData } = data.userProperty;
     // Case : 회사 인증을 하지 않고 회원가입 시도
-    if (companyData && companyData.companyName === '' && companyData.identification === '') {
+    if (companyData && !companyData.authenticationId && !companyData.category) {
       delete data.userProperty.companyData;
     }
 
