@@ -15,7 +15,8 @@ export default function VerifyCompany({ onNext, setCompanyEmailAuthId }: Props) 
   const {
     register,
     getValues,
-    formState: { errors, isDirty, isValid },
+    watch,
+    formState: { errors },
   } = useFormContext<{
     userProperty: {
       companyData: {
@@ -40,8 +41,7 @@ export default function VerifyCompany({ onNext, setCompanyEmailAuthId }: Props) 
   };
 
   const buttonDisabledState =
-    getValues('userProperty.companyData.identification')?.length > 0 &&
-    getValues('userProperty.companyData.companyName')?.length > 0;
+    watch('userProperty.companyData.identification') && watch('userProperty.companyData.companyName');
 
   return (
     <>
