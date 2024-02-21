@@ -141,7 +141,6 @@ export default function SelectRestaurantResult() {
       <CHeader title="식당 추첨 결과" isBackBtn />
 
       <S.ResultContainer>
-        <S.ResultLabel>조건에 맞는 23,000개의 식당 중에서 오늘 점심은...</S.ResultLabel>
         <S.ResultValue>{restaurantName}</S.ResultValue>
       </S.ResultContainer>
 
