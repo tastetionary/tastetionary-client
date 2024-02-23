@@ -32,12 +32,18 @@ export default function SelectRestaurantResult() {
 
   useEffect(() => {
     const getImage = async () => {
-      const res = await axios.get(`/search-image-api?query=${restaurantName}`, {
-        headers: {
-          'X-Naver-Client-Id': process.env.NEXT_PUBLIC_NAVER_CLIENT_ID,
-          'X-Naver-Client-Secret': process.env.NEXT_PUBLIC_NAVER_CLIENT_SECRET,
-        },
-      });
+      const needDistrict = !restaurantName?.includes(' ');
+      const district = address?.split(' ')?.[1];
+
+      const res = await axios.get(
+        `/search-image-api?query=${needDistrict && district ? `${district} ${restaurantName}` : restaurantName}`,
+        {
+          headers: {
+            'X-Naver-Client-Id': process.env.NEXT_PUBLIC_NAVER_CLIENT_ID,
+            'X-Naver-Client-Secret': process.env.NEXT_PUBLIC_NAVER_CLIENT_SECRET,
+          },
+        }
+      );
 
       if (res?.data?.total >= 15) {
         setImageUrl([res?.data?.items?.[0]?.link, res?.data?.items?.[1]?.link, res?.data?.items?.[2]?.link]);
@@ -46,10 +52,10 @@ export default function SelectRestaurantResult() {
       }
     };
 
-    if (restaurantName && restaurantName?.length > 0) {
+    if (restaurantName && restaurantName?.length > 0 && address !== '') {
       getImage();
     }
-  }, [restaurant]);
+  }, [restaurant, address]);
 
   useEffect(() => {
     const getAddress = async () => {
