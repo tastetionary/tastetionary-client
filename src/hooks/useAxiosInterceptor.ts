@@ -1,6 +1,7 @@
 import http from '@/apis/http';
 import { MODAL_TYPES } from '@/components/Modal/GlobalModal';
 import useModal from '@/components/Modal/GlobalModal/hooks/useModal';
+import { SERVER_ERROR_MSG } from '@/constants/error-msg';
 import * as Sentry from '@sentry/nextjs';
 import { AxiosResponse } from 'axios';
 import { useEffect } from 'react';
@@ -11,6 +12,15 @@ export const useAxiosInterceptor = () => {
   const errorTrigger = () => {
     openModal(MODAL_TYPES.dialog, {
       title: '에러가 발생했습니다.',
+      handleConfirm: () => closeModal(MODAL_TYPES.dialog),
+      confirmText: '확인',
+      needClose: true,
+    });
+  };
+
+  const serverErrorTrigger = (category: keyof typeof SERVER_ERROR_MSG) => {
+    openModal(MODAL_TYPES.dialog, {
+      title: SERVER_ERROR_MSG[category],
       handleConfirm: () => closeModal(MODAL_TYPES.dialog),
       confirmText: '확인',
       needClose: true,
@@ -64,6 +74,12 @@ export const useAxiosInterceptor = () => {
       // 호진FIXME: 해당 부분에서 400이상의 모든 에러를 처리하면 컴포넌트 레벨에서 에러를 추가할때 에러가 2번 발생함 ( 해당 파일에서 발생 + 컴포넌트에서 에러 팝업 발생)
       if (error.response.data.statusCode === 404) {
         errorTrigger();
+        return;
+      }
+
+      if (error.response.data.category in SERVER_ERROR_MSG) {
+        serverErrorTrigger(error.response.data.category);
+        return;
       }
 
       Sentry.captureException(error);
