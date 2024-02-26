@@ -155,68 +155,70 @@ export default function RestaurantSearch() {
       </S.Form>
 
       <S.PlaceList>
-        {data?.documents?.map((d: ISearchKeyword) => {
-          const placeAddress = d.road_address_name !== '' ? d.road_address_name : d.address_name;
+        {data?.documents
+          ?.filter((d: ISearchKeyword) => d.category_name?.includes('음식점'))
+          ?.map((d: ISearchKeyword) => {
+            const placeAddress = d.road_address_name !== '' ? d.road_address_name : d.address_name;
 
-          const distance = getDistance(latitude ?? 0, longitude ?? 0, +d?.y, +d?.x);
+            const distance = getDistance(latitude ?? 0, longitude ?? 0, +d?.y, +d?.x);
 
-          return (
-            <S.PlaceListItem
-              key={d.id}
-              onClick={() => {
-                setAddress(placeAddress);
-                getKakaoMap(placeAddress);
-              }}
-            >
-              <S.PlaceContainer>
-                <div>
-                  <S.FlexBox>
-                    <S.PlaceName>{d.place_name}</S.PlaceName>
-                    <S.Distance>{distance ? `${distance}km` : ''}</S.Distance>
-                  </S.FlexBox>
+            return (
+              <S.PlaceListItem
+                key={d.id}
+                onClick={() => {
+                  setAddress(placeAddress);
+                  getKakaoMap(placeAddress);
+                }}
+              >
+                <S.PlaceContainer>
+                  <div>
+                    <S.FlexBox>
+                      <S.PlaceName>{d.place_name}</S.PlaceName>
+                      <S.Distance>{distance ? `${distance}km` : ''}</S.Distance>
+                    </S.FlexBox>
 
-                  <S.PlaceAddress>{d.road_address_name}</S.PlaceAddress>
+                    <S.PlaceAddress>{d.road_address_name}</S.PlaceAddress>
 
-                  <S.RoadAddressFlexBox>
-                    <S.RoadAddressTag>지번</S.RoadAddressTag>
+                    <S.RoadAddressFlexBox>
+                      <S.RoadAddressTag>지번</S.RoadAddressTag>
 
-                    <S.RoadAddress>{d?.address_name}</S.RoadAddress>
-                  </S.RoadAddressFlexBox>
+                      <S.RoadAddress>{d?.address_name}</S.RoadAddress>
+                    </S.RoadAddressFlexBox>
 
-                  <S.Phone as="a" href={`tel:${d?.phone}`}>
-                    {d?.phone}
-                  </S.Phone>
-                </div>
-              </S.PlaceContainer>
+                    <S.Phone as="a" href={`tel:${d?.phone}`}>
+                      {d?.phone}
+                    </S.Phone>
+                  </div>
+                </S.PlaceContainer>
 
-              {placeAddress !== '' && placeAddress === address && (
-                <>
-                  <S.MapContainer>
-                    <div id="map" style={{ width: placeAddress?.length > 0 ? '100%' : 0, height: '100%' }}></div>
-                  </S.MapContainer>
+                {placeAddress !== '' && placeAddress === address && (
+                  <>
+                    <S.MapContainer>
+                      <div id="map" style={{ width: placeAddress?.length > 0 ? '100%' : 0, height: '100%' }}></div>
+                    </S.MapContainer>
 
-                  <MainButton
-                    btnText="식당 선택"
-                    style={{ marginTop: 16 }}
-                    onClick={() => {
-                      setReviewPlaceInfo({
-                        address: placeAddress,
-                        id: d?.id,
-                        latitude: d?.y,
-                        longitude: d?.x,
-                        placeName: d?.place_name,
-                        place_url: d?.place_url,
-                      });
-                      return router.push(`/register-review`, {
-                        scroll: true,
-                      });
-                    }}
-                  />
-                </>
-              )}
-            </S.PlaceListItem>
-          );
-        })}
+                    <MainButton
+                      btnText="식당 선택"
+                      style={{ marginTop: 16 }}
+                      onClick={() => {
+                        setReviewPlaceInfo({
+                          address: placeAddress,
+                          id: d?.id,
+                          latitude: d?.y,
+                          longitude: d?.x,
+                          placeName: d?.place_name,
+                          place_url: d?.place_url,
+                        });
+                        return router.push(`/register-review`, {
+                          scroll: true,
+                        });
+                      }}
+                    />
+                  </>
+                )}
+              </S.PlaceListItem>
+            );
+          })}
       </S.PlaceList>
     </>
   );
