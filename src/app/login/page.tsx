@@ -22,7 +22,7 @@ export default function Login() {
   const {
     register,
     handleSubmit,
-    formState: { errors },
+    formState: { errors, isValid },
   } = useForm<FormValue>({
     mode: 'onSubmit',
   });
@@ -80,14 +80,14 @@ export default function Login() {
               onChangeEvent={checked => setLoginState(checked)}
             />
 
-            <MainButton btnText="로그인" />
+            <MainButton btnText="로그인" disabled={!isValid} />
           </S.Form>
         </S.FormContainer>
 
         <S.NavContainer>
           <S.NavItem onClick={() => router.push('/ready')}>아이디 찾기</S.NavItem>
           <S.NavDivider />
-          <S.NavItem onClick={() => router.push('/ready')}>비밀번호 찾기</S.NavItem>
+          <S.NavItem onClick={() => router.push('/find-password')}>비밀번호 찾기</S.NavItem>
           <S.NavDivider />
           <S.NavItem onClick={() => router.push('/sign-up')}>회원가입</S.NavItem>
         </S.NavContainer>
