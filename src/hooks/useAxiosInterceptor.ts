@@ -27,7 +27,7 @@ export const useAxiosInterceptor = () => {
     });
   };
 
-  const requestInterceptor = http.client.interceptors.response.use(
+  const requestInterceptor = http.client.interceptors.request.use(
     (request: any) => {
       // 토큰이 없을때 타는 로직
       if (typeof window === undefined) return request;
