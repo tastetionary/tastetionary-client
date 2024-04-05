@@ -1,7 +1,7 @@
 'use client';
 
-import { getRestaurantOption } from '@/apis/restaurant/option';
 import { postRestarantReview } from '@/apis/restaurant/review';
+import { getRestaurantReviewOption } from '@/apis/restaurant/review/option';
 import IC_MAP from '@/assets/common/map.svg';
 import MainButton from '@/components/Button/MainButton';
 import TextArea from '@/components/Input/TextArea';
@@ -31,7 +31,7 @@ export default function RegisterReview() {
   const router = useRouter();
   const { openModal, closeModal } = useModal();
   const { token } = useUser();
-  const { data } = useQuery(['restaurant-option'], () => getRestaurantOption(), {
+  const { data } = useQuery(['restaurant-review-option'], () => getRestaurantReviewOption(), {
     cacheTime: 0,
     staleTime: 0,
   });
