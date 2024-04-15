@@ -171,7 +171,9 @@ export default function SelectRestaurantResult() {
           <S.MapText>리뷰 {review?.total ?? 'N'}건</S.MapText>
         </S.FlexBox>
 
-        <S.MapText>리뷰 자세히 보기 &gt;</S.MapText>
+        <S.MapText onClick={() => router.push('result/review/1')} style={{ cursor: 'pointer' }}>
+          리뷰 자세히 보기 &gt;
+        </S.MapText>
       </S.ReviewContainer>
 
       <CSelectSection title="리뷰 키워드">
