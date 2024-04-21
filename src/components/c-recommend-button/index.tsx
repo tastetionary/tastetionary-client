@@ -93,6 +93,7 @@ export default function CRecommendButton({ selectType, btnText, ...rest }: Props
             name: res?.name,
             latitude: res?.latitude ?? 33.450701,
             longitude: res?.longitude ?? 126.570667,
+            id: res?.id,
             ...(res?.aggregateReviews
               ? {
                   review: {
