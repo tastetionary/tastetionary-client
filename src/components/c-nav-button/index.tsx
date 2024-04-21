@@ -1,5 +1,3 @@
-import * as S from './page.styled';
-
 interface Props {
   title: string;
   icon: React.ReactElement;
@@ -10,15 +8,15 @@ interface Props {
 export default function CNavButton({ title, icon, isActive, clickEvent }: Props) {
   return (
     <>
-      <S.Button
-        $isActive={isActive}
+      <button
+        className={`flex h-60 w-120 flex-col items-center justify-center gap-4 ${isActive ? 'bg-white' : 'bg-neutral-bg05'} border-solid ${isActive ? 'border-t-0' : 'border-2'} border-[#ced9db]`}
         onClick={() => {
           if (clickEvent) clickEvent();
         }}
       >
-        <S.Icon>{icon}</S.Icon>
-        <S.Title>{title}</S.Title>
-      </S.Button>
+        <div>{icon}</div>
+        <p className="text-14">{title}</p>
+      </button>
     </>
   );
 }
