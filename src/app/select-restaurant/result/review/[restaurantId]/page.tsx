@@ -4,8 +4,14 @@ import CHeader from '@/components/c-header';
 import CReviewItem from '@/components/c-review-item';
 import useRestaurantReviewQuery from './_hooks/useRestaurantReivewQuery.ts';
 
-export default function SelectRestaurantResultReview() {
-  const { restaurantReviews } = useRestaurantReviewQuery({ restaurantId: 25 });
+interface Props {
+  params: {
+    restaurantId: string;
+  };
+}
+
+export default function SelectRestaurantResultReview({ params }: Props) {
+  const { restaurantReviews } = useRestaurantReviewQuery({ restaurantId: params.restaurantId });
 
   return (
     <>

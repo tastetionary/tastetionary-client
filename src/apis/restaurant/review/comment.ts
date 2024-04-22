@@ -1,7 +1,7 @@
 import http from '@/apis/http';
 
 interface Params {
-  restaurantId: number;
+  restaurantId: string;
 }
 
 export const getRestaurantReviewComment = async ({ restaurantId }: Params) => {

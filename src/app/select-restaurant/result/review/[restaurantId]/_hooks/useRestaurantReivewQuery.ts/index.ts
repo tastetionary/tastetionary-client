@@ -3,7 +3,7 @@ import { GetRestaurantReviewRes } from '@/types/review';
 import { useQuery } from '@tanstack/react-query';
 
 interface Props {
-  restaurantId: number;
+  restaurantId: string;
 }
 
 export default function useRestaurantReviewQuery({ restaurantId }: Props) {
@@ -11,9 +11,7 @@ export default function useRestaurantReviewQuery({ restaurantId }: Props) {
     data: {
       reviews: GetRestaurantReviewRes[];
     };
-  }>(['review-comment'], () => getRestaurantReviewComment({ restaurantId }), {
-    staleTime: 0,
-  });
+  }>(['review-comment', restaurantId], () => getRestaurantReviewComment({ restaurantId }));
 
   return { restaurantReviews: data?.data.reviews };
 }
