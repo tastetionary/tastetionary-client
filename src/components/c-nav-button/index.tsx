@@ -1,5 +1,5 @@
-import { cn } from "@/utils/styles.utils";
-import { cva } from "class-variance-authority";
+import { cn } from '@/utils/styles.utils';
+import * as S from './style';
 
 interface Props {
   title: string;
@@ -8,36 +8,18 @@ interface Props {
   clickEvent?: () => void;
 }
 
-
-
 export default function CNavButton({ title, icon, isActive, clickEvent }: Props) {
-  const state = isActive ? "isActive": "default"
+  const state = isActive ? 'isActive' : 'default';
 
   return (
-      <button
-        className={cn(navButtonVariants({background: state, border: state}))}
-        onClick={() => {
-          if (clickEvent) clickEvent();
-        }}
-      >
-        <div>{icon}</div>
-        <p className="text-14">{title}</p>
-      </button>
-    
+    <button
+      className={cn(S.navButtonVariants({ background: state, border: state }))}
+      onClick={() => {
+        if (clickEvent) clickEvent();
+      }}
+    >
+      <div>{icon}</div>
+      <p className="text-14">{title}</p>
+    </button>
   );
 }
-
-const navButtonVariants = cva(
-  "flex h-60 w-120 flex-col items-center justify-center gap-4 border-solid border-[#ced9db]", {
-    variants: {
-      background: {
-        default: "bg-neutral-bg05",
-        isActive: "bg-white",
-      },
-      border: {
-        default: "border-2",
-        isActive: "border-t-0"
-      }
-    }
-  }
-)
