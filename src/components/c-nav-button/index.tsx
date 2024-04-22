@@ -1,4 +1,5 @@
-import * as S from './page.styled';
+import { cn } from '@/utils/styles.utils';
+import * as S from './style';
 
 interface Props {
   title: string;
@@ -8,17 +9,17 @@ interface Props {
 }
 
 export default function CNavButton({ title, icon, isActive, clickEvent }: Props) {
+  const state = isActive ? 'isActive' : 'default';
+
   return (
-    <>
-      <S.Button
-        $isActive={isActive}
-        onClick={() => {
-          if (clickEvent) clickEvent();
-        }}
-      >
-        <S.Icon>{icon}</S.Icon>
-        <S.Title>{title}</S.Title>
-      </S.Button>
-    </>
+    <button
+      className={cn(S.navButtonVariants({ background: state, border: state }))}
+      onClick={() => {
+        if (clickEvent) clickEvent();
+      }}
+    >
+      <div>{icon}</div>
+      <p className="text-14">{title}</p>
+    </button>
   );
 }
