@@ -1,5 +1,6 @@
 import StyledComponentsRegistry from '@/lib/registry';
 import StyledComponentsWrapper from '@/lib/styled-components/StyledComponentsWrapper';
+import '@/styles/globals.css';
 import { Metadata } from 'next';
 import localFont from 'next/font/local';
 
