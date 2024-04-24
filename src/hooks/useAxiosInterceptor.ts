@@ -89,7 +89,7 @@ export const useAxiosInterceptor = () => {
 
   useEffect(() => {
     return () => {
-      http.client.interceptors.response.eject(requestInterceptor);
+      http.client.interceptors.request.eject(requestInterceptor);
       http.client.interceptors.response.eject(responseInterceptor);
     };
   }, [requestInterceptor, responseInterceptor]);

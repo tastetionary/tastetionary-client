@@ -141,6 +141,7 @@ export default function SelectRestaurantResult() {
       setPrice(result);
     }
   }, [review?.aggregatePrice]);
+  console.log('restaurant', restaurant);
 
   return (
     <>
@@ -171,7 +172,7 @@ export default function SelectRestaurantResult() {
           <S.MapText>리뷰 {review?.total ?? 'N'}건</S.MapText>
         </S.FlexBox>
 
-        <S.MapText onClick={() => router.push('result/review/1')} style={{ cursor: 'pointer' }}>
+        <S.MapText onClick={() => router.push(`result/review/${restaurant?.id}`)} style={{ cursor: 'pointer' }}>
           리뷰 자세히 보기 &gt;
         </S.MapText>
       </S.ReviewContainer>

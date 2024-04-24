@@ -5,6 +5,7 @@ interface RestaurantInfo {
   name?: string;
   latitude: number;
   longitude: number;
+  id: string;
   review?: {
     total: number;
     keywords: string[];
@@ -37,6 +38,7 @@ const defaultRestaurant = {
   name: undefined,
   latitude: 0,
   longitude: 0,
+  id: '0',
 };
 
 export const useSelectResultStore = create<SelectResultState>()(
@@ -52,11 +54,12 @@ export const useSelectResultStore = create<SelectResultState>()(
               name: value.name,
             },
           }),
-        setSelectRestaurantResult: value =>
-          set({
+        setSelectRestaurantResult: value => {
+          return set({
             restaurant: {
               name: value.name,
               latitude: value.latitude,
+              id: value.id,
               longitude: value.longitude,
               ...(value.review?.total &&
               value.review?.keywords &&
@@ -72,7 +75,9 @@ export const useSelectResultStore = create<SelectResultState>()(
                   }
                 : {}),
             },
-          }),
+          });
+        },
+
         resetFoodResult: () =>
           set({
             food: defaultFood,
