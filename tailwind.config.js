@@ -8,12 +8,40 @@ const px0_400 = { ...Array.from(Array(401)).map((_, i) => `${i}px`) };
 module.exports = {
   content: ['./src/**/*.{js,ts,jsx,tsx,mdx}'],
   theme: {
+    screens: {
+      sm: '320px',
+    },
     extend: {
       borderRadius: px0_50,
       fontSize: px0_100,
       spacing: px0_200,
       width: px0_400,
       height: px0_400,
+      padding: px0_100,
+      zIndex: px0_100,
+      transitionProperty: {
+        visibility: 'visibility',
+      },
+      transitionDuration: {
+        250: '250ms',
+      },
+      transitionTimingFunction: {
+        'in-out': 'ease-in-out',
+      },
+      keyframes: {
+        fadeIn: {
+          '0%': { opacity: 0 },
+          '100%': { opacity: 1 },
+        },
+        fadeOut: {
+          '0%': { opacity: 1 },
+          '100%': { opacity: 0 },
+        },
+      },
+      animation: {
+        fadeIn: 'fadeIn 0.25s ease-in-out',
+        fadeOut: 'fadeOut 0.25s ease-in-out',
+      },
     },
     colors: {
       white: '#ffffff',

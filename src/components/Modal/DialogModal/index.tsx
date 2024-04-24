@@ -1,5 +1,6 @@
+import { cn } from '@/utils/styles.utils';
 import { ReactNode, useEffect, useState } from 'react';
-import * as S from './page.styled';
+import * as S from './style';
 
 export interface DialogModalProps {
   title: string;
@@ -23,6 +24,8 @@ export default function DialogModal({
   needClose,
 }: DialogModalProps) {
   const [animate, setAnimate] = useState(false);
+
+  const state = animate ? 'visible' : 'default';
 
   const onClose = () => {
     setAnimate(false);
@@ -51,36 +54,42 @@ export default function DialogModal({
   }, []);
 
   return (
-    <S.Overlay $visible={animate}>
-      <S.Container $visible={animate}>
-        <S.TextContainer>
-          <S.Title>{title}</S.Title>
+    <div className={cn(S.overlayVariants({ visibility: state, animation: state }))}>
+      <div className={cn(S.dialogModalContainerVariants({ visibility: state, animation: state }))}>
+        <div>
+          <div className="whitespace-pre-line break-keep p-24 text-16 font-bold leading-[140%]">{title}</div>
 
           {(message || elementMessage) && (
-            <S.MessageContainer>
-              {message && <S.Message>{message}</S.Message>}
+            <div className="px-24 py-8">
+              {message && (
+                <p className="whitespace-pre-line break-keep text-14 font-normal leading-[160%] text-neutral-bg40">
+                  {message}
+                </p>
+              )}
               {elementMessage ?? null}
-            </S.MessageContainer>
+            </div>
           )}
-        </S.TextContainer>
+        </div>
 
-        <S.ButtonContainer>
+        <div className="flex items-center justify-end gap-8 p-8">
           <>
             {cancelText && (
-              <S.Button
-                $isSecondary={true}
+              <button
+                className={cn(S.dialogModalButtonVariants({ color: 'isSecondary' }))}
                 onClick={() => {
                   if (onClose) onClose();
                 }}
               >
                 {cancelText}
-              </S.Button>
+              </button>
             )}
 
-            <S.Button onClick={onConfirm}>{confirmText}</S.Button>
+            <button className={cn(S.dialogModalButtonVariants({ color: 'default' }))} onClick={onConfirm}>
+              {confirmText}
+            </button>
           </>
-        </S.ButtonContainer>
-      </S.Container>
-    </S.Overlay>
+        </div>
+      </div>
+    </div>
   );
 }
