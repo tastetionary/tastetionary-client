@@ -1,9 +1,11 @@
+import { cn } from '@/utils/styles.utils';
 import Lottie from 'lottie-react';
 import { useEffect, useState } from 'react';
+import { overlayVariants } from '../DialogModal/style';
 import { MODAL_TYPES } from '../GlobalModal';
 import useModal from '../GlobalModal/hooks/useModal';
 import BookAnimation from './book_animation.json';
-import * as S from './page.styled';
+import * as S from './style';
 
 export interface LoadingModalProps {
   handleClose?: () => void;
@@ -12,6 +14,8 @@ export interface LoadingModalProps {
 export default function LoadingModal({ handleClose }: LoadingModalProps) {
   const { closeModal } = useModal();
   const [animate, setAnimate] = useState(false);
+
+  const state = animate ? 'visible' : 'default';
 
   useEffect(() => {
     if (animate) {
@@ -30,8 +34,8 @@ export default function LoadingModal({ handleClose }: LoadingModalProps) {
   }, []);
 
   return (
-    <S.Overlay $visible={animate}>
-      <S.Container $visible={animate}>
+    <div className={cn(overlayVariants({ visibility: state, animation: state }))}>
+      <div className={cn(S.loadingModalContainerVariants({ visibility: state, animation: state }))}>
         <Lottie
           autoPlay={true}
           loop={true}
@@ -42,7 +46,7 @@ export default function LoadingModal({ handleClose }: LoadingModalProps) {
           height={200}
           width={200}
         />
-      </S.Container>
-    </S.Overlay>
+      </div>
+    </div>
   );
 }
