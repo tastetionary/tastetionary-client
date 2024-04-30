@@ -40,3 +40,15 @@
     }
   }
 }
+
+@layer components {
+  .overlay {
+    @apply b-safe transition-visibility duration-250 fixed left-0 right-0 top-0 z-[15] flex h-screen w-full items-center justify-center bg-black/50 px-20 ease-in-out;
+  }
+}
+
+@layer utilities {
+  .b-safe {
+    bottom: env(safe-area-inset-bottom);
+  }
+}
