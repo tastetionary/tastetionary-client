@@ -10,6 +10,7 @@ module.exports = {
   theme: {
     screens: {
       sm: '320px',
+      mobile: { max: '768px' },
     },
     extend: {
       borderRadius: px0_50,
@@ -17,6 +18,7 @@ module.exports = {
       spacing: px0_200,
       width: px0_400,
       height: px0_400,
+      maxWidth: px0_400,
       padding: px0_100,
       zIndex: px0_100,
       transitionProperty: {
