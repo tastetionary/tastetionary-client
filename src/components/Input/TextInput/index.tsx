@@ -3,7 +3,7 @@ import INPUT_INACTIVE from '@/assets/Input/InputInactive.svg';
 import INPUT_TYPED from '@/assets/Input/InputTyped.svg';
 import { cn } from '@/utils/styles.utils';
 import { ForwardedRef, InputHTMLAttributes, forwardRef, useState } from 'react';
-import * as S from './page.styled';
+import * as S from './style';
 
 interface TextInputProps extends InputHTMLAttributes<HTMLInputElement> {
   label?: string;
