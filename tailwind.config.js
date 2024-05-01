@@ -30,6 +30,9 @@ module.exports = {
       transitionTimingFunction: {
         'in-out': 'ease-in-out',
       },
+      fontFamily: {
+        pretendard: ['var(--font-pretendard)'],
+      },
       keyframes: {
         fadeIn: {
           '0%': { opacity: 0 },

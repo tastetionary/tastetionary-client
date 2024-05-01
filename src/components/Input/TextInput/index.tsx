@@ -1,6 +1,7 @@
 import INPUT_ERROR from '@/assets/Input/InputError.svg';
 import INPUT_INACTIVE from '@/assets/Input/InputInactive.svg';
 import INPUT_TYPED from '@/assets/Input/InputTyped.svg';
+import { cn } from '@/utils/styles.utils';
 import { ForwardedRef, InputHTMLAttributes, forwardRef, useState } from 'react';
 import * as S from './page.styled';
 
@@ -17,24 +18,35 @@ function TextInput(
 
   const hasError = Boolean(errorMsg);
 
-  return (
-    <S.Container>
-      {label && <S.Label>{label}</S.Label>}
+  const inputStyleBgColorState = hasError ? 'hasError' : 'default';
+  const inputStyleColorState = disabled ? 'disabled' : 'default';
 
-      <S.InputContainer
-        $disabled={disabled}
-        $focused={focused}
-        $hasError={hasError}
+  const containerStyleBorderState = hasError ? 'hasError' : focused ? 'focused' : 'default';
+  const containerStyleBgColorState = disabled ? 'disabled' : hasError ? 'hasError' : 'default';
+
+  return (
+    <div>
+      {label && <label className="mb-6 inline-block text-12 font-normal text-neutral-bg80">{label}</label>}
+
+      <div
+        className={cn(
+          S.textInputContainerVariants({ bgColor: containerStyleBgColorState, border: containerStyleBorderState })
+        )}
         onFocus={() => setFocused(true)}
         onBlur={() => setFocused(false)}
       >
-        <S.Input $hasError={hasError} disabled={disabled} ref={ref} {...rest} />
+        <input
+          className={cn(S.textInputVariants({ color: inputStyleColorState, bgColor: inputStyleBgColorState }))}
+          disabled={disabled}
+          ref={ref}
+          {...rest}
+        />
 
         {hasError ? <INPUT_ERROR /> : focused ? <INPUT_TYPED /> : <INPUT_INACTIVE />}
-      </S.InputContainer>
+      </div>
 
-      {errorMsg && <S.ErrorMsg>{errorMsg}</S.ErrorMsg>}
-    </S.Container>
+      {errorMsg && <div className="font-pretendard ml-14 mt-8 text-12 font-normal text-simentic-r90">{errorMsg}</div>}
+    </div>
   );
 }
 
