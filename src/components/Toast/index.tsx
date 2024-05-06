@@ -1,10 +1,12 @@
-import { StyledToast } from './page.styled';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 export default function Toast() {
   return (
-    <StyledToast
+    <ToastContainer
+      className={'toast'}
       position="top-center"
-      autoClose={200000}
+      autoClose={2000}
       hideProgressBar={true}
       closeOnClick={true}
       pauseOnHover={true}

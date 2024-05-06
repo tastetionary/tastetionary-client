@@ -1,4 +1,3 @@
-import * as S from '@/app/page.styled';
 import HomeIcon from '@/assets/logo/home.svg';
 import MypageIcon from '@/assets/logo/my-page.svg';
 import ReviewIcon from '@/assets/logo/review.svg';
@@ -48,7 +47,7 @@ export default function GNB() {
   };
 
   return (
-    <S.NavContainer>
+    <div className="max-w-360 mobile:max-w-full fixed bottom-0 flex w-full [&>button]:flex-grow ">
       <CNavButton title="리뷰" icon={<ReviewIcon />} isActive={false} clickEvent={onReviewClick} />
       <CNavButton title="홈" icon={<HomeIcon />} isActive={pathName === '/'} clickEvent={() => router.push('/')} />
       <CNavButton
@@ -57,6 +56,6 @@ export default function GNB() {
         isActive={pathName === '/mypage'}
         clickEvent={() => router.push('/mypage')}
       />
-    </S.NavContainer>
+    </div>
   );
 }
