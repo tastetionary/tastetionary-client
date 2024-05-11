@@ -47,6 +47,10 @@ module.exports = {
         fadeIn: 'fadeIn 0.25s ease-in-out',
         fadeOut: 'fadeOut 0.25s ease-in-out',
       },
+      backgroundImage: {
+        ic_checkbox_inactive: "url('/image/CheckBox/ic_checkbox_inactive.svg')",
+        ic_checkbox_active: "url('/image/CheckBox/ic_checkbox_active.svg')",
+      },
     },
     colors: {
       white: '#ffffff',
