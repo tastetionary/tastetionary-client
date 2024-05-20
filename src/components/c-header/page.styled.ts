@@ -1,42 +1,19 @@
-import styled from 'styled-components';
+import { cva } from 'class-variance-authority';
 
-export const Wrapper = styled.div`
-  height: 56px;
-  background-color: ${({ theme }) => theme.colors.white};
-  position: fixed;
-  top: 44px;
-  width: 360px;
-  z-index: 1;
+export const backBtnVariants = cva('absolute left-0 w-56 h-56 flex justify-center items-center', {
+  variants: {
+    cursor: {
+      default: 'cursor-auto',
+      isBackBtn: 'cursor-pointer',
+    },
+  },
+});
 
-  @media screen and (max-width: 768px) {
-    width: 100%;
-  }
-`;
-
-export const Container = styled.div`
-  position: relative;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100%;
-`;
-export const BackBtnContainer = styled.div<{ $isBackBtn?: boolean }>`
-  position: absolute;
-  left: 0;
-  cursor: ${({ $isBackBtn }) => ($isBackBtn ? 'pointer' : 'auto')};
-  width: 56px;
-  height: 56px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-`;
-export const TitleContainer = styled.div<{ $isLogo: boolean }>`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 24px;
-  cursor: ${({ $isLogo }) => ($isLogo ? 'pointer' : 'auto')};
-`;
-export const Title = styled.p`
-  margin-left: 8px;
-`;
+export const titleVariants = cva('flex justify-center items-center h-24', {
+  variants: {
+    cursor: {
+      default: 'cursor-auto',
+      isLogo: 'cursor-pointer',
+    },
+  },
+});

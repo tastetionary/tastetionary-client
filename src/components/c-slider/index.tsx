@@ -1,8 +1,8 @@
 import { useReviewStore } from '@/store/useReviewStore';
 import { useSelectRestaurantStore } from '@/store/useSelectRestaurantStore';
+import Slider from 'rc-slider';
 import 'rc-slider/assets/index.css';
 import { useEffect, useState } from 'react';
-import { StyledSlider } from './page.styled';
 
 interface Props {
   markData: {
@@ -28,7 +28,8 @@ export default function CSlider({ markData, type }: Props) {
   }, [value, type]);
 
   return (
-    <StyledSlider
+    <Slider
+      className="slider w-[calc(100% - 28px)] mx-auto my-0 h-20"
       marks={marks}
       min={markData?.[0]?.id ?? 0}
       max={markData?.[markData?.length - 1]?.id ?? 4}
