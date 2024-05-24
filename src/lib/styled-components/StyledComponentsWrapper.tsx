@@ -17,11 +17,11 @@ export default function StyledComponentsWrapper({ children }: { children: ReactN
 
   return (
     <ThemeProvider theme={theme}>
-      <GlobalStyle />
-      <GlobalModal />
-      <Toast />
-      <GoogleAnalytics />
       <ReactQueryProvider>
+        <GlobalStyle />
+        <GlobalModal />
+        <Toast />
+        <GoogleAnalytics />
         <MobileLayout>
           <GridLayout>{children}</GridLayout>
         </MobileLayout>
