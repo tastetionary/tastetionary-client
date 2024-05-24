@@ -45,7 +45,7 @@ function TextInput(
         {hasError ? <INPUT_ERROR /> : focused ? <INPUT_TYPED /> : <INPUT_INACTIVE />}
       </div>
 
-      {errorMsg && <div className="font-pretendard ml-14 mt-8 text-12 font-normal text-simentic-r90">{errorMsg}</div>}
+      {errorMsg && <div className="ml-14 mt-8 !font-pretendard text-12 font-normal text-simentic-r90">{errorMsg}</div>}
     </div>
   );
 }
