@@ -43,7 +43,7 @@ export default function BottomModal({ content }: Props) {
             className="flex cursor-pointer items-center justify-center gap-4"
             onClick={() => setExpand(prev => !prev)}
           >
-            <span className="text-12 leading-[100%] text-neutral-bg40">리스트 보기</span>
+            <span className="text-12 leading-[100%] text-neutral-bg40">{expand ? '지도 보기' : '리스트 보기'}</span>
             <IC_EXPAND_MORE
               width={16}
               height={16}
