@@ -13,8 +13,10 @@ export default function BottomModal({ content }: Props) {
   const { closeModal } = useModal();
 
   const [animate, setAnimate] = useState(false);
+  const [expand, setExpand] = useState(false);
 
   const state = animate ? 'visible' : 'default';
+  const expandState = expand ? 'expand' : 'fold';
 
   const onClose = () => {
     setAnimate(false);
@@ -35,13 +37,25 @@ export default function BottomModal({ content }: Props) {
         if (e.target === e.currentTarget) onClose();
       }}
     >
-      <div className={cn(S.bottomModalContainerVariants({ animation: state }))}>
-        <div className="flex w-full items-center justify-center gap-4 py-12">
-          <span className="text-12 leading-[100%] text-neutral-bg40">리스트 보기</span>
-          <IC_EXPAND_MORE width={16} height={16} />
+      <div className={cn(S.bottomModalContainerVariants({ animation: state, expand: expandState }))}>
+        <div className="flex w-full  items-center justify-center py-12">
+          <div
+            className="flex cursor-pointer items-center justify-center gap-4"
+            onClick={() => setExpand(prev => !prev)}
+          >
+            <span className="text-12 leading-[100%] text-neutral-bg40">리스트 보기</span>
+            <IC_EXPAND_MORE
+              width={16}
+              height={16}
+              style={{
+                transform: expand ? 'rotate(180deg)' : 'none',
+                transition: 'transform ease-in-out 300ms',
+              }}
+            />
+          </div>
         </div>
 
-        <div className="overflow-y-auto">{content ?? <></>}</div>
+        <div className={cn(S.bottomModalContentVariants({ expand: expandState }))}>{content ?? <></>}</div>
       </div>
     </div>
   );

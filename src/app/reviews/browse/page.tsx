@@ -3,7 +3,6 @@
 import { MODAL_TYPES } from '@/components/Modal/GlobalModal';
 import useModal from '@/components/Modal/GlobalModal/hooks/useModal';
 import CHeader from '@/components/c-header';
-import CReviewBrowserNoItem from '@/components/c-review-broswer-noitem';
 import CReviewBrowserItem from '@/components/c-review-browser-item';
 import { useEffect } from 'react';
 
@@ -14,7 +13,7 @@ export default function ReviewBrowse() {
     openModal(MODAL_TYPES.bottom, {
       content: (
         <>
-          <CReviewBrowserNoItem />
+          {/* <CReviewBrowserNoItem /> */}
           <CReviewBrowserItem />
           <CReviewBrowserItem />
           <CReviewBrowserItem />
