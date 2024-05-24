@@ -1,11 +1,28 @@
 'use client';
 
+import { MODAL_TYPES } from '@/components/Modal/GlobalModal';
 import useModal from '@/components/Modal/GlobalModal/hooks/useModal';
 import CHeader from '@/components/c-header';
+import CReviewBrowserNoItem from '@/components/c-review-broswer-noitem';
+import CReviewBrowserItem from '@/components/c-review-browser-item';
 import { useEffect } from 'react';
 
 export default function ReviewBrowse() {
   const { openModal } = useModal();
+
+  const modal = () => {
+    openModal(MODAL_TYPES.bottom, {
+      content: (
+        <>
+          <CReviewBrowserNoItem />
+          <CReviewBrowserItem />
+          <CReviewBrowserItem />
+          <CReviewBrowserItem />
+          <CReviewBrowserItem />
+        </>
+      ),
+    });
+  };
 
   const getKakaoMap = (placeAddress: string) => {
     // script가 완전히 load 된 이후, 실행될 함수
@@ -76,6 +93,8 @@ export default function ReviewBrowse() {
       <CHeader title="리뷰 둘러보기" isBackBtn />
 
       <div id="map" className="h-[calc(100%-267px)] w-full" />
+
+      <button onClick={modal}>모달</button>
     </>
   );
 }
