@@ -1,4 +1,4 @@
-import { getRestaurantReviewComment } from '@/apis/restaurant/review/comment';
+import reviewRepository from '@/apis/restaurant/review/comment';
 import { GetRestaurantReviewRes } from '@/types/review';
 import { useQuery } from '@tanstack/react-query';
 
@@ -8,10 +8,8 @@ interface Props {
 
 export default function useRestaurantReviewQuery({ restaurantId }: Props) {
   const { data } = useQuery<{
-    data: {
-      reviews: GetRestaurantReviewRes[];
-    };
-  }>(['review-comment', restaurantId], () => getRestaurantReviewComment({ restaurantId }));
+    reviews: GetRestaurantReviewRes[];
+  }>(['review-comment', restaurantId], () => reviewRepository().getComment({ restaurantId }));
 
-  return { restaurantReviews: data?.data.reviews };
+  return { restaurantReviews: data?.reviews };
 }
