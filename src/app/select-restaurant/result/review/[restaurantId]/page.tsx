@@ -48,7 +48,7 @@ export default function SelectRestaurantResultReview({ params }: Props) {
     <>
       <CHeader title="리뷰" isBackBtn />
 
-      <div className="bg-white">
+      <div className="mb-48 bg-white">
         <div className="px-24">
           <p className="mb-16 flex items-center gap-4 px-6">
             <Image src={'/image/LikeOn.svg'} alt="like" width={28} height={28} />
@@ -61,6 +61,10 @@ export default function SelectRestaurantResultReview({ params }: Props) {
         </div>
 
         {restaurantReviews?.map(reviews => <CReviewItem reviews={reviews} />)}
+      </div>
+
+      <div className="fixed bottom-0 flex h-48 w-full justify-center bg-primary-y70">
+        <button className="text-white">리뷰 쓰기</button>
       </div>
     </>
   );
