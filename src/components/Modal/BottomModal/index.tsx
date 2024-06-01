@@ -7,9 +7,10 @@ import * as S from './style';
 
 interface Props {
   content?: ReactNode;
+  removeExpandBtn?: boolean;
 }
 
-export default function BottomModal({ content }: Props) {
+export default function BottomModal({ content, removeExpandBtn }: Props) {
   const { closeModal } = useModal();
 
   const [animate, setAnimate] = useState(false);
@@ -39,20 +40,22 @@ export default function BottomModal({ content }: Props) {
     >
       <div className={cn(S.bottomModalContainerVariants({ animation: state, expand: expandState }))}>
         <div className="flex w-full  items-center justify-center py-12">
-          <div
-            className="flex cursor-pointer items-center justify-center gap-4"
-            onClick={() => setExpand(prev => !prev)}
-          >
-            <span className="text-12 leading-[100%] text-neutral-bg40">{expand ? '지도 보기' : '리스트 보기'}</span>
-            <IC_EXPAND_MORE
-              width={16}
-              height={16}
-              style={{
-                transform: expand ? 'rotate(180deg)' : 'none',
-                transition: 'transform ease-in-out 300ms',
-              }}
-            />
-          </div>
+          {!removeExpandBtn && (
+            <div
+              className="flex cursor-pointer items-center justify-center gap-4"
+              onClick={() => setExpand(prev => !prev)}
+            >
+              <span className="text-12 leading-[100%] text-neutral-bg40">{expand ? '지도 보기' : '리스트 보기'}</span>
+              <IC_EXPAND_MORE
+                width={16}
+                height={16}
+                style={{
+                  transform: expand ? 'rotate(180deg)' : 'none',
+                  transition: 'transform ease-in-out 300ms',
+                }}
+              />
+            </div>
+          )}
         </div>
 
         <div className={cn(S.bottomModalContentVariants({ expand: expandState }))}>{content ?? <></>}</div>
