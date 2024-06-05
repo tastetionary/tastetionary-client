@@ -14,6 +14,7 @@ module.exports = {
     },
     extend: {
       borderRadius: px0_50,
+      borderWidth: px0_50,
       fontSize: px0_100,
       spacing: px0_200,
       width: px0_400,
@@ -31,7 +32,7 @@ module.exports = {
         'in-out': 'ease-in-out',
       },
       fontFamily: {
-        pretendard: ['var(--font-pretendard)'],
+        pretendard: ['var(--Pretendard-Variable)'],
       },
       keyframes: {
         fadeIn: {
@@ -42,10 +43,20 @@ module.exports = {
           '0%': { opacity: 1 },
           '100%': { opacity: 0 },
         },
+        slideDown: {
+          '0%': { transform: 'translateY(0px)', opacity: 1 },
+          '100%': { transform: 'translateY(100vh)', opacity: 0 },
+        },
+        slideUp: {
+          '0%': { transform: 'translateY(100vh)', opacity: 0 },
+          '100%': { transform: 'translateY(0px)', opacity: 1 },
+        },
       },
       animation: {
         fadeIn: 'fadeIn 0.25s ease-in-out',
         fadeOut: 'fadeOut 0.25s ease-in-out',
+        slideDown: 'slideDown 0.4s ease-in-out',
+        slideUp: 'slideUp 0.4s ease-in-out',
       },
       backgroundImage: {
         ic_checkbox_inactive: "url('/image/CheckBox/ic_checkbox_inactive.svg')",

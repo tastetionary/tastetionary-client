@@ -7,12 +7,14 @@ import useModal from './hooks/useModal';
 const ExampleModal = dynamic(() => import('../ExampleModal'), { ssr: false });
 const DialogModal = dynamic(() => import('../DialogModal'), { ssr: false });
 const LoadingModal = dynamic(() => import('../LoadingModal'), { ssr: false });
+const BottomModal = dynamic(() => import('../BottomModal'), { ssr: false });
 
 // 사용할 모달 컴포넌트들을 담은 Object
 export const MODAL_TYPES = {
   example: ExampleModal as FunctionComponent<ComponentProps<typeof ExampleModal>>,
   dialog: DialogModal as FunctionComponent<ComponentProps<typeof DialogModal>>,
   loading: LoadingModal as FunctionComponent<ComponentProps<typeof LoadingModal>>,
+  bottom: BottomModal as FunctionComponent<ComponentProps<typeof BottomModal>>,
 };
 
 export default function GlobalModal() {
