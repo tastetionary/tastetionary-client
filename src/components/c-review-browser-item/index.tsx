@@ -11,11 +11,17 @@ export default function CReviewBrowserItem({ title, address }: Props) {
 
   useEffect(() => {
     const getImage = async () => {
-      const needDistrict = !title?.includes(' ');
+      const regex = /(?<=\s)([^ ]+)(?=점$)/; // 식당 이름에서 공백과 '점' 사이의 글자를 추출하는 정규식
+
+      const branch =
+        title?.includes(' ') && title?.split('')[title.length - 1] === '점' ? title.match(regex)?.[0] : undefined;
+
       const district = address?.split(' ')?.[1];
 
       const res = await axios.get(
-        `/search-image-api?query=${needDistrict && district ? `${district} ${title}` : title}&start=1&display=3&sort=sim`,
+        `/search-image-api?query=${
+          branch ? `${branch} 맛집 ${title}` : district ? `${district} 맛집 ${title} 메뉴` : `${title}`
+        }&start=1&display=3&sort=sim`,
         {
           headers: {
             'X-Naver-Client-Id': process.env.NEXT_PUBLIC_NAVER_CLIENT_ID,
