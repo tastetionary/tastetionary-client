@@ -1,17 +1,36 @@
 import http from '@/apis/http';
 
-interface Params {
+interface GetCommentParams {
   restaurantId: string;
 }
 
-export const getRestaurantReviewComment = async ({ restaurantId }: Params) => {
-  const token = sessionStorage?.getItem('token');
+interface PostReportParams {
+  reviewId: number;
+  content: string;
+  category: string;
+}
 
-  const response = await http.get(`/apis/v1/restaurant/${restaurantId}/review`, {
-    headers: {
-      Authorization: `Bearer ${token}`,
-    },
-  });
+const token = sessionStorage?.getItem('token');
 
-  return response;
+const reviewRepository = () => {
+  return {
+    getComment: async ({ restaurantId }: GetCommentParams) =>
+      await http.get(`/apis/v1/restaurant/${restaurantId}/review`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }),
+    postReport: async ({ reviewId, content, category }: PostReportParams) =>
+      await http.post(
+        `/apis/v1/restaurant/review/report`,
+        { reviewId, content, category },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      ),
+  };
 };
+
+export default reviewRepository;

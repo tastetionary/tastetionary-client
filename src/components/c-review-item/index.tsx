@@ -24,7 +24,7 @@ export default function CReviewItem({ reviews }: Props) {
         </S.UserContainer>
 
         <button>
-          <CReviewReportBtn />
+          <CReviewReportBtn id={reviews?.id} />
         </button>
       </S.SpaceBetween>
 

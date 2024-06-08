@@ -1,9 +1,15 @@
+import useReviewReportMutation from '@/app/select-restaurant/result/review/[restaurantId]/_hooks/useReviewReportMutation';
 import { MODAL_TYPES } from '@/components/Modal/GlobalModal';
 import useModal from '@/components/Modal/GlobalModal/hooks/useModal';
 import { toast } from 'react-toastify';
 import * as S from './page.styled';
 
-export default function CReviewReportBtn() {
+interface Props {
+  id: string | undefined;
+}
+
+export default function CReviewReportBtn({ id }: Props) {
+  const { postReportMutate } = useReviewReportMutation();
   const { openModal, closeModal } = useModal();
 
   const reportModal = () => {
@@ -18,6 +24,12 @@ export default function CReviewReportBtn() {
         </S.Text>
       ),
       handleConfirm: () => {
+        postReportMutate({
+          reviewId: Number(id),
+          content: 'string',
+          category: '부적절한 내용',
+        });
+
         toast.success('신고 완료 되었습니다.');
         closeModal(MODAL_TYPES.dialog);
       },
