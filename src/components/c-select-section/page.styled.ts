@@ -43,11 +43,11 @@ import styled from 'styled-components';
 //   text-align: right;
 // `;
 
-export const SectionLink = styled.span`
-  cursor: pointer;
-  font-size: 12px;
-  font-style: normal;
-  font-weight: 400;
-  line-height: 100%;
-  color: ${({ theme }) => theme.colors.neutral.bg60};
-`;
+// export const SectionLink = styled.span`
+//   cursor: pointer;
+//   font-size: 12px;
+//   font-style: normal;
+//   font-weight: 400;
+//   line-height: 100%;
+//   color: ${({ theme }) => theme.colors.neutral.bg60};
+// `;
