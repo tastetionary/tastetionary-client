@@ -63,7 +63,7 @@ export default function SelectRestaurantResultReview({ params }: Props) {
         {restaurantReviews?.map(reviews => <CReviewItem reviews={reviews} />)}
       </div>
 
-      <div className="fixed bottom-0 flex h-48 w-full justify-center bg-primary-y70">
+      <div className="absolute bottom-0 flex h-48 w-full justify-center bg-primary-y70 mobile:fixed">
         <button className="text-white">리뷰 쓰기</button>
       </div>
     </>
