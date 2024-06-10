@@ -2,7 +2,6 @@ import useReviewReportMutation from '@/app/select-restaurant/result/review/[rest
 import { MODAL_TYPES } from '@/components/Modal/GlobalModal';
 import useModal from '@/components/Modal/GlobalModal/hooks/useModal';
 import { toast } from 'react-toastify';
-import * as S from './page.styled';
 
 interface Props {
   id: string | undefined;
@@ -17,11 +16,11 @@ export default function CReviewReportBtn({ id }: Props) {
       title: '리뷰 신고하기',
       message: '해당 리뷰를 신고하시겠습니까?',
       elementMessage: (
-        <S.Text>
+        <span className="text-12 font-normal leading-[19.2px] text-neutral-bg20">
           신고 시 관리자 검토 후에
           <br />
           리뷰 삭제 및 적절한 조치가 이뤄집니다.
-        </S.Text>
+        </span>
       ),
       handleConfirm: () => {
         postReportMutate({
@@ -40,5 +39,10 @@ export default function CReviewReportBtn({ id }: Props) {
     });
   };
 
-  return <S.Button onClick={reportModal} />;
+  return (
+    <button
+      className="flex h-24 w-24 items-center justify-center bg-[url(/image/ReportBtn/report_default.svg)] bg-contain bg-center bg-no-repeat text-18 font-normal text-white drop-shadow-sm enabled:active:bg-[url(/image/ReportBtn/report_pressed.svg)]"
+      onClick={reportModal}
+    />
+  );
 }
