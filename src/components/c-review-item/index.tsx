@@ -3,7 +3,6 @@ import dayjs from 'dayjs';
 import { useState } from 'react';
 import CReviewLikeBtn from './c-review-like-btn';
 import CReviewReportBtn from './c-review-report-btn';
-import * as S from './page.styled';
 
 interface Props {
   reviews?: GetRestaurantReviewRes;
@@ -14,25 +13,34 @@ export default function CReviewItem({ reviews }: Props) {
   const [dislike, setDislike] = useState(false);
 
   return (
-    <S.Container>
-      <S.SpaceBetween>
-        <S.UserContainer>
-          <S.Nickname>{reviews?.user.nickname}</S.Nickname>
-          <S.Date>
+    <div className="flex w-full flex-col gap-12 border-solid border-neutral-bg10 bg-white p-24 [&:not(:last-child)]:border-b-1">
+      <div className="flex items-center justify-between">
+        <div className="flex flex-col gap-10">
+          <span className="text-14 font-bold leading-[14px]">{reviews?.user.nickname}</span>
+          <span className="text-12 font-normal leading-[12px] text-neutral-bg20">
             작성리뷰 {reviews?.user.reviews}개 | {dayjs(reviews?.createdAt).format('YYYY-MM-DD')}
-          </S.Date>
-        </S.UserContainer>
+          </span>
+        </div>
 
         <button>
           <CReviewReportBtn id={reviews?.id} />
         </button>
-      </S.SpaceBetween>
+      </div>
 
-      <S.Review>{reviews?.summary}</S.Review>
+      <p className="text-14 leading-[25.2px]">{reviews?.summary}</p>
 
-      <S.KeywordContainer>{reviews?.keywords.map((k, i) => <S.Keyword key={i}>{k}</S.Keyword>)}</S.KeywordContainer>
+      <div className="flex flex-wrap gap-4">
+        {reviews?.keywords.map((k, i) => (
+          <div
+            key={i}
+            className="border-1 border-solid border-neutral-bg20 p-10 text-12 leading-[12px] text-neutral-bg60"
+          >
+            {k}
+          </div>
+        ))}
+      </div>
 
-      <S.LikedBtnContainer>
+      <div className="flex gap-4">
         <CReviewLikeBtn
           text="도움이 돼요"
           value={reviews?.like as number}
@@ -52,7 +60,7 @@ export default function CReviewItem({ reviews }: Props) {
             setLike(dislike);
           }}
         />
-      </S.LikedBtnContainer>
-    </S.Container>
+      </div>
+    </div>
   );
 }
