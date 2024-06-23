@@ -1,7 +1,6 @@
 import IC_PIN2 from '@/assets/common/Pin2.svg';
 import { useRouter } from 'next/navigation';
 import { ReactNode } from 'react';
-import * as S from './page.styled';
 
 interface Props {
   title: string;
@@ -18,19 +17,26 @@ export default function CSelectSection({ title, subtitle, value, link, children 
   const router = useRouter();
 
   return (
-    <S.Section>
-      <S.SectionHeader>
-        <S.SectionTitleContainer>
+    <section className="mb-48 mt-20 w-full px-16">
+      <div className="mb-20 flex w-full items-center justify-between py-8">
+        <div className="flex items-center gap-8">
           <IC_PIN2 />
-          <S.SectionTitle>{title}</S.SectionTitle>
-          {subtitle && <S.SectionSubTitle>{subtitle}</S.SectionSubTitle>}
-        </S.SectionTitleContainer>
+          <div className="text-16 font-bold">{title}</div>
+          {subtitle && <span className="text-12 font-normal text-neutral-bg30">{subtitle}</span>}
+        </div>
 
-        {value && <S.SectionHeaderValue as={'span'}>{value}</S.SectionHeaderValue>}
-        {link && <S.SectionLink onClick={() => router.push(link.route)}>{link?.text}</S.SectionLink>}
-      </S.SectionHeader>
+        {value && <span className="text-right text-primary-y70">{value}</span>}
+        {link && (
+          <span
+            className="cursor-pointer text-12 font-normal text-neutral-bg60"
+            onClick={() => router.push(link.route)}
+          >
+            {link?.text}
+          </span>
+        )}
+      </div>
 
       {children}
-    </S.Section>
+    </section>
   );
 }
