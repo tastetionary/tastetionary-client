@@ -3,7 +3,6 @@ import { useSelectFoodStore } from '@/store/useSelectFoodStore';
 import { useSelectRestaurantStore } from '@/store/useSelectRestaurantStore';
 import Image from 'next/image';
 import { useEffect, useState } from 'react';
-// import * as S from './page.styled';
 import * as S from './style';
 
 interface Props {

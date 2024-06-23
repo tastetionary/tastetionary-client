@@ -1,7 +1,6 @@
 import IC_PIN2 from '@/assets/common/Pin2.svg';
 import { useRouter } from 'next/navigation';
 import { ReactNode } from 'react';
-import * as S from './page.styled';
 
 interface Props {
   title: string;

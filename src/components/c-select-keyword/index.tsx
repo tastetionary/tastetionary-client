@@ -42,7 +42,6 @@ export default function CSelectKeyword({ data, selectType }: Props) {
             className={S.keyboardButtonVariants({ isSelected: isSelected ? 'selected' : 'default' })}
             key={k.id}
             type="button"
-            // $isSelected={isSelected}
             onClick={() => {
               if (selectedKeyword?.length > 0 && isSelected) {
                 // 이미 선택된 경우

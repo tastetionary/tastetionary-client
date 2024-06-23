@@ -39,3 +39,6 @@ next-env.d.ts
 .npmrc
 # Sentry Config File
 .sentryclirc
+
+# webstorm 설정 파일 ignore
+.idea
