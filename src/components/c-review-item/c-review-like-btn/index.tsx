@@ -1,4 +1,5 @@
-import * as S from './page.styled';
+import { cn } from '@/utils/styles.utils';
+import * as S from './style';
 
 interface Props {
   text: string;
@@ -8,11 +9,13 @@ interface Props {
 }
 
 export default function CReviewLikeBtn({ text, value, clicked, onClickEvent }: Props) {
-  return (
-    <S.LikedBtn $clicked={clicked} onClick={onClickEvent}>
-      <span>{text}</span>
+  const state = clicked ? 'clicked' : 'default';
 
-      <span>{value}</span>
-    </S.LikedBtn>
+  return (
+    <button className={cn(S.likeBtnVariants({ borderColor: state, bgColor: state }))} onClick={onClickEvent}>
+      <span className={clicked ? 'text-secondary-o50' : 'text-neutral-bg80'}>{text}</span>
+
+      <span className={clicked ? 'text-secondary-o50' : 'text-neutral-bg80'}>{value}</span>
+    </button>
   );
 }
