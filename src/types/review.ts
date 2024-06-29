@@ -11,6 +11,15 @@ export interface GetRestaurantReviewRes {
   dislike: number;
 }
 
+export interface GetRestaurantKeywordReviewRes {
+  revisitRatio: number;
+  total: number;
+  keywordCounts: {
+    name: string;
+    count: number;
+  }[];
+}
+
 interface User {
   id: number;
   nickname: string;
