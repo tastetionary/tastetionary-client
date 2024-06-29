@@ -27,7 +27,7 @@ export default function RevisitingProgressbar({ name, cnt, percent }: Props) {
       </div>
       <div
         style={{
-          width: `${mock.percent + 0.5}%`,
+          width: `${percent + 0.5}%`,
         }}
         className="z-1000 absolute top-0 h-32 border-1 border-solid border-primary-y50"
       ></div>
