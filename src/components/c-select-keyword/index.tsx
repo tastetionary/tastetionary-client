@@ -2,7 +2,7 @@ import { useReviewStore } from '@/store/useReviewStore';
 import { useSelectFoodStore } from '@/store/useSelectFoodStore';
 import { useSelectRestaurantStore } from '@/store/useSelectRestaurantStore';
 import { useEffect, useState } from 'react';
-import * as S from './page.styled';
+import * as S from './style';
 
 interface Props {
   selectType: 'food' | 'restaurant' | 'review';
@@ -33,15 +33,15 @@ export default function CSelectKeyword({ data, selectType }: Props) {
   }, [foodKeyword, restaurantKeyword, reviewKeyword, selectType]);
 
   return (
-    <S.KeywordContainer>
+    <div className="mt-24 flex flex-wrap gap-x-8 gap-y-16">
       {data?.map((k, i) => {
         const isSelected = selectedKeyword?.includes(k?.name);
 
         return (
-          <S.KeywordBtn
+          <button
+            className={S.keyboardButtonVariants({ isSelected: isSelected ? 'selected' : 'default' })}
             key={k.id}
             type="button"
-            $isSelected={isSelected}
             onClick={() => {
               if (selectedKeyword?.length > 0 && isSelected) {
                 // 이미 선택된 경우
@@ -67,9 +67,9 @@ export default function CSelectKeyword({ data, selectType }: Props) {
             }}
           >
             {k.name}
-          </S.KeywordBtn>
+          </button>
         );
       })}
-    </S.KeywordContainer>
+    </div>
   );
 }
