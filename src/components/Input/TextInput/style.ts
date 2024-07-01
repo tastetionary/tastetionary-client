@@ -19,7 +19,7 @@ export const textInputContainerVariants = cva(
 );
 
 export const textInputVariants = cva(
-  'w-[calc(100% - 24px)] bg-white text-16 font-normal text-neutral-bg80 placeholder:text-[14px] placeholder:text-neutral-bg20',
+  'w-[calc(100%-24px)] bg-white text-16 font-normal text-neutral-bg80 placeholder:text-[14px] placeholder:text-neutral-bg20',
   {
     variants: {
       color: {
