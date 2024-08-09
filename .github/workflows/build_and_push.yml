@@ -57,7 +57,7 @@ jobs:
           NPMRC_PATH: ${{ env.npmrc_path }}
         run: |
           docker buildx build \
-            --file docker/Dockerfile \
+            --file ./Dockerfile \
             --tag $REGISTRY/$REPOSITORY:$IMAGE_TAG \
             --tag $REGISTRY/$REPOSITORY:$GITHUB_REF_NAME \
             --cache-from "type=registry,ref=$REGISTRY/$REPOSITORY:$IMAGE_TAG" \
