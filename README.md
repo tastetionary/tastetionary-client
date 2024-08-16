@@ -2,7 +2,7 @@
 
 TBD
 
-## Getting Startedssssssssssss
+## Getting Started
 
 ## Installationsssssssssssssssss
 
