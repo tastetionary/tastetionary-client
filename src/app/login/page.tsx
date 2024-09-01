@@ -9,6 +9,8 @@ import { SHA256 } from 'crypto-js';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
+import useGoogleLogin from './hooks/useGoogleLogin';
+import useKakaoLogin from './hooks/useKakaoLogin';
 import useLoginMutate from './hooks/useLoginMutate';
 import * as S from './pagd.styled';
 
@@ -29,6 +31,16 @@ export default function Login() {
 
   const [loginState, setLoginState] = useState(false);
   const { mutate: loginMutate } = useLoginMutate();
+  const { loginPopup: kakaoLogin } = useKakaoLogin({
+    successEvent: (provider, providerId) => {
+      console.log(provider, providerId);
+    },
+  });
+  const { googleLogin } = useGoogleLogin({
+    successEvent: (provider, providerId) => {
+      console.log(provider, providerId);
+    },
+  });
 
   const onSubmitHandler: SubmitHandler<FormValue> = data => {
     data.password = SHA256(data.password).toString();
@@ -91,6 +103,15 @@ export default function Login() {
           <S.NavDivider />
           <S.NavItem onClick={() => router.push('/sign-up')}>회원가입</S.NavItem>
         </S.NavContainer>
+
+        <div className="mt-20 flex justify-center gap-10 px-20">
+          <button className="border-1 border-solid border-black bg-white px-10 py-8" onClick={kakaoLogin}>
+            카카오
+          </button>
+          <button className="border-1 border-solid border-black bg-white px-10 py-8" onClick={() => googleLogin()}>
+            구글
+          </button>
+        </div>
       </S.Container>
     </>
   );
