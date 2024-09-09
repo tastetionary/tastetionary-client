@@ -35,7 +35,7 @@ const SentryWebpackPluginOptions = {
 
   // Suppresses source map uploading logs during build
   silent: true,
-  org: '4506020618633216',
+  org: 'tastionary',
   project: 'taste-client',
   authToken: process.env.NEXT_PUBLIC_SENTRY_AUTH_KEY, // An auth token is required for uploading source maps.
 };
