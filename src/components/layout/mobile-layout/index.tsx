@@ -1,18 +1,11 @@
-import HEADER_LAYOUT_LOGO from '@/assets/logo/header_layout.svg';
-import * as S from './page.styled';
 interface Props {
   children: React.ReactNode;
 }
 
 export default function MobileLayout({ children }: Props) {
   return (
-    <S.LayoutWrapper>
-      <S.Layout>
-        <S.LogoWrapper>
-          <HEADER_LAYOUT_LOGO />
-        </S.LogoWrapper>
-        {children}
-      </S.Layout>
-    </S.LayoutWrapper>
+    <div className="flex min-h-svh w-full justify-center bg-neutral-bg05">
+      <div className="mx-auto my-0 w-full max-w-360 bg-white mobile:max-w-full">{children}</div>
+    </div>
   );
 }
