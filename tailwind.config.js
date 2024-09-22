@@ -5,6 +5,8 @@ const px0_100 = { ...Array.from(Array(101)).map((_, i) => `${i}px`) };
 const px0_200 = { ...Array.from(Array(201)).map((_, i) => `${i}px`) };
 const px0_400 = { ...Array.from(Array(401)).map((_, i) => `${i}px`) };
 
+const plugin = require('tailwindcss/plugin');
+
 module.exports = {
   content: ['./src/**/*.{js,ts,jsx,tsx,mdx}'],
   theme: {
@@ -22,6 +24,7 @@ module.exports = {
       maxWidth: px0_400,
       padding: px0_100,
       zIndex: px0_100,
+      bgOpacity: px0_100,
       transitionProperty: {
         visibility: 'visibility',
       },
@@ -72,6 +75,10 @@ module.exports = {
         xxl: '48px',
         xxxl: '80px',
       },
+      boxShadow: {
+        negative: '-1px -1px 0 rgba(0, 0, 0, 0.25)',
+        positive: '1px 1px 0 rgba(0, 0, 0, 0.25)',
+      },
     },
     colors: {
       white: '#ffffff',
@@ -121,7 +128,23 @@ module.exports = {
         black: '#000000',
         white: '#FFFFFF',
       },
+      red: {
+        r90: '#B71B1C',
+        r80: '#C62728',
+        r70: '#D32E30',
+        r60: '#E53835',
+        r50: '#F44236',
+        r40: '#EF5350',
+        r30: '#E57373',
+        r20: '#EF9A9A',
+        r10: '#FFCDD1',
+        r05: '#FFEBEE',
+      },
     },
   },
-  plugins: [],
+  plugins: [
+    plugin(function ({ addVariant }) {
+      addVariant('not-disabled', '&:not(:disabled)');
+    }),
+  ],
 };
