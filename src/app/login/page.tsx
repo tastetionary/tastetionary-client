@@ -31,7 +31,7 @@ export default function Login() {
 
   const [loginState, setLoginState] = useState(false);
   const { mutate: loginMutate } = useLoginMutate();
-  const { loginPopup: kakaoLogin } = useKakaoLogin({
+  const { loginHandler: kakaoLogin } = useKakaoLogin({
     successEvent: (provider, providerId) => {
       console.log(provider, providerId);
     },
