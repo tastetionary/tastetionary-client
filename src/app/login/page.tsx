@@ -1,97 +1,80 @@
 'use client';
 
-import MainButton from '@/components/Button/MainButton';
-import CheckBox2 from '@/components/CheckBox/CheckBox2';
-import TextInput from '@/components/Input/TextInput';
-import CHeader from '@/components/c-header';
-import { emailRegex } from '@/constants';
-import { SHA256 } from 'crypto-js';
+import IC_EMAIL from '@/assets/common/Icons/email.svg';
+import MAIN_LOGO from '@/assets/logo/main_logo.svg';
+import LOGO_APPLE from '@/assets/logo/sns/logo_apple.svg';
+import LOGO_GOOGLE from '@/assets/logo/sns/logo_google.svg';
+import LOGO_KAKAO from '@/assets/logo/sns/logo_kakao.svg';
+import LOGO_NAVER from '@/assets/logo/sns/logo_naver.svg';
+import DefaultButton from '@/components/Button/DefaultButton';
+import Header from '@/components/Header';
+import clsx from 'clsx';
 import { useRouter } from 'next/navigation';
-import { useState } from 'react';
-import { SubmitHandler, useForm } from 'react-hook-form';
-import useLoginMutate from './hooks/useLoginMutate';
-import * as S from './pagd.styled';
-
-interface FormValue {
-  identification: string;
-  password: string;
-}
 
 export default function Login() {
-  const router = useRouter();
-  const {
-    register,
-    handleSubmit,
-    formState: { errors, isValid },
-  } = useForm<FormValue>({
-    mode: 'onSubmit',
-  });
+  const { push } = useRouter();
 
-  const [loginState, setLoginState] = useState(false);
-  const { mutate: loginMutate } = useLoginMutate();
-
-  const onSubmitHandler: SubmitHandler<FormValue> = data => {
-    data.password = SHA256(data.password).toString();
-    loginMutate({ ...data, category: 'email' });
+  const loginButtonDefaultStyle = (bgColor: string) => {
+    return `login-btn bg-${bgColor}`;
   };
 
   return (
     <>
-      <CHeader title="로그인" isBackBtn />
+      <Header title="로그인" />
 
-      <S.Container>
-        <S.FormContainer>
-          <S.FormShadow />
+      <div className="= mt-xxxl flex w-full flex-col items-center px-xl pb-xxxl">
+        <MAIN_LOGO width={80} height={80} />
 
-          <S.FormHeader></S.FormHeader>
-          <S.Form onSubmit={handleSubmit(onSubmitHandler)}>
-            <TextInput
-              type="text"
-              label="아이디"
-              placeholder="아이디 입력"
-              errorMsg={errors?.identification?.message}
-              {...register('identification', {
-                required: true,
-                pattern: {
-                  value: emailRegex,
-                  message: '이메일 형식이 맞지 않습니다.',
-                },
-              })}
-            />
+        <h1 className="title2 mt-xs break-keep text-center font-bold ">
+          맛셔너리,
+          <br />
+          직장인을 위한 맞춤 점심 추천
+        </h1>
 
-            <TextInput
-              type="password"
-              label="비밀번호"
-              placeholder="비밀번호 입력"
-              errorMsg={errors?.password?.message}
-              {...register('password', {
-                required: true,
-                pattern: {
-                  value: /^(?=.*[a-zA-Z])(?=.*\d)(?=.*[@#$%^&+=!?]).{8,}$/,
-                  message: '영문, 숫자, 특수문자를 조합하여 8자 이상 입력해주세요.',
-                },
-              })}
-            />
+        <p className="body2 mt-xs break-keep text-center text-neutral-bg60">
+          키워드로 메뉴부터 식당까지, 맛셔너리가 추천해드립니다.
+        </p>
 
-            <CheckBox2
-              checkBoxId="login-state"
-              label="로그인 상태 유지"
-              checked={loginState}
-              onChangeEvent={checked => setLoginState(checked)}
-            />
+        <div className="mt-xxl w-full">
+          <button className={`login-btn w-full gap-xs bg-[#fae64d] py-sm`}>
+            <LOGO_KAKAO width={20} height={20} />
+            <span className="body1">카카오 로그인</span>
+          </button>
 
-            <MainButton btnText="로그인" disabled={!isValid} />
-          </S.Form>
-        </S.FormContainer>
+          <div className="bg-tran mt-xl flex justify-center gap-lg">
+            <button className={clsx(`login-btn h-48 w-48 bg-[#5AC467]`)}>
+              <LOGO_NAVER width={24} height={24} />
+            </button>
 
-        <S.NavContainer>
-          <S.NavItem onClick={() => router.push('/ready')}>아이디 찾기</S.NavItem>
-          <S.NavDivider />
-          <S.NavItem onClick={() => router.push('/find-password')}>비밀번호 찾기</S.NavItem>
-          <S.NavDivider />
-          <S.NavItem onClick={() => router.push('/sign-up')}>회원가입</S.NavItem>
-        </S.NavContainer>
-      </S.Container>
+            <button className={clsx(`${loginButtonDefaultStyle('white')} h-48 w-48`)}>
+              <LOGO_GOOGLE width={24} height={24} />
+            </button>
+
+            <button className={clsx(`${loginButtonDefaultStyle('black')} h-48 w-48`)}>
+              <LOGO_APPLE width={24} height={24} />
+            </button>
+
+            <button
+              className={clsx(`${loginButtonDefaultStyle('white')} h-48 w-48`)}
+              onClick={() => push('/login/email')}
+            >
+              <IC_EMAIL width={24} height={24} />
+            </button>
+          </div>
+        </div>
+
+        <div className="mt-xl flex w-full items-center justify-center">
+          <DefaultButton bgColor="none" customStyle="py-5 w-100" onClick={() => push('/ready')}>
+            <span className="body2 !font-pretendard">아이디 찾기</span>
+          </DefaultButton>
+
+          <div className="h-20 w-1 bg-neutral-bg20" />
+
+          <DefaultButton bgColor="none" customStyle="py-5 w-100" onClick={() => push('/sign-up')}>
+            <span className="body2 !font-pretendard">회원가입</span>
+          </DefaultButton>
+        </div>
+      </div>
     </>
   );
 }
