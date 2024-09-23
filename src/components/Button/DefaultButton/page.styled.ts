@@ -1,6 +1,6 @@
 import { cva } from 'class-variance-authority';
 
-export const buttonBgVariants = cva('default-btn', {
+export const buttonBgVariants = cva('default-btn disabled:bg-opacity-40', {
   variants: {
     bgColor: {
       orange: 'bg-secondary-o40',
@@ -21,10 +21,10 @@ export const buttonBgVariants = cva('default-btn', {
       none: 'bg-transparent',
     },
     disabled: {
-      orange: 'bg-secondary-o40 bg-opacity-40',
-      yellow: 'bg-primary-y70 bg-opacity-40',
-      gray: 'bg-white bg-opacity-40',
-      none: 'bg-transparent bg-opacity-40',
+      orange: 'bg-secondary-o40',
+      yellow: 'bg-primary-y70',
+      gray: 'bg-white',
+      none: 'bg-transparent',
     },
   },
 });

@@ -13,7 +13,7 @@ export default function DefaultButton({ bgColor, customStyle, children, ...rest 
     return (
       <button
         {...rest}
-        className={`not-disabled:hover:bg-opacity-8 flex items-center justify-center active:bg-opacity-20 disabled:bg-opacity-40 ${customStyle && `${customStyle}`}`}
+        className={`border-none-btn flex items-center justify-center disabled:bg-opacity-40 ${customStyle && `${customStyle}`}`}
       >
         {children}
       </button>
