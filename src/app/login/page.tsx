@@ -15,7 +15,7 @@ export default function Login() {
   const { push } = useRouter();
 
   const loginButtonDefaultStyle = (bgColor: string) => {
-    return `login-btn bg-${bgColor}`;
+    return `default-btn bg-${bgColor}`;
   };
 
   return (
@@ -36,13 +36,13 @@ export default function Login() {
         </p>
 
         <div className="mt-xxl w-full">
-          <button className={`login-btn w-full gap-xs bg-[#fae64d] py-sm`}>
+          <button className={`default-btn w-full gap-xs bg-[#fae64d] py-sm`}>
             <LOGO_KAKAO width={20} height={20} />
             <span className="body1">카카오 로그인</span>
           </button>
 
           <div className="bg-tran mt-xl flex justify-center gap-lg">
-            <button className={clsx(`login-btn h-48 w-48 bg-[#5AC467]`)}>
+            <button className={clsx(`default-btn h-48 w-48 bg-[#5AC467]`)}>
               <LOGO_NAVER width={24} height={24} />
             </button>
 

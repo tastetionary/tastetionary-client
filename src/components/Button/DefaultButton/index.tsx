@@ -20,13 +20,7 @@ export default function DefaultButton({ bgColor, customStyle, children, ...rest 
     );
 
   return (
-    <button
-      {...rest}
-      className={cn(
-        S.buttonBgVariants({ bgColor, active: bgColor, hover: bgColor, disabled: bgColor }),
-        customStyle && `${customStyle}`
-      )}
-    >
+    <button {...rest} className={cn(S.buttonBgVariants({ bgColor }), customStyle && `${customStyle}`)}>
       {children}
     </button>
   );
