@@ -1,22 +1,19 @@
 'use client';
 
-import IC_EMAIL from '@/assets/common/Icons/email.svg';
 import MAIN_LOGO from '@/assets/logo/main_logo.svg';
-import LOGO_APPLE from '@/assets/logo/sns/logo_apple.svg';
-import LOGO_GOOGLE from '@/assets/logo/sns/logo_google.svg';
-import LOGO_KAKAO from '@/assets/logo/sns/logo_kakao.svg';
-import LOGO_NAVER from '@/assets/logo/sns/logo_naver.svg';
 import DefaultButton from '@/components/Button/DefaultButton';
 import Header from '@/components/Header';
-import clsx from 'clsx';
 import { useRouter } from 'next/navigation';
+import LoginBtn from './components/LoginBtn';
+import useGoogleLogin from './hooks/useGoogleLogin';
+import useKakaoLogin from './hooks/useKakaoLogin';
+import useNaverLogin from './hooks/useNaverLogin';
 
 export default function Login() {
   const { push } = useRouter();
-
-  const loginButtonDefaultStyle = (bgColor: string) => {
-    return `default-btn bg-${bgColor}`;
-  };
+  const { loginHandler: kakaoLogin } = useKakaoLogin();
+  const { loginHandler: googleLogin } = useGoogleLogin();
+  const { loginHandler: naverLogin } = useNaverLogin();
 
   return (
     <>
@@ -36,30 +33,16 @@ export default function Login() {
         </p>
 
         <div className="mt-xxl w-full">
-          <button className={`default-btn w-full gap-xs bg-[#fae64d] py-sm`}>
-            <LOGO_KAKAO width={20} height={20} />
-            <span className="body1">카카오 로그인</span>
-          </button>
+          <LoginBtn loginType="kakao" onClick={kakaoLogin} />
 
           <div className="bg-tran mt-xl flex justify-center gap-lg">
-            <button className={clsx(`default-btn h-48 w-48 bg-[#5AC467]`)}>
-              <LOGO_NAVER width={24} height={24} />
-            </button>
+            <LoginBtn loginType="naver" onClick={naverLogin} />
 
-            <button className={clsx(`${loginButtonDefaultStyle('white')} h-48 w-48`)}>
-              <LOGO_GOOGLE width={24} height={24} />
-            </button>
+            <LoginBtn loginType="google" onClick={googleLogin} />
 
-            <button className={clsx(`${loginButtonDefaultStyle('black')} h-48 w-48`)}>
-              <LOGO_APPLE width={24} height={24} />
-            </button>
+            <LoginBtn loginType="apple" />
 
-            <button
-              className={clsx(`${loginButtonDefaultStyle('white')} h-48 w-48`)}
-              onClick={() => push('/login/email')}
-            >
-              <IC_EMAIL width={24} height={24} />
-            </button>
+            <LoginBtn loginType="email" onClick={() => push('/login/email')} />
           </div>
         </div>
 

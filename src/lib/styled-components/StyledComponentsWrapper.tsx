@@ -1,5 +1,6 @@
 'use client';
 
+import LoginSDK from '@/app/login/components/LoginSDK';
 import GlobalModal from '@/components/Modal/GlobalModal';
 import Toast from '@/components/Toast';
 import GoogleAnalytics from '@/components/google-analytics';
@@ -21,6 +22,7 @@ export default function StyledComponentsWrapper({ children }: { children: ReactN
         <GlobalModal />
         <Toast />
         <GoogleAnalytics />
+        <LoginSDK />
         <MobileLayout>{children}</MobileLayout>
       </ReactQueryProvider>
     </ThemeProvider>
