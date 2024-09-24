@@ -10,9 +10,9 @@ export default function Header({ title, noBackBtn }: Props) {
   const { back } = useRouter();
 
   return (
-    <div className="gap-md fixed top-0 z-1 flex h-56 w-360 items-center justify-between border-b-1 border-solid border-b-neutral-bg20 bg-white mobile:w-full">
+    <div className="fixed top-0 z-1 flex h-56 w-360 items-center justify-between gap-md border-b-1 border-solid border-b-neutral-bg20 bg-white mobile:w-full">
       {!noBackBtn ? (
-        <button className="flex h-56 w-56 items-center justify-center" onClick={back}>
+        <button className="flex h-55 w-56 items-center justify-center" onClick={back}>
           <ARROW width={24} height={24} />
         </button>
       ) : (
