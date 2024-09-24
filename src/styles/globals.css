@@ -223,11 +223,11 @@
       transition: background-color 0.3s ease;
     }
 
-    &:hover:before {
+    &:not(:disabled):hover:before {
       background-color: rgba(0, 0, 0, 0.08);
     }
 
-    &:active:before {
+    &:not(:disabled):active:before {
       background-color: rgba(0, 0, 0, 0.12);
     }
 
@@ -264,11 +264,11 @@
       transition: background-color 0.3s ease;
     }
 
-    &:hover:before {
+    &:not(:disabled):hover:before {
       background-color: rgba(0, 0, 0, 0.08);
     }
 
-    &:active:before {
+    &:not(:disabled):active:before {
       background-color: rgba(0, 0, 0, 0.12);
     }
   }
