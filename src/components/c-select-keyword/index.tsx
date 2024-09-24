@@ -40,7 +40,7 @@ export default function CSelectKeyword({ data, selectType }: Props) {
         return (
           <DefaultButton
             bgColor="gray"
-            customStyle={`px-24 py-12 ${isSelected ? 'selected' : ''}`}
+            customStyle={`px-16 py-12 ${isSelected ? 'selected' : ''}`}
             className="test"
             key={k.id}
             type="button"
@@ -68,7 +68,7 @@ export default function CSelectKeyword({ data, selectType }: Props) {
               }
             }}
           >
-            {k.name}
+            <span className="body1">{k.name}</span>
           </DefaultButton>
         );
       })}
