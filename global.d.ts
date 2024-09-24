@@ -2,6 +2,7 @@
 declare global {
   interface Window {
     kakao: any;
+    naver: any;
   }
   const kakao: any;
 }
