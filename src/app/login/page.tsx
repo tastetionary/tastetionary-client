@@ -19,7 +19,7 @@ export default function Login() {
     <>
       <Header title="로그인" />
 
-      <div className="= mt-xxxl flex w-full flex-col items-center px-xl pb-xxxl">
+      <div className="mt-xxxl flex w-full flex-col items-center px-xl pb-xxxl">
         <MAIN_LOGO width={80} height={80} />
 
         <h1 className="title2 mt-xs break-keep text-center font-bold ">
