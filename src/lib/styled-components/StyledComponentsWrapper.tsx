@@ -3,7 +3,6 @@
 import GlobalModal from '@/components/Modal/GlobalModal';
 import Toast from '@/components/Toast';
 import GoogleAnalytics from '@/components/google-analytics';
-import GridLayout from '@/components/layout/grid-layout';
 import MobileLayout from '@/components/layout/mobile-layout';
 import { useAxiosInterceptor } from '@/hooks/useAxiosInterceptor';
 import { GlobalStyle } from '@/styles/GlobalStyle';
@@ -22,9 +21,7 @@ export default function StyledComponentsWrapper({ children }: { children: ReactN
         <GlobalModal />
         <Toast />
         <GoogleAnalytics />
-        <MobileLayout>
-          <GridLayout>{children}</GridLayout>
-        </MobileLayout>
+        <MobileLayout>{children}</MobileLayout>
       </ReactQueryProvider>
     </ThemeProvider>
   );

@@ -22,6 +22,7 @@ export default function CHeader({ isLogo = false, isBackBtn = false, title }: Pr
         <div className={cn(S.backBtnVariants({ cursor: backBtnState }))}>
           {isBackBtn && <ISBACK_BTN onClick={() => router.back()} />}
         </div>
+
         <div
           className={cn(S.titleVariants({ cursor: titleState }))}
           onClick={() => {
