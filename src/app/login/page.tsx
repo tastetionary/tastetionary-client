@@ -2,7 +2,7 @@
 
 import MAIN_LOGO from '@/assets/logo/main_logo.svg';
 import DefaultButton from '@/components/Button/DefaultButton';
-import Header from '@/components/Header';
+import CHeader from '@/components/c-header';
 import { useRouter } from 'next/navigation';
 import LoginBtn from './components/LoginBtn';
 import useGoogleLogin from './hooks/useGoogleLogin';
@@ -17,7 +17,7 @@ export default function Login() {
 
   return (
     <>
-      <Header title="로그인" />
+      <CHeader title="로그인" />
 
       <div className="= mt-xxxl flex w-full flex-col items-center px-xl pb-xxxl">
         <MAIN_LOGO width={80} height={80} />

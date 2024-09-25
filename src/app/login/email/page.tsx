@@ -1,7 +1,7 @@
 'use client';
 
 import DefaultButton from '@/components/Button/DefaultButton';
-import Header from '@/components/Header';
+import CHeader from '@/components/c-header';
 import TextInput from '@/components/Input/TextInput';
 import { emailRegex } from '@/constants';
 import { SHA256 } from 'crypto-js';
@@ -40,7 +40,7 @@ export default function EmailLogin() {
 
   return (
     <>
-      <Header title="이메일 로그인" />
+      <CHeader title="이메일 로그인" />
 
       <div className="mt-xxxl flex w-full flex-col gap-xl px-xl">
         <h1 className="title2 break-keep font-bold ">이메일로 로그인 ✉</h1>
