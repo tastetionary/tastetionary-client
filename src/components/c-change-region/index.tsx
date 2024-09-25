@@ -1,7 +1,8 @@
-import IC_MAP from '@/assets/common/map.svg';
+import IC_CHEVRON from '@/assets/common/Icons/chevron.svg';
+import IC_PIN from '@/assets/common/Icons/pin.svg';
 import useUser from '@/hooks/useUser';
 import { useRouter } from 'next/navigation';
-import * as S from './page.styled';
+import DefaultButton from '../Button/DefaultButton';
 
 interface Props {
   type: 'activity_area' | 'dining_area';
@@ -20,20 +21,23 @@ export default function CChangeRegion({ type }: Props) {
   };
 
   return (
-    <S.ChangeRegionContainer onClick={onClickEvent}>
-      <S.FlexBox>
-        <IC_MAP width={24} height={24} />
+    <div className="w-full px-12 py-12">
+      <div
+        className="flex w-full items-center justify-between rounded-4 border-1 border-solid border-neutral-bg10 bg-neutral-bg05 px-16 py-9"
+        onClick={onClickEvent}
+      >
+        <div className="flex items-center gap-xs">
+          <IC_PIN width={16} height={16} />
 
-        <S.Region>
-          {type === 'dining_area'
-            ? data?.area?.diningArea?.address
-            : type === 'activity_area'
-            ? data?.area?.activityArea?.address
-            : ''}
-        </S.Region>
-      </S.FlexBox>
+          <span className="body2">{data?.area?.address ?? ''}</span>
+        </div>
 
-      <S.ChangeText>{type === 'dining_area' ? '식사' : '활동'} 지역 변경 &gt;</S.ChangeText>
-    </S.ChangeRegionContainer>
+        <DefaultButton bgColor="gray" customStyle="flex items-center gap-xxs py-4 pr-12 pl-8">
+          <span className="body2">지역 변경</span>
+
+          <IC_CHEVRON width={16} height={16} />
+        </DefaultButton>
+      </div>
+    </div>
   );
 }
