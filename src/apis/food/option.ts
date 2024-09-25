@@ -12,6 +12,6 @@ export const getFoodOption = async () => {
   const res = await http.get<{ data?: Res }>(`${baseUrl}/apis/v1/food/option`);
 
   if (res?.data) {
-    return res?.data;
+    return res?.data as Res;
   }
 };

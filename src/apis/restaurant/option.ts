@@ -13,6 +13,6 @@ export const getRestaurantOption = async () => {
   const res = await http.get<{ data?: Res }>(`${baseUrl}/apis/v1/restaurant/option`);
 
   if (res?.data) {
-    return res?.data;
+    return res?.data as Res;
   }
 };
