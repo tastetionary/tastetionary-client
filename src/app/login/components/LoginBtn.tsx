@@ -18,7 +18,11 @@ export default function LoginBtn({ loginType, ...rest }: Props) {
   if (loginType === 'naver')
     return (
       <Fragment>
-        <button className={clsx(`${loginButtonDefaultStyle('[#5AC467]')} h-48 w-48`)} {...rest}>
+        <button
+          className={clsx(`${loginButtonDefaultStyle('[#5AC467]')} h-48 w-48`)}
+          style={{ backgroundColor: '#5AC467' }}
+          {...rest}
+        >
           <LOGO_NAVER width={24} height={24} />
         </button>
 

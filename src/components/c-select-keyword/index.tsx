@@ -2,7 +2,7 @@ import { useReviewStore } from '@/store/useReviewStore';
 import { useSelectFoodStore } from '@/store/useSelectFoodStore';
 import { useSelectRestaurantStore } from '@/store/useSelectRestaurantStore';
 import { useEffect, useState } from 'react';
-import * as S from './style';
+import DefaultButton from '../Button/DefaultButton';
 
 interface Props {
   selectType: 'food' | 'restaurant' | 'review';
@@ -33,13 +33,15 @@ export default function CSelectKeyword({ data, selectType }: Props) {
   }, [foodKeyword, restaurantKeyword, reviewKeyword, selectType]);
 
   return (
-    <div className="mt-24 flex flex-wrap gap-x-8 gap-y-16">
+    <div className="flex flex-wrap gap-[14px]">
       {data?.map((k, i) => {
         const isSelected = selectedKeyword?.includes(k?.name);
 
         return (
-          <button
-            className={S.keyboardButtonVariants({ isSelected: isSelected ? 'selected' : 'default' })}
+          <DefaultButton
+            bgColor="gray"
+            customStyle={`px-16 py-12 ${isSelected ? 'selected' : ''}`}
+            className="test"
             key={k.id}
             type="button"
             onClick={() => {
@@ -66,8 +68,8 @@ export default function CSelectKeyword({ data, selectType }: Props) {
               }
             }}
           >
-            {k.name}
-          </button>
+            <span className="body1">{k.name}</span>
+          </DefaultButton>
         );
       })}
     </div>
