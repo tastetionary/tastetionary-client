@@ -1,5 +1,6 @@
 /** @type {import('tailwindcss').Config} */
 
+const _0_100 = { ...Array.from(Array(101)).map((_, i) => `${i}`) };
 const px0_50 = { ...Array.from(Array(51)).map((_, i) => `${i}px`) };
 const px0_100 = { ...Array.from(Array(101)).map((_, i) => `${i}px`) };
 const px0_200 = { ...Array.from(Array(201)).map((_, i) => `${i}px`) };
@@ -23,7 +24,7 @@ module.exports = {
       height: px0_400,
       maxWidth: px0_400,
       padding: px0_100,
-      zIndex: px0_100,
+      zIndex: _0_100,
       bgOpacity: px0_100,
       transitionProperty: {
         visibility: 'visibility',
