@@ -1,8 +1,5 @@
-import IC_DINNER from '@/assets/common/dinner.svg';
-import IC_EXCEPT from '@/assets/common/except.svg';
-import IC_REFRESH from '@/assets/common/refresh_default.svg';
 import { ButtonHTMLAttributes } from 'react';
-import * as S from './pagd.styled';
+import DefaultButton from '../DefaultButton';
 
 interface RefreshButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   btnText: string;
@@ -11,10 +8,8 @@ interface RefreshButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
 
 export default function RefreshButton({ btnText, iconType = 'refresh', ...rest }: RefreshButtonProps) {
   return (
-    <S.RefreshContainer {...rest}>
-      {iconType === 'except' ? <IC_EXCEPT /> : iconType === 'dinner' ? <IC_DINNER /> : <IC_REFRESH />}
-
-      <S.RefreshText>{btnText}</S.RefreshText>
-    </S.RefreshContainer>
+    <DefaultButton bgColor="gray" customStyle="px-24 py-12" {...rest}>
+      <span className="body1">{btnText}</span>
+    </DefaultButton>
   );
 }

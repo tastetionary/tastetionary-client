@@ -1,9 +1,9 @@
 import { useReviewStore } from '@/store/useReviewStore';
 import { useSelectFoodStore } from '@/store/useSelectFoodStore';
 import { useSelectRestaurantStore } from '@/store/useSelectRestaurantStore';
+import { theme } from '@/styles/theme';
 import Image from 'next/image';
 import { useEffect, useState } from 'react';
-import * as S from './style';
 
 interface Props {
   selectType: 'food' | 'restaurant' | 'review';
@@ -35,7 +35,7 @@ export default function CSelectCategory({ selectType, data, isDuplicate = true }
   }, [foodCategory, restaurantCategory, reviewCategory, selectType]);
 
   return (
-    <div className="grid grid-cols-4 items-center gap-24">
+    <div className="grid grid-cols-4 items-center gap-[16px]">
       {data?.map((m: { id: number; name: string; icon: string }, i: number) => {
         const isSelected = selectedCategory?.includes(m?.name);
         const isAll = m.id === 0; // 전체
@@ -67,14 +67,19 @@ export default function CSelectCategory({ selectType, data, isDuplicate = true }
         };
 
         return (
-          <div className="flex cursor-pointer flex-col items-center gap-8" key={m.id} onClick={onMenuItemClick}>
+          <div className="flex cursor-pointer flex-col items-center gap-[4px]" key={m.id} onClick={onMenuItemClick}>
             <Image
               src={`/image/Menu/${m?.icon}${isSelected ? '_selected' : ''}.svg`}
               alt={m?.icon}
               width={64}
               height={64}
             />
-            <span className={S.menuTitleVariants({ isSelected: isSelected ? 'selected' : 'default' })}>{m?.name}</span>
+            <span
+              className={'body1 text-nowrap'}
+              style={{ color: isSelected ? theme.colors.secondary.o50 : undefined }}
+            >
+              {m?.name}
+            </span>
           </div>
         );
       })}

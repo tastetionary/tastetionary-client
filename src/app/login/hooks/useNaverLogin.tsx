@@ -6,7 +6,7 @@ export default function useNaverLogin() {
   const initNaverLogin = () => {
     const naverLogin = new window.naver.LoginWithNaverId({
       clientId: process.env.NEXT_PUBLIC_NAVER_CLIENT_ID,
-      callbackUrl: process.env.NEXT_PUBLIC_LOGIN_REDIRECT_URI,
+      callbackUrl: `${window.location.origin}${process.env.NEXT_PUBLIC_LOGIN_REDIRECT_URI}`,
       isPopup: false,
       loginButton: { color: 'green', type: 1, height: 60 },
       callbackHandle: true,
