@@ -9,15 +9,16 @@ import 'swiper/css/pagination';
 import { Autoplay } from 'swiper/modules';
 import { Swiper, SwiperSlide } from 'swiper/react';
 
-export default function RestaurantImages() {
+interface Props {
+  address: string;
+}
+
+export default function RestaurantImages({ address }: Props) {
   const [imageUrl, setImageUrl] = useState<string[]>([]);
-  const [address, setAddress] = useState('');
   const [activeIndex, setActiveIndex] = useState(0);
 
   const { restaurant } = useSelectResultStore();
   const restaurantName = restaurant?.name;
-  const lat = restaurant?.latitude;
-  const lng = restaurant?.longitude;
 
   useEffect(() => {
     const getImage = async () => {
@@ -50,26 +51,6 @@ export default function RestaurantImages() {
       getImage();
     }
   }, [restaurant, address]);
-
-  useEffect(() => {
-    const getAddress = async () => {
-      const res = await axios.get(`https://dapi.kakao.com/v2/local/geo/coord2address.json?x=${lng}&y=${lat}`, {
-        headers: {
-          Authorization: `KakaoAK ${process.env.NEXT_PUBLIC_KAKAO_REST_API_KEY}`,
-        },
-      });
-
-      const data = res?.data?.documents?.[0];
-
-      if (data) {
-        setAddress(data?.road_address?.address_name ?? data?.address?.address_name);
-      }
-    };
-
-    if (lat && lng) {
-      getAddress();
-    }
-  }, [lat, lng]);
 
   if (imageUrl?.length === 0) return <div className="h-280 w-full bg-neutral-bg10"></div>;
 
