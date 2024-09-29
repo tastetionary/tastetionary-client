@@ -33,8 +33,7 @@ export default function CRecommendButton({ selectType, btnText, ...rest }: Props
     price: restaurantPrice,
     resetSelectRestaurant,
   } = useSelectRestaurantStore();
-  const { setSelectFoodResult, setSelectRestaurantResult, resetFoodResult, resetRestaurantResult } =
-    useSelectResultStore();
+  const { setSelectFoodResult, setSelectRestaurantResult } = useSelectResultStore();
 
   const isResultPage = pathname?.includes('result');
 
@@ -130,11 +129,7 @@ export default function CRecommendButton({ selectType, btnText, ...rest }: Props
         token
       ),
     {
-      onSuccess: res => {
-        resetFoodResult(); // 메뉴 검색 결과 저장 값 초기화
-
-        loadingModal(res);
-      },
+      onSuccess: res => loadingModal(res),
       onError: err => {
         if (err?.response?.status === 401) {
           return loginModal();
@@ -155,11 +150,7 @@ export default function CRecommendButton({ selectType, btnText, ...rest }: Props
         token
       ),
     {
-      onSuccess: res => {
-        resetRestaurantResult(); // 식당 검색 결고 저장 값 초기화
-
-        loadingModal(res);
-      },
+      onSuccess: res => loadingModal(res),
       onError: err => {
         if (err?.response?.status === 401) {
           return loginModal();
