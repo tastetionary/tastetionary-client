@@ -9,7 +9,7 @@ export default function RestaurantReview() {
 
   return (
     <div className="pb-[120px]">
-      <div className="mt-xxl flex w-full items-center justify-between">
+      <div className="mt-xxl flex w-full items-center justify-between px-xl">
         <div className="title2">
           <strong className="title2 font-bold">리뷰 </strong>
           {restaurant?.review?.total ?? 0}개

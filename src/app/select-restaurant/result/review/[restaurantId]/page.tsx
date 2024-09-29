@@ -18,12 +18,14 @@ export default function SelectRestaurantResultReview({ params }: Props) {
     <>
       <CHeader title="리뷰 더 보기" isBackBtn />
 
-      <div className="px-xl pb-xl pt-lg">
-        <DefaultButton bgColor="orange" customStyle="flex-grow py-12 w-full">
-          <span className="body1 text-white">리뷰 작성하러 가기</span>
-        </DefaultButton>
+      <div className="pb-xl pt-lg">
+        <div className="w-full px-xl">
+          <DefaultButton bgColor="orange" customStyle="flex-grow py-12 w-full">
+            <span className="body1 text-white">리뷰 작성하러 가기</span>
+          </DefaultButton>
+        </div>
 
-        <div className="mt-md">{restaurantReviews?.map(reviews => <ReviewItem reviews={reviews} />)}</div>
+        <div className="mt-md ">{restaurantReviews?.map(reviews => <ReviewItem reviews={reviews} />)}</div>
       </div>
     </>
   );

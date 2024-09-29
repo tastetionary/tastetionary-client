@@ -158,6 +158,7 @@ module.exports = {
   plugins: [
     plugin(function ({ addVariant }) {
       addVariant('not-disabled', '&:not(:disabled)');
+      addVariant('not-last', '&:not(:last-child)');
     }),
   ],
 };

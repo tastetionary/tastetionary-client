@@ -131,13 +131,14 @@ export default function SelectRestaurantResult() {
       setPrice(result);
     }
   }, [review?.aggregatePrice]);
+
   console.log('restaurant', restaurant);
 
   return (
     <>
       <CHeader title="식당 고르기" />
 
-      <RestaurantImages />
+      <RestaurantImages address={address} />
 
       <div className="px-xl pb-xl pt-lg">
         <div className="flex items-center gap-xs">
@@ -179,7 +180,7 @@ export default function SelectRestaurantResult() {
 
       <ButtonTab tabList={['식당 상세', '리뷰']} selectedTab={tab} clickEvent={value => setTab(value)} />
 
-      <div className="mt-lg px-xl">
+      <div className={tab === 0 ? 'mt-lg px-xl' : 'mt-lg'}>
         {tab === 0 ? (
           <>
             <RestaurantDetail />
@@ -195,7 +196,7 @@ export default function SelectRestaurantResult() {
           <>
             <RestaurantReview />
 
-            <BottomButtonContainer>
+            <BottomButtonContainer style={{ padding: 32 }}>
               <DefaultButton bgColor="orange" customStyle="flex-grow py-12">
                 <span className="body1 text-white">리뷰 작성하러 가기</span>
               </DefaultButton>

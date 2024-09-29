@@ -11,7 +11,7 @@ interface Props {
 
 export default function ReviewItem({ reviews }: Props) {
   return (
-    <div className="flex w-full flex-col gap-sm">
+    <div className="not-last:border-b-1 not-last:border-solid not-last:border-neutral-bg20 flex w-full flex-col gap-sm px-xl pb-lg pt-md">
       <div className="flex items-center justify-between">
         <div>
           <span className="body2 font-bold">{reviews?.user?.nickname ?? ''}</span>
