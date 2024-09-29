@@ -2,6 +2,7 @@ import { getRestaurantOption } from '@/apis/restaurant/option';
 import CheckBox2 from '@/components/CheckBox/CheckBox2';
 import { useSelectRestaurantStore } from '@/store/useSelectRestaurantStore';
 import { useQuery } from '@tanstack/react-query';
+import { useEffect } from 'react';
 
 export default function SelectPrice() {
   const { price, setRestaurantPrice } = useSelectRestaurantStore();
@@ -11,6 +12,10 @@ export default function SelectPrice() {
     staleTime: 0,
     enabled: false, // Do not refetch on the client
   });
+
+  useEffect(() => {
+    setRestaurantPrice(0);
+  }, []);
 
   return (
     <>
