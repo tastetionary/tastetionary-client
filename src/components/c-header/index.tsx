@@ -12,7 +12,7 @@ export default function CHeader({ isLogo = false, isBackBtn = false, title, noBa
   const { back } = useRouter();
 
   return (
-    <div className="fixed top-0 z-2 flex h-56 w-360 items-center justify-between gap-md border-b-1 border-solid border-b-neutral-bg20 bg-white mobile:w-full">
+    <div className="fixed top-0 z-3 flex h-56 w-360 items-center justify-between gap-md border-b-1 border-solid border-b-neutral-bg20 bg-white mobile:w-full">
       {!noBackBtn ? (
         <button className="flex h-55 w-56 items-center justify-center" onClick={back}>
           <ARROW width={24} height={24} />
