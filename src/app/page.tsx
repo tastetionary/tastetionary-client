@@ -35,7 +35,7 @@ export default function Home() {
 
   return (
     <>
-      <CHeader title="맛셔너리" isLogo />
+      <CHeader title="맛셔너리" noBackBtn />
 
       <GNBLayout>
         <S.MainContent>
