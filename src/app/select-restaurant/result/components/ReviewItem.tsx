@@ -1,38 +1,37 @@
 import IC_DISLIKE from '@/assets/common/Icons/dislike.svg';
 import IC_LIKE from '@/assets/common/Icons/like.svg';
-import IC_REPORT from '@/assets/common/Icons/report.svg';
 import DefaultButton from '@/components/Button/DefaultButton';
+import CReviewReportBtn from '@/components/c-review-report-btn';
+import { GetRestaurantReviewRes } from '@/types/review';
+import dayjs from 'dayjs';
 
-export default function ReviewItem() {
+interface Props {
+  reviews?: GetRestaurantReviewRes;
+}
+
+export default function ReviewItem({ reviews }: Props) {
   return (
     <div className="flex w-full flex-col gap-sm">
       <div className="flex items-center justify-between">
         <div>
-          <span className="body2 font-bold">닉네임</span>
+          <span className="body2 font-bold">{reviews?.user?.nickname ?? ''}</span>
 
-          <div className="body3 mt-xxs text-neutral-bg60">작성 리뷰 0개 | 0000.00.00</div>
+          <div className="body3 mt-xxs text-neutral-bg60">
+            작성 리뷰 {reviews?.user?.reviews ?? 0}개 | {dayjs(reviews?.createdAt).format('YYYY.MM.DD')}
+          </div>
         </div>
 
-        <button className="flex cursor-pointer items-center justify-center px-10 py-10">
-          <IC_REPORT />
-        </button>
+        <CReviewReportBtn id={reviews?.id ?? '0'} />
       </div>
 
-      <p className="body2">
-        리뷰 내용 리뷰 내용 리뷰 내용 리뷰 내용 리뷰 내용 리뷰 내용 리뷰 내용 리뷰 내용 리뷰 내용 리뷰 내용 리뷰 내용
-        리뷰 내용 리뷰 내용 리뷰 내용 리뷰 내용 리뷰 내용 리뷰 내용
-      </p>
+      <p className="body2">{reviews?.summary}</p>
 
       <div className="flex- flex-g flex flex-wrap gap-xxs">
-        <DefaultButton bgColor="gray" customStyle="py-2 px-8">
-          <span className="body4">키워드</span>
-        </DefaultButton>
-        <DefaultButton bgColor="gray" customStyle="py-2 px-8">
-          <span className="body4">키워드</span>
-        </DefaultButton>
-        <DefaultButton bgColor="gray" customStyle="py-2 px-8">
-          <span className="body4">키워드</span>
-        </DefaultButton>
+        {reviews?.keywords?.map((k, i) => (
+          <DefaultButton bgColor="gray" customStyle="py-2 px-8" key={i}>
+            <span className="body4">{k}</span>
+          </DefaultButton>
+        ))}
       </div>
 
       <div className="flex w-full gap-xxs">

@@ -1,9 +1,8 @@
 'use client';
 
+import DefaultButton from '@/components/Button/DefaultButton';
 import CHeader from '@/components/c-header';
-import CReviewItem from '@/components/c-review-item';
-import Image from 'next/image';
-import RevisitingProgressbar from './_components/revisiting-progressbar';
+import ReviewItem from '../../components/ReviewItem';
 import useRestaurantReviewQuery from './_hooks/useRestaurantReivewQuery.ts';
 
 interface Props {
@@ -17,31 +16,14 @@ export default function SelectRestaurantResultReview({ params }: Props) {
 
   return (
     <>
-      <CHeader title="리뷰" isBackBtn />
+      <CHeader title="리뷰 더 보기" isBackBtn />
 
-      <div className="mb-48 bg-white">
-        <div className="px-24">
-          <p className="mb-16 flex items-center gap-4 px-6">
-            <Image src={'/image/LikeOn.svg'} alt="like" width={28} height={28} />
-            <span className="font-extrabold text-primary-y80">{keywordReviews?.revisitRatio}%</span>{' '}
-            <span className="text-14">의 리뷰어가 재방문하고 싶어 해요!</span>
-          </p>
+      <div className="px-xl pb-xl pt-lg">
+        <DefaultButton bgColor="orange" customStyle="flex-grow py-12 w-full">
+          <span className="body1 text-white">리뷰 작성하러 가기</span>
+        </DefaultButton>
 
-          {keywordReviews?.keywordCounts?.map((d, idx) => (
-            <RevisitingProgressbar
-              key={idx}
-              name={d.name}
-              cnt={d.count}
-              percent={(d.count / keywordReviews?.total) * 100}
-            />
-          ))}
-        </div>
-
-        {restaurantReviews?.map(reviews => <CReviewItem reviews={reviews} />)}
-      </div>
-
-      <div className="absolute bottom-0 flex h-48 w-full justify-center bg-primary-y70 mobile:fixed">
-        <button className="text-white">리뷰 쓰기</button>
+        <div className="mt-md">{restaurantReviews?.map(reviews => <ReviewItem reviews={reviews} />)}</div>
       </div>
     </>
   );
