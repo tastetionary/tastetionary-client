@@ -14,8 +14,6 @@ export default function RestaurantImages() {
   const [address, setAddress] = useState('');
   const [activeIndex, setActiveIndex] = useState(0);
 
-  console.log(imageUrl);
-
   const { restaurant } = useSelectResultStore();
   const restaurantName = restaurant?.name;
   const lat = restaurant?.latitude;
@@ -37,7 +35,12 @@ export default function RestaurantImages() {
       );
 
       if (res?.data?.total >= 15) {
-        setImageUrl([res?.data?.items?.[1]?.link, res?.data?.items?.[2]?.link, res?.data?.items?.[3]?.link]);
+        const filtered = res?.data?.items
+          .filter((item: { link: string | string[] }) => !item.link.includes('post.phinf.naver.net')) // 필터링
+          .slice(0, 3) // 3개만 선택
+          .map((item: string) => item.link); // link만 추출
+
+        setImageUrl(filtered);
       } else {
         setImageUrl([]);
       }
