@@ -37,7 +37,7 @@ function TextInput(
         />
       </div>
 
-      {errorMsg && <div className="body2 text-red-r50 !font-pretendard">{errorMsg}</div>}
+      {errorMsg && <div className="body2 !font-pretendard text-red-r50">{errorMsg}</div>}
     </div>
   );
 }
