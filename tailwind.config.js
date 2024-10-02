@@ -1,5 +1,6 @@
 /** @type {import('tailwindcss').Config} */
 
+const _0_100 = { ...Array.from(Array(101)).map((_, i) => `${i}`) };
 const px0_50 = { ...Array.from(Array(51)).map((_, i) => `${i}px`) };
 const px0_100 = { ...Array.from(Array(101)).map((_, i) => `${i}px`) };
 const px0_200 = { ...Array.from(Array(201)).map((_, i) => `${i}px`) };
@@ -23,7 +24,7 @@ module.exports = {
       height: px0_400,
       maxWidth: px0_400,
       padding: px0_100,
-      zIndex: px0_100,
+      zIndex: _0_100,
       bgOpacity: px0_100,
       transitionProperty: {
         visibility: 'visibility',
@@ -140,11 +141,24 @@ module.exports = {
         r10: '#FFCDD1',
         r05: '#FFEBEE',
       },
+      orange: {
+        o90: '#C13001',
+        o80: '#D94000',
+        o70: '#E64801',
+        o60: '#F44E00',
+        o50: '#FF5601',
+        o40: '#FF6E32',
+        o30: '#FE895A',
+        o20: '#FFAA8A',
+        o10: '#FFCBB8',
+        o05: '#FCE9E6',
+      },
     },
   },
   plugins: [
     plugin(function ({ addVariant }) {
       addVariant('not-disabled', '&:not(:disabled)');
+      addVariant('not-last', '&:not(:last-child)');
     }),
   ],
 };

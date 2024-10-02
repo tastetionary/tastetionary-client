@@ -20,7 +20,7 @@ export default function CheckBox2({ checkBoxId, checked, onChangeEvent, label, .
       />
 
       <label
-        className="peer-[.checkbox]:peer-checked:bg-ic_checkbox_active peer-[.checkbox]:bg-ic_checkbox_inactive text-12 font-normal peer-[.checkbox]:flex peer-[.checkbox]:h-20 peer-[.checkbox]:w-full peer-[.checkbox]:cursor-pointer peer-[.checkbox]:items-center peer-[.checkbox]:bg-no-repeat peer-[.checkbox]:pl-28 peer-[.checkbox]:text-neutral-bg40 peer-[.checkbox]:peer-checked:text-neutral-bg80"
+        className="peer-[.checkbox]:body2 pl-[28px] peer-[.checkbox]:flex peer-[.checkbox]:w-full peer-[.checkbox]:cursor-pointer peer-[.checkbox]:items-center peer-[.checkbox]:bg-ic_checkbox_inactive peer-[.checkbox]:bg-no-repeat peer-[.checkbox]:peer-checked:bg-ic_checkbox_active"
         htmlFor={checkBoxId}
       >
         {label}

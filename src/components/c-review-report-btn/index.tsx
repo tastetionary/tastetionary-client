@@ -1,4 +1,5 @@
 import useReviewReportMutation from '@/app/select-restaurant/result/review/[restaurantId]/_hooks/useReviewReportMutation';
+import IC_REPORT from '@/assets/common/Icons/report.svg';
 import { MODAL_TYPES } from '@/components/Modal/GlobalModal';
 import useModal from '@/components/Modal/GlobalModal/hooks/useModal';
 import { toast } from 'react-toastify';
@@ -40,9 +41,8 @@ export default function CReviewReportBtn({ id }: Props) {
   };
 
   return (
-    <button
-      className="flex h-24 w-24 items-center justify-center bg-[url(/image/ReportBtn/report_default.svg)] bg-contain bg-center bg-no-repeat text-18 font-normal text-white drop-shadow-sm enabled:active:bg-[url(/image/ReportBtn/report_pressed.svg)]"
-      onClick={reportModal}
-    />
+    <button onClick={reportModal} className="flex cursor-pointer items-center justify-center px-10 py-10">
+      <IC_REPORT />
+    </button>
   );
 }

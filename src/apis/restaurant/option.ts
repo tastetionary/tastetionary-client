@@ -7,9 +7,12 @@ interface Res {
 }
 
 export const getRestaurantOption = async () => {
-  const res = await http.get<{ data?: Res }>('/apis/v1/restaurant/option');
+  const baseUrl =
+    process.env.NODE_ENV === 'development' ? 'http://localhost:3000' : process.env.NEXT_PUBLIC_API_BASE_URL;
+
+  const res = await http.get<{ data?: Res }>(`${baseUrl}/apis/v1/restaurant/option`);
 
   if (res?.data) {
-    return res?.data;
+    return res?.data as Res;
   }
 };
