@@ -10,7 +10,7 @@ interface PostReportParams {
   category: string;
 }
 
-const token = sessionStorage?.getItem('token');
+const token = typeof window === undefined ? '' : (sessionStorage as Storage)?.getItem('token');
 
 const reviewRepository = () => {
   return {
