@@ -3,7 +3,7 @@ import { setUser } from '@sentry/nextjs';
 import { useQuery } from '@tanstack/react-query';
 
 export default function useUser() {
-  if (typeof window === 'undefined')
+  if (!typeof window || typeof window === 'undefined')
     return {
       isLoggedIn: false,
     };
