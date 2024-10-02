@@ -24,6 +24,7 @@ export default function SelectRestaurantResult() {
   const { openModal, closeModal } = useModal();
 
   const [tab, setTab] = useState(0);
+  const [location, setLocation] = useState('');
   const [address, setAddress] = useState('');
   const [price, setPrice] = useState<{ portion: number; rank: string; label: number }[]>([]);
 
@@ -59,6 +60,7 @@ export default function SelectRestaurantResult() {
 
       if (data) {
         setAddress(data?.road_address?.address_name ?? data?.address?.address_name);
+        setLocation(data?.address?.region_3depth_name);
       }
     };
 
@@ -142,9 +144,7 @@ export default function SelectRestaurantResult() {
 
       <div className="px-xl pb-xl pt-lg">
         <div className="flex items-center gap-xs">
-          <span className="body2 text-neutral-bg60">카테고리</span>
-          <span className="body2 text-neutral-bg60">|</span>
-          <span className="body2 text-neutral-bg60">위치</span>
+          <span className="body2 text-neutral-bg60">{location}</span>
         </div>
 
         <h3 className="title2 mt-xs font-bold">{restaurantName}</h3>
