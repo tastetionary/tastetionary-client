@@ -46,7 +46,7 @@ const useLoginMutate = () => {
     onSuccess: value => {
       setToken(value.data.accessToken);
 
-      if (typeof window === undefined) return;
+      if (!typeof window || typeof window === 'undefined') return;
       (sessionStorage as Storage).setItem('token', value.data.accessToken);
       push('/');
     },

@@ -8,7 +8,10 @@ export default function useUser() {
       isLoggedIn: false,
     };
 
-  const token = typeof window !== 'undefined' ? ((sessionStorage as Storage).getItem('token') as string) : undefined;
+  const token =
+    !typeof window || typeof window === 'undefined'
+      ? ((sessionStorage as Storage).getItem('token') as string)
+      : undefined;
 
   const { data: userData } = useQuery(['user'], () => getUser(token), {
     enabled: !!token,

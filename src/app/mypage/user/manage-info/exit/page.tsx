@@ -29,7 +29,7 @@ export default function MyPageUserExit() {
         queryClient.removeQueries();
         Sentry.configureScope(scope => scope.clear());
 
-        if (typeof window === undefined) return;
+        if (!typeof window || typeof window === 'undefined') return;
         (sessionStorage as Storage).removeItem('token');
         push('/mypage/user/manage-info/exit/success');
       },
