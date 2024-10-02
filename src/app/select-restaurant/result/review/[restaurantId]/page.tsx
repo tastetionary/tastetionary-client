@@ -25,7 +25,7 @@ export default function SelectRestaurantResultReview({ params }: Props) {
           </DefaultButton>
         </div>
 
-        <div className="mt-md ">{restaurantReviews?.map(reviews => <ReviewItem reviews={reviews} />)}</div>
+        <div className="mt-md ">{restaurantReviews?.map((reviews, i) => <ReviewItem reviews={reviews} key={i} />)}</div>
       </div>
     </>
   );

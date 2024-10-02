@@ -170,8 +170,8 @@ export default function SelectRestaurantResult() {
         </div>
 
         <div className="mt-md flex gap-xxs">
-          {review?.keywords?.map(k => (
-            <DefaultButton bgColor="gray" customStyle="py-2 px-8">
+          {review?.keywords?.map((k, i) => (
+            <DefaultButton bgColor="gray" customStyle="py-2 px-8" key={i}>
               <span className="body4">{k}</span>
             </DefaultButton>
           ))}
