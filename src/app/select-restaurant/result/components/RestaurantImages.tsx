@@ -37,7 +37,10 @@ export default function RestaurantImages({ address }: Props) {
 
       if (res?.data?.total >= 15) {
         const filtered = res?.data?.items
-          .filter((item: { link: string | string[] }) => !item.link.includes('post.phinf.naver.net')) // 필터링
+          .filter(
+            (item: { link: string | string[] }) =>
+              !item.link.includes('post.phinf.naver.net') && !item.link.includes('.png')
+          ) // 필터링
           .slice(0, 3) // 3개만 선택
           .map((item: string) => item.link); // link만 추출
 
