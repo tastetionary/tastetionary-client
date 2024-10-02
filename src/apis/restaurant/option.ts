@@ -7,8 +7,7 @@ interface Res {
 }
 
 export const getRestaurantOption = async () => {
-  const baseUrl =
-    process.env.NODE_ENV === 'development' ? 'http://localhost:3000' : process.env.NEXT_PUBLIC_API_BASE_URL;
+  const baseUrl = process.env.NODE_ENV === 'development' ? 'http://localhost:3000' : 'https://www.tastetionary.com';
 
   const res = await http.get<{ data?: Res }>(`${baseUrl}/apis/v1/restaurant/option`);
 
