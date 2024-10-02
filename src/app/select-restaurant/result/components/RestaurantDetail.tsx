@@ -24,9 +24,9 @@ export default function RestaurantDetail() {
 
       <div className="py-lg">
         <div className="flex w-full items-center justify-between">
-          <div className="title2 font-bold">메뉴 가격대</div>
+          <div className="title2 whitespace-pre-line break-keep font-bold">메뉴 가격대</div>
 
-          <span className="title2">13,000원 이상 ~ 16,000원 미만</span>
+          <span className="title2 whitespace-pre-line break-keep">13,000원 이상 ~ 16,000원 미만</span>
         </div>
 
         <table className="mt-md w-full table-auto border-collapse border-1 border-solid border-neutral-bg40">
@@ -37,11 +37,15 @@ export default function RestaurantDetail() {
 
                 return (
                   <th
-                    className="body2 border border-solid border-neutral-bg40 bg-neutral-bg05 px-4 py-10 text-center"
+                    className="body2 content-center border border-solid border-neutral-bg40 bg-neutral-bg05 px-4 py-10 text-center"
                     key={i}
                   >
                     {[parts[0] === '' ? '' : parts[0].trim(), '~', parts[1] === undefined ? '' : parts[1].trim()]?.map(
-                      p => <div className="body2">{p}</div>
+                      p => {
+                        if (!p || p === '') return <div className="h-[22.4px] w-full" />;
+
+                        return <div className="body2">{p}</div>;
+                      }
                     )}
                   </th>
                 );
