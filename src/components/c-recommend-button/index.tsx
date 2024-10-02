@@ -11,7 +11,8 @@ import { RestaurantCategory } from '@homekeeper89/taste_dict/lib/domain/restaura
 import { useMutation } from '@tanstack/react-query';
 import { AxiosError } from 'axios';
 import { usePathname, useRouter } from 'next/navigation';
-import MainButton, { MainButtonProps } from '../Button/MainButton';
+import DefaultButton from '../Button/DefaultButton';
+import { MainButtonProps } from '../Button/MainButton';
 import { MODAL_TYPES } from '../Modal/GlobalModal';
 import useModal from '../Modal/GlobalModal/hooks/useModal';
 
@@ -173,5 +174,9 @@ export default function CRecommendButton({ selectType, btnText, ...rest }: Props
     if (selectType === 'restaurant') return getRestaurant();
   };
 
-  return <MainButton btnText={btnText} {...rest} onClick={() => onButtonClick()} />;
+  return (
+    <DefaultButton bgColor="yellow" customStyle="flex-grow py-12" {...rest} onClick={() => onButtonClick()}>
+      <span className="body1 text-white">{btnText}</span>
+    </DefaultButton>
+  );
 }

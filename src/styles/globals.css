@@ -223,11 +223,11 @@
       transition: background-color 0.3s ease;
     }
 
-    &:hover:before {
+    &:not(:disabled):hover:before {
       background-color: rgba(0, 0, 0, 0.08);
     }
 
-    &:active:before {
+    &:not(:disabled):active:before {
       background-color: rgba(0, 0, 0, 0.12);
     }
 
@@ -241,6 +241,14 @@
     &:not(:disabled):active {
       box-shadow: inset 1px 1px 0px 0px rgba(0, 0, 0, 0.25);
     }
+  }
+
+  .default-btn.selected {
+    box-shadow: inset 1px 1px 0px 0px rgba(0, 0, 0, 0.25);
+  }
+
+  .default-btn.selected:before {
+    background-color: rgba(0, 0, 0, 0.12);
   }
 
   .border-none-btn {
@@ -264,11 +272,11 @@
       transition: background-color 0.3s ease;
     }
 
-    &:hover:before {
+    &:not(:disabled):hover:before {
       background-color: rgba(0, 0, 0, 0.08);
     }
 
-    &:active:before {
+    &:not(:disabled):active:before {
       background-color: rgba(0, 0, 0, 0.12);
     }
   }
