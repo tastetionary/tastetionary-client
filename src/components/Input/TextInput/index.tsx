@@ -27,6 +27,7 @@ function TextInput(
         className={cn(
           S.textInputContainerVariants({ bgColor: containerStyleBgColorState, border: containerStyleBorderState })
         )}
+        onClick={rest?.onClick}
       >
         <input
           style={{ width: 'inherit' }}
