@@ -9,9 +9,7 @@ export default function useUser() {
     };
 
   const token =
-    !typeof window || typeof window === 'undefined'
-      ? ((sessionStorage as Storage).getItem('token') as string)
-      : undefined;
+    typeof window || typeof window === 'object' ? ((sessionStorage as Storage).getItem('token') as string) : undefined;
 
   const { data: userData } = useQuery(['user'], () => getUser(token), {
     enabled: !!token,
@@ -30,7 +28,7 @@ export default function useUser() {
   return {
     isLoggedIn: Boolean(token),
     token,
-    hasActivityArea: userData && token ? Boolean(userData?.area?.activityArea?.address) : false,
+    hasActivityArea: userData && token ? Boolean(userData?.area?.address) : false,
     data: {
       ...userData,
     },
