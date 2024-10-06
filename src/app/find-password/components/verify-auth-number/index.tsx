@@ -43,8 +43,6 @@ export default function VerifyAuthNumber({ onNext, type, setEmailAuthId, emailAu
 
   return (
     <>
-      {/* <CHeader title="인증코드 입력" isBackBtn /> */}
-      {/* <Header title="회원가입" /> */}
       <CHeader title="회원가입" />
       <div className="mx-8 mt-20">
         <header>

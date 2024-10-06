@@ -1,6 +1,6 @@
 'use client';
 
-import MainButton from '@/components/Button/MainButton';
+import DefaultButton from '@/components/Button/DefaultButton';
 import TextInput from '@/components/Input/TextInput';
 import CHeader from '@/components/c-header';
 import { useEffect, useRef, useState } from 'react';
@@ -83,21 +83,30 @@ export default function RegionSetting({ onNext, category = 'dining_area' }: Prop
 
   return (
     <>
-      <CHeader title={category === 'activity_area' ? '활동 지역 설정' : '식사 지역 설정'} isBackBtn />
+      <CHeader title={category === 'activity_area' ? '활동 지역 설정' : '지역 설정'} isBackBtn />
 
       <S.Wrapper>
-        <S.Title>
+        {/* <S.Title>
           {category === 'activity_area'
             ? '활동 지역 설정을 하면\n식당 리뷰를 작성할 수 있어요.'
             : '식사 지역 설정을 하면\n식당을 추천받을 수 있어요.'}
-        </S.Title>
+        </S.Title> */}
 
-        <S.SubTitle>회사 주소를 자세히 설정하면 근처의 식당을 구체적으로 추천해드릴 수 있어요.</S.SubTitle>
+        {/* <S.SubTitle>회사 주소를 자세히 설정하면 근처의 식당을 구체적으로 추천해드릴 수 있어요.</S.SubTitle> */}
+        <header>
+          <h1 className="!font-pretendard text-xl font-bold leading-8">
+            지역을 설정하면 <br />
+            근처에 있는 식당들을 추천받을 수 있어요. 🍽️
+          </h1>
+          <p className="mt-3 !font-pretendard leading-5 text-neutral-bg80">
+            주소를 자세히 설정하면 근처의 식당들을 더 구체적으로 추천해드릴 수 있어요.
+          </p>
+        </header>
 
         <S.Form>
           {!openPostCode && (
             <TextInput
-              label={category === 'activity_area' ? '활동 지역 검색' : '식사 지역 검색'}
+              label={category === 'activity_area' ? '활동 지역 검색' : '지역 검색'}
               readOnly={true}
               value={address}
               placeholder="이곳을 눌러 지역을 설정해주세요."
@@ -123,9 +132,16 @@ export default function RegionSetting({ onNext, category = 'dining_area' }: Prop
             <div id="map" ref={mapRef} style={{ width: address?.length > 0 ? '100%' : 0, height: '100%' }}></div>
           </S.MapContainer>
 
-          <S.ButtonContainer>
-            <MainButton btnText="다음" disabled={address === ''} type="button" onClick={onNext} />
-          </S.ButtonContainer>
+          <footer className="fixed bottom-[30px] w-[300px]">
+            <DefaultButton
+              bgColor="yellow"
+              customStyle="flex w-full py-[12px] px-[16px] mt-6"
+              disabled={address === ''}
+              onClick={onNext}
+            >
+              <span className="!font-pretendard text-white">다음</span>
+            </DefaultButton>
+          </footer>
         </S.Form>
       </S.Wrapper>
     </>
