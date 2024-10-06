@@ -1,4 +1,5 @@
 'use client';
+
 import VerifyAuthNumber from '@/app/find-password/components/verify-auth-number';
 import { SHA256 } from 'crypto-js';
 import { usePathname, useRouter, useSearchParams } from 'next/navigation';

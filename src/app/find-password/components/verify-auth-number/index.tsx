@@ -1,7 +1,8 @@
 import useAccountAuthCodeMutate from '@/app/sign-up/hooks/query/useAccountAuthCodeMutate';
 import useConfirmAuthCodeMutate from '@/app/sign-up/hooks/query/useConfirmAuthCodeMutate';
 import DefaultButton from '@/components/Button/DefaultButton';
-import Header from '@/components/Header';
+import CHeader from '@/components/c-header';
+// import Header from '@/components/Header';
 import TextInput from '@/components/Input/TextInput';
 import { ChangeEvent, useState } from 'react';
 import { useFormContext } from 'react-hook-form';
@@ -43,7 +44,8 @@ export default function VerifyAuthNumber({ onNext, type, setEmailAuthId, emailAu
   return (
     <>
       {/* <CHeader title="인증코드 입력" isBackBtn /> */}
-      <Header title="회원가입" />
+      {/* <Header title="회원가입" /> */}
+      <CHeader title="회원가입" />
       <div className="mx-8 mt-20">
         <header>
           <h1 className="!font-pretendard text-xl font-bold leading-8">

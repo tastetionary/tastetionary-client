@@ -1,5 +1,6 @@
 import DefaultButton from '@/components/Button/DefaultButton';
-import Header from '@/components/Header';
+// import Header from '@/components/Header';
+import CHeader from '@/components/c-header';
 import TextInput from '@/components/Input/TextInput';
 import { emailRegex } from '@/constants';
 import { useFormContext } from 'react-hook-form';
@@ -30,7 +31,7 @@ export default function EmailForm({ onNext, setEmailAuthId }: Props) {
   return (
     <>
       {/* <CHeader title="이메일 주소 입력" isBackBtn /> */}
-      <Header title="회원가입" />
+      <CHeader title="회원가입" />
       <div className="mx-8 mt-20">
         <header>
           <h1 className="!font-pretendard text-xl font-bold leading-8">

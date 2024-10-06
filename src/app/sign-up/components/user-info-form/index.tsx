@@ -1,5 +1,5 @@
 import DefaultButton from '@/components/Button/DefaultButton';
-import Header from '@/components/Header';
+import CHeader from '@/components/c-header';
 import TextInput from '@/components/Input/TextInput';
 import { useFormContext } from 'react-hook-form';
 import useAccountAuthCodeMutate from '../../hooks/query/useAccountAuthCodeMutate';
@@ -38,7 +38,7 @@ export default function UserInfoForm({ onNext }: Props) {
 
   return (
     <>
-      <Header title="회원가입" />
+      <CHeader title="회원가입" />
 
       <div className="mx-8 mt-20">
         <header>

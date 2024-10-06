@@ -1,6 +1,7 @@
 import DefaultButton from '@/components/Button/DefaultButton';
 import CheckBox2 from '@/components/CheckBox/CheckBox2';
-import Header from '@/components/Header';
+// import Header from '@/components/Header';
+import CHeader from '@/components/c-header';
 import { useAgreeTermStore } from '@/store/useAgreeTermStore';
 import { useRouter } from 'next/navigation';
 import AgreementCheckbox from '../agreement-checkbox';
@@ -23,7 +24,7 @@ export default function Terms({ onNext }: Props) {
 
   return (
     <>
-      <Header title="회원 가입" />
+      <CHeader title="회원 가입" />
       <div className="mx-8 mt-20">
         <header>
           <h1 className="!font-pretendard text-xl font-bold leading-8">
