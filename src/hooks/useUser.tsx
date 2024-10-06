@@ -3,12 +3,13 @@ import { setUser } from '@sentry/nextjs';
 import { useQuery } from '@tanstack/react-query';
 
 export default function useUser() {
-  if (typeof window === 'undefined')
+  if (!typeof window || typeof window === 'undefined')
     return {
       isLoggedIn: false,
     };
 
-  const token = typeof window !== 'undefined' ? ((sessionStorage as Storage).getItem('token') as string) : undefined;
+  const token =
+    typeof window || typeof window === 'object' ? ((sessionStorage as Storage).getItem('token') as string) : undefined;
 
   const { data: userData } = useQuery(['user'], () => getUser(token), {
     enabled: !!token,
@@ -27,7 +28,7 @@ export default function useUser() {
   return {
     isLoggedIn: Boolean(token),
     token,
-    hasActivityArea: userData && token ? Boolean(userData?.area?.activityArea?.address) : false,
+    hasActivityArea: userData && token ? Boolean(userData?.area?.address) : false,
     data: {
       ...userData,
     },

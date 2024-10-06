@@ -46,8 +46,8 @@ export default function RestaurantSearch() {
     mode: 'onSubmit',
   });
 
-  const longitude = userData?.area.activityArea?.longitude;
-  const latitude = userData?.area.activityArea?.latitude;
+  const longitude = userData?.area?.longitude;
+  const latitude = userData?.area?.latitude;
 
   const searchByKeyword = async (keyword: string) => {
     const { data } = await axios.get(

@@ -1,3 +1,4 @@
+import DefaultButton from '@/components/Button/DefaultButton';
 import { cn } from '@/utils/styles.utils';
 import { ReactNode, useEffect, useState } from 'react';
 import * as S from './style';
@@ -56,37 +57,34 @@ export default function DialogModal({
   return (
     <div className={cn(S.overlayVariants({ visibility: state, animation: state }))}>
       <div className={cn(S.dialogModalContainerVariants({ visibility: state, animation: state }))}>
-        <div>
-          <div className="whitespace-pre-line break-keep p-24 text-16 font-bold leading-[140%]">{title}</div>
+        <div className="flex flex-col gap-md">
+          <div className="title2 whitespace-pre-line break-keep font-bold">{title}</div>
 
           {(message || elementMessage) && (
-            <div className="px-24 py-8">
-              {message && (
-                <p className="whitespace-pre-line break-keep text-14 font-normal leading-[160%] text-neutral-bg40">
-                  {message}
-                </p>
-              )}
+            <div>
+              {message && <p className="body2 whitespace-pre-line break-keep">{message}</p>}
               {elementMessage ?? null}
             </div>
           )}
         </div>
 
-        <div className="flex items-center justify-end gap-8 p-8">
+        <div className="flex items-center justify-end gap-xs p-8">
           <>
             {cancelText && (
-              <button
-                className={cn(S.dialogModalButtonVariants({ color: 'isSecondary' }))}
+              <DefaultButton
+                bgColor="none"
                 onClick={() => {
                   if (onClose) onClose();
                 }}
+                customStyle="px-12 py-4"
               >
-                {cancelText}
-              </button>
+                <span className="body2">{cancelText}</span>
+              </DefaultButton>
             )}
 
-            <button className={cn(S.dialogModalButtonVariants({ color: 'default' }))} onClick={onConfirm}>
-              {confirmText}
-            </button>
+            <DefaultButton bgColor="yellow" onClick={onConfirm} customStyle="px-12 py-4">
+              <span className="body2 text-white">{confirmText}</span>
+            </DefaultButton>
           </>
         </div>
       </div>

@@ -344,6 +344,25 @@
       border-right: 1px #f44236 solid;
     }
   }
+
+  .button-tab {
+    position: relative;
+    border: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 0.5px 0 0 #b0bec5; /* 하단에만 0.5px 그림자 추가 */
+  }
+
+  .button-tab.default {
+    background-color: #edeff1;
+    border-top: 1px solid #b0bec5;
+    border-bottom: 0.5px solid #b0bec5;
+  }
+
+  .button-tab.selected {
+    border-bottom: 2px solid #ff5601;
+  }
 }
 
 @layer utilities {

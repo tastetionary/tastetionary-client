@@ -1,8 +1,11 @@
 <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-<path d="M2 2H18V18H2V2Z" fill="#EDEFF1"/>
-<path d="M2 0H18V2H2V0Z" fill="#CFD8DB"/>
-<path d="M2 18H18V20H2V18Z" fill="#CFD8DB"/>
-<path d="M20 2V18H18V2H20Z" fill="#CFD8DB"/>
-<path d="M2 2V18H0L6.99382e-07 2L2 2Z" fill="#CFD8DB"/>
-<rect x="2" y="2" width="16" height="16" fill="white"/>
+<path d="M3.33333 1.66667H16.6667V3.33333H3.33333V1.66667Z" fill="#90A4AE"/>
+<path d="M3.33333 16.6667H16.6667V18.3333H3.33333V16.6667Z" fill="#90A4AE"/>
+<path d="M18.3333 3.33333V16.6667H16.6667V3.33333L18.3333 3.33333Z" fill="#90A4AE"/>
+<path d="M3.33333 3.33333V16.6667H1.66667L1.66667 3.33333L3.33333 3.33333Z" fill="#90A4AE"/>
+<path d="M3.33333 3.33333H16.6667V16.6667H3.33333V3.33333Z" fill="white"/>
+<path d="M3.33333 3.33333H5V5H3.33333V3.33333Z" fill="#90A4AE"/>
+<path d="M3.33333 15H5V16.6667H3.33333V15Z" fill="#90A4AE"/>
+<path d="M15 3.33333H16.6667V5H15V3.33333Z" fill="#90A4AE"/>
+<path d="M15 15H16.6667V16.6667H15V15Z" fill="#90A4AE"/>
 </svg>
