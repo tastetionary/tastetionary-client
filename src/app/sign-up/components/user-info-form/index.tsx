@@ -50,14 +50,13 @@ export default function UserInfoForm({ onNext }: Props) {
             회원 정보는 개인화된 추천과 원활한 서비스 제공을 위해 사용되며, <br /> 안전하게 보호됩니다.
           </p>
         </header>
-        <section className="mt-12">
+        <section className="mt-12 [&>div]:mt-3">
           <TextInput type="text" label="이메일 주소" disabled value={accountEmail} />
 
           <TextInput
             type="password"
             label="비밀번호"
             placeholder="영문, 숫자, 특수문자를 조합하여 8자 이상"
-            value={accountEmail}
             errorMsg={errors.account?.password ? '영문, 숫자, 특수문자를 조합하여 8자 이상 입력해주세요.' : undefined}
             {...register('account.password', {
               required: '비밀번호를 입력해주세요',
@@ -77,11 +76,11 @@ export default function UserInfoForm({ onNext }: Props) {
             })}
           />
 
-          <div className="relative flex items-center">
-            <TextInput type="text" label="닉네임" value={accountEmail} placeholder="랜덤 닉네임" />
+          <div className="relative flex items-center [&>div]:w-[70%]">
+            <TextInput type="text" label="닉네임" placeholder="랜덤 닉네임" />
             <DefaultButton
               bgColor="yellow"
-              customStyle="bottom-0 absolute h-48 right-0"
+              customStyle="bottom-0 absolute h-48 right-0 px-[16px] py-[12px] text-xs"
               disabled
               onClick={() => console.log('닉네임 중복 확인 API')}
             >

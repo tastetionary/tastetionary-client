@@ -60,10 +60,11 @@ export default function VerifyAuthNumber({ onNext, type, setEmailAuthId, emailAu
           <div className="mt-4">
             <TextInput
               type="text"
-              label="인증코드"
-              value={accountEmail}
+              label="인증 코드"
+              placeholder="6자리 숫자입력"
               maxLength={6}
               onChange={handleChangeAuthNumber}
+              value={authNumber}
             />
           </div>
         </section>
