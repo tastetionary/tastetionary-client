@@ -1,6 +1,5 @@
 import DefaultButton from '@/components/Button/DefaultButton';
 import CheckBox2 from '@/components/CheckBox/CheckBox2';
-// import Header from '@/components/Header';
 import CHeader from '@/components/c-header';
 import { useAgreeTermStore } from '@/store/useAgreeTermStore';
 import { useRouter } from 'next/navigation';
@@ -13,9 +12,12 @@ interface Props {
 export default function Terms({ onNext }: Props) {
   const router = useRouter();
 
-  const { marketing, privacy, service, setAllToggle, setToggle } = useAgreeTermStore();
+  const { marketing, privacy, service, moreThan14, locationBased, setAllToggle, setToggle } = useAgreeTermStore();
 
-  const handleChangeAgreeTerms = (checked: boolean, type: 'all' | 'privacy' | 'marketing' | 'service') => {
+  const handleChangeAgreeTerms = (
+    checked: boolean,
+    type: 'all' | 'privacy' | 'marketing' | 'service' | 'moreThan14' | 'locationBased'
+  ) => {
     if (type === 'all') {
       return setAllToggle(checked);
     }
@@ -43,17 +45,17 @@ export default function Terms({ onNext }: Props) {
                 checkBoxId="all"
                 label="약관 전체 동의하기"
                 onChangeEvent={checked => handleChangeAgreeTerms(checked, 'all')}
-                checked={privacy && marketing && service}
+                checked={privacy && marketing && service && locationBased && moreThan14}
               />
             </div>
 
             <div className="mt-6">
               {/* 만 14세 이상 */}
               <AgreementCheckbox
-                type="service"
+                type="moreThan14"
                 title="[필수] 만 14세 이상입니다."
-                onChangeCheckbox={checked => handleChangeAgreeTerms(checked, 'service')}
-                checked={service}
+                onChangeCheckbox={checked => handleChangeAgreeTerms(checked, 'moreThan14')}
+                checked={moreThan14}
                 onNext={() => router.push('/sign-up?step=terms-of-service')}
               />
 
@@ -77,10 +79,10 @@ export default function Terms({ onNext }: Props) {
 
               {/* 위치 기반 서비스 이용 약관 */}
               <AgreementCheckbox
-                type="marketing"
+                type="locationBased"
                 title="[선택] 위치 기반 서비스 이용 약관"
-                onChangeCheckbox={checked => handleChangeAgreeTerms(checked, 'marketing')}
-                checked={marketing}
+                onChangeCheckbox={checked => handleChangeAgreeTerms(checked, 'locationBased')}
+                checked={locationBased}
                 onNext={() => router.push('/sign-up?step=opt-in-marketing')}
               />
             </div>
@@ -90,7 +92,7 @@ export default function Terms({ onNext }: Props) {
           <DefaultButton
             bgColor="yellow"
             customStyle="flex w-full py-[12px] px-[16px]"
-            disabled={!(marketing && privacy && service)}
+            disabled={!(privacy && service && moreThan14)}
             onClick={onNext}
           >
             <span className="font-pretendard text-white">다음</span>
