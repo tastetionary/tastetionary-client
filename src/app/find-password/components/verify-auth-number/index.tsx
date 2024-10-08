@@ -68,7 +68,7 @@ export default function VerifyAuthNumber({ onNext, type, setEmailAuthId, emailAu
             />
           </div>
         </section>
-        <footer className="fixed bottom-[30px] w-[300px]">
+        <footer className="fixed bottom-[30px] w-[84%]">
           <div className="flex justify-center gap-2">
             <p className="!font-pretendard text-sm text-neutral-bg80">인증 코드를 받지 못하셨나요?</p>
             <DefaultButton bgColor="gray" customStyle="px-[12px] py-[4px]" onClick={onEmailAuthRequest}>

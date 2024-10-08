@@ -88,7 +88,7 @@ export default function Terms({ onNext }: Props) {
             </div>
           </div>
         </section>
-        <footer className="fixed bottom-[30px] w-[300px]">
+        <footer className="fixed bottom-[30px] w-[84%]">
           <DefaultButton
             bgColor="yellow"
             customStyle="flex w-full py-[12px] px-[16px]"

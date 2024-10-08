@@ -125,7 +125,7 @@ export default function RegionSetting({ onNext, category = 'dining_area' }: Prop
             <div id="map" ref={mapRef} style={{ width: address?.length > 0 ? '100%' : 0, height: '100%' }}></div>
           </S.MapContainer>
           {!openPostCode && (
-            <footer className="fixed bottom-[30px] w-[300px]">
+            <footer className="fixed bottom-[30px] w-[90%]">
               <DefaultButton
                 bgColor="yellow"
                 customStyle="flex w-full py-[12px] px-[16px] mt-6"
