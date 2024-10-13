@@ -24,8 +24,8 @@ export default function SignUpComplete() {
         </p>
       </S.Wrapper>
 
-      <footer className="fixed bottom-[30px] w-full px-25 pb-10 pt-5">
-        <DefaultButton bgColor="orange" customStyle="flex w-full py-[12px] px-[16px]">
+      <footer className="fixed bottom-[30px] w-[360px] px-25 pb-10 pt-5 mobile:w-full">
+        <DefaultButton bgColor="orange" customStyle="flex w-full py-[12px] px-[16px]" onClick={() => router.push('/')}>
           <span className="!font-pretendard text-white">메인 화면으로 이동</span>
         </DefaultButton>
       </footer>
