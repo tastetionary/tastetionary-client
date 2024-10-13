@@ -68,23 +68,24 @@ export default function VerifyAuthNumber({ onNext, type, setEmailAuthId, emailAu
             />
           </div>
         </section>
-        <footer className="fixed bottom-[30px] w-[84%]">
-          <div className="flex justify-center gap-2">
-            <p className="!font-pretendard text-sm text-neutral-bg80">인증 코드를 받지 못하셨나요?</p>
-            <DefaultButton bgColor="gray" customStyle="px-[12px] py-[4px]" onClick={onEmailAuthRequest}>
-              <span className="!font-pretendard">메일 재전송</span>
-            </DefaultButton>
-          </div>
-          <DefaultButton
-            bgColor="yellow"
-            customStyle="flex w-full py-[12px] px-[16px] mt-6"
-            disabled={authNumber.length === 0 || false}
-            onClick={onConfirmAuthCode}
-          >
-            <span className="!font-pretendard text-white">다음</span>
-          </DefaultButton>
-        </footer>
       </div>
+
+      <footer className="fixed bottom-[30px] w-[360px] px-25 pb-10 pt-5 mobile:w-full">
+        <div className="flex justify-center gap-2">
+          <p className="!font-pretendard text-sm text-neutral-bg80">인증 코드를 받지 못하셨나요?</p>
+          <DefaultButton bgColor="gray" customStyle="px-[12px] py-[4px]" onClick={onEmailAuthRequest}>
+            <span className="!font-pretendard">메일 재전송</span>
+          </DefaultButton>
+        </div>
+        <DefaultButton
+          bgColor="yellow"
+          customStyle="flex w-full py-[12px] px-[16px] mt-6"
+          disabled={authNumber.length === 0 || false}
+          onClick={onConfirmAuthCode}
+        >
+          <span className="!font-pretendard text-white">다음</span>
+        </DefaultButton>
+      </footer>
     </>
   );
 }

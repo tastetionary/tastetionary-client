@@ -89,19 +89,19 @@ export default function Terms({ onNext }: Props) {
               />
             </div>
           </div>
-
-          <footer className="fixed bottom-[30px] w-[300px]">
-            <DefaultButton
-              bgColor="yellow"
-              customStyle="flex w-full py-[12px] px-[16px]"
-              disabled={!(privacy && service && moreThan14)}
-              onClick={onNext}
-            >
-              <span className="font-pretendard text-white">다음</span>
-            </DefaultButton>
-          </footer>
         </section>
       </div>
+
+      <footer className="fixed bottom-[30px] w-[360px] px-25 pb-10 pt-5 mobile:w-full">
+        <DefaultButton
+          bgColor="yellow"
+          customStyle="flex w-full py-[12px] px-[16px]"
+          disabled={!(privacy && service && moreThan14)}
+          onClick={onNext}
+        >
+          <span className="font-pretendard text-white">다음</span>
+        </DefaultButton>
+      </footer>
     </>
   );
 }

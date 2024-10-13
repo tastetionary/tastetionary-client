@@ -51,18 +51,18 @@ export default function EmailForm({ onNext, setEmailAuthId }: Props) {
             {...register('account.identification', { required: true, pattern: emailRegex })}
           />
         </section>
-
-        <footer className="fixed bottom-[30px] w-[84%]">
-          <DefaultButton
-            bgColor="yellow"
-            customStyle="flex w-full py-[12px] px-[16px]"
-            disabled={!isDirty || !isValid}
-            onClick={onEmailAuthRequest}
-          >
-            <span className="font-pretendard text-white">다음</span>
-          </DefaultButton>
-        </footer>
       </div>
+
+      <footer className="fixed bottom-[30px] w-[360px] px-25 pb-10 pt-5 mobile:w-full">
+        <DefaultButton
+          bgColor="yellow"
+          customStyle="flex w-full py-[12px] px-[16px]"
+          disabled={!isDirty || !isValid}
+          onClick={onEmailAuthRequest}
+        >
+          <span className="font-pretendard text-white">다음</span>
+        </DefaultButton>
+      </footer>
     </>
   );
 }

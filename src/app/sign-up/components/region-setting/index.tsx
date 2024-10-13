@@ -124,20 +124,21 @@ export default function RegionSetting({ onNext, category = 'dining_area' }: Prop
           <S.MapContainer>
             <div id="map" ref={mapRef} style={{ width: address?.length > 0 ? '100%' : 0, height: '100%' }}></div>
           </S.MapContainer>
-          {!openPostCode && (
-            <footer className="fixed bottom-[30px] w-[90%]">
-              <DefaultButton
-                bgColor="yellow"
-                customStyle="flex w-full py-[12px] px-[16px] mt-6"
-                disabled={address === ''}
-                onClick={onNext}
-              >
-                <span className="!font-pretendard text-white">다음</span>
-              </DefaultButton>
-            </footer>
-          )}
         </S.Form>
       </S.Wrapper>
+
+      {!openPostCode && (
+        <footer className="fixed bottom-[30px] w-[360px] px-25 pb-10 pt-5 mobile:w-full">
+          <DefaultButton
+            bgColor="yellow"
+            customStyle="flex w-full py-[12px] px-[16px] mt-6"
+            disabled={address === ''}
+            onClick={onNext}
+          >
+            <span className="!font-pretendard text-white">다음</span>
+          </DefaultButton>
+        </footer>
+      )}
     </>
   );
 }
