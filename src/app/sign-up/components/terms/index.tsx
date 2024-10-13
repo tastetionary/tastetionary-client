@@ -4,6 +4,7 @@ import CHeader from '@/components/c-header';
 import { useAgreeTermStore } from '@/store/useAgreeTermStore';
 import { useRouter } from 'next/navigation';
 import AgreementCheckbox from '../agreement-checkbox';
+import * as S from './page.styled';
 
 interface Props {
   onNext: () => void;
@@ -13,6 +14,7 @@ export default function Terms({ onNext }: Props) {
   const router = useRouter();
 
   const { marketing, privacy, service, moreThan14, locationBased, setAllToggle, setToggle } = useAgreeTermStore();
+  const allCheckedState = moreThan14 && locationBased && service && privacy ? 'all' : 'default';
 
   const handleChangeAgreeTerms = (
     checked: boolean,
@@ -27,7 +29,7 @@ export default function Terms({ onNext }: Props) {
   return (
     <>
       <CHeader title="회원 가입" />
-      <div className="mx-8 mt-20">
+      <div className="mx-8 my-20">
         <header>
           <h1 className="!font-pretendard text-xl font-bold leading-8">
             안녕하세요 👋 <br /> 맛셔너리 이용을 위해 아래 약관에 동의해주세요.
@@ -40,7 +42,7 @@ export default function Terms({ onNext }: Props) {
         <section>
           <div className="mt-12">
             {/* 전체 이용 약관 */}
-            <div className="flex justify-center border-1 border-solid border-black p-[3%]">
+            <div className={S.agreeAllCheckedVariants({ checked: allCheckedState })}>
               <CheckBox2
                 checkBoxId="all"
                 label="약관 전체 동의하기"
@@ -87,17 +89,18 @@ export default function Terms({ onNext }: Props) {
               />
             </div>
           </div>
+
+          <footer className="fixed bottom-[30px] w-[300px]">
+            <DefaultButton
+              bgColor="yellow"
+              customStyle="flex w-full py-[12px] px-[16px]"
+              disabled={!(privacy && service && moreThan14)}
+              onClick={onNext}
+            >
+              <span className="font-pretendard text-white">다음</span>
+            </DefaultButton>
+          </footer>
         </section>
-        <footer className="fixed bottom-[30px] w-[84%]">
-          <DefaultButton
-            bgColor="yellow"
-            customStyle="flex w-full py-[12px] px-[16px]"
-            disabled={!(privacy && service && moreThan14)}
-            onClick={onNext}
-          >
-            <span className="font-pretendard text-white">다음</span>
-          </DefaultButton>
-        </footer>
       </div>
     </>
   );

@@ -30,9 +30,8 @@ export default function EmailForm({ onNext, setEmailAuthId }: Props) {
 
   return (
     <>
-      {/* <CHeader title="이메일 주소 입력" isBackBtn /> */}
       <CHeader title="회원가입" />
-      <div className="mx-8 mt-20">
+      <div className="mx-8 my-20">
         <header>
           <h1 className="!font-pretendard text-xl font-bold leading-8">
             아이디로 사용할 <br /> 이메일 주소를 입력해 주세요. ✍️
