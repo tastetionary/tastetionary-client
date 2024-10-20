@@ -1,23 +1,41 @@
 'use client';
 
+import { TloginCategory } from '@/apis/auth';
+import { overlayVariants } from '@/components/Modal/DialogModal/style';
+import * as S from '@/components/Modal/LoadingModal/style';
+import { cn } from '@/utils/styles.utils';
+import Lottie from 'lottie-react';
+import { useSearchParams } from 'next/navigation';
 import { useEffect, useState } from 'react';
+import BookAnimation from '../../../components/Modal/LoadingModal/book_animation.json';
+import useLoginMutate from '../hooks/useLoginMutate';
 
 export default function LoginCallback() {
-  const [query, setQuery] = useState<string | null>(null);
-  const [hash, setHash] = useState('');
+  const searchParams = useSearchParams();
+  const { mutate: login } = useLoginMutate();
 
-  console.log('query', query);
+  const [hash, setHash] = useState('');
+  const [value, setValue] = useState<string | null>(null);
+
+  console.log('value', value);
   console.log('hash', hash);
 
-  useEffect(() => {
-    // window.location.search로 쿼리 문자열을 가져옴
-    const params = new URLSearchParams(window.location.search);
-    const queryParam = params.get('code'); // 'code'라는 파라미터 값 추출
+  const category = searchParams.get('category') as undefined | TloginCategory;
+  const code = searchParams.get('code');
 
-    setQuery(queryParam); // kakao / google
+  console.log({ category, code });
+
+  useEffect(() => {
+    if (!value || value === '' || !category) return;
+
+    login({ category, code: value, identification: '', password: '' });
+  }, [value, category]);
+
+  useEffect(() => {
+    if (category === 'kakao' || category === 'google') setValue(code); // kakao / google
 
     const handleHashChange = () => {
-      setHash(window.location.hash); // URL의 hash 값 추출
+      setHash(window.location.hash?.replace('#', '')); // URL의 hash 값 추출
     };
 
     // 처음 렌더링 시 hash 값 설정
@@ -30,7 +48,22 @@ export default function LoginCallback() {
     return () => {
       window.removeEventListener('hashchange', handleHashChange);
     };
-  }, []);
+  }, [category, code]);
 
-  return <div>로그인 중입니다</div>;
+  return (
+    <div className={cn(overlayVariants({ visibility: 'visible', animation: 'visible' }))}>
+      <div className={cn(S.loadingModalContainerVariants({ visibility: 'visible', animation: 'visible' }))}>
+        <Lottie
+          autoPlay={true}
+          loop={true}
+          rendererSettings={{
+            preserveAspectRatio: '',
+          }}
+          animationData={BookAnimation}
+          height={200}
+          width={200}
+        />
+      </div>
+    </div>
+  );
 }

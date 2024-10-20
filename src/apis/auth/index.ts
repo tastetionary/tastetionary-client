@@ -1,9 +1,11 @@
 import http from '../http';
 
+export type TloginCategory = 'email' | 'kakao' | 'naver' | 'google' | 'apple';
+
 interface PostLoginParams {
   identification?: string;
   password?: string;
-  category: 'email' | 'kakao' | 'naver' | 'google';
+  category: TloginCategory;
   code?: string;
 }
 
