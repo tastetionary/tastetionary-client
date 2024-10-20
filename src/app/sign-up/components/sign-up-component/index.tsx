@@ -49,7 +49,7 @@ interface FormValue {
 
 export default function SignUpComponent() {
   const [emailAuthId, setEmailAuthId] = useState(0);
-  const [companyEmailAuthId, setCompanyEmailAuthId] = useState(0);
+  // const [companyEmailAuthId, setCompanyEmailAuthId] = useState(0);
 
   const { push } = useRouter();
   const params = useSearchParams();

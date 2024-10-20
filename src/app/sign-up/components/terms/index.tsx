@@ -31,10 +31,10 @@ export default function Terms({ onNext }: Props) {
       <CHeader title="회원 가입" />
       <div className="mx-8 my-20">
         <header>
-          <h1 className="!font-pretendard text-xl font-bold leading-8">
+          <h1 className="!font-pretendard font-bold leading-8">
             안녕하세요 👋 <br /> 맛셔너리 이용을 위해 아래 약관에 동의해주세요.
           </h1>
-          <p className="mt-3 !font-pretendard leading-5 text-neutral-bg80">
+          <p className="mt-3 !font-pretendard text-sm leading-5 text-neutral-bg80">
             서비스 이용을 위해 동의가 필요합니다. <br />
             정책 및 약관을 확인하신 후, 회원가입을 진행해주세요.
           </p>

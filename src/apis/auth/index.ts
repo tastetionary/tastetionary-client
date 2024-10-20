@@ -6,9 +6,14 @@ interface PostLoginParams {
   category: 'email';
 }
 
+interface GetValidateNicknameParams {
+  nickname: string;
+}
+
 interface AuthRepository {
   postLogin: ({ identification, password, category }: PostLoginParams) => Promise<any>;
   postLogout: ({ token }: { token: string }) => Promise<any>;
+  getValidateNickname: ({ nickname }: GetValidateNicknameParams) => Promise<any>;
 }
 
 const authRepository = (): AuthRepository => {
@@ -25,6 +30,8 @@ const authRepository = (): AuthRepository => {
           Authorization: `Bearer ${token}`,
         },
       }),
+    getValidateNickname: async ({ nickname }: GetValidateNicknameParams) =>
+      await http.get(`/apis/v1/user/nickname/validation?name=${nickname}`),
   };
 };
 
