@@ -10,7 +10,6 @@ import CHeader from '@/components/c-header';
 import CRecommendButton from '@/components/c-recommend-button';
 import { MODAL_TYPES } from '@/components/Modal/GlobalModal';
 import useModal from '@/components/Modal/GlobalModal/hooks/useModal';
-import ButtonTab from '@/components/Tab/ButtonTab';
 import { useSelectResultStore } from '@/store/useSelectResultStore';
 import axios from 'axios';
 import { useRouter } from 'next/navigation';
@@ -69,71 +68,6 @@ export default function SelectRestaurantResult() {
     }
   }, [lat, lng]);
 
-  useEffect(() => {
-    const aggregatePrice = review?.aggregatePrice;
-
-    if (aggregatePrice) {
-      const { avg, ...others } = aggregatePrice;
-
-      const price = others;
-
-      const keys = Object.keys(price);
-      const values = Object.values(price);
-
-      const total = values.reduce((a, b) => a + b); // 가격 개수
-
-      const assignRanks = (arr: number[]) => {
-        // 각 원소의 값을 인덱스와 함께 저장하는 배열을 생성
-        const indexedArr = arr.map((value, index) => {
-          return { value: value, index: index };
-        });
-
-        // 원소를 값에 따라 정렬
-        indexedArr.sort((a, b) => {
-          if (a.value === b.value) {
-            return b.index - a.index; // 값이 같을 경우 내림차순
-          }
-          return a.value - b.value; // 오름차순
-        });
-
-        // 순위를 부여할 빈 배열을 생성
-        let ranks: string[] = [];
-
-        // 순위 부여
-        for (let i = 0; i < arr.length; i++) {
-          let rank;
-          if (i === 0) {
-            rank = 'smallest';
-          } else if (i === 1) {
-            rank = 'small';
-          } else if (i === arr.length - 2) {
-            rank = 'large';
-          } else if (i === arr.length - 1) {
-            rank = 'largest';
-          } else {
-            rank = 'medium';
-          }
-          ranks[indexedArr[i].index] = rank;
-        }
-
-        return ranks;
-      };
-
-      const result: { portion: number; rank: string; label: number }[] = [];
-      const ranks: string[] = assignRanks(values);
-
-      ranks?.forEach((r, i) => {
-        result.push({
-          portion: (values[i] / total) * 100,
-          rank: r,
-          label: +keys[i],
-        });
-      });
-
-      setPrice(result);
-    }
-  }, [review?.aggregatePrice]);
-
   console.log('restaurant', restaurant);
 
   return (
@@ -178,31 +112,17 @@ export default function SelectRestaurantResult() {
         </div>
       </div>
 
-      <ButtonTab tabList={['식당 상세', '리뷰']} selectedTab={tab} clickEvent={value => setTab(value)} />
+      <div className={'mt-lg'}>
+        <RestaurantDetail />
 
-      <div className={tab === 0 ? 'mt-lg px-xl' : 'mt-lg'}>
-        {tab === 0 ? (
-          <>
-            <RestaurantDetail />
+        <RestaurantReview />
 
-            <BottomButtonContainer>
-              <DefaultButton bgColor="gray" customStyle="px-lg" onClick={excludeModal}>
-                <span className="body1">이 식당 제외</span>
-              </DefaultButton>
-              <CRecommendButton btnText="다시 추첨하기" selectType="restaurant" />
-            </BottomButtonContainer>
-          </>
-        ) : (
-          <>
-            <RestaurantReview />
-
-            <BottomButtonContainer style={{ padding: 32 }}>
-              <DefaultButton bgColor="orange" customStyle="flex-grow py-12">
-                <span className="body1 text-white">리뷰 작성하러 가기</span>
-              </DefaultButton>
-            </BottomButtonContainer>
-          </>
-        )}
+        <BottomButtonContainer>
+          <DefaultButton bgColor="gray" customStyle="px-lg" onClick={excludeModal}>
+            <span className="body1">이 식당 제외</span>
+          </DefaultButton>
+          <CRecommendButton btnText="다시 추첨하기" selectType="restaurant" />
+        </BottomButtonContainer>
       </div>
     </>
   );
