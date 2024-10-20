@@ -65,6 +65,7 @@ module.exports = {
       backgroundImage: {
         ic_checkbox_inactive: "url('/image/CheckBox/ic_checkbox_inactive.svg')",
         ic_checkbox_active: "url('/image/CheckBox/ic_checkbox_active.svg')",
+        ic_checkbox_bg_orange_active: "url('/image/CheckBox/ic_checkbox_orange_active.png')",
       },
       spacing: {
         xxs: '4px',
