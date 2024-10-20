@@ -1,8 +1,8 @@
 import styled from 'styled-components';
 
 export const Menu = styled.div`
-  padding-top: 24px;
   width: 100%;
+  border-bottom: 1px solid ${({ theme }) => theme.colors.neutral.bg10};
 `;
 
 export const MenuTitle = styled.div`
