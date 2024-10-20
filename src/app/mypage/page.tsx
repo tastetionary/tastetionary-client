@@ -88,8 +88,7 @@ export default function MyPage() {
               { name: '개인정보 처리 방침', clickEvent: () => push('/sign-up?step=privacy-notice') },
             ]}
           />
-
-          <CMypageMenu items={[{ name: '로그아웃', clickEvent: () => logoutModal() }]} />
+          {isLoggedIn && <CMypageMenu items={[{ name: '로그아웃', clickEvent: () => logoutModal() }]} />}
         </S.MenuList>
       </GNBLayout>
     </>
