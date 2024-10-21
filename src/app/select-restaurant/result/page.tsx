@@ -11,12 +11,12 @@ import CHeader from '@/components/c-header';
 import CRecommendButton from '@/components/c-recommend-button';
 import { MODAL_TYPES } from '@/components/Modal/GlobalModal';
 import useModal from '@/components/Modal/GlobalModal/hooks/useModal';
+import { iconToast } from '@/components/Toast';
 import useUser from '@/hooks/useUser';
 import { useSelectResultStore } from '@/store/useSelectResultStore';
 import { useMutation } from '@tanstack/react-query';
 import axios from 'axios';
 import { useEffect, useState } from 'react';
-import { toast } from 'react-toastify';
 import RestaurantDetail from './components/RestaurantDetail';
 import RestaurantImages from './components/RestaurantImages';
 import RestaurantReview from './components/RestaurantReview';
@@ -37,7 +37,7 @@ export default function SelectRestaurantResult() {
 
   const { mutate: excludedRestaurant } = useMutation(preferenceRepository().postPreference, {
     onSuccess: () => {
-      toast.success('이 식당은 앞으로 제외됩니다.');
+      iconToast('이 식당은 앞으로 제외됩니다.', 'check');
     },
   });
 

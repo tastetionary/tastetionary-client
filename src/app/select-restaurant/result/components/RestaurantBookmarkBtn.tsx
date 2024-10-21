@@ -1,6 +1,7 @@
 import preferenceRepository from '@/apis/user/preference';
 import IC_BOOKMARK_ACTIVE from '@/assets/common/Icons/bookmark_active.svg';
 import IC_BOOKMARK_INACTIVE from '@/assets/common/Icons/bookmark_inactive.svg';
+import { iconToast } from '@/components/Toast';
 import useUser from '@/hooks/useUser';
 import { useSelectResultStore } from '@/store/useSelectResultStore';
 import { useMutation } from '@tanstack/react-query';
@@ -13,7 +14,10 @@ export default function RestaurantBookmarkBtn() {
   const { restaurant } = useSelectResultStore();
 
   const { mutate: addBookMark } = useMutation(preferenceRepository().postPreference, {
-    onSuccess: () => setIsBookMarked(true),
+    onSuccess: () => {
+      iconToast('북마크에 추가되었습니다.', 'check');
+      setIsBookMarked(true);
+    },
   });
 
   const { mutate: deleteBookMark } = useMutation(preferenceRepository().deletePreference, {
