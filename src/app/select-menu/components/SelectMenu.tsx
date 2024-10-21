@@ -36,13 +36,13 @@ export default function SelectMenu() {
         <SelectSection title={{ bold: '키워드', normal: '를 선택하세요.' }} subtitle="여러 개 선택 가능합니다.">
           <CSelectKeyword data={data?.keywords} selectType="food" />
         </SelectSection>
-
-        <BottomButtonContainer>
-          <RefreshButton btnText="초기화" onClick={resetSelectFood} disabled={refreshBtnDisabled} />
-
-          <CRecommendButton btnText="메뉴 추첨 시작" selectType="food" disabled={recommendBtnDisabled} />
-        </BottomButtonContainer>
       </ContentLayout>
+
+      <BottomButtonContainer>
+        <RefreshButton btnText="초기화" onClick={resetSelectFood} disabled={refreshBtnDisabled} />
+
+        <CRecommendButton btnText="메뉴 추첨 시작" selectType="food" disabled={recommendBtnDisabled} />
+      </BottomButtonContainer>
     </>
   );
 }

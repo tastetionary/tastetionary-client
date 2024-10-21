@@ -1,0 +1,37 @@
+<svg width="25" height="24" viewBox="0 0 25 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M14.5 14H12.5V16H14.5V14Z" fill="#FF5601"/>
+<path d="M16.5 12H14.5V14H16.5V12Z" fill="#FF5601"/>
+<path d="M18.5 10H16.5V12H18.5V10Z" fill="#FF5601"/>
+<path d="M20.5 8H18.5V10H20.5V8Z" fill="#FF5601"/>
+<path d="M10.5 14H8.5V16H10.5V14Z" fill="white"/>
+<path d="M10.5 16H8.5V18H10.5V16Z" fill="white"/>
+<rect width="2" height="2" transform="matrix(-1 0 0 1 12.5 16)" fill="#FFCBB8"/>
+<path d="M14.5 12H12.5V14H14.5V12Z" fill="#FFAA8A"/>
+<path d="M12.5 12H10.5V14H12.5V12Z" fill="#FFAA8A"/>
+<path d="M16.5 10H14.5V12H16.5V10Z" fill="#FFAA8A"/>
+<path d="M14.5 10H12.5V12H14.5V10Z" fill="#FFAA8A"/>
+<path d="M18.5 8H16.5V10H18.5V8Z" fill="#FFAA8A"/>
+<path d="M16.5 8H14.5V10H16.5V8Z" fill="#FFAA8A"/>
+<path d="M20.5 6H18.5V8H20.5V6Z" fill="#FFAA8A"/>
+<path d="M18.5 6H16.5V8H18.5V6Z" fill="#FFAA8A"/>
+<path d="M12.5 18H10.5V20H12.5V18Z" fill="#37474F"/>
+<path d="M14.5 16H12.5V18H14.5V16Z" fill="#37474F"/>
+<path d="M16.5 14H14.5V16H16.5V14Z" fill="#37474F"/>
+<path d="M18.5 12H16.5V14H18.5V12Z" fill="#37474F"/>
+<path d="M20.5 10H18.5V12H20.5V10Z" fill="#37474F"/>
+<path d="M22.5 6H20.5V8H22.5V6Z" fill="#37474F"/>
+<path d="M22.5 8H20.5V10H22.5V8Z" fill="#37474F"/>
+<path d="M20.5 4H18.5V6H20.5V4Z" fill="#37474F"/>
+<path d="M10.5 18H8.5V20H10.5V18Z" fill="#37474F"/>
+<path d="M8.5 18H6.5V20H8.5V18Z" fill="#37474F"/>
+<path d="M8.5 16H6.5V18H8.5V16Z" fill="#37474F"/>
+<path d="M8.5 14H6.5V16H8.5V14Z" fill="#37474F"/>
+<path d="M10.5 12H8.5V14H10.5V12Z" fill="#37474F"/>
+<path d="M12.5 14H10.5V16H12.5V14Z" fill="#37474F"/>
+<path d="M12.5 10H10.5V12H12.5V10Z" fill="#37474F"/>
+<path d="M14.5 8H12.5V10H14.5V8Z" fill="#37474F"/>
+<path d="M16.5 6H14.5V8H16.5V6Z" fill="#37474F"/>
+<path d="M18.5 4H16.5V6H18.5V4Z" fill="#37474F"/>
+<path d="M6.5 20H4.5V22H6.5V20Z" fill="#37474F"/>
+<path d="M4.5 20H2.5V22H4.5V20Z" fill="#37474F"/>
+</svg>

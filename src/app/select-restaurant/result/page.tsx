@@ -4,43 +4,65 @@ import IC_LOCATION from '@/assets/common/Icons/location.svg';
 import IC_PRICE from '@/assets/common/Icons/price.svg';
 import IC_REVIEW2 from '@/assets/common/Icons/review.svg';
 
+import preferenceRepository from '@/apis/user/preference';
 import BottomButtonContainer from '@/components/Button/BottomButtonContainer';
 import DefaultButton from '@/components/Button/DefaultButton';
 import CHeader from '@/components/c-header';
 import CRecommendButton from '@/components/c-recommend-button';
 import { MODAL_TYPES } from '@/components/Modal/GlobalModal';
 import useModal from '@/components/Modal/GlobalModal/hooks/useModal';
-import ButtonTab from '@/components/Tab/ButtonTab';
+import { iconToast } from '@/components/Toast';
+import useUser from '@/hooks/useUser';
 import { useSelectResultStore } from '@/store/useSelectResultStore';
+import { useMutation } from '@tanstack/react-query';
 import axios from 'axios';
-import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import RestaurantDetail from './components/RestaurantDetail';
 import RestaurantImages from './components/RestaurantImages';
 import RestaurantReview from './components/RestaurantReview';
 
 export default function SelectRestaurantResult() {
-  const router = useRouter();
+  const { token } = useUser();
   const { openModal, closeModal } = useModal();
 
-  const [tab, setTab] = useState(0);
   const [location, setLocation] = useState('');
   const [address, setAddress] = useState('');
-  const [price, setPrice] = useState<{ portion: number; rank: string; label: number }[]>([]);
 
   const { restaurant } = useSelectResultStore();
+
   const restaurantName = restaurant?.name;
   const lat = restaurant?.latitude;
   const lng = restaurant?.longitude;
   const review = restaurant?.review;
 
-  const uniqueReviewKeyword = review?.keywords?.filter((k, i) => review?.keywords.indexOf(k) === i);
+  const maxPrice = restaurant?.review?.priceList.reduce(
+    (acc, item) => {
+      const [key, value] = Object.entries(item)[0];
+      return value >= acc.maxValue ? { maxKey: key, maxValue: value } : acc;
+    },
+    { maxKey: '', maxValue: -Infinity }
+  ).maxKey;
+
+  const maxPriceText: { [key: string]: string } = {
+    '~10,000': '10,000원 이하',
+    '10,000~13,000': '10,000원 ~ 13,000원',
+    '13,000~16,000': '13,000원 ~ 16,000원',
+    '16,000~20,000': '16,000원 ~ 20,000원',
+    '20,000~': '20,000원 이상',
+  };
+
+  const { mutate: excludedRestaurant } = useMutation(preferenceRepository().postPreference, {
+    onSuccess: () => {
+      iconToast('이 식당은 앞으로 제외됩니다.', 'check');
+    },
+  });
 
   const excludeModal = () => {
     openModal(MODAL_TYPES.dialog, {
       title: '이 식당 제외하기',
       message: '앞으로도 이 식당이 나타나지 않도록 제외할까요?',
-      handleConfirm: () => closeModal(MODAL_TYPES.dialog),
+      handleConfirm: () =>
+        excludedRestaurant({ category: 'excluded', restaurantId: restaurant?.id ? +restaurant?.id : 0, token: token! }),
       cancelText: '닫기',
       confirmText: '추천하지 않기',
       handleClose: () => closeModal(MODAL_TYPES.dialog),
@@ -69,73 +91,6 @@ export default function SelectRestaurantResult() {
     }
   }, [lat, lng]);
 
-  useEffect(() => {
-    const aggregatePrice = review?.aggregatePrice;
-
-    if (aggregatePrice) {
-      const { avg, ...others } = aggregatePrice;
-
-      const price = others;
-
-      const keys = Object.keys(price);
-      const values = Object.values(price);
-
-      const total = values.reduce((a, b) => a + b); // 가격 개수
-
-      const assignRanks = (arr: number[]) => {
-        // 각 원소의 값을 인덱스와 함께 저장하는 배열을 생성
-        const indexedArr = arr.map((value, index) => {
-          return { value: value, index: index };
-        });
-
-        // 원소를 값에 따라 정렬
-        indexedArr.sort((a, b) => {
-          if (a.value === b.value) {
-            return b.index - a.index; // 값이 같을 경우 내림차순
-          }
-          return a.value - b.value; // 오름차순
-        });
-
-        // 순위를 부여할 빈 배열을 생성
-        let ranks: string[] = [];
-
-        // 순위 부여
-        for (let i = 0; i < arr.length; i++) {
-          let rank;
-          if (i === 0) {
-            rank = 'smallest';
-          } else if (i === 1) {
-            rank = 'small';
-          } else if (i === arr.length - 2) {
-            rank = 'large';
-          } else if (i === arr.length - 1) {
-            rank = 'largest';
-          } else {
-            rank = 'medium';
-          }
-          ranks[indexedArr[i].index] = rank;
-        }
-
-        return ranks;
-      };
-
-      const result: { portion: number; rank: string; label: number }[] = [];
-      const ranks: string[] = assignRanks(values);
-
-      ranks?.forEach((r, i) => {
-        result.push({
-          portion: (values[i] / total) * 100,
-          rank: r,
-          label: +keys[i],
-        });
-      });
-
-      setPrice(result);
-    }
-  }, [review?.aggregatePrice]);
-
-  console.log('restaurant', restaurant);
-
   return (
     <>
       <CHeader title="식당 고르기" />
@@ -159,7 +114,7 @@ export default function SelectRestaurantResult() {
           <div className="flex items-center gap-xs">
             <IC_PRICE width={16} height={16} />
 
-            <span className="body2 text-neutral-bg60">가격대</span>
+            <span className="body2 text-neutral-bg60">가격대 {maxPrice ? maxPriceText[maxPrice] : ''}</span>
           </div>
 
           <div className="flex items-center gap-xs">
@@ -178,31 +133,18 @@ export default function SelectRestaurantResult() {
         </div>
       </div>
 
-      <ButtonTab tabList={['식당 상세', '리뷰']} selectedTab={tab} clickEvent={value => setTab(value)} />
+      <div className={'mt-lg'}>
+        <RestaurantDetail />
 
-      <div className={tab === 0 ? 'mt-lg px-xl' : 'mt-lg'}>
-        {tab === 0 ? (
-          <>
-            <RestaurantDetail />
+        <RestaurantReview />
 
-            <BottomButtonContainer>
-              <DefaultButton bgColor="gray" customStyle="px-lg" onClick={excludeModal}>
-                <span className="body1">이 식당 제외</span>
-              </DefaultButton>
-              <CRecommendButton btnText="다시 추첨하기" selectType="restaurant" />
-            </BottomButtonContainer>
-          </>
-        ) : (
-          <>
-            <RestaurantReview />
+        <BottomButtonContainer>
+          <DefaultButton bgColor="gray" customStyle="px-lg" onClick={excludeModal}>
+            <span className="body1">이 식당 제외</span>
+          </DefaultButton>
 
-            <BottomButtonContainer style={{ padding: 32 }}>
-              <DefaultButton bgColor="orange" customStyle="flex-grow py-12">
-                <span className="body1 text-white">리뷰 작성하러 가기</span>
-              </DefaultButton>
-            </BottomButtonContainer>
-          </>
-        )}
+          <CRecommendButton btnText="한번 더 돌리기" selectType="restaurant" />
+        </BottomButtonContainer>
       </div>
     </>
   );

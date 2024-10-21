@@ -99,7 +99,8 @@ export default function CRecommendButton({ selectType, btnText, ...rest }: Props
                   review: {
                     total: res?.aggregateReviews?.totalCount ?? 0,
                     revisitRatio: res?.aggregateReviews?.revisitRatio ?? 0,
-                    aggregatePrice: res?.aggregateReviews?.aggregatePrice,
+                    prices: res?.aggregateReviews?.prices ?? [],
+                    priceList: [],
                     keywords: res?.aggregateReviews?.keywords ?? [],
                   },
                 }
@@ -107,7 +108,7 @@ export default function CRecommendButton({ selectType, btnText, ...rest }: Props
           });
         } else {
           setSelectFoodResult({
-            id: +res?.id ?? 0,
+            id: res?.id ? +res?.id : 0,
             name: res?.name,
           });
         }

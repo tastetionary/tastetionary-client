@@ -7,7 +7,7 @@ interface Props extends HTMLAttributes<HTMLDivElement> {
 export default function BottomButtonContainer({ children, ...rest }: Props) {
   return (
     <div
-      className="flex w-full gap-[14px] py-xl mobile:fixed mobile:bottom-0 mobile:left-0 mobile:bg-white mobile:px-xl"
+      className="fixed bottom-0 flex w-[360px] gap-[14px] bg-white px-xl py-xl mobile:left-0 mobile:w-full"
       {...rest}
     >
       {children}

@@ -91,10 +91,11 @@
     .Toastify__toast,
     .Toastify__toast--error {
       width: auto;
-      padding: 10px 61px;
-      min-height: 42px;
-      background-color: rgba(0, 0, 0, 0.6);
+      padding: 6px 16px;
+      min-height: 50px;
+      background-color: #253238;
       margin-bottom: 0;
+      border-radius: 4px !important;
     }
 
     &&&.Toastify__toast-container {
@@ -107,13 +108,15 @@
     }
 
     .Toastify__toast-icon {
-      width: 0px !important;
+      width: 24px !important;
     }
 
     .Toastify__toast-body {
+      display: flex !important;
+      align-items: center !important ;
+      gap: 10px !important ;
       padding: 0 !important;
       margin: 0 !important;
-      display: block !important;
 
       div {
         font-family: var(--Pretendard-Variable) !important;
@@ -125,6 +128,10 @@
         color: #ffffff !important;
         white-space: pre-line !important;
       }
+    }
+
+    .Toastify__toast-icon {
+      margin: 0 !important;
     }
 
     &&&.Toastify__toast-container--top-center {
