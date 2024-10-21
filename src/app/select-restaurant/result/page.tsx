@@ -35,6 +35,22 @@ export default function SelectRestaurantResult() {
   const lng = restaurant?.longitude;
   const review = restaurant?.review;
 
+  const maxPrice = restaurant?.review?.priceList.reduce(
+    (acc, item) => {
+      const [key, value] = Object.entries(item)[0];
+      return value >= acc.maxValue ? { maxKey: key, maxValue: value } : acc;
+    },
+    { maxKey: '', maxValue: -Infinity }
+  ).maxKey;
+
+  const maxPriceText: { [key: string]: string } = {
+    '~10,000': '10,000원 이하',
+    '10,000~13,000': '10,000원 ~ 13,000원',
+    '13,000~16,000': '13,000원 ~ 16,000원',
+    '16,000~20,000': '16,000원 ~ 20,000원',
+    '20,000~': '20,000원 이상',
+  };
+
   const { mutate: excludedRestaurant } = useMutation(preferenceRepository().postPreference, {
     onSuccess: () => {
       iconToast('이 식당은 앞으로 제외됩니다.', 'check');
@@ -98,7 +114,7 @@ export default function SelectRestaurantResult() {
           <div className="flex items-center gap-xs">
             <IC_PRICE width={16} height={16} />
 
-            <span className="body2 text-neutral-bg60">가격대</span>
+            <span className="body2 text-neutral-bg60">가격대 {maxPrice ? maxPriceText[maxPrice] : ''}</span>
           </div>
 
           <div className="flex items-center gap-xs">
