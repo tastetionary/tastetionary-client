@@ -4,42 +4,49 @@ import IC_LOCATION from '@/assets/common/Icons/location.svg';
 import IC_PRICE from '@/assets/common/Icons/price.svg';
 import IC_REVIEW2 from '@/assets/common/Icons/review.svg';
 
+import preferenceRepository from '@/apis/user/preference';
 import BottomButtonContainer from '@/components/Button/BottomButtonContainer';
 import DefaultButton from '@/components/Button/DefaultButton';
 import CHeader from '@/components/c-header';
 import CRecommendButton from '@/components/c-recommend-button';
 import { MODAL_TYPES } from '@/components/Modal/GlobalModal';
 import useModal from '@/components/Modal/GlobalModal/hooks/useModal';
+import useUser from '@/hooks/useUser';
 import { useSelectResultStore } from '@/store/useSelectResultStore';
+import { useMutation } from '@tanstack/react-query';
 import axios from 'axios';
-import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
+import { toast } from 'react-toastify';
 import RestaurantDetail from './components/RestaurantDetail';
 import RestaurantImages from './components/RestaurantImages';
 import RestaurantReview from './components/RestaurantReview';
 
 export default function SelectRestaurantResult() {
-  const router = useRouter();
+  const { token } = useUser();
   const { openModal, closeModal } = useModal();
 
-  const [tab, setTab] = useState(0);
   const [location, setLocation] = useState('');
   const [address, setAddress] = useState('');
-  const [price, setPrice] = useState<{ portion: number; rank: string; label: number }[]>([]);
 
   const { restaurant } = useSelectResultStore();
+
   const restaurantName = restaurant?.name;
   const lat = restaurant?.latitude;
   const lng = restaurant?.longitude;
   const review = restaurant?.review;
 
-  const uniqueReviewKeyword = review?.keywords?.filter((k, i) => review?.keywords.indexOf(k) === i);
+  const { mutate: excludedRestaurant } = useMutation(preferenceRepository().postPreference, {
+    onSuccess: () => {
+      toast.success('이 식당은 앞으로 제외됩니다.');
+    },
+  });
 
   const excludeModal = () => {
     openModal(MODAL_TYPES.dialog, {
       title: '이 식당 제외하기',
       message: '앞으로도 이 식당이 나타나지 않도록 제외할까요?',
-      handleConfirm: () => closeModal(MODAL_TYPES.dialog),
+      handleConfirm: () =>
+        excludedRestaurant({ category: 'excluded', restaurantId: restaurant?.id ? +restaurant?.id : 0, token: token! }),
       cancelText: '닫기',
       confirmText: '추천하지 않기',
       handleClose: () => closeModal(MODAL_TYPES.dialog),
@@ -67,8 +74,6 @@ export default function SelectRestaurantResult() {
       getAddress();
     }
   }, [lat, lng]);
-
-  console.log('restaurant', restaurant);
 
   return (
     <>
@@ -121,7 +126,8 @@ export default function SelectRestaurantResult() {
           <DefaultButton bgColor="gray" customStyle="px-lg" onClick={excludeModal}>
             <span className="body1">이 식당 제외</span>
           </DefaultButton>
-          <CRecommendButton btnText="다시 추첨하기" selectType="restaurant" />
+
+          <CRecommendButton btnText="한번 더 돌리기" selectType="restaurant" />
         </BottomButtonContainer>
       </div>
     </>
