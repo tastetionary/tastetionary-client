@@ -91,10 +91,13 @@
     .Toastify__toast,
     .Toastify__toast--error {
       width: auto;
-      padding: 10px 61px;
-      min-height: 42px;
-      background-color: rgba(0, 0, 0, 0.6);
+      padding: 6px 16px;
+      min-height: 50px;
+      background-color: #253238;
       margin-bottom: 0;
+      display: flex;
+      align-items: center;
+      gap: 10px;
     }
 
     &&&.Toastify__toast-container {
@@ -107,7 +110,7 @@
     }
 
     .Toastify__toast-icon {
-      width: 0px !important;
+      width: 24px !important;
     }
 
     .Toastify__toast-body {
