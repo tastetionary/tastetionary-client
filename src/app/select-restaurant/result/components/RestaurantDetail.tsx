@@ -1,13 +1,11 @@
 'use client';
 
-import { useSelectResultStore } from '@/store/useSelectResultStore';
-
-export type PriceRange = '~10,000' | '10,000~13,000' | '13,000~16,000' | '16,000~20,000' | '20,000~';
+import { PriceRange, useSelectResultStore } from '@/store/useSelectResultStore';
 
 export default function RestaurantDetail() {
   const { restaurant } = useSelectResultStore();
 
-  const priceList = restaurant?.review?.priceList?.map(p => Object.keys(p)[0]) ?? [];
+  const priceList = restaurant?.review?.priceList?.map(p => Object.keys(p)[0] as PriceRange) ?? [];
 
   return (
     <div className="border-b-1 border-t-1 border-solid border-neutral-bg20 px-xl py-lg">

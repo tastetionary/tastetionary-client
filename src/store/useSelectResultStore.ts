@@ -1,6 +1,7 @@
-import { PriceRange } from '@/app/select-restaurant/result/components/RestaurantDetail';
 import { create } from 'zustand';
 import { devtools, persist } from 'zustand/middleware';
+
+export type PriceRange = '~10,000' | '10,000~13,000' | '13,000~16,000' | '16,000~20,000' | '20,000~';
 
 interface RestaurantInfo {
   name?: string;
