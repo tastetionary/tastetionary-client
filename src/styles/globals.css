@@ -95,9 +95,7 @@
       min-height: 50px;
       background-color: #253238;
       margin-bottom: 0;
-      display: flex;
-      align-items: center;
-      gap: 10px;
+      border-radius: 4px !important;
     }
 
     &&&.Toastify__toast-container {
@@ -114,9 +112,11 @@
     }
 
     .Toastify__toast-body {
+      display: flex !important;
+      align-items: center !important ;
+      gap: 10px !important ;
       padding: 0 !important;
       margin: 0 !important;
-      display: block !important;
 
       div {
         font-family: var(--Pretendard-Variable) !important;
@@ -128,6 +128,10 @@
         color: #ffffff !important;
         white-space: pre-line !important;
       }
+    }
+
+    .Toastify__toast-icon {
+      margin: 0 !important;
     }
 
     &&&.Toastify__toast-container--top-center {

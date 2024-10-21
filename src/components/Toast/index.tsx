@@ -27,7 +27,7 @@ export default function Toast() {
     <ToastContainer
       className={'toast'}
       position="top-center"
-      autoClose={20000000}
+      autoClose={2000}
       hideProgressBar={true}
       closeOnClick={true}
       pauseOnHover={true}
