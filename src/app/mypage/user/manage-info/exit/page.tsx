@@ -1,10 +1,10 @@
 'use client';
 
 import { deleteUser } from '@/apis/user/deleteUser';
-import { CheckboxContainer, Divider } from '@/app/sign-up/components/terms/page.styled';
-import MainButton from '@/components/Button/MainButton';
-import CheckBox2 from '@/components/CheckBox/CheckBox2';
+// import { CheckboxContainer, Divider } from '@/app/sign-up/components/terms/page.styled';
+import DefaultButton from '@/components/Button/DefaultButton';
 import CHeader from '@/components/c-header';
+import CheckBox2 from '@/components/CheckBox/CheckBox2';
 import { userExitReasonObject } from '@/constants/user-exit';
 import useUser from '@/hooks/useUser';
 import { queryClient } from '@/lib/react-query/ReactQueryProvider';
@@ -49,33 +49,41 @@ export default function MyPageUserExit() {
     <>
       <CHeader title="회원 탈퇴" isBackBtn />
 
-      <S.Container>
-        <S.Title>
-          더 나은 맛셔너리를 위해
-          <br />
-          탈퇴 사유를 선택해 주세요.
-        </S.Title>
+      <div className="mx-8 my-20">
+        <header>
+          <h1 className="!font-pretendard text-xl font-bold leading-8">
+            더 나은 맛셔너리를 위해 <br /> 탈퇴 사유를 선택해 주세요. 🥲
+          </h1>
+          <p className="mt-3 !font-pretendard text-sm leading-5 text-neutral-bg80">탈퇴 사유는 중복 선택 가능합니다.</p>
+        </header>
 
-        <S.ReasonList>
-          {Object.entries(userExitReasonObject).map(([type, text], i) => (
-            <S.ReasonItem key={i}>
-              <Divider isActive={type === userDeleteType}></Divider>
-              <CheckboxContainer isActive={type === userDeleteType}>
+        <section>
+          <S.ReasonList>
+            {Object.entries(userExitReasonObject).map(([type, text], i) => (
+              <div key={i} className="my-3">
                 <CheckBox2
+                  bg="orange"
                   label={text}
                   checkBoxId={`reason-${i}`}
                   checked={type === userDeleteType}
                   onChangeEvent={checked => onReasonClick(type as WithdrawalType, checked)}
                 />
-              </CheckboxContainer>
-            </S.ReasonItem>
-          ))}
-        </S.ReasonList>
+              </div>
+            ))}
+          </S.ReasonList>
+        </section>
+      </div>
 
-        <S.NextButtonWrapper>
-          <MainButton btnText="탈퇴하기" disabled={userDeleteType === ''} onClick={() => exitUser()} />
-        </S.NextButtonWrapper>
-      </S.Container>
+      <footer className="fixed bottom-[30px] w-[360px] px-25 pb-10 pt-5 mobile:w-full">
+        <DefaultButton
+          bgColor="yellow"
+          customStyle="flex w-full py-[12px] px-[16px]"
+          disabled={userDeleteType === ''}
+          onClick={() => exitUser()}
+        >
+          <span className="font-pretendard text-white">회원 탈퇴</span>
+        </DefaultButton>
+      </footer>
     </>
   );
 }
