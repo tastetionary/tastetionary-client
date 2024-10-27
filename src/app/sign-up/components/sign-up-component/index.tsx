@@ -1,4 +1,5 @@
 'use client';
+
 import VerifyAuthNumber from '@/app/find-password/components/verify-auth-number';
 import { SHA256 } from 'crypto-js';
 import { usePathname, useRouter, useSearchParams } from 'next/navigation';
@@ -13,8 +14,6 @@ import RegionSetting from '../region-setting';
 import Terms from '../terms';
 import TermsOfService from '../terms-of-service';
 import UserInfoForm from '../user-info-form';
-import VerifyCompany from '../verify-company';
-import VerifyNumber from '../verify-number';
 
 interface FormValue {
   userProperty: {
@@ -119,8 +118,10 @@ export default function SignUpComponent() {
           />
         )}
         {step === 'user-info' && <UserInfoForm onNext={() => setStep('region-setting')} />}
-        {step === 'region-setting' && <RegionSetting onNext={() => setStep('verify-company')} />}
-        {step === 'verify-company' && (
+        {step === 'region-setting' && <RegionSetting onNext={() => setStep('complete')} />}
+
+        {/* 회사 검증은 사라짐! */}
+        {/* {step === 'verify-company' && (
           <VerifyCompany onNext={() => setStep('verify-number')} setCompanyEmailAuthId={setCompanyEmailAuthId} />
         )}
         {step === 'verify-number' && (
@@ -134,7 +135,7 @@ export default function SignUpComponent() {
               methods.setValue('userProperty.companyData.authenticationId', authId);
             }}
           />
-        )}
+        )} */}
         {step === 'complete' && <SignUpComplete />}
       </form>
     </FormProvider>

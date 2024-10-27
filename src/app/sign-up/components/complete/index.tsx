@@ -1,7 +1,7 @@
 'use client';
 
 import COMPLETE from '@/assets/logo/complete.svg';
-import MainButton from '@/components/Button/MainButton';
+import DefaultButton from '@/components/Button/DefaultButton';
 import CHeader from '@/components/c-header';
 import { useRouter } from 'next/navigation';
 import * as S from './page.styled';
@@ -14,21 +14,21 @@ export default function SignUpComplete() {
       <CHeader title="회원가입 완료" />
       <S.Wrapper>
         <COMPLETE />
-        <S.Title>
-          맛셔너리 회원가입이
+        <div className="mt-5 !font-pretendard text-xl font-bold leading-relaxed">회원가입이 완료되었습니다.</div>
+        <p className="my-[15px] mb-[100px] !font-pretendard text-sm font-normal leading-[170%] text-neutral-bg60">
+          지역 변경을 원하신다면{' '}
+          <span className="!font-pretendard text-sm font-bold text-neutral-bg60">개인정보 관리 {'>'} 지역 변경</span>{' '}
           <br />
-          완료되었습니다.
-        </S.Title>
-        <S.SubTitle>
-          지금 바로 맛셔너리를 통해
-          <br />
-          오늘의 점심 메뉴와 식당을 골라보세요.
-        </S.SubTitle>
+          또는 <span className="!font-pretendard text-sm font-bold text-neutral-bg60">메인화면</span>에서 위치를
+          변경해주세요.
+        </p>
       </S.Wrapper>
 
-      <S.NextButtonWrapper>
-        <MainButton type="button" btnText="로그인" onClick={() => router.push('/login')} />
-      </S.NextButtonWrapper>
+      <footer className="fixed bottom-[30px] w-[360px] px-25 pb-10 pt-5 mobile:w-full">
+        <DefaultButton bgColor="orange" customStyle="flex w-full py-[12px] px-[16px]" onClick={() => router.push('/')}>
+          <span className="!font-pretendard text-white">메인 화면으로 이동</span>
+        </DefaultButton>
+      </footer>
     </>
   );
 }
