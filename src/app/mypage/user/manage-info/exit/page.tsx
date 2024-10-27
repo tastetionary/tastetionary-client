@@ -1,7 +1,6 @@
 'use client';
 
 import { deleteUser } from '@/apis/user/deleteUser';
-import { CheckboxContainer, Divider } from '@/app/sign-up/components/terms/page.styled';
 import MainButton from '@/components/Button/MainButton';
 import CheckBox2 from '@/components/CheckBox/CheckBox2';
 import CHeader from '@/components/c-header';
@@ -59,15 +58,12 @@ export default function MyPageUserExit() {
         <S.ReasonList>
           {Object.entries(userExitReasonObject).map(([type, text], i) => (
             <S.ReasonItem key={i}>
-              <Divider isActive={type === userDeleteType}></Divider>
-              <CheckboxContainer isActive={type === userDeleteType}>
-                <CheckBox2
-                  label={text}
-                  checkBoxId={`reason-${i}`}
-                  checked={type === userDeleteType}
-                  onChangeEvent={checked => onReasonClick(type as WithdrawalType, checked)}
-                />
-              </CheckboxContainer>
+              <CheckBox2
+                label={text}
+                checkBoxId={`reason-${i}`}
+                checked={type === userDeleteType}
+                onChangeEvent={checked => onReasonClick(type as WithdrawalType, checked)}
+              />
             </S.ReasonItem>
           ))}
         </S.ReasonList>
