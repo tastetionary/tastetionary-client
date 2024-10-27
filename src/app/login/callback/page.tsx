@@ -1,13 +1,13 @@
 'use client';
 
 import { TloginCategory } from '@/apis/auth';
+import Loading from '@/assets/animation/loading.json';
 import { overlayVariants } from '@/components/Modal/DialogModal/style';
 import * as S from '@/components/Modal/LoadingModal/style';
 import { cn } from '@/utils/styles.utils';
 import Lottie from 'lottie-react';
 import { useSearchParams } from 'next/navigation';
 import { useEffect, useState } from 'react';
-import BookAnimation from '../../../components/Modal/LoadingModal/book_animation.json';
 import useLoginMutate from '../hooks/useLoginMutate';
 
 export default function LoginCallback() {
@@ -59,7 +59,7 @@ export default function LoginCallback() {
           rendererSettings={{
             preserveAspectRatio: '',
           }}
-          animationData={BookAnimation}
+          animationData={Loading}
           height={200}
           width={200}
         />
