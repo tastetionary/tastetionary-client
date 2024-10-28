@@ -101,6 +101,7 @@ export default function UserInfoForm({ onNext }: Props) {
           customStyle="flex w-full py-[12px] px-[16px] mt-6"
           disabled={!isDirty || !isValid}
           onClick={onNext}
+          type="button"
         >
           <span className="!font-pretendard text-white">다음</span>
         </DefaultButton>
