@@ -1,10 +1,9 @@
+import { WithdrawalTypeEnum } from '@homekeeper89/taste_dict/lib/domain/user/user.enum';
 import http from '../http';
 
-interface IDeleteUserReq {
-  type: string;
-}
+type WithdrawalType = keyof typeof WithdrawalTypeEnum;
 
-export const deleteUser = async (req: IDeleteUserReq, token?: string) => {
+export const deleteUser = async (req: { types: WithdrawalType[] }, token?: string) => {
   const res = await http.delete<{ data?: any }>(
     '/apis/v1/user',
     token
@@ -12,7 +11,7 @@ export const deleteUser = async (req: IDeleteUserReq, token?: string) => {
           headers: {
             Authorization: `Bearer ${token}`,
           },
-          data: req,
+          data: req, // 변환된 데이터 전송
         }
       : undefined
   );
