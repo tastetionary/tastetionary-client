@@ -20,8 +20,8 @@ export default function UserInfoForm({ onNext }: Props) {
       password: string;
       category: 'email';
       passwordConfirm: string;
-      nickname: string;
     };
+    nickname: string;
   }>();
 
   const accountEmail = getValues('account.identification');
@@ -40,7 +40,7 @@ export default function UserInfoForm({ onNext }: Props) {
   };
 
   const handleValidateNickname = () => {
-    validateNicknameMutate({ nickname: getValues('account.nickname') });
+    validateNicknameMutate({ nickname: getValues('nickname') });
   };
 
   return (
@@ -88,7 +88,7 @@ export default function UserInfoForm({ onNext }: Props) {
               type="text"
               label="닉네임"
               placeholder="랜덤 닉네임"
-              {...register('account.nickname', {
+              {...register('nickname', {
                 required: true,
               })}
             />
@@ -96,6 +96,7 @@ export default function UserInfoForm({ onNext }: Props) {
               bgColor="yellow"
               customStyle="bottom-0 absolute h-48 right-0 px-[16px] py-[12px] text-xs"
               onClick={handleValidateNickname}
+              type="button"
             >
               <span className="!font-pretendard text-white">중복 확인</span>
             </DefaultButton>
