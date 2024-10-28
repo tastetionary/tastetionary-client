@@ -82,6 +82,7 @@ export default function VerifyAuthNumber({ onNext, type, setEmailAuthId, emailAu
           customStyle="flex w-full py-[12px] px-[16px] mt-6"
           disabled={authNumber.length === 0 || false}
           onClick={onConfirmAuthCode}
+          type="button"
         >
           <span className="!font-pretendard text-white">다음</span>
         </DefaultButton>

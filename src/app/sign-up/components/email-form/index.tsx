@@ -59,6 +59,7 @@ export default function EmailForm({ onNext, setEmailAuthId }: Props) {
           customStyle="flex w-full py-[12px] px-[16px]"
           disabled={!isDirty || !isValid}
           onClick={onEmailAuthRequest}
+          type="button"
         >
           <span className="font-pretendard text-white">다음</span>
         </DefaultButton>

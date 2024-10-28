@@ -98,6 +98,7 @@ export default function Terms({ onNext }: Props) {
           customStyle="flex w-full py-[12px] px-[16px]"
           disabled={!(privacy && service && moreThan14)}
           onClick={onNext}
+          type="button"
         >
           <span className="font-pretendard text-white">다음</span>
         </DefaultButton>

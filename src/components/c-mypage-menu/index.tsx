@@ -1,7 +1,6 @@
 import * as S from './page.styled';
 
 interface Props {
-  title: string;
   items: {
     name: string;
     hasArrow?: boolean;
@@ -10,25 +9,39 @@ interface Props {
   }[];
 }
 
-export default function CMypageMenu({ title, items }: Props) {
+export default function CMypageMenu({ items }: Props) {
   return (
     <S.Menu>
-      <S.MenuTitle>{title}</S.MenuTitle>
+      {items?.map((d, i) => {
+        if (d.mail) {
+          return (
+            <a
+              className="flex cursor-pointer items-center justify-between px-20 py-[17px] text-sm font-normal leading-[14px]"
+              key={i}
+              onClick={() => {
+                if (d.clickEvent) d.clickEvent();
+              }}
+              href={'mailto:tastetionary@gmail.com'}
+            >
+              <span className="!font-pretendard">{d.name}</span>
+              {d?.hasArrow && <span>{'>'}</span>}
+            </a>
+          );
+        }
 
-      {items?.map((d, i) => (
-        <S.MenuItem
-          key={i}
-          onClick={() => {
-            if(d.clickEvent) d.clickEvent();
-          }}
-          as={d.mail ? "a" : undefined}
-          href={d.mail ? "mailto:tastetionary@gmail.com" : undefined}
-        >
-          <span>{d.name}</span>
-
-          {d?.hasArrow && <span>{'>'}</span>}
-        </S.MenuItem>
-      ))}
+        return (
+          <div
+            className="flex cursor-pointer items-center justify-between px-20 py-[17px] text-sm font-normal leading-[14px]"
+            key={i}
+            onClick={() => {
+              if (d.clickEvent) d.clickEvent();
+            }}
+          >
+            <span className="!font-pretendard">{d.name}</span>
+            {d?.hasArrow && <span>{'>'}</span>}
+          </div>
+        );
+      })}
     </S.Menu>
   );
 }

@@ -134,6 +134,7 @@ export default function RegionSetting({ onNext, category = 'dining_area' }: Prop
             customStyle="flex w-full py-[12px] px-[16px] mt-6"
             disabled={address === ''}
             onClick={onNext}
+            type="submit"
           >
             <span className="!font-pretendard text-white">다음</span>
           </DefaultButton>

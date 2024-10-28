@@ -85,15 +85,17 @@ export default function SignUpComponent() {
   });
 
   const onSubmit: SubmitHandler<FormValue> = data => {
-    const { companyData } = data.userProperty;
-    // Case : 회사 인증을 하지 않고 회원가입 시도
-    if (companyData && !companyData.authenticationId && !companyData.category) {
-      delete data.userProperty.companyData;
-    }
+    // const { companyData } = data.userProperty;
+    // // Case : 회사 인증을 하지 않고 회원가입 시도
+    // if (companyData && !companyData.authenticationId && !companyData.category) {
+    //   delete data.userProperty.companyData;
+    // }
 
     // 비밀번호를 Hash하고 패스워드 체크를 지움
     delete data.account.passwordConfirm;
     data.account.password = SHA256(data.account.password).toString();
+
+    console.log('회원가입 완료 data', data);
 
     registerUserMutate(data);
   };

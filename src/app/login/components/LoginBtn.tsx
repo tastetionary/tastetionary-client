@@ -1,3 +1,4 @@
+import { TloginCategory } from '@/apis/auth';
 import IC_EMAIL from '@/assets/common/Icons/email.svg';
 import LOGO_APPLE from '@/assets/logo/sns/logo_apple.svg';
 import LOGO_GOOGLE from '@/assets/logo/sns/logo_google.svg';
@@ -7,7 +8,7 @@ import clsx from 'clsx';
 import { ButtonHTMLAttributes, Fragment } from 'react';
 
 interface Props extends ButtonHTMLAttributes<HTMLButtonElement> {
-  loginType: 'kakao' | 'naver' | 'google' | 'apple' | 'email';
+  loginType: TloginCategory;
 }
 
 export default function LoginBtn({ loginType, ...rest }: Props) {
