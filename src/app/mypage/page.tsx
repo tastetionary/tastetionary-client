@@ -38,20 +38,20 @@ export default function MyPage() {
           // 호진FIXME: 해당 부분 컴포넌트화 가능한 로직!
           <S.NotLogInContainer>
             <div>
-              <p className="flex cursor-pointer !font-pretendard text-xl font-bold" onClick={() => push('/login')}>
+              <p className="title2 flex cursor-pointer font-bold" onClick={() => push('/login')}>
                 {data?.nickname}
                 <Image src={'/image/Mypage/arrow_right.svg'} width={24} height={24} alt="arrow_right" />
               </p>
-              <p className="mt-3 !font-pretendard text-sm">{data?.account?.accountEmail}</p>
+              <p className="body2 mt-3">{data?.account?.accountEmail}</p>
             </div>
           </S.NotLogInContainer>
         ) : (
           <S.NotLogInContainer>
             <div>
-              <p className="flex cursor-pointer !font-pretendard text-xl font-bold" onClick={() => push('/login')}>
+              <p className="title2 flex cursor-pointer font-bold" onClick={() => push('/login')}>
                 로그인 <Image src={'/image/Mypage/arrow_right.svg'} width={24} height={24} alt="arrow_right" />
               </p>
-              <p className="mt-3 !font-pretendard text-sm">맛셔너리 서비스 이용을 위해 로그인해주세요.</p>
+              <p className="body2 mt-3">맛셔너리 서비스 이용을 위해 로그인해주세요.</p>
             </div>
           </S.NotLogInContainer>
         )}
