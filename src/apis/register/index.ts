@@ -31,14 +31,12 @@ interface PostRegisterUserParams {
       companyEmail?: string;
     };
   };
-  areas: [
-    {
-      category: 'dining_area' | 'activity_area';
-      address: '';
-      latitude: number;
-      longitude: number;
-    },
-  ];
+  area: {
+    // category: 'dining_area' | 'activity_area';
+    address: '';
+    latitude: number;
+    longitude: number;
+  };
   account: {
     identification: string;
     password: string;
