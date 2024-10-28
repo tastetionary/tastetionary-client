@@ -23,7 +23,12 @@ export default function MyPageUserExitSuccess() {
       </S.Wrapper>
 
       <footer className="fixed bottom-[30px] w-[360px] px-25 pb-10 pt-5 mobile:w-full">
-        <DefaultButton bgColor="orange" customStyle="flex w-full py-[12px] px-[16px] mt-6" onClick={() => push('/')}>
+        <DefaultButton
+          bgColor="orange"
+          customStyle="flex w-full py-[12px] px-[16px] mt-6"
+          onClick={() => push('/')}
+          type="button"
+        >
           <span className="!font-pretendard text-white">메인 화면으로 이동</span>
         </DefaultButton>
       </footer>
