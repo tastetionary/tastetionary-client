@@ -43,13 +43,13 @@ export default function SelectRestaurant() {
         <SelectSection title={{ bold: '가격대', normal: '를 선택하세요.' }}>
           <SelectPrice />
         </SelectSection>
-
-        <BottomButtonContainer>
-          <RefreshButton btnText="초기화" onClick={resetSelectRestaurant} disabled={refreshBtnDisabled} />
-
-          <CRecommendButton btnText="식당 추첨 시작" selectType="restaurant" disabled={recommendBtnDisabled} />
-        </BottomButtonContainer>
       </ContentLayout>
+
+      <BottomButtonContainer>
+        <RefreshButton btnText="초기화" onClick={resetSelectRestaurant} disabled={refreshBtnDisabled} />
+
+        <CRecommendButton btnText="식당 추첨 시작" selectType="restaurant" disabled={recommendBtnDisabled} />
+      </BottomButtonContainer>
     </>
   );
 }

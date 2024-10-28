@@ -1,4 +1,3 @@
-import IC_BOOKMARK from '@/assets/common/Icons/bookmark.svg';
 import { useSelectResultStore } from '@/store/useSelectResultStore';
 import { theme } from '@/styles/theme';
 import axios from 'axios';
@@ -8,6 +7,7 @@ import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 import { Autoplay } from 'swiper/modules';
 import { Swiper, SwiperSlide } from 'swiper/react';
+import RestaurantBookmarkBtn from './RestaurantBookmarkBtn';
 
 interface Props {
   address: string;
@@ -59,9 +59,7 @@ export default function RestaurantImages({ address }: Props) {
 
   return (
     <div className="relative flex flex-col items-center">
-      <div className="absolute right-[10px] top-[10px] z-2 cursor-pointer rounded-2 bg-[#00000040] p-10">
-        <IC_BOOKMARK />
-      </div>
+      <RestaurantBookmarkBtn />
 
       <Swiper
         modules={[Autoplay]}

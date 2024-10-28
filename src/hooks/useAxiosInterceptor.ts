@@ -18,9 +18,9 @@ export const useAxiosInterceptor = () => {
     });
   };
 
-  const serverErrorTrigger = (category: keyof typeof SERVER_ERROR_MSG) => {
+  const serverErrorTrigger = (category: keyof typeof SERVER_ERROR_MSG, message?: string) => {
     openModal(MODAL_TYPES.dialog, {
-      title: SERVER_ERROR_MSG[category],
+      title: message || SERVER_ERROR_MSG[category], // 서버에서 보내는 에러 메시지가 있으면 보여주기
       handleConfirm: () => closeModal(MODAL_TYPES.dialog),
       confirmText: '확인',
       needClose: true,
@@ -78,7 +78,7 @@ export const useAxiosInterceptor = () => {
       }
 
       if (error.response.data.category in SERVER_ERROR_MSG) {
-        serverErrorTrigger(error.response.data.category);
+        serverErrorTrigger(error.response.data.category, error?.response?.data?.originMessage);
         return;
       }
 
