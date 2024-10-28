@@ -37,6 +37,10 @@ jobs:
           echo "NEXT_PUBLIC_GA_ID=${{ secrets.NEXT_PUBLIC_GA_ID }}" >> .env
           echo "NEXT_PUBLIC_TELEGRAM_TOKEN=${{ secrets.NEXT_PUBLIC_TELEGRAM_TOKEN }}" >> .env
           echo "NEXT_PUBLIC_TELEGRAM_CHAT_ID=${{ secrets.NEXT_PUBLIC_TELEGRAM_CHAT_ID }}" >> .env
+          echo "NEXT_PUBLIC_GOOGLE_CLIENT_ID=${{ secrets.NEXT_PUBLIC_GOOGLE_CLIENT_ID }}" >> .env
+          echo "NEXT_PUBLIC_LOGIN_REDIRECT_URI=${{ secrets.NEXT_PUBLIC_LOGIN_REDIRECT_URI }}" >> .env
+          echo "NEXT_PUBLIC_API_BASE_URL=${{ secrets.NEXT_PUBLIC_API_BASE_URL }}" >> .env
+
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v2
 
@@ -56,7 +60,7 @@ jobs:
           REGISTRY: ${{ secrets.DOCKER_REGISTRY }}
           REPOSITORY: taste-client
           IMAGE_TAG: latest
-          GITHUB_REF_NAME: ${{ github.ref_name }}  # Assuming GITHUB_REF_NAME is provided in the environment
+          GITHUB_REF_NAME: ${{ github.ref_name }} # Assuming GITHUB_REF_NAME is provided in the environment
           NPMRC_PATH: ${{ env.npmrc_path }}
         run: |
           docker buildx build \
@@ -71,7 +75,7 @@ jobs:
   deploy:
     runs-on: self-hosted
     if: always()
-    needs: [ build_and_push ]
+    needs: [build_and_push]
     env:
       ACTIONS_ALLOW_USE_UNSECURE_NODE_VERSION: 'true'
     steps:

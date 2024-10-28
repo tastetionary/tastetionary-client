@@ -1,7 +1,6 @@
 'use client';
 
 import { deleteUser } from '@/apis/user/deleteUser';
-// import { CheckboxContainer, Divider } from '@/app/sign-up/components/terms/page.styled';
 import DefaultButton from '@/components/Button/DefaultButton';
 import CHeader from '@/components/c-header';
 import CheckBox2 from '@/components/CheckBox/CheckBox2';
