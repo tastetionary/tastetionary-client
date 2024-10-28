@@ -24,17 +24,15 @@ export default function RestaurantDetail() {
                   className="body2 content-center border border-solid border-neutral-bg40 bg-neutral-bg05 px-4 py-10 text-center"
                   key={i}
                 >
-                  {[parts[0] === '' ? '' : parts[0].trim(), '~', parts[1] === undefined ? '' : parts[1].trim()]?.map(
-                    (p, index) => {
-                      if (!p || p === '') return <div className="h-[22.4px] w-full" key={index} />;
+                  {[parts[0].trim(), '~', parts[1].trim()]?.map((p, index) => {
+                    if (!p || p === '') return <div className="h-[22.4px] w-full" key={index} />;
 
-                      return (
-                        <div className="body2" key={1000 + index}>
-                          {p}
-                        </div>
-                      );
-                    }
-                  )}
+                    return (
+                      <div className="body2" key={1000 + index}>
+                        {p}
+                      </div>
+                    );
+                  })}
                 </th>
               );
             })}
