@@ -15,6 +15,7 @@ import DefaultButton from '../Button/DefaultButton';
 import { MainButtonProps } from '../Button/MainButton';
 import { MODAL_TYPES } from '../Modal/GlobalModal';
 import useModal from '../Modal/GlobalModal/hooks/useModal';
+import { toUnicodeEscape } from './utils';
 
 interface Props extends MainButtonProps {
   selectType: 'food' | 'restaurant';
@@ -77,18 +78,26 @@ export default function CRecommendButton({ selectType, btnText, ...rest }: Props
     }, 500);
   };
 
-  const loadingModal = (res: RestaurantRecommendRes | FoodRecommendRes) => {
+  const loadingModal = (res?: RestaurantRecommendRes | FoodRecommendRes) => {
     openModal(MODAL_TYPES.loading, {
       handleClose: () => {
+        const unicodeFoodCategory = foodCategory.filter(c => c !== '전체').map(c => toUnicodeEscape(c));
+        const unicodeFoodKeyword = foodKeyword.filter(c => c !== '전체').map(c => toUnicodeEscape(c));
+
+        const encodedFoodCategory = encodeURIComponent(JSON.stringify(unicodeFoodCategory));
+        const encodedFoodKeyword = encodeURIComponent(JSON.stringify(unicodeFoodKeyword));
+
         if (!res && selectType === 'restaurant') {
           return noResultModal();
         }
 
         if (!res && selectType === 'food') {
-          return router.push('/select-menu/result');
+          goScrollToTop();
+
+          return router.push(`/select-menu/result-share?category=${encodedFoodCategory}&keyword=${encodedFoodKeyword}`);
         }
 
-        if ('aggregateReviews' in res) {
+        if (res && 'aggregateReviews' in res) {
           setSelectRestaurantResult({
             name: res?.name,
             latitude: res?.latitude ?? 33.450701,
@@ -107,7 +116,7 @@ export default function CRecommendButton({ selectType, btnText, ...rest }: Props
           });
         } else {
           setSelectFoodResult({
-            id: +res?.id ?? 0,
+            id: res?.id ? +res.id : 0,
             name: res?.name,
           });
         }
@@ -160,7 +169,7 @@ export default function CRecommendButton({ selectType, btnText, ...rest }: Props
   );
 
   const onButtonClick = () => {
-    if (selectType === 'food') return getFood();
+    if (selectType === 'food') return loadingModal();
 
     if (selectType === 'restaurant') return getRestaurant();
   };
