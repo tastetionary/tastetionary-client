@@ -9,6 +9,7 @@ import RefreshButton from '@/components/Button/RefreshButton';
 import CHeader from '@/components/c-header';
 import CRecommendButton from '@/components/c-recommend-button';
 import { unicodeToText } from '@/components/c-recommend-button/utils';
+import { copyText } from '@/utils';
 import { useQuery } from '@tanstack/react-query';
 import clsx from 'clsx';
 import dayjs from 'dayjs';
@@ -65,6 +66,12 @@ export default function SelectMenuResultShare() {
         },
       ],
     });
+  };
+
+  const handleLinkShare = () => {
+    if (typeof window === 'undefined') return;
+
+    copyText(window.location.href, '링크가 복사되었습니다');
   };
 
   useEffect(() => {
@@ -164,7 +171,7 @@ export default function SelectMenuResultShare() {
               <LOGO_KAKAO width={20} height={20} />
             </button>
 
-            <button className={clsx(`default-btn h-48 w-xxl bg-white`)}>
+            <button className={clsx(`default-btn h-48 w-xxl bg-white`)} onClick={handleLinkShare}>
               <IC_LINK width={24} height={24} />
             </button>
           </div>
