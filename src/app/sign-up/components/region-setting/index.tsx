@@ -57,9 +57,9 @@ export default function RegionSetting({ onNext, category = 'dining_area' }: Prop
             if (status === window.kakao.maps.services.Status.OK) {
               var coords = new window.kakao.maps.LatLng(result[0].y, result[0].x);
 
-              setValue('areas[0].latitude', coords.Ma);
-              setValue('areas[0].longitude', coords.La);
-              setValue('areas[0].address', address);
+              setValue('area.latitude', coords.Ma);
+              setValue('area.longitude', coords.La);
+              setValue('area.address', address);
 
               // 결과값으로 받은 위치를 마커로 표시합니다
               var marker = new window.kakao.maps.Marker({
@@ -134,6 +134,7 @@ export default function RegionSetting({ onNext, category = 'dining_area' }: Prop
             customStyle="flex w-full py-[12px] px-[16px] mt-6"
             disabled={address === ''}
             onClick={onNext}
+            type="submit"
           >
             <span className="!font-pretendard text-white">다음</span>
           </DefaultButton>

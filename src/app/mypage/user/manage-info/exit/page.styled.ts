@@ -1,4 +1,4 @@
-import { CheckboxWrapper } from '@/app/sign-up/components/terms/page.styled';
+// import { CheckboxWrapper } from '@/app/sign-up/components/terms/page.styled';
 import styled from 'styled-components';
 
 export const Container = styled.div`
@@ -17,13 +17,13 @@ export const ReasonList = styled.div`
   margin: 40px 0 56px 0;
 `;
 
-export const ReasonItem = styled(CheckboxWrapper)`
-  margin-top: 0;
+// export const ReasonItem = styled(CheckboxWrapper)`
+//   margin-top: 0;
 
-  &:not(:last-child) {
-    margin-bottom: 20px;
-  }
-`;
+//   &:not(:last-child) {
+//     margin-bottom: 20px;
+//   }
+// `;
 
 export const NextButtonWrapper = styled.div`
   position: absolute;

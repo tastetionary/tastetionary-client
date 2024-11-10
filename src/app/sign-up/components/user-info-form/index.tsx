@@ -3,6 +3,7 @@ import CHeader from '@/components/c-header';
 import TextInput from '@/components/Input/TextInput';
 import { useFormContext } from 'react-hook-form';
 import useAccountAuthCodeMutate from '../../hooks/query/useAccountAuthCodeMutate';
+import useValidationNickname from '../../hooks/query/useValidationNickname';
 
 interface Props {
   onNext: () => void;
@@ -20,6 +21,7 @@ export default function UserInfoForm({ onNext }: Props) {
       category: 'email';
       passwordConfirm: string;
     };
+    nickname: string;
   }>();
 
   const accountEmail = getValues('account.identification');
@@ -31,9 +33,14 @@ export default function UserInfoForm({ onNext }: Props) {
     category: 'account',
     type: 'retry',
   });
+  const { validateNicknameMutate } = useValidationNickname();
 
   const onEmailAuthRequest = () => {
     accountAuthCodeMutate({ identification: accountEmail, type: 'email', category: 'account' });
+  };
+
+  const handleValidateNickname = () => {
+    validateNicknameMutate({ nickname: getValues('nickname') });
   };
 
   return (
@@ -77,12 +84,19 @@ export default function UserInfoForm({ onNext }: Props) {
           />
 
           <div className="relative flex items-center [&>div]:w-[70%]">
-            <TextInput type="text" label="닉네임" placeholder="랜덤 닉네임" />
+            <TextInput
+              type="text"
+              label="닉네임"
+              placeholder="랜덤 닉네임"
+              {...register('nickname', {
+                required: true,
+              })}
+            />
             <DefaultButton
               bgColor="yellow"
               customStyle="bottom-0 absolute h-48 right-0 px-[16px] py-[12px] text-xs"
-              disabled
-              onClick={() => console.log('닉네임 중복 확인 API')}
+              onClick={handleValidateNickname}
+              type="button"
             >
               <span className="!font-pretendard text-white">중복 확인</span>
             </DefaultButton>
@@ -101,6 +115,7 @@ export default function UserInfoForm({ onNext }: Props) {
           customStyle="flex w-full py-[12px] px-[16px] mt-6"
           disabled={!isDirty || !isValid}
           onClick={onNext}
+          type="button"
         >
           <span className="!font-pretendard text-white">다음</span>
         </DefaultButton>

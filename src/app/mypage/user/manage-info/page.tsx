@@ -1,7 +1,7 @@
 'use client';
 
 import CHeader from '@/components/c-header';
-import { MenuItem } from '@/components/c-mypage-menu/page.styled';
+import CMypageItem from '@/components/c-mypage-items';
 import { useRouter } from 'next/navigation';
 
 export default function MyPageUserManageInfo() {
@@ -10,12 +10,10 @@ export default function MyPageUserManageInfo() {
   return (
     <>
       <CHeader title="개인정보 관리" isBackBtn />
-
-      <MenuItem>비밀번호 변경</MenuItem>
-      <MenuItem onClick={() => push('/mypage/verify-company?step=info')}>회사 재인증</MenuItem>
-      <MenuItem style={{ border: 'none' }} onClick={() => push('/mypage/user/manage-info/exit')}>
-        회원 탈퇴
-      </MenuItem>
+      <CMypageItem title="닉네임 수정" />
+      <CMypageItem title="비밀번호 재설정" />
+      <CMypageItem title="지역 변경" />
+      <CMypageItem title="회원 탈퇴" onClick={() => push('/mypage/user/manage-info/exit')} />
     </>
   );
 }

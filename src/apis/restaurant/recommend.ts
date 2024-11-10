@@ -20,7 +20,7 @@ export interface RestaurantRecommendRes {
     summaries: string[];
     opinions: string;
     keywords: string[];
-    prices: number;
+    prices: number[];
     aggregatePrice: {
       avg: number;
       [key: string]: number;

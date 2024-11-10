@@ -24,14 +24,11 @@ interface FormValue {
       category: 'email';
     };
   };
-  areas: [
-    {
-      category: 'dining_area' | 'activity_area';
-      address: '';
-      latitude: number;
-      longitude: number;
-    },
-  ];
+  area: {
+    address: '';
+    latitude: number;
+    longitude: number;
+  };
   account: {
     identification: string;
     password: string;
@@ -45,11 +42,11 @@ interface FormValue {
       is_agree: boolean;
     },
   ];
+  nickname: string;
 }
 
 export default function SignUpComponent() {
   const [emailAuthId, setEmailAuthId] = useState(0);
-  const [companyEmailAuthId, setCompanyEmailAuthId] = useState(0);
 
   const { push } = useRouter();
   const params = useSearchParams();
@@ -67,11 +64,6 @@ export default function SignUpComponent() {
   const methods = useForm<FormValue>({
     mode: 'onBlur',
     defaultValues: {
-      areas: [
-        {
-          category: 'dining_area',
-        },
-      ],
       account: {
         category: 'email',
       },
@@ -85,15 +77,11 @@ export default function SignUpComponent() {
   });
 
   const onSubmit: SubmitHandler<FormValue> = data => {
-    const { companyData } = data.userProperty;
-    // Case : 회사 인증을 하지 않고 회원가입 시도
-    if (companyData && !companyData.authenticationId && !companyData.category) {
-      delete data.userProperty.companyData;
-    }
-
     // 비밀번호를 Hash하고 패스워드 체크를 지움
     delete data.account.passwordConfirm;
     data.account.password = SHA256(data.account.password).toString();
+
+    console.log('회원가입 완료 data', data);
 
     registerUserMutate(data);
   };
@@ -118,24 +106,11 @@ export default function SignUpComponent() {
           />
         )}
         {step === 'user-info' && <UserInfoForm onNext={() => setStep('region-setting')} />}
-        {step === 'region-setting' && <RegionSetting onNext={() => setStep('complete')} />}
-
-        {/* 회사 검증은 사라짐! */}
-        {/* {step === 'verify-company' && (
-          <VerifyCompany onNext={() => setStep('verify-number')} setCompanyEmailAuthId={setCompanyEmailAuthId} />
-        )}
-        {step === 'verify-number' && (
-          <VerifyNumber
+        {step === 'region-setting' && (
+          <RegionSetting
             onNext={() => formRef.current?.dispatchEvent(new Event('submit', { cancelable: true, bubbles: true }))}
-            type="register"
-            companyEmailAuthId={companyEmailAuthId}
-            setCompanyEmailAuthId={setCompanyEmailAuthId}
-            saveAuthId={authId => {
-              methods.setValue('userProperty.companyData.category', 'email');
-              methods.setValue('userProperty.companyData.authenticationId', authId);
-            }}
           />
-        )} */}
+        )}
         {step === 'complete' && <SignUpComplete />}
       </form>
     </FormProvider>

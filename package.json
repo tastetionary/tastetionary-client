@@ -13,6 +13,7 @@
         "@homekeeper89/taste_dict": "^0.7.14",
         "@sentry/nextjs": "^7.84.0",
         "@svgr/webpack": "^8.1.0",
+        "@taehoya/tastetionary": "^0.5.17",
         "@tanstack/query-sync-storage-persister": "^4.33.0",
         "@tanstack/react-query": "^4.32.6",
         "@tanstack/react-query-persist-client": "^4.33.0",
