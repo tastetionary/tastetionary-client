@@ -1,7 +1,5 @@
-import { postFoodRecommend } from '@/apis/food/recommend';
 import { unicodeToText } from '@/components/c-recommend-button/utils';
-import getQueryClient from '@/lib/react-query/getQueryClient';
-import { dehydrate, Hydrate } from '@tanstack/react-query';
+import { FoodCategory, FoodKeyword } from '@homekeeper89/taste_dict/lib/domain/food/food.enum';
 import SelectMenuResultShare from './components/SelectMenuResultShare';
 
 export default async function SelectMenuResultSharePage({
@@ -9,24 +7,25 @@ export default async function SelectMenuResultSharePage({
 }: {
   searchParams: Record<string, string | undefined>;
 }) {
-  const queryClient = getQueryClient();
+  const { category: encodedCategory, keyword: encodedKeyword, id: encodedId, name: encodedName } = searchParams;
 
-  const { category: encodedCategory, keyword: encodedKeyword } = searchParams;
+  const decoded = (encoded: string | undefined) => {
+    if (!encoded) throw new Error('No encoded value provided');
+    const decoded = decodeURIComponent(encoded);
 
-  const category = JSON.parse(decodeURIComponent(encodedCategory!)).map((d: string) => unicodeToText(d));
-  const keyword = JSON.parse(decodeURIComponent(encodedKeyword!)).map((d: string) => unicodeToText(d));
+    return decoded.split(',').map(unicodeToText);
+  };
 
-  // Pre-fetching data server-side
-  await queryClient.prefetchQuery(['food-recommend', encodedCategory, encodedKeyword], () =>
-    postFoodRecommend({ categories: category, keywords: keyword })
-  );
+  const validFoodCategories = Object.values(FoodCategory);
+  const validFoodKeywords = Object.values(FoodKeyword);
 
-  // Dehydrating the state for client-side hydration
-  const dehydratedState = dehydrate(queryClient);
+  const decodedCategory = decoded(encodedCategory) as FoodCategory[];
+  const decodedKeyword = decoded(encodedKeyword) as FoodKeyword[];
+  const decodedId = +decoded(encodedId)[0];
+  const decodedName = decoded(encodedName)[0];
 
-  return (
-    <Hydrate state={dehydratedState}>
-      <SelectMenuResultShare />
-    </Hydrate>
-  );
+  let category = decodedCategory.every(c => validFoodCategories.includes(c)) ? decodedCategory : [];
+  let keyword = decodedKeyword.every(c => validFoodKeywords.includes(c)) ? decodedKeyword : [];
+
+  return <SelectMenuResultShare category={category} keyword={keyword} id={decodedId} name={decodedName} />;
 }

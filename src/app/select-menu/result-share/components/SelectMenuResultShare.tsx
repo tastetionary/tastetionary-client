@@ -1,6 +1,5 @@
 'use client';
 
-import { postFoodRecommend } from '@/apis/food/recommend';
 import IC_LINK from '@/assets/common/Icons/link.svg';
 import LOGO_KAKAO from '@/assets/logo/sns/logo_kakao.svg';
 import VERTICAL_LOGO from '@/assets/logo/vertical_logo.svg';
@@ -8,36 +7,25 @@ import BottomButtonContainer from '@/components/Button/BottomButtonContainer';
 import RefreshButton from '@/components/Button/RefreshButton';
 import CHeader from '@/components/c-header';
 import CRecommendButton from '@/components/c-recommend-button';
-import { unicodeToText } from '@/components/c-recommend-button/utils';
 import { copyText } from '@/utils';
-import { useQuery } from '@tanstack/react-query';
+import { FoodCategory, FoodKeyword } from '@homekeeper89/taste_dict/lib/domain/food/food.enum';
 import clsx from 'clsx';
 import dayjs from 'dayjs';
 import Image from 'next/image';
-import { useRouter, useSearchParams } from 'next/navigation';
+import { useRouter } from 'next/navigation';
 import { useEffect } from 'react';
 
-export default function SelectMenuResultShare() {
+interface Props {
+  category: FoodCategory[];
+  keyword: FoodKeyword[];
+  id: number;
+  name: string;
+}
+
+export default function SelectMenuResultShare({ category, keyword, id, name }: Props) {
   const router = useRouter();
-  const searchParams = useSearchParams();
 
-  const encodedCategory = searchParams.get('category');
-  const encodedKeyword = searchParams.get('keyword');
-
-  const category = JSON.parse(decodeURIComponent(encodedCategory!)).map((d: string) => unicodeToText(d));
-  const keyword = JSON.parse(decodeURIComponent(encodedKeyword!)).map((d: string) => unicodeToText(d));
-
-  const { data } = useQuery(
-    ['food-recommend', encodedCategory, encodedKeyword],
-    () => postFoodRecommend({ categories: category, keywords: keyword }),
-    {
-      cacheTime: 0,
-      staleTime: 0,
-      //   enabled: false,
-    }
-  );
-
-  console.log(data);
+  console.log(category, keyword, id, name);
 
   const handleKakaoShare = () => {
     if (typeof window === 'undefined' || !window.Kakao) return;
@@ -88,7 +76,7 @@ export default function SelectMenuResultShare() {
         <div className="flex flex-col gap-3">
           <div className="mt-xxl flex w-full gap-2.5">
             <div className="flex w-full flex-col justify-between gap-xxs">
-              <div className="pc:text-42 text-[10vw] leading-[1.6]">메뉴 품의서</div>
+              <div className="text-[10vw] leading-[1.6] pc:text-42">메뉴 품의서</div>
 
               <table className="w-full border-1 border-solid border-neutral-bg90">
                 <tbody>
@@ -145,13 +133,13 @@ export default function SelectMenuResultShare() {
             <tbody className="border-1 border-solid border-neutral-bg90">
               <tr>
                 <td className="relative flex flex-col items-center px-16 pb-40 pt-64">
-                  <div className="pc:text-32 absolute top-5 text-[10vw] leading-[1.6] text-neutral-bg10">
+                  <div className="absolute top-5 text-[10vw] leading-[1.6] text-neutral-bg10 pc:text-32">
                     결재 바랍니다
                   </div>
                   <div className="z-1 flex flex-col items-center gap-3">
-                    <Image src={`/image/Food/food_${data.id}.svg`} alt={'menu-result'} width={160} height={160} />
+                    <Image src={`/image/Food/food_${id || 0}.svg`} alt={'menu-result'} width={160} height={160} />
 
-                    <h1 className="text-24 leading-[1.6]">{data.name}</h1>
+                    <h1 className="text-24 leading-[1.6]">{name || ''}</h1>
                   </div>
                 </td>
               </tr>

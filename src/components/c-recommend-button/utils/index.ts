@@ -6,7 +6,10 @@ export const toUnicodeEscape = (str: string) => {
 };
 
 export const unicodeToText = (unicodeStr: string) => {
-  return unicodeStr.replace(/\\u[\dA-Fa-f]{4}/g, match => {
+  // 두 번 이스케이프된 `\\u`를 단일 `\u`로 변환
+  const singleEscapedStr = unicodeStr.replace(/\\\\u/g, '\\u');
+  // 단일 `\uXXXX` 형태로 변환
+  return singleEscapedStr.replace(/\\u[\dA-Fa-f]{4}/g, match => {
     return String.fromCharCode(parseInt(match.replace('\\u', ''), 16));
   });
 };

@@ -81,20 +81,31 @@ export default function CRecommendButton({ selectType, btnText, ...rest }: Props
   const loadingModal = (res?: RestaurantRecommendRes | FoodRecommendRes) => {
     openModal(MODAL_TYPES.loading, {
       handleClose: () => {
-        const unicodeFoodCategory = foodCategory.filter(c => c !== '전체').map(c => toUnicodeEscape(c));
-        const unicodeFoodKeyword = foodKeyword.filter(c => c !== '전체').map(c => toUnicodeEscape(c));
+        const unicodeFoodCategory = foodCategory
+          .filter(c => c !== '전체')
+          .map(c => toUnicodeEscape(c))
+          .join(',');
+        const unicodeFoodKeyword = foodKeyword
+          .filter(c => c !== '전체')
+          .map(c => toUnicodeEscape(c.replaceAll("'", '')))
+          .join(',');
 
-        const encodedFoodCategory = encodeURIComponent(JSON.stringify(unicodeFoodCategory));
-        const encodedFoodKeyword = encodeURIComponent(JSON.stringify(unicodeFoodKeyword));
+        const encodedFoodCategory = encodeURIComponent(unicodeFoodCategory);
+        const encodedFoodKeyword = encodeURIComponent(unicodeFoodKeyword);
 
         if (!res && selectType === 'restaurant') {
           return noResultModal();
         }
 
-        if (!res && selectType === 'food') {
+        if (res && selectType === 'food') {
+          const encodedFoodId = encodeURIComponent(toUnicodeEscape(res?.id + ''));
+          const encodedFoodName = encodeURIComponent(toUnicodeEscape(res?.name));
+
           goScrollToTop();
 
-          return router.push(`/select-menu/result-share?category=${encodedFoodCategory}&keyword=${encodedFoodKeyword}`);
+          return router.push(
+            `/select-menu/result-share?category=${encodedFoodCategory}&keyword=${encodedFoodKeyword}&id=${encodedFoodId}&name=${encodedFoodName}`
+          );
         }
 
         if (res && 'aggregateReviews' in res) {
@@ -124,7 +135,7 @@ export default function CRecommendButton({ selectType, btnText, ...rest }: Props
 
         goScrollToTop();
 
-        router.push(selectType === 'food' ? `/select-menu/result` : `/select-restaurant/result`);
+        router.push(`/select-restaurant/result`);
       },
     });
   };
@@ -170,7 +181,7 @@ export default function CRecommendButton({ selectType, btnText, ...rest }: Props
   );
 
   const onButtonClick = () => {
-    if (selectType === 'food') return loadingModal();
+    if (selectType === 'food') return getFood();
 
     if (selectType === 'restaurant') return getRestaurant();
   };
