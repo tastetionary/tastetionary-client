@@ -42,20 +42,15 @@ export const getLimitedByteText = (inputText: string, maxByte: number) => {
 };
 
 export const copyText = async (text: string, toastMessage?: string) => {
-  let success = false;
-
   if (text) {
-    if (navigator?.clipboard) {
+    if (navigator.clipboard) {
       // (IE는 사용 못하고, 크롬은 66버전 이상일때 사용 가능합니다.)
-      navigator.clipboard
-        .writeText(text)
-        .then(() => {
-          success = true;
-          if (toastMessage) iconToast(toastMessage, 'check');
-        })
-        .catch(() => {
-          alert('복사를 다시 시도해주세요.');
-        });
+      try {
+        await navigator.clipboard.writeText(text); // 비동기 작업을 기다림
+        if (toastMessage) iconToast(toastMessage, 'check');
+      } catch (error) {
+        alert('복사를 다시 시도해주세요.');
+      }
     } else {
       // 흐름 2.
       if (!document.queryCommandSupported('copy')) {
@@ -80,12 +75,9 @@ export const copyText = async (text: string, toastMessage?: string) => {
       // 흐름 6.
       document.body.removeChild(textarea);
 
-      success = true;
       if (toastMessage) iconToast(toastMessage, 'check');
 
       // alert("클립보드에 복사되었습니다.");
     }
-
-    return success;
   }
 };
