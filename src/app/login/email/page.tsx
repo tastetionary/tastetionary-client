@@ -77,7 +77,7 @@ export default function EmailLogin() {
             })}
           />
 
-          <DefaultButton bgColor="yellow" customStyle="h-46 mt-xl" disabled={!isValid}>
+          <DefaultButton bgColor="yellow" customStyle="h-46 mt-xs" disabled={!isValid}>
             <span className="body1 text-white">로그인</span>
           </DefaultButton>
         </form>
