@@ -4,7 +4,7 @@ const _0_100 = { ...Array.from(Array(101)).map((_, i) => `${i}`) };
 const px0_50 = { ...Array.from(Array(51)).map((_, i) => `${i}px`) };
 const px0_100 = { ...Array.from(Array(101)).map((_, i) => `${i}px`) };
 const px0_200 = { ...Array.from(Array(201)).map((_, i) => `${i}px`) };
-const px0_400 = { ...Array.from(Array(401)).map((_, i) => `${i}px`) };
+const px0_1000 = { ...Array.from(Array(1001)).map((_, i) => `${i}px`) };
 
 const plugin = require('tailwindcss/plugin');
 
@@ -20,9 +20,9 @@ module.exports = {
       borderWidth: px0_50,
       fontSize: px0_100,
       spacing: px0_200,
-      width: px0_400,
-      height: px0_400,
-      maxWidth: px0_400,
+      width: px0_1000,
+      height: px0_1000,
+      maxWidth: px0_1000,
       padding: px0_100,
       zIndex: _0_100,
       bgOpacity: px0_100,
