@@ -98,7 +98,7 @@ export default function UserInfoForm({ onNext }: Props) {
               bgColor="yellow"
               customStyle="bottom-0 absolute h-48 right-0 px-[16px] py-[12px] text-xs"
               onClick={handleValidateNickname}
-              disabled={nickname.length === 0}
+              disabled={!nickname || nickname?.length === 0}
               type="button"
             >
               <span className="!font-pretendard text-white">중복 확인</span>
