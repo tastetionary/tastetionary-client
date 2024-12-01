@@ -12,8 +12,10 @@ export interface FoodRecommendRes {
 }
 
 export const postFoodRecommend = async (req: Req, token?: string) => {
+  const baseUrl = process.env.NODE_ENV === 'development' ? 'http://localhost:3000' : 'https://www.tastetionary.com';
+
   const res = await http.post<{ data?: FoodRecommendRes }, Req>(
-    '/apis/v1/food/recommendation',
+    `${baseUrl}/apis/v1/food/recommendation`,
     req,
     token
       ? {
