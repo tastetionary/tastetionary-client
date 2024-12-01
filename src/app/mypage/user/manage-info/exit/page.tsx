@@ -2,13 +2,13 @@
 
 import { deleteUser } from '@/apis/user/deleteUser';
 import DefaultButton from '@/components/Button/DefaultButton';
-import CHeader from '@/components/c-header';
 import CheckBox2 from '@/components/CheckBox/CheckBox2';
+import CHeader from '@/components/c-header';
 import { userExitReasonObject } from '@/constants/user-exit';
 import useUser from '@/hooks/useUser';
 import { queryClient } from '@/lib/react-query/ReactQueryProvider';
-import { WithdrawalTypeEnum } from '@homekeeper89/taste_dict/lib/domain/user/user.enum';
 import * as Sentry from '@sentry/nextjs';
+import { WithdrawalTypeEnum } from '@taehoya/tastetionary/lib/domain/user/user.enum';
 import { useMutation } from '@tanstack/react-query';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
