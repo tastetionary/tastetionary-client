@@ -1,7 +1,7 @@
 import { cva } from 'class-variance-authority';
 
 export const loadingModalContainerVariants = cva(
-  'z-100 sm:max-w-[calc(100vs - 40px)] flex w-full max-w-[120px] flex-col justify-between',
+  'z-100 sm:max-w-[calc(100vs - 40px)] flex w-full max-w-[80px] flex-col justify-between',
   {
     variants: {
       visibility: {

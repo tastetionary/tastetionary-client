@@ -14,6 +14,7 @@ module.exports = {
     screens: {
       sm: '320px',
       mobile: { max: '768px' },
+      pc: { min: '768px' },
     },
     extend: {
       borderRadius: px0_50,
