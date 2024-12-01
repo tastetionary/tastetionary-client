@@ -1,6 +1,7 @@
 'use client';
 
 import { deleteUser } from '@/apis/user/deleteUser';
+import BottomButtonContainer from '@/components/Button/BottomButtonContainer';
 import DefaultButton from '@/components/Button/DefaultButton';
 import CHeader from '@/components/c-header';
 import CheckBox2 from '@/components/CheckBox/CheckBox2';
@@ -45,7 +46,7 @@ export default function MyPageUserExit() {
     <>
       <CHeader title="회원 탈퇴" isBackBtn />
 
-      <div className="mx-8 my-20">
+      <div className="mx-8 mb-20 mt-xl">
         <header>
           <h1 className="title2 font-bold leading-8">
             더 나은 맛셔너리를 위해 <br /> 탈퇴 사유를 선택해 주세요. 🥲
@@ -70,16 +71,18 @@ export default function MyPageUserExit() {
         </section>
       </div>
 
-      <footer className="fixed bottom-[30px] w-[360px] px-25 pb-10 pt-5 mobile:w-full">
-        <DefaultButton
-          bgColor="yellow"
-          customStyle="flex w-full py-[12px] px-[16px]"
-          disabled={userDeleteType.length === 0}
-          onClick={() => exitUser()}
-        >
-          <span className="font-pretendard text-white">회원 탈퇴</span>
-        </DefaultButton>
-      </footer>
+      <BottomButtonContainer>
+        <footer className="w-full">
+          <DefaultButton
+            bgColor="yellow"
+            customStyle="flex w-full py-[12px] px-[16px]"
+            disabled={userDeleteType.length === 0}
+            onClick={() => exitUser()}
+          >
+            <span className="font-pretendard text-white">회원 탈퇴</span>
+          </DefaultButton>
+        </footer>
+      </BottomButtonContainer>
     </>
   );
 }
