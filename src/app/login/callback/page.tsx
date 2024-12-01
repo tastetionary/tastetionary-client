@@ -60,8 +60,8 @@ export default function LoginCallback() {
             preserveAspectRatio: '',
           }}
           animationData={Loading}
-          height={200}
-          width={200}
+          height={80}
+          width={80}
         />
       </div>
     </div>
