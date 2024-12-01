@@ -1,5 +1,6 @@
 import useAccountAuthCodeMutate from '@/app/sign-up/hooks/query/useAccountAuthCodeMutate';
 import useConfirmAuthCodeMutate from '@/app/sign-up/hooks/query/useConfirmAuthCodeMutate';
+import BottomButtonContainer from '@/components/Button/BottomButtonContainer';
 import DefaultButton from '@/components/Button/DefaultButton';
 import CHeader from '@/components/c-header';
 // import Header from '@/components/Header';
@@ -44,13 +45,14 @@ export default function VerifyAuthNumber({ onNext, type, setEmailAuthId, emailAu
   return (
     <>
       <CHeader title="회원가입" />
-      <div className="mx-8 mt-20">
+
+      <div className="mx-8 mt-xl">
         <header>
-          <h1 className="!font-pretendard text-xl font-bold leading-8">
+          <h1 className="title2 font-bold">
             1시간 이내로 이메일로 발송된 <br />
             인증 코드를 입력해 주세요. 🔒
           </h1>
-          <p className="mt-3 !font-pretendard leading-5 text-neutral-bg80">
+          <p className="body2 mt-3 text-neutral-bg80">
             인증 코드를 받지 못하신 경우, 스팸메일함을 확인하거나 <br />
             하단의 재전송 버튼을 통해 인증 코드를 다시 받으세요.
           </p>
@@ -70,23 +72,25 @@ export default function VerifyAuthNumber({ onNext, type, setEmailAuthId, emailAu
         </section>
       </div>
 
-      <footer className="fixed bottom-[30px] w-[360px] px-25 pb-10 pt-5 mobile:w-full">
-        <div className="flex justify-center gap-2">
-          <p className="!font-pretendard text-sm text-neutral-bg80">인증 코드를 받지 못하셨나요?</p>
-          <DefaultButton bgColor="gray" customStyle="px-[12px] py-[4px]" onClick={onEmailAuthRequest}>
-            <span className="!font-pretendard">메일 재전송</span>
+      <BottomButtonContainer>
+        <footer className="w-full">
+          <div className="flex justify-center gap-2">
+            <p className="!font-pretendard text-sm text-neutral-bg80">인증 코드를 받지 못하셨나요?</p>
+            <DefaultButton bgColor="gray" customStyle="px-[12px] py-[4px]" onClick={onEmailAuthRequest}>
+              <span className="!font-pretendard">메일 재전송</span>
+            </DefaultButton>
+          </div>
+          <DefaultButton
+            bgColor="yellow"
+            customStyle="flex w-full py-[12px] px-[16px] mt-6"
+            disabled={authNumber.length === 0 || false}
+            onClick={onConfirmAuthCode}
+            type="button"
+          >
+            <span className="!font-pretendard text-white">다음</span>
           </DefaultButton>
-        </div>
-        <DefaultButton
-          bgColor="yellow"
-          customStyle="flex w-full py-[12px] px-[16px] mt-6"
-          disabled={authNumber.length === 0 || false}
-          onClick={onConfirmAuthCode}
-          type="button"
-        >
-          <span className="!font-pretendard text-white">다음</span>
-        </DefaultButton>
-      </footer>
+        </footer>
+      </BottomButtonContainer>
     </>
   );
 }
