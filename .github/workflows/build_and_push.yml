@@ -17,9 +17,6 @@ jobs:
 
       - name: Create .npmrc
         run: |
-          echo "//npm.pkg.github.com/:_authToken=${{ secrets.NPM_AUTH_TOKEN }}" > $HOME/.npmrc
-          echo "@homekeeper89:registry=https://npm.pkg.github.com" >> $HOME/.npmrc
-          echo "" >> $HOME/.npmrc
           echo "//npm.pkg.github.com/:_authToken=${{ secrets.NPM_AUTH_V2 }}" >> $HOME/.npmrc
           echo "@taehoya:registry=https://npm.pkg.github.com" >> $HOME/.npmrc
           echo "npmrc_path=$HOME/.npmrc" >> "$GITHUB_ENV"

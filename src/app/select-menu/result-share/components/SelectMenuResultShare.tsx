@@ -8,7 +8,7 @@ import RefreshButton from '@/components/Button/RefreshButton';
 import CHeader from '@/components/c-header';
 import CRecommendButton from '@/components/c-recommend-button';
 import { copyText } from '@/utils';
-import { FoodCategory, FoodKeyword } from '@homekeeper89/taste_dict/lib/domain/food/food.enum';
+import { FoodCategory, FoodKeyword } from '@taehoya/tastetionary/lib/domain/food/food.enum';
 import clsx from 'clsx';
 import dayjs from 'dayjs';
 import Image from 'next/image';

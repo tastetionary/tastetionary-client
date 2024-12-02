@@ -1,4 +1,4 @@
-import { RestaurantCategory, RestaurantKeyword } from '@homekeeper89/taste_dict/lib/domain/restaurant/restaurant.enum';
+import { RestaurantCategory, RestaurantKeyword } from '@taehoya/tastetionary/lib/domain/restaurant/restaurant.enum';
 import http from '../http';
 
 interface Req {

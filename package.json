@@ -10,7 +10,6 @@
         "lint-fix": "lint-staged"
     },
     "dependencies": {
-        "@homekeeper89/taste_dict": "^0.7.14",
         "@sentry/nextjs": "^7.84.0",
         "@svgr/webpack": "^8.1.0",
         "@taehoya/tastetionary": "^0.5.17",

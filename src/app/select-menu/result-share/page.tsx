@@ -1,5 +1,5 @@
 import { unicodeToText } from '@/components/c-recommend-button/utils';
-import { FoodCategory, FoodKeyword } from '@homekeeper89/taste_dict/lib/domain/food/food.enum';
+import { FoodCategory, FoodKeyword } from '@taehoya/tastetionary/lib/domain/food/food.enum';
 import SelectMenuResultShare from './components/SelectMenuResultShare';
 
 export default async function SelectMenuResultSharePage({

@@ -16,7 +16,7 @@ import useUser from '@/hooks/useUser';
 import { useReviewPlaceInfoStore } from '@/store/useReviewPlaceInfoStore';
 import { useReviewStore } from '@/store/useReviewStore';
 import { getByte, getLimitedByteText } from '@/utils';
-import { RestaurantCategory, RestaurantKeyword } from '@homekeeper89/taste_dict/lib/domain/restaurant/restaurant.enum';
+import { RestaurantCategory, RestaurantKeyword } from '@taehoya/tastetionary/lib/domain/restaurant/restaurant.enum';
 import { useMutation, useQuery } from '@tanstack/react-query';
 import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
