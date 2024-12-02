@@ -1,5 +1,6 @@
 'use client';
 
+import BottomButtonContainer from '@/components/Button/BottomButtonContainer';
 import DefaultButton from '@/components/Button/DefaultButton';
 import TextInput from '@/components/Input/TextInput';
 import CHeader from '@/components/c-header';
@@ -87,11 +88,11 @@ export default function RegionSetting({ onNext, category = 'dining_area' }: Prop
 
       <S.Wrapper>
         <header>
-          <h1 className="!font-pretendard text-xl font-bold leading-8">
+          <h1 className="title2 font-bold">
             지역을 설정하면 <br />
             근처에 있는 식당들을 추천받을 수 있어요. 🍽️
           </h1>
-          <p className="mt-3 !font-pretendard leading-5 text-neutral-bg80">
+          <p className="body2 mt-3 text-neutral-bg80">
             주소를 자세히 설정하면 근처의 식당들을 더 구체적으로 추천해드릴 수 있어요.
           </p>
         </header>
@@ -128,17 +129,19 @@ export default function RegionSetting({ onNext, category = 'dining_area' }: Prop
       </S.Wrapper>
 
       {!openPostCode && (
-        <footer className="fixed bottom-[30px] w-[360px] px-25 pb-10 pt-5 mobile:w-full">
-          <DefaultButton
-            bgColor="yellow"
-            customStyle="flex w-full py-[12px] px-[16px] mt-6"
-            disabled={address === ''}
-            onClick={onNext}
-            type="submit"
-          >
-            <span className="!font-pretendard text-white">다음</span>
-          </DefaultButton>
-        </footer>
+        <BottomButtonContainer>
+          <footer className="w-full">
+            <DefaultButton
+              bgColor="yellow"
+              customStyle="flex w-full py-[12px] px-[16px] mt-6"
+              disabled={address === ''}
+              onClick={onNext}
+              type="submit"
+            >
+              <span className="!font-pretendard text-white">다음</span>
+            </DefaultButton>
+          </footer>
+        </BottomButtonContainer>
       )}
     </>
   );

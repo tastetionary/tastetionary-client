@@ -15,6 +15,7 @@ import DefaultButton from '../Button/DefaultButton';
 import { MainButtonProps } from '../Button/MainButton';
 import { MODAL_TYPES } from '../Modal/GlobalModal';
 import useModal from '../Modal/GlobalModal/hooks/useModal';
+import { toUnicodeEscape } from './utils';
 
 interface Props extends MainButtonProps {
   selectType: 'food' | 'restaurant';
@@ -77,18 +78,37 @@ export default function CRecommendButton({ selectType, btnText, ...rest }: Props
     }, 500);
   };
 
-  const loadingModal = (res: RestaurantRecommendRes | FoodRecommendRes) => {
+  const loadingModal = (res?: RestaurantRecommendRes | FoodRecommendRes) => {
     openModal(MODAL_TYPES.loading, {
       handleClose: () => {
+        const unicodeFoodCategory = foodCategory
+          .filter(c => c !== '전체')
+          .map(c => toUnicodeEscape(c))
+          .join(',');
+        const unicodeFoodKeyword = foodKeyword
+          .filter(c => c !== '전체')
+          .map(c => toUnicodeEscape(c.replaceAll("'", '')))
+          .join(',');
+
+        const encodedFoodCategory = encodeURIComponent(unicodeFoodCategory);
+        const encodedFoodKeyword = encodeURIComponent(unicodeFoodKeyword);
+
         if (!res && selectType === 'restaurant') {
           return noResultModal();
         }
 
-        if (!res && selectType === 'food') {
-          return router.push('/select-menu/result');
+        if (res && selectType === 'food') {
+          const encodedFoodId = encodeURIComponent(toUnicodeEscape(res?.id + ''));
+          const encodedFoodName = encodeURIComponent(toUnicodeEscape(res?.name));
+
+          goScrollToTop();
+
+          return router.push(
+            `/select-menu/result-share?category=${encodedFoodCategory}&keyword=${encodedFoodKeyword}&id=${encodedFoodId}&name=${encodedFoodName}`
+          );
         }
 
-        if ('aggregateReviews' in res) {
+        if (res && 'aggregateReviews' in res) {
           setSelectRestaurantResult({
             name: res?.name,
             latitude: res?.latitude ?? 33.450701,
@@ -108,14 +128,14 @@ export default function CRecommendButton({ selectType, btnText, ...rest }: Props
           });
         } else {
           setSelectFoodResult({
-            id: res?.id ? +res?.id : 0,
+            id: res?.id ? +res.id : 0,
             name: res?.name,
           });
         }
 
         goScrollToTop();
 
-        router.push(selectType === 'food' ? `/select-menu/result` : `/select-restaurant/result`);
+        router.push(`/select-restaurant/result`);
       },
     });
   };
