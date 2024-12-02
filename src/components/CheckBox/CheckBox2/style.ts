@@ -8,6 +8,17 @@ export const checkboxVariants = cva(
         default: 'peer-[.checkbox]:peer-checked:bg-ic_checkbox_active',
         orange: 'peer-[.checkbox]:peer-checked:bg-ic_checkbox_bg_orange_active',
       },
+      checked: {
+        true: '',
+        false: '',
+      },
     },
+    compoundVariants: [
+      {
+        bg: 'default',
+        checked: true,
+        className: 'text-white',
+      },
+    ],
   }
 );

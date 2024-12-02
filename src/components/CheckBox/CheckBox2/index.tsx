@@ -23,7 +23,7 @@ export default function CheckBox2({ checkBoxId, checked, onChangeEvent, label, b
         {...rest}
       />
 
-      <label className={S.checkboxVariants({ bg: bgState })} htmlFor={checkBoxId}>
+      <label className={S.checkboxVariants({ bg: bgState, checked })} htmlFor={checkBoxId}>
         {label}
       </label>
     </div>

@@ -43,7 +43,7 @@ export default function Terms({ onNext }: Props) {
           </p>
         </header>
         <section>
-          <div className="mt-12">
+          <div className="mt-[32px]">
             {/* 전체 이용 약관 */}
             <div className={S.agreeAllCheckedVariants({ checked: allCheckedState })}>
               <CheckBox2
@@ -54,7 +54,7 @@ export default function Terms({ onNext }: Props) {
               />
             </div>
 
-            <div className="mt-6">
+            <div className="mt-[16px]">
               {/* 만 14세 이상 */}
               <AgreementCheckbox
                 type="moreThan14"
