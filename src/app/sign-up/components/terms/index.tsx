@@ -30,7 +30,7 @@ export default function Terms({ onNext }: Props) {
   return (
     <>
       <CHeader title="회원 가입" />
-      <div className="mx-8 mb-20 mt-xl">
+      <div className="mx-xl mb-20 mt-xl">
         <header>
           <h1 className="title2 font-bold">
             안녕하세요 👋 <br /> 맛셔너리 이용을 위해
@@ -43,7 +43,7 @@ export default function Terms({ onNext }: Props) {
           </p>
         </header>
         <section>
-          <div className="mt-12">
+          <div className="mt-xl">
             {/* 전체 이용 약관 */}
             <div className={S.agreeAllCheckedVariants({ checked: allCheckedState })}>
               <CheckBox2
@@ -54,7 +54,7 @@ export default function Terms({ onNext }: Props) {
               />
             </div>
 
-            <div className="mt-6">
+            <div className="mt-md">
               {/* 만 14세 이상 */}
               <AgreementCheckbox
                 type="moreThan14"
@@ -98,7 +98,7 @@ export default function Terms({ onNext }: Props) {
       <BottomButtonContainer>
         <DefaultButton
           bgColor="yellow"
-          customStyle="flex w-full py-[12px] px-[16px]"
+          customStyle="flex w-full py-sm px-md"
           disabled={!(privacy && service && moreThan14)}
           onClick={onNext}
           type="button"
