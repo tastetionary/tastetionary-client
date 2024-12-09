@@ -3,7 +3,6 @@ import http from '../http';
 interface Req {
   latitude: number;
   longitude: number;
-  category: 'activity_area' | 'dining_area';
   address: string;
 }
 

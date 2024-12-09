@@ -7,7 +7,6 @@ import CHeader from '@/components/c-header';
 import { useEffect, useRef, useState } from 'react';
 import DaumPostcodeEmbed from 'react-daum-postcode';
 import { useFormContext } from 'react-hook-form';
-import * as S from './page.styled';
 
 interface Props {
   onNext: () => void;
@@ -58,9 +57,9 @@ export default function RegionSetting({ onNext, category = 'dining_area' }: Prop
             if (status === window.kakao.maps.services.Status.OK) {
               var coords = new window.kakao.maps.LatLng(result[0].y, result[0].x);
 
-              setValue('area.latitude', coords.Ma);
-              setValue('area.longitude', coords.La);
-              setValue('area.address', address);
+              setValue('latitude', coords.Ma);
+              setValue('longitude', coords.La);
+              setValue('address', address);
 
               // 결과값으로 받은 위치를 마커로 표시합니다
               var marker = new window.kakao.maps.Marker({
@@ -86,7 +85,7 @@ export default function RegionSetting({ onNext, category = 'dining_area' }: Prop
     <>
       <CHeader title={category === 'activity_area' ? '활동 지역 설정' : '지역 설정'} isBackBtn />
 
-      <S.Wrapper>
+      <div className="relative mt-xl h-full px-xl pb-[120px]">
         <header>
           <h1 className="title2 font-bold">
             지역을 설정하면 <br />
@@ -97,7 +96,7 @@ export default function RegionSetting({ onNext, category = 'dining_area' }: Prop
           </p>
         </header>
 
-        <S.Form>
+        <div className="mt-xl w-full">
           {!openPostCode && (
             <TextInput
               label={category === 'activity_area' ? '활동 지역 검색' : '지역 검색'}
@@ -122,11 +121,11 @@ export default function RegionSetting({ onNext, category = 'dining_area' }: Prop
             />
           )}
 
-          <S.MapContainer>
+          <div className="relative mt-lg h-500 w-full">
             <div id="map" ref={mapRef} style={{ width: address?.length > 0 ? '100%' : 0, height: '100%' }}></div>
-          </S.MapContainer>
-        </S.Form>
-      </S.Wrapper>
+          </div>
+        </div>
+      </div>
 
       {!openPostCode && (
         <BottomButtonContainer>
@@ -135,8 +134,10 @@ export default function RegionSetting({ onNext, category = 'dining_area' }: Prop
               bgColor="yellow"
               customStyle="flex w-full py-[12px] px-[16px] mt-6"
               disabled={address === ''}
-              onClick={onNext}
-              type="submit"
+              onClick={e => {
+                e.preventDefault();
+                onNext();
+              }}
             >
               <span className="!font-pretendard text-white">다음</span>
             </DefaultButton>

@@ -9,14 +9,9 @@ import { MODAL_TYPES } from '../Modal/GlobalModal';
 import useModal from '../Modal/GlobalModal/hooks/useModal';
 
 interface FormValue {
-  areas: [
-    {
-      category: 'dining_area' | 'activity_area';
-      address: '';
-      latitude: number;
-      longitude: number;
-    },
-  ];
+  address: '';
+  latitude: number;
+  longitude: number;
 }
 
 interface Props {
@@ -29,13 +24,6 @@ export default function CRegionSetting({ category, onNextPage }: Props) {
   const { token } = useUser();
   const methods = useForm<FormValue>({
     mode: 'onBlur',
-    defaultValues: {
-      areas: [
-        {
-          category: 'dining_area',
-        },
-      ],
-    },
   });
 
   const { openModal, closeModal } = useModal();
@@ -55,7 +43,6 @@ export default function CRegionSetting({ category, onNextPage }: Props) {
       putSaveRegion(
         {
           address: data?.address,
-          category,
           latitude: data?.latitude,
           longitude: data?.longitude,
         },
@@ -66,22 +53,9 @@ export default function CRegionSetting({ category, onNextPage }: Props) {
         queryClient.setQueryData(['user'], (prev: any) => {
           let oldData = prev;
 
-          if (category === 'activity_area') {
-            oldData.area.activityArea = {
-              address: data?.address,
-              category,
-              latitude: data?.latitude,
-              longitude: data?.longitude,
-            };
-          }
-          if (category === 'dining_area') {
-            oldData.area.diningArea = {
-              address: data?.address,
-              category,
-              latitude: data?.latitude,
-              longitude: data?.longitude,
-            };
-          }
+          oldData.area.address = data?.address;
+          oldData.area.latitude = data?.latitude;
+          oldData.area.longitude = data?.longitude;
 
           return oldData;
         });
@@ -93,15 +67,13 @@ export default function CRegionSetting({ category, onNextPage }: Props) {
 
   return (
     <FormProvider {...methods}>
-      <form>
+      <form className="h-full">
         <RegionSetting
           category={category}
           onNext={() => {
-            const data = methods.watch('areas')[0];
+            const data = methods.watch();
 
-            if (data) {
-              saveRegion(data);
-            }
+            saveRegion(data);
           }}
         />
       </form>
