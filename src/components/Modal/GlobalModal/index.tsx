@@ -1,7 +1,7 @@
 'use client';
 
 import dynamic from 'next/dynamic';
-import { ComponentProps, FunctionComponent, useEffect } from 'react';
+import { FunctionComponent, useEffect } from 'react';
 import useModal from './hooks/useModal';
 
 const ExampleModal = dynamic(() => import('../ExampleModal'), { ssr: false });
@@ -11,10 +11,10 @@ const BottomModal = dynamic(() => import('../BottomModal'), { ssr: false });
 
 // 사용할 모달 컴포넌트들을 담은 Object
 export const MODAL_TYPES = {
-  example: ExampleModal as FunctionComponent<ComponentProps<typeof ExampleModal>>,
-  dialog: DialogModal as FunctionComponent<ComponentProps<typeof DialogModal>>,
-  loading: LoadingModal as FunctionComponent<ComponentProps<typeof LoadingModal>>,
-  bottom: BottomModal as FunctionComponent<ComponentProps<typeof BottomModal>>,
+  example: ExampleModal as FunctionComponent,
+  dialog: DialogModal as FunctionComponent,
+  loading: LoadingModal as FunctionComponent,
+  bottom: BottomModal as FunctionComponent,
 };
 
 export default function GlobalModal() {

@@ -1,10 +1,10 @@
 'use client';
 
+import { MODAL_TYPES } from '@/components/Modal/GlobalModal';
+import useModal from '@/components/Modal/GlobalModal/hooks/useModal';
 import CHeader from '@/components/c-header';
 import CMypageMenu from '@/components/c-mypage-menu';
 import GNBLayout from '@/components/layout/gnb-layout';
-import { MODAL_TYPES } from '@/components/Modal/GlobalModal';
-import useModal from '@/components/Modal/GlobalModal/hooks/useModal';
 import useUser from '@/hooks/useUser';
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';

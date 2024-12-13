@@ -7,29 +7,31 @@ import CheckBox2 from '@/components/CheckBox/CheckBox2';
 import CHeader from '@/components/c-header';
 import { userExitReasonObject } from '@/constants/user-exit';
 import useUser from '@/hooks/useUser';
-import { queryClient } from '@/lib/react-query/ReactQueryProvider';
+import getQueryClient from '@/lib/react-query/getQueryClient';
 import * as Sentry from '@sentry/nextjs';
 import { WithdrawalTypeEnum } from '@taehoya/tastetionary/lib/domain/user/user.enum';
 import { useMutation } from '@tanstack/react-query';
 import { useRouter } from 'next/navigation';
+import { destroyCookie } from 'nookies';
 import { useState } from 'react';
 import * as S from './page.styled';
 
 type WithdrawalType = keyof typeof WithdrawalTypeEnum;
 
 export default function MyPageUserExit() {
+  const queryClient = getQueryClient();
   const { push } = useRouter();
   const { token } = useUser();
   const [userDeleteType, setUserDeleteType] = useState<WithdrawalType[]>([]);
 
   const { mutate: exitUser } = useMutation(() => deleteUser({ types: userDeleteType }, token), {
     onSuccess: () => {
-      queryClient.removeQueries();
       Sentry.configureScope(scope => scope.clear());
+      destroyCookie(null, 'token');
 
-      if (!typeof window || typeof window === 'undefined') return;
-      (sessionStorage as Storage).removeItem('token');
       push('/mypage/user/manage-info/exit/success');
+
+      queryClient.clear();
     },
   });
 

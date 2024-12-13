@@ -1,15 +1,15 @@
 import { getUser } from '@/apis/user/getUser';
 import { setUser } from '@sentry/nextjs';
 import { useQuery } from '@tanstack/react-query';
+import useToken from './useToken';
 
 export default function useUser() {
-  if (!typeof window || typeof window === 'undefined')
+  const { token } = useToken();
+
+  if (!token)
     return {
       isLoggedIn: false,
     };
-
-  const token =
-    typeof window || typeof window === 'object' ? ((sessionStorage as Storage).getItem('token') as string) : undefined;
 
   const { data: userData } = useQuery(['user'], () => getUser(token), {
     enabled: !!token,

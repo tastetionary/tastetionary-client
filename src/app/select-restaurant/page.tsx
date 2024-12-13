@@ -1,9 +1,12 @@
 import { getRestaurantOption } from '@/apis/restaurant/option';
 import getQueryClient from '@/lib/react-query/getQueryClient';
-import { dehydrate, Hydrate } from '@tanstack/react-query';
+import { requireAuth } from '@/utils/auth';
+import { Hydrate, dehydrate } from '@tanstack/react-query';
 import SelectRestaurant from './components/SelectRestaurant';
 
 export default async function SelectRestaurantPage() {
+  requireAuth();
+
   const queryClient = getQueryClient();
 
   // Pre-fetching data server-side

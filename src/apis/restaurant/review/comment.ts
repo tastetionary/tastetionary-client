@@ -1,4 +1,5 @@
 import http from '@/apis/http';
+import { parseCookies } from 'nookies';
 
 interface GetCommentParams {
   restaurantId: string;
@@ -10,7 +11,7 @@ interface PostReportParams {
   category: string;
 }
 
-const token = !typeof window || typeof window === 'undefined' ? '' : (sessionStorage as Storage)?.getItem('token');
+const token = parseCookies().token;
 
 const reviewRepository = () => {
   return {

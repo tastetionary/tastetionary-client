@@ -44,9 +44,8 @@ export default function DialogModal({
     if (needClose) onClose();
 
     if (handleConfirm) {
-      setTimeout(() => {
-        handleConfirm();
-      }, 100);
+      console.log('logout!');
+      handleConfirm();
     }
   };
 
