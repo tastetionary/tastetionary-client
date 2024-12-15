@@ -8,26 +8,44 @@ import GNBLayout from '@/components/layout/gnb-layout';
 import useUser from '@/hooks/useUser';
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
+import { useEffect } from 'react';
 import useLogoutMutate from '../login/hooks/useLogoutMutate';
 import * as S from './page.styled';
 
 export default function MyPage() {
   const { push } = useRouter();
   const { isLoggedIn, token, data } = useUser();
-  const { openModal, closeModal } = useModal();
+  const { modals, openModal, closeModal } = useModal();
   const { mutate: logoutMutate } = useLogoutMutate();
 
   const logoutModal = () => {
+    if (!openModal || !closeModal) {
+      console.error('useModal 훅에서 상태를 가져오는 데 실패했습니다.');
+      return;
+    }
+
     openModal(MODAL_TYPES.dialog, {
       title: '로그아웃 하시겠습니까?',
       cancelText: '취소',
       needClose: true,
-      handleClose: () => closeModal(MODAL_TYPES.dialog),
-      handleConfirm: () => {
-        if (token) logoutMutate({ token });
+      handleClose: () => closeModal(MODAL_TYPES.dialog), // Modal 상태 변경
+      handleConfirm: async () => {
+        if (token) {
+          console.log('handleConfirm 실행!');
+
+          try {
+            await logoutMutate({ token }); // 비동기 작업
+          } catch (error) {
+            console.error('Logout failed:', error);
+          }
+        }
       },
     });
   };
+
+  useEffect(() => {
+    console.log('초기 상태:', { modals, openModal, closeModal });
+  }, [modals, openModal, closeModal]);
 
   return (
     <>
