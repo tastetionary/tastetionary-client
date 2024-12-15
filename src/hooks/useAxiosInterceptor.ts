@@ -5,8 +5,10 @@ import { SERVER_ERROR_MSG } from '@/constants/error-msg';
 import * as Sentry from '@sentry/nextjs';
 import { AxiosResponse } from 'axios';
 import { useEffect } from 'react';
+import useToken from './useToken';
 
 export const useAxiosInterceptor = () => {
+  const { token } = useToken();
   const { openModal, closeModal } = useModal();
 
   const errorTrigger = () => {
@@ -29,11 +31,7 @@ export const useAxiosInterceptor = () => {
 
   const requestInterceptor = http.client.interceptors.request.use(
     (request: any) => {
-      // 토큰이 없을때 타는 로직
-      if (!typeof window || typeof window === 'undefined') return request;
-
       if (request.headers.Authorization?.toString().split(' ')[1] === 'null') {
-        const token = (sessionStorage as Storage).getItem('token');
         request.headers.Authorization = `Bearer ${token}`;
         return { ...request };
       }

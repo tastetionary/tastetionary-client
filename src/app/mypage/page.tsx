@@ -1,10 +1,10 @@
 'use client';
 
+import { MODAL_TYPES } from '@/components/Modal/GlobalModal';
+import useModal from '@/components/Modal/GlobalModal/hooks/useModal';
 import CHeader from '@/components/c-header';
 import CMypageMenu from '@/components/c-mypage-menu';
 import GNBLayout from '@/components/layout/gnb-layout';
-import { MODAL_TYPES } from '@/components/Modal/GlobalModal';
-import useModal from '@/components/Modal/GlobalModal/hooks/useModal';
 import useUser from '@/hooks/useUser';
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
@@ -18,13 +18,24 @@ export default function MyPage() {
   const { mutate: logoutMutate } = useLogoutMutate();
 
   const logoutModal = () => {
+    if (!openModal || !closeModal) {
+      console.error('useModal 훅에서 상태를 가져오는 데 실패했습니다.');
+      return;
+    }
+
     openModal(MODAL_TYPES.dialog, {
       title: '로그아웃 하시겠습니까?',
       cancelText: '취소',
       needClose: true,
-      handleClose: () => closeModal(MODAL_TYPES.dialog),
-      handleConfirm: () => {
-        if (token) logoutMutate({ token });
+      handleClose: () => closeModal(MODAL_TYPES.dialog), // Modal 상태 변경
+      handleConfirm: async () => {
+        if (token) {
+          try {
+            await logoutMutate({ token }); // 비동기 작업
+          } catch (error) {
+            console.error('Logout failed:', error);
+          }
+        }
       },
     });
   };

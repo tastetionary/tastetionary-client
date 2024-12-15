@@ -3,10 +3,11 @@ import { getUser } from '@/apis/user/getUser';
 import { MODAL_TYPES } from '@/components/Modal/GlobalModal';
 import useModal from '@/components/Modal/GlobalModal/hooks/useModal';
 import { ERROR_MSG } from '@/constants/error-msg';
-import { useMutation, useQuery } from '@tanstack/react-query';
+import useToken from '@/hooks/useToken';
+import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { AxiosError } from 'axios';
 import { useRouter } from 'next/navigation';
-import { useState } from 'react';
+import { setCookie } from 'nookies';
 
 interface ErrorType {
   category: string;
@@ -17,10 +18,10 @@ interface ErrorType {
 }
 
 const useLoginMutate = () => {
+  const queryClient = useQueryClient();
   const { push } = useRouter();
-
-  const [token, setToken] = useState('');
   const { openModal, closeModal } = useModal();
+  const { token } = useToken();
 
   const noRegisterModal = () => {
     openModal(MODAL_TYPES.dialog, {
@@ -44,10 +45,15 @@ const useLoginMutate = () => {
 
   const { mutate } = useMutation(authRepository().postLogin, {
     onSuccess: value => {
-      setToken(value.data.accessToken);
+      const token = value.data.accessToken;
 
-      if (!typeof window || typeof window === 'undefined') return;
-      (sessionStorage as Storage).setItem('token', value.data.accessToken);
+      setCookie(null, 'token', token, {
+        path: '/',
+      });
+
+      // Pre-fetch user data
+      queryClient.prefetchQuery(['user'], () => getUser(token));
+
       push('/');
     },
     onError: (errors: AxiosError<ErrorType>) => {
@@ -62,9 +68,9 @@ const useLoginMutate = () => {
     },
   });
 
-  const data = useQuery(['user'], () => getUser(token), {
-    enabled: token !== '',
-    staleTime: Infinity, // token 값을 받으면 user 정보를 받아와 react-query에 저장
+  const { data: user } = useQuery(['user'], () => getUser(token), {
+    enabled: !!token,
+    staleTime: Infinity,
     cacheTime: 1000 * 60 * 60 * 24, // 24 hours
   });
 

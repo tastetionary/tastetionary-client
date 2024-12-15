@@ -1,10 +1,9 @@
 import { getFoodOption } from '@/apis/food/option';
-import getQueryClient from '@/lib/react-query/getQueryClient';
-import { dehydrate, Hydrate } from '@tanstack/react-query';
+import { dehydrate, Hydrate, QueryClient } from '@tanstack/react-query';
 import SelectMenu from './components/SelectMenu';
 
 export default async function SelectMenuPage() {
-  const queryClient = getQueryClient();
+  const queryClient = new QueryClient();
 
   // Pre-fetching data server-side
   await queryClient.prefetchQuery(['food-option'], () => getFoodOption());
