@@ -166,7 +166,7 @@ export default function SelectMenuResultShare({ category, keyword, id, name }: P
         </div>
       </div>
 
-      <BottomButtonContainer>
+      <BottomButtonContainer style={{ zIndex: 1 }}>
         <RefreshButton btnText="조건 재설정" onClick={() => router.push('/select-menu')} />
 
         <CRecommendButton btnText="한 번 더 돌리기" selectType="food" />
