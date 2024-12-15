@@ -1,12 +1,12 @@
 'use client';
 
+import ARROW_RIGHT from '@/assets/common/Icons/arrow_right.svg';
 import { MODAL_TYPES } from '@/components/Modal/GlobalModal';
 import useModal from '@/components/Modal/GlobalModal/hooks/useModal';
 import CHeader from '@/components/c-header';
 import CMypageMenu from '@/components/c-mypage-menu';
 import GNBLayout from '@/components/layout/gnb-layout';
 import useUser from '@/hooks/useUser';
-import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 import useLogoutMutate from '../login/hooks/useLogoutMutate';
 import * as S from './page.styled';
@@ -45,27 +45,17 @@ export default function MyPage() {
       <CHeader title="마이페이지" isLogo />
 
       <GNBLayout>
-        {isLoggedIn ? (
-          // 호진FIXME: 해당 부분 컴포넌트화 가능한 로직!
-          <S.NotLogInContainer>
-            <div>
-              <p className="title2 flex cursor-pointer font-bold" onClick={() => push('/login')}>
-                {data?.nickname}
-                <Image src={'/image/Mypage/arrow_right.svg'} width={24} height={24} alt="arrow_right" />
-              </p>
-              <p className="body2 mt-3">{data?.account?.accountEmail}</p>
-            </div>
-          </S.NotLogInContainer>
-        ) : (
-          <S.NotLogInContainer>
-            <div>
-              <p className="title2 flex cursor-pointer font-bold" onClick={() => push('/login')}>
-                로그인 <Image src={'/image/Mypage/arrow_right.svg'} width={24} height={24} alt="arrow_right" />
-              </p>
-              <p className="body2 mt-3">맛셔너리 서비스 이용을 위해 로그인해주세요.</p>
-            </div>
-          </S.NotLogInContainer>
-        )}
+        <S.NotLogInContainer>
+          <div>
+            <p className="title2 flex cursor-pointer items-center font-bold" onClick={() => push('/login')}>
+              {isLoggedIn ? data?.nickname : '로그인'}
+              <ARROW_RIGHT width={24} height={24} />
+            </p>
+            <p className="body2 mt-3">
+              {isLoggedIn ? data?.account?.accountEmail : '맛셔너리 서비스 이용을 위해 로그인해주세요.'}
+            </p>
+          </div>
+        </S.NotLogInContainer>
 
         <S.MenuList>
           {isLoggedIn && (
