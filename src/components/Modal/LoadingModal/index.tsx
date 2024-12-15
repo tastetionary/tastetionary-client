@@ -9,9 +9,10 @@ import * as S from './style';
 
 export interface LoadingModalProps {
   handleClose?: () => void;
+  maxWidth?: number;
 }
 
-export default function LoadingModal({ handleClose }: LoadingModalProps) {
+export default function LoadingModal({ handleClose, maxWidth }: LoadingModalProps) {
   const { closeModal } = useModal();
   const [animate, setAnimate] = useState(false);
 
@@ -35,7 +36,10 @@ export default function LoadingModal({ handleClose }: LoadingModalProps) {
 
   return (
     <div className={cn(overlayVariants({ visibility: state, animation: state }))}>
-      <div className={cn(S.loadingModalContainerVariants({ visibility: state, animation: state }))}>
+      <div
+        className={cn(S.loadingModalContainerVariants({ visibility: state, animation: state }))}
+        style={maxWidth ? { maxWidth } : undefined}
+      >
         <Lottie
           autoPlay={true}
           loop={true}

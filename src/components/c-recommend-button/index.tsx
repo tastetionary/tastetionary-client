@@ -80,6 +80,7 @@ export default function CRecommendButton({ selectType, btnText, ...rest }: Props
 
   const loadingModal = (res?: RestaurantRecommendRes | FoodRecommendRes) => {
     openModal(MODAL_TYPES.loading, {
+      maxWidth: 120,
       handleClose: () => {
         const unicodeFoodCategory = foodCategory
           .filter(c => c !== '전체')
