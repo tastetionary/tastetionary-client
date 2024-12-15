@@ -1,8 +1,7 @@
 import { putSaveRegion } from '@/apis/user/saveRegion';
 import RegionSetting from '@/app/sign-up/components/region-setting';
 import useUser from '@/hooks/useUser';
-import { queryClient } from '@/lib/react-query/ReactQueryProvider';
-import { useMutation } from '@tanstack/react-query';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { useRouter } from 'next/navigation';
 import { FormProvider, useForm } from 'react-hook-form';
 import { MODAL_TYPES } from '../Modal/GlobalModal';
@@ -26,6 +25,7 @@ interface Props {
 
 export default function CRegionSetting({ category, onNextPage }: Props) {
   const router = useRouter();
+  const queryClient = useQueryClient();
   const { token } = useUser();
   const methods = useForm<FormValue>({
     mode: 'onBlur',

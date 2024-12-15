@@ -6,18 +6,6 @@ import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import { PersistQueryClientProvider } from '@tanstack/react-query-persist-client';
 import React, { useState } from 'react';
 
-export const queryClient = new QueryClient({
-  defaultOptions: {
-    queries: {
-      staleTime: Infinity,
-      retry: false,
-      cacheTime: 1000 * 60 * 60 * 24,
-      refetchOnWindowFocus: false,
-      retryDelay: 1000,
-    },
-  },
-});
-
 function ReactQueryProvider({ children }: React.PropsWithChildren) {
   const [client] = useState(
     () =>
@@ -39,7 +27,7 @@ function ReactQueryProvider({ children }: React.PropsWithChildren) {
   });
 
   return (
-    <PersistQueryClientProvider client={queryClient} persistOptions={{ persister }}>
+    <PersistQueryClientProvider client={client} persistOptions={{ persister }}>
       <Hydrate state={null}>{children}</Hydrate>
       <ReactQueryDevtools initialIsOpen={false} />
     </PersistQueryClientProvider>

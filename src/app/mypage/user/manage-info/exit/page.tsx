@@ -7,10 +7,9 @@ import CheckBox2 from '@/components/CheckBox/CheckBox2';
 import CHeader from '@/components/c-header';
 import { userExitReasonObject } from '@/constants/user-exit';
 import useUser from '@/hooks/useUser';
-import { queryClient } from '@/lib/react-query/ReactQueryProvider';
 import * as Sentry from '@sentry/nextjs';
 import { WithdrawalTypeEnum } from '@taehoya/tastetionary/lib/domain/user/user.enum';
-import { useMutation } from '@tanstack/react-query';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { useRouter } from 'next/navigation';
 import { destroyCookie } from 'nookies';
 import { useState } from 'react';
@@ -19,6 +18,7 @@ import * as S from './page.styled';
 type WithdrawalType = keyof typeof WithdrawalTypeEnum;
 
 export default function MyPageUserExit() {
+  const queryClient = useQueryClient();
   const { push } = useRouter();
   const { token } = useUser();
   const [userDeleteType, setUserDeleteType] = useState<WithdrawalType[]>([]);

@@ -8,14 +8,13 @@ import GNBLayout from '@/components/layout/gnb-layout';
 import useUser from '@/hooks/useUser';
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
-import { useEffect } from 'react';
 import useLogoutMutate from '../login/hooks/useLogoutMutate';
 import * as S from './page.styled';
 
 export default function MyPage() {
   const { push } = useRouter();
   const { isLoggedIn, token, data } = useUser();
-  const { modals, openModal, closeModal } = useModal();
+  const { openModal, closeModal } = useModal();
   const { mutate: logoutMutate } = useLogoutMutate();
 
   const logoutModal = () => {
@@ -31,8 +30,6 @@ export default function MyPage() {
       handleClose: () => closeModal(MODAL_TYPES.dialog), // Modal 상태 변경
       handleConfirm: async () => {
         if (token) {
-          console.log('handleConfirm 실행!');
-
           try {
             await logoutMutate({ token }); // 비동기 작업
           } catch (error) {
@@ -42,10 +39,6 @@ export default function MyPage() {
       },
     });
   };
-
-  useEffect(() => {
-    console.log('초기 상태:', { modals, openModal, closeModal });
-  }, [modals, openModal, closeModal]);
 
   return (
     <>
