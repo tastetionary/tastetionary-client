@@ -15,7 +15,7 @@ const useCompanyAuthCodeMutate = ({ onNext, setCompanyEmailAuthId }: Props) => {
 
   useEffect(() => {
     if (data) {
-      setCompanyEmailAuthId(data?.data.id as number);
+      setCompanyEmailAuthId(data.id as number);
     }
   }, [data]);
 

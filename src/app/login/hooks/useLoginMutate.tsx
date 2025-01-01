@@ -46,16 +46,14 @@ const useLoginMutate = () => {
   const { mutate } = useMutation({
     mutationFn: authRepository().postLogin,
     onSuccess: value => {
-      const token = value.data.accessToken;
+      const token = value.accessToken;
 
       setCookie(null, 'token', token, {
         path: '/',
         sameSite: 'lax',
       });
 
-      setTimeout(() => {
-        getUserInfo(token);
-      }, 100);
+      getUserInfo(token);
     },
     onError: (errors: AxiosError<ErrorType>) => {
       if (errors.response?.data.originMessage === ERROR_MSG['NO_REGISTER']) {

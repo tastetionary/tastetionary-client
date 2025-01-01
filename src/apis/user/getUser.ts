@@ -13,29 +13,24 @@ interface IRegion {
 export interface UserRes {
   id: number;
   nickname: string;
-  area: {
-    activityArea: IRegion;
-    diningArea: IRegion;
-  };
+  area: IRegion;
   account: {
-    companyEmail?: string;
     accountEmail: string;
   };
 }
 
 export const getUser = async (token?: string) => {
-  const res = await http.get<{ data?: UserRes }>(
-    '/apis/v1/user',
-    token
-      ? {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      : undefined
-  );
-
-  if (res?.data) {
-    return res?.data;
+  if (!token) {
+    throw new Error('Token is required to fetch user data');
   }
+
+  const res = await http.get<UserRes>(`/apis/v1/user`, {
+    headers: token
+      ? {
+          Authorization: `Bearer ${token}`,
+        }
+      : {},
+  });
+
+  return res;
 };

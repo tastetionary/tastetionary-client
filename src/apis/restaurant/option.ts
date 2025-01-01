@@ -7,11 +7,5 @@ interface Res {
 }
 
 export const getRestaurantOption = async () => {
-  const baseUrl = process.env.NODE_ENV === 'development' ? 'http://localhost:3000' : 'https://www.tastetionary.com';
-
-  const res = await http.get<{ data?: Res }>(`${baseUrl}/apis/v1/restaurant/option`);
-
-  if (res?.data) {
-    return res?.data as Res;
-  }
+  return await http.get<Res>(`/apis/v1/restaurant/option`);
 };

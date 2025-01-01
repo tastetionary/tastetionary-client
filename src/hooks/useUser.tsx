@@ -1,6 +1,6 @@
 import { UserRes, getUser } from '@/apis/user/getUser';
 import { setUser } from '@sentry/nextjs';
-import { QueryClient, UseQueryResult, useQuery } from '@tanstack/react-query';
+import { UseQueryResult, useQuery, useQueryClient } from '@tanstack/react-query';
 import useToken from './useToken';
 
 type UseUserResult = Partial<UseQueryResult<UserRes, any>> & {
@@ -11,7 +11,7 @@ type UseUserResult = Partial<UseQueryResult<UserRes, any>> & {
 
 export default function useUser(): UseUserResult {
   const { token } = useToken();
-  const queryClient = new QueryClient();
+  const queryClient = useQueryClient();
 
   // 토큰이 없을 경우
   if (!token) {
@@ -27,7 +27,7 @@ export default function useUser(): UseUserResult {
     queryKey: ['user'],
     queryFn: () => getUser(token),
     enabled: !!token,
-    gcTime: 1000 * 60 * 60 * 24, // 24 hours
+    staleTime: 1000 * 60 * 60 * 24, // 24 hours
     initialData: queryClient.getQueryData(['user']),
   });
 

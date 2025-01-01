@@ -9,7 +9,11 @@ export default async function SelectMenuPage() {
   // Pre-fetching data server-side
   await queryClient.prefetchQuery({
     queryKey: ['food-option'],
-    queryFn: () => getFoodOption(),
+    queryFn: async () => {
+      console.log('Query function executed');
+
+      return getFoodOption();
+    },
   });
 
   // Dehydrating the state for client-side hydration

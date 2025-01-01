@@ -4,7 +4,7 @@ import http from '../http';
 type WithdrawalType = keyof typeof WithdrawalTypeEnum;
 
 export const deleteUser = async (req: { types: WithdrawalType[] }, token?: string) => {
-  const res = await http.delete<{ data?: any }>(
+  return await http.delete<any>(
     '/apis/v1/user',
     token
       ? {
@@ -15,8 +15,4 @@ export const deleteUser = async (req: { types: WithdrawalType[] }, token?: strin
         }
       : undefined
   );
-
-  if (res?.data) {
-    return res?.data;
-  }
 };

@@ -8,15 +8,13 @@ interface Props {
 
 export default function useRestaurantReviewQuery({ restaurantId }: Props) {
   const { data } = useQuery<{
-    data: {
-      keywordReviews: GetRestaurantKeywordReviewRes;
-      reviews: GetRestaurantReviewRes[];
-    };
+    keywordReviews: GetRestaurantKeywordReviewRes;
+    reviews: GetRestaurantReviewRes[];
   }>({
     queryKey: ['review-comment', restaurantId],
     queryFn: () => reviewRepository().getComment({ restaurantId }),
     staleTime: 0,
   });
 
-  return { restaurantReviews: data?.data.reviews, keywordReviews: data?.data.keywordReviews };
+  return { restaurantReviews: data?.reviews, keywordReviews: data?.keywordReviews };
 }

@@ -1,4 +1,4 @@
-import http from '@/apis/http';
+import { axiosInstance } from '@/apis/http';
 import { MODAL_TYPES } from '@/components/Modal/GlobalModal';
 import useModal from '@/components/Modal/GlobalModal/hooks/useModal';
 import { SERVER_ERROR_MSG } from '@/constants/error-msg';
@@ -6,6 +6,37 @@ import * as Sentry from '@sentry/nextjs';
 import { AxiosResponse } from 'axios';
 import { useEffect } from 'react';
 import useToken from './useToken';
+
+const PUBLIC_DOMAIN = [
+  {
+    domain: '/account/tokens',
+    method: 'post',
+  },
+  {
+    domain: '/account/password',
+    method: 'put',
+  },
+  {
+    domain: '/authentication/',
+    method: 'post',
+  },
+  {
+    domain: '/configuration/',
+    method: 'get',
+  },
+  {
+    domain: '/option',
+    method: 'get',
+  },
+  {
+    domain: '/food/recommendation',
+    method: 'post',
+  },
+  {
+    domain: '/user',
+    method: 'post',
+  },
+];
 
 export const useAxiosInterceptor = () => {
   const { token } = useToken();
@@ -29,9 +60,15 @@ export const useAxiosInterceptor = () => {
     });
   };
 
-  const requestInterceptor = http.client.interceptors.request.use(
+  const requestInterceptor = axiosInstance.interceptors.request.use(
     (request: any) => {
-      if (request.headers.Authorization?.toString().split(' ')[1] === 'null') {
+      const { url, method } = request;
+
+      console.log(url, method);
+
+      const isPublic = PUBLIC_DOMAIN.find(d => url.includes(d.domain) && method.toLowerCase() === d.method);
+
+      if (!isPublic && token) {
         request.headers.Authorization = `Bearer ${token}`;
         return { ...request };
       }
@@ -46,9 +83,14 @@ export const useAxiosInterceptor = () => {
     }
   );
 
-  const responseInterceptor = http.client.interceptors.response.use(
+  const responseInterceptor = axiosInstance.interceptors.response.use(
     (response: AxiosResponse) => {
-      console.log('axios response!!!!');
+      if (response.data && response.data.data) {
+        return {
+          ...response,
+          data: response.data.data, // response.data를 가공된 형태로 교체
+        };
+      }
       return response;
     },
     (error: any) => {
@@ -69,6 +111,12 @@ export const useAxiosInterceptor = () => {
         });
       }
 
+      if (error.response.data.statusCode === 400) {
+        serverErrorTrigger(error.response.data.category, error?.response?.data?.originMessage);
+
+        return;
+      }
+
       // 호진FIXME: 해당 부분에서 400이상의 모든 에러를 처리하면 컴포넌트 레벨에서 에러를 추가할때 에러가 2번 발생함 ( 해당 파일에서 발생 + 컴포넌트에서 에러 팝업 발생)
       if (error.response.data.statusCode === 404) {
         errorTrigger();
@@ -87,8 +135,8 @@ export const useAxiosInterceptor = () => {
 
   useEffect(() => {
     return () => {
-      http.client.interceptors.request.eject(requestInterceptor);
-      http.client.interceptors.response.eject(responseInterceptor);
+      axiosInstance.interceptors.request.eject(requestInterceptor);
+      axiosInstance.interceptors.response.eject(responseInterceptor);
     };
   }, [requestInterceptor, responseInterceptor]);
 };

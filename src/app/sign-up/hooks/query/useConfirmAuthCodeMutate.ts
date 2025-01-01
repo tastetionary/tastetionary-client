@@ -43,7 +43,7 @@ const useConfirmAuthCodeMutate = ({ onNext, type, saveAuthId }: Props) => {
   const { mutate } = useMutation({
     mutationFn: getRegisterRepository().postConfirmAuthCode,
     onSuccess: data => {
-      saveAuthId?.(data.data.authenticationId);
+      saveAuthId?.(data.authenticationId);
       authCompleteModal(type);
     },
   });
