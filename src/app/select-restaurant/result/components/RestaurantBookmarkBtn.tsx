@@ -13,14 +13,16 @@ export default function RestaurantBookmarkBtn() {
   const [isBookMarked, setIsBookMarked] = useState(false);
   const { restaurant } = useSelectResultStore();
 
-  const { mutate: addBookMark } = useMutation(preferenceRepository().postPreference, {
+  const { mutate: addBookMark } = useMutation({
+    mutationFn: preferenceRepository().postPreference,
     onSuccess: () => {
       iconToast('북마크에 추가되었습니다.', 'check');
       setIsBookMarked(true);
     },
   });
 
-  const { mutate: deleteBookMark } = useMutation(preferenceRepository().deletePreference, {
+  const { mutate: deleteBookMark } = useMutation({
+    mutationFn: preferenceRepository().deletePreference,
     onSuccess: () => setIsBookMarked(false),
   });
 

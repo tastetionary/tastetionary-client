@@ -25,7 +25,8 @@ const useAccountAuthCodeMutate = ({ onNext, setEmailAuthId, setCompanyEmailAuthI
     });
   };
 
-  const { data, mutate } = useMutation(getRegisterRepository().postAccountAuthCode, {
+  const { data, mutate } = useMutation({
+    mutationFn: getRegisterRepository().postAccountAuthCode,
     onSuccess: () => (type === 'retry' ? emailRetryModal() : onNext()),
   });
 

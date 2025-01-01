@@ -62,8 +62,9 @@ export default function RestaurantSearch() {
     return data;
   };
 
-  const { mutate: getSearchList, data } = useMutation((keyword: string) => searchByKeyword(keyword), {
-    cacheTime: 0,
+  const { mutate: getSearchList, data } = useMutation({
+    mutationFn: (keyword: string) => searchByKeyword(keyword),
+    gcTime: 0,
   });
 
   const onSubmitHandler: SubmitHandler<FormValue> = ({ name }) => {

@@ -31,8 +31,9 @@ export default function RegisterReview() {
   const router = useRouter();
   const { openModal, closeModal } = useModal();
   const { token } = useUser();
-  const { data } = useQuery(['restaurant-review-option'], () => getRestaurantReviewOption(), {
-    cacheTime: 0,
+  const { data } = useQuery({
+    queryKey: ['restaurant-review-option'],
+    queryFn: () => getRestaurantReviewOption(),
     staleTime: 0,
   });
 
@@ -44,8 +45,8 @@ export default function RegisterReview() {
     mode: 'onSubmit',
   });
 
-  const { mutate: registerReview, isSuccess } = useMutation(
-    (summary: string) =>
+  const { mutate: registerReview, isSuccess } = useMutation({
+    mutationFn: (summary: string) =>
       postRestarantReview(
         {
           review: {
@@ -69,32 +70,30 @@ export default function RegisterReview() {
         },
         token
       ),
-    {
-      onSuccess: () => {
-        const clickEvent = () => {
-          resetReviewState();
-          resetReviewPlaceInfo();
-        };
+    onSuccess: () => {
+      const clickEvent = () => {
+        resetReviewState();
+        resetReviewPlaceInfo();
+      };
 
-        openModal(MODAL_TYPES.dialog, {
-          title: '리뷰 등록 완료',
-          message: '작성하신 리뷰가 식당 추첨에 반영되었어요!',
-          cancelText: '다른 가게 리뷰하기',
-          confirmText: '홈으로 가기',
-          handleConfirm: () => {
-            router.push('/');
-            closeModal(MODAL_TYPES.dialog);
-            clickEvent();
-          },
-          handleClose: () => {
-            router.push('/register-review/restaurant');
-            closeModal(MODAL_TYPES.dialog);
-            clickEvent();
-          },
-        });
-      },
-    }
-  );
+      openModal(MODAL_TYPES.dialog, {
+        title: '리뷰 등록 완료',
+        message: '작성하신 리뷰가 식당 추첨에 반영되었어요!',
+        cancelText: '다른 가게 리뷰하기',
+        confirmText: '홈으로 가기',
+        handleConfirm: () => {
+          router.push('/');
+          closeModal(MODAL_TYPES.dialog);
+          clickEvent();
+        },
+        handleClose: () => {
+          router.push('/register-review/restaurant');
+          closeModal(MODAL_TYPES.dialog);
+          clickEvent();
+        },
+      });
+    },
+  });
 
   const onSubmitHandler: SubmitHandler<FormValue> = data => {
     registerReview(data?.review);

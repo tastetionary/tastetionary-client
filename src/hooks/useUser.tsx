@@ -1,36 +1,48 @@
-import { getUser } from '@/apis/user/getUser';
+import { UserRes, getUser } from '@/apis/user/getUser';
 import { setUser } from '@sentry/nextjs';
-import { useQuery } from '@tanstack/react-query';
+import { QueryClient, UseQueryResult, useQuery } from '@tanstack/react-query';
 import useToken from './useToken';
 
-export default function useUser() {
-  const { token } = useToken();
+type UseUserResult = Partial<UseQueryResult<UserRes, any>> & {
+  isLoggedIn: boolean;
+  token: string | undefined;
+  hasActivityArea: boolean;
+};
 
-  if (!token)
+export default function useUser(): UseUserResult {
+  const { token } = useToken();
+  const queryClient = new QueryClient();
+
+  // 토큰이 없을 경우
+  if (!token) {
     return {
       isLoggedIn: false,
+      token: undefined,
+      hasActivityArea: false,
     };
+  }
 
-  const { data: userData } = useQuery(['user'], () => getUser(token), {
+  // 토큰이 있을 경우
+  const res = useQuery<UserRes>({
+    queryKey: ['user'],
+    queryFn: () => getUser(token),
     enabled: !!token,
-    staleTime: Infinity, // token 값을 받으면 user 정보를 받아와 react-query에 저장
-    cacheTime: 1000 * 60 * 60 * 24, // 24 hours
+    gcTime: 1000 * 60 * 60 * 24, // 24 hours
+    initialData: queryClient.getQueryData(['user']),
   });
 
-  if (userData) {
+  if (res.data) {
     setUser({
-      id: userData.id,
-      username: userData.nickname,
-      email: userData.account.accountEmail,
+      id: res.data.id,
+      username: res.data.nickname,
+      email: res.data.account?.accountEmail || '',
     });
   }
 
   return {
-    isLoggedIn: Boolean(token),
+    isLoggedIn: true,
     token,
-    hasActivityArea: userData && token ? Boolean(userData?.area?.address) : false,
-    data: {
-      ...userData,
-    },
+    hasActivityArea: res?.data && token ? Boolean(res.data?.area?.address) : false,
+    ...res,
   };
 }

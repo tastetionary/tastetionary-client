@@ -8,7 +8,8 @@ const useLogoutMutate = () => {
   const queryClient = useQueryClient();
   const { push } = useRouter();
 
-  const { mutate } = useMutation(authRepository().postLogout, {
+  return useMutation({
+    mutationFn: authRepository().postLogout,
     onSuccess: () => {
       Sentry.configureScope(scope => scope.clear());
       setTimeout(() => {
@@ -18,8 +19,6 @@ const useLogoutMutate = () => {
       push('/');
     },
   });
-
-  return { mutate };
 };
 
 export default useLogoutMutate;

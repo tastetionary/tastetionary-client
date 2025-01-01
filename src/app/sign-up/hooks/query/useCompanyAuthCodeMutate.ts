@@ -8,7 +8,8 @@ interface Props {
 }
 
 const useCompanyAuthCodeMutate = ({ onNext, setCompanyEmailAuthId }: Props) => {
-  const { data, mutate } = useMutation(getRegisterRepository().postCompanyAuthCode, {
+  const { data, mutate } = useMutation({
+    mutationFn: getRegisterRepository().postCompanyAuthCode,
     onSuccess: () => onNext(),
   });
 

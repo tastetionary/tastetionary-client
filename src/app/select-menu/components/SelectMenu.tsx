@@ -18,10 +18,10 @@ export default function SelectMenu() {
   const recommendBtnDisabled = category?.length === 0 || keyword?.length === 0;
   const refreshBtnDisabled = category?.length === 0 && keyword?.length === 0;
 
-  const { data } = useQuery(['food-option'], () => getFoodOption(), {
-    cacheTime: 0,
-    staleTime: 0,
-    enabled: false, // Do not refetch on the client
+  const { data } = useQuery({
+    queryKey: ['food-option'],
+    queryFn: () => getFoodOption(),
+    enabled: false,
   });
 
   return (

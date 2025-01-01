@@ -1,22 +1,26 @@
 import { getRestaurantOption } from '@/apis/restaurant/option';
-import { requireAuth } from '@/utils/auth';
-import { Hydrate, QueryClient, dehydrate } from '@tanstack/react-query';
+import { withAuth } from '@/utils/auth';
+import { QueryClient, dehydrate } from '@tanstack/query-core';
+import { HydrationBoundary } from '@tanstack/react-query';
 import SelectRestaurant from './components/SelectRestaurant';
 
-export default async function SelectRestaurantPage() {
-  requireAuth();
-
+async function SelectRestaurantPage() {
   const queryClient = new QueryClient();
 
   // Pre-fetching data server-side
-  await queryClient.prefetchQuery(['restaurant-option'], () => getRestaurantOption());
+  await queryClient.prefetchQuery({
+    queryKey: ['restaurant-option'],
+    queryFn: () => getRestaurantOption(),
+  });
 
   // Dehydrating the state for client-side hydration
   const dehydratedState = dehydrate(queryClient);
 
   return (
-    <Hydrate state={dehydratedState}>
+    <HydrationBoundary state={dehydratedState}>
       <SelectRestaurant />
-    </Hydrate>
+    </HydrationBoundary>
   );
 }
+
+export default withAuth(SelectRestaurantPage, '/');
