@@ -1,97 +1,32 @@
-'use client';
+import { getUser } from '@/apis/user/getUser';
+import { QueryClient, dehydrate } from '@tanstack/query-core';
+import { HydrationBoundary } from '@tanstack/react-query';
+import { cookies } from 'next/headers';
+import MyPagePage from './components/MyPagePage';
 
-import ARROW_RIGHT from '@/assets/common/Icons/arrow_right.svg';
-import { MODAL_TYPES } from '@/components/Modal/GlobalModal';
-import useModal from '@/components/Modal/GlobalModal/hooks/useModal';
-import CHeader from '@/components/c-header';
-import CMypageMenu from '@/components/c-mypage-menu';
-import GNBLayout from '@/components/layout/gnb-layout';
-import useUser from '@/hooks/useUser';
-import { useRouter } from 'next/navigation';
-import useLogoutMutate from '../login/hooks/useLogoutMutate';
-import * as S from './page.styled';
+async function MyPage() {
+  const cookieStore = cookies();
+  const token = cookieStore.get('token')?.value;
 
-export default function MyPage() {
-  const { push } = useRouter();
-  const { isLoggedIn, token, data } = useUser();
-  const { openModal, closeModal } = useModal();
-  const { mutate: logoutMutate } = useLogoutMutate();
+  const queryClient = new QueryClient();
 
-  const logoutModal = () => {
-    if (!openModal || !closeModal) {
-      console.error('useModal 훅에서 상태를 가져오는 데 실패했습니다.');
-      return;
-    }
-
-    openModal(MODAL_TYPES.dialog, {
-      title: '로그아웃 하시겠습니까?',
-      cancelText: '취소',
-      needClose: true,
-      handleClose: () => closeModal(MODAL_TYPES.dialog), // Modal 상태 변경
-      handleConfirm: async () => {
-        if (token) {
-          try {
-            await logoutMutate({ token }); // 비동기 작업
-          } catch (error) {
-            console.error('Logout failed:', error);
-          }
-        }
-      },
+  if (token) {
+    // Pre-fetching data server-side
+    await queryClient.prefetchQuery({
+      queryKey: ['user'],
+      queryFn: () => getUser(token),
+      staleTime: 1000 * 60 * 60 * 24, // 서버에서 설정한 staleTime
     });
-  };
+  }
+
+  // Dehydrating the state for client-side hydration
+  const dehydratedState = dehydrate(queryClient);
 
   return (
-    <>
-      <CHeader title="마이페이지" isLogo />
-
-      <GNBLayout>
-        <S.NotLogInContainer>
-          <div>
-            <p className="title2 flex cursor-pointer items-center font-bold" onClick={() => push('/login')}>
-              {isLoggedIn ? data?.nickname : '로그인'}
-              <ARROW_RIGHT width={24} height={24} />
-            </p>
-            <p className="body2 mt-3">
-              {isLoggedIn ? data?.account?.accountEmail : '맛셔너리 서비스 이용을 위해 로그인해주세요.'}
-            </p>
-          </div>
-        </S.NotLogInContainer>
-
-        <S.MenuList>
-          {isLoggedIn && (
-            <CMypageMenu
-              items={[
-                { name: '개인정보 관리', clickEvent: () => push('/mypage/user/manage-info') },
-                { name: '작성한 리뷰 관리' },
-                { name: '북마크 식당 관리' },
-                { name: '추천 제외 식당 보기' },
-              ]}
-            />
-          )}
-
-          <CMypageMenu
-            items={[
-              {
-                name: '공지사항',
-                clickEvent: () =>
-                  window.open(
-                    'https://tastetionary.notion.site/03ebf00931f44926b889e085cabbd02c?v=5c1337997b384b15a63e6d89a3708ed9&pvs=74'
-                  ),
-              },
-              { name: '자주 묻는 질문' },
-              { name: '의견 보내기', mail: 'tastetionary@gmail.com' },
-            ]}
-          />
-
-          <CMypageMenu
-            items={[
-              { name: '서비스 이용약관', clickEvent: () => push('/sign-up?step=terms-of-service') },
-              { name: '개인정보 처리 방침', clickEvent: () => push('/sign-up?step=privacy-notice') },
-            ]}
-          />
-          {isLoggedIn && <CMypageMenu items={[{ name: '로그아웃', clickEvent: () => logoutModal() }]} />}
-        </S.MenuList>
-      </GNBLayout>
-    </>
+    <HydrationBoundary state={dehydratedState}>
+      <MyPagePage isLoggedIn={Boolean(token)} token={token} />
+    </HydrationBoundary>
   );
 }
+
+export default MyPage;
