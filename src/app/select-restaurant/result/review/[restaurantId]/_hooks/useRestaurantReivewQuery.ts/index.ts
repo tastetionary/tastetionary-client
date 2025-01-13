@@ -12,7 +12,12 @@ export default function useRestaurantReviewQuery({ restaurantId }: Props) {
     reviews: GetRestaurantReviewRes[];
   }>({
     queryKey: ['review-comment', restaurantId],
-    queryFn: () => reviewRepository().getComment({ restaurantId }),
+    queryFn: async () => {
+      return (await reviewRepository().getComment({ restaurantId })) as {
+        keywordReviews: GetRestaurantKeywordReviewRes;
+        reviews: GetRestaurantReviewRes[];
+      };
+    },
     staleTime: 0,
   });
 
