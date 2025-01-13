@@ -1,34 +1,28 @@
 'use client';
 
 import { createSyncStoragePersister } from '@tanstack/query-sync-storage-persister';
-import { Hydrate, QueryClient } from '@tanstack/react-query';
+import { QueryClient } from '@tanstack/react-query';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import { PersistQueryClientProvider } from '@tanstack/react-query-persist-client';
-import React, { useState } from 'react';
+import React from 'react';
+
+const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: {
+      retry: false,
+      refetchOnWindowFocus: false,
+    },
+  },
+});
 
 function ReactQueryProvider({ children }: React.PropsWithChildren) {
-  const [client] = useState(
-    () =>
-      new QueryClient({
-        defaultOptions: {
-          queries: {
-            staleTime: 3 * 60 * 1000,
-            retry: false,
-            cacheTime: 3 * 60 * 1000,
-            refetchOnWindowFocus: false,
-            retryDelay: 1000,
-          },
-        },
-      })
-  );
-
   const persister = createSyncStoragePersister({
     storage: typeof window !== 'undefined' ? window.localStorage : undefined,
   });
 
   return (
-    <PersistQueryClientProvider client={client} persistOptions={{ persister }}>
-      <Hydrate state={null}>{children}</Hydrate>
+    <PersistQueryClientProvider client={queryClient} persistOptions={{ persister }}>
+      {children}
       <ReactQueryDevtools initialIsOpen={false} />
     </PersistQueryClientProvider>
   );

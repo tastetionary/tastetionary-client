@@ -38,8 +38,8 @@ export default function CRegionSetting({ category, onNextPage }: Props) {
     });
   };
 
-  const { mutate: saveRegion } = useMutation(
-    (data: { address: string; latitude: number; longitude: number }) =>
+  const { mutate: saveRegion } = useMutation({
+    mutationFn: (data: { address: string; latitude: number; longitude: number }) =>
       putSaveRegion(
         {
           address: data?.address,
@@ -48,22 +48,20 @@ export default function CRegionSetting({ category, onNextPage }: Props) {
         },
         token
       ),
-    {
-      onSuccess: (_, data) => {
-        queryClient.setQueryData(['user'], (prev: any) => {
-          let oldData = prev;
+    onSuccess: (_, data) => {
+      queryClient.setQueryData(['user'], (prev: any) => {
+        let oldData = prev;
 
-          oldData.area.address = data?.address;
-          oldData.area.latitude = data?.latitude;
-          oldData.area.longitude = data?.longitude;
+        oldData.area.address = data?.address;
+        oldData.area.latitude = data?.latitude;
+        oldData.area.longitude = data?.longitude;
 
-          return oldData;
-        });
+        return oldData;
+      });
 
-        handleCompleteRegionSetting();
-      },
-    }
-  );
+      handleCompleteRegionSetting();
+    },
+  });
 
   return (
     <FormProvider {...methods}>

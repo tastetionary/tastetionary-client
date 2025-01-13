@@ -1,8 +1,8 @@
-import { requireNoAuth } from '@/utils/auth';
+import { withNoAuth } from '@/utils/auth';
 import LoginPage from './components/LoginPage';
 
-export default function Login() {
-  requireNoAuth();
-
+function Login() {
   return <LoginPage />;
 }
+
+export default withNoAuth(Login);

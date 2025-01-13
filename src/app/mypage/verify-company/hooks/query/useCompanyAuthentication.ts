@@ -24,17 +24,15 @@ export default function useCompanyAuthentication({ email, type, onNext }: Props)
     });
   };
 
-  const { data, mutate } = useMutation(
-    () =>
+  const { data, mutate } = useMutation({
+    mutationFn: () =>
       getUserCompanyRepository().postRequestCompanyAuthCode({
         type: 'email',
         identification: email,
         token,
       }),
-    {
-      onSuccess: data => (type === 'retry' ? emailRetryModal() : onNext(data.data.id)),
-    }
-  );
+    onSuccess: data => (type === 'retry' ? emailRetryModal() : onNext(data.id)),
+  });
 
   return {
     data,

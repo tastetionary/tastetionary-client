@@ -1,19 +1,27 @@
 import { getFoodOption } from '@/apis/food/option';
-import { dehydrate, Hydrate, QueryClient } from '@tanstack/react-query';
+import { QueryClient, dehydrate } from '@tanstack/query-core';
+import { HydrationBoundary } from '@tanstack/react-query';
 import SelectMenu from './components/SelectMenu';
 
 export default async function SelectMenuPage() {
   const queryClient = new QueryClient();
 
   // Pre-fetching data server-side
-  await queryClient.prefetchQuery(['food-option'], () => getFoodOption());
+  await queryClient.prefetchQuery({
+    queryKey: ['food-option'],
+    queryFn: async () => {
+      console.log('Query function executed');
+
+      return getFoodOption();
+    },
+  });
 
   // Dehydrating the state for client-side hydration
   const dehydratedState = dehydrate(queryClient);
 
   return (
-    <Hydrate state={dehydratedState}>
+    <HydrationBoundary state={dehydratedState}>
       <SelectMenu />
-    </Hydrate>
+    </HydrationBoundary>
   );
 }

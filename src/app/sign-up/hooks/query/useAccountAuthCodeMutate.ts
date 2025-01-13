@@ -25,13 +25,14 @@ const useAccountAuthCodeMutate = ({ onNext, setEmailAuthId, setCompanyEmailAuthI
     });
   };
 
-  const { data, mutate } = useMutation(getRegisterRepository().postAccountAuthCode, {
+  const { data, mutate } = useMutation({
+    mutationFn: getRegisterRepository().postAccountAuthCode,
     onSuccess: () => (type === 'retry' ? emailRetryModal() : onNext()),
   });
 
   useEffect(() => {
     if (data) {
-      const authId = data.data.id as number;
+      const authId = data.id as number;
       category === 'account' ? setEmailAuthId?.(authId) : setCompanyEmailAuthId?.(authId);
     }
   }, [data]);

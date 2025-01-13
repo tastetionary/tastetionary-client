@@ -21,7 +21,7 @@ interface Req {
 interface Res {}
 
 export const postRestarantReview = async (req: Req, token?: string) => {
-  const res = await http.post<{ data?: Res }, Req>(
+  return await http.post<Res, Req>(
     '/apis/v1/restaurant/review',
     req,
     token
@@ -32,8 +32,4 @@ export const postRestarantReview = async (req: Req, token?: string) => {
         }
       : undefined
   );
-
-  if (res?.data) {
-    return res?.data;
-  }
 };

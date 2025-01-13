@@ -1,16 +1,12 @@
 import http from '../http';
 
 interface PostAccountAuthCodeRes {
-  data: {
-    id: number;
-    expiredAt: string;
-  };
+  id: number;
+  expiredAt: string;
 }
 
 interface PostConfirmAuthCodeRes {
-  data: {
-    authenticationId: number;
-  };
+  authenticationId: number;
 }
 
 interface PostAccountAuthParams {
@@ -60,25 +56,21 @@ interface GetRegisterRepository {
 
 export const getRegisterRepository = (): GetRegisterRepository => {
   return {
-    postAccountAuthCode: async ({ identification, type, category }: PostAccountAuthParams) =>
-      await http.post<PostAccountAuthCodeRes, PostAccountAuthParams>(`/apis/v1/authentication/public/${category}`, {
-        identification,
-        type,
-        category,
-      }),
-    postConfirmAuthCode: async ({ historyId, code }: PostConfirmAuthCodeParams) =>
-      await http.post<PostConfirmAuthCodeRes, PostConfirmAuthCodeParams>('/apis/v1/authentication/public/status/done', {
-        historyId,
-        code,
-      }),
-    postCompanyAuthCode: async ({ identification, type }: PostAccountAuthParams) =>
-      await http.post<PostAccountAuthCodeRes, PostAccountAuthParams>('/apis/v1/authentication/public/company', {
-        identification,
-        type,
-      }),
-    postRegisterUser: async (payload: PostRegisterUserParams) =>
-      await http.post<PostAccountAuthCodeRes, PostRegisterUserParams>('/apis/v1/user', {
-        ...payload,
-      }),
+    postAccountAuthCode: async (params: PostAccountAuthParams): Promise<PostAccountAuthCodeRes> => {
+      const url = `/apis/v1/authentication/public/${params.category}`;
+      return http.post<PostAccountAuthCodeRes, PostAccountAuthParams>(url, params);
+    },
+    postConfirmAuthCode: async (params: PostConfirmAuthCodeParams): Promise<PostConfirmAuthCodeRes> => {
+      const url = '/apis/v1/authentication/public/status/done';
+      return http.post<PostConfirmAuthCodeRes, PostConfirmAuthCodeParams>(url, params);
+    },
+    postCompanyAuthCode: async (params: PostAccountAuthParams): Promise<PostAccountAuthCodeRes> => {
+      const url = '/apis/v1/authentication/public/company';
+      return http.post<PostAccountAuthCodeRes, PostAccountAuthParams>(url, params);
+    },
+    postRegisterUser: async (params: PostRegisterUserParams): Promise<PostAccountAuthCodeRes> => {
+      const url = '/apis/v1/user';
+      return http.post<PostAccountAuthCodeRes, PostRegisterUserParams>(url, params);
+    },
   };
 };

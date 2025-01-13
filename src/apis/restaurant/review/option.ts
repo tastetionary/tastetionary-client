@@ -7,9 +7,5 @@ interface Res {
 }
 
 export const getRestaurantReviewOption = async () => {
-  const res = await http.get<{ data?: Res }>('/apis/v1/restaurant/review/option');
-
-  if (res?.data) {
-    return res?.data;
-  }
+  return await http.get<Res>('/apis/v1/restaurant/review/option');
 };

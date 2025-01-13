@@ -19,9 +19,9 @@ export default function SelectRestaurant() {
   const recommendBtnDisabled = category?.length === 0 || keyword?.length === 0;
   const refreshBtnDisabled = category?.length === 0 && keyword?.length === 0;
 
-  const { data } = useQuery(['restaurant-option'], () => getRestaurantOption(), {
-    cacheTime: 0,
-    staleTime: 0,
+  const { data } = useQuery({
+    queryKey: ['restaurant-option'],
+    queryFn: () => getRestaurantOption(),
     enabled: false, // Do not refetch on the client
   });
 

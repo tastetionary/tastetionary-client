@@ -3,7 +3,9 @@ import { useMutation } from '@tanstack/react-query';
 import { toast } from 'react-toastify';
 
 const useValidationNickname = () => {
-  const { mutate } = useMutation(['nickname'], authRepository().getValidateNickname, {
+  const { mutate } = useMutation({
+    mutationKey: ['nickname'],
+    mutationFn: authRepository().getValidateNickname,
     onSuccess: () => {
       toast.success('닉네임 입력이 완료되었습니다.');
     },

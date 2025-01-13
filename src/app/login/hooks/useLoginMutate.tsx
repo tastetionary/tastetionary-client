@@ -4,7 +4,7 @@ import { MODAL_TYPES } from '@/components/Modal/GlobalModal';
 import useModal from '@/components/Modal/GlobalModal/hooks/useModal';
 import { ERROR_MSG } from '@/constants/error-msg';
 import useToken from '@/hooks/useToken';
-import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { AxiosError } from 'axios';
 import { useRouter } from 'next/navigation';
 import { setCookie } from 'nookies';
@@ -43,18 +43,17 @@ const useLoginMutate = () => {
     });
   };
 
-  const { mutate } = useMutation(authRepository().postLogin, {
+  const { mutate } = useMutation({
+    mutationFn: authRepository().postLogin,
     onSuccess: value => {
-      const token = value.data.accessToken;
+      const token = value.accessToken;
 
       setCookie(null, 'token', token, {
         path: '/',
+        sameSite: 'lax',
       });
 
-      // Pre-fetch user data
-      queryClient.prefetchQuery(['user'], () => getUser(token));
-
-      push('/');
+      getUserInfo(token);
     },
     onError: (errors: AxiosError<ErrorType>) => {
       if (errors.response?.data.originMessage === ERROR_MSG['NO_REGISTER']) {
@@ -68,10 +67,13 @@ const useLoginMutate = () => {
     },
   });
 
-  const { data: user } = useQuery(['user'], () => getUser(token), {
-    enabled: !!token,
-    staleTime: Infinity,
-    cacheTime: 1000 * 60 * 60 * 24, // 24 hours
+  const { mutate: getUserInfo } = useMutation({
+    mutationFn: (token: string) => getUser(token),
+    onSuccess: res => {
+      queryClient.setQueryData(['user'], res);
+
+      push('/');
+    },
   });
 
   return { mutate };

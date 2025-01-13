@@ -1,10 +1,8 @@
 import http from '@/apis/http';
 
 interface PostAccountAuthCodeRes {
-  data: {
-    id: number;
-    expiredAt: string;
-  };
+  id: number;
+  expiredAt: string;
 }
 
 interface PostAccountAuthParams {

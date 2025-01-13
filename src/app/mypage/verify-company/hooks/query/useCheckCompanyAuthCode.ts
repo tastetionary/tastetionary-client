@@ -9,7 +9,8 @@ interface Props {
 export default function useCheckCompanyAuthCode({ onNext }: Props) {
   const { token } = useUser();
 
-  const { data, mutate } = useMutation(getUserCompanyRepository().postCheckCompanyAuthCode, {
+  const { data, mutate } = useMutation({
+    mutationFn: getUserCompanyRepository().postCheckCompanyAuthCode,
     onSuccess: () => onNext(),
   });
 

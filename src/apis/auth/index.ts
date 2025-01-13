@@ -28,7 +28,7 @@ const authRepository = (): AuthRepository => {
         category,
         code,
       }),
-    postLogout: async ({ token }) =>
+    postLogout: async ({ token }: { token: string }) =>
       await http.delete('/apis/v1/account/tokens', {
         headers: {
           Authorization: `Bearer ${token}`,

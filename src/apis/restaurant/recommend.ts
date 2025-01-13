@@ -31,7 +31,7 @@ export interface RestaurantRecommendRes {
 }
 
 export const postRestaurantRecommend = async (req: Req, token?: string) => {
-  const res = await http.post<{ data?: RestaurantRecommendRes }, Req>(
+  return await http.post<RestaurantRecommendRes, Req>(
     '/apis/v1/restaurant/recommendation',
     req,
     token
@@ -42,8 +42,4 @@ export const postRestaurantRecommend = async (req: Req, token?: string) => {
         }
       : undefined
   );
-
-  if (res) {
-    return res?.data ?? null;
-  }
 };

@@ -7,11 +7,11 @@ import IC_REVIEW2 from '@/assets/common/Icons/review.svg';
 import preferenceRepository from '@/apis/user/preference';
 import BottomButtonContainer from '@/components/Button/BottomButtonContainer';
 import DefaultButton from '@/components/Button/DefaultButton';
-import CHeader from '@/components/c-header';
-import CRecommendButton from '@/components/c-recommend-button';
 import { MODAL_TYPES } from '@/components/Modal/GlobalModal';
 import useModal from '@/components/Modal/GlobalModal/hooks/useModal';
 import { iconToast } from '@/components/Toast';
+import CHeader from '@/components/c-header';
+import CRecommendButton from '@/components/c-recommend-button';
 import useUser from '@/hooks/useUser';
 import { useSelectResultStore } from '@/store/useSelectResultStore';
 import { useMutation } from '@tanstack/react-query';
@@ -51,7 +51,8 @@ export default function SelectRestaurantResult() {
     '20,000~': '20,000원 이상',
   };
 
-  const { mutate: excludedRestaurant } = useMutation(preferenceRepository().postPreference, {
+  const { mutate: excludedRestaurant } = useMutation({
+    mutationFn: preferenceRepository().postPreference,
     onSuccess: () => {
       iconToast('이 식당은 앞으로 제외됩니다.', 'check');
     },

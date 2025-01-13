@@ -141,8 +141,8 @@ export default function CRecommendButton({ selectType, btnText, ...rest }: Props
     });
   };
 
-  const { mutate: getFood } = useMutation<FoodRecommendRes, AxiosError>(
-    () =>
+  const { mutate: getFood } = useMutation<FoodRecommendRes, AxiosError>({
+    mutationFn: () =>
       postFoodRecommend(
         {
           categories: foodCategory?.filter(c => c !== '전체') as FoodCategory[],
@@ -150,18 +150,16 @@ export default function CRecommendButton({ selectType, btnText, ...rest }: Props
         },
         token
       ),
-    {
-      onSuccess: res => loadingModal(res),
-      onError: err => {
-        if (err?.response?.status === 401) {
-          return loginModal();
-        }
-      },
-    }
-  );
+    onSuccess: res => loadingModal(res),
+    onError: err => {
+      if (err?.response?.status === 401) {
+        return loginModal();
+      }
+    },
+  });
 
-  const { mutate: getRestaurant } = useMutation<RestaurantRecommendRes, AxiosError>(
-    () =>
+  const { mutate: getRestaurant } = useMutation<RestaurantRecommendRes, AxiosError>({
+    mutationFn: () =>
       postRestaurantRecommend(
         {
           category: restaurantCategory?.filter(c => c !== '전체') as RestaurantCategory[],
@@ -171,15 +169,13 @@ export default function CRecommendButton({ selectType, btnText, ...rest }: Props
         },
         token
       ),
-    {
-      onSuccess: res => loadingModal(res),
-      onError: err => {
-        if (err?.response?.status === 401) {
-          return loginModal();
-        }
-      },
-    }
-  );
+    onSuccess: res => loadingModal(res),
+    onError: err => {
+      if (err?.response?.status === 401) {
+        return loginModal();
+      }
+    },
+  });
 
   const onButtonClick = () => {
     if (selectType === 'food') return getFood();

@@ -23,7 +23,8 @@ export default function MyPageUserExit() {
   const { token } = useUser();
   const [userDeleteType, setUserDeleteType] = useState<WithdrawalType[]>([]);
 
-  const { mutate: exitUser } = useMutation(() => deleteUser({ types: userDeleteType }, token), {
+  const { mutate: exitUser } = useMutation({
+    mutationFn: () => deleteUser({ types: userDeleteType }, token),
     onSuccess: () => {
       Sentry.configureScope(scope => scope.clear());
       setTimeout(() => {

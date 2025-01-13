@@ -16,7 +16,7 @@ interface Res {
 }
 
 export const putSaveRegion = async (req: Req, token?: string) => {
-  const res = await http.put<{ data?: Res }, Req>(
+  return await http.put<Res, Req>(
     '/apis/v1/user',
     req,
     token
@@ -27,8 +27,4 @@ export const putSaveRegion = async (req: Req, token?: string) => {
         }
       : undefined
   );
-
-  if (res?.data) {
-    return res?.data;
-  }
 };
