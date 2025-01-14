@@ -1,7 +1,7 @@
 import { axiosInstance } from '@/apis/http';
 import { MODAL_TYPES } from '@/components/Modal/GlobalModal';
 import useModal from '@/components/Modal/GlobalModal/hooks/useModal';
-import { SERVER_ERROR_MSG } from '@/constants/error-msg';
+import { ERROR_CODE } from '@/utils/error-code';
 import * as Sentry from '@sentry/nextjs';
 import { AxiosResponse } from 'axios';
 import { useEffect } from 'react';
@@ -51,9 +51,9 @@ export const useAxiosInterceptor = () => {
     });
   };
 
-  const serverErrorTrigger = (category: keyof typeof SERVER_ERROR_MSG, message?: string) => {
+  const serverErrorTrigger = (code: keyof typeof ERROR_CODE) => {
     openModal(MODAL_TYPES.dialog, {
-      title: message || SERVER_ERROR_MSG[category], // 서버에서 보내는 에러 메시지가 있으면 보여주기
+      title: ERROR_CODE[code], // 서버에서 보내는 에러 메시지가 있으면 보여주기
       handleConfirm: () => closeModal(MODAL_TYPES.dialog),
       confirmText: '확인',
       needClose: true,
@@ -94,6 +94,8 @@ export const useAxiosInterceptor = () => {
       return response;
     },
     (error: any) => {
+      console.log(error);
+
       const { method, url, params, data: requestData, headers } = error.config ?? {};
       Sentry.setContext('API Request Detail', {
         method,
@@ -112,7 +114,7 @@ export const useAxiosInterceptor = () => {
       }
 
       if (error.response.data.statusCode === 400) {
-        serverErrorTrigger(error.response.data.category, error?.response?.data?.originMessage);
+        serverErrorTrigger(error.response.data.errorCode);
 
         return;
       }
@@ -123,8 +125,8 @@ export const useAxiosInterceptor = () => {
         return;
       }
 
-      if (error.response.data.category in SERVER_ERROR_MSG) {
-        serverErrorTrigger(error.response.data.category, error?.response?.data?.originMessage);
+      if (error.response.data.errorCode in ERROR_CODE) {
+        serverErrorTrigger(error.response.data.errorCode);
         return;
       }
 
