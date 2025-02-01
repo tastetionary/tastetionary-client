@@ -1,4 +1,5 @@
 import ARROW from '@/assets/common/Icons/arrow.svg';
+import MAIN_LOGO from '@/assets/logo/main_logo.svg';
 import { useRouter } from 'next/navigation';
 
 interface Props {
@@ -27,7 +28,10 @@ export default function CHeader({ isLogo = false, isBackBtn = false, title, noBa
         <div className="w-56"></div>
       )}
 
-      <div className="body2 !font-pretendard font-normal">{title}</div>
+      <div className="body2 flex items-center justify-center !font-pretendard font-normal">
+        {isLogo && <MAIN_LOGO width={40} height={30} />}
+        {title}
+      </div>
 
       <div className="w-56"></div>
     </div>
