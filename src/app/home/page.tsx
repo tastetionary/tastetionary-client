@@ -66,7 +66,7 @@ export default function Home() {
         </div>
       </div>
 
-      <div className="h-[500px] w-[500px] bg-neutral-bg05"></div>
+      <div className="h-[500px] w-full bg-neutral-bg05"></div>
 
       <div className="px-32 pb-24 pt-[48px]">
         <p className="title4 font-bold">오늘 리뷰가 등록된 식당이 있어요 ✍️</p>

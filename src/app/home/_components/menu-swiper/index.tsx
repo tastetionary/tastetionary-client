@@ -29,9 +29,9 @@ const MenuSwiper = () => {
         disableOnInteraction: false,
       }}
       loop={true}
-      className="w-full [&_.swiper-slide]:!w-120"
+      className="w-full [&_.swiper-slide]:!w-120 [&_.swiper-wrapper]:pt-2"
     >
-      <SwiperSlide className="w-120!">
+      <SwiperSlide>
         <DefaultButton
           bgColor="gray"
           customStyle="flex items-center gap-[8px] py-4 pr-12 pl-8 grow h-120 w-120 flex-col"
