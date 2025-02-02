@@ -1,17 +1,30 @@
 'use client';
 
 import IC_CHEVRON from '@/assets/common/Icons/chevron.svg';
+import IC_MENU_SELECT from '@/assets/common/Icons/menu_select.svg';
+import IC_RESTAURANT_SELECT from '@/assets/common/Icons/restaurant_select.svg';
 import IC_POSITION from '@/assets/common/system.svg';
 import DefaultButton from '@/components/Button/DefaultButton';
 import CHeader from '@/components/c-header';
 import CRecommendButton from '@/components/c-recommend-button';
+import { useRouter } from 'next/navigation';
 import MenuSwiper from './_components/menu-swiper';
 import ReviewContent from './_components/review-content';
 
 export default function Home() {
+  const router = useRouter();
+
+  const handleMoveToMenuSelect = () => {
+    router.push('/select-menu');
+  };
+
+  const handleMoveToRestaurantSelect = () => {
+    router.push('/select-restaurant');
+  };
+
   return (
     <>
-      <CHeader title="맛셔너리" noBackBtn isLogo />
+      <CHeader title="맛셔너리" isHome isLogo />
 
       <div className="p-12">
         <div className="flex items-center justify-between rounded border border-solid border-neutral-bg10 bg-neutral-bg05 px-16 py-13">
@@ -22,7 +35,6 @@ export default function Home() {
           <div>
             <DefaultButton bgColor="gray" customStyle="flex items-center gap-xxs py-4 pr-12 pl-8">
               <span className="body2">지역 변경</span>
-
               <IC_CHEVRON width={16} height={16} />
             </DefaultButton>
           </div>
@@ -34,11 +46,21 @@ export default function Home() {
         <p className="body2 pt-12">점심 메뉴가 고민될 때에는 메뉴 고르기, 식당을 찾고 싶을 때에는 식당 고르기</p>
 
         <div className="flex gap-[14px] pt-24">
-          <DefaultButton bgColor="gray" customStyle="flex items-center gap-xxs py-4 pr-12 pl-8 grow h-[98px]">
+          <DefaultButton
+            bgColor="gray"
+            customStyle="flex items-center gap-[12px] py-4 pr-12 pl-8 grow h-[98px] flex-col"
+            onClick={handleMoveToMenuSelect}
+          >
+            <IC_MENU_SELECT />
             <span>메뉴 고르기</span>
           </DefaultButton>
 
-          <DefaultButton bgColor="gray" customStyle="flex items-center gap-xxs py-4 pr-12 pl-8 grow">
+          <DefaultButton
+            bgColor="gray"
+            customStyle="flex items-center gap-[12px] py-4 pr-12 pl-8 grow flex-col"
+            onClick={handleMoveToRestaurantSelect}
+          >
+            <IC_RESTAURANT_SELECT />
             <span>식당 고르기</span>
           </DefaultButton>
         </div>
