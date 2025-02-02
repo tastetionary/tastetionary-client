@@ -1,3 +1,4 @@
+import IC_DUMPLING from '@/assets/common/Icons/dumpling.svg';
 import DefaultButton from '@/components/Button/DefaultButton';
 import 'swiper/css';
 import { Autoplay } from 'swiper/modules';
@@ -28,35 +29,55 @@ const MenuSwiper = () => {
         disableOnInteraction: false,
       }}
       loop={true}
-      className="w-full"
+      className="w-full [&_.swiper-slide]:!w-120"
     >
-      <SwiperSlide>
-        <DefaultButton bgColor="gray" customStyle="flex items-center gap-2 py-4 pr-12 pl-8 grow h-120 w-120">
-          <span>김치 볶음밥</span>
+      <SwiperSlide className="w-120!">
+        <DefaultButton
+          bgColor="gray"
+          customStyle="flex items-center gap-[8px] py-4 pr-12 pl-8 grow h-120 w-120 flex-col"
+        >
+          <IC_DUMPLING />
+          <span className="body1">김치 볶음밥</span>
         </DefaultButton>
       </SwiperSlide>
 
       <SwiperSlide>
-        <DefaultButton bgColor="gray" customStyle="flex items-center gap-2 py-4 pr-12 pl-8 grow h-120 w-120">
-          <span>라면</span>
+        <DefaultButton
+          bgColor="gray"
+          customStyle="flex items-center gap-[8px] py-4 pr-12 pl-8 grow h-120 w-120 flex-col"
+        >
+          <IC_DUMPLING />
+          <span className="body1">라면</span>
         </DefaultButton>
       </SwiperSlide>
 
       <SwiperSlide>
-        <DefaultButton bgColor="gray" customStyle="flex items-center gap-2 py-4 pr-12 pl-8 grow h-120 w-120">
-          <span>만두</span>
+        <DefaultButton
+          bgColor="gray"
+          customStyle="flex items-center gap-[8px] py-4 pr-12 pl-8 grow h-120 w-120 flex-col"
+        >
+          <IC_DUMPLING />
+          <span className="body1">만두</span>
         </DefaultButton>
       </SwiperSlide>
 
       <SwiperSlide>
-        <DefaultButton bgColor="gray" customStyle="flex items-center gap-2 py-4 pr-12 pl-8 grow h-120 w-120">
-          <span>수제비</span>
+        <DefaultButton
+          bgColor="gray"
+          customStyle="flex items-center gap-[8px] py-4 pr-12 pl-8 grow h-120 w-120 flex-col"
+        >
+          <IC_DUMPLING />
+          <span className="body1">수제비</span>
         </DefaultButton>
       </SwiperSlide>
 
       <SwiperSlide>
-        <DefaultButton bgColor="gray" customStyle="flex items-center gap-2 py-4 pr-12 pl-8 grow h-120 w-120">
-          <span>삼겹살</span>
+        <DefaultButton
+          bgColor="gray"
+          customStyle="flex items-center gap-[8px] py-4 pr-12 pl-8 grow h-120 w-120 flex-col"
+        >
+          <IC_DUMPLING />
+          <span className="body1">삼겹살</span>
         </DefaultButton>
       </SwiperSlide>
     </Swiper>

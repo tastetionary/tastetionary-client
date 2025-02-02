@@ -88,19 +88,26 @@ export default function Home() {
         <p className="title4 font-bold">오늘 많이 고른 메뉴 🔥</p>
         <p className="body2 pt-12">사람들이 오늘 가장 많이 고른 메뉴를 확인하세요.</p>
       </div>
-      <div className="pt-24">
+      <div className="border-b border-solid border-neutral-bg20 pb-48 pt-24">
         <MenuSwiper />
       </div>
 
-      <div className="pt-48">
+      <div>
         <div className="flex justify-between px-38 pt-32">
-          <span className="body2">서비스 이용약관</span>
-          <span className="body2">개인정보처리방침</span>
-          <span className="body2">공지사항</span>
-          <span className="body2">Q&A</span>
-          <span className="body2">의견 보내기</span>
+          {['서비스 이용약관', '개인정보처리방침', '공지사항', 'Q&A', '의견 보내기'].map((text, index, array) => (
+            <span
+              key={text}
+              className={`body2 ${
+                index !== array.length - 1
+                  ? "[&:not(:last-child)]:after:-align-[1px] [&:not(:last-child)]:after:mx-[10px] [&:not(:last-child)]:after:inline-block [&:not(:last-child)]:after:h-[10px] [&:not(:last-child)]:after:w-[1px] [&:not(:last-child)]:after:bg-neutral-bg10 [&:not(:last-child)]:after:content-['']"
+                  : ''
+              }`}
+            >
+              {text}
+            </span>
+          ))}
         </div>
-        <p className="body3 pt-8 text-center">Copyright © Tastetionary All rights reserved.</p>
+        <p className="body3 pb-32 pt-8 text-center text-neutral-bg30">Copyright © Tastetionary All rights reserved.</p>
       </div>
     </>
   );
