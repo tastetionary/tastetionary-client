@@ -70,7 +70,7 @@ export default function SelectMenuResultShare({ category, keyword, id, name }: P
 
   return (
     <>
-      <CHeader title="메뉴 고르기" isBackBtn />
+      <CHeader title="메뉴 고르기" />
 
       <div className="px-lg pb-[120px]">
         <div className="flex flex-col gap-3">

@@ -115,7 +115,7 @@ export default function RegisterReview() {
 
   return (
     <>
-      <CHeader title="식당 리뷰 작성" isBackBtn />
+      <CHeader title="식당 리뷰 작성" />
 
       <S.TitleSection>
         <S.RestaurantName>{placeName ?? '롤링파스타 종로점'}</S.RestaurantName>

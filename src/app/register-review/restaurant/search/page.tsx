@@ -145,7 +145,7 @@ export default function RestaurantSearch() {
 
   return (
     <>
-      <CHeader title="식당 검색" isBackBtn />
+      <CHeader title="식당 검색" />
 
       <S.Form onSubmit={handleSubmit(onSubmitHandler)}>
         <S.InputContainer>

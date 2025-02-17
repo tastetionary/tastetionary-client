@@ -134,7 +134,7 @@ export default function ReviewBrowse() {
 
   return (
     <>
-      <CHeader title="리뷰 둘러보기" isBackBtn />
+      <CHeader title="리뷰 둘러보기" />
 
       <div id="map" className="h-[calc(100%-267px)] w-full" />
     </>

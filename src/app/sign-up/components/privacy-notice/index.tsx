@@ -19,7 +19,7 @@ b. 각각의 개인정보 처리 및 보유기간은 다음과 같습니다.
   };
   return (
     <>
-      <CHeader title="개인정보 처리방침" isBackBtn />
+      <CHeader title="개인정보 처리방침" />
       <S.Wrapper>
         <S.Title>개인정보 처리방침</S.Title>
         <S.SubTitle>개정일 : 2023.09.06</S.SubTitle>

@@ -95,7 +95,7 @@ export default function TermsOfService() {
 
   return (
     <>
-      <CHeader title="서비스 이용약관" isBackBtn />
+      <CHeader title="서비스 이용약관" />
       <S.Wrapper>
         <S.Title>'맛셔너리' 서비스 이용약관</S.Title>
         <S.SubTitle>개정일 : 2023.09.06</S.SubTitle>

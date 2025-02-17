@@ -45,7 +45,7 @@ export default function VerifyCompany({ onNext, setCompanyEmailAuthId }: Props) 
 
   return (
     <>
-      <CHeader title="회사 인증" isBackBtn />
+      <CHeader title="회사 인증" />
 
       <S.Wrapper>
         <S.Title>회사 인증을 진행해주세요.</S.Title>

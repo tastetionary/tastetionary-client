@@ -6,7 +6,7 @@ import * as S from './page.styled';
 export default function RegisterReviewCaution() {
   return (
     <>
-      <CHeader title="리뷰 작성 시 유의사항" isBackBtn />
+      <CHeader title="리뷰 작성 시 유의사항" />
 
       <S.Container>
         <S.Content>
