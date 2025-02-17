@@ -12,6 +12,14 @@ interface Props {
   type: 'restaurant' | 'review';
 }
 
+const PRICE_OPTIONS = [
+  '10,000원 미만',
+  '10,000원 이상 ~ 13,000원 미만',
+  '13,000원 이상 ~ 16,000원 미만',
+  '16,000원 이상 ~ 20,000원 미만',
+  '20,000원 이상',
+];
+
 export default function CSlider({ markData, type }: Props) {
   const [value, setValue] = useState<number>(0);
   const { setRestaurantPrice } = useSelectRestaurantStore();
@@ -21,7 +29,7 @@ export default function CSlider({ markData, type }: Props) {
 
   useEffect(() => {
     if (type === 'restaurant') {
-      setRestaurantPrice(value);
+      setRestaurantPrice([PRICE_OPTIONS[value]]);
     } else {
       setReviewPrice(value);
     }

@@ -5,7 +5,7 @@ import { useQuery } from '@tanstack/react-query';
 import { useEffect } from 'react';
 
 export default function SelectPrice() {
-  const { price, setRestaurantPrice } = useSelectRestaurantStore();
+  const { prices, setRestaurantPrice } = useSelectRestaurantStore();
 
   const { data } = useQuery({
     queryKey: ['restaurant-option'],
@@ -14,7 +14,7 @@ export default function SelectPrice() {
   });
 
   useEffect(() => {
-    setRestaurantPrice(0);
+    setRestaurantPrice([]);
   }, []);
 
   return (
@@ -24,8 +24,8 @@ export default function SelectPrice() {
           <CheckBox2
             label={p.name}
             checkBoxId={`price-${i}`}
-            checked={p.id === price}
-            onChangeEvent={() => setRestaurantPrice(p.id)}
+            checked={prices.includes(p.name)}
+            onChangeEvent={() => setRestaurantPrice([p.name])}
           />
         </div>
       ))}

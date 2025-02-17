@@ -5,7 +5,7 @@ interface Req {
   excludeIds: number[];
   category: RestaurantCategory[];
   keywords: string[];
-  price: number;
+  prices: string[];
 }
 
 export interface RestaurantRecommendRes {
