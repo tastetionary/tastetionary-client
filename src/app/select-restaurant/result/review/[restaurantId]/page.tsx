@@ -16,7 +16,7 @@ export default function SelectRestaurantResultReview({ params }: Props) {
 
   return (
     <>
-      <CHeader title="리뷰 더 보기" isBackBtn />
+      <CHeader title="리뷰 더 보기" />
 
       <div className="pb-xl pt-lg">
         <div className="w-full px-xl">

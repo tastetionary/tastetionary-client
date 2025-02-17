@@ -13,7 +13,7 @@ export default function OptInMarketing() {
   };
   return (
     <>
-      <CHeader title="마케팅 활용 정보 수신 제공" isBackBtn />
+      <CHeader title="마케팅 활용 정보 수신 제공" />
       <S.Wrapper>
         <S.Title>마켓팅 활용 정보 수신 제공</S.Title>
         <S.SubTitle>개정일 : 2023.09.06</S.SubTitle>

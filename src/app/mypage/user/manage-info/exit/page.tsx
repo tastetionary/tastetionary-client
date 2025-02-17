@@ -46,7 +46,7 @@ export default function MyPageUserExit() {
 
   return (
     <>
-      <CHeader title="회원 탈퇴" isBackBtn />
+      <CHeader title="회원 탈퇴" />
 
       <div className="mx-8 mb-20 mt-xl">
         <header>

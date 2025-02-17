@@ -12,7 +12,7 @@ interface Props {
 
 // 호진FIXME: noBackBtn -> negative로 조건을 분기하는것보다 positive로 조건을 만드는게 좋아보임
 // EX) noBackBtn -> isBackBtn
-export default function CHeader({ isLogo = false, title, noBackBtn, isHome }: Props) {
+export default function CHeader({ isLogo = false, title, noBackBtn = false, isHome }: Props) {
   const { back } = useRouter();
 
   const renderLeftItems = () => {

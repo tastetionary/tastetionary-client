@@ -14,7 +14,7 @@ export default function CError({ type }: Props) {
 
   return (
     <>
-      <CHeader title="" isBackBtn />
+      <CHeader title="" />
 
       <S.Container>
         {type === '404' ? <IC_ERROR /> : <IC_READY />}

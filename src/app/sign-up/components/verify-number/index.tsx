@@ -50,7 +50,7 @@ export default function VerifyNumber({ onNext, type, companyEmailAuthId, setComp
 
   return (
     <>
-      <CHeader title="인증코드 입력" isBackBtn />
+      <CHeader title="인증코드 입력" />
 
       <S.Wrapper>
         <S.Title>

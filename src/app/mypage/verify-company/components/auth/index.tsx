@@ -29,7 +29,7 @@ export default function CompanyAuth({ onNext }: Props) {
 
   return (
     <>
-      <CHeader title="인증코드 입력" isBackBtn />
+      <CHeader title="인증코드 입력" />
 
       <S.Wrapper>
         <S.Title>

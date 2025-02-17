@@ -20,7 +20,7 @@ export default function VerifyEmail({ onNext }: Props) {
 
   return (
     <>
-      <CHeader title="비밀번호 재설정" isBackBtn />
+      <CHeader title="비밀번호 재설정" />
       <S.Wrapper>
         <S.Title>
           이메일 주소 인증을 통해 <br /> 비밀번호를 재설정합니다.

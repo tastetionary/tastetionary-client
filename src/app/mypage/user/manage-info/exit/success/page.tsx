@@ -12,7 +12,7 @@ export default function MyPageUserExitSuccess() {
 
   return (
     <>
-      <CHeader title="회원 탈퇴 완료" noBackBtn />
+      <CHeader title="회원 탈퇴 완료" />
 
       <S.Wrapper>
         <COMPLETE />

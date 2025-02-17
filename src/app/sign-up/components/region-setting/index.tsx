@@ -83,7 +83,7 @@ export default function RegionSetting({ onNext, category = 'dining_area' }: Prop
 
   return (
     <>
-      <CHeader title={category === 'activity_area' ? '활동 지역 설정' : '지역 설정'} isBackBtn />
+      <CHeader title={category === 'activity_area' ? '활동 지역 설정' : '지역 설정'} />
 
       <div className="relative mt-xl h-full px-xl pb-[120px]">
         <header>
