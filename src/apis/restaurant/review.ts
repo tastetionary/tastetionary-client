@@ -5,7 +5,7 @@ interface Req {
   review: {
     category: RestaurantCategory;
     keywords: RestaurantKeyword[];
-    price: number;
+    prices: string[];
     summary: string;
     opinion: string;
   };

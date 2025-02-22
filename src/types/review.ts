@@ -7,8 +7,8 @@ export interface GetRestaurantReviewRes {
   opinion: string;
   keywords: string[];
   summary: string;
-  like: number;
-  dislike: number;
+  reviewReactionCnt: { L: number; D: number };
+  prices: string[];
 }
 
 export interface GetRestaurantKeywordReviewRes {

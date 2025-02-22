@@ -1,3 +1,4 @@
+import { RestaurantReview } from '@/apis/restaurant/recommend';
 import { create } from 'zustand';
 import { devtools, persist } from 'zustand/middleware';
 
@@ -11,10 +12,10 @@ interface RestaurantInfo {
   review?: {
     total: number;
     keywords: string[];
-    prices: number[];
     revisitRatio: number;
     aggregatePrice: { [key: string]: number };
   };
+  reviews: RestaurantReview[];
 }
 
 interface SelectResultState {
@@ -39,6 +40,7 @@ const defaultRestaurant = {
   latitude: 0,
   longitude: 0,
   id: '0',
+  reviews: [],
 };
 
 export const useSelectResultStore = create<SelectResultState>()(
@@ -61,12 +63,15 @@ export const useSelectResultStore = create<SelectResultState>()(
               latitude: value.latitude,
               id: value.id,
               longitude: value.longitude,
-              ...(value.review?.total && value.review?.keywords && value.review?.prices && value.review?.revisitRatio
+              reviews: value.reviews,
+              ...(value.review?.total &&
+              value.review?.keywords &&
+              value.review?.aggregatePrice &&
+              value.review?.revisitRatio
                 ? {
                     review: {
                       total: value.review?.total,
                       keywords: value.review?.keywords,
-                      prices: value.review?.prices,
                       aggregatePrice: value.review.aggregatePrice,
                       revisitRatio: value.review?.revisitRatio,
                     },

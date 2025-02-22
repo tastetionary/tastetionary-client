@@ -31,7 +31,7 @@ export default function CSlider({ markData, type }: Props) {
     if (type === 'restaurant') {
       setRestaurantPrice([PRICE_OPTIONS[value]]);
     } else {
-      setReviewPrice(value);
+      setReviewPrice([PRICE_OPTIONS[value]]);
     }
   }, [value, type]);
 

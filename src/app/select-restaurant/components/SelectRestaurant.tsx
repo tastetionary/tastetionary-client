@@ -41,7 +41,7 @@ export default function SelectRestaurant() {
         </SelectSection>
 
         <SelectSection title={{ bold: '가격대', normal: '를 선택하세요.' }}>
-          <SelectPrice />
+          <SelectPrice type="restaurant" />
         </SelectSection>
       </ContentLayout>
 

@@ -4,23 +4,23 @@ import { devtools } from 'zustand/middleware';
 interface ReviewState {
   category: string[];
   keyword: string[];
-  price: number;
+  prices: string[];
   resetReviewState: () => void;
   setReviewCategory: (value: string[]) => void;
   setReviewKeyword: (value: string[]) => void;
-  setReviewPrice: (value: number) => void;
+  setReviewPrice: (value: string[]) => void;
 }
 
 export const useReviewStore = create<ReviewState>()(
   devtools(set => ({
     category: [],
     keyword: [],
-    price: 0,
+    prices: [],
     resetReviewState: () =>
       set({
         category: [],
         keyword: [],
-        price: 0,
+        prices: [],
       }),
     setReviewCategory: value =>
       set({
@@ -32,7 +32,7 @@ export const useReviewStore = create<ReviewState>()(
       }),
     setReviewPrice: value =>
       set({
-        price: value,
+        prices: value,
       }),
   }))
 );
