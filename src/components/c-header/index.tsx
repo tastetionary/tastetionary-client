@@ -1,3 +1,5 @@
+'use client';
+
 import ARROW from '@/assets/common/Icons/arrow.svg';
 import USER_ICON from '@/assets/common/user.svg';
 import MAIN_LOGO from '@/assets/logo/main_logo.svg';
