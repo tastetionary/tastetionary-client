@@ -20,14 +20,14 @@ export default function CHeader({ isLogo = false, title, noBackBtn = false, isHo
   const renderLeftItems = () => {
     if (isHome) {
       return (
-        <button className="flex h-55 w-56 items-center justify-center">
+        <button className="flex h-55 w-56 items-center justify-center" type="button">
           <USER_ICON width={24} height={24} onClick={() => push('/mypage')} />
         </button>
       );
     }
     if (!noBackBtn) {
       return (
-        <button className="flex h-55 w-56 items-center justify-center" onClick={back}>
+        <button className="flex h-55 w-56 items-center justify-center" onClick={back} type="button">
           <ARROW width={24} height={24} />
         </button>
       );
