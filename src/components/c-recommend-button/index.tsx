@@ -18,7 +18,7 @@ import useModal from '../Modal/GlobalModal/hooks/useModal';
 import { toUnicodeEscape } from './utils';
 
 interface Props extends MainButtonProps {
-  selectType: 'food' | 'restaurant';
+  selectType: 'food' | 'restaurant' | 'home';
 }
 
 export default function CRecommendButton({ selectType, btnText, ...rest }: Props) {
@@ -178,6 +178,11 @@ export default function CRecommendButton({ selectType, btnText, ...rest }: Props
   });
 
   const onButtonClick = () => {
+    if (selectType === 'home') {
+      router.push('/select-menu');
+      return;
+    }
+
     if (selectType === 'food') return getFood();
 
     if (selectType === 'restaurant') return getRestaurant();
