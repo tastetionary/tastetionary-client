@@ -1,18 +1,5 @@
 import styled from 'styled-components';
 
-export const Form = styled.form`
-  width: 100%;
-  padding: 20px;
-  border-bottom: 2px solid ${({ theme }) => theme.colors.neutral.bg20};
-  display: flex;
-  gap: 20px;
-  align-items: center;
-`;
-
-export const InputContainer = styled.div`
-  width: calc(100% - 120px);
-`;
-
 export const SearchButton = styled.button`
   padding: 14px 30px;
   border: 2px solid ${({ theme }) => theme.colors.neutral.bg60};
@@ -36,13 +23,6 @@ export const SearchButton = styled.button`
 
 export const PlaceList = styled.ul`
   width: 100%;
-`;
-
-export const PlaceListItem = styled.li`
-  width: 100%;
-  padding: 16px 20px;
-  border-bottom: 1px solid ${({ theme }) => theme.colors.neutral.bg10};
-  background-color: ${({ theme }) => theme.colors.white};
 `;
 
 export const PlaceContainer = styled.div`
@@ -124,6 +104,6 @@ export const SelectButton = styled.button`
 
 export const MapContainer = styled.div`
   width: 100%;
-  height: 160px;
+  height: 100%;
   margin-top: 20px;
 `;

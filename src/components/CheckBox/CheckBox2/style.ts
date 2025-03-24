@@ -17,7 +17,6 @@ export const checkboxVariants = cva(
       {
         bg: 'default',
         checked: true,
-        className: 'text-white',
       },
     ],
   }

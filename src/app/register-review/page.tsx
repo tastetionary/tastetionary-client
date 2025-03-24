@@ -2,25 +2,28 @@
 
 import { postRestarantReview } from '@/apis/restaurant/review';
 import { getRestaurantReviewOption } from '@/apis/restaurant/review/option';
+import ARROW_RIGHT from '@/assets/common/Icons/arrow_right.svg';
 import IC_MAP from '@/assets/common/map.svg';
-import MainButton from '@/components/Button/MainButton';
+import BottomButtonContainer from '@/components/Button/BottomButtonContainer';
+import DefaultButton from '@/components/Button/DefaultButton';
 import TextArea from '@/components/Input/TextArea';
 import { MODAL_TYPES } from '@/components/Modal/GlobalModal';
 import useModal from '@/components/Modal/GlobalModal/hooks/useModal';
 import CHeader from '@/components/c-header';
 import CSelectCategory from '@/components/c-select-category';
 import CSelectKeyword from '@/components/c-select-keyword';
-import CSelectSection from '@/components/c-select-section';
-import CSlider from '@/components/c-slider';
 import useUser from '@/hooks/useUser';
 import { useReviewPlaceInfoStore } from '@/store/useReviewPlaceInfoStore';
 import { useReviewStore } from '@/store/useReviewStore';
+import { theme } from '@/styles/theme';
 import { getByte, getLimitedByteText } from '@/utils';
 import { RestaurantCategory, RestaurantKeyword } from '@taehoya/tastetionary/lib/domain/restaurant/restaurant.enum';
 import { useMutation, useQuery } from '@tanstack/react-query';
 import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
+import SelectSection from '../select-menu/components/SelectSection';
+import SelectPrice from '../select-restaurant/components/SelectPrice';
 import * as S from './page.styled';
 
 interface FormValue {
@@ -37,7 +40,7 @@ export default function RegisterReview() {
     staleTime: 0,
   });
 
-  const { resetReviewState, category: reviewCategory, keyword: reviewKeyword, price: ReviewPrice } = useReviewStore();
+  const { resetReviewState, category: reviewCategory, keyword: reviewKeyword, prices: reviewPrice } = useReviewStore();
   const { resetReviewPlaceInfo, id, latitude, longitude, placeName, place_url, address } = useReviewPlaceInfoStore();
   const [revisit, setRevisit] = useState<null | boolean>(null);
 
@@ -52,7 +55,7 @@ export default function RegisterReview() {
           review: {
             category: reviewCategory[0] as RestaurantCategory,
             keywords: reviewKeyword as RestaurantKeyword[],
-            price: 10000 + 1000 * ReviewPrice,
+            prices: reviewPrice,
             summary,
             opinion: revisit === true ? 'Y' : 'N',
           },
@@ -118,36 +121,29 @@ export default function RegisterReview() {
       <CHeader title="식당 리뷰 작성" />
 
       <S.TitleSection>
-        <S.RestaurantName>{placeName ?? '롤링파스타 종로점'}</S.RestaurantName>
+        <S.RestaurantName>{placeName ?? ''}</S.RestaurantName>
       </S.TitleSection>
 
       <S.AddressSection>
         <IC_MAP width={12} height={12} />
 
-        <S.Address>{address ?? '서울 종로구 삼일대로 392'}</S.Address>
+        <S.Address>{address ?? ''}</S.Address>
       </S.AddressSection>
 
-      <S.Form id="register-review-form" onSubmit={handleSubmit(onSubmitHandler)}>
-        <CSelectSection title="음식 종류">
-          <CSelectCategory data={data?.categories} selectType="review" isDuplicate={false} />
-        </CSelectSection>
+      <form className="w-full px-xl" id="register-review-form" onSubmit={handleSubmit(onSubmitHandler)}>
+        <SelectSection title={{ bold: '음식 종류', normal: '를 선택하세요.' }} subtitle="여러 개 선택 가능합니다.">
+          <CSelectCategory data={data?.categories} selectType="review" isDuplicate={true} />
+        </SelectSection>
 
-        <CSelectSection title="키워드" subtitle="(복수 선택 가능)">
+        <SelectSection title={{ bold: '키워드', normal: '를 선택하세요.' }} subtitle="여러 개 선택 가능합니다.">
           <CSelectKeyword data={data?.keywords} selectType="review" />
-        </CSelectSection>
+        </SelectSection>
 
-        <CSelectSection title="가격">
-          <CSlider markData={data?.prices ?? []} type="review" />
-        </CSelectSection>
+        <SelectSection title={{ bold: '가격대', normal: '를 선택하세요.' }}>
+          <SelectPrice type={'review'} />
+        </SelectSection>
 
-        <CSelectSection
-          title="한 줄 리뷰"
-          subtitle="(선택)"
-          link={{
-            text: '리뷰 작성 시 유의사항 >',
-            route: '/register-review/caution',
-          }}
-        >
+        <SelectSection title={{ bold: '한 줄 리뷰', normal: '를 작성해 주세요. (선택)' }}>
           <TextArea
             {...register('review', {
               onChange: e => {
@@ -164,27 +160,46 @@ export default function RegisterReview() {
           />
 
           <S.Byte>{getByte(watch('review')) ?? 0} / 100byte</S.Byte>
-        </CSelectSection>
 
-        <CSelectSection title="재방문 의사">
-          <S.SelectButtonContainer>
-            <S.SelectButton type="button" $isSelected={revisit === true} onClick={() => setRevisit(true)}>
-              재방문 의사 있음
-            </S.SelectButton>
-            <S.SelectButton type="button" $isSelected={revisit === false} onClick={() => setRevisit(false)}>
-              재방문 의사 없음
-            </S.SelectButton>
-          </S.SelectButtonContainer>
-        </CSelectSection>
+          <div className="mt-sm flex items-center justify-between">
+            <span className="body2 text-neutral-bg80">리뷰 작성 시 유의사항</span>
+            <ARROW_RIGHT width={16} height={16} color={theme.colors.neutral.bg40} />
+          </div>
+        </SelectSection>
 
-        <S.ButtonContainer>
-          <MainButton
-            btnText="리뷰 등록하기"
-            form="register-review-form"
+        <SelectSection title={{ bold: '재방문 의사', normal: '를 선택해 주세요.' }}>
+          <div className="flex w-full items-center gap-md">
+            <DefaultButton
+              bgColor="gray"
+              type="button"
+              customStyle={'py-15 flex gap-xs flex-grow' + (revisit === true ? ' selected' : '')}
+              onClick={() => setRevisit(true)}
+            >
+              있음
+            </DefaultButton>
+            <DefaultButton
+              bgColor="gray"
+              type="button"
+              customStyle={'py-15 flex gap-xs flex-grow' + (revisit === false ? ' selected' : '')}
+              onClick={() => setRevisit(false)}
+            >
+              없음
+            </DefaultButton>
+          </div>
+        </SelectSection>
+
+        <div className="h-[150px] w-full" />
+
+        <BottomButtonContainer>
+          <DefaultButton
+            bgColor="yellow"
             disabled={revisit === null || reviewCategory?.length === 0 || reviewKeyword?.length === 0}
-          />
-        </S.ButtonContainer>
-      </S.Form>
+            customStyle="flex-grow py-12"
+          >
+            <span className="body1 text-white">리뷰 등록하기</span>
+          </DefaultButton>
+        </BottomButtonContainer>
+      </form>
     </>
   );
 }
