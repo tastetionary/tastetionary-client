@@ -12,7 +12,7 @@ export default function RestaurantReview() {
       <div className="mt-xxl flex w-full items-center justify-between px-xl">
         <div className="title2">
           <strong className="title2 font-bold">리뷰 </strong>
-          {restaurant?.review?.total ?? 0}개
+          {restaurant?.reviews.length ?? 0}개
         </div>
 
         <div
@@ -25,9 +25,7 @@ export default function RestaurantReview() {
         </div>
       </div>
 
-      <div className="mt-md">
-        <ReviewItem />
-      </div>
+      <div className="mt-md">{restaurant?.reviews?.map(review => <ReviewItem key={review.id} {...review} />)}</div>
     </div>
   );
 }

@@ -5,7 +5,28 @@ interface Req {
   excludeIds: number[];
   category: RestaurantCategory[];
   keywords: string[];
-  price: number;
+  prices: string[];
+}
+
+export interface RestaurantReview {
+  id: string;
+  external_restaurant_information_id: string;
+  user: {
+    id: number;
+    nickname: string;
+    reviews: number;
+  };
+  reviewReactionCnt: {
+    L: number;
+    D: number;
+  };
+  userReaction: string | null;
+  keywords: string[];
+  summary: string;
+  prices: string[];
+  createdAt: string;
+  updatedAt: string;
+  opinion: string;
 }
 
 export interface RestaurantRecommendRes {
@@ -15,6 +36,7 @@ export interface RestaurantRecommendRes {
   latitude: number;
   longitude: number;
   distance: number;
+  reviews: RestaurantReview[];
   aggregateReviews?: {
     categories: string[];
     summaries: string[];

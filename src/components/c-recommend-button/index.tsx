@@ -31,7 +31,7 @@ export default function CRecommendButton({ selectType, btnText, ...rest }: Props
   const {
     category: restaurantCategory,
     keyword: restaurantKeyword,
-    price: restaurantPrice,
+    prices: restaurantPrices,
     resetSelectRestaurant,
   } = useSelectRestaurantStore();
   const { setSelectFoodResult, setSelectRestaurantResult } = useSelectResultStore();
@@ -115,14 +115,14 @@ export default function CRecommendButton({ selectType, btnText, ...rest }: Props
             latitude: res?.latitude ?? 33.450701,
             longitude: res?.longitude ?? 126.570667,
             id: res?.id,
+            reviews: res?.reviews,
             ...(res?.aggregateReviews
               ? {
                   review: {
                     total: res?.aggregateReviews?.totalCount ?? 0,
                     revisitRatio: res?.aggregateReviews?.revisitRatio ?? 0,
-                    prices: res?.aggregateReviews?.prices ?? [],
-                    priceList: [],
                     keywords: res?.aggregateReviews?.keywords ?? [],
+                    aggregatePrice: res.aggregateReviews.aggregatePrice,
                   },
                 }
               : {}),
@@ -164,12 +164,14 @@ export default function CRecommendButton({ selectType, btnText, ...rest }: Props
         {
           category: restaurantCategory?.filter(c => c !== '전체') as RestaurantCategory[],
           keywords: restaurantKeyword?.filter(c => c !== '전체'),
-          price: 10000 + 1000 * restaurantPrice,
+          prices: restaurantPrices,
           excludeIds: [],
         },
         token
       ),
-    onSuccess: res => loadingModal(res),
+    onSuccess: res => {
+      loadingModal(res);
+    },
     onError: err => {
       if (err?.response?.status === 401) {
         return loginModal();

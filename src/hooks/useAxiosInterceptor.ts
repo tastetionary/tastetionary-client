@@ -51,9 +51,9 @@ export const useAxiosInterceptor = () => {
     });
   };
 
-  const serverErrorTrigger = (code: keyof typeof ERROR_CODE) => {
+  const serverErrorTrigger = (code: keyof typeof ERROR_CODE, originMessage?: string) => {
     openModal(MODAL_TYPES.dialog, {
-      title: ERROR_CODE[code], // 서버에서 보내는 에러 메시지가 있으면 보여주기
+      title: ERROR_CODE[code] || originMessage || '문제가 발생했습니다.', // 서버에서 보내는 에러 메시지가 있으면 보여주기
       handleConfirm: () => closeModal(MODAL_TYPES.dialog),
       confirmText: '확인',
       needClose: true,
@@ -107,6 +107,7 @@ export const useAxiosInterceptor = () => {
 
       if (error.response) {
         const { data, status } = error.response;
+
         Sentry.setContext('API Response Detail', {
           status,
           data,
@@ -114,7 +115,7 @@ export const useAxiosInterceptor = () => {
       }
 
       if (error.response.data.statusCode === 400) {
-        serverErrorTrigger(error.response.data.errorCode);
+        serverErrorTrigger(error.response.data.errorCode, error.response.data.originMessage);
 
         return;
       }

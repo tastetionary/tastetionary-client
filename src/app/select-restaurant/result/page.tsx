@@ -14,6 +14,7 @@ import CHeader from '@/components/c-header';
 import CRecommendButton from '@/components/c-recommend-button';
 import useUser from '@/hooks/useUser';
 import { useSelectResultStore } from '@/store/useSelectResultStore';
+import { getMoneyValue } from '@/utils';
 import { useMutation } from '@tanstack/react-query';
 import axios from 'axios';
 import { useEffect, useState } from 'react';
@@ -35,21 +36,7 @@ export default function SelectRestaurantResult() {
   const lng = restaurant?.longitude;
   const review = restaurant?.review;
 
-  const maxPrice = restaurant?.review?.priceList.reduce(
-    (acc, item) => {
-      const [key, value] = Object.entries(item)[0];
-      return value >= acc.maxValue ? { maxKey: key, maxValue: value } : acc;
-    },
-    { maxKey: '', maxValue: -Infinity }
-  ).maxKey;
-
-  const maxPriceText: { [key: string]: string } = {
-    '~10,000': '10,000원 이하',
-    '10,000~13,000': '10,000원 ~ 13,000원',
-    '13,000~16,000': '13,000원 ~ 16,000원',
-    '16,000~20,000': '16,000원 ~ 20,000원',
-    '20,000~': '20,000원 이상',
-  };
+  console.log(restaurant);
 
   const { mutate: excludedRestaurant } = useMutation({
     mutationFn: preferenceRepository().postPreference,
@@ -115,7 +102,9 @@ export default function SelectRestaurantResult() {
           <div className="flex items-center gap-xs">
             <IC_PRICE width={16} height={16} />
 
-            <span className="body2 text-neutral-bg60">가격대 {maxPrice ? maxPriceText[maxPrice] : ''}</span>
+            <span className="body2 text-neutral-bg60">
+              평균 가격대 {getMoneyValue(restaurant?.review?.aggregatePrice?.avg ?? 0)}
+            </span>
           </div>
 
           <div className="flex items-center gap-xs">
@@ -125,7 +114,7 @@ export default function SelectRestaurantResult() {
           </div>
         </div>
 
-        <div className="mt-md flex gap-xxs">
+        <div className="mt-md flex flex-wrap gap-xxs">
           {review?.keywords?.map((k, i) => (
             <DefaultButton bgColor="gray" customStyle="py-2 px-8" key={i}>
               <span className="body4">{k}</span>

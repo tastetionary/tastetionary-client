@@ -1,6 +1,6 @@
 'use client';
 
-import MainButton from '@/components/Button/MainButton';
+import DefaultButton from '@/components/Button/DefaultButton';
 import TextInput from '@/components/Input/TextInput';
 import CHeader from '@/components/c-header';
 import useUser from '@/hooks/useUser';
@@ -147,15 +147,22 @@ export default function RestaurantSearch() {
     <>
       <CHeader title="식당 검색" />
 
-      <S.Form onSubmit={handleSubmit(onSubmitHandler)}>
-        <S.InputContainer>
-          <TextInput id="keyword" placeholder="식당 이름 검색" {...register('name', { required: true })} />
-        </S.InputContainer>
+      <form className="flex w-full flex-1 items-end gap-xs px-xl pt-xxl" onSubmit={handleSubmit(onSubmitHandler)}>
+        <div className="w-[calc(100%-65px)]">
+          <TextInput
+            id="keyword"
+            label="식당 검색"
+            placeholder="식당 이름을 입력해 주세요"
+            {...register('name', { required: true })}
+          />
+        </div>
 
-        <S.SearchButton disabled={!isValid}>검색</S.SearchButton>
-      </S.Form>
+        <DefaultButton disabled={!isValid} bgColor="yellow" customStyle="w-57 h-49 !font-pretendard text-white">
+          검색
+        </DefaultButton>
+      </form>
 
-      <S.PlaceList>
+      <ul>
         {data?.documents
           ?.filter((d: ISearchKeyword) => d.category_name?.includes('음식점'))
           ?.map((d: ISearchKeyword) => {
@@ -164,7 +171,8 @@ export default function RestaurantSearch() {
             const distance = getDistance(latitude ?? 0, longitude ?? 0, +d?.y, +d?.x);
 
             return (
-              <S.PlaceListItem
+              <li
+                className="w-full border-b border-solid border-neutral-bg10 px-xl py-md"
                 key={d.id}
                 onClick={() => {
                   setAddress(placeAddress);
@@ -194,13 +202,13 @@ export default function RestaurantSearch() {
 
                 {placeAddress !== '' && placeAddress === address && (
                   <>
-                    <S.MapContainer>
+                    <div className="my-md h-[calc(100vw-64px)] w-full">
                       <div id="map" style={{ width: placeAddress?.length > 0 ? '100%' : 0, height: '100%' }}></div>
-                    </S.MapContainer>
+                    </div>
 
-                    <MainButton
-                      btnText="식당 선택"
-                      style={{ marginTop: 16 }}
+                    <DefaultButton
+                      bgColor="yellow"
+                      customStyle=" w-full h-xxl !font-pretendard text-white"
                       onClick={() => {
                         setReviewPlaceInfo({
                           address: placeAddress,
@@ -214,13 +222,15 @@ export default function RestaurantSearch() {
                           scroll: true,
                         });
                       }}
-                    />
+                    >
+                      이 식당 리뷰쓰기
+                    </DefaultButton>
                   </>
                 )}
-              </S.PlaceListItem>
+              </li>
             );
           })}
-      </S.PlaceList>
+      </ul>
     </>
   );
 }

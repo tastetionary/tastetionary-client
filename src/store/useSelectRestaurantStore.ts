@@ -4,10 +4,10 @@ import { devtools, persist } from 'zustand/middleware';
 interface SelectRestaurantState {
   category: string[];
   keyword: string[];
-  price: number;
+  prices: string[];
   setRestaurantCategory: (value: string[]) => void;
   setRestaurantKeyword: (value: string[]) => void;
-  setRestaurantPrice: (value: number) => void;
+  setRestaurantPrice: (value: string[]) => void;
   resetSelectRestaurant: () => void;
 }
 
@@ -17,7 +17,7 @@ export const useSelectRestaurantStore = create<SelectRestaurantState>()(
       set => ({
         category: [],
         keyword: [],
-        price: 0,
+        prices: [],
         setRestaurantCategory: value =>
           set({
             category: value,
@@ -28,13 +28,13 @@ export const useSelectRestaurantStore = create<SelectRestaurantState>()(
           }),
         setRestaurantPrice: value =>
           set({
-            price: value,
+            prices: value,
           }),
         resetSelectRestaurant: () =>
           set({
             category: [],
             keyword: [],
-            price: 0,
+            prices: [],
           }),
       }),
       {
