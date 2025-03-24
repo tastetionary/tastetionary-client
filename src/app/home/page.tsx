@@ -8,7 +8,6 @@ import RecommendMenu from './_components/recommend-menu';
 
 export default async function Home() {
   const recentReviews = await homeRepository().getRecentReviews();
-  console.log('recentReviews', recentReviews);
 
   return (
     <CServerHeaderWithChildren title="맛셔너리" isHome isLogo>

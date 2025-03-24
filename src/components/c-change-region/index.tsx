@@ -29,7 +29,7 @@ export default function CChangeRegion({ type }: Props) {
         <div className="flex items-center gap-xs">
           <IC_PIN width={16} height={16} />
 
-          <span className="body2">{data?.area?.address ?? ''}</span>
+          <span className="body2">{data?.area?.address ?? '지역을 설정하세요.'}</span>
         </div>
 
         <DefaultButton bgColor="gray" customStyle="flex items-center gap-xxs py-4 pr-12 pl-8">
