@@ -15,20 +15,19 @@ interface Props {
 // 호진FIXME: noBackBtn -> negative로 조건을 분기하는것보다 positive로 조건을 만드는게 좋아보임
 // EX) noBackBtn -> isBackBtn
 export default function CHeader({ isLogo = false, title, noBackBtn = false, isHome }: Props) {
-  const { back } = useRouter();
+  const { back, push } = useRouter();
 
   const renderLeftItems = () => {
     if (isHome) {
       return (
-        <button className="flex h-55 w-56 items-center justify-center">
-          <USER_ICON width={24} height={24} />
+        <button className="flex h-55 w-56 items-center justify-center" type="button">
+          <USER_ICON width={24} height={24} onClick={() => push('/mypage')} />
         </button>
       );
     }
-
     if (!noBackBtn) {
       return (
-        <button className="flex h-55 w-56 items-center justify-center" onClick={back}>
+        <button className="flex h-55 w-56 items-center justify-center" onClick={back} type="button">
           <ARROW width={24} height={24} />
         </button>
       );
