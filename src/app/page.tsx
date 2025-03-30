@@ -43,7 +43,7 @@ export default function Home() {
             title={'메뉴 고르기'}
             desc={'오늘은 어떤 음식을 먹을까?'}
             subject={'menu'}
-            clickEvent={() => router.push('select-menu')}
+            clickEvent={() => router.push('/select-menu')}
           />
 
           <CPickerButton

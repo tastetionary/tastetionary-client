@@ -19,7 +19,7 @@ export default function RecentReviews({ reviews }: Props) {
 
       {/* 호진FIXME: width 고정 px로 선언한 부분 제거 */}
       <div className="mx-auto flex w-[322px] items-center pt-8">
-        <CRecommendButton btnText="메뉴 고르기" selectType="food" disabled={false} />
+        <CRecommendButton btnText="메뉴 고르기" selectType="home" disabled={false} />
       </div>
     </div>
   );
