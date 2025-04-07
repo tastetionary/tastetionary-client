@@ -12,7 +12,6 @@ export default function SelectPrice({ type }: { type: 'restaurant' | 'review' })
   const { data } = useQuery({
     queryKey: ['restaurant-option'],
     queryFn: () => getRestaurantOption(),
-    enabled: false, // Do not refetch on the client
   });
 
   useEffect(() => {
