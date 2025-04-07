@@ -40,8 +40,8 @@ export default function RegisterReview() {
     staleTime: 0,
   });
 
-  const { resetReviewState, category: reviewCategory, keyword: reviewKeyword, prices: reviewPrice } = useReviewStore();
-  const { resetReviewPlaceInfo, id, latitude, longitude, placeName, place_url, address } = useReviewPlaceInfoStore();
+  const { category: reviewCategory, keyword: reviewKeyword, prices: reviewPrice } = useReviewStore();
+  const { id, latitude, longitude, placeName, place_url, address } = useReviewPlaceInfoStore();
   const [revisit, setRevisit] = useState<null | boolean>(null);
 
   const { register, handleSubmit, watch, setValue } = useForm<FormValue>({
@@ -74,27 +74,7 @@ export default function RegisterReview() {
         token
       ),
     onSuccess: () => {
-      const clickEvent = () => {
-        resetReviewState();
-        resetReviewPlaceInfo();
-      };
-
-      openModal(MODAL_TYPES.dialog, {
-        title: '리뷰 등록 완료',
-        message: '작성하신 리뷰가 식당 추첨에 반영되었어요!',
-        cancelText: '다른 가게 리뷰하기',
-        confirmText: '홈으로 가기',
-        handleConfirm: () => {
-          router.push('/');
-          closeModal(MODAL_TYPES.dialog);
-          clickEvent();
-        },
-        handleClose: () => {
-          router.push('/register-review/restaurant');
-          closeModal(MODAL_TYPES.dialog);
-          clickEvent();
-        },
-      });
+      router.push('/register-review/complete');
     },
   });
 
