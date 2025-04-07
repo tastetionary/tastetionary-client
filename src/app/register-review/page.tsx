@@ -141,7 +141,10 @@ export default function RegisterReview() {
 
           <S.Byte>{getByte(watch('review')) ?? 0} / 100byte</S.Byte>
 
-          <div className="mt-sm flex items-center justify-between">
+          <div
+            className="mt-sm flex items-center justify-between"
+            onClick={() => router.push('/register-review/caution')}
+          >
             <span className="body2 text-neutral-bg80">리뷰 작성 시 유의사항</span>
             <ARROW_RIGHT width={16} height={16} color={theme.colors.neutral.bg40} />
           </div>
