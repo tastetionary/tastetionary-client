@@ -1,6 +1,5 @@
 'use client';
 
-import { UserRes } from '@/apis/user/getUser';
 import useLogoutMutate from '@/app/login/hooks/useLogoutMutate';
 import ARROW_RIGHT from '@/assets/common/Icons/arrow_right.svg';
 import { MODAL_TYPES } from '@/components/Modal/GlobalModal';
@@ -9,21 +8,16 @@ import CHeader from '@/components/c-header';
 import CMypageMenu from '@/components/c-mypage-menu';
 import GNBLayout from '@/components/layout/gnb-layout';
 import useUser from '@/hooks/useUser';
-import { useQuery } from '@tanstack/react-query';
 import { useRouter } from 'next/navigation';
 import * as S from '../page.styled';
 
 export default function MyPagePage() {
   const { push } = useRouter();
-  const { token, isLoggedIn } = useUser();
+  const { token, isLoggedIn, data, isPending } = useUser();
   const { openModal, closeModal } = useModal();
   const { mutate: logoutMutate } = useLogoutMutate();
 
-  const { data, isPending } = useQuery<UserRes>({
-    queryKey: ['user'],
-    enabled: Boolean(token),
-    staleTime: 1000 * 60 * 60 * 24, // 24시간 동안 데이터를 구식으로 간주하지 않음
-  });
+  const showSkeleton = typeof window === 'undefined' || (isLoggedIn && isPending);
 
   const logoutModal = () => {
     if (!openModal || !closeModal) {
@@ -55,7 +49,7 @@ export default function MyPagePage() {
       <GNBLayout>
         <S.NotLogInContainer>
           <div className="flex w-full flex-col gap-3">
-            {isPending ? (
+            {showSkeleton ? (
               <div className="h-32 w-2/3 rounded-7 bg-neutral-bg05" />
             ) : (
               <p className="title2 flex cursor-pointer items-center font-bold" onClick={() => push('/login')}>
@@ -64,7 +58,7 @@ export default function MyPagePage() {
               </p>
             )}
 
-            {isPending ? (
+            {showSkeleton ? (
               <div className="h-22 w-2/3 rounded-7 bg-neutral-bg05" />
             ) : (
               <p className="body2">
@@ -74,7 +68,7 @@ export default function MyPagePage() {
           </div>
         </S.NotLogInContainer>
 
-        {isPending ? (
+        {showSkeleton ? (
           <div className="flex flex-col gap-[20px] p-[20px]">
             <div className="h-180 w-full rounded-7 bg-neutral-bg05" />
             <div className="h-145 w-full rounded-7 bg-neutral-bg05" />
