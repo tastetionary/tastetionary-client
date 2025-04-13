@@ -3,7 +3,7 @@ import { useMutation } from '@tanstack/react-query';
 import { toast } from 'react-toastify';
 
 const useValidationNickname = () => {
-  const { mutate } = useMutation({
+  const { mutate, ...rest } = useMutation({
     mutationKey: ['nickname'],
     mutationFn: authRepository().getValidateNickname,
     onSuccess: () => {
@@ -11,7 +11,7 @@ const useValidationNickname = () => {
     },
   });
 
-  return { validateNicknameMutate: mutate };
+  return { validateNicknameMutate: mutate, ...rest };
 };
 
 export default useValidationNickname;
