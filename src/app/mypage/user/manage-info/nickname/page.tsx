@@ -1,24 +1,50 @@
 'use client';
 
+import userRepository from '@/apis/user';
+import useValidationNickname from '@/app/sign-up/hooks/query/useValidationNickname';
+import BottomButtonContainer from '@/components/Button/BottomButtonContainer';
 import DefaultButton from '@/components/Button/DefaultButton';
 import CHeader from '@/components/c-header';
 import TextInput from '@/components/Input/TextInput';
+import ContentLayout from '@/components/layout/content-layout';
+import { iconToast } from '@/components/Toast';
+import useUser from '@/hooks/useUser';
+import { useMutation } from '@tanstack/react-query';
 import { ChangeEvent, useState } from 'react';
 
 export default function Nickname() {
+  const { token } = useUser();
   const [nickname, setNickname] = useState('');
 
   const notEntered = nickname.length === 0;
+
+  const { validateNicknameMutate, isSuccess } = useValidationNickname();
+
+  const { mutate: updateNickname } = useMutation({
+    mutationFn: userRepository().putProfile,
+    onSuccess: () => {
+      iconToast('닉네임 변경이 완료되었습니다.', 'check');
+    },
+  });
 
   const handleChangeNickname = (e: ChangeEvent<HTMLInputElement>) => {
     setNickname(e.target.value);
   };
 
+  const handleValidateNickname = () => {
+    validateNicknameMutate({ nickname });
+  };
+
+  const handleUpdateNickname = () => {
+    updateNickname({ nickname, token: token! });
+  };
+
   return (
     <>
       <CHeader title="닉네임 수정" />
-      <div className="mx-8 my-20">
-        <header>
+
+      <ContentLayout>
+        <header className="mt-xxl">
           <h1 className="title2 font-bold leading-8">
             원하는 이름으로 <br />
             닉네임을 변경할 수 있어요. 💕
@@ -29,32 +55,35 @@ export default function Nickname() {
         </header>
 
         <section className="mt-12">
-          <div className="relative flex items-center [&>div]:w-[70%]">
-            <TextInput type="text" label="닉네임" placeholder="기존 닉네임" onChange={e => handleChangeNickname(e)} />
+          <div className="flex w-full items-end gap-[10px]">
+            <div className="w-[calc(100%-94px)]">
+              <TextInput type="text" label="닉네임" placeholder="기존 닉네임" onChange={e => handleChangeNickname(e)} />
+            </div>
 
             <DefaultButton
               bgColor="yellow"
-              customStyle="bottom-0 absolute h-48 right-0 px-[16px] py-[12px] text-xs"
+              customStyle="h-48 px-[16px] py-[12px] text-xs"
               type="button"
               disabled={notEntered}
+              onClick={handleValidateNickname}
             >
               <span className="body2 text-white">중복 확인</span>
             </DefaultButton>
           </div>
         </section>
-      </div>
+      </ContentLayout>
 
-      <footer className="fixed bottom-[30px] w-[360px] px-25 pb-10 pt-5 mobile:w-full">
+      <BottomButtonContainer>
         <DefaultButton
           bgColor="yellow"
           customStyle="flex w-full py-[12px] px-[16px]"
           type="button"
-          disabled={notEntered}
-          onClick={() => console.log('click!')}
+          disabled={!isSuccess}
+          onClick={handleUpdateNickname}
         >
           <span className="body2 text-white">변경하기</span>
         </DefaultButton>
-      </footer>
+      </BottomButtonContainer>
     </>
   );
 }

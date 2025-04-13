@@ -110,66 +110,65 @@ export default function RegisterReview() {
         <S.Address>{address ?? ''}</S.Address>
       </S.AddressSection>
 
-      <form className="w-full px-xl" id="register-review-form" onSubmit={handleSubmit(onSubmitHandler)}>
-        <SelectSection title={{ bold: '음식 종류', normal: '를 선택하세요.' }} subtitle="여러 개 선택 가능합니다.">
-          <CSelectCategory data={data?.categories} selectType="review" isDuplicate={true} />
-        </SelectSection>
+      <form className="w-full" id="register-review-form" onSubmit={handleSubmit(onSubmitHandler)}>
+        <div className="px-xl">
+          <SelectSection title={{ bold: '음식 종류', normal: '를 선택하세요.' }} subtitle="여러 개 선택 가능합니다.">
+            <CSelectCategory data={data?.categories} selectType="review" isDuplicate={true} />
+          </SelectSection>
 
-        <SelectSection title={{ bold: '키워드', normal: '를 선택하세요.' }} subtitle="여러 개 선택 가능합니다.">
-          <CSelectKeyword data={data?.keywords} selectType="review" />
-        </SelectSection>
+          <SelectSection title={{ bold: '키워드', normal: '를 선택하세요.' }} subtitle="여러 개 선택 가능합니다.">
+            <CSelectKeyword data={data?.keywords} selectType="review" />
+          </SelectSection>
 
-        <SelectSection title={{ bold: '가격대', normal: '를 선택하세요.' }}>
-          <SelectPrice type={'review'} />
-        </SelectSection>
+          <SelectSection title={{ bold: '가격대', normal: '를 선택하세요.' }}>
+            <SelectPrice type={'review'} />
+          </SelectSection>
 
-        <SelectSection title={{ bold: '한 줄 리뷰', normal: '를 작성해 주세요. (선택)' }}>
-          <TextArea
-            {...register('review', {
-              onChange: e => {
-                const byte = getByte(e.target.value);
+          <SelectSection title={{ bold: '한 줄 리뷰', normal: '를 작성해 주세요. (선택)' }}>
+            <TextArea
+              {...register('review', {
+                onChange: e => {
+                  const byte = getByte(e.target.value);
 
-                if (byte <= 100) {
-                  setValue('review', e.target.value);
-                } else {
-                  setValue('review', getLimitedByteText(e.target.value, 100));
-                }
-              },
-            })}
-            placeholder={`좋은 표현을 사용하여 작성해 주세요.\n좋은 정보가 있다면 함께 남겨 주세요.`}
-          />
+                  if (byte <= 100) {
+                    setValue('review', e.target.value);
+                  } else {
+                    setValue('review', getLimitedByteText(e.target.value, 100));
+                  }
+                },
+              })}
+              placeholder={`좋은 표현을 사용하여 작성해 주세요.\n좋은 정보가 있다면 함께 남겨 주세요.`}
+            />
 
-          <S.Byte>{getByte(watch('review')) ?? 0} / 100byte</S.Byte>
+            <S.Byte>{getByte(watch('review')) ?? 0} / 100byte</S.Byte>
 
-          <div
-            className="mt-sm flex items-center justify-between"
-            onClick={() => router.push('/register-review/caution')}
-          >
-            <span className="body2 text-neutral-bg80">리뷰 작성 시 유의사항</span>
-            <ARROW_RIGHT width={16} height={16} color={theme.colors.neutral.bg40} />
-          </div>
-        </SelectSection>
+            <div className="mt-sm flex items-center justify-between">
+              <span className="body2 text-neutral-bg80">리뷰 작성 시 유의사항</span>
+              <ARROW_RIGHT width={16} height={16} color={theme.colors.neutral.bg40} />
+            </div>
+          </SelectSection>
 
-        <SelectSection title={{ bold: '재방문 의사', normal: '를 선택해 주세요.' }}>
-          <div className="flex w-full items-center gap-md">
-            <DefaultButton
-              bgColor="gray"
-              type="button"
-              customStyle={'py-15 flex gap-xs flex-grow' + (revisit === true ? ' selected' : '')}
-              onClick={() => setRevisit(true)}
-            >
-              있음
-            </DefaultButton>
-            <DefaultButton
-              bgColor="gray"
-              type="button"
-              customStyle={'py-15 flex gap-xs flex-grow' + (revisit === false ? ' selected' : '')}
-              onClick={() => setRevisit(false)}
-            >
-              없음
-            </DefaultButton>
-          </div>
-        </SelectSection>
+          <SelectSection title={{ bold: '재방문 의사', normal: '를 선택해 주세요.' }}>
+            <div className="flex w-full items-center gap-md">
+              <DefaultButton
+                bgColor="gray"
+                type="button"
+                customStyle={'py-15 flex gap-xs flex-grow' + (revisit === true ? ' selected' : '')}
+                onClick={() => setRevisit(true)}
+              >
+                있음
+              </DefaultButton>
+              <DefaultButton
+                bgColor="gray"
+                type="button"
+                customStyle={'py-15 flex gap-xs flex-grow' + (revisit === false ? ' selected' : '')}
+                onClick={() => setRevisit(false)}
+              >
+                없음
+              </DefaultButton>
+            </div>
+          </SelectSection>
+        </div>
 
         <div className="h-[150px] w-full" />
 
