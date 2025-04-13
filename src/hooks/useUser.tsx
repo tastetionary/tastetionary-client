@@ -13,21 +13,11 @@ export default function useUser(): UseUserResult {
   const { token } = useToken();
   const queryClient = useQueryClient();
 
-  // 토큰이 없을 경우
-  if (!token) {
-    return {
-      isLoggedIn: false,
-      token: undefined,
-      hasActivityArea: false,
-    };
-  }
-
-  // 토큰이 있을 경우
   const res = useQuery<UserRes>({
     queryKey: ['user'],
-    queryFn: () => getUser(token),
+    queryFn: () => getUser(token ?? ''),
     enabled: !!token,
-    staleTime: 1000 * 60 * 60 * 24, // 24 hours
+    staleTime: 1000,
     initialData: queryClient.getQueryData(['user']),
   });
 
@@ -40,7 +30,7 @@ export default function useUser(): UseUserResult {
   }
 
   return {
-    isLoggedIn: true,
+    isLoggedIn: !!token,
     token,
     hasActivityArea: res?.data && token ? Boolean(res.data?.area?.address) : false,
     ...res,
