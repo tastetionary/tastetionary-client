@@ -16,6 +16,7 @@ interface GetValidateNicknameParams {
 interface AuthRepository {
   postLogin: ({ identification, password, category, code }: PostLoginParams) => Promise<any>;
   postLogout: ({ token }: { token: string }) => Promise<any>;
+  updatePassword: ({ historyId, code }: { historyId: number; code: string }) => Promise<any>;
   getValidateNickname: ({ nickname }: GetValidateNicknameParams) => Promise<any>;
 }
 
@@ -34,6 +35,7 @@ const authRepository = (): AuthRepository => {
           Authorization: `Bearer ${token}`,
         },
       }),
+    updatePassword: async ({ historyId, code }) => await http.put('/apis/v1/account/password', { historyId, code }),
     getValidateNickname: async ({ nickname }: GetValidateNicknameParams) =>
       await http.get(`/apis/v1/user/nickname/validation?name=${nickname}`),
   };

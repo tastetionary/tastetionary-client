@@ -49,8 +49,8 @@ export default function FindPasswordComponent() {
 
         {step === 'verify-auth-number' && (
           <VerifyAuthNumber
+            type="find-password"
             onNext={() => push('/find-password/complete')}
-            type="register"
             emailAuthId={emailAuthId}
             setEmailAuthId={setEmailAuthId}
             saveAuthId={authId => methods.setValue('account.authenticationId', authId)}

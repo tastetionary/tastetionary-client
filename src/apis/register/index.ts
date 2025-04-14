@@ -12,7 +12,7 @@ interface PostConfirmAuthCodeRes {
 interface PostAccountAuthParams {
   identification: string;
   type: 'email';
-  category?: 'account' | 'company';
+  category?: 'account' | 'password';
 }
 
 interface PostConfirmAuthCodeParams {
