@@ -58,23 +58,10 @@ const BannerSlider = () => {
         centeredSlides={true}
         pagination={{
           clickable: true,
-          renderBullet: function (index, className) {
-            // 현재 활성화된 슬라이드인지 확인 (activeIndex와 비교)
-            const isActive = index === activeIndex;
-            // 활성화 상태에 따라 배경색 다르게 설정
-            const backgroundColor = isActive ? '#fff' : 'transparent';
-            // 테두리는 투명 상태일 때 보이도록 설정
-            const border = isActive ? 'none' : '1px solid #fff';
-
-            return `<span class="${className}" 
-                style="width: 16px; height: 6px; background-color: ${backgroundColor}; 
-                       border: ${border}; border-radius: 0px; opacity: 1; 
-                       margin: 0 5px; transition: all 0.3s ease;">
-           </span>`;
-          },
+          bulletClass: 'swiper-pagination-bullet custom-bullet',
+          bulletActiveClass: 'swiper-pagination-bullet-active custom-bullet-active',
         }}
         autoplay={{
-          // 호진FIXME: 5초정도로 설정
           delay: 5000,
           disableOnInteraction: false,
         }}

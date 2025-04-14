@@ -101,6 +101,20 @@
 }
 
 @layer components {
+  .custom-bullet {
+    width: 16px !important;
+    height: 6px !important;
+    border-radius: 0px !important;
+    background: #fff !important;
+    opacity: 0.5;
+  }
+  .custom-bullet-active {
+    width: 16px !important;
+    height: 6px !important;
+    border-radius: 0px !important;
+    background: white !important;
+  }
+
   .overlay {
     @apply b-safe fixed left-0 right-0 top-0 z-[15] flex h-screen w-full items-center justify-center bg-black/50 px-20 transition-visibility duration-250 ease-in-out;
   }
