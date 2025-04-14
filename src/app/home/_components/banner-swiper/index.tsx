@@ -87,16 +87,6 @@ const BannerSlider = () => {
           </SwiperSlide>
         ))}
       </Swiper>
-
-      {/* 인디케이터 */}
-      <div className="mt-4 flex justify-center gap-2">
-        {banners.map((_, index) => (
-          <div
-            key={index}
-            className={`h-2 w-2 rounded-full ${index === activeIndex ? 'bg-white' : 'bg-white opacity-50'}`}
-          />
-        ))}
-      </div>
     </div>
   );
 };

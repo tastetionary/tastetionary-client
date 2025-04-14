@@ -16,7 +16,6 @@ export default async function Home() {
 
       <MenuSelection />
 
-      {/* <div className="h-[500px] w-full bg-neutral-bg05"></div> */}
       <BannerSlider />
 
       <RecentReviews reviews={recentReviews} />
