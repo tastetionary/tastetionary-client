@@ -1,49 +1,68 @@
-import MainButton from '@/components/Button/MainButton';
+import useAccountAuthCodeMutate from '@/app/sign-up/hooks/query/useAccountAuthCodeMutate';
+import BottomButtonContainer from '@/components/Button/BottomButtonContainer';
+import DefaultButton from '@/components/Button/DefaultButton';
 import TextInput from '@/components/Input/TextInput';
 import CHeader from '@/components/c-header';
+import ContentLayout from '@/components/layout/content-layout';
 import { emailRegex } from '@/constants';
-import { SubmitHandler, useForm } from 'react-hook-form';
-import * as S from './page.styled';
+import { useFormContext } from 'react-hook-form';
 
 interface Props {
   onNext: () => void;
+  setEmailAuthId: (value: number) => void;
 }
 
-interface FormValue {
-  email: string;
-}
+export default function VerifyEmail({ onNext, setEmailAuthId }: Props) {
+  const {
+    register,
+    getValues,
+    formState: { isValid },
+  } = useFormContext<{
+    account: {
+      identification: string;
+    };
+  }>();
 
-export default function VerifyEmail({ onNext }: Props) {
-  const { register, handleSubmit } = useForm<FormValue>();
+  const { mutate: accountAuthCodeMutate } = useAccountAuthCodeMutate({ onNext, setEmailAuthId, category: 'account' });
 
-  const onSubmit: SubmitHandler<FormValue> = data => console.log(data);
+  const onEmailAuthRequest = () => {
+    accountAuthCodeMutate({ identification: getValues('account.identification'), type: 'email', category: 'account' });
+  };
 
   return (
     <>
       <CHeader title="비밀번호 재설정" />
-      <S.Wrapper>
-        <S.Title>
-          이메일 주소 인증을 통해 <br /> 비밀번호를 재설정합니다.
-        </S.Title>
-        <S.SubTitle>
-          TEXTTEXTTEXTTEXTTEXTTEXTTEXTTEXTTEXT
-          <br />
-          TEXTTEXTTEXTTEXTTEXTTEXTTEXTTEXT
-        </S.SubTitle>
-        <S.Form onSubmit={handleSubmit(onSubmit)}>
-          <S.MainContainer>
-            <TextInput
-              type="email"
-              label="이메일 주소"
-              placeholder="이메일 주소 입력"
-              {...register('email', { required: true, pattern: emailRegex })}
-            />
-          </S.MainContainer>
-          <S.NextButtonWrapper>
-            <MainButton btnText="인증코드 전송" disabled={false} onClick={onNext} type="submit" />
-          </S.NextButtonWrapper>
-        </S.Form>
-      </S.Wrapper>
+
+      <ContentLayout className="flex flex-col gap-xxl pt-xxl">
+        <div>
+          <div className="title2 font-bold">
+            이메일 주소 인증을 통해 <br /> 비밀번호를 재설정합니다.
+          </div>
+
+          <p className="body2 mt-xs">회원가입 시 입력하신 이메일 주소를 입력해주세요.</p>
+        </div>
+
+        <div className="mt-37">
+          <TextInput
+            type="email"
+            label="이메일 주소"
+            placeholder="이메일 주소 입력"
+            {...register('account.identification', { required: true, pattern: emailRegex })}
+          />
+        </div>
+      </ContentLayout>
+
+      <BottomButtonContainer>
+        <DefaultButton
+          type="button"
+          bgColor="yellow"
+          customStyle="flex-grow py-12"
+          disabled={!isValid}
+          onClick={onEmailAuthRequest}
+        >
+          <span className="body1 text-white">인증코드 전송</span>
+        </DefaultButton>
+      </BottomButtonContainer>
     </>
   );
 }
