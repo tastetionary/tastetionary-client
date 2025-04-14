@@ -20,7 +20,12 @@ export default function AgreementCheckbox({ type, title, onChangeCheckbox, check
           checked={checked}
           bg="orange"
         />
-        <DefaultButton bgColor="gray" customStyle="px-[12px] py-[4px] absolute right-0 top-0 text-xs">
+        <DefaultButton
+          onClick={onNext}
+          type="button"
+          bgColor="gray"
+          customStyle="px-[12px] py-[4px] absolute right-0 top-0 text-xs"
+        >
           보기
         </DefaultButton>
       </div>

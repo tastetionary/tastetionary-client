@@ -14,7 +14,7 @@ export const textInputContainerVariants = cva('default-input w-full px-12 py-13'
 });
 
 export const textInputVariants = cva(
-  'bg-white body2 !font-pretendard text-neutral-bg80 placeholder:text-neutral-bg20',
+  'bg-white body2 !font-pretendard text-neutral-bg80 placeholder:text-neutral-bg20 z-1',
   {
     variants: {
       color: {
