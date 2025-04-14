@@ -60,7 +60,7 @@ export default function Nickname() {
           </header>
 
           <section className="mt-12">
-            <div className={cn('flex w-full gap-[10px]', nickname.length && !isValid ? 'items-center' : 'items-end')}>
+            <div className={cn('flex w-full gap-[10px]', nickname?.length && !isValid ? 'items-center' : 'items-end')}>
               <div className="w-[calc(100%-94px)]">
                 <TextInput
                   type="text"
