@@ -1,8 +1,8 @@
 import DefaultButton from '@/components/Button/DefaultButton';
 // import Header from '@/components/Header';
 import BottomButtonContainer from '@/components/Button/BottomButtonContainer';
-import CHeader from '@/components/c-header';
 import TextInput from '@/components/Input/TextInput';
+import CHeader from '@/components/c-header';
 import { emailRegex } from '@/constants';
 import { useFormContext } from 'react-hook-form';
 import useAccountAuthCodeMutate from '../../hooks/query/useAccountAuthCodeMutate';
@@ -23,7 +23,7 @@ export default function EmailForm({ onNext, setEmailAuthId }: Props) {
     };
   }>();
 
-  const { mutate: accountAuthCodeMutate } = useAccountAuthCodeMutate({ onNext, setEmailAuthId, category: 'account' });
+  const { mutate: accountAuthCodeMutate } = useAccountAuthCodeMutate({ onNext, setEmailAuthId });
 
   const onEmailAuthRequest = () => {
     accountAuthCodeMutate({ identification: getValues('account.identification'), type: 'email', category: 'account' });

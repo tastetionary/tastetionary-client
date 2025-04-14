@@ -13,11 +13,10 @@ interface Props {
   onNext: () => void;
   type: 'register';
   companyEmailAuthId: number;
-  setCompanyEmailAuthId: (value: number) => void;
   saveAuthId?: (authenticationId: number) => void;
 }
 
-export default function VerifyNumber({ onNext, type, companyEmailAuthId, setCompanyEmailAuthId, saveAuthId }: Props) {
+export default function VerifyNumber({ onNext, type, companyEmailAuthId, saveAuthId }: Props) {
   const { getValues } = useFormContext();
   const [authNumber, setAuthNumber] = useState('');
 
@@ -25,8 +24,6 @@ export default function VerifyNumber({ onNext, type, companyEmailAuthId, setComp
 
   const { mutate: accountAuthCodeMutate } = useAccountAuthCodeMutate({
     onNext,
-    setCompanyEmailAuthId,
-    category: 'company',
     type: 'retry',
   });
 
@@ -44,7 +41,6 @@ export default function VerifyNumber({ onNext, type, companyEmailAuthId, setComp
     accountAuthCodeMutate({
       identification: companyEmail,
       type: 'email',
-      category: 'company',
     });
   };
 

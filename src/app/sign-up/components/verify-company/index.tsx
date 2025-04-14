@@ -28,15 +28,12 @@ export default function VerifyCompany({ onNext, setCompanyEmailAuthId }: Props) 
 
   const { mutate: accountAuthCodeMutate } = useAccountAuthCodeMutate({
     onNext,
-    setCompanyEmailAuthId,
-    category: 'company',
   });
 
   const onCompanyEmailAuthRequest = () => {
     accountAuthCodeMutate({
       identification: getValues('userProperty.companyData.identification'),
       type: 'email',
-      category: 'company',
     });
   };
 
