@@ -1,5 +1,6 @@
 import { homeRepository } from '@/apis/home';
 import CServerHeaderWithChildren from '@/components/c-server-header-with-children';
+import BannerSlider from './_components/banner-swiper';
 import FooterLinks from './_components/footer-links';
 import LocationSection from './_components/location-section';
 import MenuSelection from './_components/menu-selection';
@@ -15,7 +16,7 @@ export default async function Home() {
 
       <MenuSelection />
 
-      <div className="h-[500px] w-full bg-neutral-bg05"></div>
+      <BannerSlider />
 
       <RecentReviews reviews={recentReviews} />
 

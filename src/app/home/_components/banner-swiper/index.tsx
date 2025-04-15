@@ -1,0 +1,94 @@
+'use client';
+
+import banner01 from '@/assets/common/bannel01.jpg';
+import banner02 from '@/assets/common/bannel02.jpg';
+import banner03 from '@/assets/common/bannel03.jpg';
+import banner04 from '@/assets/common/bannel04.jpg';
+import banner05 from '@/assets/common/bannel05.jpg';
+import Image from 'next/image';
+
+import { useState } from 'react';
+import 'swiper/css';
+import 'swiper/css/pagination';
+import { Autoplay, Pagination } from 'swiper/modules';
+import { Swiper, SwiperSlide } from 'swiper/react';
+
+const BannerSlider = () => {
+  const [activeIndex, setActiveIndex] = useState(0);
+
+  const banners = [
+    {
+      id: 1,
+      src: banner01,
+      title: '혹시 어제,\n과음하셨나요?',
+      subtitle: '속이 편안해지는 해장 메뉴 추천',
+    },
+    {
+      id: 2,
+      src: banner02,
+      title: '비 오는 날, \n이런 메뉴 어때요?',
+      subtitle: '판교 직장인이 추천하는 비오는 날 맛집',
+    },
+    {
+      id: 3,
+      src: banner03,
+      title: '스트레스 받을 때에는 \n역시 매운 게 딱이죠.',
+      subtitle: '맵고 화끈한 맛으로 장전! 판교 매운맛 리스트',
+    },
+    {
+      id: 4,
+      src: banner04,
+      title: '간단하게 \n혼밥하고 싶을 때에는.',
+      subtitle: '혼자도 부담 없는 혼밥 가능한 판교 맛집 리스트',
+    },
+    {
+      id: 5,
+      src: banner05,
+      title: '다이어트 중이지만 \n맛있는 건 먹고 싶어.',
+      subtitle: '다이어터도 타협 가능한 판교 건강식 맛집',
+    },
+  ];
+
+  return (
+    <div className="max-w-screen-lg mx-auto w-full py-8">
+      <Swiper
+        modules={[Pagination, Autoplay]}
+        spaceBetween={15}
+        slidesPerView={1.2}
+        centeredSlides={true}
+        pagination={{
+          clickable: true,
+          bulletClass: 'swiper-pagination-bullet custom-bullet',
+          bulletActiveClass: 'swiper-pagination-bullet-active custom-bullet-active',
+        }}
+        autoplay={{
+          delay: 5000,
+          disableOnInteraction: false,
+        }}
+        loop={true}
+        className="w-full"
+        onSlideChange={swiper => setActiveIndex(swiper.realIndex)}
+      >
+        {banners.map(banner => (
+          <SwiperSlide key={banner.id} className="overflow-hidden transition-opacity duration-300">
+            {/* 여기서 고정 크기의 컨테이너를 생성 */}
+            <div className="relative h-[280px] w-[430px] overflow-hidden">
+              {/* 배경 이미지 */}
+              <div className="absolute inset-0">
+                {banner.src && <Image src={banner.src} alt="banner" fill style={{ objectFit: 'cover' }} priority />}
+              </div>
+
+              {/* 컨텐츠 */}
+              <div className="absolute bottom-0 left-0 z-10 pb-[46px] pl-[32px]">
+                <h2 className="body5 mb-2 whitespace-pre-line font-bold text-white">{banner.title}</h2>
+                <p className="body6 text-white">{banner.subtitle}</p>
+              </div>
+            </div>
+          </SwiperSlide>
+        ))}
+      </Swiper>
+    </div>
+  );
+};
+
+export default BannerSlider;
