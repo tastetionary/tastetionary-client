@@ -143,6 +143,8 @@ export default function RestaurantSearch() {
     return Math.round(d * 10) / 10;
   };
 
+  const onClickReview = () => {};
+
   return (
     <>
       <CHeader title="식당 검색" />
@@ -218,7 +220,8 @@ export default function RestaurantSearch() {
                           placeName: d?.place_name,
                           place_url: d?.place_url,
                         });
-                        return router.push(`/register-review`, {
+                        window.scrollTo({ top: 0, behavior: 'smooth' });
+                        router.push(`/register-review`, {
                           scroll: true,
                         });
                       }}
