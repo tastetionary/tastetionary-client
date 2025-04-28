@@ -30,6 +30,7 @@ import url5 from '@/assets/common/contents/banner05/url5.jpg';
 
 import DefaultButton from '@/components/Button/DefaultButton';
 import CServerHeaderWithChildren from '@/components/c-server-header-with-children';
+import DefaultTextBox from '@/components/c-text-box';
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 
@@ -158,40 +159,25 @@ export default function ContentDetail({ params }: { params: Params }) {
               <p className="title3 mt-1 font-bold">{content.subTitle}</p>
               <p className="body2 mt-3">작성일 : {content.createdAt}</p>
               <p className="body2 mt-8 whitespace-pre-line">{content.desc}</p>
-              <DefaultButton
-                bgColor="orange"
-                customStyle="flex w-full py-[12px] px-[16px] mt-8"
-                onClick={() => console.log('123')}
-                type="button"
-              >
+              <DefaultTextBox bgColor="orange" customStyle="flex w-full py-[12px] px-[16px] mt-8">
                 <span className="!font-pretendard text-white">{content.recommendBtn1}</span>
-              </DefaultButton>
+              </DefaultTextBox>
             </div>
             {/* 첫번째 추천 메뉴 */}
             <Image src={content.recommendUrl1} alt="content" style={{ width: '100%' }} />
             <div className="mb-4 ml-8 mr-8 mt-4">
               <p className="body2 whitespace-pre-line">{content.recommendDesc1}</p>
-              <DefaultButton
-                bgColor="orange"
-                customStyle="flex w-full py-[12px] px-[16px] mt-8"
-                onClick={() => console.log('123')}
-                type="button"
-              >
+              <DefaultTextBox bgColor="orange" customStyle="flex w-full py-[12px] px-[16px] mt-8">
                 <span className="!font-pretendard text-white">{content.recommendBtn2}</span>
-              </DefaultButton>
+              </DefaultTextBox>
             </div>
             {/* 두번째 추천 메뉴 */}
             <Image src={content.recommendUrl2} alt="content" style={{ width: '100%' }} />
             <div className="mb-4 ml-8 mr-8 mt-4">
               <p className="body2 whitespace-pre-line">{content.recommendDesc2}</p>
-              <DefaultButton
-                bgColor="orange"
-                customStyle="flex w-full py-[12px] px-[16px] mt-8"
-                onClick={() => console.log('123')}
-                type="button"
-              >
+              <DefaultTextBox bgColor="orange" customStyle="flex w-full py-[12px] px-[16px] mt-8">
                 <span className="!font-pretendard text-white">{content.recommendBtn3}</span>
-              </DefaultButton>
+              </DefaultTextBox>
             </div>
             {/* 세번째 추천 메뉴 */}
             <Image src={content.recommendUrl3} alt="content" style={{ width: '100%' }} />
