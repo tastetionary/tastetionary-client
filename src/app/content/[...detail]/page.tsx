@@ -31,6 +31,7 @@ import url5 from '@/assets/common/contents/banner05/url5.jpg';
 import DefaultButton from '@/components/Button/DefaultButton';
 import CServerHeaderWithChildren from '@/components/c-server-header-with-children';
 import Image from 'next/image';
+import { useRouter } from 'next/navigation';
 
 interface Params {
   detail: string[];
@@ -38,6 +39,7 @@ interface Params {
 
 export default function ContentDetail({ params }: { params: Params }) {
   console.log('params', params.detail[0]);
+  const router = useRouter();
   const contents = [
     {
       params: 'banner01',
@@ -201,7 +203,7 @@ export default function ContentDetail({ params }: { params: Params }) {
               <DefaultButton
                 bgColor="yellow"
                 customStyle="flex py-[12px] px-[16px] mt-[81px] mb-[33px] mx-4 md:mx-8 lg:mx-12 w-3/5 md:w-2/3 lg:w-1/2"
-                onClick={() => console.log('여기')}
+                onClick={() => router.push('/select-menu')}
                 type="button"
               >
                 <span className="!font-pretendard text-white">다른 메뉴도 고르러 가기</span>
