@@ -3,7 +3,7 @@ import CHeader from '../c-header';
 
 interface Props {
   title: string;
-  isHome: boolean;
+  isHome?: boolean;
   isLogo: boolean;
 }
 
