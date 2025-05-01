@@ -36,11 +36,11 @@ export default function LoginPage() {
           <LoginBtn loginType="kakao" onClick={kakaoLogin} />
 
           <div className="bg-tran mt-xl flex justify-center gap-lg">
-            <LoginBtn loginType="naver" onClick={naverLogin} />
+            {/* <LoginBtn loginType="naver" onClick={naverLogin} /> */}
 
             <LoginBtn loginType="google" onClick={googleLogin} />
 
-            <LoginBtn loginType="apple" />
+            {/* <LoginBtn loginType="apple" /> */}
 
             <LoginBtn loginType="email" onClick={() => push('/login/email')} />
           </div>
