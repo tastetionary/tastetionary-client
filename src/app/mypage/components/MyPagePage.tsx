@@ -93,9 +93,9 @@ export default function MyPagePage() {
               <CMypageMenu
                 items={[
                   { name: '개인정보 관리', clickEvent: () => push('/mypage/user/manage-info') },
-                  { name: '작성한 리뷰 관리' },
-                  { name: '북마크 식당 관리' },
-                  { name: '추천 제외 식당 보기' },
+                  { name: '작성한 리뷰 관리', clickEvent: () => push('/ready') },
+                  { name: '북마크 식당 관리', clickEvent: () => push('/ready') },
+                  { name: '추천 제외 식당 보기', clickEvent: () => push('/ready') },
                 ]}
               />
             )}
@@ -109,7 +109,7 @@ export default function MyPagePage() {
                       'https://tastetionary.notion.site/03ebf00931f44926b889e085cabbd02c?v=5c1337997b384b15a63e6d89a3708ed9&pvs=74'
                     ),
                 },
-                { name: '자주 묻는 질문' },
+                { name: '자주 묻는 질문', clickEvent: () => push('/ready') },
                 { name: '의견 보내기', mail: 'tastetionary@gmail.com' },
               ]}
             />
