@@ -218,9 +218,8 @@ export default function RestaurantSearch() {
                           placeName: d?.place_name,
                           place_url: d?.place_url,
                         });
-                        return router.push(`/register-review`, {
-                          scroll: true,
-                        });
+                        window.scrollTo({ top: 0, behavior: 'smooth' });
+                        router.push('/register-review');
                       }}
                     >
                       이 식당 리뷰쓰기
