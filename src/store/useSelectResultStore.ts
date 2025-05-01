@@ -1,6 +1,7 @@
-import { RestaurantReview } from '@/apis/restaurant/recommend';
+import { type RestaurantReview } from '@/apis/restaurant/recommend';
 import { create } from 'zustand';
 import { devtools, persist } from 'zustand/middleware';
+import { immer } from 'zustand/middleware/immer';
 
 export type PriceRange = '~10,000' | '10,000~13,000' | '13,000~16,000' | '16,000~20,000' | '20,000~';
 
@@ -26,6 +27,7 @@ interface SelectResultState {
   restaurant?: RestaurantInfo;
   setSelectFoodResult: (value: { id: number; name?: string }) => void;
   setSelectRestaurantResult: (value: RestaurantInfo) => void;
+  updateReviewReact: (reviewId: string, type: 'L' | 'D') => void;
   resetFoodResult: () => void;
   resetRestaurantResult: () => void;
 }
@@ -46,19 +48,19 @@ const defaultRestaurant = {
 export const useSelectResultStore = create<SelectResultState>()(
   devtools(
     persist(
-      set => ({
+      immer(set => ({
         food: defaultFood,
         restaurant: defaultRestaurant,
         setSelectFoodResult: value =>
-          set({
-            food: {
+          set(state => {
+            state.food = {
               id: value.id,
               name: value.name,
-            },
+            };
           }),
-        setSelectRestaurantResult: value => {
-          return set({
-            restaurant: {
+        setSelectRestaurantResult: value =>
+          set(state => {
+            state.restaurant = {
               name: value.name,
               latitude: value.latitude,
               id: value.id,
@@ -70,26 +72,44 @@ export const useSelectResultStore = create<SelectResultState>()(
               value.review?.revisitRatio
                 ? {
                     review: {
-                      total: value.review?.total,
-                      keywords: value.review?.keywords,
+                      total: value.review.total,
+                      keywords: value.review.keywords,
                       aggregatePrice: value.review.aggregatePrice,
-                      revisitRatio: value.review?.revisitRatio,
+                      revisitRatio: value.review.revisitRatio,
                     },
                   }
                 : {}),
-            },
-          });
-        },
+            };
+          }),
+        updateReviewReact: (reviewId, type) =>
+          set(state => {
+            const review = state?.restaurant?.reviews.find((r: RestaurantReview) => r.id === reviewId);
 
+            console.log({ review });
+
+            if (!review) return;
+
+            // 이전 반응 제거
+            if (review.userReaction) {
+              review.reviewReactionCnt[review.userReaction] = Math.max(
+                0,
+                review.reviewReactionCnt[review.userReaction] - 1
+              );
+            }
+
+            // 새로운 반응 추가
+            review.reviewReactionCnt[type] += 1;
+            review.userReaction = type;
+          }),
         resetFoodResult: () =>
-          set({
-            food: defaultFood,
+          set(state => {
+            state.food = defaultFood;
           }),
         resetRestaurantResult: () =>
-          set({
-            restaurant: defaultRestaurant,
+          set(state => {
+            state.restaurant = defaultRestaurant;
           }),
-      }),
+      })),
       {
         name: 'select-result-storage',
       }

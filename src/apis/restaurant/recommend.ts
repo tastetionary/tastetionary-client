@@ -20,13 +20,13 @@ export interface RestaurantReview {
     L: number;
     D: number;
   };
-  userReaction: string | null;
+  userReaction: 'L' | 'D' | null;
   keywords: string[];
   summary: string;
   prices: string[];
   createdAt: string;
   updatedAt: string;
-  opinion: string;
+  opinion: 'L' | 'D';
 }
 
 export interface RestaurantRecommendRes {
