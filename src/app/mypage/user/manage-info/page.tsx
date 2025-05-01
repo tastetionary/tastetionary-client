@@ -12,7 +12,7 @@ export default function MyPageUserManageInfo() {
       <CHeader title="개인정보 관리" />
       <CMypageItem title="닉네임 수정" onClick={() => push('/mypage/user/manage-info/nickname')} />
       <CMypageItem title="비밀번호 재설정" onClick={() => push('/mypage/user/manage-info/password')} />
-      <CMypageItem title="지역 변경" />
+      <CMypageItem title="지역 변경" onClick={() => push('/ready')} />
       <CMypageItem title="회원 탈퇴" onClick={() => push('/mypage/user/manage-info/exit')} />
     </>
   );
