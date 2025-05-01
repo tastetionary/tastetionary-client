@@ -34,25 +34,29 @@ const useConfirmAuthCodeMutate = ({ onNext, type, saveAuthId }: Props) => {
     }
   };
 
-  const { mutate: updatePassword } = useMutation({
-    mutationFn: authRepository().updatePassword,
-    onSuccess: () => router.push('/find-password/complete'),
-  });
-
-  const { mutate } = useMutation({
-    mutationFn: getRegisterRepository().postConfirmAuthCode,
-    onSuccess: (data, { historyId, code }) => {
+  const { mutate: resetPassword } = useMutation({
+    mutationFn: authRepository().resetPassword,
+    onSuccess: data => {
       saveAuthId?.(data.authenticationId);
 
       if (type === 'find-password') {
-        return updatePassword({ historyId, code });
+        return router.push('/find-password/complete');
       }
 
       authCompleteModal(type);
     },
   });
 
-  return { mutate };
+  const { mutate: confirmCode } = useMutation({
+    mutationFn: getRegisterRepository().postConfirmAuthCode,
+    onSuccess: data => {
+      saveAuthId?.(data.authenticationId);
+
+      authCompleteModal(type);
+    },
+  });
+
+  return { mutate: type === 'register' ? confirmCode : resetPassword };
 };
 
 export default useConfirmAuthCodeMutate;
