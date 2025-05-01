@@ -1,7 +1,7 @@
 import BottomButtonContainer from '@/components/Button/BottomButtonContainer';
 import DefaultButton from '@/components/Button/DefaultButton';
-import CHeader from '@/components/c-header';
 import TextInput from '@/components/Input/TextInput';
+import CHeader from '@/components/c-header';
 import { useFormContext } from 'react-hook-form';
 import useAccountAuthCodeMutate from '../../hooks/query/useAccountAuthCodeMutate';
 import useValidationNickname from '../../hooks/query/useValidationNickname';
@@ -32,7 +32,6 @@ export default function UserInfoForm({ onNext }: Props) {
   const { mutate: accountAuthCodeMutate } = useAccountAuthCodeMutate({
     onNext,
     // setEmailAuthId,
-    category: 'account',
     type: 'retry',
   });
   const { validateNicknameMutate } = useValidationNickname();

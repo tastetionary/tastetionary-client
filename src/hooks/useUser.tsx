@@ -14,7 +14,7 @@ export default function useUser(): UseUserResult {
   const queryClient = useQueryClient();
 
   const res = useQuery<UserRes>({
-    queryKey: ['user'],
+    queryKey: ['user', token],
     queryFn: () => getUser(token ?? ''),
     enabled: !!token,
     staleTime: 1000,

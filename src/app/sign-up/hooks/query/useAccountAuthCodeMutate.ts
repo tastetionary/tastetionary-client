@@ -7,12 +7,10 @@ import { useEffect } from 'react';
 interface Props {
   onNext: () => void;
   setEmailAuthId?: (value: number) => void;
-  setCompanyEmailAuthId?: (value: number) => void;
-  category: 'account' | 'company';
   type?: 'retry';
 }
 
-const useAccountAuthCodeMutate = ({ onNext, setEmailAuthId, setCompanyEmailAuthId, category, type }: Props) => {
+const useAccountAuthCodeMutate = ({ onNext, setEmailAuthId, type }: Props) => {
   const { openModal, closeModal } = useModal();
 
   const emailRetryModal = () => {
@@ -33,7 +31,7 @@ const useAccountAuthCodeMutate = ({ onNext, setEmailAuthId, setCompanyEmailAuthI
   useEffect(() => {
     if (data) {
       const authId = data.id as number;
-      category === 'account' ? setEmailAuthId?.(authId) : setCompanyEmailAuthId?.(authId);
+      setEmailAuthId?.(authId);
     }
   }, [data]);
 

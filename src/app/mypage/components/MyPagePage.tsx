@@ -8,6 +8,7 @@ import CHeader from '@/components/c-header';
 import CMypageMenu from '@/components/c-mypage-menu';
 import GNBLayout from '@/components/layout/gnb-layout';
 import useUser from '@/hooks/useUser';
+import { cn } from '@/utils/styles.utils';
 import { useRouter } from 'next/navigation';
 import * as S from '../page.styled';
 
@@ -42,6 +43,14 @@ export default function MyPagePage() {
     });
   };
 
+  const handleLoginClick = () => {
+    if (isLoggedIn && data) {
+      return;
+    }
+
+    push('/login');
+  };
+
   return (
     <>
       <CHeader title="마이페이지" isLogo />
@@ -52,7 +61,10 @@ export default function MyPagePage() {
             {showSkeleton ? (
               <div className="h-32 w-2/3 rounded-7 bg-neutral-bg05" />
             ) : (
-              <p className="title2 flex cursor-pointer items-center font-bold" onClick={() => push('/login')}>
+              <p
+                className={cn('title2 flex items-center font-bold', isLoggedIn && data ? '' : 'cursor-pointer')}
+                onClick={handleLoginClick}
+              >
                 {isLoggedIn && data ? data.nickname : '로그인'}
                 <ARROW_RIGHT width={24} height={24} />
               </p>

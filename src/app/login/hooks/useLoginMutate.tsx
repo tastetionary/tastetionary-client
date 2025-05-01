@@ -3,7 +3,6 @@ import { getUser } from '@/apis/user/getUser';
 import { MODAL_TYPES } from '@/components/Modal/GlobalModal';
 import useModal from '@/components/Modal/GlobalModal/hooks/useModal';
 import { ERROR_MSG } from '@/constants/error-msg';
-import useToken from '@/hooks/useToken';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { AxiosError } from 'axios';
 import { useRouter } from 'next/navigation';
@@ -21,7 +20,6 @@ const useLoginMutate = () => {
   const queryClient = useQueryClient();
   const { push } = useRouter();
   const { openModal, closeModal } = useModal();
-  const { token } = useToken();
 
   const noRegisterModal = () => {
     openModal(MODAL_TYPES.dialog, {
@@ -50,7 +48,6 @@ const useLoginMutate = () => {
 
       setCookie(null, 'token', token, {
         path: '/',
-        sameSite: 'lax',
       });
 
       getUserInfo(token);
