@@ -23,7 +23,6 @@ export default function VerifyAuthNumber({ onNext, type, setEmailAuthId, emailAu
   const { mutate: accountAuthCodeMutate } = useAccountAuthCodeMutate({
     onNext,
     setEmailAuthId,
-    category: 'account',
     type: 'retry',
   });
   const { mutate: confirmAuthCodeMutate } = useConfirmAuthCodeMutate({ onNext, type, saveAuthId });
@@ -44,7 +43,7 @@ export default function VerifyAuthNumber({ onNext, type, setEmailAuthId, emailAu
 
   return (
     <>
-      <CHeader title="회원가입" />
+      <CHeader title={type === 'find-password' ? '비밀번호 재설정' : '회원가입'} />
 
       <div className="mx-8 mt-xl">
         <header>

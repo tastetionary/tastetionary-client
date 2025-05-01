@@ -1,29 +1,62 @@
 'use client';
 
-import { usePathname, useRouter } from 'next/navigation';
+import { usePathname, useRouter, useSearchParams } from 'next/navigation';
 import { useState } from 'react';
-import PasswordComplete from '../password-complete';
+import { FormProvider, SubmitHandler, useForm } from 'react-hook-form';
+import VerifyAuthNumber from '../verify-auth-number';
 import VerifyEmail from '../verify-email';
 
-export default function FindPasswordComponent() {
-  const [emailAuthId, setEmailAuthId] = useState(0);
+interface FormValue {
+  account: {
+    identification: string;
+    password: string;
+    passwordConfirm?: string;
+    category: 'email';
+    authenticationId: number;
+  };
+}
 
+export default function FindPasswordComponent() {
   const { push } = useRouter();
   const pathname = usePathname();
+  const params = useSearchParams();
+
+  const [emailAuthId, setEmailAuthId] = useState(0);
+
+  const step = params.get('step');
+
   const setStep = (step: string) => {
     push(`${pathname}?step=${step}`);
   };
 
+  const methods = useForm<FormValue>({
+    mode: 'onBlur',
+    defaultValues: {
+      account: {
+        category: 'email',
+      },
+    },
+  });
+
+  const onSubmit: SubmitHandler<FormValue> = data => {
+    console.log(data);
+  };
+
   return (
-    <>
-      <VerifyEmail onNext={() => setStep('verify-auth-number')} />
-      {/* <VerifyAuthNumber
-        onNext={() => setStep('password-complete')}
-        type="find-password"
-        emailAuthId={emailAuthId}
-        setEmailAuthId={setEmailAuthId}
-      /> */}
-      <PasswordComplete />
-    </>
+    <FormProvider {...methods}>
+      <form onSubmit={methods.handleSubmit(onSubmit)}>
+        {!step && <VerifyEmail setEmailAuthId={setEmailAuthId} onNext={() => setStep('verify-auth-number')} />}
+
+        {step === 'verify-auth-number' && (
+          <VerifyAuthNumber
+            type="find-password"
+            onNext={() => push('/find-password/complete')}
+            emailAuthId={emailAuthId}
+            setEmailAuthId={setEmailAuthId}
+            saveAuthId={authId => methods.setValue('account.authenticationId', authId)}
+          />
+        )}
+      </form>
+    </FormProvider>
   );
 }
