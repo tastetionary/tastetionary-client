@@ -1,59 +1,30 @@
-'use client';
+import { homeRepository } from '@/apis/home';
+import CServerHeaderWithChildren from '@/components/c-server-header-with-children';
+import BannerSlider from './_components/banner-swiper';
+import FooterLinks from './_components/footer-links';
+import LocationSection from './_components/location-section';
+import MenuSelection from './_components/menu-selection';
+import RecentReviews from './_components/recent-reivews';
+import RecommendMenu from './_components/recommend-menu';
 
-import * as S from '@/app/page.styled';
-import { MODAL_TYPES } from '@/components/Modal/GlobalModal';
-import useModal from '@/components/Modal/GlobalModal/hooks/useModal';
-import CHeader from '@/components/c-header';
-import CPickerButton from '@/components/c-pickerButton';
-import GNBLayout from '@/components/layout/gnb-layout';
-import useUser from '@/hooks/useUser';
-import { useRouter } from 'next/navigation';
-
-export default function Home() {
-  const router = useRouter();
-  const { openModal, closeModal } = useModal();
-
-  const { isLoggedIn } = useUser();
-
-  const loginInfoModal = () => {
-    openModal(MODAL_TYPES.dialog, {
-      title: '로그인 안내',
-      message: '내 주변의 식당을 고르기 위해\n로그인이 필요해요.',
-      handleConfirm: () => router.push('/login'),
-      handleClose: () => closeModal(MODAL_TYPES.dialog),
-      cancelText: '취소',
-      confirmText: '로그인 하기',
-      needClose: true,
-    });
-  };
-
-  const onRestaurantClick = () => {
-    if (!isLoggedIn) return loginInfoModal();
-
-    router.push('/select-restaurant');
-  };
+export default async function Home() {
+  const recentReviews = await homeRepository().getRecentReviews();
 
   return (
-    <>
-      <CHeader title="맛셔너리" noBackBtn />
+    <CServerHeaderWithChildren title="맛셔너리" isHome isLogo>
+      <LocationSection />
 
-      <GNBLayout>
-        <S.MainContent>
-          <CPickerButton
-            title={'메뉴 고르기'}
-            desc={'오늘은 어떤 음식을 먹을까?'}
-            subject={'menu'}
-            clickEvent={() => router.push('/select-menu')}
-          />
+      <MenuSelection />
 
-          <CPickerButton
-            title={'식당 고르기'}
-            desc={'오늘은 어떤 식당에 가볼까?'}
-            subject={'restaurant'}
-            clickEvent={onRestaurantClick}
-          />
-        </S.MainContent>
-      </GNBLayout>
-    </>
+      <BannerSlider />
+
+      <RecentReviews reviews={recentReviews} />
+
+      <RecommendMenu />
+
+      <footer>
+        <FooterLinks />
+      </footer>
+    </CServerHeaderWithChildren>
   );
 }
