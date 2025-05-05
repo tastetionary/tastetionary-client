@@ -85,8 +85,6 @@ export const useSelectResultStore = create<SelectResultState>()(
           set(state => {
             const review = state?.restaurant?.reviews.find((r: RestaurantReview) => r.id === reviewId);
 
-            console.log({ review });
-
             if (!review) return;
 
             // 이전 반응 제거
