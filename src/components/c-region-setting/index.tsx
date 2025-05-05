@@ -15,7 +15,7 @@ interface FormValue {
 
 interface Props {
   category: 'dining_area' | 'activity_area';
-  onNextPage: '/register-review/restaurant' | '/select-restaurant' | '/mypage' | '/home';
+  onNextPage: '/register-review/restaurant' | '/select-restaurant' | '/mypage' | '/';
 }
 
 export default function CRegionSetting({ category, onNextPage }: Props) {
