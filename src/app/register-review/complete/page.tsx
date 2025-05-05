@@ -25,7 +25,7 @@ export default function ReviewComplete() {
 
   const handleMoveToHome = () => {
     resetReviewData();
-    router.push('/home');
+    router.push('/');
   };
 
   return (
