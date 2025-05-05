@@ -1,25 +1,35 @@
 import authRepository from '@/apis/auth';
+import useToken from '@/hooks/useToken';
 import * as Sentry from '@sentry/nextjs';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { useRouter } from 'next/navigation';
-import { destroyCookie, parseCookies } from 'nookies';
+import { destroyCookie } from 'nookies';
+import { useEffect, useState } from 'react';
 
 const useLogoutMutate = () => {
   const queryClient = useQueryClient();
   const { push } = useRouter();
-  const cookies = parseCookies();
+  const { token } = useToken();
+
+  const [isDestroied, setIsDestroied] = useState(false);
+
+  useEffect(() => {
+    if (!isDestroied || token) {
+      return;
+    }
+
+    queryClient.clear();
+    push('/');
+    setIsDestroied(false);
+  }, [token, isDestroied]);
 
   return useMutation({
     mutationFn: authRepository().postLogout,
     onSuccess: () => {
       Sentry.configureScope(scope => scope.clear());
 
+      setIsDestroied(true);
       destroyCookie(null, 'token');
-
-      if (!cookies.token) {
-        queryClient.clear();
-        push('/');
-      }
     },
   });
 };
