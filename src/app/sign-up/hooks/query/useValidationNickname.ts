@@ -7,7 +7,7 @@ const useValidationNickname = () => {
     mutationKey: ['nickname'],
     mutationFn: authRepository().getValidateNickname,
     onSuccess: () => {
-      iconToast('닉네임 입력이 완료되었습니다.', 'check');
+      iconToast('사용 가능한 닉네임입니다.', 'check');
     },
   });
 
