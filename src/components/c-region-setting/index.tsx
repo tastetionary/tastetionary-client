@@ -15,7 +15,7 @@ interface FormValue {
 
 interface Props {
   category: 'dining_area' | 'activity_area';
-  onNextPage: '/register-review/restaurant' | '/select-restaurant' | '/mypage';
+  onNextPage: '/register-review/restaurant' | '/select-restaurant' | '/mypage' | '/';
 }
 
 export default function CRegionSetting({ category, onNextPage }: Props) {
@@ -38,7 +38,7 @@ export default function CRegionSetting({ category, onNextPage }: Props) {
     });
   };
 
-  const { mutate: saveRegion } = useMutation({
+  const { mutate: saveRegion, mutateAsync: asyncSaveRegion } = useMutation({
     mutationFn: (data: { address: string; latitude: number; longitude: number }) =>
       putSaveRegion(
         {
@@ -50,14 +50,20 @@ export default function CRegionSetting({ category, onNextPage }: Props) {
       ),
     onSuccess: (_, data) => {
       queryClient.setQueryData(['user'], (prev: any) => {
-        let oldData = prev;
+        if (!prev) return prev;
 
-        oldData.area.address = data?.address;
-        oldData.area.latitude = data?.latitude;
-        oldData.area.longitude = data?.longitude;
-
-        return oldData;
+        return {
+          ...prev,
+          area: {
+            ...prev.area,
+            address: data.address,
+            latitude: data.latitude,
+            longitude: data.longitude,
+          },
+        };
       });
+
+      console.log('여기 들어와여?');
 
       handleCompleteRegionSetting();
     },
@@ -70,8 +76,8 @@ export default function CRegionSetting({ category, onNextPage }: Props) {
           category={category}
           onNext={() => {
             const data = methods.watch();
-
-            saveRegion(data);
+            console.log('data', data);
+            asyncSaveRegion(data);
           }}
         />
       </form>
