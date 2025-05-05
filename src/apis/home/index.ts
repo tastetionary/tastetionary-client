@@ -1,4 +1,4 @@
-import { Reviews } from '@/app/home/_components/review-content';
+import { Reviews } from '@/app/_components/review-content';
 import http from '../http';
 
 export const homeRepository = () => {
