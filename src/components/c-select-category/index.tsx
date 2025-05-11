@@ -12,27 +12,36 @@ interface Props {
 }
 
 export default function CSelectCategory({ selectType, data, isDuplicate = true }: Props) {
-  const [selectedCategory, setSelectedCategory] = useState<string[]>([]);
-
   const { category: foodCategory, setFoodCategory } = useSelectFoodStore();
   const { category: restaurantCategory, setRestaurantCategory } = useSelectRestaurantStore();
   const { category: reviewCategory, setReviewCategory } = useReviewStore();
 
-  useEffect(() => {
-    if (selectType === 'food') {
-      setFoodCategory(selectedCategory);
-    } else if (selectType === 'restaurant') {
-      setRestaurantCategory(selectedCategory);
-    } else {
-      setReviewCategory(selectedCategory);
-    }
-  }, [selectedCategory, selectType]);
+  // 현재 타입에 맞는 스토어의 카테고리 값을 가져옵니다
+  const getCurrentStoreCategory = () => {
+    if (selectType === 'food') return foodCategory;
+    if (selectType === 'restaurant') return restaurantCategory;
+    return reviewCategory;
+  };
 
+  // 로컬 상태는 현재 타입의 스토어 카테고리로 초기화
+  const [selectedCategory, setSelectedCategory] = useState<string[]>(() => getCurrentStoreCategory());
+
+  // 로컬 상태가 변경될 때만 스토어 업데이트 (초기화 X)
+  const updateStore = (categories: string[]) => {
+    if (selectType === 'food') {
+      setFoodCategory(categories);
+    } else if (selectType === 'restaurant') {
+      setRestaurantCategory(categories);
+    } else {
+      setReviewCategory(categories);
+    }
+  };
+
+  // 컴포넌트 마운트 시 또는 selectType이 변경될 때만 로컬 상태 초기화
   useEffect(() => {
-    setSelectedCategory(
-      selectType === 'food' ? foodCategory : selectType === 'restaurant' ? restaurantCategory : reviewCategory
-    );
-  }, [foodCategory, restaurantCategory, reviewCategory, selectType]);
+    console.log('selectType', selectType);
+    setSelectedCategory(getCurrentStoreCategory());
+  }, [selectType]); // selectType이 변경될 때만 로컬 상태 초기화
 
   return (
     <div className="grid grid-cols-4 items-center gap-[16px]">
@@ -43,27 +52,29 @@ export default function CSelectCategory({ selectType, data, isDuplicate = true }
         const allCatgoryName = data?.map(m => m.name);
 
         const onMenuItemClick = () => {
+          let newCategories: string[];
+
           if (selectedCategory?.length > 0 && isSelected) {
             // 이미 선택된 경우
             if (isAll) {
-              setSelectedCategory([]);
+              newCategories = [];
             } else {
-              setSelectedCategory(prev => {
-                const filtered: string[] = prev.filter(p => p !== m?.name);
-
-                return [...filtered];
-              });
+              newCategories = selectedCategory.filter(p => p !== m?.name);
             }
           } else {
             // 새롭게 추가하는 경우
             if (isAll) {
-              setSelectedCategory(allCatgoryName);
+              newCategories = allCatgoryName;
             } else if (isDuplicate) {
-              setSelectedCategory(prev => [...prev, m?.name]);
+              newCategories = [...selectedCategory, m?.name];
             } else {
-              setSelectedCategory([m?.name]);
+              newCategories = [m?.name];
             }
           }
+
+          // 로컬 상태와 스토어 상태 모두 한번에 업데이트
+          setSelectedCategory(newCategories);
+          updateStore(newCategories);
         };
 
         return (

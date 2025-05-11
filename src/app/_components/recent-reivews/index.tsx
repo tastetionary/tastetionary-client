@@ -12,8 +12,13 @@ export default function RecentReviews({ reviews }: Props) {
       <p className="body2 pt-12">최근 다녀온 식당의 리뷰를 작성해 보세요.</p>
 
       <div className="pt-24 [&>div:last-child]:border-none">
-        {reviews.map(review => (
-          <ReviewContent address={review.address} name={review.name} summary={review.summary} />
+        {reviews.map((review, idx) => (
+          <ReviewContent
+            key={`review_content-${idx}`}
+            address={review.address}
+            name={review.name}
+            summary={review.summary}
+          />
         ))}
       </div>
 
