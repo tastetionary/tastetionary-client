@@ -5,9 +5,9 @@ import SelectMenuResultShare from './components/SelectMenuResultShare';
 export default async function SelectMenuResultSharePage({
   searchParams,
 }: {
-  searchParams: Record<string, string | undefined>;
+  searchParams: Promise<Record<string, string | undefined>>;
 }) {
-  const { category: encodedCategory, keyword: encodedKeyword, id: encodedId, name: encodedName } = searchParams;
+  const { category: encodedCategory, keyword: encodedKeyword, id: encodedId, name: encodedName } = await searchParams;
 
   const decoded = (encoded: string | undefined) => {
     if (!encoded) throw new Error('No encoded value provided');
