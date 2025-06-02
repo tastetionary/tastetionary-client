@@ -1,8 +1,9 @@
 'use client';
 
+import { PickedMenus } from '@/apis/home';
 import MenuSwiper from '../menu-swiper';
 
-export default function RecommendMenu() {
+export default function RecommendMenu({ menus }: { menus: PickedMenus[] }) {
   return (
     <>
       <div className="px-32 pt-48">
@@ -10,7 +11,7 @@ export default function RecommendMenu() {
         <p className="body2 pt-12">사람들이 오늘 가장 많이 고른 메뉴를 확인하세요.</p>
       </div>
       <div className="border-b border-solid border-neutral-bg20 pb-48 pt-24">
-        <MenuSwiper />
+        <MenuSwiper menus={menus} />
       </div>
     </>
   );
