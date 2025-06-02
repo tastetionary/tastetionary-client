@@ -16,8 +16,6 @@ export default function ReviewBrowse() {
   const { openModal } = useModal();
 
   const modal = (positions?: IPosition[]) => {
-    console.log(positions);
-
     openModal(MODAL_TYPES.bottom, {
       content: (
         <>

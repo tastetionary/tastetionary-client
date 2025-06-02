@@ -26,7 +26,7 @@ export default function MyReviews() {
       <CHeader title="리뷰 관리" />
 
       <div>
-        {!data?.reviews && (
+        {data?.reviews.length === 0 && (
           <div className="flex flex-col items-center gap-md">
             <IMG_ERROR />
 
@@ -49,7 +49,7 @@ export default function MyReviews() {
         )}
 
         {data?.reviews?.map(r => (
-          <MyReviewItem key={r.id} keywords={r.keywords} restaurant={r.restaurant} summary={r.summary} />
+          <MyReviewItem key={r.id} id={r.id} keywords={r.keywords} restaurant={r.restaurant} summary={r.summary} />
         ))}
       </div>
     </>

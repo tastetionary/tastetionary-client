@@ -42,6 +42,11 @@ export type RestaurantReviewItemType = {
   userReaction: null;
 };
 
+type DeleteRestaurantReviewType = {
+  reviewId: string;
+  token?: string;
+};
+
 interface RestaurantReviewRepository {
   getUsersRestaurantReview: ({
     reviewer_id,
@@ -51,6 +56,7 @@ interface RestaurantReviewRepository {
     token?: string;
   }) => Promise<GetUsersRestaurantReviewRes>;
   postRestaurantReview: ({ review, external, token }: postRestaurantReviewReq) => Promise<any>;
+  deleteRestaurantReview: ({ reviewId, token }: DeleteRestaurantReviewType) => Promise<any>;
 }
 
 interface GetUsersRestaurantReviewRes {
@@ -82,5 +88,11 @@ export const restaurantReviewRepository = (): RestaurantReviewRepository => {
             }
           : undefined
       ),
+    deleteRestaurantReview: async ({ reviewId, token }) =>
+      await http.delete(`/apis/v1/restaurant/review/${reviewId}`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }),
   };
 };
