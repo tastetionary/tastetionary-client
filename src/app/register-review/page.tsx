@@ -1,6 +1,6 @@
 'use client';
 
-import { postRestarantReview } from '@/apis/restaurant/review';
+import { restaurantReviewRepository } from '@/apis/restaurant/review';
 import { getRestaurantReviewOption } from '@/apis/restaurant/review/option';
 import ARROW_RIGHT from '@/assets/common/Icons/arrow_right.svg';
 import IC_MAP from '@/assets/common/map.svg';
@@ -50,29 +50,27 @@ export default function RegisterReview() {
 
   const { mutate: registerReview, isSuccess } = useMutation({
     mutationFn: (summary: string) =>
-      postRestarantReview(
-        {
-          review: {
-            category: reviewCategory[0] as RestaurantCategory,
-            keywords: reviewKeyword as RestaurantKeyword[],
-            prices: reviewPrice,
-            summary,
-            opinion: revisit === true ? 'Y' : 'N',
-          },
-          external: {
-            externalUUID: +id,
-            name: placeName,
-            latitude: +latitude,
-            longitude: +longitude,
-            ...(place_url
-              ? {
-                  referenceLink: place_url,
-                }
-              : {}),
-          },
+      restaurantReviewRepository().postRestaurantReview({
+        review: {
+          category: reviewCategory[0] as RestaurantCategory,
+          keywords: reviewKeyword as RestaurantKeyword[],
+          prices: reviewPrice,
+          summary,
+          opinion: revisit === true ? 'Y' : 'N',
         },
-        token
-      ),
+        external: {
+          externalUUID: +id,
+          name: placeName,
+          latitude: +latitude,
+          longitude: +longitude,
+          ...(place_url
+            ? {
+                referenceLink: place_url,
+              }
+            : {}),
+        },
+        token,
+      }),
     onSuccess: () => {
       router.push('/register-review/complete');
     },
