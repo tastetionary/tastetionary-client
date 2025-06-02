@@ -63,6 +63,7 @@ export default function RegisterReview() {
           name: placeName,
           latitude: +latitude,
           longitude: +longitude,
+          address,
           ...(place_url
             ? {
                 referenceLink: place_url,

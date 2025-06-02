@@ -15,6 +15,7 @@ interface postRestaurantReviewReq {
     name: string;
     latitude: number;
     longitude: number;
+    address: string;
     referenceLink?: string;
   };
 }
