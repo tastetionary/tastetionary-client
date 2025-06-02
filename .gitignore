@@ -42,3 +42,5 @@ next-env.d.ts
 
 # webstorm 설정 파일 ignore
 .idea
+
+.npmrc
