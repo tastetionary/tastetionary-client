@@ -9,6 +9,7 @@ import RecommendMenu from './_components/recommend-menu';
 
 export default async function Home() {
   const recentReviews = await homeRepository().getRecentReviews();
+  const recentPickedMenus = await homeRepository().getRecentPickedMenus();
 
   return (
     <CServerHeaderWithChildren title="맛셔너리" isHome isLogo>
@@ -20,7 +21,7 @@ export default async function Home() {
 
       <RecentReviews reviews={recentReviews} />
 
-      <RecommendMenu />
+      <RecommendMenu menus={recentPickedMenus} />
 
       <footer>
         <FooterLinks />

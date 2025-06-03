@@ -1,10 +1,11 @@
-import IC_DUMPLING from '@/assets/common/Icons/dumpling.svg';
+import { PickedMenus } from '@/apis/home';
 import DefaultButton from '@/components/Button/DefaultButton';
+import Image from 'next/image';
 import 'swiper/css';
 import { Autoplay } from 'swiper/modules';
 import { Swiper, SwiperSlide } from 'swiper/react';
 
-const MenuSwiper = () => {
+const MenuSwiper = ({ menus }: { menus: PickedMenus[] }) => {
   return (
     <Swiper
       modules={[Autoplay]}
@@ -31,55 +32,17 @@ const MenuSwiper = () => {
       loop={true}
       className="w-full [&_.swiper-slide]:!w-120 [&_.swiper-wrapper]:pt-2"
     >
-      <SwiperSlide>
-        <DefaultButton
-          bgColor="gray"
-          customStyle="flex items-center gap-[8px] py-4 pr-12 pl-8 grow h-120 w-120 flex-col"
-        >
-          <IC_DUMPLING />
-          <span className="body1">김치 볶음밥</span>
-        </DefaultButton>
-      </SwiperSlide>
-
-      <SwiperSlide>
-        <DefaultButton
-          bgColor="gray"
-          customStyle="flex items-center gap-[8px] py-4 pr-12 pl-8 grow h-120 w-120 flex-col"
-        >
-          <IC_DUMPLING />
-          <span className="body1">라면</span>
-        </DefaultButton>
-      </SwiperSlide>
-
-      <SwiperSlide>
-        <DefaultButton
-          bgColor="gray"
-          customStyle="flex items-center gap-[8px] py-4 pr-12 pl-8 grow h-120 w-120 flex-col"
-        >
-          <IC_DUMPLING />
-          <span className="body1">만두</span>
-        </DefaultButton>
-      </SwiperSlide>
-
-      <SwiperSlide>
-        <DefaultButton
-          bgColor="gray"
-          customStyle="flex items-center gap-[8px] py-4 pr-12 pl-8 grow h-120 w-120 flex-col"
-        >
-          <IC_DUMPLING />
-          <span className="body1">수제비</span>
-        </DefaultButton>
-      </SwiperSlide>
-
-      <SwiperSlide>
-        <DefaultButton
-          bgColor="gray"
-          customStyle="flex items-center gap-[8px] py-4 pr-12 pl-8 grow h-120 w-120 flex-col"
-        >
-          <IC_DUMPLING />
-          <span className="body1">삼겹살</span>
-        </DefaultButton>
-      </SwiperSlide>
+      {menus.map(menu => (
+        <SwiperSlide key={menu.id}>
+          <DefaultButton
+            bgColor="gray"
+            customStyle="flex items-center gap-[8px] py-4 pr-12 pl-8 grow h-120 w-120 flex-col"
+          >
+            <Image src={`/image/Food/food_${menu.id || 0}.svg`} alt={'menu-result'} width={64} height={64} />
+            <span className="body1">{menu.name}</span>
+          </DefaultButton>
+        </SwiperSlide>
+      ))}
     </Swiper>
   );
 };
