@@ -48,6 +48,16 @@ type DeleteRestaurantReviewType = {
   token?: string;
 };
 
+type UpdateRestaurantReviewType = {
+  reviewId: string;
+  token?: string;
+  category: RestaurantCategory;
+  keywords: RestaurantKeyword[];
+  prices: string[];
+  summary: string;
+  opinion: string;
+};
+
 interface RestaurantReviewRepository {
   getUsersRestaurantReview: ({
     reviewer_id,
@@ -58,6 +68,15 @@ interface RestaurantReviewRepository {
   }) => Promise<GetUsersRestaurantReviewRes>;
   postRestaurantReview: ({ review, external, token }: postRestaurantReviewReq) => Promise<any>;
   deleteRestaurantReview: ({ reviewId, token }: DeleteRestaurantReviewType) => Promise<any>;
+  updateRestaurantReview: ({
+    reviewId,
+    token,
+    category,
+    keywords,
+    prices,
+    summary,
+    opinion,
+  }: UpdateRestaurantReviewType) => Promise<any>;
 }
 
 interface GetUsersRestaurantReviewRes {
@@ -95,5 +114,21 @@ export const restaurantReviewRepository = (): RestaurantReviewRepository => {
           Authorization: `Bearer ${token}`,
         },
       }),
+    updateRestaurantReview: async ({ reviewId, token, category, keywords, prices, summary, opinion }) =>
+      await http.put(
+        `/apis/v1/restaurant/review/${reviewId}`,
+        {
+          category,
+          keywords,
+          prices,
+          summary,
+          opinion,
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      ),
   };
 };

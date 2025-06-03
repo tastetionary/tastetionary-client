@@ -5,7 +5,9 @@ import { MODAL_TYPES } from '@/components/Modal/GlobalModal';
 import useModal from '@/components/Modal/GlobalModal/hooks/useModal';
 import { iconToast } from '@/components/Toast';
 import useToken from '@/hooks/useToken';
+import { useReviewPlaceInfoStore } from '@/store/useReviewPlaceInfoStore';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
+import { useRouter } from 'next/navigation';
 
 export function MyReviewItem({
   id,
@@ -16,6 +18,9 @@ export function MyReviewItem({
   const { openModal, closeModal } = useModal();
   const { token } = useToken();
   const queryClient = useQueryClient();
+  const router = useRouter();
+
+  const setReviewPlaceInfo = useReviewPlaceInfoStore(state => state.setReviewPlaceInfo);
 
   const { mutate: deleteReview } = useMutation({
     mutationFn: restaurantReviewRepository().deleteRestaurantReview,
@@ -30,11 +35,25 @@ export function MyReviewItem({
     },
   });
 
+  const onReviewUpdateClick = () => {
+    router.push(`/register-review?update=${id}`);
+    closeModal(MODAL_TYPES.bottom);
+    setReviewPlaceInfo({
+      id,
+      placeName: restaurant.name,
+      address: restaurant.address,
+      latitude: '',
+      longitude: '',
+    });
+  };
+
   const reviewOptionModal = () => {
     openModal(MODAL_TYPES.bottom, {
       content: (
         <div className="px-xl py-xs">
-          <div className="body2 cursor-pointer py-md ">리뷰 수정</div>
+          <div onClick={onReviewUpdateClick} className="body2 cursor-pointer py-md ">
+            리뷰 수정
+          </div>
           <div
             onClick={reviewDeleteAskModal}
             className="body2 cursor-pointer border-t border-solid border-neutral-bg20 py-md"
