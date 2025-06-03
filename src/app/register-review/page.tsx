@@ -1,6 +1,6 @@
 'use client';
 
-import { postRestarantReview } from '@/apis/restaurant/review';
+import { restaurantReviewRepository } from '@/apis/restaurant/review';
 import { getRestaurantReviewOption } from '@/apis/restaurant/review/option';
 import ARROW_RIGHT from '@/assets/common/Icons/arrow_right.svg';
 import IC_MAP from '@/assets/common/map.svg';
@@ -9,6 +9,7 @@ import DefaultButton from '@/components/Button/DefaultButton';
 import TextArea from '@/components/Input/TextArea';
 import { MODAL_TYPES } from '@/components/Modal/GlobalModal';
 import useModal from '@/components/Modal/GlobalModal/hooks/useModal';
+import { iconToast } from '@/components/Toast';
 import CHeader from '@/components/c-header';
 import CSelectCategory from '@/components/c-select-category';
 import CSelectKeyword from '@/components/c-select-keyword';
@@ -19,7 +20,7 @@ import { theme } from '@/styles/theme';
 import { getByte, getLimitedByteText } from '@/utils';
 import { RestaurantCategory, RestaurantKeyword } from '@taehoya/tastetionary/lib/domain/restaurant/restaurant.enum';
 import { useMutation, useQuery } from '@tanstack/react-query';
-import { useRouter } from 'next/navigation';
+import { useRouter, useSearchParams } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import SelectSection from '../select-menu/components/SelectSection';
@@ -32,6 +33,7 @@ interface FormValue {
 
 export default function RegisterReview() {
   const router = useRouter();
+  const searchParams = useSearchParams();
   const { openModal, closeModal } = useModal();
   const { token } = useUser();
   const { data } = useQuery({
@@ -39,6 +41,9 @@ export default function RegisterReview() {
     queryFn: () => getRestaurantReviewOption(),
     staleTime: 0,
   });
+
+  const reviewId = searchParams.get('update');
+  const isUpdate = reviewId && !isNaN(+reviewId);
 
   const { category: reviewCategory, keyword: reviewKeyword, prices: reviewPrice } = useReviewStore();
   const { id, latitude, longitude, placeName, place_url, address } = useReviewPlaceInfoStore();
@@ -50,36 +55,55 @@ export default function RegisterReview() {
 
   const { mutate: registerReview, isSuccess } = useMutation({
     mutationFn: (summary: string) =>
-      postRestarantReview(
-        {
-          review: {
-            category: reviewCategory[0] as RestaurantCategory,
-            keywords: reviewKeyword as RestaurantKeyword[],
-            prices: reviewPrice,
-            summary,
-            opinion: revisit === true ? 'Y' : 'N',
-          },
-          external: {
-            externalUUID: +id,
-            name: placeName,
-            latitude: +latitude,
-            longitude: +longitude,
-            ...(place_url
-              ? {
-                  referenceLink: place_url,
-                }
-              : {}),
-          },
+      restaurantReviewRepository().postRestaurantReview({
+        review: {
+          category: reviewCategory[0] as RestaurantCategory,
+          keywords: reviewKeyword as RestaurantKeyword[],
+          prices: reviewPrice,
+          summary,
+          opinion: revisit === true ? 'Y' : 'N',
         },
-        token
-      ),
+        external: {
+          externalUUID: +id,
+          name: placeName,
+          latitude: +latitude,
+          longitude: +longitude,
+          address,
+          ...(place_url
+            ? {
+                referenceLink: place_url,
+              }
+            : {}),
+        },
+        token,
+      }),
     onSuccess: () => {
       router.push('/register-review/complete');
     },
   });
 
+  const { mutate: updateReview } = useMutation({
+    mutationFn: restaurantReviewRepository().updateRestaurantReview,
+    onSuccess: () => {
+      iconToast('리뷰가 수정되었어요', 'check');
+      router.push('/mypage/user/reviews');
+    },
+  });
+
   const onSubmitHandler: SubmitHandler<FormValue> = data => {
-    registerReview(data?.review);
+    if (isUpdate) {
+      updateReview({
+        reviewId: String(reviewId),
+        category: reviewCategory[0] as RestaurantCategory,
+        keywords: reviewKeyword as RestaurantKeyword[],
+        prices: reviewPrice,
+        summary: data.review,
+        opinion: revisit === true ? 'Y' : 'N',
+        token,
+      });
+    } else {
+      registerReview(data?.review);
+    }
   };
 
   useEffect(() => {
@@ -98,7 +122,7 @@ export default function RegisterReview() {
 
   return (
     <>
-      <CHeader title="식당 리뷰 작성" />
+      <CHeader title={isUpdate ? '식당 리뷰 수정' : '식당 리뷰 작성'} />
 
       <S.TitleSection>
         <S.RestaurantName>{placeName ?? ''}</S.RestaurantName>
@@ -178,7 +202,7 @@ export default function RegisterReview() {
             disabled={revisit === null || reviewCategory?.length === 0 || reviewKeyword?.length === 0}
             customStyle="flex-grow py-12"
           >
-            <span className="body1 text-white">리뷰 등록하기</span>
+            <span className="body1 text-white">{isUpdate ? '리뷰 수정하기' : '리뷰 등록하기'}</span>
           </DefaultButton>
         </BottomButtonContainer>
       </form>

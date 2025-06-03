@@ -39,7 +39,11 @@ export default function CHeader({ isLogo = false, title, noBackBtn = false, isHo
   return (
     <div className="fixed top-0 z-3 flex h-56 w-500 items-center justify-between gap-md border-b-1 border-solid border-b-neutral-bg20 bg-white mobile:w-full">
       {renderLeftItems()}
-      <div className="body2 flex items-center justify-center !font-pretendard font-normal">
+
+      <div
+        onClick={() => push('/')}
+        className="body2 flex cursor-pointer items-center justify-center !font-pretendard font-normal"
+      >
         {isLogo && <MAIN_LOGO width={40} height={30} />}
         {title}
       </div>

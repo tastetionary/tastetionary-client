@@ -39,7 +39,7 @@ export default function BottomModal({ content, removeExpandBtn }: Props) {
       }}
     >
       <div className={cn(S.bottomModalContainerVariants({ animation: state, expand: expandState }))}>
-        <div className="flex w-full  items-center justify-center py-12">
+        <div className={cn('flex w-full  items-center justify-center', removeExpandBtn ? '' : 'py-12')}>
           {!removeExpandBtn && (
             <div
               className="flex cursor-pointer items-center justify-center gap-4"
