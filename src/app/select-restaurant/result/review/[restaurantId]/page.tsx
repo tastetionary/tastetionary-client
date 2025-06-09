@@ -1,17 +1,19 @@
 'use client';
 
 import CHeader from '@/components/c-header';
+import { use } from 'react';
 import ReviewItem from '../../components/ReviewItem';
 import useRestaurantReviewQuery from './_hooks/useRestaurantReivewQuery.ts';
 
 interface Props {
-  params: {
+  params: Promise<{
     restaurantId: string;
-  };
+  }>;
 }
 
 export default function SelectRestaurantResultReview({ params }: Props) {
-  const { restaurantReviews } = useRestaurantReviewQuery({ restaurantId: params.restaurantId });
+  const resolvedParams = use(params);
+  const { restaurantReviews } = useRestaurantReviewQuery({ restaurantId: resolvedParams.restaurantId });
 
   return (
     <>
@@ -24,9 +26,7 @@ export default function SelectRestaurantResultReview({ params }: Props) {
           </div>
         </div>
 
-        <div className="mt-md ">
-          {restaurantReviews?.map((reviews, i) => <ReviewItem {...reviews} key={reviews.id} />)}
-        </div>
+        <div className="mt-md ">{restaurantReviews?.map(reviews => <ReviewItem {...reviews} key={reviews.id} />)}</div>
       </div>
     </>
   );
