@@ -13,8 +13,16 @@ interface PostPreferenceParams extends PreferenceCategory {
   restaurantId: number;
 }
 
+export type GetPreferenceRes = {
+  address: string;
+  externalUUID: string;
+  id: string;
+  name: string;
+  phone: string;
+};
+
 interface PreferenceRepository {
-  getPreference: ({ category, token }: GetPreferenceParams) => Promise<any>;
+  getPreference: ({ category, token }: GetPreferenceParams) => Promise<GetPreferenceRes[]>;
   postPreference: ({ category, restaurantId, token }: PostPreferenceParams) => Promise<any>;
   deletePreference: ({ category, restaurantId, token }: PostPreferenceParams) => Promise<any>;
 }
