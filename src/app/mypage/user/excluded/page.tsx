@@ -8,31 +8,31 @@ import CHeader from '@/components/c-header';
 import useUser from '@/hooks/useUser';
 import { useQuery } from '@tanstack/react-query';
 import { useRouter } from 'next/navigation';
-import { PreferenceListItem } from './components/BookmarkItem';
+import { PreferenceListItem } from '../bookmark/components/BookmarkItem';
 
-export default function MyReviews() {
+export default function MyExcluded() {
   const router = useRouter();
   const { token, data: userData } = useUser();
   const { data } = useQuery({
-    queryKey: ['my-bookmark', token],
+    queryKey: ['my-excluded', token],
     queryFn: async () => {
-      return await preferenceRepository().getPreference({ category: 'bookmark', token: String(token) });
+      return await preferenceRepository().getPreference({ category: 'excluded', token: String(token) });
     },
     enabled: Boolean(token) && Boolean(userData?.id),
   });
 
   return (
     <>
-      <CHeader title="북마크 관리" />
+      <CHeader title="추천 제외 식당 관리" />
 
       <div>
         {data?.length === 0 && (
           <div className="flex flex-col items-center gap-md">
             <IMG_ERROR />
 
-            <div className="title2 font-bold">북마크한 식당이 없어요</div>
+            <div className="title2 font-bold">추천을 제외할 식당이 없어요</div>
 
-            <p className="body2 mt-xs text-neutral-bg60">식당을 고르고 마음에 드는 식당을 찾아 북마크해보세요.</p>
+            <p className="body2 mt-xs text-neutral-bg60">조건에 맞는 식당을 골라보세요</p>
 
             <BottomButtonContainer>
               <footer className="flex w-full flex-col gap-md">
@@ -59,7 +59,7 @@ export default function MyReviews() {
         <div>
           {data?.map(item => (
             <PreferenceListItem
-              type="bookmark"
+              type="excluded"
               key={item.id}
               id={item.id}
               name={item.name}

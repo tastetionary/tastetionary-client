@@ -6,23 +6,23 @@ import { iconToast } from '@/components/Toast';
 import useToken from '@/hooks/useToken';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 
-export function BookmarkItem({
-  name,
-  phone,
-  address,
-  id,
-}: Pick<GetPreferenceRes, 'address' | 'name' | 'phone' | 'id'>) {
+type PreferenceListItemType = Pick<GetPreferenceRes, 'address' | 'name' | 'phone' | 'id'> & {
+  type: 'bookmark' | 'excluded';
+};
+
+export function PreferenceListItem({ type, name, phone, address, id }: PreferenceListItemType) {
   const { openModal, closeModal } = useModal();
   const { token } = useToken();
   const queryClient = useQueryClient();
 
-  const { mutate: deleteBookmark } = useMutation({
+  const { mutate: deletePreference } = useMutation({
     mutationFn: preferenceRepository().deletePreference,
     onSuccess: () => {
-      queryClient.setQueryData(['my-bookmark', token], (oldData: GetPreferenceRes[]) =>
-        oldData.filter(data => data.id !== id)
+      queryClient.setQueryData(
+        [type === 'bookmark' ? 'my-bookmark' : 'my-excluded', token],
+        (oldData: GetPreferenceRes[]) => oldData.filter(data => data.id !== id)
       );
-      iconToast('북마크가 삭제되었어요', 'check');
+      iconToast(type === 'bookmark' ? '북마크가 삭제되었어요' : '제외 식당에서 삭제되었어요', 'check');
       closeModal(MODAL_TYPES.dialog);
       closeModal(MODAL_TYPES.bottom);
     },
@@ -30,11 +30,14 @@ export function BookmarkItem({
 
   const bookmarkDeleteAskModal = () => {
     openModal(MODAL_TYPES.dialog, {
-      title: '북마크 삭제',
-      message: '해당 식당에 대한 북마크를 삭제하시겠어요?',
+      title: type === 'bookmark' ? '북마크 삭제' : '추천 제외 식당 삭제',
+      message:
+        type === 'bookmark'
+          ? '해당 식당에 대한 북마크를 삭제하시겠어요?'
+          : '해당 식당을 추천 제외 식당에서 삭제하시겠어요?',
       cancelText: '취소',
       confirmText: '삭제',
-      handleConfirm: () => deleteBookmark({ category: 'bookmark', token, restaurantId: +id }),
+      handleConfirm: () => deletePreference({ category: type, token, restaurantId: +id }),
     });
   };
 

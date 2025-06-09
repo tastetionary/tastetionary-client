@@ -95,7 +95,7 @@ export default function MyPagePage() {
                   { name: '개인정보 관리', clickEvent: () => push('/mypage/user/manage-info') },
                   { name: '작성한 리뷰 관리', clickEvent: () => push('/mypage/user/reviews') },
                   { name: '북마크 식당 관리', clickEvent: () => push('/mypage/user/bookmark') },
-                  { name: '추천 제외 식당 보기', clickEvent: () => push('/ready') },
+                  { name: '추천 제외 식당 보기', clickEvent: () => push('/mypage/user/excluded') },
                 ]}
               />
             )}
