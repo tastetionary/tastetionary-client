@@ -6,8 +6,13 @@ interface OnNextSearchParams {
   onNextPage: 'home';
 }
 
-export default function SelectRestaurantRegionSetting({ searchParams }: { searchParams?: OnNextSearchParams }) {
-  const onNextPage = searchParams?.onNextPage === 'home' ? '/' : '/select-restaurant';
+export default async function SelectRestaurantRegionSetting({
+  searchParams,
+}: {
+  searchParams?: Promise<OnNextSearchParams>;
+}) {
+  const resolvedSearchParams = await searchParams;
+  const onNextPage = resolvedSearchParams?.onNextPage === 'home' ? '/' : '/select-restaurant';
 
   return <CRegionSetting category="dining_area" onNextPage={onNextPage} />;
 }

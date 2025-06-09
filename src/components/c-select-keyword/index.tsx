@@ -10,32 +10,41 @@ interface Props {
 }
 
 export default function CSelectKeyword({ data, selectType }: Props) {
-  const [selectedKeyword, setSelectedKeyword] = useState<string[]>([]);
-
   const { keyword: foodKeyword, setFoodKeyword } = useSelectFoodStore();
   const { keyword: restaurantKeyword, setRestaurantKeyword } = useSelectRestaurantStore();
   const { keyword: reviewKeyword, setReviewKeyword } = useReviewStore();
 
-  useEffect(() => {
-    if (selectType === 'food') {
-      setFoodKeyword(selectedKeyword);
-    } else if (selectType === 'restaurant') {
-      setRestaurantKeyword(selectedKeyword);
-    } else {
-      setReviewKeyword(selectedKeyword);
-    }
-  }, [selectedKeyword, selectType]);
+  // 현재 타입에 맞는 스토어의 키워드 값을 가져오는 함수
+  const getCurrentStoreKeyword = () => {
+    if (selectType === 'food') return foodKeyword;
+    if (selectType === 'restaurant') return restaurantKeyword;
+    return reviewKeyword;
+  };
 
+  // 로컬 상태는 현재 타입의 스토어 키워드로 초기화
+  const [selectedKeyword, setSelectedKeyword] = useState<string[]>(() => getCurrentStoreKeyword());
+
+  // 스토어 업데이트 함수
+  const updateStore = (keywords: string[]) => {
+    if (selectType === 'food') {
+      setFoodKeyword(keywords);
+    } else if (selectType === 'restaurant') {
+      setRestaurantKeyword(keywords);
+    } else {
+      setReviewKeyword(keywords);
+    }
+  };
+
+  // selectType이 변경될 때만 로컬 상태 초기화
   useEffect(() => {
-    setSelectedKeyword(
-      selectType === 'food' ? foodKeyword : selectType === 'restaurant' ? restaurantKeyword : reviewKeyword
-    );
-  }, [foodKeyword, restaurantKeyword, reviewKeyword, selectType]);
+    setSelectedKeyword(getCurrentStoreKeyword());
+  }, [selectType]);
 
   return (
     <div className="flex flex-wrap gap-[14px]">
       {data?.map((k, i) => {
         const isSelected = selectedKeyword?.includes(k?.name);
+        const isAll = i === 0; // 첫 번째 항목이 '전체' 옵션이라고 가정
 
         return (
           <DefaultButton
@@ -45,27 +54,28 @@ export default function CSelectKeyword({ data, selectType }: Props) {
             key={k.id}
             type="button"
             onClick={() => {
+              let newKeywords: string[];
+
               if (selectedKeyword?.length > 0 && isSelected) {
                 // 이미 선택된 경우
-                if (i === 0) {
-                  setSelectedKeyword([]);
+                if (isAll) {
+                  newKeywords = [];
                 } else {
-                  setSelectedKeyword(prev => {
-                    const filtered: string[] = prev.filter(p => p !== k?.name);
-
-                    return [...filtered];
-                  });
+                  newKeywords = selectedKeyword.filter(p => p !== k?.name);
                 }
               } else {
                 // 새롭게 추가하는 경우
-                if (i === 0) {
-                  const allKeywordName = data?.map(k => k.name);
-
-                  setSelectedKeyword(allKeywordName);
+                if (isAll) {
+                  const allKeywordNames = data?.map(k => k.name) || [];
+                  newKeywords = allKeywordNames;
                 } else {
-                  setSelectedKeyword(prev => [...prev, k?.name]);
+                  newKeywords = [...selectedKeyword, k?.name];
                 }
               }
+
+              // 로컬 상태와 스토어 상태 모두 한번에 업데이트
+              setSelectedKeyword(newKeywords);
+              updateStore(newKeywords);
             }}
           >
             <span className="body1">{k.name}</span>

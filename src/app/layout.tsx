@@ -3,6 +3,7 @@ import StyledComponentsWrapper from '@/lib/styled-components/StyledComponentsWra
 import '@/styles/globals.css';
 import { Metadata } from 'next';
 import localFont from 'next/font/local';
+import { Suspense } from 'react';
 
 const mainFont = localFont({
   src: '../assets/fonts/Galmuri9.woff2',
@@ -29,7 +30,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       </head>
       <body className={`${subFont.variable} ${mainFont.variable}`} suppressHydrationWarning>
         <StyledComponentsRegistry>
-          <StyledComponentsWrapper>{children}</StyledComponentsWrapper>
+          <StyledComponentsWrapper>
+            <Suspense fallback={<div>Loading...</div>}>{children}</Suspense>
+          </StyledComponentsWrapper>
         </StyledComponentsRegistry>
       </body>
     </html>

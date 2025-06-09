@@ -22,7 +22,6 @@ import recommendUrl4_2 from '@/assets/common/contents/banner04/recommendUrl4-2.j
 import recommendUrl4_3 from '@/assets/common/contents/banner04/recommendUrl4-3.jpg';
 import url4 from '@/assets/common/contents/banner04/url4.jpg';
 // 다섯번째 컨텐츠
-// 네번째 컨텐츠
 import recommendUrl5_1 from '@/assets/common/contents/banner05/recommendUrl5-1.jpg';
 import recommendUrl5_2 from '@/assets/common/contents/banner05/recommendUrl5-2.jpg';
 import recommendUrl5_3 from '@/assets/common/contents/banner05/recommendUrl5-3.jpg';
@@ -33,13 +32,14 @@ import CServerHeaderWithChildren from '@/components/c-server-header-with-childre
 import DefaultTextBox from '@/components/c-text-box';
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
+import { Fragment, use } from 'react';
 
 interface Params {
   detail: string[];
 }
 
-export default function ContentDetail({ params }: { params: Params }) {
-  console.log('params', params.detail[0]);
+export default function ContentDetail({ params }: { params: Promise<Params> }) {
+  const paramsDetail = use(params).detail[0];
   const router = useRouter();
   const contents = [
     {
@@ -145,14 +145,14 @@ export default function ContentDetail({ params }: { params: Params }) {
   ];
 
   const getFindContents = () => {
-    return contents.filter(content => content.params === params.detail[0]);
+    return contents.filter(content => content.params === paramsDetail);
   };
 
   return (
     <CServerHeaderWithChildren title="맛셔너리" isLogo>
-      {getFindContents().map(content => {
+      {getFindContents().map((content, idx) => {
         return (
-          <>
+          <Fragment key={`content-detail-${idx}`}>
             <Image src={content.url} alt="content" style={{ width: '100%' }} />
             <div className="mb-4 ml-8 mr-8 mt-12">
               <p className="title4 font-bold">{content.title}</p>
@@ -195,7 +195,7 @@ export default function ContentDetail({ params }: { params: Params }) {
                 <span className="!font-pretendard text-white">다른 메뉴도 고르러 가기</span>
               </DefaultButton>
             </div>
-          </>
+          </Fragment>
         );
       })}
     </CServerHeaderWithChildren>

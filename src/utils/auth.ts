@@ -16,7 +16,7 @@ export function withAuth<T extends object>(
   // HOC의 반환값
   return async (props: T) => {
     // 쿠키에서 토큰 가져오기
-    const cookieStore = cookies();
+    const cookieStore = await cookies();
     const token = cookieStore.get('token')?.value;
 
     console.log('💫 token form hoc', token);
@@ -46,7 +46,7 @@ export function withNoAuth<T extends object>(
   // HOC의 반환값
   return async (props: T) => {
     // 쿠키에서 토큰 가져오기
-    const cookieStore = cookies();
+    const cookieStore = await cookies();
     const token = cookieStore.get('token')?.value;
 
     // 토큰이 없으면 리디렉션

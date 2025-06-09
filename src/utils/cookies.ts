@@ -1,8 +1,8 @@
 import { cookies } from 'next/headers';
 import nookies from 'nookies';
 
-export function getServerToken() {
-  const cookieStore = cookies();
+export async function getServerToken() {
+  const cookieStore = await cookies();
   const ctx = { req: { headers: { cookie: cookieStore.toString() } } };
   return nookies.get(ctx).token;
 }
