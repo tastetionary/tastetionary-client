@@ -28,7 +28,7 @@ export function PreferenceListItem({ type, name, phone, address, id }: Preferenc
     },
   });
 
-  const bookmarkDeleteAskModal = () => {
+  const deletePreferenceAskModal = () => {
     openModal(MODAL_TYPES.dialog, {
       title: type === 'bookmark' ? '북마크 삭제' : '추천 제외 식당 삭제',
       message:
@@ -53,7 +53,7 @@ export function PreferenceListItem({ type, name, phone, address, id }: Preferenc
         <div className="body2">{phone}</div>
       </div>
 
-      <button onClick={bookmarkDeleteAskModal}>
+      <button onClick={deletePreferenceAskModal}>
         <IC_CLOSE />
       </button>
     </div>
