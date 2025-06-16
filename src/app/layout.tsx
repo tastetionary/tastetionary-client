@@ -31,7 +31,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <body className={`${subFont.variable} ${mainFont.variable}`} suppressHydrationWarning>
         <StyledComponentsRegistry>
           <StyledComponentsWrapper>
-            <Suspense fallback={<div>Loading...</div>}>{children}</Suspense>
+            <Suspense fallback={<div></div>}>{children}</Suspense>
           </StyledComponentsWrapper>
         </StyledComponentsRegistry>
       </body>

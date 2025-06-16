@@ -7,6 +7,9 @@ import MenuSelection from './_components/menu-selection';
 import RecentReviews from './_components/recent-reivews';
 import RecommendMenu from './_components/recommend-menu';
 
+// 동적 렌더링 강제 (캐싱 비활성화)
+export const dynamic = 'force-dynamic';
+
 export default async function Home() {
   const recentReviews = await homeRepository().getRecentReviews();
   const recentPickedMenus = await homeRepository().getRecentPickedMenus();
