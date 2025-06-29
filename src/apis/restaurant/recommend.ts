@@ -37,6 +37,7 @@ export interface RestaurantRecommendRes {
   longitude: number;
   distance: number;
   reviews: RestaurantReview[];
+  bookmark: boolean;
   aggregateReviews?: {
     categories: string[];
     summaries: string[];

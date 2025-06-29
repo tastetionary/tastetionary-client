@@ -1,3 +1,5 @@
+'use client';
+
 import IC_CHECK from '@/assets/common/Icons/check.svg';
 import IC_EMAIL from '@/assets/common/Icons/email.svg';
 import IC_PENCIL from '@/assets/common/Icons/pencil.svg';
@@ -8,17 +10,23 @@ import 'react-toastify/dist/ReactToastify.css';
 type ToastIcon = 'pencil' | 'check' | 'prohibit' | 'mail';
 
 export const iconToast = (message: string, type: ToastIcon) => {
-  toast(message, {
-    icon:
-      type === 'check' ? (
-        <IC_CHECK />
-      ) : type === 'pencil' ? (
-        <IC_PENCIL />
-      ) : type === 'prohibit' ? (
-        <IC_PROHIBIT />
-      ) : type === 'mail' ? (
-        <IC_EMAIL width={24} height={24} />
-      ) : null,
+  const getIconComponent = () => {
+    switch (type) {
+      case 'check':
+        return IC_CHECK && <IC_CHECK />;
+      case 'pencil':
+        return IC_PENCIL && <IC_PENCIL />;
+      case 'prohibit':
+        return IC_PROHIBIT && <IC_PROHIBIT />;
+      case 'mail':
+        return IC_EMAIL && <IC_EMAIL width={24} height={24} />;
+      default:
+        return false;
+    }
+  };
+
+  toast(<span>{message}</span>, {
+    icon: getIconComponent(),
   });
 };
 

@@ -36,8 +36,6 @@ export default function SelectRestaurantResult() {
   const lng = restaurant?.longitude;
   const review = restaurant?.review;
 
-  console.log(restaurant);
-
   const { mutate: excludedRestaurant } = useMutation({
     mutationFn: preferenceRepository().postPreference,
     onSuccess: () => {

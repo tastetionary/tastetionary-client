@@ -10,8 +10,8 @@ import { useState } from 'react';
 export default function RestaurantBookmarkBtn() {
   const { token } = useUser();
 
-  const [isBookMarked, setIsBookMarked] = useState(false);
   const { restaurant } = useSelectResultStore();
+  const [isBookMarked, setIsBookMarked] = useState(restaurant?.bookmark ?? false);
 
   const { mutate: addBookMark } = useMutation({
     mutationFn: preferenceRepository().postPreference,
@@ -23,7 +23,10 @@ export default function RestaurantBookmarkBtn() {
 
   const { mutate: deleteBookMark } = useMutation({
     mutationFn: preferenceRepository().deletePreference,
-    onSuccess: () => setIsBookMarked(false),
+    onSuccess: () => {
+      iconToast('북마크가 제거되었습니다.', 'check');
+      setIsBookMarked(false);
+    },
   });
 
   const handleBookMark = () => {
@@ -34,7 +37,6 @@ export default function RestaurantBookmarkBtn() {
     };
 
     if (isBookMarked) return deleteBookMark(data);
-
     return addBookMark(data);
   };
 
