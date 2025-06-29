@@ -10,6 +10,7 @@ interface RestaurantInfo {
   latitude: number;
   longitude: number;
   id: string;
+  bookmark?: boolean;
   review?: {
     total: number;
     keywords: string[];
@@ -42,6 +43,7 @@ const defaultRestaurant = {
   latitude: 0,
   longitude: 0,
   id: '0',
+  bookmark: false,
   reviews: [],
 };
 
@@ -66,6 +68,7 @@ export const useSelectResultStore = create<SelectResultState>()(
               id: value.id,
               longitude: value.longitude,
               reviews: value.reviews,
+              bookmark: value.bookmark,
               ...(value.review?.total &&
               value.review?.keywords &&
               value.review?.aggregatePrice &&

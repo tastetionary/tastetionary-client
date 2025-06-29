@@ -108,6 +108,7 @@ export default function CRecommendButton({ selectType, btnText, ...rest }: Props
             `/select-menu/result-share?category=${encodedFoodCategory}&keyword=${encodedFoodKeyword}&id=${encodedFoodId}&name=${encodedFoodName}`
           );
         }
+        console.log('res', res);
 
         if (res && 'aggregateReviews' in res) {
           setSelectRestaurantResult({
@@ -116,6 +117,7 @@ export default function CRecommendButton({ selectType, btnText, ...rest }: Props
             longitude: res?.longitude ?? 126.570667,
             id: res?.id,
             reviews: res?.reviews,
+            bookmark: res?.bookmark,
             ...(res?.aggregateReviews
               ? {
                   review: {
