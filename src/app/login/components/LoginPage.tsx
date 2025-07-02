@@ -7,13 +7,13 @@ import { useRouter } from 'next/navigation';
 import LoginBtn from '../components/LoginBtn';
 import useGoogleLogin from '../hooks/useGoogleLogin';
 import useKakaoLogin from '../hooks/useKakaoLogin';
-import useNaverLogin from '../hooks/useNaverLogin';
+// import useNaverLogin from '../hooks/useNaverLogin';
 
 export default function LoginPage() {
   const { push } = useRouter();
   const { loginHandler: kakaoLogin } = useKakaoLogin();
   const { loginHandler: googleLogin } = useGoogleLogin();
-  const { loginHandler: naverLogin } = useNaverLogin();
+  // const { loginHandler: naverLogin } = useNaverLogin();
 
   return (
     <>

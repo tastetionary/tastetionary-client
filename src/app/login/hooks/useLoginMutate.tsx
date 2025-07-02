@@ -45,10 +45,15 @@ const useLoginMutate = () => {
     mutationFn: authRepository().postLogin,
     onSuccess: value => {
       const token = value.accessToken;
+      const expirationDate = new Date(value.accessTokenExpiredAt);
 
       setCookie(null, 'token', token, {
         path: '/',
+        expires: expirationDate,
       });
+
+      console.log('login 후 token', token);
+      console.log('token 만료일', value.accessTokenExpiredAt);
 
       getUserInfo(token);
     },
@@ -67,6 +72,7 @@ const useLoginMutate = () => {
   const { mutate: getUserInfo } = useMutation({
     mutationFn: (token: string) => getUser(token),
     onSuccess: res => {
+      console.log('getUserInfo 성공', res);
       queryClient.setQueryData(['user'], res);
 
       push('/');

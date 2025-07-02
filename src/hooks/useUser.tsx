@@ -1,6 +1,7 @@
 import { UserRes, getUser } from '@/apis/user/getUser';
 import { setUser } from '@sentry/nextjs';
 import { UseQueryResult, useQuery, useQueryClient } from '@tanstack/react-query';
+import { useEffect } from 'react';
 import useToken from './useToken';
 
 type UseUserResult = Partial<UseQueryResult<UserRes, any>> & {
@@ -13,12 +14,21 @@ export default function useUser(): UseUserResult {
   const { token } = useToken();
   const queryClient = useQueryClient();
 
+  // 토큰이 없어질 때 (만료되어 쿠키 삭제) 사용자 쿼리 캐시 제거
+  useEffect(() => {
+    if (!token) {
+      console.log('토큰 없어짐');
+      queryClient.removeQueries({ queryKey: ['user'] });
+      queryClient.setQueryData(['user'], undefined);
+    }
+  }, [token, queryClient]);
+
   const res = useQuery<UserRes>({
-    queryKey: ['user', token],
+    queryKey: ['user'],
     queryFn: () => getUser(token ?? ''),
     enabled: !!token,
     staleTime: 1000,
-    initialData: queryClient.getQueryData(['user']),
+    initialData: token ? queryClient.getQueryData(['user']) : undefined,
   });
 
   if (res.data) {

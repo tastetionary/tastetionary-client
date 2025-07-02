@@ -116,7 +116,11 @@ export const useAxiosInterceptor = () => {
 
       if (error.response.data.statusCode === 400) {
         serverErrorTrigger(error.response.data.errorCode, error.response.data.originMessage);
+        return;
+      }
 
+      if (error.response.data.statusCode === 401) {
+        serverErrorTrigger('UNAUTHORIZED', ERROR_CODE.UNAUTHORIZED);
         return;
       }
 
