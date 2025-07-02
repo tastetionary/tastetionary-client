@@ -16,4 +16,5 @@ export const ERROR_CODE = {
   ERR1014: '유효하지 않은 인증 유형입니다. (never, google, kakao)',
   ERR3001: '외부 서버 에러 (e.g. 인증 이메일)',
   ERR5001: '내부 서버 에러',
+  UNAUTHORIZED: '만료된 토큰입니다. \n 로그인을 다시 해주세요.',
 };

@@ -13,6 +13,8 @@ export default function useUser(): UseUserResult {
   const { token } = useToken();
   const queryClient = useQueryClient();
 
+  console.log('useUser hook 호출!');
+
   const res = useQuery<UserRes>({
     queryKey: ['user', token],
     queryFn: () => getUser(token ?? ''),
