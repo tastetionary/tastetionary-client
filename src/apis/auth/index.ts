@@ -13,8 +13,15 @@ interface GetValidateNicknameParams {
   nickname: string;
 }
 
+interface PostLoginResponse {
+  accessToken: string;
+  refreshToken: string;
+  accessTokenExpiredAt: string;
+  refreshTokenExpiredAt: string;
+}
+
 interface AuthRepository {
-  postLogin: ({ identification, password, category, code }: PostLoginParams) => Promise<any>;
+  postLogin: ({ identification, password, category, code }: PostLoginParams) => Promise<PostLoginResponse>;
   postLogout: ({ token }: { token: string }) => Promise<any>;
   updatePassword: ({ password, token }: { password: string; token: string }) => Promise<any>;
   resetPassword: ({ historyId, code }: { historyId: number; code: string }) => Promise<any>;
