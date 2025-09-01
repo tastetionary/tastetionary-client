@@ -43,7 +43,7 @@ const SentryWebpackPluginOptions = {
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   // output: 'standalone',
-  staticPageGenerationTimeout: 90,
+  staticPageGenerationTimeout: 600,
   compiler: {
     styledComponents: true,
   },
