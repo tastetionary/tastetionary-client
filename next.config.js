@@ -59,7 +59,7 @@ const nextConfig = {
     return [
       {
         source: '/apis/:path*',
-        destination: process.env.NEXT_PUBLIC_DEV_SERVER_URL,
+        destination: process.env.NEXT_PUBLIC_SERVER_URL,
       },
       {
         source: '/search-image-api:path*',
