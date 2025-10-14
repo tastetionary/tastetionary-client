@@ -1,7 +1,7 @@
 import axios, { AxiosInstance, AxiosRequestConfig, AxiosResponse } from 'axios';
 
 // Base URL 설정
-const baseUrl = process.env.NODE_ENV === 'development' ? 'http://localhost:3000' : 'https://www.tastetionary.com';
+const baseUrl = process.env.NODE_ENV === 'development' ? 'http://localhost:3000' : 'https://tastetionary.vercel.app/';
 
 // Axios 인스턴스 생성
 export const axiosInstance: AxiosInstance = axios.create({
