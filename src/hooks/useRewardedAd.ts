@@ -30,22 +30,52 @@ export function useRewardedAd(onRewardEarned?: () => void) {
       switch (type) {
         case 'AD_READY':
           setIsAdReady(payload.ready);
+          console.log('[useRewardedAd] 광고 준비 상태:', payload.ready);
           break;
         case 'AD_REWARD_EARNED':
           // 보상 획득 처리
+          console.log('[useRewardedAd] 보상 획득 - 다음 광고 준비 시작');
           handleRewardEarned(payload);
+
+          // 보상 획득 후 즉시 다음 광고 로드
+          setIsAdReady(false);
+          setTimeout(() => {
+            console.log('[useRewardedAd] 다음 광고 로드 요청');
+            (window as any).loadRewardedAd?.();
+          }, 1000);
           break;
         case 'AD_CLOSED':
           // 광고 닫힘 처리
-          console.log('Ad closed');
+          console.log('[useRewardedAd] 광고 닫힘 - 다음 광고 로드 시작');
+          setIsAdReady(false);
+
+          // 광고 닫힌 후 즉시 다음 광고 로드
+          setTimeout(() => {
+            console.log('[useRewardedAd] 광고 닫힘 후 다음 광고 로드 요청');
+            (window as any).loadRewardedAd?.();
+          }, 1000);
           break;
         case 'AD_ERROR':
           // 에러 처리
-          console.error('Ad error:', payload.error);
+          console.error('[useRewardedAd] 광고 에러:', payload.error);
           setIsAdReady(false);
+
+          // 에러 발생 시 재시도
+          setTimeout(() => {
+            console.log('[useRewardedAd] 에러 후 광고 재로드 시도');
+            (window as any).loadRewardedAd?.();
+          }, 3000);
           break;
         case 'AD_NOT_READY':
           setIsAdReady(false);
+          console.warn('[useRewardedAd] 광고가 아직 준비되지 않음 - 로드 재요청');
+
+          // 광고가 준비되지 않았다면 즉시 로드 요청
+          setTimeout(() => {
+            console.log('[useRewardedAd] AD_NOT_READY 상태에서 광고 로드 요청');
+            (window as any).loadRewardedAd?.();
+          }, 500);
+
           alert('광고가 아직 준비되지 않았습니다. 잠시 후 다시 시도해주세요.');
           break;
       }
@@ -54,10 +84,17 @@ export function useRewardedAd(onRewardEarned?: () => void) {
     if (checkIfInApp()) {
       window.addEventListener('appMessage', handleAppMessage as EventListener);
 
+      // 초기 광고 로드 요청
+      setTimeout(() => {
+        console.log('[useRewardedAd] 앱 초기화 - 광고 로드 요청');
+        (window as any).loadRewardedAd?.();
+      }, 500);
+
       // 초기 광고 준비 상태 확인
       setTimeout(() => {
+        console.log('[useRewardedAd] 광고 준비 상태 확인');
         (window as any).checkAdReady?.();
-      }, 1000);
+      }, 2000);
     }
 
     return () => {
