@@ -76,7 +76,6 @@ export function useRewardedAd(onRewardEarned?: () => void) {
             (window as any).loadRewardedAd?.();
           }, 500);
 
-          alert('광고가 아직 준비되지 않았습니다. 잠시 후 다시 시도해주세요.');
           break;
       }
     };
