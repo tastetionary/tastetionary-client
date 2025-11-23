@@ -17,7 +17,6 @@ export default function useUser(): UseUserResult {
   // 토큰이 없어질 때 (만료되어 쿠키 삭제) 사용자 쿼리 캐시 제거
   useEffect(() => {
     if (!token) {
-      console.log('토큰 없어짐');
       queryClient.removeQueries({ queryKey: ['user'] });
       queryClient.setQueryData(['user'], undefined);
     }

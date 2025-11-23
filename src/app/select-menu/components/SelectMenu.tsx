@@ -26,7 +26,7 @@ export default function SelectMenu() {
 
   return (
     <>
-      <CHeader title="메뉴 고르기" />
+      <CHeader title="메뉴 고르기" onBackPress={resetSelectFood} />
 
       <ContentLayout>
         <SelectSection title={{ bold: '음식 종류', normal: '를 선택하세요.' }} subtitle="여러 개 선택 가능합니다.">

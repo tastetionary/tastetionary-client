@@ -10,12 +10,18 @@ interface Props {
   title: string;
   noBackBtn?: boolean;
   isHome?: boolean;
+  onBackPress?: () => void;
 }
 
 // 호진FIXME: noBackBtn -> negative로 조건을 분기하는것보다 positive로 조건을 만드는게 좋아보임
 // EX) noBackBtn -> isBackBtn
-export default function CHeader({ isLogo = false, title, noBackBtn = false, isHome }: Props) {
+export default function CHeader({ isLogo = false, title, noBackBtn = false, isHome, onBackPress }: Props) {
   const { back, push } = useRouter();
+
+  const handleBackPress = () => {
+    onBackPress?.();
+    back();
+  };
 
   const renderLeftItems = () => {
     if (isHome) {
@@ -27,7 +33,7 @@ export default function CHeader({ isLogo = false, title, noBackBtn = false, isHo
     }
     if (!noBackBtn) {
       return (
-        <button className="flex h-55 w-56 items-center justify-center" onClick={back} type="button">
+        <button className="flex h-55 w-56 items-center justify-center" onClick={handleBackPress} type="button">
           <ARROW width={24} height={24} />
         </button>
       );
