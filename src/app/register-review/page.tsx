@@ -18,7 +18,7 @@ import { useReviewPlaceInfoStore } from '@/store/useReviewPlaceInfoStore';
 import { useReviewStore } from '@/store/useReviewStore';
 import { theme } from '@/styles/theme';
 import { getByte, getLimitedByteText } from '@/utils';
-import { RestaurantCategory, RestaurantKeyword } from '@taehoya/tastetionary/lib/domain/restaurant/restaurant.enum';
+import { RestaurantCategory, RestaurantKeyword } from '@/types/enums';
 import { useMutation, useQuery } from '@tanstack/react-query';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { useEffect, useState } from 'react';

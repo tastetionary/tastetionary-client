@@ -1,4 +1,4 @@
-import { WithdrawalTypeEnum } from '@taehoya/tastetionary/lib/domain/user/user.enum';
+import { WithdrawalTypeEnum } from '@/types/enums';
 import http from '../http';
 
 type WithdrawalType = keyof typeof WithdrawalTypeEnum;

@@ -1,4 +1,4 @@
-import { FoodCategory, FoodKeyword } from '@taehoya/tastetionary/lib/domain/food/food.enum';
+import { FoodCategory, FoodKeyword } from '../../types/enums';
 import http from '../http';
 
 interface Req {

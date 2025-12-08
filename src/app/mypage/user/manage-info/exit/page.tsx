@@ -8,7 +8,7 @@ import CHeader from '@/components/c-header';
 import { userExitReasonObject } from '@/constants/user-exit';
 import useUser from '@/hooks/useUser';
 import * as Sentry from '@sentry/nextjs';
-import { WithdrawalTypeEnum } from '@taehoya/tastetionary/lib/domain/user/user.enum';
+import { WithdrawalTypeEnum } from '@/types/enums';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { useRouter } from 'next/navigation';
 import { destroyCookie } from 'nookies';

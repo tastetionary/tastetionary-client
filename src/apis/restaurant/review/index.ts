@@ -1,5 +1,5 @@
 import http from '@/apis/http';
-import { RestaurantCategory, RestaurantKeyword } from '@taehoya/tastetionary/lib/domain/restaurant/restaurant.enum';
+import { RestaurantCategory, RestaurantKeyword } from '@/types/enums';
 
 interface postRestaurantReviewReq {
   token?: string;
