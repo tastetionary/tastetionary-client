@@ -10,21 +10,18 @@ import { GlobalStyle } from '@/styles/GlobalStyle';
 import { theme } from '@/styles/theme';
 import { ReactNode } from 'react';
 import { ThemeProvider } from 'styled-components';
-import ReactQueryProvider from '../react-query/ReactQueryProvider';
 
 export default function StyledComponentsWrapper({ children }: { children: ReactNode }) {
   useAxiosInterceptor();
 
   return (
     <ThemeProvider theme={theme}>
-      <ReactQueryProvider>
-        <GlobalStyle />
-        <GlobalModal />
-        <Toast />
-        <GoogleAnalytics />
-        <LoginSDK />
-        <MobileLayout>{children}</MobileLayout>
-      </ReactQueryProvider>
+      <GlobalStyle />
+      <GlobalModal />
+      <Toast />
+      <GoogleAnalytics />
+      <LoginSDK />
+      <MobileLayout>{children}</MobileLayout>
     </ThemeProvider>
   );
 }

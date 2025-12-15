@@ -1,3 +1,4 @@
+import ReactQueryProvider from '@/lib/react-query/ReactQueryProvider';
 import StyledComponentsRegistry from '@/lib/registry';
 import StyledComponentsWrapper from '@/lib/styled-components/StyledComponentsWrapper';
 import '@/styles/globals.css';
@@ -29,11 +30,13 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
       </head>
       <body className={`${subFont.variable} ${mainFont.variable}`} suppressHydrationWarning>
-        <StyledComponentsRegistry>
-          <StyledComponentsWrapper>
-            <Suspense fallback={<div></div>}>{children}</Suspense>
-          </StyledComponentsWrapper>
-        </StyledComponentsRegistry>
+        <ReactQueryProvider>
+          <StyledComponentsRegistry>
+            <StyledComponentsWrapper>
+              <Suspense fallback={<div></div>}>{children}</Suspense>
+            </StyledComponentsWrapper>
+          </StyledComponentsRegistry>
+        </ReactQueryProvider>
       </body>
     </html>
   );

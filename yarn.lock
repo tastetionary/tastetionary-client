@@ -1132,14 +1132,6 @@
     got "^11.8.5"
     os-filter-obj "^2.0.0"
 
-"@nestia/fetcher@^1.6.5":
-  version "1.6.7"
-  resolved "https://registry.yarnpkg.com/@nestia/fetcher/-/fetcher-1.6.7.tgz#fa224bfb10ca1de71f929562ff180c3b2d930d36"
-  integrity sha512-xn+UuA1ZTHqqpnlm2fD3hPDfkbyaXhwlGKo3RTGTuWRfH0h3wk6Pr4ZcawOT/lklMtpoFyQoGxY5y1nQhOm8xg==
-  dependencies:
-    import2 "^1.0.3"
-    node-fetch "^2.6.7"
-
 "@next/env@15.3.6":
   version "15.3.6"
   resolved "https://registry.yarnpkg.com/@next/env/-/env-15.3.6.tgz#30d4be8f9a68b59cfcd3bc6d8ca8434bc02a3e6b"
@@ -1626,14 +1618,6 @@
   integrity sha512-4BAffykYOgO+5nzBWYwE3W90sBgLJoUPRWWcL8wlyiM8IB8ipJz3UMJ9KXQd1RKQXpKp8Tutn80HZtWsu2u76w==
   dependencies:
     defer-to-connect "^2.0.0"
-
-"@taehoya/tastetionary@^0.5.17":
-  version "0.5.18"
-  resolved "https://npm.pkg.github.com/download/@taehoya/tastetionary/0.5.18/466b32d0b700ae55f34659aff054eb4fb66f0de6#466b32d0b700ae55f34659aff054eb4fb66f0de6"
-  integrity sha512-no9vbPdaBr6kiKhY5FO+of0QXoGLea6XKjbJdH3iQzRd8p2Tm/K6vsSpHkXBKzhH/CxbBQMrzUBu5qGQnJW3kg==
-  dependencies:
-    "@nestia/fetcher" "^1.6.5"
-    typescript-transform-paths "^3.4.6"
 
 "@tanstack/query-core@5.62.9", "@tanstack/query-core@^5.62.9":
   version "5.62.9"
@@ -3746,11 +3730,6 @@ import-fresh@^3.2.1, import-fresh@^3.3.0:
     parent-module "^1.0.0"
     resolve-from "^4.0.0"
 
-import2@^1.0.3:
-  version "1.0.3"
-  resolved "https://registry.yarnpkg.com/import2/-/import2-1.0.3.tgz#7623f15bb905011d8e97acb1d6eb355531ab7c99"
-  integrity sha512-X7KHNp1fovFaiah9Q+njdxXJKIV9/XippWGZwHL9ZdJYnQPBs+4wLd4PuCigbxz2IWNm5YvFycSjRA/1lgmdGw==
-
 imurmurhash@^0.1.4:
   version "0.1.4"
   resolved "https://registry.yarnpkg.com/imurmurhash/-/imurmurhash-0.1.4.tgz#9218b9b2b928a238b13dc4fb6b6d576f231453ea"
@@ -4383,7 +4362,7 @@ minimatch@^5.0.1:
   dependencies:
     brace-expansion "^2.0.1"
 
-minimatch@^9.0.3, minimatch@^9.0.4, minimatch@^9.0.5:
+minimatch@^9.0.3, minimatch@^9.0.4:
   version "9.0.5"
   resolved "https://registry.yarnpkg.com/minimatch/-/minimatch-9.0.5.tgz#d74f9dd6b57d83d8e98cfb82133b03978bc929e5"
   integrity sha512-G6T0ZX48xgozx7587koeX9Ys2NYy6Gmv//P89sEte9V9whIapMNF4idKxnW2QtCcLiTWlb/wfCabAtAFWhhBow==
@@ -5453,16 +5432,7 @@ string-argv@0.3.2:
   resolved "https://registry.yarnpkg.com/string-argv/-/string-argv-0.3.2.tgz#2b6d0ef24b656274d957d54e0a4bbf6153dc02b6"
   integrity sha512-aqD2Q0144Z+/RqG52NeHEkZauTAUWJO8c6yTftGJKO3Tja5tUgIfmIl6kExvhtxSDP7fXB6DvzkfMpCd/F3G+Q==
 
-"string-width-cjs@npm:string-width@^4.2.0":
-  version "4.2.3"
-  resolved "https://registry.yarnpkg.com/string-width/-/string-width-4.2.3.tgz#269c7117d27b05ad2e536830a8ec895ef9c6d010"
-  integrity sha512-wKyQRQpjJ0sIp62ErSZdGsjMJWsap5oRNihHhu6G7JVO/9jIB6UyevL+tXuOqrng8j/cxKTWyWUwvSTriiZz/g==
-  dependencies:
-    emoji-regex "^8.0.0"
-    is-fullwidth-code-point "^3.0.0"
-    strip-ansi "^6.0.1"
-
-string-width@^4.1.0:
+"string-width-cjs@npm:string-width@^4.2.0", string-width@^4.1.0:
   version "4.2.3"
   resolved "https://registry.yarnpkg.com/string-width/-/string-width-4.2.3.tgz#269c7117d27b05ad2e536830a8ec895ef9c6d010"
   integrity sha512-wKyQRQpjJ0sIp62ErSZdGsjMJWsap5oRNihHhu6G7JVO/9jIB6UyevL+tXuOqrng8j/cxKTWyWUwvSTriiZz/g==
@@ -5555,14 +5525,7 @@ string_decoder@^1.1.1:
   dependencies:
     safe-buffer "~5.2.0"
 
-"strip-ansi-cjs@npm:strip-ansi@^6.0.1":
-  version "6.0.1"
-  resolved "https://registry.yarnpkg.com/strip-ansi/-/strip-ansi-6.0.1.tgz#9e26c63d30f53443e9489495b2105d37b67a85d9"
-  integrity sha512-Y38VPSHcqkFrCpFnQ9vuSXmquuv5oXOKpGeT6aGrr3o3Gc9AlVa6JBfUSOCnbxGGZF+/0ooI7KrPuUSztUdU5A==
-  dependencies:
-    ansi-regex "^5.0.1"
-
-strip-ansi@^6.0.0, strip-ansi@^6.0.1:
+"strip-ansi-cjs@npm:strip-ansi@^6.0.1", strip-ansi@^6.0.0, strip-ansi@^6.0.1:
   version "6.0.1"
   resolved "https://registry.yarnpkg.com/strip-ansi/-/strip-ansi-6.0.1.tgz#9e26c63d30f53443e9489495b2105d37b67a85d9"
   integrity sha512-Y38VPSHcqkFrCpFnQ9vuSXmquuv5oXOKpGeT6aGrr3o3Gc9AlVa6JBfUSOCnbxGGZF+/0ooI7KrPuUSztUdU5A==
@@ -5886,13 +5849,6 @@ typed-array-length@^1.0.7:
     is-typed-array "^1.1.13"
     possible-typed-array-names "^1.0.0"
     reflect.getprototypeof "^1.0.6"
-
-typescript-transform-paths@^3.4.6:
-  version "3.5.3"
-  resolved "https://registry.yarnpkg.com/typescript-transform-paths/-/typescript-transform-paths-3.5.3.tgz#bb456773abf3382d06a372cca6dce23218a0daed"
-  integrity sha512-5y2l2iPKNHKOj08/1i+02+ljBVUhWcXQLXomiOXCmNpiTuSxIkj0dM1LUE7OOAt53+/6KidY+sFTCP781J64Eg==
-  dependencies:
-    minimatch "^9.0.5"
 
 typescript@5.1.6:
   version "5.1.6"

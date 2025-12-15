@@ -3,6 +3,7 @@ import { MODAL_TYPES } from '@/components/Modal/GlobalModal';
 import useModal from '@/components/Modal/GlobalModal/hooks/useModal';
 import { ERROR_CODE } from '@/utils/error-code';
 import * as Sentry from '@sentry/nextjs';
+import { useQueryClient } from '@tanstack/react-query';
 import { AxiosResponse } from 'axios';
 import { useEffect } from 'react';
 import useToken from './useToken';
@@ -41,6 +42,7 @@ const PUBLIC_DOMAIN = [
 export const useAxiosInterceptor = () => {
   const { token } = useToken();
   const { openModal, closeModal } = useModal();
+  const queryClient = useQueryClient();
 
   const errorTrigger = () => {
     openModal(MODAL_TYPES.dialog, {
@@ -121,6 +123,8 @@ export const useAxiosInterceptor = () => {
 
       if (error.response?.data?.statusCode === 401) {
         serverErrorTrigger('UNAUTHORIZED', ERROR_CODE.UNAUTHORIZED);
+        queryClient.removeQueries({ queryKey: ['user'] });
+        queryClient.setQueryData(['user'], undefined);
         return;
       }
 
