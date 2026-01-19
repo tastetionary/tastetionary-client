@@ -7,8 +7,8 @@ import BottomButtonContainer from '@/components/Button/BottomButtonContainer';
 import RefreshButton from '@/components/Button/RefreshButton';
 import CHeader from '@/components/c-header';
 import CRecommendButton from '@/components/c-recommend-button';
-import { copyText } from '@/utils';
 import { FoodCategory, FoodKeyword } from '@/types/enums';
+import { copyText } from '@/utils';
 import clsx from 'clsx';
 import dayjs from 'dayjs';
 import Image from 'next/image';
@@ -65,7 +65,7 @@ export default function SelectMenuResultShare({ category, keyword, id, name }: P
   useEffect(() => {
     if (!window.Kakao || window.Kakao.isInitialized()) return;
 
-    window.Kakao.init(process.env.NEXT_PUBLIC_KAKAO_CLIENT_KEY);
+    window.Kakao.init(process.env.NEXT_PUBLIC_KAKAO_CLIENT_KEY!);
   }, []);
 
   return (

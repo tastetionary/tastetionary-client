@@ -15,6 +15,7 @@ declare global {
 
 // Kakao SDK 타입 정의
 interface KakaoSDK {
+  Share: any;
   init: (appKey: string) => void;
   isInitialized: () => boolean;
   Auth: {
@@ -43,4 +44,5 @@ interface KakaoAPISettings {
 }
 
 // Export an empty object to satisfy the export {}
-export {};
+export { };
+
