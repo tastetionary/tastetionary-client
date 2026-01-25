@@ -41,7 +41,7 @@ const useLoginMutate = () => {
     });
   };
 
-  const { mutate } = useMutation({
+  const { mutate, isSuccess, data } = useMutation({
     mutationFn: authRepository().postLogin,
     onSuccess: value => {
       const token = value.accessToken;
@@ -79,7 +79,7 @@ const useLoginMutate = () => {
     },
   });
 
-  return { mutate };
+  return { mutate, isSuccess, data };
 };
 
 export default useLoginMutate;

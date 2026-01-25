@@ -3,7 +3,8 @@
 import MAIN_LOGO from '@/assets/logo/main_logo.svg';
 import DefaultButton from '@/components/Button/DefaultButton';
 import CHeader from '@/components/c-header';
-import { useRouter } from 'next/navigation';
+import { useRouter, useSearchParams } from 'next/navigation';
+import { useEffect } from 'react';
 import LoginBtn from '../components/LoginBtn';
 import useGoogleLogin from '../hooks/useGoogleLogin';
 import useKakaoLogin from '../hooks/useKakaoLogin';
@@ -14,6 +15,22 @@ export default function LoginPage() {
   const { loginHandler: kakaoLogin } = useKakaoLogin();
   const { loginHandler: googleLogin } = useGoogleLogin();
   // const { loginHandler: naverLogin } = useNaverLogin();
+
+  const searchParams = useSearchParams();
+
+  // 앱의 시스템 브라우저에서 열린 경우 자동으로 Google 로그인 시작
+  useEffect(() => {
+    const source = searchParams.get('source');
+    const returnUrl = searchParams.get('returnUrl');
+
+    if (source === 'app' && returnUrl) {
+      // returnUrl 저장
+      sessionStorage.setItem('app_return_url', returnUrl);
+
+      // 자동으로 Google OAuth 시작
+      window.location.href = `https://accounts.google.com/o/oauth2/v2/auth?client_id=${process.env.NEXT_PUBLIC_GOOGLE_CLIENT_ID}&redirect_uri=${window.location.origin}${process.env.NEXT_PUBLIC_LOGIN_REDIRECT_URI}?category=google&response_type=code&scope=email+profile`;
+    }
+  }, [searchParams]);
 
   return (
     <>
