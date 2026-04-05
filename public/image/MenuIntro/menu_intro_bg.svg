@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="390" height="740" viewBox="0 0 390 740" preserveAspectRatio="xMidYMin slice" fill="none">
+  <defs>
+    <linearGradient id="menuIntroBg" x1="195" y1="0" x2="195" y2="370" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#EDEFF1" />
+      <stop offset="1" stop-color="#FFFFFF" />
+    </linearGradient>
+  </defs>
+  <rect width="390" height="740" fill="url(#menuIntroBg)" />
+</svg>

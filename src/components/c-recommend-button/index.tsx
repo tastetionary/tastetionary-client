@@ -106,8 +106,12 @@ export default function CRecommendButton({ selectType, btnText, ...rest }: Props
 
           goScrollToTop();
 
+          const foodResultShareBase = pathname?.startsWith('/v2/select-menu')
+            ? '/v2/select-menu/result-share'
+            : '/select-menu/result-share';
+
           return router.push(
-            `/select-menu/result-share?category=${encodedFoodCategory}&keyword=${encodedFoodKeyword}&id=${encodedFoodId}&name=${encodedFoodName}`
+            `${foodResultShareBase}?category=${encodedFoodCategory}&keyword=${encodedFoodKeyword}&id=${encodedFoodId}&name=${encodedFoodName}`
           );
         }
         console.log('res', res);

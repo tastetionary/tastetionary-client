@@ -8,11 +8,22 @@ import MobileLayout from '@/components/layout/mobile-layout';
 import { useAxiosInterceptor } from '@/hooks/useAxiosInterceptor';
 import { GlobalStyle } from '@/styles/GlobalStyle';
 import { theme } from '@/styles/theme';
+import { usePathname } from 'next/navigation';
 import { ReactNode } from 'react';
 import { ThemeProvider } from 'styled-components';
 
+/** `/v2`만 전체화면(모바일 레이아웃 미적용). `/v2/select-menu` 등은 제외 */
+const FULLSCREEN_EXACT = ['/v2'] as const;
+
+function isFullscreenRoute(pathname: string | null) {
+  if (!pathname) return false;
+  return FULLSCREEN_EXACT.some((route) => pathname === route);
+}
+
 export default function StyledComponentsWrapper({ children }: { children: ReactNode }) {
   useAxiosInterceptor();
+  const pathname = usePathname();
+  const wrapWithMobileLayout = !isFullscreenRoute(pathname);
 
   return (
     <ThemeProvider theme={theme}>
@@ -21,7 +32,7 @@ export default function StyledComponentsWrapper({ children }: { children: ReactN
       <Toast />
       <GoogleAnalytics />
       <LoginSDK />
-      <MobileLayout>{children}</MobileLayout>
+      {wrapWithMobileLayout ? <MobileLayout>{children}</MobileLayout> : children}
     </ThemeProvider>
   );
 }
