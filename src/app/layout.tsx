@@ -2,6 +2,7 @@ import RootLayoutProviders from '@/app/RootLayoutProviders';
 import '@/styles/globals.css';
 import { Metadata } from 'next';
 import localFont from 'next/font/local';
+import Script from 'next/script';
 
 const mainFont = localFont({
   src: '../assets/fonts/Galmuri9.woff2',
@@ -25,6 +26,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     <html lang="en">
       <head>
         <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+        <Script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1106497460474641"
+          crossOrigin="anonymous" />
       </head>
       <body className={`${subFont.variable} ${mainFont.variable}`} suppressHydrationWarning>
         <RootLayoutProviders>{children}</RootLayoutProviders>

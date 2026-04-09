@@ -1,6 +1,7 @@
 'use client';
 
 import VerticalLogo from '@/assets/logo/vertical_logo.svg';
+// import GoogleAdBanner from '@/components/google-adsense';
 import V2LayoutCorners from '@/components/layout/V2LayoutCorners';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
@@ -42,9 +43,11 @@ export default function MenuIntroPage() {
         </main>
 
         <footer className="relative z-10 mt-auto flex w-full flex-col items-center gap-16 px-24 pb-24 pt-8">
-          <div className="flex w-full max-w-320 items-center justify-center bg-[#D9D9D9] py-14" role="region" aria-label="광고 영역">
-            <span className="text-14 !text-black opacity-50">광/고/영/역</span>
-          </div>
+          {/* <GoogleAdBanner
+            adSlot={process.env.NEXT_PUBLIC_ADSENSE_SLOT_ID ?? ''}
+            className="w-full max-w-320"
+            style={{ minHeight: '50px' }}
+          /> */}
           <div className="flex items-center gap-12 text-12 leading-none">
             <span className="!text-neutral-bg70">tastetionary © 2026</span>
             <span className="h-8 w-1 shrink-0 bg-neutral-bg20" aria-hidden />
