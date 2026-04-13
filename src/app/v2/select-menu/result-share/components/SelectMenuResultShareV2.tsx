@@ -29,6 +29,8 @@ export default function SelectMenuResultShareV2({ category: _category, keyword, 
   const handleKakaoShare = () => {
     if (typeof window === 'undefined' || !window.Kakao) return;
 
+    console.log("공유하기!");
+
     window.Kakao.Share.sendDefault({
       objectType: 'feed',
       content: {
@@ -60,11 +62,11 @@ export default function SelectMenuResultShareV2({ category: _category, keyword, 
     copyText(window.location.href, '링크가 복사되었습니다');
   };
 
-  useEffect(() => {
-    if (!window.Kakao || window.Kakao.isInitialized()) return;
+  // useEffect(() => {
+  //   if (!window.Kakao || window.Kakao.isInitialized()) return;
 
-    window.Kakao.init(process.env.NEXT_PUBLIC_KAKAO_CLIENT_KEY!);
-  }, []);
+  //   window.Kakao.init(process.env.NEXT_PUBLIC_KAKAO_CLIENT_KEY!);
+  // }, []);
 
   const dateLabel = `${dayjs().format('YYYY년 MM월 DD일')} 메뉴`;
   const catchphrase =
