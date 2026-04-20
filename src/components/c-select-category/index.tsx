@@ -3,7 +3,6 @@ import { useSelectFoodStore } from '@/store/useSelectFoodStore';
 import { useSelectRestaurantStore } from '@/store/useSelectRestaurantStore';
 import { theme } from '@/styles/theme';
 import Image from 'next/image';
-import { useEffect, useState } from 'react';
 
 interface Props {
   selectType: 'food' | 'restaurant' | 'review';
@@ -16,17 +15,9 @@ export default function CSelectCategory({ selectType, data, isDuplicate = true }
   const { category: restaurantCategory, setRestaurantCategory } = useSelectRestaurantStore();
   const { category: reviewCategory, setReviewCategory } = useReviewStore();
 
-  // 현재 타입에 맞는 스토어의 카테고리 값을 가져옵니다
-  const getCurrentStoreCategory = () => {
-    if (selectType === 'food') return foodCategory;
-    if (selectType === 'restaurant') return restaurantCategory;
-    return reviewCategory;
-  };
+  const selectedCategory =
+    selectType === 'food' ? foodCategory : selectType === 'restaurant' ? restaurantCategory : reviewCategory;
 
-  // 로컬 상태는 현재 타입의 스토어 카테고리로 초기화
-  const [selectedCategory, setSelectedCategory] = useState<string[]>(() => getCurrentStoreCategory());
-
-  // 로컬 상태가 변경될 때만 스토어 업데이트 (초기화 X)
   const updateStore = (categories: string[]) => {
     if (selectType === 'food') {
       setFoodCategory(categories);
@@ -36,12 +27,6 @@ export default function CSelectCategory({ selectType, data, isDuplicate = true }
       setReviewCategory(categories);
     }
   };
-
-  // 컴포넌트 마운트 시 또는 selectType이 변경될 때만 로컬 상태 초기화
-  useEffect(() => {
-    console.log('selectType', selectType);
-    setSelectedCategory(getCurrentStoreCategory());
-  }, [selectType]); // selectType이 변경될 때만 로컬 상태 초기화
 
   return (
     <div className="grid grid-cols-4 items-center gap-[16px]">
@@ -72,8 +57,6 @@ export default function CSelectCategory({ selectType, data, isDuplicate = true }
             }
           }
 
-          // 로컬 상태와 스토어 상태 모두 한번에 업데이트
-          setSelectedCategory(newCategories);
           updateStore(newCategories);
         };
 

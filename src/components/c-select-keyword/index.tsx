@@ -1,7 +1,6 @@
 import { useReviewStore } from '@/store/useReviewStore';
 import { useSelectFoodStore } from '@/store/useSelectFoodStore';
 import { useSelectRestaurantStore } from '@/store/useSelectRestaurantStore';
-import { useEffect, useState } from 'react';
 import DefaultButton from '../Button/DefaultButton';
 
 interface Props {
@@ -14,17 +13,9 @@ export default function CSelectKeyword({ data, selectType }: Props) {
   const { keyword: restaurantKeyword, setRestaurantKeyword } = useSelectRestaurantStore();
   const { keyword: reviewKeyword, setReviewKeyword } = useReviewStore();
 
-  // 현재 타입에 맞는 스토어의 키워드 값을 가져오는 함수
-  const getCurrentStoreKeyword = () => {
-    if (selectType === 'food') return foodKeyword;
-    if (selectType === 'restaurant') return restaurantKeyword;
-    return reviewKeyword;
-  };
+  const selectedKeyword =
+    selectType === 'food' ? foodKeyword : selectType === 'restaurant' ? restaurantKeyword : reviewKeyword;
 
-  // 로컬 상태는 현재 타입의 스토어 키워드로 초기화
-  const [selectedKeyword, setSelectedKeyword] = useState<string[]>(() => getCurrentStoreKeyword());
-
-  // 스토어 업데이트 함수
   const updateStore = (keywords: string[]) => {
     if (selectType === 'food') {
       setFoodKeyword(keywords);
@@ -34,11 +25,6 @@ export default function CSelectKeyword({ data, selectType }: Props) {
       setReviewKeyword(keywords);
     }
   };
-
-  // selectType이 변경될 때만 로컬 상태 초기화
-  useEffect(() => {
-    setSelectedKeyword(getCurrentStoreKeyword());
-  }, [selectType]);
 
   return (
     <div className="flex flex-wrap gap-[14px]">
@@ -73,8 +59,6 @@ export default function CSelectKeyword({ data, selectType }: Props) {
                 }
               }
 
-              // 로컬 상태와 스토어 상태 모두 한번에 업데이트
-              setSelectedKeyword(newKeywords);
               updateStore(newKeywords);
             }}
           >

@@ -25,8 +25,9 @@ export const iconToast = (message: string, type: ToastIcon) => {
     }
   };
 
-  toast(<span>{message}</span>, {
+  toast(<span style={{ color: '#ffffff' }}>{message}</span>, {
     icon: getIconComponent(),
+    style: { color: '#ffffff' },
   });
 };
 

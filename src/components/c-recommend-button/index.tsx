@@ -96,13 +96,9 @@ export default function CRecommendButton({ selectType, btnText, ...rest }: Props
         const encodedFoodCategory = encodeURIComponent(unicodeFoodCategory);
         const encodedFoodKeyword = encodeURIComponent(unicodeFoodKeyword);
 
-        if (!res && selectType === 'restaurant') {
-          return noResultModal();
-        }
-
-        if (res && selectType === 'food') {
-          const encodedFoodId = encodeURIComponent(toUnicodeEscape(res?.id + ''));
-          const encodedFoodName = encodeURIComponent(toUnicodeEscape(res?.name));
+        if (selectType === 'food') {
+          const encodedFoodId = encodeURIComponent(toUnicodeEscape((res?.id ?? 0) + ''));
+          const encodedFoodName = encodeURIComponent(toUnicodeEscape(res?.name ?? ''));
 
           goScrollToTop();
 
@@ -114,7 +110,10 @@ export default function CRecommendButton({ selectType, btnText, ...rest }: Props
             `${foodResultShareBase}?category=${encodedFoodCategory}&keyword=${encodedFoodKeyword}&id=${encodedFoodId}&name=${encodedFoodName}`
           );
         }
-        console.log('res', res);
+
+        if (!res && selectType === 'restaurant') {
+          return noResultModal();
+        }
 
         if (res && 'aggregateReviews' in res) {
           setSelectRestaurantResult({
@@ -134,11 +133,6 @@ export default function CRecommendButton({ selectType, btnText, ...rest }: Props
                   },
                 }
               : {}),
-          });
-        } else {
-          setSelectFoodResult({
-            id: res?.id ? +res.id : 0,
-            name: res?.name,
           });
         }
 

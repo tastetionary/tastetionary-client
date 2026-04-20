@@ -146,11 +146,12 @@
     .Toastify__toast-body {
       display: flex !important;
       align-items: center !important ;
-      gap: 10px !important ;
+      gap: 8px !important ;
       padding: 0 !important;
       margin: 0 !important;
 
-      div {
+      div,
+      div > span {
         font-family: var(--Pretendard-Variable) !important;
         font-size: 14px !important;
         font-style: normal !important;

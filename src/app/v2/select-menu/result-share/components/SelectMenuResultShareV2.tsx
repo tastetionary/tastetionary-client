@@ -13,7 +13,6 @@ import clsx from 'clsx';
 import dayjs from 'dayjs';
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
-import { useEffect } from 'react';
 
 interface Props {
   category: FoodCategory[];
@@ -61,12 +60,6 @@ export default function SelectMenuResultShareV2({ category: _category, keyword, 
 
     copyText(window.location.href, '링크가 복사되었습니다');
   };
-
-  // useEffect(() => {
-  //   if (!window.Kakao || window.Kakao.isInitialized()) return;
-
-  //   window.Kakao.init(process.env.NEXT_PUBLIC_KAKAO_CLIENT_KEY!);
-  // }, []);
 
   const dateLabel = `${dayjs().format('YYYY년 MM월 DD일')} 메뉴`;
   const catchphrase =
