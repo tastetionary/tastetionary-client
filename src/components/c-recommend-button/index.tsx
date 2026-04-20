@@ -36,7 +36,7 @@ export default function CRecommendButton({ selectType, btnText, ...rest }: Props
     prices: restaurantPrices,
     resetSelectRestaurant,
   } = useSelectRestaurantStore();
-  const { setSelectFoodResult, setSelectRestaurantResult } = useSelectResultStore();
+  const { setSelectRestaurantResult } = useSelectResultStore();
 
   const isResultPage = pathname?.includes('result');
 
@@ -97,8 +97,27 @@ export default function CRecommendButton({ selectType, btnText, ...rest }: Props
         const encodedFoodKeyword = encodeURIComponent(unicodeFoodKeyword);
 
         if (selectType === 'food') {
-          const encodedFoodId = encodeURIComponent(toUnicodeEscape((res?.id ?? 0) + ''));
-          const encodedFoodName = encodeURIComponent(toUnicodeEscape(res?.name ?? ''));
+          if (!res) {
+            setTimeout(() => {
+              openModal(MODAL_TYPES.dialog, {
+                title: '추첨 가능한 메뉴가 없어요.',
+                message: '다른 조건으로 다시 시도해 보세요!',
+                handleConfirm: () => {
+                  const foodBase = pathname?.startsWith('/v2/select-menu') ? '/v2/select-menu' : '/select-menu';
+                  router.push(foodBase);
+                  closeModal(MODAL_TYPES.dialog);
+                },
+                handleClose: () => closeModal(MODAL_TYPES.dialog),
+                cancelText: '닫기',
+                confirmText: '조건 재설정',
+                needClose: true,
+              });
+            }, 500);
+            return;
+          }
+
+          const encodedFoodId = encodeURIComponent(toUnicodeEscape(res.id + ''));
+          const encodedFoodName = encodeURIComponent(toUnicodeEscape(res.name));
 
           goScrollToTop();
 

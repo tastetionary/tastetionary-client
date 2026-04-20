@@ -9,8 +9,8 @@ export default async function V2SelectMenuResultSharePage({
 }) {
   const { category: encodedCategory, keyword: encodedKeyword, id: encodedId, name: encodedName } = await searchParams;
 
-  const decoded = (encoded: string | undefined) => {
-    if (!encoded) throw new Error('No encoded value provided');
+  const decoded = (encoded: string | undefined): string[] => {
+    if (!encoded) return [];
     const decoded = decodeURIComponent(encoded);
 
     return decoded.split(',').map(unicodeToText);
@@ -21,8 +21,9 @@ export default async function V2SelectMenuResultSharePage({
 
   const decodedCategory = decoded(encodedCategory) as FoodCategory[];
   const decodedKeyword = decoded(encodedKeyword) as FoodKeyword[];
-  const decodedId = +decoded(encodedId)[0];
-  const decodedName = decoded(encodedName)[0];
+  const decodedIdArr = decoded(encodedId);
+  const decodedId = decodedIdArr.length > 0 ? Number(decodedIdArr[0]) || 0 : 0;
+  const decodedName = decoded(encodedName)[0] ?? '';
 
   const category = decodedCategory.every(c => validFoodCategories.includes(c)) ? decodedCategory : [];
   const keyword = decodedKeyword.every(c => validFoodKeywords.includes(c)) ? decodedKeyword : [];
