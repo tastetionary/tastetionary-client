@@ -19,8 +19,6 @@ export function withAuth<T extends object>(
     const cookieStore = await cookies();
     const token = cookieStore.get('token')?.value;
 
-    console.log('💫 token form hoc', token);
-
     // 토큰이 없으면 리디렉션
     if (!token) {
       if (redirectPath) {

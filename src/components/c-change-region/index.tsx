@@ -13,7 +13,6 @@ interface Props {
 export default function CChangeRegion({ type }: Props) {
   const router = useRouter();
   const { data } = useUser();
-  console.log('deploy 성공!');
   const { openModal, closeModal } = useModal();
 
   const checkAuthStatus = () => {

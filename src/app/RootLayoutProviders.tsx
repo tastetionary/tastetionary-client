@@ -12,7 +12,6 @@ export default function RootLayoutProviders({ children }: { children: ReactNode 
 
       if (type === 'LOGIN_SUCCESS_FROM_BROWSER') {
         const { accessToken, refreshToken } = payload;
-        console.log('🔵 외부 브라우저에서 토큰 수신:', { accessToken, refreshToken });
 
         if (accessToken) {
           // 토큰 저장 (예: zustand, localStorage, cookie 등)

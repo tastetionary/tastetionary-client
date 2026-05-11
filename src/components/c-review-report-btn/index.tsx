@@ -1,4 +1,4 @@
-import useReviewReportMutation from '@/app/select-restaurant/result/review/[restaurantId]/_hooks/useReviewReportMutation';
+import useReviewReportMutation from '@/app/_legacy/select-restaurant/result/review/[restaurantId]/_hooks/useReviewReportMutation';
 import IC_REPORT from '@/assets/common/Icons/report.svg';
 import { MODAL_TYPES } from '@/components/Modal/GlobalModal';
 import useModal from '@/components/Modal/GlobalModal/hooks/useModal';

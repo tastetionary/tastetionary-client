@@ -103,8 +103,7 @@ export default function CRecommendButton({ selectType, btnText, ...rest }: Props
                 title: '추첨 가능한 메뉴가 없어요.',
                 message: '다른 조건으로 다시 시도해 보세요!',
                 handleConfirm: () => {
-                  const foodBase = pathname?.startsWith('/v2/select-menu') ? '/v2/select-menu' : '/select-menu';
-                  router.push(foodBase);
+                  router.push('/select-menu');
                   closeModal(MODAL_TYPES.dialog);
                 },
                 handleClose: () => closeModal(MODAL_TYPES.dialog),
@@ -121,12 +120,8 @@ export default function CRecommendButton({ selectType, btnText, ...rest }: Props
 
           goScrollToTop();
 
-          const foodResultShareBase = pathname?.startsWith('/v2/select-menu')
-            ? '/v2/select-menu/result-share'
-            : '/select-menu/result-share';
-
           return router.push(
-            `${foodResultShareBase}?category=${encodedFoodCategory}&keyword=${encodedFoodKeyword}&id=${encodedFoodId}&name=${encodedFoodName}`
+            `/select-menu/result-share?category=${encodedFoodCategory}&keyword=${encodedFoodKeyword}&id=${encodedFoodId}&name=${encodedFoodName}`
           );
         }
 
@@ -163,22 +158,16 @@ export default function CRecommendButton({ selectType, btnText, ...rest }: Props
   };
 
   const { mutate: foodRecommend } = useMutation<FoodRecommendRes, AxiosError>({
-    mutationFn: () => {
-      console.log('[foodRecommend] API 호출 시작');
-      return postFoodRecommend(
+    mutationFn: () =>
+      postFoodRecommend(
         {
           categories: foodCategory?.filter(c => c !== '전체') as FoodCategory[],
           keywords: foodKeyword?.filter(c => c !== '전체') as FoodKeyword[],
         },
         token
-      );
-    },
-    onSuccess: res => {
-      console.log('[foodRecommend] 성공:', res);
-      loadingModal(res);
-    },
+      ),
+    onSuccess: res => loadingModal(res),
     onError: err => {
-      console.error('[foodRecommend] 에러:', err);
       if (err?.response?.status === 401) {
         return loginModal();
       }
@@ -186,9 +175,8 @@ export default function CRecommendButton({ selectType, btnText, ...rest }: Props
   });
 
   const { mutate: restaurantRecommend } = useMutation<RestaurantRecommendRes, AxiosError>({
-    mutationFn: () => {
-      console.log('[restaurantRecommend] API 호출 시작');
-      return postRestaurantRecommend(
+    mutationFn: () =>
+      postRestaurantRecommend(
         {
           category: restaurantCategory?.filter(c => c !== '전체') as RestaurantCategory[],
           keywords: restaurantKeyword?.filter(c => c !== '전체'),
@@ -196,14 +184,9 @@ export default function CRecommendButton({ selectType, btnText, ...rest }: Props
           excludeIds: [],
         },
         token
-      );
-    },
-    onSuccess: res => {
-      console.log('[restaurantRecommend] 성공:', res);
-      loadingModal(res);
-    },
+      ),
+    onSuccess: res => loadingModal(res),
     onError: err => {
-      console.error('[restaurantRecommend] 에러:', err);
       if (err?.response?.status === 401) {
         return loginModal();
       }
@@ -212,21 +195,12 @@ export default function CRecommendButton({ selectType, btnText, ...rest }: Props
 
   // 광고 보상을 받았을 때 추첨 진행
   const handleAdReward = () => {
-    console.log('[handleAdReward] 시작 - selectType:', selectType);
-
     if (selectType === 'food') {
-      console.log('[handleAdReward] foodRecommend 호출 시작');
       foodRecommend();
-      console.log('[handleAdReward] foodRecommend 호출 완료');
     } else if (selectType === 'restaurant') {
-      console.log('[handleAdReward] restaurantRecommend 호출 시작');
       restaurantRecommend();
-      console.log('[handleAdReward] restaurantRecommend 호출 완료');
-    } else {
-      console.log('[handleAdReward] pendingActionRef가 null이거나 유효하지 않음');
     }
     pendingActionRef.current = null;
-    console.log('[handleAdReward] 완료');
   };
 
   const { isInApp, requestAd } = useRewardedAd(handleAdReward);

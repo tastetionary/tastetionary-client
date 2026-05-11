@@ -1,0 +1,77 @@
+- generic [active] [ref=e1]:
+  - region "Notifications Alt+T"
+  - generic [ref=e5]:
+    - banner [ref=e6]:
+      - button "뒤로 가기" [ref=e7] [cursor=pointer]:
+        - img [ref=e8]
+      - heading "메뉴 고르기" [level=1] [ref=e11]
+    - main [ref=e13]:
+      - generic [ref=e14]:
+        - heading "어떤 메뉴를 펼쳐볼까요?" [level=2] [ref=e15]
+        - region "[ 메뉴 분류 ]" [ref=e16]:
+          - paragraph [ref=e17]: "[ 메뉴 분류 ]"
+          - generic [ref=e19]:
+            - generic [ref=e20] [cursor=pointer]:
+              - img "menu_all" [ref=e21]
+              - generic [ref=e22]: 전체
+            - generic [ref=e23] [cursor=pointer]:
+              - img "menu_korean" [ref=e24]
+              - generic [ref=e25]: 한식
+            - generic [ref=e26] [cursor=pointer]:
+              - img "menu_chinese" [ref=e27]
+              - generic [ref=e28]: 중식
+            - generic [ref=e29] [cursor=pointer]:
+              - img "menu_western" [ref=e30]
+              - generic [ref=e31]: 양식
+            - generic [ref=e32] [cursor=pointer]:
+              - img "menu_japanese" [ref=e33]
+              - generic [ref=e34]: 일식
+            - generic [ref=e35] [cursor=pointer]:
+              - img "menu_fastfood" [ref=e36]
+              - generic [ref=e37]: 패스트푸드
+            - generic [ref=e38] [cursor=pointer]:
+              - img "menu_snack" [ref=e39]
+              - generic [ref=e40]: 분식
+            - generic [ref=e41] [cursor=pointer]:
+              - img "menu_asian" [ref=e42]
+              - generic [ref=e43]: 아시아식
+            - generic [ref=e44] [cursor=pointer]:
+              - img "menu_salad" [ref=e45]
+              - generic [ref=e46]: 샐러드
+            - generic [ref=e47] [cursor=pointer]:
+              - img "menu_cafedessert" [ref=e48]
+              - generic [ref=e49]: 카페/디저트
+        - region "[ 오늘의 키워드 ]" [ref=e50]:
+          - paragraph [ref=e51]: "[ 오늘의 키워드 ]"
+          - generic [ref=e53]:
+            - button "전체" [ref=e54] [cursor=pointer]:
+              - generic [ref=e55]: 전체
+            - button "매콤한" [ref=e56] [cursor=pointer]:
+              - generic [ref=e57]: 매콤한
+            - button "고소한" [ref=e58] [cursor=pointer]:
+              - generic [ref=e59]: 고소한
+            - button "가벼운" [ref=e60] [cursor=pointer]:
+              - generic [ref=e61]: 가벼운
+            - button "차가운" [ref=e62] [cursor=pointer]:
+              - generic [ref=e63]: 차가운
+            - button "국물이 진한" [ref=e64] [cursor=pointer]:
+              - generic [ref=e65]: 국물이 진한
+            - button "깔끔한" [ref=e66] [cursor=pointer]:
+              - generic [ref=e67]: 깔끔한
+            - button "따뜻한" [ref=e68] [cursor=pointer]:
+              - generic [ref=e69]: 따뜻한
+            - button "달콤한" [ref=e70] [cursor=pointer]:
+              - generic [ref=e71]: 달콤한
+            - button "상큼한" [ref=e72] [cursor=pointer]:
+              - generic [ref=e73]: 상큼한
+            - button "해장에 제격" [ref=e74] [cursor=pointer]:
+              - generic [ref=e75]: 해장에 제격
+            - button "느끼한" [ref=e76] [cursor=pointer]:
+              - generic [ref=e77]: 느끼한
+            - button "풍미가 있는" [ref=e78] [cursor=pointer]:
+              - generic [ref=e79]: 풍미가 있는
+    - generic [ref=e80]:
+      - button "초기화" [disabled] [ref=e81]:
+        - generic [ref=e82]: 초기화
+      - button "메뉴 추첨 시작" [disabled] [ref=e83]:
+        - generic [ref=e84]: 메뉴 추첨 시작

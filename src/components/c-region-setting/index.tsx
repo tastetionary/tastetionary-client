@@ -1,5 +1,5 @@
 import { putSaveRegion } from '@/apis/user/saveRegion';
-import RegionSetting from '@/app/sign-up/components/region-setting';
+import RegionSetting from '@/app/_legacy/sign-up/components/region-setting';
 import useUser from '@/hooks/useUser';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { useRouter } from 'next/navigation';
@@ -63,8 +63,6 @@ export default function CRegionSetting({ category, onNextPage }: Props) {
         };
       });
 
-      console.log('여기 들어와여?');
-
       handleCompleteRegionSetting();
     },
   });
@@ -76,7 +74,6 @@ export default function CRegionSetting({ category, onNextPage }: Props) {
           category={category}
           onNext={() => {
             const data = methods.watch();
-            console.log('data', data);
             asyncSaveRegion(data);
           }}
         />

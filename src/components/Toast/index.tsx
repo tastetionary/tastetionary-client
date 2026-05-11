@@ -41,11 +41,7 @@ export default function Toast() {
       closeOnClick={true}
       pauseOnHover={true}
       draggable={true}
-      icon={({ type }) => {
-        console.log(type);
-
-        return <></>;
-      }}
+      icon={() => <></>}
       closeButton={() => <></>}
     />
   );

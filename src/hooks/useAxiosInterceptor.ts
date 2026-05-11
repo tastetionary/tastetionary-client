@@ -66,8 +66,6 @@ export const useAxiosInterceptor = () => {
     (request: any) => {
       const { url, method } = request;
 
-      console.log(url, method);
-
       const isPublic = PUBLIC_DOMAIN.find(d => url.includes(d.domain) && method.toLowerCase() === d.method);
 
       if (!isPublic && token) {
@@ -78,8 +76,6 @@ export const useAxiosInterceptor = () => {
       return request;
     },
     (error: any) => {
-      console.log('error', error);
-
       Sentry.captureException(error);
       return Promise.reject(error);
     }
@@ -96,8 +92,6 @@ export const useAxiosInterceptor = () => {
       return response;
     },
     (error: any) => {
-      console.log(error);
-
       const { method, url, params, data: requestData, headers } = error.config ?? {};
       Sentry.setContext('API Request Detail', {
         method,

@@ -1,4 +1,4 @@
-import useLogoutMutate from '@/app/login/hooks/useLogoutMutate';
+import useLogoutMutate from '@/app/_legacy/login/hooks/useLogoutMutate';
 import useUser from '@/hooks/useUser';
 import { useRouter } from 'next/navigation';
 import { MODAL_TYPES } from '../Modal/GlobalModal';

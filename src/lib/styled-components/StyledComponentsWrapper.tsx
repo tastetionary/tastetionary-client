@@ -1,6 +1,6 @@
 'use client';
 
-import LoginSDK from '@/app/login/components/LoginSDK';
+import LoginSDK from '@/app/_legacy/login/components/LoginSDK';
 import GlobalModal from '@/components/Modal/GlobalModal';
 import Toast from '@/components/Toast';
 import GoogleAnalytics from '@/components/google-analytics';
@@ -12,8 +12,8 @@ import { usePathname } from 'next/navigation';
 import { ReactNode } from 'react';
 import { ThemeProvider } from 'styled-components';
 
-/** `/v2`만 전체화면(모바일 레이아웃 미적용). `/v2/select-menu` 등은 제외 */
-const FULLSCREEN_EXACT = ['/v2'] as const;
+/** 홈(`/`)만 전체화면(모바일 레이아웃 미적용). `/select-menu` 등은 제외 */
+const FULLSCREEN_EXACT = ['/'] as const;
 
 function isFullscreenRoute(pathname: string | null) {
   if (!pathname) return false;
