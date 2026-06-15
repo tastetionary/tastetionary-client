@@ -1,10 +1,10 @@
-import BottomButtonContainer from '@/components/Button/BottomButtonContainer';
-import DefaultButton from '@/components/Button/DefaultButton';
-import TextInput from '@/components/Input/TextInput';
-import CHeader from '@/components/c-header';
 import { useFormContext } from 'react-hook-form';
 import useAccountAuthCodeMutate from '../../hooks/query/useAccountAuthCodeMutate';
 import useValidationNickname from '../../hooks/query/useValidationNickname';
+import BottomButtonContainer from '@/components/Button/BottomButtonContainer';
+import DefaultButton from '@/components/Button/DefaultButton';
+import CHeader from '@/components/c-header';
+import TextInput from '@/components/Input/TextInput';
 
 interface Props {
   onNext: () => void;

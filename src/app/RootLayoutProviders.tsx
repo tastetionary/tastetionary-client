@@ -1,9 +1,9 @@
 'use client';
 
+import { Suspense, useEffect, type ReactNode } from 'react';
 import ReactQueryProvider from '@/lib/react-query/ReactQueryProvider';
 import StyledComponentsRegistry from '@/lib/registry';
 import StyledComponentsWrapper from '@/lib/styled-components/StyledComponentsWrapper';
-import { Suspense, useEffect, type ReactNode } from 'react';
 
 export default function RootLayoutProviders({ children }: { children: ReactNode }) {
   useEffect(() => {
@@ -16,7 +16,6 @@ export default function RootLayoutProviders({ children }: { children: ReactNode 
         if (accessToken) {
           // 토큰 저장 (예: zustand, localStorage, cookie 등)
           // setAuth({ accessToken, refreshToken });
-
           // 필요시 페이지 새로고침 또는 홈으로 이동
           // window.location.reload();
           // router.push('/');

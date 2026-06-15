@@ -1,10 +1,10 @@
-import IC_CHEVRON from '@/assets/common/Icons/chevron.svg';
-import IC_PIN from '@/assets/common/Icons/pin.svg';
-import useUser from '@/hooks/useUser';
 import { useRouter } from 'next/navigation';
 import DefaultButton from '../Button/DefaultButton';
 import { MODAL_TYPES } from '../Modal/GlobalModal';
 import useModal from '../Modal/GlobalModal/hooks/useModal';
+import IC_CHEVRON from '@/assets/common/Icons/chevron.svg';
+import IC_PIN from '@/assets/common/Icons/pin.svg';
+import useUser from '@/hooks/useUser';
 
 interface Props {
   type: 'activity_area' | 'dining_area';

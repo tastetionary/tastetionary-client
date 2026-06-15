@@ -1,7 +1,7 @@
-import IC_CHEVRON from '@/assets/common/Icons/chevron.svg';
-import { useSelectResultStore } from '@/store/useSelectResultStore';
 import { useRouter } from 'next/navigation';
 import ReviewItem from './ReviewItem';
+import IC_CHEVRON from '@/assets/common/Icons/chevron.svg';
+import { useSelectResultStore } from '@/store/useSelectResultStore';
 
 export default function RestaurantReview() {
   const { push } = useRouter();
@@ -25,7 +25,11 @@ export default function RestaurantReview() {
         </div>
       </div>
 
-      <div className="mt-md">{restaurant?.reviews?.map(review => <ReviewItem key={review.id} {...review} />)}</div>
+      <div className="mt-md">
+        {restaurant?.reviews?.map(review => (
+          <ReviewItem key={review.id} {...review} />
+        ))}
+      </div>
     </div>
   );
 }

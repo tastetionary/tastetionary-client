@@ -1,10 +1,10 @@
 'use client';
 
+import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 import VerticalLogo from '@/assets/logo/vertical_logo.svg';
 // import GoogleAdBanner from '@/components/google-adsense';
 import V2LayoutCorners from '@/components/layout/V2LayoutCorners';
-import Link from 'next/link';
-import { useRouter } from 'next/navigation';
 
 export default function MenuIntroPage() {
   const router = useRouter();

@@ -1,10 +1,10 @@
 'use client';
 
+import { useRouter } from 'next/navigation';
 import * as S from '@/app/_legacy/sign-up/components/complete/page.styled';
 import COMPLETE from '@/assets/logo/complete.svg';
 import MainButton from '@/components/Button/MainButton';
 import CHeader from '@/components/c-header';
-import { useRouter } from 'next/navigation';
 
 export default function VerifyCompanyComplete() {
   const { push } = useRouter();

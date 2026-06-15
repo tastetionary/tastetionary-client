@@ -1,11 +1,11 @@
-import { putSaveRegion } from '@/apis/user/saveRegion';
-import RegionSetting from '@/app/_legacy/sign-up/components/region-setting';
-import useUser from '@/hooks/useUser';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { useRouter } from 'next/navigation';
 import { FormProvider, useForm } from 'react-hook-form';
 import { MODAL_TYPES } from '../Modal/GlobalModal';
 import useModal from '../Modal/GlobalModal/hooks/useModal';
+import { putSaveRegion } from '@/apis/user/saveRegion';
+import RegionSetting from '@/app/_legacy/sign-up/components/region-setting';
+import useUser from '@/hooks/useUser';
 
 interface FormValue {
   address: '';

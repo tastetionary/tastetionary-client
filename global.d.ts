@@ -44,5 +44,4 @@ interface KakaoAPISettings {
 }
 
 // Export an empty object to satisfy the export {}
-export { };
-
+export {};

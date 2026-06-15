@@ -1,10 +1,10 @@
-import authRepository from '@/apis/auth';
-import useToken from '@/hooks/useToken';
 import * as Sentry from '@sentry/nextjs';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { useRouter } from 'next/navigation';
 import { destroyCookie } from 'nookies';
 import { useEffect, useState } from 'react';
+import authRepository from '@/apis/auth';
+import useToken from '@/hooks/useToken';
 
 const useLogoutMutate = () => {
   const queryClient = useQueryClient();

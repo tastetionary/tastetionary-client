@@ -6,16 +6,19 @@ TBD
 
 ## Installation
 
+> 이 프로젝트는 **pnpm**을 사용합니다. (yarn/npm 사용 금지)
+
 ```bash
-$ yarn install
+$ pnpm install
 ```
 
 ## Running the app
 
 ```bash
-$ yarn build
-$ yarn start
+$ pnpm dev          # 개발 서버
 
+$ pnpm build        # 프로덕션 빌드
+$ pnpm start
 ```
 
 ## Deployment

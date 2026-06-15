@@ -1,8 +1,8 @@
+import { useRouter } from 'next/navigation';
 import COMPLETE from '@/assets/logo/complete.svg';
 import BottomButtonContainer from '@/components/Button/BottomButtonContainer';
 import DefaultButton from '@/components/Button/DefaultButton';
 import CHeader from '@/components/c-header';
-import { useRouter } from 'next/navigation';
 
 export default function PasswordComplete() {
   const router = useRouter();

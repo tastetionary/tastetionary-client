@@ -1,4 +1,3 @@
-import { cn } from '@/utils/styles.utils';
 import Lottie from 'lottie-react';
 import { useEffect, useState } from 'react';
 import { overlayVariants } from '../DialogModal/style';
@@ -6,6 +5,7 @@ import { MODAL_TYPES } from '../GlobalModal';
 import useModal from '../GlobalModal/hooks/useModal';
 import BookAnimation from './book_animation.json';
 import * as S from './style';
+import { cn } from '@/utils/styles.utils';
 
 export interface LoadingModalProps {
   handleClose?: () => void;

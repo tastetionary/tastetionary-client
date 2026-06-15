@@ -1,5 +1,5 @@
-import CHeader from '@/components/c-header';
 import * as S from './page.styled';
+import CHeader from '@/components/c-header';
 
 export default function TermsOfService() {
   const termsOfService = {

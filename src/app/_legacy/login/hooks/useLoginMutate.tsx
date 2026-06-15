@@ -1,12 +1,12 @@
+import { useMutation, useQueryClient } from '@tanstack/react-query';
+import { AxiosError } from 'axios';
+import { useRouter } from 'next/navigation';
+import { setCookie } from 'nookies';
 import authRepository from '@/apis/auth';
 import { getUser } from '@/apis/user/getUser';
 import { MODAL_TYPES } from '@/components/Modal/GlobalModal';
 import useModal from '@/components/Modal/GlobalModal/hooks/useModal';
 import { ERROR_MSG } from '@/constants/error-msg';
-import { useMutation, useQueryClient } from '@tanstack/react-query';
-import { AxiosError } from 'axios';
-import { useRouter } from 'next/navigation';
-import { setCookie } from 'nookies';
 
 interface ErrorType {
   category: string;

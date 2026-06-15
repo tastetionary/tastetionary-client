@@ -1,23 +1,23 @@
 'use client';
 
-import LoginSDK from '@/app/_legacy/login/components/LoginSDK';
-import GlobalModal from '@/components/Modal/GlobalModal';
-import Toast from '@/components/Toast';
-import GoogleAnalytics from '@/components/google-analytics';
-import MobileLayout from '@/components/layout/mobile-layout';
-import { useAxiosInterceptor } from '@/hooks/useAxiosInterceptor';
-import { GlobalStyle } from '@/styles/GlobalStyle';
-import { theme } from '@/styles/theme';
 import { usePathname } from 'next/navigation';
 import { ReactNode } from 'react';
 import { ThemeProvider } from 'styled-components';
+import LoginSDK from '@/app/_legacy/login/components/LoginSDK';
+import GoogleAnalytics from '@/components/google-analytics';
+import MobileLayout from '@/components/layout/mobile-layout';
+import GlobalModal from '@/components/Modal/GlobalModal';
+import Toast from '@/components/Toast';
+import { useAxiosInterceptor } from '@/hooks/useAxiosInterceptor';
+import { GlobalStyle } from '@/styles/GlobalStyle';
+import { theme } from '@/styles/theme';
 
 /** 홈(`/`)만 전체화면(모바일 레이아웃 미적용). `/select-menu` 등은 제외 */
 const FULLSCREEN_EXACT = ['/'] as const;
 
 function isFullscreenRoute(pathname: string | null) {
   if (!pathname) return false;
-  return FULLSCREEN_EXACT.some((route) => pathname === route);
+  return FULLSCREEN_EXACT.some(route => pathname === route);
 }
 
 export default function StyledComponentsWrapper({ children }: { children: ReactNode }) {

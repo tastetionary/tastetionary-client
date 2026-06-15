@@ -1,4 +1,3 @@
-import CServerHeaderWithChildren from '@/components/c-server-header-with-children';
 import { ErrorBoundary } from 'react-error-boundary';
 import BannerSlider from '../_components/banner-swiper';
 import ErrorFallback from '../_components/error-fallback';
@@ -7,6 +6,7 @@ import LocationSection from '../_components/location-section';
 import MenuSelection from '../_components/menu-selection';
 import RecentReviewsFetcherWrapper from '../_components/wrapper/recent-reviews-fetcher-wrapper';
 import RecommendMenuFetcherWrapper from '../_components/wrapper/recommend-menu-fetcher-wrapper';
+import CServerHeaderWithChildren from '@/components/c-server-header-with-children';
 
 // 동적 렌더링 강제 (캐싱 비활성화)
 export const dynamic = 'force-dynamic';

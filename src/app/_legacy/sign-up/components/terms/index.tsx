@@ -1,11 +1,11 @@
-import BottomButtonContainer from '@/components/Button/BottomButtonContainer';
-import DefaultButton from '@/components/Button/DefaultButton';
-import CheckBox2 from '@/components/CheckBox/CheckBox2';
-import CHeader from '@/components/c-header';
-import { useAgreeTermStore } from '@/store/useAgreeTermStore';
 import { useRouter } from 'next/navigation';
 import AgreementCheckbox from '../agreement-checkbox';
 import * as S from './page.styled';
+import BottomButtonContainer from '@/components/Button/BottomButtonContainer';
+import DefaultButton from '@/components/Button/DefaultButton';
+import CHeader from '@/components/c-header';
+import CheckBox2 from '@/components/CheckBox/CheckBox2';
+import { useAgreeTermStore } from '@/store/useAgreeTermStore';
 
 interface Props {
   onNext: () => void;

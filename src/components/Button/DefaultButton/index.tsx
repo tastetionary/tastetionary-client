@@ -1,6 +1,6 @@
-import { cn } from '@/utils/styles.utils';
 import { ButtonHTMLAttributes, ReactNode } from 'react';
 import * as S from './page.styled';
+import { cn } from '@/utils/styles.utils';
 
 interface Props extends ButtonHTMLAttributes<HTMLButtonElement> {
   bgColor: 'orange' | 'yellow' | 'gray' | 'none';

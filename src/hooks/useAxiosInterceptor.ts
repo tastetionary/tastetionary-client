@@ -1,12 +1,12 @@
-import { axiosInstance } from '@/apis/http';
-import { MODAL_TYPES } from '@/components/Modal/GlobalModal';
-import useModal from '@/components/Modal/GlobalModal/hooks/useModal';
-import { ERROR_CODE } from '@/utils/error-code';
 import * as Sentry from '@sentry/nextjs';
 import { useQueryClient } from '@tanstack/react-query';
 import { AxiosResponse } from 'axios';
 import { useEffect } from 'react';
 import useToken from './useToken';
+import { axiosInstance } from '@/apis/http';
+import { MODAL_TYPES } from '@/components/Modal/GlobalModal';
+import useModal from '@/components/Modal/GlobalModal/hooks/useModal';
+import { ERROR_CODE } from '@/utils/error-code';
 
 const PUBLIC_DOMAIN = [
   {

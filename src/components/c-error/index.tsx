@@ -1,9 +1,9 @@
-import IC_ERROR from '@/assets/common/img_error.svg';
-import IC_READY from '@/assets/common/img_ready.svg';
 import { useRouter } from 'next/navigation';
 import BottomButtonContainer from '../Button/BottomButtonContainer';
 import DefaultButton from '../Button/DefaultButton';
 import CHeader from '../c-header';
+import IC_ERROR from '@/assets/common/img_error.svg';
+import IC_READY from '@/assets/common/img_ready.svg';
 
 interface Props {
   type: '404' | 'ready';

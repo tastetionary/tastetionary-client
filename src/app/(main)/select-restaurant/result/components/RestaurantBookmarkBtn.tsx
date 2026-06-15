@@ -1,11 +1,11 @@
+import { useMutation } from '@tanstack/react-query';
+import { useState } from 'react';
 import preferenceRepository from '@/apis/user/preference';
 import IC_BOOKMARK_ACTIVE from '@/assets/common/Icons/bookmark_active.svg';
 import IC_BOOKMARK_INACTIVE from '@/assets/common/Icons/bookmark_inactive.svg';
 import { iconToast } from '@/components/Toast';
 import useUser from '@/hooks/useUser';
 import { useSelectResultStore } from '@/store/useSelectResultStore';
-import { useMutation } from '@tanstack/react-query';
-import { useState } from 'react';
 
 export default function RestaurantBookmarkBtn() {
   const { token } = useUser();

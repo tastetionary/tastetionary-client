@@ -1,19 +1,19 @@
 'use client';
 
-import { deleteUser } from '@/apis/user/deleteUser';
-import BottomButtonContainer from '@/components/Button/BottomButtonContainer';
-import DefaultButton from '@/components/Button/DefaultButton';
-import CheckBox2 from '@/components/CheckBox/CheckBox2';
-import CHeader from '@/components/c-header';
-import { userExitReasonObject } from '@/constants/user-exit';
-import useUser from '@/hooks/useUser';
 import * as Sentry from '@sentry/nextjs';
-import { WithdrawalTypeEnum } from '@/types/enums';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { useRouter } from 'next/navigation';
 import { destroyCookie } from 'nookies';
 import { useState } from 'react';
 import * as S from './page.styled';
+import { deleteUser } from '@/apis/user/deleteUser';
+import BottomButtonContainer from '@/components/Button/BottomButtonContainer';
+import DefaultButton from '@/components/Button/DefaultButton';
+import CHeader from '@/components/c-header';
+import CheckBox2 from '@/components/CheckBox/CheckBox2';
+import { userExitReasonObject } from '@/constants/user-exit';
+import useUser from '@/hooks/useUser';
+import { WithdrawalTypeEnum } from '@/types/enums';
 
 type WithdrawalType = keyof typeof WithdrawalTypeEnum;
 

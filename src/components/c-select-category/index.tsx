@@ -1,8 +1,8 @@
+import Image from 'next/image';
 import { useReviewStore } from '@/store/useReviewStore';
 import { useSelectFoodStore } from '@/store/useSelectFoodStore';
 import { useSelectRestaurantStore } from '@/store/useSelectRestaurantStore';
 import { theme } from '@/styles/theme';
-import Image from 'next/image';
 
 interface Props {
   selectType: 'food' | 'restaurant' | 'review';

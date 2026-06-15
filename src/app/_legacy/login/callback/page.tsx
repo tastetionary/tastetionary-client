@@ -1,14 +1,14 @@
 'use client';
 
+import Lottie from 'lottie-react';
+import { useSearchParams } from 'next/navigation';
+import { useEffect, useState } from 'react';
+import useLoginMutate from '../hooks/useLoginMutate';
 import { TloginCategory } from '@/apis/auth';
 import Loading from '@/assets/animation/loading.json';
 import { overlayVariants } from '@/components/Modal/DialogModal/style';
 import * as S from '@/components/Modal/LoadingModal/style';
 import { cn } from '@/utils/styles.utils';
-import Lottie from 'lottie-react';
-import { useSearchParams } from 'next/navigation';
-import { useEffect, useState } from 'react';
-import useLoginMutate from '../hooks/useLoginMutate';
 
 export default function LoginCallback() {
   const searchParams = useSearchParams();
@@ -24,21 +24,21 @@ export default function LoginCallback() {
   useEffect(() => {
     if (isSuccess && data) {
       const returnUrl = sessionStorage.getItem('app_return_url');
-      
+
       if (returnUrl) {
         // 앱에서 온 경우 → 딥링크로 토큰 전달
         sessionStorage.removeItem('app_return_url');
-        
+
         const appUrl = `${returnUrl}?accessToken=${encodeURIComponent(data.accessToken)}&refreshToken=${encodeURIComponent(data.refreshToken)}`;
         console.log('앱으로 리다이렉트:', appUrl);
-        
+
         // 약간의 딜레이 후 리다이렉트
         setTimeout(() => {
           window.location.href = appUrl;
         }, 500);
         return;
       }
-      
+
       // 웹에서 온 경우 → 기존 로직 (예: 홈으로 이동)
       // router.push('/');
     }
@@ -68,13 +68,13 @@ export default function LoginCallback() {
   useEffect(() => {
     const handleAppMessage = (event: CustomEvent) => {
       const { type, payload } = event.detail;
-      
+
       if (type === 'GOOGLE_LOGIN_SUCCESS') {
         // 기존 방식: code로 로그인 (이제 사용 안 함)
         login({ category: 'google', code: payload.code, identification: '', password: '' });
       }
     };
-  
+
     window.addEventListener('appMessage', handleAppMessage as EventListener);
     return () => window.removeEventListener('appMessage', handleAppMessage as EventListener);
   }, [login]);

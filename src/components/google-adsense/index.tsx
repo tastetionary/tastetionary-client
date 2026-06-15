@@ -37,12 +37,7 @@ export default function GoogleAdBanner({
 
   if (!clientId) {
     return (
-      <div
-        className={className}
-        style={style}
-        role="region"
-        aria-label="광고 영역"
-      >
+      <div className={className} style={style} role="region" aria-label="광고 영역">
         <div className="flex w-full items-center justify-center bg-[#D9D9D9] py-14">
           <span className="text-14 !text-black opacity-50">광/고/영/역</span>
         </div>

@@ -1,5 +1,5 @@
-import { cn } from '@/utils/styles.utils';
 import * as S from './style';
+import { cn } from '@/utils/styles.utils';
 
 interface Props {
   title: string;

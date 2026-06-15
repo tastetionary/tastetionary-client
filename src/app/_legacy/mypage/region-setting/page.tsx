@@ -1,7 +1,7 @@
 'use client';
 
-import CRegionSetting from '@/components/c-region-setting';
 import { useSearchParams } from 'next/navigation';
+import CRegionSetting from '@/components/c-region-setting';
 
 export default function RegionSetting() {
   const params = useSearchParams();

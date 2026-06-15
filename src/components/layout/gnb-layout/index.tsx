@@ -1,5 +1,5 @@
-import GNB from '@/components/GNB';
 import * as S from './page.styled';
+import GNB from '@/components/GNB';
 
 interface Props {
   children: React.ReactNode;

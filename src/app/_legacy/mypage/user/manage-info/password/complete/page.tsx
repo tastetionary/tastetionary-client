@@ -1,16 +1,16 @@
 'use client';
 
+import * as Sentry from '@sentry/nextjs';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
+import { useRouter } from 'next/navigation';
+import { destroyCookie } from 'nookies';
+import { useEffect } from 'react';
 import authRepository from '@/apis/auth';
 import COMPLETE from '@/assets/logo/complete.svg';
 import BottomButtonContainer from '@/components/Button/BottomButtonContainer';
 import DefaultButton from '@/components/Button/DefaultButton';
 import CHeader from '@/components/c-header';
 import useToken from '@/hooks/useToken';
-import * as Sentry from '@sentry/nextjs';
-import { useMutation, useQueryClient } from '@tanstack/react-query';
-import { useRouter } from 'next/navigation';
-import { destroyCookie } from 'nookies';
-import { useEffect } from 'react';
 
 export default function UpdatePasswordComplete() {
   const router = useRouter();

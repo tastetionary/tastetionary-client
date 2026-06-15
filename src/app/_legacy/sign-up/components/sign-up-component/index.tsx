@@ -1,6 +1,5 @@
 'use client';
 
-import VerifyAuthNumber from '@/app/_legacy/find-password/components/verify-auth-number';
 import { SHA256 } from 'crypto-js';
 import { usePathname, useRouter, useSearchParams } from 'next/navigation';
 import { useRef, useState } from 'react';
@@ -14,6 +13,7 @@ import RegionSetting from '../region-setting';
 import Terms from '../terms';
 import TermsOfService from '../terms-of-service';
 import UserInfoForm from '../user-info-form';
+import VerifyAuthNumber from '@/app/_legacy/find-password/components/verify-auth-number';
 
 interface FormValue {
   userProperty: {

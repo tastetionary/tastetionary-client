@@ -1,3 +1,5 @@
+import { ChangeEvent, useState } from 'react';
+import { useFormContext } from 'react-hook-form';
 import useAccountAuthCodeMutate from '@/app/_legacy/sign-up/hooks/query/useAccountAuthCodeMutate';
 import useConfirmAuthCodeMutate from '@/app/_legacy/sign-up/hooks/query/useConfirmAuthCodeMutate';
 import BottomButtonContainer from '@/components/Button/BottomButtonContainer';
@@ -5,8 +7,6 @@ import DefaultButton from '@/components/Button/DefaultButton';
 import CHeader from '@/components/c-header';
 // import Header from '@/components/Header';
 import TextInput from '@/components/Input/TextInput';
-import { ChangeEvent, useState } from 'react';
-import { useFormContext } from 'react-hook-form';
 
 interface Props {
   onNext: () => void;

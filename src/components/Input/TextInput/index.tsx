@@ -1,6 +1,6 @@
-import { cn } from '@/utils/styles.utils';
 import { ForwardedRef, InputHTMLAttributes, forwardRef } from 'react';
 import * as S from './style';
+import { cn } from '@/utils/styles.utils';
 
 interface TextInputProps extends InputHTMLAttributes<HTMLInputElement> {
   label?: string;

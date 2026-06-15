@@ -1,3 +1,5 @@
+import { useMutation } from '@tanstack/react-query';
+import dayjs from 'dayjs';
 import restaurantRepository from '@/apis/restaurant';
 import { type RestaurantReview } from '@/apis/restaurant/recommend';
 import IC_DISLIKE from '@/assets/common/Icons/dislike.svg';
@@ -7,8 +9,6 @@ import CReviewReportBtn from '@/components/c-review-report-btn';
 import useToken from '@/hooks/useToken';
 import { useSelectResultStore } from '@/store/useSelectResultStore';
 import { cn } from '@/utils/styles.utils';
-import { useMutation } from '@tanstack/react-query';
-import dayjs from 'dayjs';
 
 export default function ReviewItem({ user, createdAt, id, keywords, summary, userReaction }: RestaurantReview) {
   const { restaurant, updateReviewReact } = useSelectResultStore();

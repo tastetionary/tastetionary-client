@@ -1,5 +1,7 @@
 'use client';
 
+import { useMutation } from '@tanstack/react-query';
+import { useForm } from 'react-hook-form';
 import userRepository from '@/apis/user';
 import useValidationNickname from '@/app/_legacy/sign-up/hooks/query/useValidationNickname';
 import BottomButtonContainer from '@/components/Button/BottomButtonContainer';
@@ -10,8 +12,6 @@ import ContentLayout from '@/components/layout/content-layout';
 import { iconToast } from '@/components/Toast';
 import useUser from '@/hooks/useUser';
 import { cn } from '@/utils/styles.utils';
-import { useMutation } from '@tanstack/react-query';
-import { useForm } from 'react-hook-form';
 
 export default function Nickname() {
   const { token } = useUser();

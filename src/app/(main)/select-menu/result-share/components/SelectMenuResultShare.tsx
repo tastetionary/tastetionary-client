@@ -1,5 +1,10 @@
 'use client';
 
+import clsx from 'clsx';
+import dayjs from 'dayjs';
+import Image from 'next/image';
+import { useRouter } from 'next/navigation';
+import { useEffect } from 'react';
 import IC_LINK from '@/assets/common/Icons/link.svg';
 import LOGO_KAKAO from '@/assets/logo/sns/logo_kakao.svg';
 import VERTICAL_LOGO from '@/assets/logo/vertical_logo.svg';
@@ -9,11 +14,6 @@ import CHeader from '@/components/c-header';
 import CRecommendButton from '@/components/c-recommend-button';
 import { FoodCategory, FoodKeyword } from '@/types/enums';
 import { copyText } from '@/utils';
-import clsx from 'clsx';
-import dayjs from 'dayjs';
-import Image from 'next/image';
-import { useRouter } from 'next/navigation';
-import { useEffect } from 'react';
 
 interface Props {
   category: FoodCategory[];

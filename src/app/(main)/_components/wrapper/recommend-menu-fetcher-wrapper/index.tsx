@@ -1,5 +1,5 @@
-import { homeRepository } from '@/apis/home';
 import RecommendMenu from '../../recommend-menu';
+import { homeRepository } from '@/apis/home';
 
 export default async function RecommendMenuFetcherWrapper() {
   const recentPickedMenus = await homeRepository().getRecentPickedMenus();

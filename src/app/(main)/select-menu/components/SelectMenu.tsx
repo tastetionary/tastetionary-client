@@ -1,5 +1,7 @@
 'use client';
 
+import { useQuery } from '@tanstack/react-query';
+import SelectSection from './SelectSection';
 import { getFoodOption } from '@/apis/food/option';
 import BottomButtonContainer from '@/components/Button/BottomButtonContainer';
 import RefreshButton from '@/components/Button/RefreshButton';
@@ -9,8 +11,6 @@ import CSelectCategory from '@/components/c-select-category';
 import CSelectKeyword from '@/components/c-select-keyword';
 import ContentLayout from '@/components/layout/content-layout';
 import { useSelectFoodStore } from '@/store/useSelectFoodStore';
-import { useQuery } from '@tanstack/react-query';
-import SelectSection from './SelectSection';
 
 export default function SelectMenu() {
   const { category, keyword, resetSelectFood } = useSelectFoodStore();

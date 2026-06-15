@@ -1,11 +1,11 @@
 'use client';
 
-import { MODAL_TYPES } from '@/components/Modal/GlobalModal';
-import useModal from '@/components/Modal/GlobalModal/hooks/useModal';
+import { useEffect } from 'react';
 import CHeader from '@/components/c-header';
 import CReviewBrowserNoItem from '@/components/c-review-broswer-noitem';
 import CReviewBrowserItem from '@/components/c-review-browser-item';
-import { useEffect } from 'react';
+import { MODAL_TYPES } from '@/components/Modal/GlobalModal';
+import useModal from '@/components/Modal/GlobalModal/hooks/useModal';
 
 interface IPosition {
   title: string;

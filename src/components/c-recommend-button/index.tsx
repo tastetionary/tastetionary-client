@@ -1,5 +1,15 @@
 'use client';
 
+import { useMutation } from '@tanstack/react-query';
+import { AxiosError } from 'axios';
+import { usePathname, useRouter } from 'next/navigation';
+import { useRef } from 'react';
+import { FoodCategory, FoodKeyword, RestaurantCategory } from '../../types/enums';
+import DefaultButton from '../Button/DefaultButton';
+import { MainButtonProps } from '../Button/MainButton';
+import { MODAL_TYPES } from '../Modal/GlobalModal';
+import useModal from '../Modal/GlobalModal/hooks/useModal';
+import { toUnicodeEscape } from './utils';
 import { FoodRecommendRes, postFoodRecommend } from '@/apis/food/recommend';
 import { RestaurantRecommendRes, postRestaurantRecommend } from '@/apis/restaurant/recommend';
 import { useRewardedAd } from '@/hooks/useRewardedAd';
@@ -7,16 +17,6 @@ import useUser from '@/hooks/useUser';
 import { useSelectFoodStore } from '@/store/useSelectFoodStore';
 import { useSelectRestaurantStore } from '@/store/useSelectRestaurantStore';
 import { useSelectResultStore } from '@/store/useSelectResultStore';
-import { FoodCategory, FoodKeyword, RestaurantCategory } from '../../types/enums';
-import { useMutation } from '@tanstack/react-query';
-import { AxiosError } from 'axios';
-import { usePathname, useRouter } from 'next/navigation';
-import { useRef } from 'react';
-import DefaultButton from '../Button/DefaultButton';
-import { MainButtonProps } from '../Button/MainButton';
-import { MODAL_TYPES } from '../Modal/GlobalModal';
-import useModal from '../Modal/GlobalModal/hooks/useModal';
-import { toUnicodeEscape } from './utils';
 
 interface Props extends MainButtonProps {
   selectType: 'food' | 'restaurant' | 'home';

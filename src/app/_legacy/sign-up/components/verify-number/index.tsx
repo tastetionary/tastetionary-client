@@ -1,13 +1,13 @@
 'use client';
 
-import MainButton from '@/components/Button/MainButton';
-import TextInput from '@/components/Input/TextInput';
-import CHeader from '@/components/c-header';
 import { ChangeEvent, useState } from 'react';
 import { useFormContext } from 'react-hook-form';
 import useAccountAuthCodeMutate from '../../hooks/query/useAccountAuthCodeMutate';
 import useConfirmAuthCodeMutate from '../../hooks/query/useConfirmAuthCodeMutate';
 import * as S from './page.styled';
+import MainButton from '@/components/Button/MainButton';
+import CHeader from '@/components/c-header';
+import TextInput from '@/components/Input/TextInput';
 
 interface Props {
   onNext: () => void;

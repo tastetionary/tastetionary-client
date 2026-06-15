@@ -1,18 +1,17 @@
 'use client';
 
+import Image from 'next/image';
+import { useRouter } from 'next/navigation';
+import { useState } from 'react';
+import { Autoplay, Pagination } from 'swiper/modules';
+import { Swiper, SwiperSlide } from 'swiper/react';
 import banner01 from '@/assets/common/bannel01.jpg';
 import banner02 from '@/assets/common/bannel02.jpg';
 import banner03 from '@/assets/common/bannel03.jpg';
 import banner04 from '@/assets/common/bannel04.jpg';
 import banner05 from '@/assets/common/bannel05.jpg';
-import Image from 'next/image';
-import { useRouter } from 'next/navigation';
-
-import { useState } from 'react';
 import 'swiper/css';
 import 'swiper/css/pagination';
-import { Autoplay, Pagination } from 'swiper/modules';
-import { Swiper, SwiperSlide } from 'swiper/react';
 
 const BannerSlider = () => {
   const [activeIndex, setActiveIndex] = useState(0);

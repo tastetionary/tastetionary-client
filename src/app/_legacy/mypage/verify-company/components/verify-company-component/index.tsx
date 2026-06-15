@@ -1,12 +1,12 @@
 'use client';
 
-import useUser from '@/hooks/useUser';
 import { usePathname, useRouter, useSearchParams } from 'next/navigation';
 import { FormProvider, SubmitHandler, useForm } from 'react-hook-form';
 import useCheckCompanyAuthCode from '../../hooks/query/useCheckCompanyAuthCode';
 import CompanyAuth from '../auth';
 import VerifyCompanyComplete from '../complete';
 import CompanyInfo from '../info';
+import useUser from '@/hooks/useUser';
 
 export interface VerifyCompanyFormValue {
   companyName: string;

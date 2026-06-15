@@ -47,7 +47,7 @@ export default function CHeader({ isLogo = false, title, noBackBtn = false, isHo
   };
 
   return (
-    <div className="fixed top-0 inset-x-0 mx-auto z-3 flex h-56 w-[calc(100%-16px)] max-w-[484px] items-center justify-between gap-md border-b-1 border-solid border-b-neutral-bg20 bg-white">
+    <div className="fixed inset-x-0 top-0 z-3 mx-auto flex h-56 w-[calc(100%-16px)] max-w-[484px] items-center justify-between gap-md border-b-1 border-solid border-b-neutral-bg20 bg-white">
       {renderLeftItems()}
 
       <div

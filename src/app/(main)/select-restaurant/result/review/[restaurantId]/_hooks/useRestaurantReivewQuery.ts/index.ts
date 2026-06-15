@@ -1,7 +1,7 @@
+import { useQuery } from '@tanstack/react-query';
 import { type RestaurantReview } from '@/apis/restaurant/recommend';
 import reviewRepository from '@/apis/restaurant/review/comment';
 import { type GetRestaurantKeywordReviewRes } from '@/types/review';
-import { useQuery } from '@tanstack/react-query';
 
 interface Props {
   restaurantId: string;

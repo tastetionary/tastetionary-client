@@ -1,12 +1,12 @@
 'use client';
 
-import * as S from '@/app/_legacy/sign-up/components/verify-number/page.styled';
-import MainButton from '@/components/Button/MainButton';
-import TextInput from '@/components/Input/TextInput';
-import CHeader from '@/components/c-header';
 import { useFormContext } from 'react-hook-form';
 import useCompanyAuthentication from '../../hooks/query/useCompanyAuthentication';
 import { VerifyCompanyFormValue } from '../verify-company-component';
+import * as S from '@/app/_legacy/sign-up/components/verify-number/page.styled';
+import MainButton from '@/components/Button/MainButton';
+import CHeader from '@/components/c-header';
+import TextInput from '@/components/Input/TextInput';
 
 interface Props {
   onNext: (id: number) => void;

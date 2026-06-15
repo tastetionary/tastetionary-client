@@ -1,5 +1,5 @@
-import reviewRepository from '@/apis/restaurant/review/comment';
 import { useMutation } from '@tanstack/react-query';
+import reviewRepository from '@/apis/restaurant/review/comment';
 
 const useReviewReportMutation = () => {
   const { mutate: postReportMutate } = useMutation({ mutationFn: reviewRepository().postReport });

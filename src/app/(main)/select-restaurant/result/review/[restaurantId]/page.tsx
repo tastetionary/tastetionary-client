@@ -1,10 +1,10 @@
 'use client';
 
-import { type RestaurantReview } from '@/apis/restaurant/recommend';
-import CHeader from '@/components/c-header';
 import { use } from 'react';
 import ReviewItem from '../../components/ReviewItem';
 import useRestaurantReviewQuery from './_hooks/useRestaurantReivewQuery.ts';
+import { type RestaurantReview } from '@/apis/restaurant/recommend';
+import CHeader from '@/components/c-header';
 
 interface Props {
   params: Promise<{
@@ -27,7 +27,11 @@ export default function SelectRestaurantResultReview({ params }: Props) {
           </div>
         </div>
 
-        <div className="mt-md ">{restaurantReviews?.map((reviews: RestaurantReview) => <ReviewItem {...reviews} key={reviews.id} />)}</div>
+        <div className="mt-md ">
+          {restaurantReviews?.map((reviews: RestaurantReview) => (
+            <ReviewItem {...reviews} key={reviews.id} />
+          ))}
+        </div>
       </div>
     </>
   );

@@ -1,26 +1,25 @@
 'use client';
 
-import IC_LOCATION from '@/assets/common/Icons/location.svg';
-import IC_PRICE from '@/assets/common/Icons/price.svg';
-import IC_REVIEW2 from '@/assets/common/Icons/review.svg';
-
-import preferenceRepository from '@/apis/user/preference';
-import BottomButtonContainer from '@/components/Button/BottomButtonContainer';
-import DefaultButton from '@/components/Button/DefaultButton';
-import { MODAL_TYPES } from '@/components/Modal/GlobalModal';
-import useModal from '@/components/Modal/GlobalModal/hooks/useModal';
-import { iconToast } from '@/components/Toast';
-import CHeader from '@/components/c-header';
-import CRecommendButton from '@/components/c-recommend-button';
-import useUser from '@/hooks/useUser';
-import { useSelectResultStore } from '@/store/useSelectResultStore';
-import { getMoneyValue } from '@/utils';
 import { useMutation } from '@tanstack/react-query';
 import axios from 'axios';
 import { useEffect, useState } from 'react';
 import RestaurantDetail from './components/RestaurantDetail';
 import RestaurantImages from './components/RestaurantImages';
 import RestaurantReview from './components/RestaurantReview';
+import preferenceRepository from '@/apis/user/preference';
+import IC_LOCATION from '@/assets/common/Icons/location.svg';
+import IC_PRICE from '@/assets/common/Icons/price.svg';
+import IC_REVIEW2 from '@/assets/common/Icons/review.svg';
+import BottomButtonContainer from '@/components/Button/BottomButtonContainer';
+import DefaultButton from '@/components/Button/DefaultButton';
+import CHeader from '@/components/c-header';
+import CRecommendButton from '@/components/c-recommend-button';
+import { MODAL_TYPES } from '@/components/Modal/GlobalModal';
+import useModal from '@/components/Modal/GlobalModal/hooks/useModal';
+import { iconToast } from '@/components/Toast';
+import useUser from '@/hooks/useUser';
+import { useSelectResultStore } from '@/store/useSelectResultStore';
+import { getMoneyValue } from '@/utils';
 
 export default function SelectRestaurantResult() {
   const { token } = useUser();

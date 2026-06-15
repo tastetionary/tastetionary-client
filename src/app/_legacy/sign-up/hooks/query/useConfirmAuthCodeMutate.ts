@@ -1,9 +1,9 @@
+import { useMutation } from '@tanstack/react-query';
+import { useRouter } from 'next/navigation';
 import authRepository from '@/apis/auth';
 import { getRegisterRepository } from '@/apis/register';
 import { MODAL_TYPES } from '@/components/Modal/GlobalModal';
 import useModal from '@/components/Modal/GlobalModal/hooks/useModal';
-import { useMutation } from '@tanstack/react-query';
-import { useRouter } from 'next/navigation';
 
 interface Props {
   onNext: () => void;

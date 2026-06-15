@@ -42,8 +42,12 @@ const SentryWebpackPluginOptions = {
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  output: 'standalone',
   staticPageGenerationTimeout: 600,
+  // 빌드는 lint로 차단하지 않음. lint는 `pnpm lint` / `pnpm fix`로 별도 실행.
+  // (TypeScript 타입 에러는 그대로 빌드를 실패시킴)
+  eslint: {
+    ignoreDuringBuilds: true,
+  },
   compiler: {
     styledComponents: true,
   },

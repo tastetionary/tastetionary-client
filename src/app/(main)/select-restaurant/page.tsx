@@ -1,7 +1,7 @@
-import { getRestaurantOption } from '@/apis/restaurant/option';
 import { QueryClient, dehydrate } from '@tanstack/query-core';
 import { HydrationBoundary } from '@tanstack/react-query';
 import SelectRestaurant from './components/SelectRestaurant';
+import { getRestaurantOption } from '@/apis/restaurant/option';
 
 async function SelectRestaurantPage() {
   const queryClient = new QueryClient();

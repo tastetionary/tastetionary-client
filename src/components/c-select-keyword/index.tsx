@@ -1,7 +1,7 @@
+import DefaultButton from '../Button/DefaultButton';
 import { useReviewStore } from '@/store/useReviewStore';
 import { useSelectFoodStore } from '@/store/useSelectFoodStore';
 import { useSelectRestaurantStore } from '@/store/useSelectRestaurantStore';
-import DefaultButton from '../Button/DefaultButton';
 
 interface Props {
   selectType: 'food' | 'restaurant' | 'review';

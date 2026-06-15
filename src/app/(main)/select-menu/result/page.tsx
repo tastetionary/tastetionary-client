@@ -1,13 +1,13 @@
 'use client';
 
+import Image from 'next/image';
+import { useRouter } from 'next/navigation';
 import FOOD_NO_RESULT from '@/assets/common/food_no_result.svg';
 import BottomButtonContainer from '@/components/Button/BottomButtonContainer';
 import RefreshButton from '@/components/Button/RefreshButton';
 import CHeader from '@/components/c-header';
 import CRecommendButton from '@/components/c-recommend-button';
 import { useSelectResultStore } from '@/store/useSelectResultStore';
-import Image from 'next/image';
-import { useRouter } from 'next/navigation';
 
 export default function SelectMenuResult() {
   const router = useRouter();

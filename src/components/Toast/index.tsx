@@ -1,10 +1,10 @@
 'use client';
 
+import { toast, ToastContainer } from 'react-toastify';
 import IC_CHECK from '@/assets/common/Icons/check.svg';
 import IC_EMAIL from '@/assets/common/Icons/email.svg';
 import IC_PENCIL from '@/assets/common/Icons/pencil.svg';
 import IC_PROHIBIT from '@/assets/common/Icons/prohibit.svg';
-import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 type ToastIcon = 'pencil' | 'check' | 'prohibit' | 'mail';

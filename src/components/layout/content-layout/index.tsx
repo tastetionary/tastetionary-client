@@ -1,5 +1,5 @@
-import { cn } from '@/utils/styles.utils';
 import { ReactNode } from 'react';
+import { cn } from '@/utils/styles.utils';
 
 interface Props {
   children: ReactNode;

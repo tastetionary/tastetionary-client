@@ -1,11 +1,11 @@
+import clsx from 'clsx';
+import { ButtonHTMLAttributes, Fragment } from 'react';
 import { TloginCategory } from '@/apis/auth';
 import IC_EMAIL from '@/assets/common/Icons/email.svg';
 import LOGO_APPLE from '@/assets/logo/sns/logo_apple.svg';
 import LOGO_GOOGLE from '@/assets/logo/sns/logo_google.svg';
 import LOGO_KAKAO from '@/assets/logo/sns/logo_kakao.svg';
 import LOGO_NAVER from '@/assets/logo/sns/logo_naver.svg';
-import clsx from 'clsx';
-import { ButtonHTMLAttributes, Fragment } from 'react';
 
 interface Props extends ButtonHTMLAttributes<HTMLButtonElement> {
   loginType: TloginCategory;

@@ -1,7 +1,7 @@
 'use client';
 
-import { PickedMenus } from '@/apis/home';
 import MenuSwiper from '../menu-swiper';
+import { PickedMenus } from '@/apis/home';
 
 export default function RecommendMenu({ menus }: { menus: PickedMenus[] }) {
   return (

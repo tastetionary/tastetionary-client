@@ -1,8 +1,8 @@
+import { useMutation } from '@tanstack/react-query';
 import { getUserCompanyRepository } from '@/apis/user/company';
 import { MODAL_TYPES } from '@/components/Modal/GlobalModal';
 import useModal from '@/components/Modal/GlobalModal/hooks/useModal';
 import useUser from '@/hooks/useUser';
-import { useMutation } from '@tanstack/react-query';
 
 interface Props {
   email: string;

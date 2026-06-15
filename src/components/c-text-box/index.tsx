@@ -1,6 +1,6 @@
-import { cn } from '@/utils/styles.utils';
 import { HTMLAttributes, ReactNode } from 'react';
 import * as S from './page.styled';
+import { cn } from '@/utils/styles.utils';
 
 interface TextBoxProps extends HTMLAttributes<HTMLDivElement> {
   bgColor: 'orange' | 'yellow' | 'gray' | 'none';

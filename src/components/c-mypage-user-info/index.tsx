@@ -1,9 +1,9 @@
-import useLogoutMutate from '@/app/_legacy/login/hooks/useLogoutMutate';
-import useUser from '@/hooks/useUser';
 import { useRouter } from 'next/navigation';
 import { MODAL_TYPES } from '../Modal/GlobalModal';
 import useModal from '../Modal/GlobalModal/hooks/useModal';
 import * as S from './page.styeld';
+import useLogoutMutate from '@/app/_legacy/login/hooks/useLogoutMutate';
+import useUser from '@/hooks/useUser';
 
 export default function CMyPageUserInfo() {
   const { data, token } = useUser();

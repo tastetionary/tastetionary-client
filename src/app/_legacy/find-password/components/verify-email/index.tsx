@@ -1,11 +1,11 @@
+import { useFormContext } from 'react-hook-form';
 import useAccountAuthCodeMutate from '@/app/_legacy/sign-up/hooks/query/useAccountAuthCodeMutate';
 import BottomButtonContainer from '@/components/Button/BottomButtonContainer';
 import DefaultButton from '@/components/Button/DefaultButton';
-import TextInput from '@/components/Input/TextInput';
 import CHeader from '@/components/c-header';
+import TextInput from '@/components/Input/TextInput';
 import ContentLayout from '@/components/layout/content-layout';
 import { emailRegex } from '@/constants';
-import { useFormContext } from 'react-hook-form';
 
 interface Props {
   onNext: () => void;

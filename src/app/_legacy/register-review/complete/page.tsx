@@ -1,12 +1,12 @@
 'use client';
 
+import { useRouter } from 'next/navigation';
 import COMPLETE from '@/assets/logo/complete.svg';
 import BottomButtonContainer from '@/components/Button/BottomButtonContainer';
 import DefaultButton from '@/components/Button/DefaultButton';
 import CHeader from '@/components/c-header';
 import { useReviewPlaceInfoStore } from '@/store/useReviewPlaceInfoStore';
 import { useReviewStore } from '@/store/useReviewStore';
-import { useRouter } from 'next/navigation';
 
 export default function ReviewComplete() {
   const router = useRouter();

@@ -1,6 +1,9 @@
 'use client';
 
 // 첫번째 컨텐츠
+import Image from 'next/image';
+import { useRouter } from 'next/navigation';
+import { Fragment, use } from 'react';
 import recommendUrl1_1 from '@/assets/common/contents/banner01/recommendUrl1-1.jpg';
 import recommendUrl1_2 from '@/assets/common/contents/banner01/recommendUrl1-2.jpg';
 import recommendUrl1_3 from '@/assets/common/contents/banner01/recommendUrl1-3.jpg';
@@ -26,13 +29,9 @@ import recommendUrl5_1 from '@/assets/common/contents/banner05/recommendUrl5-1.j
 import recommendUrl5_2 from '@/assets/common/contents/banner05/recommendUrl5-2.jpg';
 import recommendUrl5_3 from '@/assets/common/contents/banner05/recommendUrl5-3.jpg';
 import url5 from '@/assets/common/contents/banner05/url5.jpg';
-
 import DefaultButton from '@/components/Button/DefaultButton';
 import CServerHeaderWithChildren from '@/components/c-server-header-with-children';
 import DefaultTextBox from '@/components/c-text-box';
-import Image from 'next/image';
-import { useRouter } from 'next/navigation';
-import { Fragment, use } from 'react';
 
 interface Params {
   detail: string[];
