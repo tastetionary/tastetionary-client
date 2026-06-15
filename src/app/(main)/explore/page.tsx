@@ -4,7 +4,6 @@ import ErrorFallback from '../_components/error-fallback';
 import FooterLinks from '../_components/footer-links';
 import LocationSection from '../_components/location-section';
 import MenuSelection from '../_components/menu-selection';
-import RecentReviewsFetcherWrapper from '../_components/wrapper/recent-reviews-fetcher-wrapper';
 import RecommendMenuFetcherWrapper from '../_components/wrapper/recommend-menu-fetcher-wrapper';
 import CServerHeaderWithChildren from '@/components/c-server-header-with-children';
 
@@ -21,15 +20,15 @@ export default async function Home() {
       <BannerSlider />
 
       <ErrorBoundary FallbackComponent={ErrorFallback}>
-        <RecentReviewsFetcherWrapper />
+        {/* <RecentReviewsFetcherWrapper /> */}
         <RecommendMenuFetcherWrapper />
       </ErrorBoundary>
 
-      {/* 로그인 기능 - 임시 비활성화 (푸터: 서비스 이용약관, 개인정보처리방침)
+      {/* 로그인 기능 - 임시 비활성화 (푸터: 서비스 이용약관, 개인정보처리방침) */}
       <footer>
         <FooterLinks />
       </footer>
-      */}
+
     </CServerHeaderWithChildren>
   );
 }
