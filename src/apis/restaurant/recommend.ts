@@ -6,6 +6,8 @@ interface Req {
   category: RestaurantCategory[];
   keywords: string[];
   prices: string[];
+  latitude?: number;
+  longitude?: number;
 }
 
 export interface RestaurantReview {

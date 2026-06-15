@@ -12,6 +12,7 @@ import useModal from '../Modal/GlobalModal/hooks/useModal';
 import { toUnicodeEscape } from './utils';
 import { FoodRecommendRes, postFoodRecommend } from '@/apis/food/recommend';
 import { RestaurantRecommendRes, postRestaurantRecommend } from '@/apis/restaurant/recommend';
+import useRegion from '@/hooks/useRegion';
 import { useRewardedAd } from '@/hooks/useRewardedAd';
 import useUser from '@/hooks/useUser';
 import { useSelectFoodStore } from '@/store/useSelectFoodStore';
@@ -25,6 +26,7 @@ interface Props extends MainButtonProps {
 export default function CRecommendButton({ selectType, btnText, ...rest }: Props) {
   const router = useRouter();
   const { token } = useUser();
+  const { latitude, longitude } = useRegion();
   const { openModal, closeModal } = useModal();
   const pathname = usePathname();
   const pendingActionRef = useRef<'food' | 'restaurant' | null>(null);
@@ -182,6 +184,7 @@ export default function CRecommendButton({ selectType, btnText, ...rest }: Props
           keywords: restaurantKeyword?.filter(c => c !== '전체'),
           prices: restaurantPrices,
           excludeIds: [],
+          ...(latitude && longitude ? { latitude, longitude } : {}),
         },
         token
       ),

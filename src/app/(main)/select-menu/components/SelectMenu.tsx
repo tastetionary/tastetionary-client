@@ -1,6 +1,7 @@
 'use client';
 
 import { useQuery } from '@tanstack/react-query';
+import { useEffect } from 'react';
 import SelectSection from './SelectSection';
 import { getFoodOption } from '@/apis/food/option';
 import BottomButtonContainer from '@/components/Button/BottomButtonContainer';
@@ -14,6 +15,12 @@ import { useSelectFoodStore } from '@/store/useSelectFoodStore';
 
 export default function SelectMenu() {
   const { category, keyword, resetSelectFood } = useSelectFoodStore();
+
+  // 페이지 진입 시 이전에 선택했던 값을 초기화한다.
+  useEffect(() => {
+    resetSelectFood();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   const recommendBtnDisabled = category?.length === 0 || keyword?.length === 0;
   const refreshBtnDisabled = category?.length === 0 && keyword?.length === 0;
