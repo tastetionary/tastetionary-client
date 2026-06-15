@@ -1,9 +1,9 @@
 'use client';
 
 import { Suspense, useEffect, type ReactNode } from 'react';
-import ReactQueryProvider from '@/lib/react-query/ReactQueryProvider';
-import StyledComponentsRegistry from '@/lib/registry';
-import StyledComponentsWrapper from '@/lib/styled-components/StyledComponentsWrapper';
+import ReactQueryProvider from '@/shared/lib/react-query/ReactQueryProvider';
+import StyledComponentsRegistry from '@/shared/lib/registry';
+import StyledComponentsWrapper from '@/shared/lib/styled-components/StyledComponentsWrapper';
 
 export default function RootLayoutProviders({ children }: { children: ReactNode }) {
   useEffect(() => {

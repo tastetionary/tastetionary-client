@@ -3,8 +3,8 @@
 import { use } from 'react';
 import ReviewItem from '../../components/ReviewItem';
 import useRestaurantReviewQuery from './_hooks/useRestaurantReivewQuery.ts';
-import { type RestaurantReview } from '@/apis/restaurant/recommend';
-import CHeader from '@/components/c-header';
+import { type RestaurantReview } from '@/features/recommendation/api/restaurant/recommend';
+import CHeader from '@/shared/ui/c-header';
 
 interface Props {
   params: Promise<{

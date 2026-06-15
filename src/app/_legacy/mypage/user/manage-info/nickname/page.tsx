@@ -2,16 +2,16 @@
 
 import { useMutation } from '@tanstack/react-query';
 import { useForm } from 'react-hook-form';
-import userRepository from '@/apis/user';
 import useValidationNickname from '@/app/_legacy/sign-up/hooks/query/useValidationNickname';
-import BottomButtonContainer from '@/components/Button/BottomButtonContainer';
-import DefaultButton from '@/components/Button/DefaultButton';
-import CHeader from '@/components/c-header';
-import TextInput from '@/components/Input/TextInput';
-import ContentLayout from '@/components/layout/content-layout';
-import { iconToast } from '@/components/Toast';
-import useUser from '@/hooks/useUser';
-import { cn } from '@/utils/styles.utils';
+import userRepository from '@/shared/api/user';
+import useUser from '@/shared/hooks/useUser';
+import BottomButtonContainer from '@/shared/ui/Button/BottomButtonContainer';
+import DefaultButton from '@/shared/ui/Button/DefaultButton';
+import CHeader from '@/shared/ui/c-header';
+import TextInput from '@/shared/ui/Input/TextInput';
+import ContentLayout from '@/shared/ui/layout/content-layout';
+import { iconToast } from '@/shared/ui/Toast';
+import { cn } from '@/shared/utils/styles.utils';
 
 export default function Nickname() {
   const { token } = useUser();

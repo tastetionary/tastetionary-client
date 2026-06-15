@@ -3,10 +3,10 @@ import { useQueryClient } from '@tanstack/react-query';
 import { AxiosResponse } from 'axios';
 import { useEffect } from 'react';
 import useToken from './useToken';
-import { axiosInstance } from '@/apis/http';
-import { MODAL_TYPES } from '@/components/Modal/GlobalModal';
-import useModal from '@/components/Modal/GlobalModal/hooks/useModal';
-import { ERROR_CODE } from '@/utils/error-code';
+import { axiosInstance } from '@/shared/api/http';
+import { MODAL_TYPES } from '@/shared/ui/Modal/GlobalModal';
+import useModal from '@/shared/ui/Modal/GlobalModal/hooks/useModal';
+import { ERROR_CODE } from '@/shared/utils/error-code';
 
 const PUBLIC_DOMAIN = [
   {

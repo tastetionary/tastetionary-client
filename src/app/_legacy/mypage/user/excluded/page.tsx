@@ -3,12 +3,12 @@
 import { useQuery } from '@tanstack/react-query';
 import { useRouter } from 'next/navigation';
 import { PreferenceListItem } from '../bookmark/components/BookmarkItem';
-import preferenceRepository, { GetPreferenceRes } from '@/apis/user/preference';
 import IMG_ERROR from '@/assets/common/error.svg';
-import BottomButtonContainer from '@/components/Button/BottomButtonContainer';
-import DefaultButton from '@/components/Button/DefaultButton';
-import CHeader from '@/components/c-header';
-import useUser from '@/hooks/useUser';
+import preferenceRepository, { GetPreferenceRes } from '@/shared/api/user/preference';
+import useUser from '@/shared/hooks/useUser';
+import BottomButtonContainer from '@/shared/ui/Button/BottomButtonContainer';
+import DefaultButton from '@/shared/ui/Button/DefaultButton';
+import CHeader from '@/shared/ui/c-header';
 
 export default function MyExcluded() {
   const router = useRouter();

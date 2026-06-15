@@ -3,9 +3,9 @@
 import { useRouter } from 'next/navigation';
 import * as S from '@/app/_legacy/sign-up/components/complete/page.styled';
 import COMPLETE from '@/assets/logo/complete.svg';
-import BottomButtonContainer from '@/components/Button/BottomButtonContainer';
-import DefaultButton from '@/components/Button/DefaultButton';
-import CHeader from '@/components/c-header';
+import BottomButtonContainer from '@/shared/ui/Button/BottomButtonContainer';
+import DefaultButton from '@/shared/ui/Button/DefaultButton';
+import CHeader from '@/shared/ui/c-header';
 
 export default function MyPageUserExitSuccess() {
   const { push } = useRouter();

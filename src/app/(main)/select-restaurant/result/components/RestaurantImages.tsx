@@ -1,4 +1,4 @@
-import { useSelectResultStore } from '@/store/useSelectResultStore';
+import { useSelectResultStore } from '@/features/recommendation/store/useSelectResultStore';
 import { theme } from '@/styles/theme';
 import axios from 'axios';
 import { useEffect, useState } from 'react';

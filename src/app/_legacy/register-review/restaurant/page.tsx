@@ -1,9 +1,9 @@
 'use client';
 
 import { useRouter } from 'next/navigation';
-import CChangeRegion from '@/components/c-change-region';
-import CHeader from '@/components/c-header';
-import TextInput from '@/components/Input/TextInput';
+import CChangeRegion from '@/features/region/components/c-change-region';
+import CHeader from '@/shared/ui/c-header';
+import TextInput from '@/shared/ui/Input/TextInput';
 
 export default function RegisterReviewRestaurant() {
   const router = useRouter();

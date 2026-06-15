@@ -1,8 +1,8 @@
 'use client';
 
 import { useRouter } from 'next/navigation';
-import CHeader from '@/components/c-header';
-import CMypageItem from '@/components/c-mypage-items';
+import CMypageItem from '@/features/user/components/c-mypage-items';
+import CHeader from '@/shared/ui/c-header';
 
 export default function MyPageUserManageInfo() {
   const { push } = useRouter();

@@ -3,12 +3,12 @@
 import { useQuery } from '@tanstack/react-query';
 import { useRouter } from 'next/navigation';
 import { MyReviewItem } from './components/MyReviewItem';
-import { RestaurantReviewItemType, restaurantReviewRepository } from '@/apis/restaurant/review';
 import IMG_ERROR from '@/assets/common/error.svg';
-import BottomButtonContainer from '@/components/Button/BottomButtonContainer';
-import DefaultButton from '@/components/Button/DefaultButton';
-import CHeader from '@/components/c-header';
-import useUser from '@/hooks/useUser';
+import { RestaurantReviewItemType, restaurantReviewRepository } from '@/features/reviews/api';
+import useUser from '@/shared/hooks/useUser';
+import BottomButtonContainer from '@/shared/ui/Button/BottomButtonContainer';
+import DefaultButton from '@/shared/ui/Button/DefaultButton';
+import CHeader from '@/shared/ui/c-header';
 
 export default function MyReviews() {
   const router = useRouter();

@@ -3,8 +3,8 @@
 import { useRouter } from 'next/navigation';
 import * as S from '@/app/_legacy/sign-up/components/complete/page.styled';
 import COMPLETE from '@/assets/logo/complete.svg';
-import MainButton from '@/components/Button/MainButton';
-import CHeader from '@/components/c-header';
+import MainButton from '@/shared/ui/Button/MainButton';
+import CHeader from '@/shared/ui/c-header';
 
 export default function VerifyCompanyComplete() {
   const { push } = useRouter();

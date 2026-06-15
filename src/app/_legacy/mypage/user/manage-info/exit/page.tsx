@@ -6,14 +6,14 @@ import { useRouter } from 'next/navigation';
 import { destroyCookie } from 'nookies';
 import { useState } from 'react';
 import * as S from './page.styled';
-import { deleteUser } from '@/apis/user/deleteUser';
-import BottomButtonContainer from '@/components/Button/BottomButtonContainer';
-import DefaultButton from '@/components/Button/DefaultButton';
-import CHeader from '@/components/c-header';
-import CheckBox2 from '@/components/CheckBox/CheckBox2';
-import { userExitReasonObject } from '@/constants/user-exit';
-import useUser from '@/hooks/useUser';
-import { WithdrawalTypeEnum } from '@/types/enums';
+import { deleteUser } from '@/shared/api/user/deleteUser';
+import { userExitReasonObject } from '@/shared/constants/user-exit';
+import useUser from '@/shared/hooks/useUser';
+import { WithdrawalTypeEnum } from '@/shared/types/enums';
+import BottomButtonContainer from '@/shared/ui/Button/BottomButtonContainer';
+import DefaultButton from '@/shared/ui/Button/DefaultButton';
+import CHeader from '@/shared/ui/c-header';
+import CheckBox2 from '@/shared/ui/CheckBox/CheckBox2';
 
 type WithdrawalType = keyof typeof WithdrawalTypeEnum;
 

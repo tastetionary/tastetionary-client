@@ -1,5 +1,5 @@
-import { PickedMenus } from '@/apis/home';
-import DefaultButton from '@/components/Button/DefaultButton';
+import { PickedMenus } from '@/features/home/api';
+import DefaultButton from '@/shared/ui/Button/DefaultButton';
 import Image from 'next/image';
 import 'swiper/css';
 import { Autoplay } from 'swiper/modules';

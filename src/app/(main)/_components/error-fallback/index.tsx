@@ -1,6 +1,6 @@
 'use client';
 
-import DefaultButton from '@/components/Button/DefaultButton';
+import DefaultButton from '@/shared/ui/Button/DefaultButton';
 
 export default function ErrorFallback() {
   return (

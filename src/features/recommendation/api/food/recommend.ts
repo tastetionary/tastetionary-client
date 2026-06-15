@@ -1,5 +1,5 @@
-import { FoodCategory, FoodKeyword } from '../../types/enums';
-import http from '../http';
+import http from '@/shared/api/http';
+import { FoodCategory, FoodKeyword } from '@/shared/types/enums';
 
 interface Req {
   categories: FoodCategory[];

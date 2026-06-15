@@ -4,13 +4,13 @@ import { useMutation } from '@tanstack/react-query';
 import { SHA256 } from 'crypto-js';
 import { useRouter } from 'next/navigation';
 import { SubmitHandler, useForm } from 'react-hook-form';
-import authRepository from '@/apis/auth';
-import BottomButtonContainer from '@/components/Button/BottomButtonContainer';
-import DefaultButton from '@/components/Button/DefaultButton';
-import CHeader from '@/components/c-header';
-import TextInput from '@/components/Input/TextInput';
-import ContentLayout from '@/components/layout/content-layout';
-import useUser from '@/hooks/useUser';
+import authRepository from '@/shared/api/auth';
+import useUser from '@/shared/hooks/useUser';
+import BottomButtonContainer from '@/shared/ui/Button/BottomButtonContainer';
+import DefaultButton from '@/shared/ui/Button/DefaultButton';
+import CHeader from '@/shared/ui/c-header';
+import TextInput from '@/shared/ui/Input/TextInput';
+import ContentLayout from '@/shared/ui/layout/content-layout';
 
 type FormValue = {
   password: string;

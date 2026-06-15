@@ -1,8 +1,8 @@
 import { useRouter } from 'next/navigation';
-import DefaultButton from '../Button/DefaultButton';
 import IC_CHEVRON from '@/assets/common/Icons/chevron.svg';
 import IC_PIN from '@/assets/common/Icons/pin.svg';
-import useRegion from '@/hooks/useRegion';
+import useRegion from '@/features/region/hooks/useRegion';
+import DefaultButton from '@/shared/ui/Button/DefaultButton';
 
 interface Props {
   type: 'activity_area' | 'dining_area';

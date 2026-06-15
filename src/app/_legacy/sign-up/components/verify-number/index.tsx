@@ -5,9 +5,9 @@ import { useFormContext } from 'react-hook-form';
 import useAccountAuthCodeMutate from '../../hooks/query/useAccountAuthCodeMutate';
 import useConfirmAuthCodeMutate from '../../hooks/query/useConfirmAuthCodeMutate';
 import * as S from './page.styled';
-import MainButton from '@/components/Button/MainButton';
-import CHeader from '@/components/c-header';
-import TextInput from '@/components/Input/TextInput';
+import MainButton from '@/shared/ui/Button/MainButton';
+import CHeader from '@/shared/ui/c-header';
+import TextInput from '@/shared/ui/Input/TextInput';
 
 interface Props {
   onNext: () => void;

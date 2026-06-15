@@ -1,4 +1,4 @@
-import http from '../http';
+import http from '@/shared/api/http';
 
 interface Res {
   categories: { id: number; name: string; icon: string }[];

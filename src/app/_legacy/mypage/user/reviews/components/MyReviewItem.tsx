@@ -1,13 +1,13 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { useRouter } from 'next/navigation';
-import { RestaurantReviewItemType, restaurantReviewRepository } from '@/apis/restaurant/review';
 import IC_MORE from '@/assets/common/Icons/more.svg';
-import DefaultButton from '@/components/Button/DefaultButton';
-import { MODAL_TYPES } from '@/components/Modal/GlobalModal';
-import useModal from '@/components/Modal/GlobalModal/hooks/useModal';
-import { iconToast } from '@/components/Toast';
-import useToken from '@/hooks/useToken';
-import { useReviewPlaceInfoStore } from '@/store/useReviewPlaceInfoStore';
+import { RestaurantReviewItemType, restaurantReviewRepository } from '@/features/reviews/api';
+import { useReviewPlaceInfoStore } from '@/features/reviews/store/useReviewPlaceInfoStore';
+import useToken from '@/shared/hooks/useToken';
+import DefaultButton from '@/shared/ui/Button/DefaultButton';
+import { MODAL_TYPES } from '@/shared/ui/Modal/GlobalModal';
+import useModal from '@/shared/ui/Modal/GlobalModal/hooks/useModal';
+import { iconToast } from '@/shared/ui/Toast';
 
 export function MyReviewItem({
   id,

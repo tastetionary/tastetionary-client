@@ -1,7 +1,7 @@
-import http from '@/apis/http';
-import { RestaurantCategory, RestaurantKeyword } from '@/types/enums';
+import http from '@/shared/api/http';
+import { RestaurantCategory, RestaurantKeyword } from '@/shared/types/enums';
 
-interface postRestaurantReviewReq {
+interface PostRestaurantReviewReq {
   token?: string;
   review: {
     category: RestaurantCategory;
@@ -66,7 +66,7 @@ interface RestaurantReviewRepository {
     reviewer_id: number;
     token?: string;
   }) => Promise<GetUsersRestaurantReviewRes>;
-  postRestaurantReview: ({ review, external, token }: postRestaurantReviewReq) => Promise<any>;
+  postRestaurantReview: ({ review, external, token }: PostRestaurantReviewReq) => Promise<any>;
   deleteRestaurantReview: ({ reviewId, token }: DeleteRestaurantReviewType) => Promise<any>;
   updateRestaurantReview: ({
     reviewId,
@@ -97,7 +97,7 @@ export const restaurantReviewRepository = (): RestaurantReviewRepository => {
         },
       }),
     postRestaurantReview: async ({ review, external, token }) =>
-      await http.post<{}, postRestaurantReviewReq>(
+      await http.post<{}, PostRestaurantReviewReq>(
         '/apis/v1/restaurant/review',
         { review, external },
         token

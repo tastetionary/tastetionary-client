@@ -1,9 +1,9 @@
 import { useQuery } from '@tanstack/react-query';
 import { useEffect } from 'react';
-import { getRestaurantOption } from '@/apis/restaurant/option';
-import CheckBox2 from '@/components/CheckBox/CheckBox2';
-import { useReviewStore } from '@/store/useReviewStore';
-import { useSelectRestaurantStore } from '@/store/useSelectRestaurantStore';
+import { getRestaurantOption } from '@/features/recommendation/api/restaurant/option';
+import { useSelectRestaurantStore } from '@/features/recommendation/store/useSelectRestaurantStore';
+import { useReviewStore } from '@/features/reviews/store/useReviewStore';
+import CheckBox2 from '@/shared/ui/CheckBox/CheckBox2';
 
 export default function SelectPrice({ type }: { type: 'restaurant' | 'review' }) {
   const { prices: restaurantPrice, setRestaurantPrice } = useSelectRestaurantStore();

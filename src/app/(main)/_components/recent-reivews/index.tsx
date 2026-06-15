@@ -2,7 +2,7 @@
 
 import { useRouter } from 'next/navigation';
 import ReviewContent, { Reviews } from '../review-content';
-import DefaultButton from '@/components/Button/DefaultButton';
+import DefaultButton from '@/shared/ui/Button/DefaultButton';
 
 interface Props {
   reviews: Reviews[];

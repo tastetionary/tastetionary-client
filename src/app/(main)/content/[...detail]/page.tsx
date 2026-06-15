@@ -29,9 +29,9 @@ import recommendUrl5_1 from '@/assets/common/contents/banner05/recommendUrl5-1.j
 import recommendUrl5_2 from '@/assets/common/contents/banner05/recommendUrl5-2.jpg';
 import recommendUrl5_3 from '@/assets/common/contents/banner05/recommendUrl5-3.jpg';
 import url5 from '@/assets/common/contents/banner05/url5.jpg';
-import DefaultButton from '@/components/Button/DefaultButton';
-import CServerHeaderWithChildren from '@/components/c-server-header-with-children';
-import DefaultTextBox from '@/components/c-text-box';
+import DefaultButton from '@/shared/ui/Button/DefaultButton';
+import CServerHeaderWithChildren from '@/shared/ui/c-server-header-with-children';
+import DefaultTextBox from '@/shared/ui/c-text-box';
 
 interface Params {
   detail: string[];

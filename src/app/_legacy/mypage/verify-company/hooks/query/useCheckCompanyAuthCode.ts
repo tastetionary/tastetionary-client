@@ -1,6 +1,6 @@
 import { useMutation } from '@tanstack/react-query';
-import { getUserCompanyRepository } from '@/apis/user/company';
-import useUser from '@/hooks/useUser';
+import { getUserCompanyRepository } from '@/shared/api/user/company';
+import useUser from '@/shared/hooks/useUser';
 
 interface Props {
   onNext: () => void;

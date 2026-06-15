@@ -1,5 +1,5 @@
-import DefaultButton from '@/components/Button/DefaultButton';
-import CheckBox2 from '@/components/CheckBox/CheckBox2';
+import DefaultButton from '@/shared/ui/Button/DefaultButton';
+import CheckBox2 from '@/shared/ui/CheckBox/CheckBox2';
 
 interface Props {
   type: string;

@@ -1,10 +1,10 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
-import preferenceRepository, { GetPreferenceRes } from '@/apis/user/preference';
 import IC_CLOSE from '@/assets/common/Icons/close.svg';
-import { MODAL_TYPES } from '@/components/Modal/GlobalModal';
-import useModal from '@/components/Modal/GlobalModal/hooks/useModal';
-import { iconToast } from '@/components/Toast';
-import useToken from '@/hooks/useToken';
+import preferenceRepository, { GetPreferenceRes } from '@/shared/api/user/preference';
+import useToken from '@/shared/hooks/useToken';
+import { MODAL_TYPES } from '@/shared/ui/Modal/GlobalModal';
+import useModal from '@/shared/ui/Modal/GlobalModal/hooks/useModal';
+import { iconToast } from '@/shared/ui/Toast';
 
 type PreferenceListItemType = Pick<GetPreferenceRes, 'address' | 'name' | 'phone' | 'id'> & {
   type: 'bookmark' | 'excluded';

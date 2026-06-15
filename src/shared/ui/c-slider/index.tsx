@@ -1,6 +1,6 @@
 import Slider from 'rc-slider';
-import { useReviewStore } from '@/store/useReviewStore';
-import { useSelectRestaurantStore } from '@/store/useSelectRestaurantStore';
+import { useSelectRestaurantStore } from '@/features/recommendation/store/useSelectRestaurantStore';
+import { useReviewStore } from '@/features/reviews/store/useReviewStore';
 import 'rc-slider/assets/index.css';
 import { useEffect, useState } from 'react';
 

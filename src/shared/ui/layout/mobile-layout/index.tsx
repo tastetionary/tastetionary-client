@@ -1,4 +1,4 @@
-import V2LayoutCorners from '@/components/layout/V2LayoutCorners';
+import V2LayoutCorners from '@/shared/ui/layout/V2LayoutCorners';
 
 interface Props {
   children: React.ReactNode;

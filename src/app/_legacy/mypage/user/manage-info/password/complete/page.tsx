@@ -5,12 +5,12 @@ import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { useRouter } from 'next/navigation';
 import { destroyCookie } from 'nookies';
 import { useEffect } from 'react';
-import authRepository from '@/apis/auth';
 import COMPLETE from '@/assets/logo/complete.svg';
-import BottomButtonContainer from '@/components/Button/BottomButtonContainer';
-import DefaultButton from '@/components/Button/DefaultButton';
-import CHeader from '@/components/c-header';
-import useToken from '@/hooks/useToken';
+import authRepository from '@/shared/api/auth';
+import useToken from '@/shared/hooks/useToken';
+import BottomButtonContainer from '@/shared/ui/Button/BottomButtonContainer';
+import DefaultButton from '@/shared/ui/Button/DefaultButton';
+import CHeader from '@/shared/ui/c-header';
 
 export default function UpdatePasswordComplete() {
   const router = useRouter();

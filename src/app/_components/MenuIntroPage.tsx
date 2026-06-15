@@ -3,8 +3,8 @@
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import VerticalLogo from '@/assets/logo/vertical_logo.svg';
-// import GoogleAdBanner from '@/components/google-adsense';
-import V2LayoutCorners from '@/components/layout/V2LayoutCorners';
+// import GoogleAdBanner from '@/shared/ui/google-adsense';
+import V2LayoutCorners from '@/shared/ui/layout/V2LayoutCorners';
 
 export default function MenuIntroPage() {
   const router = useRouter();

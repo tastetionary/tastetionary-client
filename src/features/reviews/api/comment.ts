@@ -1,5 +1,5 @@
 import { parseCookies } from 'nookies';
-import http from '@/apis/http';
+import http from '@/shared/api/http';
 
 interface GetCommentParams {
   restaurantId: string;

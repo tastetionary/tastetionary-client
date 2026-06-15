@@ -3,10 +3,10 @@
 import { useRouter } from 'next/navigation';
 import IC_MENU_SELECT from '@/assets/common/Icons/menu_select.svg';
 import IC_RESTAURANT_SELECT from '@/assets/common/Icons/restaurant_select.svg';
-import DefaultButton from '@/components/Button/DefaultButton';
-import { MODAL_TYPES } from '@/components/Modal/GlobalModal';
-import useModal from '@/components/Modal/GlobalModal/hooks/useModal';
-import useUser from '@/hooks/useUser';
+import useUser from '@/shared/hooks/useUser';
+import DefaultButton from '@/shared/ui/Button/DefaultButton';
+import { MODAL_TYPES } from '@/shared/ui/Modal/GlobalModal';
+import useModal from '@/shared/ui/Modal/GlobalModal/hooks/useModal';
 
 export default function MenuSelection() {
   const router = useRouter();

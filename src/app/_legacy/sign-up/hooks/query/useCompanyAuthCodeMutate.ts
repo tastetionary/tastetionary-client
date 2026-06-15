@@ -1,6 +1,6 @@
 import { useMutation } from '@tanstack/react-query';
 import { useEffect } from 'react';
-import { getRegisterRepository } from '@/apis/register';
+import { getRegisterRepository } from '@/shared/api/register';
 
 interface Props {
   onNext: () => void;

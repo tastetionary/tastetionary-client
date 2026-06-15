@@ -1,7 +1,7 @@
 import { useRouter } from 'next/navigation';
 import ReviewItem from './ReviewItem';
 import IC_CHEVRON from '@/assets/common/Icons/chevron.svg';
-import { useSelectResultStore } from '@/store/useSelectResultStore';
+import { useSelectResultStore } from '@/features/recommendation/store/useSelectResultStore';
 
 export default function RestaurantReview() {
   const { push } = useRouter();

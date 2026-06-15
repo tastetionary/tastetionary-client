@@ -6,11 +6,11 @@ import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import * as S from './page.styled';
-import DefaultButton from '@/components/Button/DefaultButton';
-import CHeader from '@/components/c-header';
-import TextInput from '@/components/Input/TextInput';
-import useUser from '@/hooks/useUser';
-import { useReviewPlaceInfoStore } from '@/store/useReviewPlaceInfoStore';
+import { useReviewPlaceInfoStore } from '@/features/reviews/store/useReviewPlaceInfoStore';
+import useUser from '@/shared/hooks/useUser';
+import DefaultButton from '@/shared/ui/Button/DefaultButton';
+import CHeader from '@/shared/ui/c-header';
+import TextInput from '@/shared/ui/Input/TextInput';
 
 interface FormValue {
   name: string;

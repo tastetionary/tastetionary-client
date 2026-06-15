@@ -5,7 +5,7 @@ import FooterLinks from '../_components/footer-links';
 import LocationSection from '../_components/location-section';
 import MenuSelection from '../_components/menu-selection';
 import RecommendMenuFetcherWrapper from '../_components/wrapper/recommend-menu-fetcher-wrapper';
-import CServerHeaderWithChildren from '@/components/c-server-header-with-children';
+import CServerHeaderWithChildren from '@/shared/ui/c-server-header-with-children';
 
 // 동적 렌더링 강제 (캐싱 비활성화)
 export const dynamic = 'force-dynamic';
@@ -28,7 +28,6 @@ export default async function Home() {
       <footer>
         <FooterLinks />
       </footer>
-
     </CServerHeaderWithChildren>
   );
 }

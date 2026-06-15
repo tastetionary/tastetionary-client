@@ -2,7 +2,7 @@ import { setUser } from '@sentry/nextjs';
 import { UseQueryResult, useQuery, useQueryClient } from '@tanstack/react-query';
 import { useEffect } from 'react';
 import useToken from './useToken';
-import { UserRes, getUser } from '@/apis/user/getUser';
+import { UserRes, getUser } from '@/shared/api/user/getUser';
 
 type UseUserResult = Partial<UseQueryResult<UserRes, any>> & {
   isLoggedIn: boolean;

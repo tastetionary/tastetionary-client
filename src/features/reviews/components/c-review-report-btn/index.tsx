@@ -1,8 +1,8 @@
 import { toast } from 'react-toastify';
 import useReviewReportMutation from '@/app/(main)/select-restaurant/result/review/[restaurantId]/_hooks/useReviewReportMutation';
 import IC_REPORT from '@/assets/common/Icons/report.svg';
-import { MODAL_TYPES } from '@/components/Modal/GlobalModal';
-import useModal from '@/components/Modal/GlobalModal/hooks/useModal';
+import { MODAL_TYPES } from '@/shared/ui/Modal/GlobalModal';
+import useModal from '@/shared/ui/Modal/GlobalModal/hooks/useModal';
 
 interface Props {
   id: string | undefined;

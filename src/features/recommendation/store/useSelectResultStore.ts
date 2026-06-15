@@ -1,7 +1,7 @@
 import { create } from 'zustand';
 import { devtools, persist } from 'zustand/middleware';
 import { immer } from 'zustand/middleware/immer';
-import { type RestaurantReview } from '@/apis/restaurant/recommend';
+import { type RestaurantReview } from '@/features/recommendation/api/restaurant/recommend';
 
 export type PriceRange = '~10,000' | '10,000~13,000' | '13,000~16,000' | '16,000~20,000' | '20,000~';
 

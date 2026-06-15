@@ -1,5 +1,5 @@
 import * as S from './page.styled';
-import CHeader from '@/components/c-header';
+import CHeader from '@/shared/ui/c-header';
 
 export default function PrivacyNotice() {
   const privacyNotice = {

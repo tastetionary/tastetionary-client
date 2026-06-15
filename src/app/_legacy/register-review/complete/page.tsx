@@ -2,11 +2,11 @@
 
 import { useRouter } from 'next/navigation';
 import COMPLETE from '@/assets/logo/complete.svg';
-import BottomButtonContainer from '@/components/Button/BottomButtonContainer';
-import DefaultButton from '@/components/Button/DefaultButton';
-import CHeader from '@/components/c-header';
-import { useReviewPlaceInfoStore } from '@/store/useReviewPlaceInfoStore';
-import { useReviewStore } from '@/store/useReviewStore';
+import { useReviewPlaceInfoStore } from '@/features/reviews/store/useReviewPlaceInfoStore';
+import { useReviewStore } from '@/features/reviews/store/useReviewStore';
+import BottomButtonContainer from '@/shared/ui/Button/BottomButtonContainer';
+import DefaultButton from '@/shared/ui/Button/DefaultButton';
+import CHeader from '@/shared/ui/c-header';
 
 export default function ReviewComplete() {
   const router = useRouter();

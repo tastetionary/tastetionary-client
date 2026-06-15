@@ -1,5 +1,5 @@
-import http from '../http';
 import { Reviews } from '@/app/(main)/_components/review-content';
+import http from '@/shared/api/http';
 
 export interface PickedMenus {
   id: number;

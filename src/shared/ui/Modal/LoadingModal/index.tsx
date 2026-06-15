@@ -5,7 +5,7 @@ import { MODAL_TYPES } from '../GlobalModal';
 import useModal from '../GlobalModal/hooks/useModal';
 import BookAnimation from './book_animation.json';
 import * as S from './style';
-import { cn } from '@/utils/styles.utils';
+import { cn } from '@/shared/utils/styles.utils';
 
 export interface LoadingModalProps {
   handleClose?: () => void;

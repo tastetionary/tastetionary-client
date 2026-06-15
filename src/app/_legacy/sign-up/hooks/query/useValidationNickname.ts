@@ -1,6 +1,6 @@
 import { useMutation } from '@tanstack/react-query';
-import authRepository from '@/apis/auth';
-import { iconToast } from '@/components/Toast';
+import authRepository from '@/shared/api/auth';
+import { iconToast } from '@/shared/ui/Toast';
 
 const useValidationNickname = () => {
   const { mutate, ...rest } = useMutation({

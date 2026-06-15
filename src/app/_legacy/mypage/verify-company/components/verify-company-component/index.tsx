@@ -6,7 +6,7 @@ import useCheckCompanyAuthCode from '../../hooks/query/useCheckCompanyAuthCode';
 import CompanyAuth from '../auth';
 import VerifyCompanyComplete from '../complete';
 import CompanyInfo from '../info';
-import useUser from '@/hooks/useUser';
+import useUser from '@/shared/hooks/useUser';
 
 export interface VerifyCompanyFormValue {
   companyName: string;

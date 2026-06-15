@@ -3,12 +3,12 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { useRouter } from 'next/navigation';
 import { FormProvider, useForm } from 'react-hook-form';
-import { MODAL_TYPES } from '../Modal/GlobalModal';
-import useModal from '../Modal/GlobalModal/hooks/useModal';
-import { putSaveRegion } from '@/apis/user/saveRegion';
 import RegionSetting from '@/app/_legacy/sign-up/components/region-setting';
-import useRegion from '@/hooks/useRegion';
-import useUser from '@/hooks/useUser';
+import useRegion from '@/features/region/hooks/useRegion';
+import { putSaveRegion } from '@/shared/api/user/saveRegion';
+import useUser from '@/shared/hooks/useUser';
+import { MODAL_TYPES } from '@/shared/ui/Modal/GlobalModal';
+import useModal from '@/shared/ui/Modal/GlobalModal/hooks/useModal';
 
 interface FormValue {
   address: '';

@@ -4,11 +4,11 @@ import { usePathname } from 'next/navigation';
 import { ReactNode } from 'react';
 import { ThemeProvider } from 'styled-components';
 import LoginSDK from '@/app/_legacy/login/components/LoginSDK';
-import GoogleAnalytics from '@/components/google-analytics';
-import MobileLayout from '@/components/layout/mobile-layout';
-import GlobalModal from '@/components/Modal/GlobalModal';
-import Toast from '@/components/Toast';
-import { useAxiosInterceptor } from '@/hooks/useAxiosInterceptor';
+import { useAxiosInterceptor } from '@/shared/hooks/useAxiosInterceptor';
+import GoogleAnalytics from '@/shared/ui/google-analytics';
+import MobileLayout from '@/shared/ui/layout/mobile-layout';
+import GlobalModal from '@/shared/ui/Modal/GlobalModal';
+import Toast from '@/shared/ui/Toast';
 import { GlobalStyle } from '@/styles/GlobalStyle';
 import { theme } from '@/styles/theme';
 

@@ -1,4 +1,4 @@
-import { iconToast } from '@/components/Toast';
+import { iconToast } from '@/shared/ui/Toast';
 
 /** 돈 표시 */
 export const getMoneyValue = (money: number, removeCurrency?: boolean) => {

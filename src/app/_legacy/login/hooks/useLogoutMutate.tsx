@@ -3,8 +3,8 @@ import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { useRouter } from 'next/navigation';
 import { destroyCookie } from 'nookies';
 import { useEffect, useState } from 'react';
-import authRepository from '@/apis/auth';
-import useToken from '@/hooks/useToken';
+import authRepository from '@/shared/api/auth';
+import useToken from '@/shared/hooks/useToken';
 
 const useLogoutMutate = () => {
   const queryClient = useQueryClient();

@@ -8,12 +8,12 @@ import { useEffect } from 'react';
 import IC_LINK from '@/assets/common/Icons/link.svg';
 import LOGO_KAKAO from '@/assets/logo/sns/logo_kakao.svg';
 import VERTICAL_LOGO from '@/assets/logo/vertical_logo.svg';
-import BottomButtonContainer from '@/components/Button/BottomButtonContainer';
-import RefreshButton from '@/components/Button/RefreshButton';
-import CHeader from '@/components/c-header';
-import CRecommendButton from '@/components/c-recommend-button';
-import { FoodCategory, FoodKeyword } from '@/types/enums';
-import { copyText } from '@/utils';
+import CRecommendButton from '@/features/recommendation/components/c-recommend-button';
+import { FoodCategory, FoodKeyword } from '@/shared/types/enums';
+import BottomButtonContainer from '@/shared/ui/Button/BottomButtonContainer';
+import RefreshButton from '@/shared/ui/Button/RefreshButton';
+import CHeader from '@/shared/ui/c-header';
+import { copyText } from '@/shared/utils';
 
 interface Props {
   category: FoodCategory[];

@@ -1,7 +1,7 @@
 import { ReactNode, useEffect, useState } from 'react';
 import * as S from './style';
-import DefaultButton from '@/components/Button/DefaultButton';
-import { cn } from '@/utils/styles.utils';
+import DefaultButton from '@/shared/ui/Button/DefaultButton';
+import { cn } from '@/shared/utils/styles.utils';
 
 export interface DialogModalProps {
   title: string;

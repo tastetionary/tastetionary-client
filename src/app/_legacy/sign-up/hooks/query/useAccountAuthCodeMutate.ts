@@ -1,8 +1,8 @@
 import { useMutation } from '@tanstack/react-query';
 import { useEffect } from 'react';
-import { getRegisterRepository } from '@/apis/register';
-import { MODAL_TYPES } from '@/components/Modal/GlobalModal';
-import useModal from '@/components/Modal/GlobalModal/hooks/useModal';
+import { getRegisterRepository } from '@/shared/api/register';
+import { MODAL_TYPES } from '@/shared/ui/Modal/GlobalModal';
+import useModal from '@/shared/ui/Modal/GlobalModal/hooks/useModal';
 
 interface Props {
   onNext: () => void;

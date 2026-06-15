@@ -1,5 +1,5 @@
-import MainButton from '../Button/MainButton';
 import useReviewClick from './hooks/useReviewClick';
+import MainButton from '@/shared/ui/Button/MainButton';
 
 export default function CReviewBrowserNoItem() {
   const { onReviewClick } = useReviewClick();

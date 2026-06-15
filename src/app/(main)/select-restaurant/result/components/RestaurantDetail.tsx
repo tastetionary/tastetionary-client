@@ -1,6 +1,6 @@
 'use client';
 
-import { useSelectResultStore } from '@/store/useSelectResultStore';
+import { useSelectResultStore } from '@/features/recommendation/store/useSelectResultStore';
 
 export default function RestaurantDetail() {
   const { restaurant } = useSelectResultStore();

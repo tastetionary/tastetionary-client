@@ -1,6 +1,6 @@
 import SelectMenuResultShare from './components/SelectMenuResultShare';
-import { unicodeToText } from '@/components/c-recommend-button/utils';
-import { FoodCategory, FoodKeyword } from '@/types/enums';
+import { unicodeToText } from '@/features/recommendation/components/c-recommend-button/utils';
+import { FoodCategory, FoodKeyword } from '@/shared/types/enums';
 
 export default async function SelectMenuResultSharePage({
   searchParams,

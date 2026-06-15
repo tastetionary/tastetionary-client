@@ -1,7 +1,7 @@
 import { useRouter } from 'next/navigation';
-import { MODAL_TYPES } from '@/components/Modal/GlobalModal';
-import useModal from '@/components/Modal/GlobalModal/hooks/useModal';
-import useUser from '@/hooks/useUser';
+import useUser from '@/shared/hooks/useUser';
+import { MODAL_TYPES } from '@/shared/ui/Modal/GlobalModal';
+import useModal from '@/shared/ui/Modal/GlobalModal/hooks/useModal';
 
 export default function useReviewClick() {
   const router = useRouter();

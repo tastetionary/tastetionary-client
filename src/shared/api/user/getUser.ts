@@ -1,4 +1,4 @@
-import http from '../http';
+import http from '@/shared/api/http';
 
 interface IRegion {
   category: 'activity_area' | 'dining_area';

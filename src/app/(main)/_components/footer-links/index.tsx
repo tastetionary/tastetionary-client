@@ -33,10 +33,11 @@ export default function FooterLinks() {
         {footerLinks.map(({ text, link }, index, array) => (
           <span
             key={text}
-            className={`body2 ${index !== array.length - 1
+            className={`body2 ${
+              index !== array.length - 1
                 ? "[&:not(:last-child)]:after:-align-[1px] [&:not(:last-child)]:after:mx-[10px] [&:not(:last-child)]:after:inline-block [&:not(:last-child)]:after:h-[10px] [&:not(:last-child)]:after:w-[1px] [&:not(:last-child)]:after:bg-neutral-bg10 [&:not(:last-child)]:after:content-['']"
                 : ''
-              }`}
+            }`}
             onClick={() => router.push(link)}
           >
             {text}

@@ -1,7 +1,7 @@
 import { QueryClient, dehydrate } from '@tanstack/query-core';
 import { HydrationBoundary } from '@tanstack/react-query';
 import SelectMenu from './components/SelectMenu';
-import { getFoodOption } from '@/apis/food/option';
+import { getFoodOption } from '@/features/recommendation/api/food/option';
 
 export default async function SelectMenuPage() {
   const queryClient = new QueryClient();

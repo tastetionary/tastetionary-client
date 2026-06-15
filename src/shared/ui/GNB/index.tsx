@@ -1,9 +1,9 @@
 import { usePathname, useRouter } from 'next/navigation';
 import CNavButton from '../c-nav-button';
-import useReviewClick from '../c-review-broswer-noitem/hooks/useReviewClick';
 import HomeIcon from '@/assets/logo/home.svg';
 import MypageIcon from '@/assets/logo/my-page.svg';
 import ReviewIcon from '@/assets/logo/review.svg';
+import useReviewClick from '@/features/reviews/components/c-review-broswer-noitem/hooks/useReviewClick';
 
 export default function GNB() {
   const pathName = usePathname();

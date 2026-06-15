@@ -4,11 +4,11 @@ import Lottie from 'lottie-react';
 import { useSearchParams } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import useLoginMutate from '../hooks/useLoginMutate';
-import { TloginCategory } from '@/apis/auth';
 import Loading from '@/assets/animation/loading.json';
-import { overlayVariants } from '@/components/Modal/DialogModal/style';
-import * as S from '@/components/Modal/LoadingModal/style';
-import { cn } from '@/utils/styles.utils';
+import { TloginCategory } from '@/shared/api/auth';
+import { overlayVariants } from '@/shared/ui/Modal/DialogModal/style';
+import * as S from '@/shared/ui/Modal/LoadingModal/style';
+import { cn } from '@/shared/utils/styles.utils';
 
 export default function LoginCallback() {
   const searchParams = useSearchParams();

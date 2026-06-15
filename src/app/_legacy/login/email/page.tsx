@@ -5,10 +5,10 @@ import { useRouter } from 'next/navigation';
 import { useEffect } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import useLoginMutate from '../hooks/useLoginMutate';
-import DefaultButton from '@/components/Button/DefaultButton';
-import CHeader from '@/components/c-header';
-import TextInput from '@/components/Input/TextInput';
-import { emailRegex } from '@/constants';
+import { emailRegex } from '@/shared/constants';
+import DefaultButton from '@/shared/ui/Button/DefaultButton';
+import CHeader from '@/shared/ui/c-header';
+import TextInput from '@/shared/ui/Input/TextInput';
 
 interface FormValue {
   identification: string;

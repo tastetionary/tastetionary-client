@@ -3,7 +3,7 @@ import { MODAL_TYPES } from '../GlobalModal';
 import useModal from '../GlobalModal/hooks/useModal';
 import * as S from './style';
 import IC_EXPAND_MORE from '@/assets/common/Icons/expandmore.svg';
-import { cn } from '@/utils/styles.utils';
+import { cn } from '@/shared/utils/styles.utils';
 
 interface Props {
   content?: ReactNode;

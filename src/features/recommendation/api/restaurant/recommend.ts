@@ -1,5 +1,5 @@
-import { RestaurantCategory } from '../../types/enums';
-import http from '../http';
+import http from '@/shared/api/http';
+import { RestaurantCategory } from '@/shared/types/enums';
 
 interface Req {
   excludeIds: number[];

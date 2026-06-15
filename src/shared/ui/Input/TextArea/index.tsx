@@ -3,7 +3,7 @@ import * as S from './style';
 import INPUT_ERROR from '@/assets/Input/InputError.svg';
 import INPUT_INACTIVE from '@/assets/Input/InputInactive.svg';
 import INPUT_TYPED from '@/assets/Input/InputTyped.svg';
-import { cn } from '@/utils/styles.utils';
+import { cn } from '@/shared/utils/styles.utils';
 
 interface TextAreaProps extends InputHTMLAttributes<HTMLTextAreaElement> {
   label?: string;

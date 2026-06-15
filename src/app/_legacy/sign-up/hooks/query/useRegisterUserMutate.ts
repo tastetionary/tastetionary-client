@@ -1,5 +1,5 @@
 import { useMutation } from '@tanstack/react-query';
-import { getRegisterRepository } from '@/apis/register';
+import { getRegisterRepository } from '@/shared/api/register';
 
 interface Props {
   onNext: () => void;

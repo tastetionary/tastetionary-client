@@ -3,17 +3,17 @@
 import { useQuery } from '@tanstack/react-query';
 import { useEffect } from 'react';
 import SelectPrice from './SelectPrice';
-import { getRestaurantOption } from '@/apis/restaurant/option';
 import SelectSection from '@/app/(main)/select-menu/components/SelectSection';
-import BottomButtonContainer from '@/components/Button/BottomButtonContainer';
-import RefreshButton from '@/components/Button/RefreshButton';
-import CChangeRegion from '@/components/c-change-region';
-import CHeader from '@/components/c-header';
-import CRecommendButton from '@/components/c-recommend-button';
-import CSelectCategory from '@/components/c-select-category';
-import CSelectKeyword from '@/components/c-select-keyword';
-import ContentLayout from '@/components/layout/content-layout';
-import { useSelectRestaurantStore } from '@/store/useSelectRestaurantStore';
+import { getRestaurantOption } from '@/features/recommendation/api/restaurant/option';
+import CRecommendButton from '@/features/recommendation/components/c-recommend-button';
+import CSelectCategory from '@/features/recommendation/components/c-select-category';
+import CSelectKeyword from '@/features/recommendation/components/c-select-keyword';
+import { useSelectRestaurantStore } from '@/features/recommendation/store/useSelectRestaurantStore';
+import CChangeRegion from '@/features/region/components/c-change-region';
+import BottomButtonContainer from '@/shared/ui/Button/BottomButtonContainer';
+import RefreshButton from '@/shared/ui/Button/RefreshButton';
+import CHeader from '@/shared/ui/c-header';
+import ContentLayout from '@/shared/ui/layout/content-layout';
 
 export default function SelectRestaurant() {
   const { category, keyword, resetSelectRestaurant } = useSelectRestaurantStore();

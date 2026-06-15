@@ -1,14 +1,14 @@
 import { useMutation } from '@tanstack/react-query';
 import dayjs from 'dayjs';
-import restaurantRepository from '@/apis/restaurant';
-import { type RestaurantReview } from '@/apis/restaurant/recommend';
 import IC_DISLIKE from '@/assets/common/Icons/dislike.svg';
 import IC_LIKE from '@/assets/common/Icons/like.svg';
-import DefaultButton from '@/components/Button/DefaultButton';
-import CReviewReportBtn from '@/components/c-review-report-btn';
-import useToken from '@/hooks/useToken';
-import { useSelectResultStore } from '@/store/useSelectResultStore';
-import { cn } from '@/utils/styles.utils';
+import restaurantRepository from '@/features/recommendation/api/restaurant';
+import { type RestaurantReview } from '@/features/recommendation/api/restaurant/recommend';
+import { useSelectResultStore } from '@/features/recommendation/store/useSelectResultStore';
+import CReviewReportBtn from '@/features/reviews/components/c-review-report-btn';
+import useToken from '@/shared/hooks/useToken';
+import DefaultButton from '@/shared/ui/Button/DefaultButton';
+import { cn } from '@/shared/utils/styles.utils';
 
 export default function ReviewItem({ user, createdAt, id, keywords, summary, userReaction }: RestaurantReview) {
   const { restaurant, updateReviewReact } = useSelectResultStore();

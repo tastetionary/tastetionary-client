@@ -6,8 +6,8 @@ import LoginBtn from '../components/LoginBtn';
 import useGoogleLogin from '../hooks/useGoogleLogin';
 import useKakaoLogin from '../hooks/useKakaoLogin';
 import MAIN_LOGO from '@/assets/logo/main_logo.svg';
-import DefaultButton from '@/components/Button/DefaultButton';
-import CHeader from '@/components/c-header';
+import DefaultButton from '@/shared/ui/Button/DefaultButton';
+import CHeader from '@/shared/ui/c-header';
 // import useNaverLogin from '../hooks/useNaverLogin';
 
 export default function LoginPage() {

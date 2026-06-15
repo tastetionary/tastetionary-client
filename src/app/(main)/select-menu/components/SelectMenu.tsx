@@ -3,15 +3,15 @@
 import { useQuery } from '@tanstack/react-query';
 import { useEffect } from 'react';
 import SelectSection from './SelectSection';
-import { getFoodOption } from '@/apis/food/option';
-import BottomButtonContainer from '@/components/Button/BottomButtonContainer';
-import RefreshButton from '@/components/Button/RefreshButton';
-import CHeader from '@/components/c-header';
-import CRecommendButton from '@/components/c-recommend-button';
-import CSelectCategory from '@/components/c-select-category';
-import CSelectKeyword from '@/components/c-select-keyword';
-import ContentLayout from '@/components/layout/content-layout';
-import { useSelectFoodStore } from '@/store/useSelectFoodStore';
+import { getFoodOption } from '@/features/recommendation/api/food/option';
+import CRecommendButton from '@/features/recommendation/components/c-recommend-button';
+import CSelectCategory from '@/features/recommendation/components/c-select-category';
+import CSelectKeyword from '@/features/recommendation/components/c-select-keyword';
+import { useSelectFoodStore } from '@/features/recommendation/store/useSelectFoodStore';
+import BottomButtonContainer from '@/shared/ui/Button/BottomButtonContainer';
+import RefreshButton from '@/shared/ui/Button/RefreshButton';
+import CHeader from '@/shared/ui/c-header';
+import ContentLayout from '@/shared/ui/layout/content-layout';
 
 export default function SelectMenu() {
   const { category, keyword, resetSelectFood } = useSelectFoodStore();

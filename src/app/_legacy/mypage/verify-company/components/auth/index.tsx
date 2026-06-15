@@ -4,9 +4,9 @@ import { useFormContext } from 'react-hook-form';
 import useCompanyAuthentication from '../../hooks/query/useCompanyAuthentication';
 import { VerifyCompanyFormValue } from '../verify-company-component';
 import * as S from '@/app/_legacy/sign-up/components/verify-number/page.styled';
-import MainButton from '@/components/Button/MainButton';
-import CHeader from '@/components/c-header';
-import TextInput from '@/components/Input/TextInput';
+import MainButton from '@/shared/ui/Button/MainButton';
+import CHeader from '@/shared/ui/c-header';
+import TextInput from '@/shared/ui/Input/TextInput';
 
 interface Props {
   onNext: (id: number) => void;

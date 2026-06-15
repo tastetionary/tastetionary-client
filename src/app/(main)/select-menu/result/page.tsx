@@ -3,11 +3,11 @@
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 import FOOD_NO_RESULT from '@/assets/common/food_no_result.svg';
-import BottomButtonContainer from '@/components/Button/BottomButtonContainer';
-import RefreshButton from '@/components/Button/RefreshButton';
-import CHeader from '@/components/c-header';
-import CRecommendButton from '@/components/c-recommend-button';
-import { useSelectResultStore } from '@/store/useSelectResultStore';
+import CRecommendButton from '@/features/recommendation/components/c-recommend-button';
+import { useSelectResultStore } from '@/features/recommendation/store/useSelectResultStore';
+import BottomButtonContainer from '@/shared/ui/Button/BottomButtonContainer';
+import RefreshButton from '@/shared/ui/Button/RefreshButton';
+import CHeader from '@/shared/ui/c-header';
 
 export default function SelectMenuResult() {
   const router = useRouter();

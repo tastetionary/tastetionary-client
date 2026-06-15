@@ -1,5 +1,5 @@
-import http from '../http';
-import { WithdrawalTypeEnum } from '@/types/enums';
+import http from '@/shared/api/http';
+import { WithdrawalTypeEnum } from '@/shared/types/enums';
 
 type WithdrawalType = keyof typeof WithdrawalTypeEnum;
 

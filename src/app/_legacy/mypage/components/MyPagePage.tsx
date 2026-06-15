@@ -4,13 +4,13 @@ import { useRouter } from 'next/navigation';
 import * as S from '../page.styled';
 import useLogoutMutate from '@/app/_legacy/login/hooks/useLogoutMutate';
 import ARROW_RIGHT from '@/assets/common/Icons/arrow_right.svg';
-import CHeader from '@/components/c-header';
-import CMypageMenu from '@/components/c-mypage-menu';
-import GNBLayout from '@/components/layout/gnb-layout';
-import { MODAL_TYPES } from '@/components/Modal/GlobalModal';
-import useModal from '@/components/Modal/GlobalModal/hooks/useModal';
-import useUser from '@/hooks/useUser';
-import { cn } from '@/utils/styles.utils';
+import CMypageMenu from '@/features/user/components/c-mypage-menu';
+import useUser from '@/shared/hooks/useUser';
+import CHeader from '@/shared/ui/c-header';
+import GNBLayout from '@/shared/ui/layout/gnb-layout';
+import { MODAL_TYPES } from '@/shared/ui/Modal/GlobalModal';
+import useModal from '@/shared/ui/Modal/GlobalModal/hooks/useModal';
+import { cn } from '@/shared/utils/styles.utils';
 
 export default function MyPagePage() {
   const { push } = useRouter();

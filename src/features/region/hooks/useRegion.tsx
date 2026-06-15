@@ -1,5 +1,5 @@
-import useUser from './useUser';
-import { Region, useRegionStore } from '@/store/useRegionStore';
+import { Region, useRegionStore } from '@/features/region/store/useRegionStore';
+import useUser from '@/shared/hooks/useUser';
 
 interface UseRegionResult extends Region {
   /** 로그인 사용자의 서버 지역 또는 localStorage 지역이 설정되어 있는지 여부 */
