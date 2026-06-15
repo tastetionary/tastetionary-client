@@ -1,9 +1,9 @@
 'use client';
 
+import { useRouter } from 'next/navigation';
 import ARROW from '@/assets/common/Icons/arrow.svg';
 import USER_ICON from '@/assets/common/user.svg';
 import MAIN_LOGO from '@/assets/logo/main_logo.svg';
-import { useRouter } from 'next/navigation';
 
 interface Props {
   isLogo?: boolean;
@@ -47,7 +47,7 @@ export default function CHeader({ isLogo = false, title, noBackBtn = false, isHo
   };
 
   return (
-    <div className="fixed top-0 z-3 flex h-56 w-500 items-center justify-between gap-md border-b-1 border-solid border-b-neutral-bg20 bg-white mobile:w-full">
+    <div className="fixed top-0 inset-x-0 mx-auto z-3 flex h-56 w-[calc(100%-16px)] max-w-[484px] items-center justify-between gap-md border-b-1 border-solid border-b-neutral-bg20 bg-white">
       {renderLeftItems()}
 
       <div

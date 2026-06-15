@@ -11,7 +11,8 @@ export default function MobileLayout({ children }: Props) {
         <div className="pointer-events-none absolute inset-0 z-[50]" aria-hidden>
           <V2LayoutCorners />
         </div>
-        <div className="relative z-[1] min-h-0 w-full">{children}</div>
+        {/* 프레임(V2LayoutCorners) 안쪽 가장자리(컨테이너 edge로부터 8px)에 맞춰 컨텐츠를 inset → 배너 등 full-bleed 요소가 테두리 밖으로 벗어나지 않도록 */}
+        <div className="relative z-[1] min-h-0 w-full px-[8px]">{children}</div>
       </div>
     </div>
   );
