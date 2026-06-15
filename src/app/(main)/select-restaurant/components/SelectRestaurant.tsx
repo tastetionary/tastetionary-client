@@ -1,7 +1,7 @@
 'use client';
 
 import { getRestaurantOption } from '@/apis/restaurant/option';
-import SelectSection from '@/app/_legacy/select-menu/components/SelectSection';
+import SelectSection from '@/app/(main)/select-menu/components/SelectSection';
 import BottomButtonContainer from '@/components/Button/BottomButtonContainer';
 import RefreshButton from '@/components/Button/RefreshButton';
 import CChangeRegion from '@/components/c-change-region';

@@ -23,8 +23,8 @@ import { useMutation, useQuery } from '@tanstack/react-query';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
-import SelectSection from '../select-menu/components/SelectSection';
-import SelectPrice from '../select-restaurant/components/SelectPrice';
+import SelectSection from '@/app/(main)/select-menu/components/SelectSection';
+import SelectPrice from '@/app/(main)/select-restaurant/components/SelectPrice';
 import * as S from './page.styled';
 
 interface FormValue {

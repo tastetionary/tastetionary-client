@@ -21,7 +21,7 @@ export default function SelectPrice({ type }: { type: 'restaurant' | 'review' })
 
   return (
     <>
-      {data?.prices?.map((p, i) => (
+      {data?.prices?.map((p: { id: number; name: string }, i: number) => (
         <div key={i} className="flex items-center gap-xs py-9">
           <CheckBox2
             label={p.name}

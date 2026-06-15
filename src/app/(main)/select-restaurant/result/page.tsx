@@ -127,9 +127,11 @@ export default function SelectRestaurantResult() {
         <RestaurantReview />
 
         <BottomButtonContainer>
+          {/* 로그인 기능 - 임시 비활성화 (이 식당 제외)
           <DefaultButton bgColor="gray" customStyle="px-lg" onClick={excludeModal}>
             <span className="body1">이 식당 제외</span>
           </DefaultButton>
+          */}
 
           <CRecommendButton btnText="한번 더 돌리기" selectType="restaurant" />
         </BottomButtonContainer>

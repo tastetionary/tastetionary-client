@@ -33,7 +33,7 @@ export default function MenuIntroPage() {
               </h1>
               <button
                 type="button"
-                onClick={() => router.push('/select-menu')}
+                onClick={() => router.push('/explore')}
                 className="default-btn h-48 w-240 max-w-full bg-primary-y70 px-16 py-5 text-14 leading-[1.6] !text-white"
               >
                 시작하기

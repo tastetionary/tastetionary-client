@@ -1,4 +1,4 @@
-import { Reviews } from '@/app/_legacy/_components/review-content';
+import { Reviews } from '@/app/(main)/_components/review-content';
 import http from '../http';
 
 export interface PickedMenus {

@@ -1,4 +1,4 @@
-import useReviewReportMutation from '@/app/_legacy/select-restaurant/result/review/[restaurantId]/_hooks/useReviewReportMutation';
+import useReviewReportMutation from '@/app/(main)/select-restaurant/result/review/[restaurantId]/_hooks/useReviewReportMutation';
 import IC_REPORT from '@/assets/common/Icons/report.svg';
 import { MODAL_TYPES } from '@/components/Modal/GlobalModal';
 import useModal from '@/components/Modal/GlobalModal/hooks/useModal';
@@ -40,9 +40,13 @@ export default function CReviewReportBtn({ id }: Props) {
     });
   };
 
+  // 로그인 기능 - 임시 비활성화 (신고하기)
+  return null;
+  /*
   return (
     <button onClick={reportModal} className="flex cursor-pointer items-center justify-center px-10 py-10">
       <IC_REPORT />
     </button>
   );
+  */
 }

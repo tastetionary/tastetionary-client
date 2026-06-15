@@ -28,7 +28,7 @@ export default function SignUpComplete() {
           <DefaultButton
             bgColor="orange"
             customStyle="flex w-full py-[12px] px-[16px]"
-            onClick={() => router.push('/')}
+            onClick={() => router.push('/explore')}
           >
             <span className="!font-pretendard text-white">메인 화면으로 이동</span>
           </DefaultButton>

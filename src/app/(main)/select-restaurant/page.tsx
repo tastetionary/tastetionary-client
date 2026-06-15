@@ -1,5 +1,4 @@
 import { getRestaurantOption } from '@/apis/restaurant/option';
-import { withAuth } from '@/utils/auth';
 import { QueryClient, dehydrate } from '@tanstack/query-core';
 import { HydrationBoundary } from '@tanstack/react-query';
 import SelectRestaurant from './components/SelectRestaurant';
@@ -23,4 +22,5 @@ async function SelectRestaurantPage() {
   );
 }
 
-export default withAuth(SelectRestaurantPage, '/');
+// 비로그인 사용 기능: 식당 고르기는 로그인 없이 접근 가능 (로그인 게이트 제거)
+export default SelectRestaurantPage;

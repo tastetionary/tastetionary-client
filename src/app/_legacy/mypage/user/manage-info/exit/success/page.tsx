@@ -28,7 +28,7 @@ export default function MyPageUserExitSuccess() {
           <DefaultButton
             bgColor="orange"
             customStyle="flex w-full py-[12px] px-[16px] mt-6"
-            onClick={() => push('/')}
+            onClick={() => push('/explore')}
             type="button"
           >
             <span className="!font-pretendard text-white">메인 화면으로 이동</span>

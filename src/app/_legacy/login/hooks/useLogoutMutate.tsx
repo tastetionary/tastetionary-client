@@ -19,7 +19,7 @@ const useLogoutMutate = () => {
     }
 
     queryClient.clear();
-    push('/');
+    push('/explore');
     setIsDestroied(false);
   }, [token, isDestroied]);
 

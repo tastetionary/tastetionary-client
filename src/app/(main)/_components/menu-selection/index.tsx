@@ -27,8 +27,7 @@ export default function MenuSelection() {
   };
 
   const onRestaurantClick = () => {
-    if (!isLoggedIn) return loginInfoModal();
-
+    // 비로그인 사용 기능: 식당 고르기는 로그인 없이 접근 가능
     router.push('/select-restaurant');
   };
 

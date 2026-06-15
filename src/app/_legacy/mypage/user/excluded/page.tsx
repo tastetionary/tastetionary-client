@@ -1,6 +1,6 @@
 'use client';
 
-import preferenceRepository from '@/apis/user/preference';
+import preferenceRepository, { GetPreferenceRes } from '@/apis/user/preference';
 import IMG_ERROR from '@/assets/common/error.svg';
 import BottomButtonContainer from '@/components/Button/BottomButtonContainer';
 import DefaultButton from '@/components/Button/DefaultButton';
@@ -57,7 +57,7 @@ export default function MyExcluded() {
         )}
 
         <div>
-          {data?.map(item => (
+          {data?.map((item: GetPreferenceRes) => (
             <PreferenceListItem
               type="excluded"
               key={item.id}

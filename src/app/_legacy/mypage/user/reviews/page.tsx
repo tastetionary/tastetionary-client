@@ -1,6 +1,6 @@
 'use client';
 
-import { restaurantReviewRepository } from '@/apis/restaurant/review';
+import { RestaurantReviewItemType, restaurantReviewRepository } from '@/apis/restaurant/review';
 import IMG_ERROR from '@/assets/common/error.svg';
 import BottomButtonContainer from '@/components/Button/BottomButtonContainer';
 import DefaultButton from '@/components/Button/DefaultButton';
@@ -48,7 +48,7 @@ export default function MyReviews() {
           </div>
         )}
 
-        {data?.reviews?.map(r => (
+        {data?.reviews?.map((r: RestaurantReviewItemType) => (
           <MyReviewItem key={r.id} id={r.id} keywords={r.keywords} restaurant={r.restaurant} summary={r.summary} />
         ))}
       </div>

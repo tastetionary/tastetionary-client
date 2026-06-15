@@ -23,7 +23,7 @@ export default function VerifyCompanyComplete() {
       </S.Wrapper>
 
       <S.NextButtonWrapper>
-        <MainButton type="button" btnText="홈 화면으로" onClick={() => push('/')} />
+        <MainButton type="button" btnText="홈 화면으로" onClick={() => push('/explore')} />
       </S.NextButtonWrapper>
     </>
   );

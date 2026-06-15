@@ -1,5 +1,6 @@
 'use client';
 
+import { type RestaurantReview } from '@/apis/restaurant/recommend';
 import CHeader from '@/components/c-header';
 import { use } from 'react';
 import ReviewItem from '../../components/ReviewItem';
@@ -26,7 +27,7 @@ export default function SelectRestaurantResultReview({ params }: Props) {
           </div>
         </div>
 
-        <div className="mt-md ">{restaurantReviews?.map(reviews => <ReviewItem {...reviews} key={reviews.id} />)}</div>
+        <div className="mt-md ">{restaurantReviews?.map((reviews: RestaurantReview) => <ReviewItem {...reviews} key={reviews.id} />)}</div>
       </div>
     </>
   );

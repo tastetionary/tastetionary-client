@@ -75,7 +75,7 @@ const useLoginMutate = () => {
       console.log('getUserInfo 성공', res);
       queryClient.setQueryData(['user'], res);
 
-      push('/');
+      push('/explore');
     },
   });
 
