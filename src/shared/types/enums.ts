@@ -57,7 +57,7 @@ export enum RestaurantKeyword {
   WAITING = '웨이팅 있어요',
 }
 
-export enum RestaurantPrice {
+enum RestaurantPrice {
   UNDER_10000 = '~10,000원',
   UNDER_11000 = '~11,000원',
   UNDER_12000 = '~12,000원',
@@ -65,7 +65,7 @@ export enum RestaurantPrice {
   OVER_13000 = '13,000원~',
 }
 
-export enum ReviewReportCategory {
+enum ReviewReportCategory {
   INAPPROPRIATE_CONTENT = '부적절한 내용',
   SPAM = '스팸',
   HATE_SPEECH = '혐오 발언',
@@ -75,12 +75,12 @@ export enum ReviewReportCategory {
 }
 
 // User related enums
-export enum UserState {
+enum UserState {
   ACTIVE = 'active',
   WITHDRAWAL = 'withdrawal',
 }
 
-export enum AgreementCategory {
+enum AgreementCategory {
   PERSONAL_INFORMATION = 'personal_information',
 }
 
@@ -102,7 +102,7 @@ export enum PreferenceCategory {
 /**
  * enum 대신할 type literal 시험 삼아 사용
  */
-export type OpinionCategory = 'withdrawal';
+type OpinionCategory = 'withdrawal';
 
 export enum WithdrawalTypeEnum {
   /**
@@ -132,7 +132,7 @@ export enum WithdrawalTypeEnum {
 }
 
 // Icon mappings (if needed)
-export const FoodCategoryIcons: Record<FoodCategory, string> = {
+const FoodCategoryIcons: Record<FoodCategory, string> = {
   [FoodCategory.ALL]: '',
   [FoodCategory.KOREAN]: '',
   [FoodCategory.CHINESE]: '',
@@ -145,7 +145,7 @@ export const FoodCategoryIcons: Record<FoodCategory, string> = {
   [FoodCategory.CAFE_AND_DESERT]: '',
 };
 
-export const RestaurantCategoryIcons: Record<RestaurantCategory, string> = {
+const RestaurantCategoryIcons: Record<RestaurantCategory, string> = {
   [RestaurantCategory.ALL]: '',
   [RestaurantCategory.KOREAN]: '',
   [RestaurantCategory.CHINESE]: '',
@@ -159,7 +159,7 @@ export const RestaurantCategoryIcons: Record<RestaurantCategory, string> = {
   [RestaurantCategory.CAFE_AND_DESERT]: '',
 };
 
-export const RestaurantKeywordEmoji: Record<RestaurantKeyword, string> = {
+const RestaurantKeywordEmoji: Record<RestaurantKeyword, string> = {
   [RestaurantKeyword.ALL]: '',
   [RestaurantKeyword.TASTE]: '',
   [RestaurantKeyword.CLEAN]: '',
@@ -173,7 +173,7 @@ export const RestaurantKeywordEmoji: Record<RestaurantKeyword, string> = {
   [RestaurantKeyword.WAITING]: '',
 };
 
-export const PreferenceCategoryToColumnMapping: Record<PreferenceCategory, string> = {
+const PreferenceCategoryToColumnMapping: Record<PreferenceCategory, string> = {
   [PreferenceCategory.BOOKMARK]: 'bookmark',
   [PreferenceCategory.EXCLUDED]: 'excluded',
 };

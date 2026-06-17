@@ -9,7 +9,7 @@ type WithAuthProps = {
 /**
  * Auth HOC
  */
-export function withAuth<T extends object>(
+function withAuth<T extends object>(
   Component: ComponentType<T & WithAuthProps>, // 컴포넌트를 타입으로 명시
   redirectPath?: string
 ) {

@@ -29,7 +29,7 @@ export const dialogModalContainerVariants = cva(
   }
 );
 
-export const dialogModalButtonVariants = cva('py-8 px-16 h-48 text-[14px] font-normal', {
+const dialogModalButtonVariants = cva('py-8 px-16 h-48 text-[14px] font-normal', {
   variants: {
     color: {
       default: 'text-secondary-o70',

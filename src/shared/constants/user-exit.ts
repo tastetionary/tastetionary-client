@@ -1,4 +1,4 @@
-export const userExitReasonList = [
+const userExitReasonList = [
   '사용이 불편해요.',
   '더 이상 서비스를 이용하지 않아요.',
   '사용 빈도가 낮아요.',

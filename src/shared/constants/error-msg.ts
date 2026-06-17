@@ -22,4 +22,4 @@ const SERVER_ERROR_MSG = {
   internal_domain_error: '내부 오류로 인해 요청을 처리할 수 없습니다. 문제가 해결될 때까지 기다려주세요.',
 };
 
-export { ERROR_MSG, SERVER_ERROR, SERVER_ERROR_MSG };
+export { ERROR_MSG };

@@ -1,4 +1,4 @@
-export interface GetRestaurantReviewRes {
+interface GetRestaurantReviewRes {
   createdAt: string;
   updatedAt: string;
   id: string;

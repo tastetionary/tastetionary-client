@@ -5,7 +5,7 @@ export const Menu = styled.div`
   border-bottom: 1px solid ${({ theme }) => theme.colors.neutral.bg10};
 `;
 
-export const MenuTitle = styled.div`
+const MenuTitle = styled.div`
   padding: 6px 20px;
   color: ${({ theme }) => theme.colors.neutral.bg30};
   font-size: 12px;
@@ -14,7 +14,7 @@ export const MenuTitle = styled.div`
   line-height: 100%; /* 12px */
 `;
 
-export const MenuItem = styled.div`
+const MenuItem = styled.div`
   cursor: pointer;
   display: flex;
   justify-content: space-between;
