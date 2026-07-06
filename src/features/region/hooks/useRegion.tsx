@@ -24,11 +24,15 @@ export default function useRegion(): UseRegionResult {
   const latitude = userArea?.latitude ?? region.latitude;
   const longitude = userArea?.longitude ?? region.longitude;
 
+  // 주소뿐 아니라 유효한 좌표(0/undefined 아님)까지 있어야 지역이 설정된 것으로 본다.
+  const hasValidCoords =
+    Number.isFinite(latitude) && Number.isFinite(longitude) && latitude !== 0 && longitude !== 0;
+
   return {
     address,
     latitude,
     longitude,
-    hasRegion: Boolean(address),
+    hasRegion: Boolean(address) && hasValidCoords,
     setRegion,
     clearRegion,
   };

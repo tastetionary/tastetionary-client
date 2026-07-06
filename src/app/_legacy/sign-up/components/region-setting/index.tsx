@@ -57,8 +57,10 @@ export default function RegionSetting({ onNext, category = 'dining_area' }: Prop
             if (status === window.kakao.maps.services.Status.OK) {
               var coords = new window.kakao.maps.LatLng(result[0].y, result[0].x);
 
-              setValue('latitude', coords.Ma);
-              setValue('longitude', coords.La);
+              // 카카오 LatLng 내부 속성(.Ma/.La)은 SDK 버전에 따라 바뀌므로
+              // 지오코더 결과값(y=위도, x=경도)을 직접 숫자로 변환해 사용한다.
+              setValue('latitude', Number(result[0].y));
+              setValue('longitude', Number(result[0].x));
               setValue('address', address);
 
               // 결과값으로 받은 위치를 마커로 표시합니다

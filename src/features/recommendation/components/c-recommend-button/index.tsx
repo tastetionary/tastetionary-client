@@ -26,7 +26,7 @@ interface Props extends MainButtonProps {
 export default function CRecommendButton({ selectType, btnText, ...rest }: Props) {
   const router = useRouter();
   const { token } = useUser();
-  const { latitude, longitude } = useRegion();
+  const { latitude, longitude, hasRegion } = useRegion();
   const { openModal, closeModal } = useModal();
   const pathname = usePathname();
   const pendingActionRef = useRef<'food' | 'restaurant' | null>(null);
@@ -59,6 +59,18 @@ export default function CRecommendButton({ selectType, btnText, ...rest }: Props
       needClose: true,
       handleClose: () => closeModal(MODAL_TYPES.dialog),
       handleConfirm: () => router.push('/login'),
+    });
+  };
+
+  const regionRequiredModal = () => {
+    openModal(MODAL_TYPES.dialog, {
+      title: '지역 설정이 필요합니다.',
+      message: '식당 추첨을 위해 먼저 지역을 설정해주세요.',
+      confirmText: '지역 설정하기',
+      cancelText: '취소',
+      needClose: true,
+      handleClose: () => closeModal(MODAL_TYPES.dialog),
+      handleConfirm: () => router.push('/select-restaurant/region-setting'),
     });
   };
 
@@ -184,7 +196,8 @@ export default function CRecommendButton({ selectType, btnText, ...rest }: Props
           keywords: restaurantKeyword?.filter(c => c !== '전체'),
           prices: restaurantPrices,
           excludeIds: [],
-          ...(latitude && longitude ? { latitude, longitude } : {}),
+          latitude,
+          longitude,
         },
         token
       ),
@@ -212,6 +225,11 @@ export default function CRecommendButton({ selectType, btnText, ...rest }: Props
     if (selectType === 'home') {
       router.push('/select-menu');
       return;
+    }
+
+    // 식당 추첨은 지역 좌표가 필요하므로 미설정 시 지역 설정으로 유도한다.
+    if (selectType === 'restaurant' && !hasRegion) {
+      return regionRequiredModal();
     }
 
     // 앱 환경에서는 광고를 먼저 보여줌
