@@ -97,6 +97,9 @@ dependencies:
     version: 5.0.14(@types/react@18.2.15)(immer@10.2.0)(react@19.1.1)
 
 devDependencies:
+  '@sentry/types':
+    specifier: 7.120.2
+    version: 7.120.2
   '@svgr/webpack':
     specifier: 8.1.0
     version: 8.1.0(typescript@5.1.6)
@@ -2138,6 +2141,11 @@ packages:
       '@sentry/types': 7.120.4
       '@sentry/utils': 7.120.4
     dev: false
+
+  /@sentry/types@7.120.2:
+    resolution: {integrity: sha512-FWVoiblHQJ892GaOqdXx/5/n5XDLF28z81vJ0lCY49PMh8waz8LJ0b9RSmt9tasSDl0OQ7eUlPl1xu1jTrv1NA==}
+    engines: {node: '>=8'}
+    dev: true
 
   /@sentry/types@7.120.4:
     resolution: {integrity: sha512-cUq2hSSe6/qrU6oZsEP4InMI5VVdD86aypE+ENrQ6eZEVLTCYm1w6XhW1NvIu3UuWh7gZec4a9J7AFpYxki88Q==}
