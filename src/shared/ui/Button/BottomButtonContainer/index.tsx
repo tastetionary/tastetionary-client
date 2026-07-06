@@ -8,7 +8,10 @@ interface Props extends HTMLAttributes<HTMLDivElement> {
 export default function BottomButtonContainer({ children, className, ...rest }: Props) {
   return (
     <div
-      className={cn('fixed bottom-0 flex w-500 gap-[14px] bg-white px-xl py-xl mobile:left-0 mobile:w-full', className)}
+      className={cn(
+        'fixed inset-x-0 bottom-0 mx-auto flex w-[calc(100%-16px)] max-w-[484px] gap-[14px] bg-white px-xl py-xl',
+        className
+      )}
       {...rest}
     >
       {children}
