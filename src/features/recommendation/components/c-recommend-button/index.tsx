@@ -4,7 +4,7 @@ import { useMutation } from '@tanstack/react-query';
 import { AxiosError } from 'axios';
 import { usePathname, useRouter } from 'next/navigation';
 import { useRef } from 'react';
-import { toUnicodeEscape } from './utils';
+import { enumValuesToKeys } from './utils';
 import { FoodRecommendRes, postFoodRecommend } from '@/features/recommendation/api/food/recommend';
 import { RestaurantRecommendRes, postRestaurantRecommend } from '@/features/recommendation/api/restaurant/recommend';
 import { useSelectFoodStore } from '@/features/recommendation/store/useSelectFoodStore';
@@ -98,18 +98,6 @@ export default function CRecommendButton({ selectType, btnText, ...rest }: Props
     openModal(MODAL_TYPES.loading, {
       maxWidth: 120,
       handleClose: () => {
-        const unicodeFoodCategory = foodCategory
-          .filter(c => c !== '전체')
-          .map(c => toUnicodeEscape(c))
-          .join(',');
-        const unicodeFoodKeyword = foodKeyword
-          .filter(c => c !== '전체')
-          .map(c => toUnicodeEscape(c.replaceAll("'", '')))
-          .join(',');
-
-        const encodedFoodCategory = encodeURIComponent(unicodeFoodCategory);
-        const encodedFoodKeyword = encodeURIComponent(unicodeFoodKeyword);
-
         if (selectType === 'food') {
           if (!res) {
             setTimeout(() => {
@@ -129,14 +117,17 @@ export default function CRecommendButton({ selectType, btnText, ...rest }: Props
             return;
           }
 
-          const encodedFoodId = encodeURIComponent(toUnicodeEscape(res.id + ''));
-          const encodedFoodName = encodeURIComponent(toUnicodeEscape(res.name));
-
           goScrollToTop();
 
-          return router.push(
-            `/select-menu/result-share?category=${encodedFoodCategory}&keyword=${encodedFoodKeyword}&id=${encodedFoodId}&name=${encodedFoodName}`
-          );
+          // 한글 값 대신 짧은 enum 키로 축약해 공유 URL 길이를 줄인다. (카카오 공유 메시지 크기 제한 대응)
+          const params = new URLSearchParams({
+            category: enumValuesToKeys(FoodCategory, foodCategory.filter(c => c !== '전체')).join(','),
+            keyword: enumValuesToKeys(FoodKeyword, foodKeyword.filter(c => c !== '전체')).join(','),
+            id: String(res.id),
+            name: res.name,
+          });
+
+          return router.push(`/select-menu/result-share?${params.toString()}`);
         }
 
         if (!res && selectType === 'restaurant') {

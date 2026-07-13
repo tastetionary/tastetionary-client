@@ -1,5 +1,5 @@
 import SelectMenuResultShare from './components/SelectMenuResultShare';
-import { unicodeToText } from '@/features/recommendation/components/c-recommend-button/utils';
+import { enumKeysToValues } from '@/features/recommendation/components/c-recommend-button/utils';
 import { FoodCategory, FoodKeyword } from '@/shared/types/enums';
 
 export default async function SelectMenuResultSharePage({
@@ -7,25 +7,13 @@ export default async function SelectMenuResultSharePage({
 }: {
   searchParams: Promise<Record<string, string | undefined>>;
 }) {
-  const { category: encodedCategory, keyword: encodedKeyword, id: encodedId, name: encodedName } = await searchParams;
+  const { category: categoryParam, keyword: keywordParam, id: idParam, name: nameParam } = await searchParams;
 
-  const decoded = (encoded: string | undefined) => {
-    if (!encoded) throw new Error('No encoded value provided');
-    const decoded = decodeURIComponent(encoded);
+  // 공유 URL에는 enum 키(예: 'KOREAN')가 콤마로 구분되어 실린다. 원래 한글 값으로 복원.
+  const category = enumKeysToValues(FoodCategory, categoryParam ? categoryParam.split(',') : []);
+  const keyword = enumKeysToValues(FoodKeyword, keywordParam ? keywordParam.split(',') : []);
+  const id = Number(idParam ?? 0);
+  const name = nameParam ?? '';
 
-    return decoded.split(',').map(unicodeToText);
-  };
-
-  const validFoodCategories = Object.values(FoodCategory);
-  const validFoodKeywords = Object.values(FoodKeyword);
-
-  const decodedCategory = decoded(encodedCategory) as FoodCategory[];
-  const decodedKeyword = decoded(encodedKeyword) as FoodKeyword[];
-  const decodedId = +decoded(encodedId)[0];
-  const decodedName = decoded(encodedName)[0];
-
-  let category = decodedCategory.every(c => validFoodCategories.includes(c)) ? decodedCategory : [];
-  let keyword = decodedKeyword.every(c => validFoodKeywords.includes(c)) ? decodedKeyword : [];
-
-  return <SelectMenuResultShare category={category} keyword={keyword} id={decodedId} name={decodedName} />;
+  return <SelectMenuResultShare category={category} keyword={keyword} id={id} name={name} />;
 }

@@ -25,8 +25,6 @@ interface Props {
 export default function SelectMenuResultShare({ category, keyword, id, name }: Props) {
   const router = useRouter();
 
-  console.log(category, keyword, id, name);
-
   const handleKakaoShare = () => {
     if (typeof window === 'undefined' || !window.Kakao) return;
 
@@ -44,15 +42,8 @@ export default function SelectMenuResultShare({ category, keyword, id, name }: P
           webUrl: window.location.href,
         },
       },
-      buttons: [
-        {
-          title: '웹으로 이동',
-          link: {
-            mobileWebUrl: window.location.href,
-            webUrl: window.location.href,
-          },
-        },
-      ],
+      // buttons를 생략하면 카카오가 content.link 기반 기본 버튼을 자동 생성한다.
+      // 링크(window.location.href)를 payload에 중복 삽입하지 않아 메시지 크기를 줄인다.
     });
   };
 
