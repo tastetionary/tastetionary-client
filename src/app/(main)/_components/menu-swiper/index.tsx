@@ -30,7 +30,7 @@ const MenuSwiper = ({ menus }: { menus: PickedMenus[] }) => {
         disableOnInteraction: false,
       }}
       loop={true}
-      className="w-full [&_.swiper-slide]:!w-120 [&_.swiper-wrapper]:pt-2"
+      className="w-full !px-32 [&_.swiper-slide]:!w-120 [&_.swiper-wrapper]:pt-2"
     >
       {menus.map(menu => (
         <SwiperSlide key={menu.id}>
