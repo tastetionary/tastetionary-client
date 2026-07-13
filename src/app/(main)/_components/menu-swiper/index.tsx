@@ -11,6 +11,8 @@ const MenuSwiper = ({ menus }: { menus: PickedMenus[] }) => {
       modules={[Autoplay]}
       spaceBetween={20}
       slidesPerView={4}
+      slidesOffsetBefore={32}
+      slidesOffsetAfter={32}
       breakpoints={{
         640: {
           slidesPerView: 2,
@@ -30,7 +32,7 @@ const MenuSwiper = ({ menus }: { menus: PickedMenus[] }) => {
         disableOnInteraction: false,
       }}
       loop={true}
-      className="w-full !px-32 [&_.swiper-slide]:!w-120 [&_.swiper-wrapper]:pt-2"
+      className="w-full [&_.swiper-slide]:!w-120 [&_.swiper-wrapper]:pt-2"
     >
       {menus.map(menu => (
         <SwiperSlide key={menu.id}>
