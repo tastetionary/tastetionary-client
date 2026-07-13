@@ -33,7 +33,7 @@ export default function SelectMenuResultShare({ category, keyword, id, name }: P
       content: {
         title: '오늘의 점심 메뉴 결재 부탁드립니다',
         description: '직장인 메뉴/식당 추천 서비스 맛셔너리',
-        imageUrl: 'https://ifh.cc/g/anywH7.png',
+        imageUrl: 'https://i.ifh.cc/KCNrs6.png',
         imageWidth: 800,
         imageHeight: 400,
         link: {
