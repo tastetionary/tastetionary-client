@@ -2,7 +2,7 @@
 
 import { useMutation } from '@tanstack/react-query';
 import { useForm } from 'react-hook-form';
-import useValidationNickname from '@/app/_legacy/sign-up/hooks/query/useValidationNickname';
+import useValidationNickname from '@/app/(main)/sign-up/hooks/query/useValidationNickname';
 import userRepository from '@/shared/api/user';
 import useUser from '@/shared/hooks/useUser';
 import BottomButtonContainer from '@/shared/ui/Button/BottomButtonContainer';

@@ -2,7 +2,7 @@
 
 import { useRouter } from 'next/navigation';
 import * as S from '../page.styled';
-import useLogoutMutate from '@/app/_legacy/login/hooks/useLogoutMutate';
+import useLogoutMutate from '@/app/(main)/login/hooks/useLogoutMutate';
 import ARROW_RIGHT from '@/assets/common/Icons/arrow_right.svg';
 import CMypageMenu from '@/features/user/components/c-mypage-menu';
 import useUser from '@/shared/hooks/useUser';

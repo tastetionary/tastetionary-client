@@ -3,7 +3,7 @@
 import { usePathname } from 'next/navigation';
 import { ReactNode } from 'react';
 import { ThemeProvider } from 'styled-components';
-import LoginSDK from '@/app/_legacy/login/components/LoginSDK';
+import LoginSDK from '@/app/(main)/login/components/LoginSDK';
 import { useAxiosInterceptor } from '@/shared/hooks/useAxiosInterceptor';
 import GoogleAnalytics from '@/shared/ui/google-analytics';
 import MobileLayout from '@/shared/ui/layout/mobile-layout';

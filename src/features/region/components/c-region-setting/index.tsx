@@ -3,7 +3,7 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { useRouter } from 'next/navigation';
 import { FormProvider, useForm } from 'react-hook-form';
-import RegionSetting from '@/app/_legacy/sign-up/components/region-setting';
+import RegionSetting from '@/app/(main)/sign-up/components/region-setting';
 import useRegion from '@/features/region/hooks/useRegion';
 import { putSaveRegion } from '@/shared/api/user/saveRegion';
 import useUser from '@/shared/hooks/useUser';

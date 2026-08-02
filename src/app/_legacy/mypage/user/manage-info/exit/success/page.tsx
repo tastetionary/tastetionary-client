@@ -1,7 +1,7 @@
 'use client';
 
 import { useRouter } from 'next/navigation';
-import * as S from '@/app/_legacy/sign-up/components/complete/page.styled';
+import * as S from '@/app/(main)/sign-up/components/complete/page.styled';
 import COMPLETE from '@/assets/logo/complete.svg';
 import BottomButtonContainer from '@/shared/ui/Button/BottomButtonContainer';
 import DefaultButton from '@/shared/ui/Button/DefaultButton';

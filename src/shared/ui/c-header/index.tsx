@@ -25,15 +25,11 @@ export default function CHeader({ isLogo = false, title, noBackBtn = false, isHo
 
   const renderLeftItems = () => {
     if (isHome) {
-      // 로그인 기능 - 임시 비활성화 (프로필 아이콘)
-      return <div className="w-56" />;
-      /*
       return (
         <button className="flex h-55 w-56 items-center justify-center" type="button">
           <USER_ICON width={24} height={24} onClick={() => push('/mypage')} />
         </button>
       );
-      */
     }
     if (!noBackBtn) {
       return (

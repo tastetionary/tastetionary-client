@@ -1,4 +1,4 @@
-// import { CheckboxWrapper } from '@/app/_legacy/sign-up/components/terms/page.styled';
+// import { CheckboxWrapper } from '@/app/(main)/sign-up/components/terms/page.styled';
 import styled from 'styled-components';
 
 export const Container = styled.div`

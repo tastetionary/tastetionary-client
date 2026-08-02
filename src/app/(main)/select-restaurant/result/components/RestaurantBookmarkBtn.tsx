@@ -40,9 +40,6 @@ export default function RestaurantBookmarkBtn() {
     return addBookMark(data);
   };
 
-  // 로그인 기능 - 임시 비활성화 (저장하기/북마크)
-  return null;
-  /*
   return (
     <div
       className="absolute right-[10px] top-[10px] z-2 cursor-pointer rounded-2 bg-[#00000040] p-10"
@@ -51,5 +48,4 @@ export default function RestaurantBookmarkBtn() {
       {isBookMarked ? <IC_BOOKMARK_ACTIVE /> : <IC_BOOKMARK_INACTIVE />}
     </div>
   );
-  */
 }

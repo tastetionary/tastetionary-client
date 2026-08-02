@@ -1,5 +1,5 @@
 import { useFormContext } from 'react-hook-form';
-import useAccountAuthCodeMutate from '@/app/_legacy/sign-up/hooks/query/useAccountAuthCodeMutate';
+import useAccountAuthCodeMutate from '@/app/(main)/sign-up/hooks/query/useAccountAuthCodeMutate';
 import { emailRegex } from '@/shared/constants';
 import BottomButtonContainer from '@/shared/ui/Button/BottomButtonContainer';
 import DefaultButton from '@/shared/ui/Button/DefaultButton';

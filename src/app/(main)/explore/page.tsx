@@ -24,7 +24,6 @@ export default async function Home() {
         <RecommendMenuFetcherWrapper />
       </ErrorBoundary>
 
-      {/* 로그인 기능 - 임시 비활성화 (푸터: 서비스 이용약관, 개인정보처리방침) */}
       <footer>
         <FooterLinks />
       </footer>

@@ -1,7 +1,7 @@
 import { ChangeEvent, useState } from 'react';
 import { useFormContext } from 'react-hook-form';
-import useAccountAuthCodeMutate from '@/app/_legacy/sign-up/hooks/query/useAccountAuthCodeMutate';
-import useConfirmAuthCodeMutate from '@/app/_legacy/sign-up/hooks/query/useConfirmAuthCodeMutate';
+import useAccountAuthCodeMutate from '@/app/(main)/sign-up/hooks/query/useAccountAuthCodeMutate';
+import useConfirmAuthCodeMutate from '@/app/(main)/sign-up/hooks/query/useConfirmAuthCodeMutate';
 import BottomButtonContainer from '@/shared/ui/Button/BottomButtonContainer';
 import DefaultButton from '@/shared/ui/Button/DefaultButton';
 import CHeader from '@/shared/ui/c-header';

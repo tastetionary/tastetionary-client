@@ -40,13 +40,9 @@ export default function CReviewReportBtn({ id }: Props) {
     });
   };
 
-  // 로그인 기능 - 임시 비활성화 (신고하기)
-  return null;
-  /*
   return (
     <button onClick={reportModal} className="flex cursor-pointer items-center justify-center px-10 py-10">
       <IC_REPORT />
     </button>
   );
-  */
 }
