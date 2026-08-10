@@ -1,4 +1,4 @@
-import { getSocialRedirectUri } from '../lib/socialRedirectUri';
+import { getGoogleAuthUrl } from '../lib/socialRedirectUri';
 
 export default function useGoogleLogin() {
   // 웹의 구글 로그인 핸들러 수정
@@ -26,7 +26,7 @@ export default function useGoogleLogin() {
       }
 
       // Google OAuth URL로 이동
-      window.location.href = `https://accounts.google.com/o/oauth2/v2/auth?client_id=${process.env.NEXT_PUBLIC_GOOGLE_CLIENT_ID}&redirect_uri=${getSocialRedirectUri('google')}&response_type=code&scope=email+profile`;
+      window.location.href = getGoogleAuthUrl();
     }
   };
 

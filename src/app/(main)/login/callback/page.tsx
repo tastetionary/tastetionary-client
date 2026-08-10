@@ -18,7 +18,10 @@ export default function LoginCallback() {
   const [hash, setHash] = useState('');
   const [value, setValue] = useState<string | null>(null);
 
-  const category = searchParams.get('category') as undefined | TloginCategory;
+  // 어느 소셜에서 왔는지는 state 로 받는다.
+  // (redirect_uri 에 ?category= 를 붙이면 카카오 콘솔에 등록할 수 없어 KOE006 이 난다.)
+  // category 쿼리는 아직 이 방식을 쓰는 네이버 콜백용 폴백.
+  const category = (searchParams.get('state') ?? searchParams.get('category')) as undefined | TloginCategory;
   const code = searchParams.get('code');
 
   // ✅ 추가: 로그인 성공 시 앱으로 리다이렉트
@@ -55,7 +58,7 @@ export default function LoginCallback() {
       code: value,
       identification: '',
       password: '',
-      redirectUri: getSocialRedirectUri(category),
+      redirectUri: getSocialRedirectUri(),
     });
   }, [value, category, login]);
 

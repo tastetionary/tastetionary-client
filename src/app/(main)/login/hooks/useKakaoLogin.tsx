@@ -13,8 +13,10 @@ export default function useKakaoLogin() {
     }
 
     // Kakao.Auth.authorize()를 통한 간편 로그인
+    // redirectUri 에는 쿼리를 붙이지 않는다(카카오 콘솔에 등록 불가). 소셜 구분은 state 로 넘긴다.
     window.Kakao.Auth.authorize({
-      redirectUri: getSocialRedirectUri('kakao'),
+      redirectUri: getSocialRedirectUri(),
+      state: 'kakao',
     });
   };
 

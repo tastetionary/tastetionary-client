@@ -5,7 +5,7 @@ import { useEffect } from 'react';
 import LoginBtn from '../components/LoginBtn';
 import useGoogleLogin from '../hooks/useGoogleLogin';
 import useKakaoLogin from '../hooks/useKakaoLogin';
-import { getSocialRedirectUri } from '../lib/socialRedirectUri';
+import { getGoogleAuthUrl } from '../lib/socialRedirectUri';
 import MAIN_LOGO from '@/assets/logo/main_logo.svg';
 import DefaultButton from '@/shared/ui/Button/DefaultButton';
 import CHeader from '@/shared/ui/c-header';
@@ -29,7 +29,7 @@ export default function LoginPage() {
       sessionStorage.setItem('app_return_url', returnUrl);
 
       // 자동으로 Google OAuth 시작
-      window.location.href = `https://accounts.google.com/o/oauth2/v2/auth?client_id=${process.env.NEXT_PUBLIC_GOOGLE_CLIENT_ID}&redirect_uri=${getSocialRedirectUri('google')}&response_type=code&scope=email+profile`;
+      window.location.href = getGoogleAuthUrl();
     }
   }, [searchParams]);
 
