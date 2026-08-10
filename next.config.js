@@ -38,6 +38,13 @@ const SentryWebpackPluginOptions = {
   org: 'tastionary',
   project: 'taste-client',
   authToken: process.env.NEXT_PUBLIC_SENTRY_AUTH_KEY, // An auth token is required for uploading source maps.
+
+  // Sentry API가 간헐적으로 5xx(504 gateway timeout 등)를 반환할 때
+  // 릴리즈 생성/소스맵 업로드 실패가 빌드 전체를 죽이지 않도록 경고로 강등한다.
+  // (기본 동작은 compilation.errors에 push해서 "Failed to compile"로 이어짐)
+  errorHandler: (err, _invokeErr, compilation) => {
+    compilation.warnings.push(new Error(`Sentry CLI Plugin: ${err.message}`));
+  },
 };
 
 /** @type {import('next').NextConfig} */
