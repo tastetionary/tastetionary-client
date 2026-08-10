@@ -27,7 +27,11 @@ export default function MenuSelection() {
   };
 
   const onRestaurantClick = () => {
-    // 비로그인 사용 기능: 식당 고르기는 로그인 없이 접근 가능
+    // 식당 고르기는 계정에 저장된 지역이 필요하므로 로그인 사용자만 진입한다.
+    if (!isLoggedIn) {
+      return loginInfoModal();
+    }
+
     router.push('/select-restaurant');
   };
 

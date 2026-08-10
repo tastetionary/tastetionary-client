@@ -3,7 +3,9 @@ import { HydrationBoundary } from '@tanstack/react-query';
 import SelectRestaurant from './components/SelectRestaurant';
 import { getRestaurantOption } from '@/features/recommendation/api/restaurant/option';
 
-async function SelectRestaurantPage() {
+// 로그인 게이트는 src/middleware.ts 에서 처리한다.
+// (레이아웃의 Suspense 때문에 서버 컴포넌트에서 redirect() 하면 307이 나가지 못하고 빈 화면이 된다.)
+export default async function SelectRestaurantPage() {
   const queryClient = new QueryClient();
 
   // Pre-fetching data server-side
@@ -21,6 +23,3 @@ async function SelectRestaurantPage() {
     </HydrationBoundary>
   );
 }
-
-// 비로그인 사용 기능: 식당 고르기는 로그인 없이 접근 가능 (로그인 게이트 제거)
-export default SelectRestaurantPage;

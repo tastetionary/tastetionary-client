@@ -1,3 +1,5 @@
+import { getSocialRedirectUri } from '../lib/socialRedirectUri';
+
 export default function useKakaoLogin() {
   const loginHandler = () => {
     if (!window.Kakao) {
@@ -12,7 +14,7 @@ export default function useKakaoLogin() {
 
     // Kakao.Auth.authorize()를 통한 간편 로그인
     window.Kakao.Auth.authorize({
-      redirectUri: `${window.location.origin}${process.env.NEXT_PUBLIC_LOGIN_REDIRECT_URI}?category=kakao`,
+      redirectUri: getSocialRedirectUri('kakao'),
     });
   };
 

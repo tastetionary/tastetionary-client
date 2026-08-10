@@ -4,7 +4,7 @@ import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { useRouter } from 'next/navigation';
 import { FormProvider, useForm } from 'react-hook-form';
 import RegionSetting from '@/app/(main)/sign-up/components/region-setting';
-import useRegion from '@/features/region/hooks/useRegion';
+import { UserRes } from '@/shared/api/user/getUser';
 import { putSaveRegion } from '@/shared/api/user/saveRegion';
 import useUser from '@/shared/hooks/useUser';
 import { MODAL_TYPES } from '@/shared/ui/Modal/GlobalModal';
@@ -25,7 +25,6 @@ export default function CRegionSetting({ category, onNextPage }: Props) {
   const router = useRouter();
   const queryClient = useQueryClient();
   const { token } = useUser();
-  const { setRegion } = useRegion();
   const methods = useForm<FormValue>({
     mode: 'onBlur',
   });
@@ -42,6 +41,28 @@ export default function CRegionSetting({ category, onNextPage }: Props) {
     });
   };
 
+  const loginRequiredModal = () => {
+    openModal(MODAL_TYPES.dialog, {
+      title: '로그인 안내',
+      message: '지역은 계정에 저장돼요.\n로그인이 필요합니다.',
+      handleConfirm: () => router.push('/login'),
+      handleClose: () => closeModal(MODAL_TYPES.dialog),
+      cancelText: '취소',
+      confirmText: '로그인 하기',
+      needClose: true,
+    });
+  };
+
+  const saveFailedModal = () => {
+    openModal(MODAL_TYPES.dialog, {
+      title: '지역 설정에 실패했습니다.',
+      message: '잠시 후 다시 시도해주세요.',
+      handleConfirm: () => closeModal(MODAL_TYPES.dialog),
+      confirmText: '확인',
+      needClose: true,
+    });
+  };
+
   const { mutateAsync: asyncSaveRegion } = useMutation({
     mutationFn: (data: { address: string; latitude: number; longitude: number }) =>
       putSaveRegion(
@@ -53,7 +74,7 @@ export default function CRegionSetting({ category, onNextPage }: Props) {
         token
       ),
     onSuccess: (_, data) => {
-      queryClient.setQueryData(['user'], (prev: any) => {
+      queryClient.setQueryData(['user'], (prev: UserRes | undefined) => {
         if (!prev) return prev;
 
         return {
@@ -72,20 +93,15 @@ export default function CRegionSetting({ category, onNextPage }: Props) {
   const handleNext = async () => {
     const data = methods.watch();
 
-    // 로그인 여부와 관계없이 항상 localStorage에 지역을 저장한다.
-    setRegion({
-      address: data.address,
-      latitude: data.latitude,
-      longitude: data.longitude,
-    });
+    // 지역의 단일 소스는 계정(서버)이므로 로그인 없이는 저장할 수 없다.
+    if (!token) {
+      return loginRequiredModal();
+    }
 
-    // 로그인 사용자는 서버에도 지역을 저장한다.
-    if (token) {
-      try {
-        await asyncSaveRegion(data);
-      } catch {
-        // 서버 저장 실패 시에도 localStorage 설정은 유지하고 완료 처리한다.
-      }
+    try {
+      await asyncSaveRegion(data);
+    } catch {
+      return saveFailedModal();
     }
 
     handleCompleteRegionSetting();

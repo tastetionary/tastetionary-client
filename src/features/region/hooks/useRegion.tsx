@@ -1,39 +1,26 @@
-import { Region, useRegionStore } from '@/features/region/store/useRegionStore';
+import { Region, isValidRegion } from '@/features/region/lib/region';
 import useUser from '@/shared/hooks/useUser';
 
 interface UseRegionResult extends Region {
-  /** 로그인 사용자의 서버 지역 또는 localStorage 지역이 설정되어 있는지 여부 */
+  /** 계정에 지역이 설정되어 있는지 여부 */
   hasRegion: boolean;
-  setRegion: (value: Region) => void;
-  clearRegion: () => void;
 }
 
 /**
- * 지역 정보를 통합 제공하는 훅.
- * - 로그인 사용자는 서버에 저장된 지역(`user.area`)을 우선 사용한다.
- * - 비로그인 사용자는 localStorage에 저장된 지역을 사용한다.
- * - `setRegion`은 항상 localStorage에 반영한다.
+ * 지역 정보를 제공하는 훅.
+ *
+ * 지역의 단일 소스는 서버(`user.area`)다. 로컬 저장소에는 지역을 두지 않으므로
+ * 비로그인 사용자에게는 지역이 없고, 지역이 필요한 화면은 로그인을 요구한다.
  */
 export default function useRegion(): UseRegionResult {
   const { data } = useUser();
-  const { region, setRegion, clearRegion } = useRegionStore();
 
-  const userArea = data?.area?.address ? data.area : undefined;
-
-  const address = userArea?.address ?? region.address;
-  const latitude = userArea?.latitude ?? region.latitude;
-  const longitude = userArea?.longitude ?? region.longitude;
-
-  // 주소뿐 아니라 유효한 좌표(0/undefined 아님)까지 있어야 지역이 설정된 것으로 본다.
-  const hasValidCoords =
-    Number.isFinite(latitude) && Number.isFinite(longitude) && latitude !== 0 && longitude !== 0;
+  const area = isValidRegion(data?.area) ? data?.area : undefined;
 
   return {
-    address,
-    latitude,
-    longitude,
-    hasRegion: Boolean(address) && hasValidCoords,
-    setRegion,
-    clearRegion,
+    address: area?.address ?? '',
+    latitude: area?.latitude ?? 0,
+    longitude: area?.longitude ?? 0,
+    hasRegion: Boolean(area),
   };
 }

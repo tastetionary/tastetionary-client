@@ -4,6 +4,7 @@ import Lottie from 'lottie-react';
 import { useSearchParams } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import useLoginMutate from '../hooks/useLoginMutate';
+import { getSocialRedirectUri } from '../lib/socialRedirectUri';
 import Loading from '@/assets/animation/loading.json';
 import { TloginCategory } from '@/shared/api/auth';
 import { overlayVariants } from '@/shared/ui/Modal/DialogModal/style';
@@ -46,7 +47,16 @@ export default function LoginCallback() {
 
   useEffect(() => {
     if (!value || value === '' || !category) return;
-    login({ category, code: value, identification: '', password: '' });
+
+    // 인가 코드를 받을 때 쓴 redirect_uri 를 그대로 동봉한다.
+    // (서버가 이 값으로 카카오/구글에 토큰을 요청하므로 값이 다르면 invalid_grant 로 실패한다.)
+    login({
+      category,
+      code: value,
+      identification: '',
+      password: '',
+      redirectUri: getSocialRedirectUri(category),
+    });
   }, [value, category, login]);
 
   useEffect(() => {

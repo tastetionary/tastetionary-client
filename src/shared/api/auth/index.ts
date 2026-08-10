@@ -7,6 +7,8 @@ interface PostLoginParams {
   password?: string;
   category: TloginCategory;
   code?: string;
+  /** 인가 코드를 받을 때 쓴 redirect_uri. 서버가 카카오/구글에 토큰을 요청할 때 그대로 써야 한다. */
+  redirectUri?: string;
 }
 
 interface GetValidateNicknameParams {
@@ -21,7 +23,7 @@ interface PostLoginResponse {
 }
 
 interface AuthRepository {
-  postLogin: ({ identification, password, category, code }: PostLoginParams) => Promise<PostLoginResponse>;
+  postLogin: ({ identification, password, category, code, redirectUri }: PostLoginParams) => Promise<PostLoginResponse>;
   postLogout: ({ token }: { token: string }) => Promise<any>;
   updatePassword: ({ password, token }: { password: string; token: string }) => Promise<any>;
   resetPassword: ({ historyId, code }: { historyId: number; code: string }) => Promise<any>;
@@ -30,12 +32,13 @@ interface AuthRepository {
 
 const authRepository = (): AuthRepository => {
   return {
-    postLogin: async ({ identification, password, category, code }) =>
+    postLogin: async ({ identification, password, category, code, redirectUri }) =>
       await http.post<any, PostLoginParams>('/apis/v1/account/tokens', {
         identification,
         password,
         category,
         code,
+        redirectUri,
       }),
     postLogout: async ({ token }: { token: string }) =>
       await http.delete('/apis/v1/account/tokens', {

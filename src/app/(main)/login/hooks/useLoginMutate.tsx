@@ -73,6 +73,8 @@ const useLoginMutate = () => {
     mutationFn: (token: string) => getUser(token),
     onSuccess: res => {
       console.log('getUserInfo 성공', res);
+
+      // 지역의 단일 소스는 계정이므로, 서버가 내려준 area를 그대로 사용한다.
       queryClient.setQueryData(['user'], res);
 
       push('/explore');
