@@ -3,7 +3,6 @@
 import { useMutation } from '@tanstack/react-query';
 import { AxiosError } from 'axios';
 import { usePathname, useRouter } from 'next/navigation';
-import { useRef } from 'react';
 import { enumValuesToKeys } from './utils';
 import { FoodRecommendRes, postFoodRecommend } from '@/features/recommendation/api/food/recommend';
 import { RestaurantRecommendRes, postRestaurantRecommend } from '@/features/recommendation/api/restaurant/recommend';
@@ -11,7 +10,6 @@ import { useSelectFoodStore } from '@/features/recommendation/store/useSelectFoo
 import { useSelectRestaurantStore } from '@/features/recommendation/store/useSelectRestaurantStore';
 import { useSelectResultStore } from '@/features/recommendation/store/useSelectResultStore';
 import useRegion from '@/features/region/hooks/useRegion';
-import { useRewardedAd } from '@/shared/hooks/useRewardedAd';
 import useUser from '@/shared/hooks/useUser';
 import { FoodCategory, FoodKeyword, RestaurantCategory } from '@/shared/types/enums';
 import DefaultButton from '@/shared/ui/Button/DefaultButton';
@@ -29,7 +27,6 @@ export default function CRecommendButton({ selectType, btnText, ...rest }: Props
   const { latitude, longitude, hasRegion } = useRegion();
   const { openModal, closeModal } = useModal();
   const pathname = usePathname();
-  const pendingActionRef = useRef<'food' | 'restaurant' | null>(null);
 
   const { category: foodCategory, keyword: foodKeyword } = useSelectFoodStore();
   const {
@@ -121,8 +118,14 @@ export default function CRecommendButton({ selectType, btnText, ...rest }: Props
 
           // 한글 값 대신 짧은 enum 키로 축약해 공유 URL 길이를 줄인다. (카카오 공유 메시지 크기 제한 대응)
           const params = new URLSearchParams({
-            category: enumValuesToKeys(FoodCategory, foodCategory.filter(c => c !== '전체')).join(','),
-            keyword: enumValuesToKeys(FoodKeyword, foodKeyword.filter(c => c !== '전체')).join(','),
+            category: enumValuesToKeys(
+              FoodCategory,
+              foodCategory.filter(c => c !== '전체')
+            ).join(','),
+            keyword: enumValuesToKeys(
+              FoodKeyword,
+              foodKeyword.filter(c => c !== '전체')
+            ).join(','),
             id: String(res.id),
             name: res.name,
           });
@@ -200,18 +203,6 @@ export default function CRecommendButton({ selectType, btnText, ...rest }: Props
     },
   });
 
-  // 광고 보상을 받았을 때 추첨 진행
-  const handleAdReward = () => {
-    if (selectType === 'food') {
-      foodRecommend();
-    } else if (selectType === 'restaurant') {
-      restaurantRecommend();
-    }
-    pendingActionRef.current = null;
-  };
-
-  const { isInApp, requestAd } = useRewardedAd(handleAdReward);
-
   const onButtonClick = () => {
     if (selectType === 'home') {
       router.push('/select-menu');
@@ -223,14 +214,6 @@ export default function CRecommendButton({ selectType, btnText, ...rest }: Props
       return regionRequiredModal();
     }
 
-    // 앱 환경에서는 광고를 먼저 보여줌
-    if (isInApp && (selectType === 'food' || selectType === 'restaurant')) {
-      pendingActionRef.current = selectType;
-      requestAd();
-      return;
-    }
-
-    // 웹 환경이거나 앱이 아니면 바로 추첨 진행
     if (selectType === 'food') return foodRecommend();
 
     if (selectType === 'restaurant') return restaurantRecommend();

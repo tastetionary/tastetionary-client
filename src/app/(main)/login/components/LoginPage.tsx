@@ -1,11 +1,9 @@
 'use client';
 
-import { useRouter, useSearchParams } from 'next/navigation';
-import { useEffect } from 'react';
+import { useRouter } from 'next/navigation';
 import LoginBtn from '../components/LoginBtn';
 import useGoogleLogin from '../hooks/useGoogleLogin';
 import useKakaoLogin from '../hooks/useKakaoLogin';
-import { getGoogleAuthUrl } from '../lib/socialRedirectUri';
 import MAIN_LOGO from '@/assets/logo/main_logo.svg';
 import DefaultButton from '@/shared/ui/Button/DefaultButton';
 import CHeader from '@/shared/ui/c-header';
@@ -17,25 +15,6 @@ export default function LoginPage() {
   const { loginHandler: googleLogin } = useGoogleLogin();
   // const { loginHandler: naverLogin } = useNaverLogin();
 
-  const searchParams = useSearchParams();
-
-  // 앱의 시스템 브라우저에서 열린 경우 자동으로 Google 로그인 시작
-  useEffect(() => {
-    const source = searchParams.get('source');
-    const returnUrl = searchParams.get('returnUrl');
-
-    if (source === 'app' && returnUrl) {
-      // returnUrl 저장
-      sessionStorage.setItem('app_return_url', returnUrl);
-
-      // 자동으로 Google OAuth 시작 (client_id 가 없으면 null 이라 이동하지 않는다)
-      const authUrl = getGoogleAuthUrl();
-      if (!authUrl) return;
-
-      window.location.href = authUrl;
-    }
-  }, [searchParams]);
-
   return (
     <>
       <CHeader title="로그인" />
@@ -43,13 +22,13 @@ export default function LoginPage() {
       <div className="mt-xxxl flex w-full flex-col items-center px-xl pb-xxxl">
         <MAIN_LOGO width={80} height={80} />
 
-        <h1 className="title2 mt-xs break-keep text-center font-bold ">
+        <h1 className="title2 mt-xs text-center font-bold break-keep">
           맛셔너리,
           <br />
           직장인을 위한 맞춤 점심 추천
         </h1>
 
-        <p className="body2 mt-xs break-keep text-center text-neutral-bg60">
+        <p className="body2 mt-xs text-center break-keep text-neutral-bg60">
           키워드로 메뉴부터 식당까지, 맛셔너리가 추천해드립니다.
         </p>
 

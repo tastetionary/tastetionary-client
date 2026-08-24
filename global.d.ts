@@ -4,11 +4,6 @@ declare global {
     kakao: any;
     Kakao: KakaoSDK;
     naver: any;
-    ReactNativeWebView?: {
-      postMessage: (message: string) => void;
-    };
-    requestRewardedAd?: () => void;
-    checkAdReady?: () => void;
   }
   const kakao: any;
 }
