@@ -26,7 +26,7 @@ const useLogoutMutate = () => {
   return useMutation({
     mutationFn: authRepository().postLogout,
     onSuccess: () => {
-      Sentry.configureScope(scope => scope.clear());
+      Sentry.getCurrentScope().clear();
 
       // 지역은 계정에만 있으므로, 쿼리 캐시가 비워지면 함께 사라진다. (아래 useEffect의 queryClient.clear)
       setIsDestroied(true);

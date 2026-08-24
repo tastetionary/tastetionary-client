@@ -25,7 +25,7 @@ export default function MyPageUserExit() {
   const { mutate: exitUser } = useMutation({
     mutationFn: () => deleteUser({ types: userDeleteType }, token),
     onSuccess: () => {
-      Sentry.configureScope(scope => scope.clear());
+      Sentry.getCurrentScope().clear();
       setTimeout(() => {
         destroyCookie(null, 'token');
         queryClient.clear();

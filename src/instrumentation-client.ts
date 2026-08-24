@@ -1,9 +1,10 @@
-// This file configures the initialization of Sentry on the client.
-// The config you add here will be used whenever a users loads a page in their browser.
-// https://docs.sentry.io/platforms/javascript/guides/nextjs/
+// 브라우저에서 Sentry 를 초기화한다.
+//
+// v10 부터는 `sentry.client.config.ts` 대신 이 파일이 규약이다.
+// (구 파일명은 아직 동작하지만 deprecation 경고가 뜨고, Turbopack 에서는 아예 안 먹는다.)
+// https://nextjs.org/docs/app/api-reference/file-conventions/instrumentation-client
 
 import * as Sentry from '@sentry/nextjs';
-import { ErrorEvent } from '@sentry/types';
 import axios from 'axios';
 
 Sentry.init({
@@ -23,11 +24,10 @@ Sentry.init({
 
   // You can remove this option if you're not planning to use the Sentry Session Replay feature:
   integrations: [
-    new Sentry.Replay({
-      // Additional Replay configuration goes in here, for example:
+    Sentry.replayIntegration({
       maskAllText: true,
       blockAllMedia: true,
-      networkDetailAllowUrls: [window.location.origin, /^\/apis\/v1\/[^\/]+(\/[^\/]+)*$/],
+      networkDetailAllowUrls: [window.location.origin, /^\/apis\/v1\/[^/]+(\/[^/]+)*$/],
       networkRequestHeaders: ['X-Custom-Header'],
       networkResponseHeaders: ['X-Custom-Header'],
     }),
@@ -35,7 +35,10 @@ Sentry.init({
   beforeSend: process.env.NODE_ENV === 'production' ? (event, hint) => sendErrorMessage(event, hint) : undefined, // 에러를 Sentry에게 전달하기 전 처리할 수 있는 hook
 });
 
-const sendErrorMessage = (event: ErrorEvent, hint: Sentry.EventHint) => {
+/** App Router 네비게이션 계측. 내보내지 않으면 SDK 가 경고를 띄운다. */
+export const onRouterTransitionStart = Sentry.captureRouterTransitionStart;
+
+const sendErrorMessage = (event: Sentry.ErrorEvent, hint: Sentry.EventHint) => {
   let errorMsg = '';
 
   const hintMsg: any = hint.originalException || hint.syntheticException;

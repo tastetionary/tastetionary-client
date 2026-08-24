@@ -20,7 +20,7 @@ export default function UpdatePasswordComplete() {
   const { mutate: logout } = useMutation({
     mutationFn: authRepository().postLogout,
     onSuccess: () => {
-      Sentry.configureScope(scope => scope.clear());
+      Sentry.getCurrentScope().clear();
 
       destroyCookie(null, 'token');
     },
