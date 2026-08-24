@@ -1,4 +1,3 @@
-import * as S from './page.styled';
 import CHeader from '@/shared/ui/c-header';
 
 export default function PrivacyNotice() {
@@ -20,34 +19,34 @@ b. 서비스 이용 과정에서 자동으로 생성/수집되는 정보 : 서�
   return (
     <>
       <CHeader title="개인정보 처리방침" />
-      <S.Wrapper>
-        <S.Title>개인정보 처리방침</S.Title>
-        <S.SubTitle>개정일 : 2023.09.06</S.SubTitle>
-        <S.Description>
+      <div className="p-20">
+        <p className="text-20 leading-[150%] font-bold text-neutral-bg80">개인정보 처리방침</p>
+        <p className="mt-[14px] text-14 leading-[170%] font-normal text-neutral-bg40">개정일 : 2023.09.06</p>
+        <p className="mt-[40px] text-11 leading-[200%] font-normal text-neutral-bg80">
           {privacyNotice.title}
           <br />
           <br />
-          <S.First>{privacyNotice.first}</S.First>
+          <span className="whitespace-pre-wrap">{privacyNotice.first}</span>
           <br />
-          <S.Section>{privacyNotice.firstSection}</S.Section>
+          <p className="pl-15 whitespace-pre-wrap">{privacyNotice.firstSection}</p>
           <br />
           {'2. 개인정보 수집항목'}
           <br />
-          <S.First>{privacyNotice.second}</S.First>
-          <S.Section>{privacyNotice.secondSection}</S.Section>
+          <span className="whitespace-pre-wrap">{privacyNotice.second}</span>
+          <p className="pl-15 whitespace-pre-wrap">{privacyNotice.secondSection}</p>
           <br />
 
           {'3. 개인정보 수집에 대한 동의'}
           <br />
-          <S.First>{privacyNotice.third}</S.First>
+          <span className="whitespace-pre-wrap">{privacyNotice.third}</span>
           <br />
           <br />
 
           {'4. 개인정보 처리 및 보유 기간'}
           <br />
-          <S.First>{privacyNotice.fourth}</S.First>
-        </S.Description>
-      </S.Wrapper>
+          <span className="whitespace-pre-wrap">{privacyNotice.fourth}</span>
+        </p>
+      </div>
     </>
   );
 }

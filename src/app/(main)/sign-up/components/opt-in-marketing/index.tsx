@@ -1,4 +1,3 @@
-import * as S from './page.styled';
 import CHeader from '@/shared/ui/c-header';
 
 export default function OptInMarketing() {
@@ -14,22 +13,30 @@ export default function OptInMarketing() {
   return (
     <>
       <CHeader title="마케팅 활용 정보 수신 제공" />
-      <S.Wrapper>
-        <S.Title>마켓팅 활용 정보 수신 제공</S.Title>
-        <S.SubTitle>개정일 : 2023.09.06</S.SubTitle>
-        <S.Description>{optInMarketing.desc}</S.Description>
+      <div className="p-20">
+        <p className="text-20 leading-[150%] font-bold text-neutral-bg80">마켓팅 활용 정보 수신 제공</p>
+        <p className="mt-[14px] text-14 leading-[170%] font-normal text-neutral-bg40">개정일 : 2023.09.06</p>
+        <p className="mt-[20px] text-11 leading-[200%] font-normal text-neutral-bg80">{optInMarketing.desc}</p>
         <br />
-        <S.Text>{optInMarketing.first}</S.Text>
-        <br />
-        <br />
-        <S.Text>{optInMarketing.second}</S.Text>
-        <br />
-        <br />
-        <S.Text>{optInMarketing.third}</S.Text>
+        <span className="text-11 leading-[200%] font-normal whitespace-pre-wrap text-neutral-bg80">
+          {optInMarketing.first}
+        </span>
         <br />
         <br />
-        <S.Text>※ 더 자세한 내용에 대해서는 개인정보처리방침을 참고하시기 바랍니다.</S.Text>
-      </S.Wrapper>
+        <span className="text-11 leading-[200%] font-normal whitespace-pre-wrap text-neutral-bg80">
+          {optInMarketing.second}
+        </span>
+        <br />
+        <br />
+        <span className="text-11 leading-[200%] font-normal whitespace-pre-wrap text-neutral-bg80">
+          {optInMarketing.third}
+        </span>
+        <br />
+        <br />
+        <span className="text-11 leading-[200%] font-normal whitespace-pre-wrap text-neutral-bg80">
+          ※ 더 자세한 내용에 대해서는 개인정보처리방침을 참고하시기 바랍니다.
+        </span>
+      </div>
     </>
   );
 }

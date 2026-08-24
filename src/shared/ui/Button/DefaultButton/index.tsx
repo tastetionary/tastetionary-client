@@ -1,5 +1,5 @@
 import { ButtonHTMLAttributes, ReactNode } from 'react';
-import * as S from './page.styled';
+import * as S from './style';
 import { cn } from '@/shared/utils/styles.utils';
 
 interface Props extends ButtonHTMLAttributes<HTMLButtonElement> {
@@ -11,10 +11,7 @@ interface Props extends ButtonHTMLAttributes<HTMLButtonElement> {
 export default function DefaultButton({ bgColor, customStyle, children, ...rest }: Props) {
   if (bgColor === 'none')
     return (
-      <button
-        {...rest}
-        className={cn('border-none-btn flex items-center justify-center disabled:bg-opacity-40', customStyle)}
-      >
+      <button {...rest} className={cn('border-none-btn flex items-center justify-center', customStyle)}>
         {children}
       </button>
     );

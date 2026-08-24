@@ -1,5 +1,4 @@
 import { cva } from 'class-variance-authority';
-import styled from 'styled-components';
 
 export const agreeAllCheckedVariants = cva('flex justify-center p-[3%]', {
   variants: {
@@ -10,5 +9,3 @@ export const agreeAllCheckedVariants = cva('flex justify-center p-[3%]', {
     },
   },
 });
-
-export const CheckboxWrapper = styled.div``;

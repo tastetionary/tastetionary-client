@@ -2,7 +2,7 @@ import Image from 'next/image';
 import { useSelectFoodStore } from '@/features/recommendation/store/useSelectFoodStore';
 import { useSelectRestaurantStore } from '@/features/recommendation/store/useSelectRestaurantStore';
 import { useReviewStore } from '@/features/reviews/store/useReviewStore';
-import { theme } from '@/styles/theme';
+import { colors } from '@/styles/colors';
 
 interface Props {
   selectType: 'food' | 'restaurant' | 'review';
@@ -68,10 +68,7 @@ export default function CSelectCategory({ selectType, data, isDuplicate = true }
               width={64}
               height={64}
             />
-            <span
-              className={'body1 text-nowrap'}
-              style={{ color: isSelected ? theme.colors.secondary.o50 : undefined }}
-            >
+            <span className={'body1 text-nowrap'} style={{ color: isSelected ? colors.secondary.o50 : undefined }}>
               {m?.name}
             </span>
           </div>

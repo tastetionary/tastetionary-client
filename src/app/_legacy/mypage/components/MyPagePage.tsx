@@ -1,7 +1,6 @@
 'use client';
 
 import { useRouter } from 'next/navigation';
-import * as S from '../page.styled';
 import useLogoutMutate from '@/app/(main)/login/hooks/useLogoutMutate';
 import ARROW_RIGHT from '@/assets/common/Icons/arrow_right.svg';
 import CMypageMenu from '@/features/user/components/c-mypage-menu';
@@ -56,7 +55,7 @@ export default function MyPagePage() {
       <CHeader title="마이페이지" isLogo />
 
       <GNBLayout>
-        <S.NotLogInContainer>
+        <div className="flex w-full items-center justify-between border-b-1 border-neutral-bg10 px-20 py-40">
           <div className="flex w-full flex-col gap-3">
             {showSkeleton ? (
               <div className="h-32 w-2/3 rounded-7 bg-neutral-bg05" />
@@ -78,7 +77,7 @@ export default function MyPagePage() {
               </p>
             )}
           </div>
-        </S.NotLogInContainer>
+        </div>
 
         {showSkeleton ? (
           <div className="flex flex-col gap-[20px] p-[20px]">

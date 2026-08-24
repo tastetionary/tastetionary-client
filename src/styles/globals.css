@@ -1,6 +1,578 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import 'tailwindcss';
+
+/* 이 파일이 src/styles 아래에 있어 자동 소스 탐지 기준점이 어긋날 수 있으므로 명시한다. */
+@source '../../src';
+
+/* v3 tailwind.config.js 의 plugin(addVariant) 대체 */
+@custom-variant not-disabled (&:not(:disabled));
+@custom-variant not-last (&:not(:last-child));
+
+/*
+ * v3 theme.screens 대체.
+ * sm 은 min-width 라 --breakpoint-sm 으로 두고,
+ * mobile/pc 는 v3 가 뽑던 미디어 쿼리를 그대로 재현한다.
+ */
+@custom-variant mobile (@media (max-width: 768px));
+@custom-variant pc (@media (min-width: 768px));
+
+@theme {
+  /* v3 는 screens 를 통째로 교체했으므로 기본 breakpoint(md/lg/xl/2xl)를 지운다. */
+  --breakpoint-*: initial;
+  --breakpoint-sm: 320px;
+
+  /*
+   * spacing.
+   *
+   * v3 config 의 extend 에는 spacing 키가 두 번 있었고(0~200 px 스케일 -> 이름 스케일),
+   * 객체 리터럴이라 뒤엣것이 앞엣것을 덮어써서 px 스케일은 실제로 죽어 있었다.
+   * 그래서 margin/gap/inset/leading 은 Tailwind 기본 rem 스케일(0.25rem 배수)로 동작한다.
+   * v4 기본값이 정확히 그 값이라 --spacing 은 건드리지 않는다.
+   *
+   * 반면 padding/width/height/maxWidth 는 별도 키로 px 스케일이 살아 있었다.
+   * 그건 아래 @utility 로 따로 재현한다.
+   */
+  --spacing-xxs: 4px;
+  --spacing-xs: 8px;
+  --spacing-sm: 12px;
+  --spacing-md: 16px;
+  --spacing-lg: 24px;
+  --spacing-xl: 32px;
+  --spacing-xxl: 48px;
+  --spacing-xxxl: 80px;
+
+  /* v3 theme.colors (extend 가 아니라 기본 팔레트 교체였다) */
+  --color-*: initial;
+  --color-white: #ffffff;
+  --color-black: #000000;
+  --color-textColor: #37474f;
+  --color-primary-y90: #ff7002;
+  --color-primary-y80: #ff9103;
+  --color-primary-y70: #ffa202;
+  --color-primary-y60: #ffb400;
+  --color-primary-y50: #ffc30b;
+  --color-primary-y40: #ffcb29;
+  --color-primary-y30: #fed750;
+  --color-primary-y20: #ffe183;
+  --color-primary-y10: #ffedb3;
+  --color-primary-y05: #fff8e1;
+  --color-secondary-o90: #c13001;
+  --color-secondary-o80: #d94000;
+  --color-secondary-o70: #e64801;
+  --color-secondary-o60: #f44e00;
+  --color-secondary-o50: #ff5601;
+  --color-secondary-o40: #ff6e32;
+  --color-secondary-o30: #fe895a;
+  --color-secondary-o20: #ffaa8a;
+  --color-secondary-o10: #ffcbb8;
+  --color-secondary-o05: #fce9e6;
+  --color-neutral-bg90: #253238;
+  --color-neutral-bg80: #37474f;
+  --color-neutral-bg70: #455a64;
+  --color-neutral-bg60: #546e7a;
+  --color-neutral-bg50: #607d8b;
+  --color-neutral-bg40: #78909c;
+  --color-neutral-bg30: #90a4ae;
+  --color-neutral-bg20: #b0bec5;
+  --color-neutral-bg10: #cfd8db;
+  --color-neutral-bg05: #edeff1;
+  --color-simentic-dg90: #207b00;
+  --color-simentic-dg50: #3fc500;
+  --color-simentic-r90: #cb2528;
+  --color-simentic-r60: #e53835;
+  --color-simentic-black: #000000;
+  --color-simentic-white: #ffffff;
+  --color-red-r90: #b71b1c;
+  --color-red-r80: #c62728;
+  --color-red-r70: #d32e30;
+  --color-red-r60: #e53835;
+  --color-red-r50: #f44236;
+  --color-red-r40: #ef5350;
+  --color-red-r30: #e57373;
+  --color-red-r20: #ef9a9a;
+  --color-red-r10: #ffcdd1;
+  --color-red-r05: #ffebee;
+  --color-orange-o90: #c13001;
+  --color-orange-o80: #d94000;
+  --color-orange-o70: #e64801;
+  --color-orange-o60: #f44e00;
+  --color-orange-o50: #ff5601;
+  --color-orange-o40: #ff6e32;
+  --color-orange-o30: #fe895a;
+  --color-orange-o20: #ffaa8a;
+  --color-orange-o10: #ffcbb8;
+  --color-orange-o05: #fce9e6;
+
+  /* v3 fontSize: 0~100 을 px 로. 기본 키(text-xs/sm/base…)는 v3 처럼 남겨둔다. */
+  --text-0: 0px;
+  --text-1: 1px;
+  --text-2: 2px;
+  --text-3: 3px;
+  --text-4: 4px;
+  --text-5: 5px;
+  --text-6: 6px;
+  --text-7: 7px;
+  --text-8: 8px;
+  --text-9: 9px;
+  --text-10: 10px;
+  --text-11: 11px;
+  --text-12: 12px;
+  --text-13: 13px;
+  --text-14: 14px;
+  --text-15: 15px;
+  --text-16: 16px;
+  --text-17: 17px;
+  --text-18: 18px;
+  --text-19: 19px;
+  --text-20: 20px;
+  --text-21: 21px;
+  --text-22: 22px;
+  --text-23: 23px;
+  --text-24: 24px;
+  --text-25: 25px;
+  --text-26: 26px;
+  --text-27: 27px;
+  --text-28: 28px;
+  --text-29: 29px;
+  --text-30: 30px;
+  --text-31: 31px;
+  --text-32: 32px;
+  --text-33: 33px;
+  --text-34: 34px;
+  --text-35: 35px;
+  --text-36: 36px;
+  --text-37: 37px;
+  --text-38: 38px;
+  --text-39: 39px;
+  --text-40: 40px;
+  --text-41: 41px;
+  --text-42: 42px;
+  --text-43: 43px;
+  --text-44: 44px;
+  --text-45: 45px;
+  --text-46: 46px;
+  --text-47: 47px;
+  --text-48: 48px;
+  --text-49: 49px;
+  --text-50: 50px;
+  --text-51: 51px;
+  --text-52: 52px;
+  --text-53: 53px;
+  --text-54: 54px;
+  --text-55: 55px;
+  --text-56: 56px;
+  --text-57: 57px;
+  --text-58: 58px;
+  --text-59: 59px;
+  --text-60: 60px;
+  --text-61: 61px;
+  --text-62: 62px;
+  --text-63: 63px;
+  --text-64: 64px;
+  --text-65: 65px;
+  --text-66: 66px;
+  --text-67: 67px;
+  --text-68: 68px;
+  --text-69: 69px;
+  --text-70: 70px;
+  --text-71: 71px;
+  --text-72: 72px;
+  --text-73: 73px;
+  --text-74: 74px;
+  --text-75: 75px;
+  --text-76: 76px;
+  --text-77: 77px;
+  --text-78: 78px;
+  --text-79: 79px;
+  --text-80: 80px;
+  --text-81: 81px;
+  --text-82: 82px;
+  --text-83: 83px;
+  --text-84: 84px;
+  --text-85: 85px;
+  --text-86: 86px;
+  --text-87: 87px;
+  --text-88: 88px;
+  --text-89: 89px;
+  --text-90: 90px;
+  --text-91: 91px;
+  --text-92: 92px;
+  --text-93: 93px;
+  --text-94: 94px;
+  --text-95: 95px;
+  --text-96: 96px;
+  --text-97: 97px;
+  --text-98: 98px;
+  --text-99: 99px;
+  --text-100: 100px;
+
+  /* v3 borderRadius: 0~50 을 px 로 */
+  --radius-0: 0px;
+  --radius-1: 1px;
+  --radius-2: 2px;
+  --radius-3: 3px;
+  --radius-4: 4px;
+  --radius-5: 5px;
+  --radius-6: 6px;
+  --radius-7: 7px;
+  --radius-8: 8px;
+  --radius-9: 9px;
+  --radius-10: 10px;
+  --radius-11: 11px;
+  --radius-12: 12px;
+  --radius-13: 13px;
+  --radius-14: 14px;
+  --radius-15: 15px;
+  --radius-16: 16px;
+  --radius-17: 17px;
+  --radius-18: 18px;
+  --radius-19: 19px;
+  --radius-20: 20px;
+  --radius-21: 21px;
+  --radius-22: 22px;
+  --radius-23: 23px;
+  --radius-24: 24px;
+  --radius-25: 25px;
+  --radius-26: 26px;
+  --radius-27: 27px;
+  --radius-28: 28px;
+  --radius-29: 29px;
+  --radius-30: 30px;
+  --radius-31: 31px;
+  --radius-32: 32px;
+  --radius-33: 33px;
+  --radius-34: 34px;
+  --radius-35: 35px;
+  --radius-36: 36px;
+  --radius-37: 37px;
+  --radius-38: 38px;
+  --radius-39: 39px;
+  --radius-40: 40px;
+  --radius-41: 41px;
+  --radius-42: 42px;
+  --radius-43: 43px;
+  --radius-44: 44px;
+  --radius-45: 45px;
+  --radius-46: 46px;
+  --radius-47: 47px;
+  --radius-48: 48px;
+  --radius-49: 49px;
+  --radius-50: 50px;
+
+  --font-pretendard: var(--Pretendard-Variable);
+
+  /*
+   * v3 는 transitionTimingFunction 에 'in-out': 'ease-in-out' 을 넣어 CSS 키워드를 그대로 썼다.
+   * v4 기본값은 cubic-bezier(0.4, 0, 0.2, 1) 이라 곡선이 달라지므로 키워드로 되돌린다.
+   */
+  --ease-in-out: ease-in-out;
+
+  --shadow-negative: -1px -1px 0 rgba(0, 0, 0, 0.25);
+  --shadow-positive: 1px 1px 0 rgba(0, 0, 0, 0.25);
+
+  --animate-fadeIn: fadeIn 0.25s ease-in-out;
+  --animate-fadeOut: fadeOut 0.25s ease-in-out;
+  --animate-slideDown: slideDown 0.4s ease-in-out;
+  --animate-slideUp: slideUp 0.4s ease-in-out;
+
+  @keyframes fadeIn {
+    0% {
+      opacity: 0;
+    }
+    100% {
+      opacity: 1;
+    }
+  }
+
+  @keyframes fadeOut {
+    0% {
+      opacity: 1;
+    }
+    100% {
+      opacity: 0;
+    }
+  }
+
+  @keyframes slideDown {
+    0% {
+      transform: translateY(0px);
+      opacity: 1;
+    }
+    100% {
+      transform: translateY(100vh);
+      opacity: 0;
+    }
+  }
+
+  @keyframes slideUp {
+    0% {
+      transform: translateY(100vh);
+      opacity: 0;
+    }
+    100% {
+      transform: translateY(0px);
+      opacity: 1;
+    }
+  }
+}
+
+/*
+ * v3 theme.extend 의 px 스케일 재현.
+ *
+ * padding 은 0~100, width/height/maxWidth 는 0~1000 을 "숫자 = px" 로 쓰고 있었다.
+ * v4 에는 유틸별 스케일이 없고 --spacing 하나를 공유하므로(그건 margin/gap/inset 이 rem 으로 쓰는 중),
+ * 이 네 가지만 함수형 유틸로 따로 정의해 숫자를 px 로 해석한다.
+ *
+ * 선언을 여러 줄 쓰면 v4 가 값이 풀리는 것만 남기므로,
+ * 숫자 -> px / 이름(xxs…) -> --spacing-* / 분수 / 임의값 순서로 모두 받는다.
+ */
+@utility p-* {
+  padding: calc(--value(integer) * 1px);
+  padding: --value(--spacing-*);
+  padding: --value([length], [percentage]);
+}
+
+@utility px-* {
+  padding-inline: calc(--value(integer) * 1px);
+  padding-inline: --value(--spacing-*);
+  padding-inline: --value([length], [percentage]);
+}
+
+@utility py-* {
+  padding-block: calc(--value(integer) * 1px);
+  padding-block: --value(--spacing-*);
+  padding-block: --value([length], [percentage]);
+}
+
+@utility pt-* {
+  padding-top: calc(--value(integer) * 1px);
+  padding-top: --value(--spacing-*);
+  padding-top: --value([length], [percentage]);
+}
+
+@utility pr-* {
+  padding-right: calc(--value(integer) * 1px);
+  padding-right: --value(--spacing-*);
+  padding-right: --value([length], [percentage]);
+}
+
+@utility pb-* {
+  padding-bottom: calc(--value(integer) * 1px);
+  padding-bottom: --value(--spacing-*);
+  padding-bottom: --value([length], [percentage]);
+}
+
+@utility pl-* {
+  padding-left: calc(--value(integer) * 1px);
+  padding-left: --value(--spacing-*);
+  padding-left: --value([length], [percentage]);
+}
+
+@utility w-* {
+  width: calc(--value(integer) * 1px);
+  width: --value(--spacing-*);
+  width: calc(--value(ratio) * 100%);
+  width: --value([length], [percentage], [*]);
+}
+
+@utility h-* {
+  height: calc(--value(integer) * 1px);
+  height: --value(--spacing-*);
+  height: calc(--value(ratio) * 100%);
+  height: --value([length], [percentage], [*]);
+}
+
+@utility max-w-* {
+  max-width: calc(--value(integer) * 1px);
+  max-width: --value(--spacing-*);
+  max-width: calc(--value(ratio) * 100%);
+  max-width: --value([length], [percentage], [*]);
+}
+
+/*
+ * v3 theme.extend.transitionProperty.visibility 대체.
+ * v3 의 transition-* 유틸은 property 와 함께 기본 duration/timing 도 같이 깔았으므로 동일하게 맞춘다.
+ */
+@utility transition-visibility {
+  transition-property: visibility;
+  transition-timing-function: var(--default-transition-timing-function);
+  transition-duration: var(--default-transition-duration);
+}
+
+/* v3 theme.extend.backgroundImage 대체 */
+@utility bg-ic_checkbox_inactive {
+  background-image: url('/image/CheckBox/ic_checkbox_inactive.svg');
+}
+
+@utility bg-ic_checkbox_active {
+  background-image: url('/image/CheckBox/ic_checkbox_active.svg');
+}
+
+@utility bg-ic_checkbox_bg_orange_active {
+  background-image: url('/image/CheckBox/ic_checkbox_orange_active.png');
+}
+
+/* v3 에서 @layer utilities 로 두던 것 */
+@utility b-safe {
+  bottom: env(safe-area-inset-bottom);
+}
+
+/*
+ * styled-components 의 GlobalStyle 에 있던 styled-reset(Eric Meyer v5.0.1) 포팅.
+ *
+ * Tailwind preflight 로는 대체되지 않는다. 특히 font: inherit 과 body 의 line-height: 1 때문에
+ * 지금 이 앱의 거의 모든 요소가 line-height 1 을 상속받고 있어서, 빼면 전체 세로 리듬이 달라진다.
+ * preflight 뒤에 와야 이기므로 @import 'tailwindcss' 아래에 둔다.
+ */
+@layer base {
+  html,
+  body,
+  div,
+  span,
+  applet,
+  object,
+  iframe,
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6,
+  p,
+  blockquote,
+  pre,
+  a,
+  abbr,
+  acronym,
+  address,
+  big,
+  cite,
+  code,
+  del,
+  dfn,
+  em,
+  img,
+  ins,
+  kbd,
+  q,
+  s,
+  samp,
+  small,
+  strike,
+  strong,
+  sub,
+  sup,
+  tt,
+  var,
+  b,
+  u,
+  i,
+  center,
+  dl,
+  dt,
+  dd,
+  menu,
+  ol,
+  ul,
+  li,
+  fieldset,
+  form,
+  label,
+  legend,
+  table,
+  caption,
+  tbody,
+  tfoot,
+  thead,
+  tr,
+  th,
+  td,
+  article,
+  aside,
+  canvas,
+  details,
+  embed,
+  figure,
+  figcaption,
+  footer,
+  header,
+  hgroup,
+  main,
+  menu,
+  nav,
+  output,
+  ruby,
+  section,
+  summary,
+  time,
+  mark,
+  audio,
+  video {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    font-size: 100%;
+    font: inherit;
+    vertical-align: baseline;
+  }
+
+  article,
+  aside,
+  details,
+  figcaption,
+  figure,
+  footer,
+  header,
+  hgroup,
+  main,
+  menu,
+  nav,
+  section {
+    display: block;
+  }
+
+  *[hidden] {
+    display: none;
+  }
+
+  body {
+    line-height: 1;
+  }
+
+  menu,
+  ol,
+  ul {
+    list-style: none;
+  }
+
+  blockquote,
+  q {
+    quotes: none;
+  }
+
+  blockquote:before,
+  blockquote:after,
+  q:before,
+  q:after {
+    content: '';
+    content: none;
+  }
+
+  table {
+    border-collapse: collapse;
+    border-spacing: 0;
+  }
+
+  /*
+   * v3 preflight 의 placeholder 색을 유지한다.
+   * v4 preflight 는 placeholder 를 currentColor 50% 로 바꿨는데, 이 앱은 전역 color 가 #37474F 라
+   * 그대로 두면 21곳의 placeholder 색이 전부 달라진다.
+   */
+  input::placeholder,
+  textarea::placeholder {
+    color: #9ca3af;
+    opacity: 1;
+  }
+}
 
 @layer base {
   body {
@@ -10,6 +582,12 @@
   * {
     font-family: var(--Galmuri-9) !important;
     box-sizing: border-box;
+    /*
+     * styled-components 의 GlobalStyle 에 있던 전역 텍스트 색.
+     * 색 클래스가 없는 요소는 전부 이 값을 쓰고 있어서 빼면 본문이 통째로 검게 바뀐다.
+     * 유틸리티 레이어가 항상 이기므로 text-* 클래스에는 영향이 없다.
+     */
+    color: var(--color-neutral-bg80);
   }
 
   a {
@@ -116,7 +694,7 @@
   }
 
   .overlay {
-    @apply b-safe fixed left-0 right-0 top-0 z-[15] flex h-screen w-full items-center justify-center bg-black/50 px-20 transition-visibility duration-250 ease-in-out;
+    @apply b-safe transition-visibility duration-250 fixed left-0 right-0 top-0 z-[15] flex h-screen w-full items-center justify-center bg-black/50 px-20 ease-in-out;
   }
 
   .toast {

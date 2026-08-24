@@ -1,5 +1,5 @@
 import { HTMLAttributes, ReactNode } from 'react';
-import * as S from './page.styled';
+import * as S from './style';
 import { cn } from '@/shared/utils/styles.utils';
 
 interface TextBoxProps extends HTMLAttributes<HTMLDivElement> {

@@ -1,9 +1,8 @@
 'use client';
 
 import { Suspense, useEffect, type ReactNode } from 'react';
+import AppShell from '@/shared/lib/app-shell';
 import ReactQueryProvider from '@/shared/lib/react-query/ReactQueryProvider';
-import StyledComponentsRegistry from '@/shared/lib/registry';
-import StyledComponentsWrapper from '@/shared/lib/styled-components/StyledComponentsWrapper';
 
 export default function RootLayoutProviders({ children }: { children: ReactNode }) {
   useEffect(() => {
@@ -29,11 +28,9 @@ export default function RootLayoutProviders({ children }: { children: ReactNode 
 
   return (
     <ReactQueryProvider>
-      <StyledComponentsRegistry>
-        <StyledComponentsWrapper>
-          <Suspense fallback={<div></div>}>{children}</Suspense>
-        </StyledComponentsWrapper>
-      </StyledComponentsRegistry>
+      <AppShell>
+        <Suspense fallback={<div></div>}>{children}</Suspense>
+      </AppShell>
     </ReactQueryProvider>
   );
 }

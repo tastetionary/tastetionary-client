@@ -1,3 +1,0 @@
-[    2182ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/compiled/react-dom/cjs/react-dom-client.development.js:25022
-[   20442ms] [WARNING] AdSense head tag doesn't support data-nscript attribute. @ webpack-internal:///(app-pages-browser)/./node_modules/@sentry/utils/esm/instrument/console.js:43
-[   22380ms] [LOG] Kakao SDK 초기화 완료: true @ webpack-internal:///(app-pages-browser)/./node_modules/@sentry/utils/esm/instrument/console.js:43

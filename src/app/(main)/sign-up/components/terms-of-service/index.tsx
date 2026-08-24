@@ -1,4 +1,3 @@
-import * as S from './page.styled';
 import CHeader from '@/shared/ui/c-header';
 
 export default function TermsOfService() {
@@ -96,103 +95,143 @@ export default function TermsOfService() {
   return (
     <>
       <CHeader title="서비스 이용약관" />
-      <S.Wrapper>
-        <S.Title>'맛셔너리' 서비스 이용약관</S.Title>
-        <S.SubTitle>개정일 : 2023.09.06</S.SubTitle>
-        <S.Description>{termsOfService.desc}</S.Description>
+      <div className="p-20">
+        <p className="text-20 leading-[150%] font-bold text-neutral-bg80">'맛셔너리' 서비스 이용약관</p>
+        <p className="mt-[14px] text-14 leading-[170%] font-normal text-neutral-bg40">개정일 : 2023.09.06</p>
+        <p className="mt-[20px] text-11 leading-[200%] font-normal text-neutral-bg80">{termsOfService.desc}</p>
         <br />
         <br />
-        <S.MainText>제 1조 (목적)</S.MainText>
-        <S.Text>{termsOfService.first}</S.Text>
+        <p className="mb-[10px] text-14 font-bold text-neutral-bg80">제 1조 (목적)</p>
+        <span className="text-11 leading-[200%] font-normal whitespace-pre-wrap text-neutral-bg80">
+          {termsOfService.first}
+        </span>
         <br />
         <br />
-        <S.MainText>제 2조 (정의)</S.MainText>
-        <S.Text>{termsOfService.second}</S.Text>
+        <p className="mb-[10px] text-14 font-bold text-neutral-bg80">제 2조 (정의)</p>
+        <span className="text-11 leading-[200%] font-normal whitespace-pre-wrap text-neutral-bg80">
+          {termsOfService.second}
+        </span>
         <br />
         <br />
-        <S.MainText>제 3조 (신원정보 등의 제공)</S.MainText>
-        <S.Text>{termsOfService.third}</S.Text>
-        <br />
-        <br />
-        <br />
-        <S.MainText>제 4조 (약관의 게시 및 개정)</S.MainText>
-        <S.Text>{termsOfService.fourth}</S.Text>
-        <br />
-        <br />
-        <br />
-        <S.MainText>제 5조 (약관의 해석 및 약관 외 사항에 대한 규정)</S.MainText>
-        <S.Text>{termsOfService.fifth}</S.Text>
+        <p className="mb-[10px] text-14 font-bold text-neutral-bg80">제 3조 (신원정보 등의 제공)</p>
+        <span className="text-11 leading-[200%] font-normal whitespace-pre-wrap text-neutral-bg80">
+          {termsOfService.third}
+        </span>
         <br />
         <br />
         <br />
-        <S.MainText>제 6조 (회원가입)</S.MainText>
-        <S.Text>{termsOfService.sixth}</S.Text>
+        <p className="mb-[10px] text-14 font-bold text-neutral-bg80">제 4조 (약관의 게시 및 개정)</p>
+        <span className="text-11 leading-[200%] font-normal whitespace-pre-wrap text-neutral-bg80">
+          {termsOfService.fourth}
+        </span>
         <br />
         <br />
         <br />
-        <S.MainText>제 7조 (개인정보보호 의무)</S.MainText>
-        <S.Text>{termsOfService.seventh}</S.Text>
+        <p className="mb-[10px] text-14 font-bold text-neutral-bg80">
+          제 5조 (약관의 해석 및 약관 외 사항에 대한 규정)
+        </p>
+        <span className="text-11 leading-[200%] font-normal whitespace-pre-wrap text-neutral-bg80">
+          {termsOfService.fifth}
+        </span>
         <br />
         <br />
         <br />
-        <S.MainText>제 8조 (회원정보의 변경)</S.MainText>
-        <S.Text>{termsOfService.eighth}</S.Text>
+        <p className="mb-[10px] text-14 font-bold text-neutral-bg80">제 6조 (회원가입)</p>
+        <span className="text-11 leading-[200%] font-normal whitespace-pre-wrap text-neutral-bg80">
+          {termsOfService.sixth}
+        </span>
         <br />
         <br />
         <br />
-        <S.MainText>제 9조 (회원에 대한 통지)</S.MainText>
-        <S.Text>{termsOfService.nineth}</S.Text>
+        <p className="mb-[10px] text-14 font-bold text-neutral-bg80">제 7조 (개인정보보호 의무)</p>
+        <span className="text-11 leading-[200%] font-normal whitespace-pre-wrap text-neutral-bg80">
+          {termsOfService.seventh}
+        </span>
         <br />
         <br />
         <br />
-        <S.MainText>제 10조 (권리의 귀속 및 저작권의 귀속)</S.MainText>
-        <S.Text>{termsOfService.tenth}</S.Text>
+        <p className="mb-[10px] text-14 font-bold text-neutral-bg80">제 8조 (회원정보의 변경)</p>
+        <span className="text-11 leading-[200%] font-normal whitespace-pre-wrap text-neutral-bg80">
+          {termsOfService.eighth}
+        </span>
         <br />
         <br />
         <br />
-        <S.MainText>제 11조 (회사의 의무)</S.MainText>
-        <S.Text>{termsOfService.eleventh}</S.Text>
+        <p className="mb-[10px] text-14 font-bold text-neutral-bg80">제 9조 (회원에 대한 통지)</p>
+        <span className="text-11 leading-[200%] font-normal whitespace-pre-wrap text-neutral-bg80">
+          {termsOfService.nineth}
+        </span>
         <br />
         <br />
         <br />
-        <S.MainText>제 12조 (회원의 의무)</S.MainText>
-        <S.Text>{termsOfService.twelfth}</S.Text>
+        <p className="mb-[10px] text-14 font-bold text-neutral-bg80">제 10조 (권리의 귀속 및 저작권의 귀속)</p>
+        <span className="text-11 leading-[200%] font-normal whitespace-pre-wrap text-neutral-bg80">
+          {termsOfService.tenth}
+        </span>
         <br />
         <br />
         <br />
-        <S.MainText>제 13조 (서비스의 제공 등)</S.MainText>
-        <S.Text>{termsOfService.thirteenth}</S.Text>
+        <p className="mb-[10px] text-14 font-bold text-neutral-bg80">제 11조 (회사의 의무)</p>
+        <span className="text-11 leading-[200%] font-normal whitespace-pre-wrap text-neutral-bg80">
+          {termsOfService.eleventh}
+        </span>
         <br />
         <br />
         <br />
-        <S.MainText>제 14조 (정보의 제공 및 광고의 게재)</S.MainText>
-        <S.Text>{termsOfService.fourteenth}</S.Text>
+        <p className="mb-[10px] text-14 font-bold text-neutral-bg80">제 12조 (회원의 의무)</p>
+        <span className="text-11 leading-[200%] font-normal whitespace-pre-wrap text-neutral-bg80">
+          {termsOfService.twelfth}
+        </span>
         <br />
         <br />
         <br />
-        <S.MainText>제 15조 ('게시물'의 권리와 책임)</S.MainText>
-        <S.Text>{termsOfService.fifteenth}</S.Text>
+        <p className="mb-[10px] text-14 font-bold text-neutral-bg80">제 13조 (서비스의 제공 등)</p>
+        <span className="text-11 leading-[200%] font-normal whitespace-pre-wrap text-neutral-bg80">
+          {termsOfService.thirteenth}
+        </span>
         <br />
         <br />
         <br />
-        <S.MainText>제 16조 (계약 해제, 해지 등)</S.MainText>
-        <S.Text>{termsOfService.sixteenth}</S.Text>
+        <p className="mb-[10px] text-14 font-bold text-neutral-bg80">제 14조 (정보의 제공 및 광고의 게재)</p>
+        <span className="text-11 leading-[200%] font-normal whitespace-pre-wrap text-neutral-bg80">
+          {termsOfService.fourteenth}
+        </span>
         <br />
         <br />
         <br />
-        <S.MainText>제 17조 (면책조항)</S.MainText>
-        <S.Text>{termsOfService.seventeenth}</S.Text>
+        <p className="mb-[10px] text-14 font-bold text-neutral-bg80">제 15조 ('게시물'의 권리와 책임)</p>
+        <span className="text-11 leading-[200%] font-normal whitespace-pre-wrap text-neutral-bg80">
+          {termsOfService.fifteenth}
+        </span>
         <br />
         <br />
         <br />
-        <S.MainText>제 18조 (분쟁의 해결)</S.MainText>
-        <S.Text>{termsOfService.eighteenth}</S.Text>
+        <p className="mb-[10px] text-14 font-bold text-neutral-bg80">제 16조 (계약 해제, 해지 등)</p>
+        <span className="text-11 leading-[200%] font-normal whitespace-pre-wrap text-neutral-bg80">
+          {termsOfService.sixteenth}
+        </span>
         <br />
         <br />
         <br />
-        <S.MainText>제 19조 (재판권 및 준거법)</S.MainText>
-        <S.Text>{termsOfService.nineteenth}</S.Text>
-      </S.Wrapper>
+        <p className="mb-[10px] text-14 font-bold text-neutral-bg80">제 17조 (면책조항)</p>
+        <span className="text-11 leading-[200%] font-normal whitespace-pre-wrap text-neutral-bg80">
+          {termsOfService.seventeenth}
+        </span>
+        <br />
+        <br />
+        <br />
+        <p className="mb-[10px] text-14 font-bold text-neutral-bg80">제 18조 (분쟁의 해결)</p>
+        <span className="text-11 leading-[200%] font-normal whitespace-pre-wrap text-neutral-bg80">
+          {termsOfService.eighteenth}
+        </span>
+        <br />
+        <br />
+        <br />
+        <p className="mb-[10px] text-14 font-bold text-neutral-bg80">제 19조 (재판권 및 준거법)</p>
+        <span className="text-11 leading-[200%] font-normal whitespace-pre-wrap text-neutral-bg80">
+          {termsOfService.nineteenth}
+        </span>
+      </div>
     </>
   );
 }

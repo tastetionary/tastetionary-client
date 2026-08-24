@@ -5,7 +5,6 @@ import axios from 'axios';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
-import * as S from './page.styled';
 import { useReviewPlaceInfoStore } from '@/features/reviews/store/useReviewPlaceInfoStore';
 import useUser from '@/shared/hooks/useUser';
 import DefaultButton from '@/shared/ui/Button/DefaultButton';
@@ -179,26 +178,37 @@ export default function RestaurantSearch() {
                   getKakaoMap(placeAddress);
                 }}
               >
-                <S.PlaceContainer>
+                <div className="flex w-full cursor-pointer items-start justify-between">
                   <div>
-                    <S.FlexBox>
-                      <S.PlaceName>{d.place_name}</S.PlaceName>
-                      <S.Distance>{distance ? `${distance}km` : ''}</S.Distance>
-                    </S.FlexBox>
+                    <div className="flex items-center gap-[6px]">
+                      <div className="!font-pretendard text-14 leading-[160%] font-bold">{d.place_name}</div>
+                      <span className="!font-pretendard text-12 font-bold text-secondary-o50">
+                        {distance ? `${distance}km` : ''}
+                      </span>
+                    </div>
 
-                    <S.PlaceAddress>{d.road_address_name}</S.PlaceAddress>
+                    <span className="mt-[6px] block !font-pretendard text-12 leading-[160%] font-normal">
+                      {d.road_address_name}
+                    </span>
 
-                    <S.RoadAddressFlexBox>
-                      <S.RoadAddressTag>지번</S.RoadAddressTag>
+                    <div className="mt-[2px] flex items-center gap-[5px]">
+                      <div className="rounded-2 bg-neutral-bg20 px-4 py-3 !font-pretendard text-11 font-normal text-white">
+                        지번
+                      </div>
 
-                      <S.RoadAddress>{d?.address_name}</S.RoadAddress>
-                    </S.RoadAddressFlexBox>
+                      <span className="mt-0 block !font-pretendard text-12 leading-[160%] font-normal text-neutral-bg40">
+                        {d?.address_name}
+                      </span>
+                    </div>
 
-                    <S.Phone as="a" href={`tel:${d?.phone}`}>
+                    <a
+                      className="mt-0 block !font-pretendard text-12 leading-[160%] font-normal text-primary-y90"
+                      href={`tel:${d?.phone}`}
+                    >
                       {d?.phone}
-                    </S.Phone>
+                    </a>
                   </div>
-                </S.PlaceContainer>
+                </div>
 
                 {placeAddress !== '' && placeAddress === address && (
                   <>

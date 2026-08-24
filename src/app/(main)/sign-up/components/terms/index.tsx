@@ -1,6 +1,6 @@
 import { useRouter } from 'next/navigation';
 import AgreementCheckbox from '../agreement-checkbox';
-import * as S from './page.styled';
+import * as S from './style';
 import { useAgreeTermStore } from '@/shared/store/useAgreeTermStore';
 import BottomButtonContainer from '@/shared/ui/Button/BottomButtonContainer';
 import DefaultButton from '@/shared/ui/Button/DefaultButton';
@@ -30,7 +30,7 @@ export default function Terms({ onNext }: Props) {
   return (
     <>
       <CHeader title="회원 가입" />
-      <div className="mx-xl mb-20 mt-xl">
+      <div className="mx-xl mt-xl mb-20">
         <header>
           <h1 className="title2 font-bold">
             안녕하세요 👋 <br /> 맛셔너리 이용을 위해

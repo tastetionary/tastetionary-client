@@ -1,6 +1,11 @@
-import { DefaultTheme } from 'styled-components';
-
-const colors = {
+/**
+ * 디자인 팔레트.
+ *
+ * 화면 스타일은 Tailwind 테마(`src/styles/globals.css` 의 @theme)가 단일 소스다.
+ * 이 파일은 JS 값으로 색이 필요한 자리(SVG color prop, inline style 등)만 쓴다.
+ * 두 곳의 값은 같아야 하므로 한쪽만 바꾸지 않는다.
+ */
+export const colors = {
   white: '#ffffff',
   black: '#000000',
   primary: {
@@ -47,13 +52,9 @@ const colors = {
     black: '#000000',
     white: '#FFFFFF',
   },
-};
+} as const;
 
-export const theme: DefaultTheme = {
-  colors,
-  textColor: colors.neutral.bg80,
-};
+/** 전역 기본 텍스트 색. globals.css 의 `* { color }` 와 같은 값. */
+export const textColor = colors.neutral.bg80;
 
-export type Theme = typeof theme;
-
-export type Color = typeof colors;
+export type Colors = typeof colors;

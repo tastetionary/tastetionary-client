@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
-import * as S from './page.styled';
+import * as S from './style';
+import { cn } from '@/shared/utils/styles.utils';
 
 export interface ExampleModalProps {
   title: string;
@@ -44,31 +45,35 @@ export default function ExampleModal({
     setAnimate(true);
   }, []);
 
-  return (
-    <S.Overlay visible={animate}>
-      <S.Container visible={animate}>
-        <S.TextContainer>
-          <S.Title>{title}</S.Title>
-          {message && <S.Message>{message}</S.Message>}
-        </S.TextContainer>
+  const state = animate ? 'visible' : 'default';
 
-        <S.ButtonContainer cancelText={cancelText}>
+  return (
+    <div className={cn(S.overlayVariants({ visibility: state, animation: state }))}>
+      <div className={cn(S.containerVariants({ visibility: state, animation: state }))}>
+        <div className="px-8 pt-8 pb-20">
+          <div className="text-20 leading-[28px] font-bold text-black">{title}</div>
+          {message && <p className="mt-[12px] text-15 leading-[21px] font-normal text-neutral-bg80">{message}</p>}
+        </div>
+
+        <div className={cn('flex items-center gap-xs', cancelText ? 'justify-start' : 'justify-end')}>
           <>
             {cancelText && (
-              <S.Button
-                isSecondary={true}
+              <button
+                className={cn(S.buttonVariants({ color: 'isSecondary' }))}
                 onClick={() => {
                   if (onClose) onClose();
                 }}
               >
                 {cancelText}
-              </S.Button>
+              </button>
             )}
 
-            <S.Button onClick={onConfirm}>{confirmText}</S.Button>
+            <button className={cn(S.buttonVariants({ color: 'default' }))} onClick={onConfirm}>
+              {confirmText}
+            </button>
           </>
-        </S.ButtonContainer>
-      </S.Container>
-    </S.Overlay>
+        </div>
+      </div>
+    </div>
   );
 }

@@ -42,3 +42,5 @@ next-env.d.ts
 
 # webstorm 설정 파일 ignore
 .idea
+# Playwright MCP 실행 산출물 (콘솔 로그/스냅샷/스크린샷)
+.playwright-mcp/

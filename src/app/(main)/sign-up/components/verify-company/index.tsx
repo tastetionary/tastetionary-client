@@ -1,6 +1,5 @@
 import { useFormContext } from 'react-hook-form';
 import useAccountAuthCodeMutate from '../../hooks/query/useAccountAuthCodeMutate';
-import * as S from './page.styled';
 import { emailRegex } from '@/shared/constants';
 import MainButton from '@/shared/ui/Button/MainButton';
 import CHeader from '@/shared/ui/c-header';
@@ -44,11 +43,13 @@ export default function VerifyCompany({ onNext, setCompanyEmailAuthId }: Props) 
     <>
       <CHeader title="회사 인증" />
 
-      <S.Wrapper>
-        <S.Title>회사 인증을 진행해주세요.</S.Title>
-        <S.SubTitle>반드시 소속 회사의 이메일을 입력해주세요.</S.SubTitle>
+      <div className="relative flex h-full flex-col px-20 pt-20 pb-180">
+        <div className="mt-[20px] text-20 leading-[150%] font-bold">회사 인증을 진행해주세요.</div>
+        <p className="mt-[15px] text-14 leading-[170%] font-normal text-neutral-bg40">
+          반드시 소속 회사의 이메일을 입력해주세요.
+        </p>
 
-        <S.InputContainer>
+        <div className="mt-[31px] mb-[115px] w-full [&_div:first-child]:mb-[20px]">
           <TextInput
             label="회사명"
             placeholder="회사명"
@@ -65,14 +66,16 @@ export default function VerifyCompany({ onNext, setCompanyEmailAuthId }: Props) 
             errorMsg={errors.userProperty?.companyData?.identification ? '이메일 형식이 맞지 않습니다.' : undefined}
             {...register('userProperty.companyData.identification', { required: false, pattern: emailRegex })}
           />
-        </S.InputContainer>
-      </S.Wrapper>
+        </div>
+      </div>
 
-      <S.NextButtonWrapper>
-        <S.SubButton type="submit">회사 인증 다음에 하기</S.SubButton>
+      <div className="absolute bottom-0 left-0 mt-[202px] w-full bg-white px-20 pt-0 pb-40 text-center mobile:fixed">
+        <button className="mx-auto mt-0 mb-[22px] px-32 py-14 text-12 font-normal underline" type="submit">
+          회사 인증 다음에 하기
+        </button>
 
         <MainButton btnText="다음" disabled={!buttonDisabledState} onClick={onCompanyEmailAuthRequest} type="button" />
-      </S.NextButtonWrapper>
+      </div>
     </>
   );
 }

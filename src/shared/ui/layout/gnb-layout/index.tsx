@@ -1,4 +1,3 @@
-import * as S from './page.styled';
 import GNB from '@/shared/ui/GNB';
 
 interface Props {
@@ -7,10 +6,10 @@ interface Props {
 
 export default function GNBLayout({ children }: Props) {
   return (
-    <S.Wrapper>
+    <div className="pb-60">
       {children}
 
       <GNB />
-    </S.Wrapper>
+    </div>
   );
 }

@@ -1,7 +1,6 @@
 'use client';
 
 import { useRouter } from 'next/navigation';
-import * as S from './page.styled';
 import COMPLETE from '@/assets/logo/complete.svg';
 import BottomButtonContainer from '@/shared/ui/Button/BottomButtonContainer';
 import DefaultButton from '@/shared/ui/Button/DefaultButton';
@@ -13,7 +12,7 @@ export default function SignUpComplete() {
   return (
     <>
       <CHeader title="회원가입 완료" />
-      <S.Wrapper>
+      <div className="relative flex h-full flex-col items-center px-0 pt-80 pb-120 text-center">
         <COMPLETE />
         <div className="title2 mt-5 font-bold">회원가입이 완료되었습니다.</div>
         <p className="body2 my-[15px] mb-[100px] text-neutral-bg60">
@@ -21,7 +20,7 @@ export default function SignUpComplete() {
           <span className="body2 font-bold text-neutral-bg60">개인정보 관리 {'>'} 지역 변경</span> <br />
           또는 <span className="body2 font-bold text-neutral-bg60">메인화면</span>에서 위치를 변경해주세요.
         </p>
-      </S.Wrapper>
+      </div>
 
       <BottomButtonContainer>
         <footer className="w-full">

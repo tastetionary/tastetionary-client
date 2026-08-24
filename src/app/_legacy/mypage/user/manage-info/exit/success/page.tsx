@@ -1,7 +1,6 @@
 'use client';
 
 import { useRouter } from 'next/navigation';
-import * as S from '@/app/(main)/sign-up/components/complete/page.styled';
 import COMPLETE from '@/assets/logo/complete.svg';
 import BottomButtonContainer from '@/shared/ui/Button/BottomButtonContainer';
 import DefaultButton from '@/shared/ui/Button/DefaultButton';
@@ -14,14 +13,14 @@ export default function MyPageUserExitSuccess() {
     <>
       <CHeader title="회원 탈퇴 완료" />
 
-      <S.Wrapper>
+      <div className="relative flex h-full flex-col items-center px-0 pt-80 pb-120 text-center">
         <COMPLETE />
 
-        <div className="title2 mt-5 font-bold leading-[150%]">회원 탈퇴가 완료되었습니다.</div>
+        <div className="title2 mt-5 leading-[150%] font-bold">회원 탈퇴가 완료되었습니다.</div>
         <p className="body2 my-4 mb-[100px] leading-[170%] text-neutral-bg60">
           지금까지 맛셔너리를 이용해주셔서 감사합니다. <br />더 나은 서비스를 위해 노력하겠습니다.
         </p>
-      </S.Wrapper>
+      </div>
 
       <BottomButtonContainer>
         <footer className="w-full">

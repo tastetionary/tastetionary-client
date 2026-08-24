@@ -4,7 +4,6 @@ import { useMutation, useQuery } from '@tanstack/react-query';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
-import * as S from './page.styled';
 import SelectSection from '@/app/(main)/select-menu/components/SelectSection';
 import SelectPrice from '@/app/(main)/select-restaurant/components/SelectPrice';
 import ARROW_RIGHT from '@/assets/common/Icons/arrow_right.svg';
@@ -25,7 +24,7 @@ import { MODAL_TYPES } from '@/shared/ui/Modal/GlobalModal';
 import useModal from '@/shared/ui/Modal/GlobalModal/hooks/useModal';
 import { iconToast } from '@/shared/ui/Toast';
 import { getByte, getLimitedByteText } from '@/shared/utils';
-import { theme } from '@/styles/theme';
+import { colors } from '@/styles/colors';
 
 interface FormValue {
   review: string;
@@ -124,15 +123,15 @@ export default function RegisterReview() {
     <>
       <CHeader title={isUpdate ? '식당 리뷰 수정' : '식당 리뷰 작성'} />
 
-      <S.TitleSection>
-        <S.RestaurantName>{placeName ?? ''}</S.RestaurantName>
-      </S.TitleSection>
+      <section className="w-full px-20 pt-20 pb-4">
+        <div className="text-20 leading-[36px] font-bold">{placeName ?? ''}</div>
+      </section>
 
-      <S.AddressSection>
+      <section className="flex w-full items-center gap-[4px] bg-neutral-bg05 px-20 py-13">
         <IC_MAP width={12} height={12} />
 
-        <S.Address>{address ?? ''}</S.Address>
-      </S.AddressSection>
+        <span className="text-12 leading-[120%] font-normal text-neutral-bg40">{address ?? ''}</span>
+      </section>
 
       <form className="w-full" id="register-review-form" onSubmit={handleSubmit(onSubmitHandler)}>
         <div className="px-xl">
@@ -164,11 +163,13 @@ export default function RegisterReview() {
               placeholder={`좋은 표현을 사용하여 작성해 주세요.\n좋은 정보가 있다면 함께 남겨 주세요.`}
             />
 
-            <S.Byte>{getByte(watch('review')) ?? 0} / 100byte</S.Byte>
+            <div className="mt-[10px] w-full text-right text-12 leading-[100%] font-normal text-neutral-bg40">
+              {getByte(watch('review')) ?? 0} / 100byte
+            </div>
 
             <div className="mt-sm flex items-center justify-between">
               <span className="body2 text-neutral-bg80">리뷰 작성 시 유의사항</span>
-              <ARROW_RIGHT width={16} height={16} color={theme.colors.neutral.bg40} />
+              <ARROW_RIGHT width={16} height={16} color={colors.neutral.bg40} />
             </div>
           </SelectSection>
 

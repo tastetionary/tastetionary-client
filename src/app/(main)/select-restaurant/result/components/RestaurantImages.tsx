@@ -1,5 +1,5 @@
 import { useSelectResultStore } from '@/features/recommendation/store/useSelectResultStore';
-import { theme } from '@/styles/theme';
+import { colors } from '@/styles/colors';
 import axios from 'axios';
 import { useEffect, useState } from 'react';
 import 'swiper/css';
@@ -76,7 +76,7 @@ export default function RestaurantImages({ address }: Props) {
         {imageUrl?.map((p, i) => {
           return (
             <SwiperSlide key={i}>
-              <div className=" h-280 w-full bg-cover bg-center bg-no-repeat" style={{ backgroundImage: `url(${p})` }} />
+              <div className="h-280 w-full bg-cover bg-center bg-no-repeat" style={{ backgroundImage: `url(${p})` }} />
             </SwiperSlide>
           );
         })}
@@ -87,7 +87,7 @@ export default function RestaurantImages({ address }: Props) {
           <div
             key={i}
             className="h-4 w-24 bg-neutral-bg20 transition-colors"
-            style={activeIndex === i ? { backgroundColor: theme.colors.white } : undefined}
+            style={activeIndex === i ? { backgroundColor: colors.white } : undefined}
           />
         ))}
       </div>

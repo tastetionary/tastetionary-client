@@ -3,7 +3,6 @@
 import { useFormContext } from 'react-hook-form';
 import useCompanyAuthentication from '../../hooks/query/useCompanyAuthentication';
 import { VerifyCompanyFormValue } from '../verify-company-component';
-import * as S from '@/app/(main)/sign-up/components/verify-company/page.styled';
 import { emailRegex } from '@/shared/constants';
 import MainButton from '@/shared/ui/Button/MainButton';
 import CHeader from '@/shared/ui/c-header';
@@ -33,11 +32,13 @@ export default function CompanyInfo({ onNext }: Props) {
     <>
       <CHeader title="회사 인증" />
 
-      <S.Wrapper>
-        <S.Title>회사 인증을 진행해주세요.</S.Title>
-        <S.SubTitle>반드시 소속 회사의 이메일을 입력해주세요.</S.SubTitle>
+      <div className="relative flex h-full flex-col px-20 pt-20 pb-180">
+        <div className="mt-[20px] text-20 leading-[150%] font-bold">회사 인증을 진행해주세요.</div>
+        <p className="mt-[15px] text-14 leading-[170%] font-normal text-neutral-bg40">
+          반드시 소속 회사의 이메일을 입력해주세요.
+        </p>
 
-        <S.InputContainer>
+        <div className="mt-[31px] mb-[115px] w-full [&_div:first-child]:mb-[20px]">
           <TextInput
             label="회사명"
             placeholder="회사명"
@@ -54,12 +55,15 @@ export default function CompanyInfo({ onNext }: Props) {
             errorMsg={errors.identification ? '이메일 형식이 맞지 않습니다.' : undefined}
             {...register('identification', { required: false, pattern: emailRegex })}
           />
-        </S.InputContainer>
-      </S.Wrapper>
+        </div>
+      </div>
 
-      <S.NextButtonWrapper style={{ padding: '20px 20px 40px' }}>
+      <div
+        className="absolute bottom-0 left-0 mt-[202px] w-full bg-white px-20 pt-0 pb-40 text-center mobile:fixed"
+        style={{ padding: '20px 20px 40px' }}
+      >
         <MainButton btnText="다음" disabled={!buttonDisabledState} onClick={() => reqVerifyCompany()} type="button" />
-      </S.NextButtonWrapper>
+      </div>
     </>
   );
 }

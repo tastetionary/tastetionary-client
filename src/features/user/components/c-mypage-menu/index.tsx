@@ -1,5 +1,3 @@
-import * as S from './page.styled';
-
 interface Props {
   items: {
     name: string;
@@ -11,12 +9,12 @@ interface Props {
 
 export default function CMypageMenu({ items }: Props) {
   return (
-    <S.Menu>
+    <div className="w-full border-b-1 border-neutral-bg10">
       {items?.map((d, i) => {
         if (d.mail) {
           return (
             <a
-              className="flex cursor-pointer items-center justify-between px-20 py-[17px] text-sm font-normal leading-[14px]"
+              className="flex cursor-pointer items-center justify-between px-20 py-[17px] text-sm leading-[14px] font-normal"
               key={i}
               onClick={() => {
                 if (d.clickEvent) d.clickEvent();
@@ -31,7 +29,7 @@ export default function CMypageMenu({ items }: Props) {
 
         return (
           <div
-            className="flex cursor-pointer items-center justify-between px-20 py-[17px] text-sm font-normal leading-[14px]"
+            className="flex cursor-pointer items-center justify-between px-20 py-[17px] text-sm leading-[14px] font-normal"
             key={i}
             onClick={() => {
               if (d.clickEvent) d.clickEvent();
@@ -42,6 +40,6 @@ export default function CMypageMenu({ items }: Props) {
           </div>
         );
       })}
-    </S.Menu>
+    </div>
   );
 }
