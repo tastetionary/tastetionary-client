@@ -1,8 +1,10 @@
-import RootLayoutProviders from '@/app/RootLayoutProviders';
-import '@/styles/globals.css';
 import { Metadata } from 'next';
 import localFont from 'next/font/local';
 import Script from 'next/script';
+// globals.css 는 컴포넌트 트리보다 먼저 와야 한다.
+// 나중에 어딘가에서 CSS 를 import 하면 그게 먼저 실려서 Tailwind preflight 가 덮어써 버린다.
+import '@/styles/globals.css';
+import RootLayoutProviders from '@/app/RootLayoutProviders';
 
 const mainFont = localFont({
   src: '../assets/fonts/Galmuri9.woff2',

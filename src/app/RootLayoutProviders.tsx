@@ -1,5 +1,3 @@
-'use client';
-
 import { Suspense, type ReactNode } from 'react';
 import AppShell from '@/shared/lib/app-shell';
 import ReactQueryProvider from '@/shared/lib/react-query/ReactQueryProvider';
