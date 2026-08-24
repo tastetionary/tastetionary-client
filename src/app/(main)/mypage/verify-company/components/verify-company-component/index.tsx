@@ -54,7 +54,8 @@ export default function VerifyCompanyComponent() {
   return (
     <FormProvider {...methods}>
       <form onSubmit={methods.handleSubmit(onSubmit)}>
-        {step === 'info' && (
+        {/* sign-up 과 같은 규칙: step 쿼리가 없으면 첫 단계를 보여준다. (없으면 빈 화면이 된다) */}
+        {(step === null || step === 'info') && (
           <CompanyInfo
             onNext={id => {
               methods.setValue('historyId', id);
