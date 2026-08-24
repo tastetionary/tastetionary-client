@@ -22,10 +22,24 @@ export function getSocialRedirectUri() {
   return `${window.location.origin}${process.env.NEXT_PUBLIC_LOGIN_REDIRECT_URI}`;
 }
 
-/** 구글 인가 코드 요청 URL. 로그인 버튼과 앱 자동 로그인 두 곳에서 쓰므로 여기서만 만든다. */
-export function getGoogleAuthUrl() {
+/**
+ * 구글 인가 코드 요청 URL. 로그인 버튼과 앱 자동 로그인 두 곳에서 쓰므로 여기서만 만든다.
+ *
+ * client_id 가 비어 있으면 null 을 돌려준다.
+ * (URLSearchParams 는 undefined 를 문자열 "undefined" 로 직렬화하기 때문에,
+ *  그대로 보내면 구글 인가 화면에서 `401 invalid_client / The OAuth client was not found` 로 튕긴다.
+ *  사용자를 구글 에러 페이지로 보내는 대신 여기서 멈추고 콘솔에 원인을 남긴다.)
+ */
+export function getGoogleAuthUrl(): string | null {
+  const clientId = process.env.NEXT_PUBLIC_GOOGLE_CLIENT_ID;
+
+  if (!clientId) {
+    console.error('NEXT_PUBLIC_GOOGLE_CLIENT_ID 가 설정되지 않아 구글 로그인을 시작할 수 없습니다. .env 를 확인하세요.');
+    return null;
+  }
+
   const params = new URLSearchParams({
-    client_id: process.env.NEXT_PUBLIC_GOOGLE_CLIENT_ID!,
+    client_id: clientId,
     redirect_uri: getSocialRedirectUri(),
     response_type: 'code',
     scope: 'email profile',

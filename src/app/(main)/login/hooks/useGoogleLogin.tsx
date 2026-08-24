@@ -25,8 +25,11 @@ export default function useGoogleLogin() {
         sessionStorage.setItem('app_return_url', returnUrl);
       }
 
-      // Google OAuth URL로 이동
-      window.location.href = getGoogleAuthUrl();
+      // Google OAuth URL로 이동 (client_id 가 없으면 null 이라 이동하지 않는다)
+      const authUrl = getGoogleAuthUrl();
+      if (!authUrl) return;
+
+      window.location.href = authUrl;
     }
   };
 

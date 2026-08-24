@@ -28,8 +28,11 @@ export default function LoginPage() {
       // returnUrl 저장
       sessionStorage.setItem('app_return_url', returnUrl);
 
-      // 자동으로 Google OAuth 시작
-      window.location.href = getGoogleAuthUrl();
+      // 자동으로 Google OAuth 시작 (client_id 가 없으면 null 이라 이동하지 않는다)
+      const authUrl = getGoogleAuthUrl();
+      if (!authUrl) return;
+
+      window.location.href = authUrl;
     }
   }, [searchParams]);
 
