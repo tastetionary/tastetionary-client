@@ -85,7 +85,11 @@ const BannerSlider = () => {
             <div className="relative h-[280px] w-[430px] overflow-hidden">
               {/* 배경 이미지 */}
               <div className="absolute inset-0">
-                {banner.src && <Image src={banner.src} alt="banner" fill style={{ objectFit: 'cover' }} priority />}
+                {/* 슬라이드 컨테이너가 430px 고정이라 sizes 를 그대로 알려준다.
+                    없으면 Next 가 100vw 로 가정해 필요보다 큰 이미지를 내려받는다. */}
+                {banner.src && (
+                  <Image src={banner.src} alt="banner" fill sizes="430px" style={{ objectFit: 'cover' }} priority />
+                )}
               </div>
 
               {/* 컨텐츠 */}
