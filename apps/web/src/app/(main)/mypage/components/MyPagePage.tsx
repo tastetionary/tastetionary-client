@@ -6,7 +6,6 @@ import ARROW_RIGHT from '@/assets/common/Icons/arrow_right.svg';
 import CMypageMenu from '@/features/user/components/c-mypage-menu';
 import useUser from '@/shared/hooks/useUser';
 import CHeader from '@/shared/ui/c-header';
-import GNBLayout from '@/shared/ui/layout/gnb-layout';
 import { MODAL_TYPES } from '@/shared/ui/Modal/GlobalModal';
 import useModal from '@/shared/ui/Modal/GlobalModal/hooks/useModal';
 import { cn } from '@/shared/utils/styles.utils';
@@ -54,75 +53,73 @@ export default function MyPagePage() {
     <>
       <CHeader title="마이페이지" isLogo />
 
-      <GNBLayout>
-        <div className="flex w-full items-center justify-between border-b-1 border-neutral-bg10 px-20 py-40">
-          <div className="flex w-full flex-col gap-3">
-            {showSkeleton ? (
-              <div className="h-32 w-2/3 rounded-7 bg-neutral-bg05" />
-            ) : (
-              <p
-                className={cn('title2 flex items-center font-bold', isLoggedIn && data ? '' : 'cursor-pointer')}
-                onClick={handleLoginClick}
-              >
-                {isLoggedIn && data ? data.nickname : '로그인'}
-                <ARROW_RIGHT width={24} height={24} />
-              </p>
-            )}
+      <div className="flex w-full items-center justify-between border-b-1 border-neutral-bg10 px-20 py-40">
+        <div className="flex w-full flex-col gap-3">
+          {showSkeleton ? (
+            <div className="h-32 w-2/3 rounded-7 bg-neutral-bg05" />
+          ) : (
+            <p
+              className={cn('title2 flex items-center font-bold', isLoggedIn && data ? '' : 'cursor-pointer')}
+              onClick={handleLoginClick}
+            >
+              {isLoggedIn && data ? data.nickname : '로그인'}
+              <ARROW_RIGHT width={24} height={24} />
+            </p>
+          )}
 
-            {showSkeleton ? (
-              <div className="h-22 w-2/3 rounded-7 bg-neutral-bg05" />
-            ) : (
-              <p className="body2">
-                {isLoggedIn && data ? data.account?.accountEmail : '맛셔너리 서비스 이용을 위해 로그인해주세요.'}
-              </p>
-            )}
-          </div>
+          {showSkeleton ? (
+            <div className="h-22 w-2/3 rounded-7 bg-neutral-bg05" />
+          ) : (
+            <p className="body2">
+              {isLoggedIn && data ? data.account?.accountEmail : '맛셔너리 서비스 이용을 위해 로그인해주세요.'}
+            </p>
+          )}
         </div>
+      </div>
 
-        {showSkeleton ? (
-          <div className="flex flex-col gap-[20px] p-[20px]">
-            <div className="h-180 w-full rounded-7 bg-neutral-bg05" />
-            <div className="h-145 w-full rounded-7 bg-neutral-bg05" />
-            <div className="h-100 w-full rounded-7 bg-neutral-bg05" />
-            <div className="h-50 w-full rounded-7 bg-neutral-bg05" />
-          </div>
-        ) : (
-          <div>
-            {isLoggedIn && (
-              <CMypageMenu
-                items={[
-                  { name: '개인정보 관리', clickEvent: () => push('/mypage/user/manage-info') },
-                  { name: '작성한 리뷰 관리', clickEvent: () => push('/mypage/user/reviews') },
-                  { name: '북마크 식당 관리', clickEvent: () => push('/mypage/user/bookmark') },
-                  { name: '추천 제외 식당 보기', clickEvent: () => push('/mypage/user/excluded') },
-                ]}
-              />
-            )}
-
+      {showSkeleton ? (
+        <div className="flex flex-col gap-[20px] p-[20px]">
+          <div className="h-180 w-full rounded-7 bg-neutral-bg05" />
+          <div className="h-145 w-full rounded-7 bg-neutral-bg05" />
+          <div className="h-100 w-full rounded-7 bg-neutral-bg05" />
+          <div className="h-50 w-full rounded-7 bg-neutral-bg05" />
+        </div>
+      ) : (
+        <div>
+          {isLoggedIn && (
             <CMypageMenu
               items={[
-                {
-                  name: '공지사항',
-                  clickEvent: () =>
-                    window.open(
-                      'https://tastetionary.notion.site/03ebf00931f44926b889e085cabbd02c?v=5c1337997b384b15a63e6d89a3708ed9&pvs=74'
-                    ),
-                },
-                { name: '자주 묻는 질문', clickEvent: () => push('/ready') },
-                { name: '의견 보내기', mail: 'tastetionary@gmail.com' },
+                { name: '개인정보 관리', clickEvent: () => push('/mypage/user/manage-info') },
+                { name: '작성한 리뷰 관리', clickEvent: () => push('/mypage/user/reviews') },
+                { name: '북마크 식당 관리', clickEvent: () => push('/mypage/user/bookmark') },
+                { name: '추천 제외 식당 보기', clickEvent: () => push('/mypage/user/excluded') },
               ]}
             />
+          )}
 
-            <CMypageMenu
-              items={[
-                { name: '서비스 이용약관', clickEvent: () => push('/sign-up?step=terms-of-service') },
-                { name: '개인정보 처리 방침', clickEvent: () => push('/sign-up?step=privacy-notice') },
-              ]}
-            />
-            {isLoggedIn && <CMypageMenu items={[{ name: '로그아웃', clickEvent: () => logoutModal() }]} />}
-          </div>
-        )}
-      </GNBLayout>
+          <CMypageMenu
+            items={[
+              {
+                name: '공지사항',
+                clickEvent: () =>
+                  window.open(
+                    'https://tastetionary.notion.site/03ebf00931f44926b889e085cabbd02c?v=5c1337997b384b15a63e6d89a3708ed9&pvs=74'
+                  ),
+              },
+              { name: '자주 묻는 질문', clickEvent: () => push('/ready') },
+              { name: '의견 보내기', mail: 'tastetionary@gmail.com' },
+            ]}
+          />
+
+          <CMypageMenu
+            items={[
+              { name: '서비스 이용약관', clickEvent: () => push('/sign-up?step=terms-of-service') },
+              { name: '개인정보 처리 방침', clickEvent: () => push('/sign-up?step=privacy-notice') },
+            ]}
+          />
+          {isLoggedIn && <CMypageMenu items={[{ name: '로그아웃', clickEvent: () => logoutModal() }]} />}
+        </div>
+      )}
     </>
   );
 }
