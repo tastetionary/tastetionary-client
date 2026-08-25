@@ -1,3 +1,4 @@
+const path = require('path');
 const { withSentryConfig } = require('@sentry/nextjs');
 
 /**
@@ -40,6 +41,9 @@ const SentryBuildOptions = {
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  // packages/ui 는 빌드 단계 없이 소스(TSX)를 그대로 내보낸다. Next 가 직접 트랜스파일한다.
+  transpilePackages: ['@tastetionary/ui'],
+
   staticPageGenerationTimeout: 600,
   // Next 16 부터 dev/build 모두 Turbopack 이 기본이라 이 함수는 평소에 쓰이지 않는다.
   // `next build --webpack` 으로 되돌릴 때를 위한 탈출구로 남겨둔다.
@@ -55,8 +59,10 @@ const nextConfig = {
 
   // 실제로 쓰이는 쪽. 위 webpack() 은 Turbopack 에서 동작하지 않으므로 SVGR 룰을 여기 선언한다.
   turbopack: {
-    // 상위 디렉터리에 남아 있는 package-lock.json 을 루트로 오인하지 않도록 고정한다.
-    root: __dirname,
+    // 모노레포 루트를 가리켜야 한다. pnpm 은 실제 패키지 실체를 워크스페이스 루트의
+    // node_modules/.pnpm 아래에 두고 apps/web/node_modules 에는 심볼릭 링크만 만든다.
+    // 여기를 apps/web 으로 좁히면 Turbopack 이 next 패키지 실체를 찾지 못해 빌드가 깨진다.
+    root: path.join(__dirname, '..', '..'),
 
     rules: {
       '*.svg': {

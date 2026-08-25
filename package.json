@@ -1,5 +1,5 @@
 {
-  "name": "bside-4team",
+  "name": "tastetionary",
   "version": "0.1.0",
   "private": true,
   "packageManager": "pnpm@8.15.6",
@@ -8,59 +8,23 @@
     "node": ">=20.9.0"
   },
   "scripts": {
-    "dev": "next dev",
-    "build": "next build",
-    "start": "next start",
+    "dev": "pnpm --filter web dev",
+    "build": "pnpm --filter web build",
+    "start": "pnpm --filter web start",
     "lint": "oxlint",
     "lint:fix": "oxlint --fix",
     "lint-fix": "lint-staged",
     "format": "oxfmt",
     "format:check": "oxfmt --check",
     "fix": "pnpm format && pnpm lint:fix",
-    "knip": "knip",
-    "knip:fix": "knip --fix --allow-remove-files"
-  },
-  "dependencies": {
-    "@sentry/nextjs": "^10.71.0",
-    "@tanstack/query-core": "^5.62.9",
-    "@tanstack/query-sync-storage-persister": "^5.62.9",
-    "@tanstack/react-query": "^5.62.11",
-    "@tanstack/react-query-persist-client": "^5.62.11",
-    "@types/node": "20.4.4",
-    "@types/react": "19.2.18",
-    "@types/react-dom": "19.2.5",
-    "axios": "^1.4.0",
-    "class-variance-authority": "^0.7.0",
-    "clsx": "^2.1.0",
-    "dayjs": "^1.11.10",
-    "immer": "^10.1.1",
-    "lottie-react": "^2.4.0",
-    "next": "16.3.2",
-    "nookies": "^2.5.2",
-    "react": "19.2.8",
-    "react-daum-postcode": "^3.1.3",
-    "react-dom": "19.2.8",
-    "react-error-boundary": "^6.0.0",
-    "react-hook-form": "^7.46.1",
-    "react-toastify": "^11.0.5",
-    "swiper": "^11.1.14",
-    "tailwind-merge": "^2.3.0",
-    "typescript": "5.1.6",
-    "zustand": "^5.0.3"
+    "knip": "pnpm --filter web knip",
+    "knip:fix": "pnpm --filter web knip:fix",
+    "typecheck": "pnpm -r exec tsc --noEmit"
   },
   "devDependencies": {
-    "@svgr/webpack": "8.1.0",
-    "@tailwindcss/cli": "^4",
-    "@tailwindcss/postcss": "^4",
-    "@tanstack/react-query-devtools": "^5.62.11",
-    "@types/crypto-js": "^4.1.3",
-    "crypto-js": "^4.1.1",
-    "knip": "^5",
     "lint-staged": "^13.2.3",
     "oxfmt": "0.65.0",
-    "oxlint": "1.80.0",
-    "postcss": "^8.4.38",
-    "tailwindcss": "^4.3.3"
+    "oxlint": "1.80.0"
   },
   "lint-staged": {
     "*.{ts,tsx,js,json,css,md}": [

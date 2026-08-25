@@ -3,6 +3,9 @@
 /* 이 파일이 src/styles 아래에 있어 자동 소스 탐지 기준점이 어긋날 수 있으므로 명시한다. */
 @source '../../src';
 
+/* 워크스페이스 UI 패키지에서 쓰는 클래스도 생성되도록 스캔 대상에 포함한다. */
+@source '../../../../packages/ui/src';
+
 /* v3 tailwind.config.js 의 plugin(addVariant) 대체 */
 @custom-variant not-disabled (&:not(:disabled));
 @custom-variant not-last (&:not(:last-child));

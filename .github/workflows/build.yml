@@ -29,23 +29,23 @@ jobs:
 
       - name: Inject env
         run: |
-          echo "ENV=dev" > .env
-          echo "NEXT_PUBLIC_KAKAO_CLIENT_KEY=${{ secrets.NEXT_PUBLIC_KAKAO_CLIENT_KEY }}" >> .env
-          echo "NEXT_PUBLIC_KAKAO_REST_API_KEY=${{ secrets.NEXT_PUBLIC_KAKAO_REST_API_KEY }}" >> .env
-          echo "NEXT_PUBLIC_DEV_SERVER_URL=${{ secrets.NEXT_PUBLIC_DEV_SERVER_URL }}" >> .env
-          echo "NEXT_PUBLIC_SEARCH_IMAGE_SERVER_URL=${{ secrets.NEXT_PUBLIC_SEARCH_IMAGE_SERVER_URL }}" >> .env
-          echo "NEXT_PUBLIC_NAVER_CLIENT_ID=${{ secrets.NEXT_PUBLIC_NAVER_CLIENT_ID }}" >> .env
-          echo "NEXT_PUBLIC_NAVER_CLIENT_SECRET=${{ secrets.NEXT_PUBLIC_NAVER_CLIENT_SECRET }}" >> .env
-          echo "NEXT_PUBLIC_ACCESS_TOKEN=${{ secrets.NEXT_PUBLIC_ACCESS_TOKEN }}" >> .env
-          echo "NEXT_PUBLIC_REFRESH_TOKEN=${{ secrets.NEXT_PUBLIC_REFRESH_TOKEN }}" >> .env
-          echo "NEXT_PUBLIC_SENTRY_DSN=${{ secrets.NEXT_PUBLIC_SENTRY_DSN }}" >> .env
-          echo "NEXT_PUBLIC_SENTRY_AUTH_KEY=${{ secrets.NEXT_PUBLIC_SENTRY_AUTH_KEY }}" >> .env
-          echo "NEXT_PUBLIC_GA_ID=${{ secrets.NEXT_PUBLIC_GA_ID }}" >> .env
-          echo "NEXT_PUBLIC_TELEGRAM_TOKEN=${{ secrets.NEXT_PUBLIC_TELEGRAM_TOKEN }}" >> .env
-          echo "NEXT_PUBLIC_TELEGRAM_CHAT_ID=${{ secrets.NEXT_PUBLIC_TELEGRAM_CHAT_ID }}" >> .env
-          echo "NEXT_PUBLIC_GOOGLE_CLIENT_ID=${{ secrets.NEXT_PUBLIC_GOOGLE_CLIENT_ID }}" >> .env
-          echo "NEXT_PUBLIC_LOGIN_REDIRECT_URI=${{ secrets.NEXT_PUBLIC_LOGIN_REDIRECT_URI }}" >> .env
-          echo "NEXT_PUBLIC_API_BASE_URL=${{ secrets.NEXT_PUBLIC_API_BASE_URL }}" >> .env
+          echo "ENV=dev" > apps/web/.env
+          echo "NEXT_PUBLIC_KAKAO_CLIENT_KEY=${{ secrets.NEXT_PUBLIC_KAKAO_CLIENT_KEY }}" >> apps/web/.env
+          echo "NEXT_PUBLIC_KAKAO_REST_API_KEY=${{ secrets.NEXT_PUBLIC_KAKAO_REST_API_KEY }}" >> apps/web/.env
+          echo "NEXT_PUBLIC_DEV_SERVER_URL=${{ secrets.NEXT_PUBLIC_DEV_SERVER_URL }}" >> apps/web/.env
+          echo "NEXT_PUBLIC_SEARCH_IMAGE_SERVER_URL=${{ secrets.NEXT_PUBLIC_SEARCH_IMAGE_SERVER_URL }}" >> apps/web/.env
+          echo "NEXT_PUBLIC_NAVER_CLIENT_ID=${{ secrets.NEXT_PUBLIC_NAVER_CLIENT_ID }}" >> apps/web/.env
+          echo "NEXT_PUBLIC_NAVER_CLIENT_SECRET=${{ secrets.NEXT_PUBLIC_NAVER_CLIENT_SECRET }}" >> apps/web/.env
+          echo "NEXT_PUBLIC_ACCESS_TOKEN=${{ secrets.NEXT_PUBLIC_ACCESS_TOKEN }}" >> apps/web/.env
+          echo "NEXT_PUBLIC_REFRESH_TOKEN=${{ secrets.NEXT_PUBLIC_REFRESH_TOKEN }}" >> apps/web/.env
+          echo "NEXT_PUBLIC_SENTRY_DSN=${{ secrets.NEXT_PUBLIC_SENTRY_DSN }}" >> apps/web/.env
+          echo "NEXT_PUBLIC_SENTRY_AUTH_KEY=${{ secrets.NEXT_PUBLIC_SENTRY_AUTH_KEY }}" >> apps/web/.env
+          echo "NEXT_PUBLIC_GA_ID=${{ secrets.NEXT_PUBLIC_GA_ID }}" >> apps/web/.env
+          echo "NEXT_PUBLIC_TELEGRAM_TOKEN=${{ secrets.NEXT_PUBLIC_TELEGRAM_TOKEN }}" >> apps/web/.env
+          echo "NEXT_PUBLIC_TELEGRAM_CHAT_ID=${{ secrets.NEXT_PUBLIC_TELEGRAM_CHAT_ID }}" >> apps/web/.env
+          echo "NEXT_PUBLIC_GOOGLE_CLIENT_ID=${{ secrets.NEXT_PUBLIC_GOOGLE_CLIENT_ID }}" >> apps/web/.env
+          echo "NEXT_PUBLIC_LOGIN_REDIRECT_URI=${{ secrets.NEXT_PUBLIC_LOGIN_REDIRECT_URI }}" >> apps/web/.env
+          echo "NEXT_PUBLIC_API_BASE_URL=${{ secrets.NEXT_PUBLIC_API_BASE_URL }}" >> apps/web/.env
 
       - name: Build
         run: |
