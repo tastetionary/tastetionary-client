@@ -51,7 +51,7 @@ export function MyReviewItem({
     openModal(MODAL_TYPES.bottom, {
       content: (
         <div className="px-xl py-xs">
-          <div onClick={onReviewUpdateClick} className="body2 cursor-pointer py-md ">
+          <div onClick={onReviewUpdateClick} className="body2 cursor-pointer py-md">
             리뷰 수정
           </div>
           <div

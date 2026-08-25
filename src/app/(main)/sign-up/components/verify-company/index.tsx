@@ -7,10 +7,9 @@ import TextInput from '@/shared/ui/Input/TextInput';
 
 interface Props {
   onNext: () => void;
-  setCompanyEmailAuthId: (value: number) => void;
 }
 
-export default function VerifyCompany({ onNext, setCompanyEmailAuthId }: Props) {
+export default function VerifyCompany({ onNext }: Props) {
   const {
     register,
     getValues,

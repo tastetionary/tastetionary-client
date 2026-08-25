@@ -13,7 +13,5 @@ export const enumValuesToKeys = <T extends Record<string, string>>(enumObj: T, v
  * 유효하지 않은 키는 제외한다.
  */
 export const enumKeysToValues = <T extends Record<string, string>>(enumObj: T, keys: string[]): T[keyof T][] => {
-  return keys
-    .map(key => enumObj[key as keyof T])
-    .filter((value): value is T[keyof T] => Boolean(value));
+  return keys.map(key => enumObj[key as keyof T]).filter((value): value is T[keyof T] => Boolean(value));
 };

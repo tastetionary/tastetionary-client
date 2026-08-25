@@ -2,7 +2,6 @@
 
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
-import { useState } from 'react';
 import { Autoplay, Pagination } from 'swiper/modules';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import banner01 from '@/assets/common/bannel01.jpg';
@@ -14,7 +13,6 @@ import 'swiper/css';
 import 'swiper/css/pagination';
 
 const BannerSlider = () => {
-  const [activeIndex, setActiveIndex] = useState(0);
   const router = useRouter();
 
   const banners = [
@@ -73,7 +71,6 @@ const BannerSlider = () => {
         }}
         loop={true}
         className="w-full"
-        onSlideChange={swiper => setActiveIndex(swiper.realIndex)}
       >
         {banners.map(banner => (
           <SwiperSlide
@@ -94,7 +91,7 @@ const BannerSlider = () => {
 
               {/* 컨텐츠 */}
               <div className="absolute bottom-0 left-0 z-10 pb-[46px] pl-[32px]">
-                <h2 className="body5 mb-2 whitespace-pre-line font-bold text-white">{banner.title}</h2>
+                <h2 className="body5 mb-2 font-bold whitespace-pre-line text-white">{banner.title}</h2>
                 <p className="body6 text-white">{banner.subtitle}</p>
               </div>
             </div>

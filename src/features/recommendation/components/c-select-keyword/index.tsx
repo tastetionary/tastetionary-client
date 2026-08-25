@@ -52,7 +52,7 @@ export default function CSelectKeyword({ data, selectType }: Props) {
               } else {
                 // 새롭게 추가하는 경우
                 if (isAll) {
-                  const allKeywordNames = data?.map(k => k.name) || [];
+                  const allKeywordNames = data?.map(keyword => keyword.name) || [];
                   newKeywords = allKeywordNames;
                 } else {
                   newKeywords = [...selectedKeyword, k?.name];

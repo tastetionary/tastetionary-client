@@ -58,11 +58,11 @@ export default function DialogModal({
     <div className={cn(S.overlayVariants({ visibility: state, animation: state }))}>
       <div className={cn(S.dialogModalContainerVariants({ visibility: state, animation: state }))}>
         <div className="flex flex-col gap-md">
-          <div className="title2 whitespace-pre-line break-keep font-bold">{title}</div>
+          <div className="title2 font-bold break-keep whitespace-pre-line">{title}</div>
 
           {(message || elementMessage) && (
             <div>
-              {message && <p className="body2 whitespace-pre-line break-keep">{message}</p>}
+              {message && <p className="body2 break-keep whitespace-pre-line">{message}</p>}
               {elementMessage ?? null}
             </div>
           )}

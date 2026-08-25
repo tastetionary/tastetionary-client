@@ -35,8 +35,8 @@ export default function VerifyCompanyComponent() {
     },
   });
 
-  const setStep = (step: string) => {
-    push(`${pathname}?step=${step}`);
+  const setStep = (nextStep: string) => {
+    push(`${pathname}?step=${nextStep}`);
   };
 
   const { mutate: checkAuthCode } = useCheckCompanyAuthCode({

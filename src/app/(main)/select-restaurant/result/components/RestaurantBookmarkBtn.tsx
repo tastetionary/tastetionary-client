@@ -42,7 +42,7 @@ export default function RestaurantBookmarkBtn() {
 
   return (
     <div
-      className="absolute right-[10px] top-[10px] z-2 cursor-pointer rounded-2 bg-[#00000040] p-10"
+      className="absolute top-[10px] right-[10px] z-2 cursor-pointer rounded-2 bg-[#00000040] p-10"
       onClick={handleBookMark}
     >
       {isBookMarked ? <IC_BOOKMARK_ACTIVE /> : <IC_BOOKMARK_INACTIVE />}

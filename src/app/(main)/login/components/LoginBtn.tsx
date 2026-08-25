@@ -1,4 +1,4 @@
-import clsx from 'clsx';
+import { clsx } from 'clsx';
 import { ButtonHTMLAttributes, Fragment } from 'react';
 import IC_EMAIL from '@/assets/common/Icons/email.svg';
 import LOGO_APPLE from '@/assets/logo/sns/logo_apple.svg';

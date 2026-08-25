@@ -1,7 +1,7 @@
 'use client';
 
 import { useEffect, useRef, useState } from 'react';
-import DaumPostcodeEmbed from 'react-daum-postcode';
+import { DaumPostcodeEmbed } from 'react-daum-postcode';
 import { useFormContext } from 'react-hook-form';
 import BottomButtonContainer from '@/shared/ui/Button/BottomButtonContainer';
 import DefaultButton from '@/shared/ui/Button/DefaultButton';

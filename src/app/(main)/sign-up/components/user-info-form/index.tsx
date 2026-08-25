@@ -48,7 +48,7 @@ export default function UserInfoForm({ onNext }: Props) {
     <>
       <CHeader title="회원가입" />
 
-      <div className="mx-xl mb-40 mt-xl">
+      <div className="mx-xl mt-xl mb-40">
         <header>
           <h1 className="title2 font-bold">
             원활한 서비스 이용을 위해 <br />

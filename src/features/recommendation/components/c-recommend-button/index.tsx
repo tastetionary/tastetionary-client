@@ -40,7 +40,7 @@ export default function CRecommendButton({ selectType, btnText, ...rest }: Props
   const isResultPage = pathname?.includes('result');
 
   const goScrollToTop = () => {
-    if (typeof window === undefined) return;
+    if (typeof window === 'undefined') return;
 
     window.scrollTo({
       top: 0,

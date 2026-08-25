@@ -48,7 +48,7 @@ export default function UpdatePassword() {
 
       <ContentLayout className="px-0">
         <header className="mt-xxl px-xl">
-          <h1 className="title2 font-bold leading-8">
+          <h1 className="title2 leading-8 font-bold">
             원하는 비밀번호로 <br />
             언제든지 변경할 수 있어요. ☑️
           </h1>

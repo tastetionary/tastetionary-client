@@ -1,13 +1,13 @@
-import { useSelectResultStore } from '@/features/recommendation/store/useSelectResultStore';
-import { colors } from '@/styles/colors';
 import axios from 'axios';
 import { useEffect, useState } from 'react';
+import { Autoplay } from 'swiper/modules';
+import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
-import { Autoplay } from 'swiper/modules';
-import { Swiper, SwiperSlide } from 'swiper/react';
 import RestaurantBookmarkBtn from './RestaurantBookmarkBtn';
+import { useSelectResultStore } from '@/features/recommendation/store/useSelectResultStore';
+import { colors } from '@/styles/colors';
 
 interface Props {
   address: string;

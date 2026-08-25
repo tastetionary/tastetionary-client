@@ -15,8 +15,8 @@ const useConfirmAuthCodeMutate = ({ onNext, type, saveAuthId }: Props) => {
   const { openModal, closeModal } = useModal();
   const router = useRouter();
 
-  const authCompleteModal = (type: 'register' | 'find-password') => {
-    if (type === 'register') {
+  const authCompleteModal = (authType: 'register' | 'find-password') => {
+    if (authType === 'register') {
       openModal(MODAL_TYPES.dialog, {
         title: '인증 완료',
         message: '이메일 인증이 완료되었습니다.',
@@ -29,7 +29,7 @@ const useConfirmAuthCodeMutate = ({ onNext, type, saveAuthId }: Props) => {
       return;
     }
 
-    if (type === 'find-password') {
+    if (authType === 'find-password') {
       return router.push('/find-password/complete');
     }
   };

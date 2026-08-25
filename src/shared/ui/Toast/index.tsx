@@ -31,6 +31,9 @@ export const iconToast = (message: string, type: ToastIcon) => {
   });
 };
 
+/** ToastContainer 의 아이콘·닫기 버튼을 비운다. 렌더마다 새 컴포넌트가 만들어지지 않도록 모듈 스코프에 둔다. */
+const RenderNothing = () => <></>;
+
 export default function Toast() {
   return (
     <ToastContainer
@@ -41,8 +44,8 @@ export default function Toast() {
       closeOnClick={true}
       pauseOnHover={true}
       draggable={true}
-      icon={() => <></>}
-      closeButton={() => <></>}
+      icon={RenderNothing}
+      closeButton={RenderNothing}
     />
   );
 }

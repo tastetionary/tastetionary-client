@@ -11,7 +11,7 @@ export default function PasswordComplete() {
     <>
       <CHeader title="비밀번호 재설정" />
 
-      <div className="relative flex h-full flex-col items-center pb-[120px] pt-80 text-center">
+      <div className="relative flex h-full flex-col items-center pt-80 pb-[120px] text-center">
         <COMPLETE />
         <div className="title2 mt-5 font-bold">
           입력하신 이메일 주소로

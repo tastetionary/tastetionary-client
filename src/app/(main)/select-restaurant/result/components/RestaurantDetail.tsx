@@ -18,9 +18,9 @@ export default function RestaurantDetail() {
   };
 
   return (
-    <div className="border-b-1 border-t-1 border-solid border-neutral-bg20 px-xl py-lg">
+    <div className="border-t-1 border-b-1 border-solid border-neutral-bg20 px-xl py-lg">
       <div className="flex w-full items-center justify-between">
-        <div className="title2 whitespace-pre-line break-keep font-bold">메뉴 가격대</div>
+        <div className="title2 font-bold break-keep whitespace-pre-line">메뉴 가격대</div>
       </div>
 
       <table className="mt-md w-full table-auto border-collapse border-1 border-solid border-neutral-bg40">

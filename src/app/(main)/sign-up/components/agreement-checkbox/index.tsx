@@ -16,7 +16,7 @@ export default function AgreementCheckbox({ type, title, onChangeCheckbox, check
         <CheckBox2
           label={title}
           checkBoxId={type}
-          onChangeEvent={checked => onChangeCheckbox(checked, 'service')}
+          onChangeEvent={isChecked => onChangeCheckbox(isChecked, 'service')}
           checked={checked}
           bg="orange"
         />

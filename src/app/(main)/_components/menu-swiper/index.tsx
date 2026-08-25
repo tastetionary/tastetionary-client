@@ -1,9 +1,9 @@
-import { PickedMenus } from '@/features/home/api';
-import DefaultButton from '@/shared/ui/Button/DefaultButton';
 import Image from 'next/image';
-import 'swiper/css';
 import { Autoplay } from 'swiper/modules';
 import { Swiper, SwiperSlide } from 'swiper/react';
+import 'swiper/css';
+import { PickedMenus } from '@/features/home/api';
+import DefaultButton from '@/shared/ui/Button/DefaultButton';
 
 /**
  * 루프에 필요한 최소 슬라이드 수.

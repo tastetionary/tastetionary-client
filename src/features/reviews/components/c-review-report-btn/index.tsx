@@ -17,7 +17,7 @@ export default function CReviewReportBtn({ id }: Props) {
       title: '리뷰 신고하기',
       message: '해당 리뷰를 신고하시겠습니까?',
       elementMessage: (
-        <span className="text-12 font-normal leading-[19.2px] text-neutral-bg20">
+        <span className="text-12 leading-[19.2px] font-normal text-neutral-bg20">
           신고 시 관리자 검토 후에
           <br />
           리뷰 삭제 및 적절한 조치가 이뤄집니다.

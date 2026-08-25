@@ -1,0 +1,73 @@
+{
+  "$schema": "./node_modules/oxlint/configuration_schema.json",
+  "plugins": ["typescript", "unicorn", "oxc", "react", "import", "jsx-a11y", "nextjs"],
+  "categories": {
+    "correctness": "error",
+    "suspicious": "warn",
+    "perf": "warn"
+  },
+  "env": {
+    "builtin": true,
+    "browser": true,
+    "node": true,
+    "es2024": true
+  },
+  "rules": {
+    "no-unused-vars": ["error", { "ignoreRestSiblings": true, "argsIgnorePattern": "^_" }],
+
+    // Next 는 automatic JSX runtime 을 쓴다. React 를 import 하지 않아도 정상이다.
+    "react/react-in-jsx-scope": "off",
+
+    // react-hooks/exhaustive-deps 와 같은 검사라 중복 보고를 막는다.
+    "react/exhaustive-effect-dependencies": "off",
+    // 의존성 배열을 건드리면 무한 렌더로 이어질 수 있어 사람이 판단해야 한다.
+    // 기존 ESLint(next/core-web-vitals)에서도 warn 이었다.
+    "react-hooks/exhaustive-deps": "warn",
+
+    // React Compiler 전용 경고. 이 프로젝트는 reactCompiler 를 켜지 않았으므로 해당 없음.
+    // next.config.js 에서 reactCompiler 를 켠다면 다시 활성화할 것.
+    "react/incompatible-library": "off",
+
+    // 모달들의 mount 시 진입 애니메이션 트리거(setAnimate(true))가 의도적으로 이 패턴을 쓴다.
+    // CSS 진입 애니메이션으로 걷어내기 전까지는 경고로만 둔다.
+    "react/set-state-in-effect": "warn",
+
+    // div 에 onClick 을 단 곳들. 실제 접근성 문제지만 UI 리팩터가 필요해 별도 작업으로 미룬다.
+    "jsx-a11y/click-events-have-key-events": "warn",
+    "jsx-a11y/no-static-element-interactions": "warn",
+    "jsx-a11y/no-noninteractive-element-interactions": "warn",
+
+    // <img> → next/image 전환은 width/height 를 알아야 해서 화면별 확인이 필요하다.
+    // 기존 ESLint 에서도 warn 이었다.
+    "nextjs/no-img-element": "warn",
+    // 대부분 순서가 고정된 정적 목록이라 실제 문제는 아니지만, 새 코드에서 습관이 되지 않도록 남겨둔다.
+    "react/no-array-index-key": "warn",
+
+    // 스타일 취향에 가깝고 기존 ESLint 설정에서도 강제하지 않았다.
+    "unicorn/consistent-function-scoping": "off",
+
+    // `import 'swiper/css'` 같은 side-effect CSS import 가 정상 용법이다.
+    "import/no-unassigned-import": "off",
+    // `export *` 재수출 체인(@sentry/nextjs)을 따라가지 못해 오탐이 난다. tsc 로는 통과하는 코드다.
+    "import/namespace": "off",
+
+    // `axios.create()` 는 axios 가 문서화한 표준 사용법이다.
+    "import/no-named-as-default-member": "off",
+
+    // `global.d.ts` 의 `export {}` 는 `declare global` 을 쓰기 위한 TS 관용구라 필요하다.
+    "unicorn/require-module-specifiers": "off"
+  },
+  "ignorePatterns": [
+    "node_modules",
+    ".next",
+    "out",
+    "build",
+    "dist",
+    ".vercel",
+    "coverage",
+    "public",
+    "next-env.d.ts",
+    "playwright-report",
+    "test-results"
+  ]
+}

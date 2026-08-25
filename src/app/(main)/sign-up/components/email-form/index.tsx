@@ -32,7 +32,7 @@ export default function EmailForm({ onNext, setEmailAuthId }: Props) {
   return (
     <>
       <CHeader title="회원가입" />
-      <div className="mx-xl mb-20 mt-xl">
+      <div className="mx-xl mt-xl mb-20">
         <header>
           <h1 className="title2 font-bold">
             아이디로 사용할 <br /> 이메일 주소를 입력해 주세요. ✍️

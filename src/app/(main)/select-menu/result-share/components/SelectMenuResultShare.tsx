@@ -1,6 +1,6 @@
 'use client';
 
-import clsx from 'clsx';
+import { clsx } from 'clsx';
 import dayjs from 'dayjs';
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
@@ -72,7 +72,7 @@ export default function SelectMenuResultShare({ category, keyword, id, name }: P
               <table className="w-full border-1 border-solid border-neutral-bg90">
                 <tbody>
                   <tr>
-                    <th className="body1 w-[1%] whitespace-nowrap border-1 border-solid border-neutral-bg90 bg-neutral-bg05 px-19 py-4">
+                    <th className="body1 w-[1%] border-1 border-solid border-neutral-bg90 bg-neutral-bg05 px-19 py-4 whitespace-nowrap">
                       작성 일자
                     </th>
                     <td className="body1 px-12 py-4">{dayjs().format('YYYY.M.D')}</td>
@@ -99,15 +99,15 @@ export default function SelectMenuResultShare({ category, keyword, id, name }: P
 
           <table className="w-full border-1 border-solid border-neutral-bg90">
             <tbody>
-              <tr className="border-1 border-solid border-neutral-bg90 ">
-                <th className="body1 w-[1%] content-center whitespace-nowrap border-1 border-solid border-neutral-bg90 bg-neutral-bg05 px-19 py-4">
+              <tr className="border-1 border-solid border-neutral-bg90">
+                <th className="body1 w-[1%] content-center border-1 border-solid border-neutral-bg90 bg-neutral-bg05 px-19 py-4 whitespace-nowrap">
                   음식 종류
                 </th>
                 <td className="body1 px-12 py-4">{category.join(', ')}</td>
               </tr>
 
               <tr>
-                <th className="body1 w-[1%] content-center whitespace-nowrap border-1 border-solid border-neutral-bg90 bg-neutral-bg05 px-19 py-4">
+                <th className="body1 w-[1%] content-center border-1 border-solid border-neutral-bg90 bg-neutral-bg05 px-19 py-4 whitespace-nowrap">
                   키워드
                 </th>
                 <td className="body1 px-12 py-4">{keyword.join(', ')}</td>
@@ -123,7 +123,7 @@ export default function SelectMenuResultShare({ category, keyword, id, name }: P
             </thead>
             <tbody className="border-1 border-solid border-neutral-bg90">
               <tr>
-                <td className="relative flex flex-col items-center px-16 pb-40 pt-64">
+                <td className="relative flex flex-col items-center px-16 pt-64 pb-40">
                   <div className="absolute top-5 text-[10vw] leading-[1.6] text-neutral-bg10 pc:text-32">
                     결재 바랍니다
                   </div>

@@ -50,7 +50,7 @@ export default function Nickname() {
       <form>
         <ContentLayout>
           <header className="mt-xxl">
-            <h1 className="title2 font-bold leading-8">
+            <h1 className="title2 leading-8 font-bold">
               원하는 이름으로 <br />
               닉네임을 변경할 수 있어요. 💕
             </h1>

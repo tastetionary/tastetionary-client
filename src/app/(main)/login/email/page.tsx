@@ -43,7 +43,7 @@ export default function EmailLogin() {
       <CHeader title="이메일 로그인" />
 
       <div className="mt-xl flex w-full flex-col gap-xl px-xl">
-        <h1 className="title2 break-keep font-bold ">
+        <h1 className="title2 font-bold break-keep">
           이메일로 로그인 <span>✉️</span>
         </h1>
 

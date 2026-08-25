@@ -25,8 +25,8 @@ export default function FindPasswordComponent() {
 
   const step = params.get('step');
 
-  const setStep = (step: string) => {
-    push(`${pathname}?step=${step}`);
+  const setStep = (nextStep: string) => {
+    push(`${pathname}?step=${nextStep}`);
   };
 
   const methods = useForm<FormValue>({

@@ -1,0 +1,51 @@
+{
+  "$schema": "./node_modules/oxfmt/configuration_schema.json",
+  "arrowParens": "avoid",
+  "bracketSameLine": false,
+  "bracketSpacing": true,
+  "endOfLine": "lf",
+  "jsxSingleQuote": false,
+  "printWidth": 120,
+  "proseWrap": "preserve",
+  "quoteProps": "as-needed",
+  "semi": true,
+  "singleQuote": true,
+  "tabWidth": 2,
+  "trailingComma": "es5",
+  "sortPackageJson": false,
+  "sortTailwindcss": {
+    "stylesheet": "./src/styles/globals.css"
+  },
+  "ignorePatterns": [
+    "node_modules",
+    ".next",
+    "out",
+    "build",
+    "dist",
+    ".vercel",
+    "coverage",
+    "pnpm-lock.yaml",
+    "package-lock.json",
+    "yarn.lock",
+    "next-env.d.ts",
+    "public",
+    "*.svg",
+    "*.png",
+    "*.jpg",
+    "*.jpeg",
+    "*.gif",
+    "*.webp",
+    "*.ico",
+    "*.woff",
+    "*.woff2",
+    ".playwright-mcp",
+    "playwright-report",
+    "test-results"
+  ],
+  "sortImports": {
+    "groups": ["builtin", "external", "parent", "sibling", "index", "internal"],
+    "newlinesBetween": false,
+    "ignoreCase": true,
+    "order": "asc"
+  }
+}

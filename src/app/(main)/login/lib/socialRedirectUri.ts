@@ -34,7 +34,9 @@ export function getGoogleAuthUrl(): string | null {
   const clientId = process.env.NEXT_PUBLIC_GOOGLE_CLIENT_ID;
 
   if (!clientId) {
-    console.error('NEXT_PUBLIC_GOOGLE_CLIENT_ID 가 설정되지 않아 구글 로그인을 시작할 수 없습니다. .env 를 확인하세요.');
+    console.error(
+      'NEXT_PUBLIC_GOOGLE_CLIENT_ID 가 설정되지 않아 구글 로그인을 시작할 수 없습니다. .env 를 확인하세요.'
+    );
     return null;
   }
 

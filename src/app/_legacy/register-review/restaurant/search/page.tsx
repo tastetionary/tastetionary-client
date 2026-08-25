@@ -40,7 +40,6 @@ export default function RestaurantSearch() {
     register,
     handleSubmit,
     formState: { isValid },
-    getValues,
   } = useForm<FormValue>({
     mode: 'onSubmit',
   });

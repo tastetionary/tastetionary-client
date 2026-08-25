@@ -48,7 +48,7 @@ export const copyText = async (text: string, toastMessage?: string) => {
       try {
         await navigator.clipboard.writeText(text); // 비동기 작업을 기다림
         if (toastMessage) iconToast(toastMessage, 'check');
-      } catch (error) {
+      } catch {
         alert('복사를 다시 시도해주세요.');
       }
     } else {

@@ -15,6 +15,9 @@ export default function LoginCallback() {
   const searchParams = useSearchParams();
   const { mutate: login } = useLoginMutate();
 
+  // 네이버 로그인은 URL 해시로 토큰을 돌려준다. 현재 비활성이지만 부활 가능성 때문에
+  // 리스너와 state 를 의도적으로 남겨둔 자리라, 읽는 곳이 없어도 지우지 않는다.
+  // oxlint-disable-next-line no-unused-vars
   const [hash, setHash] = useState('');
   const [value, setValue] = useState<string | null>(null);
 

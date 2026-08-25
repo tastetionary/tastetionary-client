@@ -28,7 +28,7 @@ export default function MenuIntroPage() {
           <div className="flex w-full max-w-240 flex-1 flex-col items-center justify-center gap-40 pb-24">
             <VerticalLogo width={138} height={100} className="shrink-0" aria-hidden />
             <div className="flex w-full flex-col items-center gap-24">
-              <h1 className="text-center text-16 font-normal leading-none !text-neutral-bg90">
+              <h1 className="text-center text-16 leading-none font-normal !text-neutral-bg90">
                 오늘의 메뉴를 펼칠 시간입니다.
               </h1>
               <button
@@ -42,7 +42,7 @@ export default function MenuIntroPage() {
           </div>
         </main>
 
-        <footer className="relative z-10 mt-auto flex w-full flex-col items-center gap-16 px-24 pb-24 pt-8">
+        <footer className="relative z-10 mt-auto flex w-full flex-col items-center gap-16 px-24 pt-8 pb-24">
           {/* <GoogleAdBanner
             adSlot={process.env.NEXT_PUBLIC_ADSENSE_SLOT_ID ?? ''}
             className="w-full max-w-320"

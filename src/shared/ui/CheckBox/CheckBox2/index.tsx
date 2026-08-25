@@ -19,7 +19,7 @@ export default function CheckBox2({ checkBoxId, checked, onChangeEvent, label, b
         type="checkbox"
         id={checkBoxId}
         checked={checked}
-        onChange={({ target: { checked } }) => onChangeEvent(checked)}
+        onChange={({ target: { checked: isChecked } }) => onChangeEvent(isChecked)}
         {...rest}
       />
 

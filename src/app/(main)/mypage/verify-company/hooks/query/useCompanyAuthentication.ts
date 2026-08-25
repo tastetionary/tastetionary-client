@@ -31,7 +31,7 @@ export default function useCompanyAuthentication({ email, type, onNext }: Props)
         identification: email,
         token,
       }),
-    onSuccess: data => (type === 'retry' ? emailRetryModal() : onNext(data.id)),
+    onSuccess: res => (type === 'retry' ? emailRetryModal() : onNext(res.id)),
   });
 
   return {

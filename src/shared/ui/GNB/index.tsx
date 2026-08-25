@@ -11,7 +11,7 @@ export default function GNB() {
   const router = useRouter();
 
   return (
-    <div className="fixed bottom-0 flex w-full max-w-500 mobile:max-w-full [&>button]:flex-grow ">
+    <div className="fixed bottom-0 flex w-full max-w-500 mobile:max-w-full [&>button]:flex-grow">
       <CNavButton title="리뷰" icon={<ReviewIcon />} isActive={false} clickEvent={onReviewClick} />
       <CNavButton title="홈" icon={<HomeIcon />} isActive={pathName === '/'} clickEvent={() => router.push('/')} />
       <CNavButton

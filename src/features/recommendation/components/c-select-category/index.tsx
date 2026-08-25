@@ -30,11 +30,11 @@ export default function CSelectCategory({ selectType, data, isDuplicate = true }
 
   return (
     <div className="grid grid-cols-4 items-center gap-[16px]">
-      {data?.map((m: { id: number; name: string; icon: string }, i: number) => {
+      {data?.map((m: { id: number; name: string; icon: string }) => {
         const isSelected = selectedCategory?.includes(m?.name);
         const isAll = m.id === 0; // 전체
 
-        const allCatgoryName = data?.map(m => m.name);
+        const allCatgoryName = data?.map(category => category.name);
 
         const onMenuItemClick = () => {
           let newCategories: string[];

@@ -4,7 +4,7 @@ import { cn } from '@/shared/utils/styles.utils';
 interface Props {
   title: string;
   icon: React.ReactElement;
-  isActive: Boolean;
+  isActive: boolean;
   clickEvent?: () => void;
 }
 

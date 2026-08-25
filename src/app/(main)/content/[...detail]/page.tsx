@@ -8,7 +8,6 @@ import recommendUrl1_1 from '@/assets/common/contents/banner01/recommendUrl1-1.j
 import recommendUrl1_2 from '@/assets/common/contents/banner01/recommendUrl1-2.jpg';
 import recommendUrl1_3 from '@/assets/common/contents/banner01/recommendUrl1-3.jpg';
 import url1 from '@/assets/common/contents/banner01/url1.png';
-
 // 두번째 컨텐츠
 import recommendUrl2_1 from '@/assets/common/contents/banner02/recommendUrl2-1.jpg';
 import recommendUrl2_2 from '@/assets/common/contents/banner02/recommendUrl2-2.jpg';
@@ -153,7 +152,7 @@ export default function ContentDetail({ params }: { params: Promise<Params> }) {
         return (
           <Fragment key={`content-detail-${idx}`}>
             <Image src={content.url} alt="content" style={{ width: '100%' }} />
-            <div className="mb-4 ml-8 mr-8 mt-12">
+            <div className="mt-12 mr-8 mb-4 ml-8">
               <p className="title4 font-bold">{content.title}</p>
               <p className="title3 mt-1 font-bold">{content.subTitle}</p>
               <p className="body2 mt-3">작성일 : {content.createdAt}</p>
@@ -164,7 +163,7 @@ export default function ContentDetail({ params }: { params: Promise<Params> }) {
             </div>
             {/* 첫번째 추천 메뉴 */}
             <Image src={content.recommendUrl1} alt="content" style={{ width: '100%' }} />
-            <div className="mb-4 ml-8 mr-8 mt-4">
+            <div className="mt-4 mr-8 mb-4 ml-8">
               <p className="body2 whitespace-pre-line">{content.recommendDesc1}</p>
               <DefaultTextBox bgColor="orange" customStyle="flex w-full py-[12px] px-[16px] mt-8">
                 <span className="!font-pretendard text-white">{content.recommendBtn2}</span>
@@ -172,7 +171,7 @@ export default function ContentDetail({ params }: { params: Promise<Params> }) {
             </div>
             {/* 두번째 추천 메뉴 */}
             <Image src={content.recommendUrl2} alt="content" style={{ width: '100%' }} />
-            <div className="mb-4 ml-8 mr-8 mt-4">
+            <div className="mt-4 mr-8 mb-4 ml-8">
               <p className="body2 whitespace-pre-line">{content.recommendDesc2}</p>
               <DefaultTextBox bgColor="orange" customStyle="flex w-full py-[12px] px-[16px] mt-8">
                 <span className="!font-pretendard text-white">{content.recommendBtn3}</span>
@@ -180,7 +179,7 @@ export default function ContentDetail({ params }: { params: Promise<Params> }) {
             </div>
             {/* 세번째 추천 메뉴 */}
             <Image src={content.recommendUrl3} alt="content" style={{ width: '100%' }} />
-            <div className="ml-8 mr-8 mt-4">
+            <div className="mt-4 mr-8 ml-8">
               <p className="body2 whitespace-pre-line">{content.recommendDesc3}</p>
             </div>
 

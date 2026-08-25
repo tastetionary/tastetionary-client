@@ -82,7 +82,7 @@ export default function SelectRestaurantResult() {
 
       <RestaurantImages address={address} />
 
-      <div className="px-xl pb-xl pt-lg">
+      <div className="px-xl pt-lg pb-xl">
         <div className="flex items-center gap-xs">
           <span className="body2 text-neutral-bg60">{location}</span>
         </div>

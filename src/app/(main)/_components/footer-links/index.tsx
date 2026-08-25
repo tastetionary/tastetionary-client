@@ -45,7 +45,7 @@ export default function FooterLinks() {
           </span>
         ))}
       </div>
-      <p className="body3 pb-32 pt-8 text-center text-neutral-bg30">Copyright © Tastetionary All rights reserved.</p>
+      <p className="body3 pt-8 pb-32 text-center text-neutral-bg30">Copyright © Tastetionary All rights reserved.</p>
     </>
   );
 }

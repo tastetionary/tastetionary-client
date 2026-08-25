@@ -57,33 +57,6 @@ export enum RestaurantKeyword {
   WAITING = '웨이팅 있어요',
 }
 
-enum RestaurantPrice {
-  UNDER_10000 = '~10,000원',
-  UNDER_11000 = '~11,000원',
-  UNDER_12000 = '~12,000원',
-  UNDER_13000 = '~13,000원',
-  OVER_13000 = '13,000원~',
-}
-
-enum ReviewReportCategory {
-  INAPPROPRIATE_CONTENT = '부적절한 내용',
-  SPAM = '스팸',
-  HATE_SPEECH = '혐오 발언',
-  ADVERTISEMENT = '광고',
-  FALSE_INFO = '허위 정보',
-  ETC = '기타',
-}
-
-// User related enums
-enum UserState {
-  ACTIVE = 'active',
-  WITHDRAWAL = 'withdrawal',
-}
-
-enum AgreementCategory {
-  PERSONAL_INFORMATION = 'personal_information',
-}
-
 export enum PreferenceCategory {
   /**
    * 북마크 식당
@@ -98,11 +71,6 @@ export enum PreferenceCategory {
    */
   EXCLUDED = 'excluded',
 }
-
-/**
- * enum 대신할 type literal 시험 삼아 사용
- */
-type OpinionCategory = 'withdrawal';
 
 export enum WithdrawalTypeEnum {
   /**
@@ -130,50 +98,3 @@ export enum WithdrawalTypeEnum {
    */
   WANT_TO_DELETE_PERSONAL_INFORMATION = 'want_to_delete_personal_information',
 }
-
-// Icon mappings (if needed)
-const FoodCategoryIcons: Record<FoodCategory, string> = {
-  [FoodCategory.ALL]: '',
-  [FoodCategory.KOREAN]: '',
-  [FoodCategory.CHINESE]: '',
-  [FoodCategory.WESTERN]: '',
-  [FoodCategory.JAPANESE]: '',
-  [FoodCategory.FAST_FOOD]: '',
-  [FoodCategory.SNACK]: '',
-  [FoodCategory.ASIAN]: '',
-  [FoodCategory.SALAD]: '',
-  [FoodCategory.CAFE_AND_DESERT]: '',
-};
-
-const RestaurantCategoryIcons: Record<RestaurantCategory, string> = {
-  [RestaurantCategory.ALL]: '',
-  [RestaurantCategory.KOREAN]: '',
-  [RestaurantCategory.CHINESE]: '',
-  [RestaurantCategory.WESTERN]: '',
-  [RestaurantCategory.JAPANESE]: '',
-  [RestaurantCategory.FAST_FOOD]: '',
-  [RestaurantCategory.SNACK]: '',
-  [RestaurantCategory.ASIAN]: '',
-  [RestaurantCategory.BUFFET]: '',
-  [RestaurantCategory.SALAD]: '',
-  [RestaurantCategory.CAFE_AND_DESERT]: '',
-};
-
-const RestaurantKeywordEmoji: Record<RestaurantKeyword, string> = {
-  [RestaurantKeyword.ALL]: '',
-  [RestaurantKeyword.TASTE]: '',
-  [RestaurantKeyword.CLEAN]: '',
-  [RestaurantKeyword.KIND]: '',
-  [RestaurantKeyword.ATMOSPHERE]: '',
-  [RestaurantKeyword.CHEAP]: '',
-  [RestaurantKeyword.PARKING]: '',
-  [RestaurantKeyword.ROTATION]: '',
-  [RestaurantKeyword.LARGE]: '',
-  [RestaurantKeyword.WIDE]: '',
-  [RestaurantKeyword.WAITING]: '',
-};
-
-const PreferenceCategoryToColumnMapping: Record<PreferenceCategory, string> = {
-  [PreferenceCategory.BOOKMARK]: 'bookmark',
-  [PreferenceCategory.EXCLUDED]: 'excluded',
-};

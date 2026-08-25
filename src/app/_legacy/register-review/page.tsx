@@ -89,19 +89,19 @@ export default function RegisterReview() {
     },
   });
 
-  const onSubmitHandler: SubmitHandler<FormValue> = data => {
+  const onSubmitHandler: SubmitHandler<FormValue> = formValue => {
     if (isUpdate) {
       updateReview({
         reviewId: String(reviewId),
         category: reviewCategory[0] as RestaurantCategory,
         keywords: reviewKeyword as RestaurantKeyword[],
         prices: reviewPrice,
-        summary: data.review,
+        summary: formValue.review,
         opinion: revisit === true ? 'Y' : 'N',
         token,
       });
     } else {
-      registerReview(data?.review);
+      registerReview(formValue?.review);
     }
   };
 
