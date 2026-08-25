@@ -41,11 +41,9 @@ const SentryBuildOptions = {
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   staticPageGenerationTimeout: 600,
-  // 빌드는 lint로 차단하지 않음. lint는 `pnpm lint` / `pnpm fix`로 별도 실행.
-  // (TypeScript 타입 에러는 그대로 빌드를 실패시킴)
-  eslint: {
-    ignoreDuringBuilds: true,
-  },
+  // Next 16 부터 dev/build 모두 Turbopack 이 기본이라 이 함수는 평소에 쓰이지 않는다.
+  // `next build --webpack` 으로 되돌릴 때를 위한 탈출구로 남겨둔다.
+  // (SVGR 룰은 아래 turbopack.rules 와 짝을 이룬다. 한쪽만 고치면 그쪽 SVG import 가 깨진다.)
   webpack: config => {
     config.module.rules.push({
       test: /\.svg$/,
@@ -54,6 +52,19 @@ const nextConfig = {
 
     return config;
   },
+
+  // 실제로 쓰이는 쪽. 위 webpack() 은 Turbopack 에서 동작하지 않으므로 SVGR 룰을 여기 선언한다.
+  turbopack: {
+    // 상위 디렉터리에 남아 있는 package-lock.json 을 루트로 오인하지 않도록 고정한다.
+    root: __dirname,
+
+    rules: {
+      '*.svg': {
+        loaders: ['@svgr/webpack'],
+        as: '*.js',
+      },
+    },
+  },
   rewrites: async () => {
     return [
       {
@@ -61,8 +72,11 @@ const nextConfig = {
         destination: process.env.NEXT_PUBLIC_SERVER_URL,
       },
       {
-        source: '/search-image-api:path*',
-        destination: process.env.NEXT_PUBLIC_SEARCH_IMAGE_SERVER_URL,
+        // 이 경로는 세그먼트 없이 쿼리스트링만 붙여 호출한다 (`/search-image-api?query=...`).
+        // Next 16 의 path-to-regexp 는 접두/접미가 없는 `:path*`(= `/search-image-api:path*`)를
+        // 거부하므로 자리표시자를 떼고 정확히 매칭한다. 쿼리스트링은 리라이트가 그대로 넘긴다.
+        source: '/search-image-api',
+        destination: (process.env.NEXT_PUBLIC_SEARCH_IMAGE_SERVER_URL ?? '').replace(/\/?:path\*$/, ''),
       },
     ];
   },
