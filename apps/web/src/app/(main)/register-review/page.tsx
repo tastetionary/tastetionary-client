@@ -167,10 +167,14 @@ export default function RegisterReview() {
               {getByte(watch('review')) ?? 0} / 100byte
             </div>
 
-            <div className="mt-sm flex items-center justify-between">
+            <button
+              type="button"
+              className="mt-sm flex w-full items-center justify-between"
+              onClick={() => router.push('/register-review/caution')}
+            >
               <span className="body2 text-neutral-bg80">리뷰 작성 시 유의사항</span>
               <ARROW_RIGHT width={16} height={16} color={colors.neutral.bg40} />
-            </div>
+            </button>
           </SelectSection>
 
           <SelectSection title={{ bold: '재방문 의사', normal: '를 선택해 주세요.' }}>
