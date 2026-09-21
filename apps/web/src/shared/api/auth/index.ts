@@ -33,13 +33,18 @@ interface AuthRepository {
 const authRepository = (): AuthRepository => {
   return {
     postLogin: async ({ identification, password, category, code, redirectUri }) =>
-      await http.post<any, PostLoginParams>('/apis/v1/account/tokens', {
-        identification,
-        password,
-        category,
-        code,
-        redirectUri,
-      }),
+      await http.post<any, PostLoginParams>(
+        '/apis/v1/account/tokens',
+        {
+          identification,
+          password,
+          category,
+          code,
+          redirectUri,
+        },
+        // 로그인 실패 안내(미가입/비밀번호 불일치 등)는 useLoginMutate 가 직접 한다
+        { skipGlobalErrorModal: true }
+      ),
     postLogout: async ({ token }: { token: string }) =>
       await http.delete('/apis/v1/account/tokens', {
         headers: {

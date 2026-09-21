@@ -27,7 +27,8 @@ export default function MyPageUserExit() {
     onSuccess: () => {
       Sentry.getCurrentScope().clear();
       setTimeout(() => {
-        destroyCookie(null, 'token');
+        // 로그인 때 path '/' 로 심은 쿠키라, path 를 맞추지 않으면 현재 URL 경로 기준으로 지워져 실제 쿠키가 남는다
+        destroyCookie(null, 'token', { path: '/' });
         queryClient.clear();
       }, 100);
       push('/mypage/user/manage-info/exit/success');

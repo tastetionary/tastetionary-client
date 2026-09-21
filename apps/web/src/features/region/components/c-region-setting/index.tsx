@@ -1,6 +1,7 @@
 'use client';
 
 import { useMutation, useQueryClient } from '@tanstack/react-query';
+import { isAxiosError } from 'axios';
 import { useRouter } from 'next/navigation';
 import { FormProvider, useForm } from 'react-hook-form';
 import RegionSetting from '@/app/(main)/sign-up/components/region-setting';
@@ -100,7 +101,10 @@ export default function CRegionSetting({ category, onNextPage }: Props) {
 
     try {
       await asyncSaveRegion(data);
-    } catch {
+    } catch (error) {
+      // 공용 인터셉터가 이미 에러 모달을 띄웠으면 겹쳐 띄우지 않는다
+      if (isAxiosError(error) && error.handledByInterceptor) return;
+
       return saveFailedModal();
     }
 

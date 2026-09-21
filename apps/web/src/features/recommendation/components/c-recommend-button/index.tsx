@@ -176,7 +176,8 @@ export default function CRecommendButton({ selectType, btnText, ...rest }: Props
       ),
     onSuccess: res => loadingModal(res),
     onError: err => {
-      if (err?.response?.status === 401) {
+      // 401 은 공용 인터셉터가 '로그인이 만료되었어요' 모달로 이미 안내한다
+      if (err?.response?.status === 401 && !err.handledByInterceptor) {
         return loginModal();
       }
     },
@@ -197,7 +198,8 @@ export default function CRecommendButton({ selectType, btnText, ...rest }: Props
       ),
     onSuccess: res => loadingModal(res),
     onError: err => {
-      if (err?.response?.status === 401) {
+      // 401 은 공용 인터셉터가 '로그인이 만료되었어요' 모달로 이미 안내한다
+      if (err?.response?.status === 401 && !err.handledByInterceptor) {
         return loginModal();
       }
     },
