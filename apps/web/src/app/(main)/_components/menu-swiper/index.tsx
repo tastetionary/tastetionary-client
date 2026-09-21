@@ -42,6 +42,14 @@ const MenuSwiper = ({ menus }: { menus: PickedMenus[] }) => {
         disableOnInteraction: false,
       }}
       loop={menus.length > MIN_SLIDES_FOR_LOOP}
+      // 슬라이드가 한 화면에 다 들어오면 Swiper 는 잠기지만(isLocked) autoplay 는 그대로 돈다.
+      // 그러면 3초 뒤 slidesOffsetAfter 몫의 스냅 지점으로 밀려 첫 카드가 왼쪽으로 잘린다. (메뉴가 1개일 때 재현)
+      // 넘길 것이 없을 때는 autoplay 를 멈추고, 화면이 좁아져 다시 넘칠 때만 켠다.
+      onAfterInit={swiper => {
+        if (swiper.isLocked) swiper.autoplay.stop();
+      }}
+      onLock={swiper => swiper.autoplay.stop()}
+      onUnlock={swiper => swiper.autoplay.start()}
       className="w-full [&_.swiper-slide]:!w-120 [&_.swiper-wrapper]:pt-2"
     >
       {menus.map(menu => (
