@@ -7,11 +7,11 @@ export default function FooterLinks() {
   const footerLinks = [
     {
       text: '서비스 이용약관',
-      link: '/sign-up?step=terms-of-service',
+      link: '/policy/terms-of-service',
     },
     {
       text: '개인정보처리방침',
-      link: '/sign-up?step=privacy-notice',
+      link: '/policy/privacy-notice',
     },
     {
       text: '공지사항',

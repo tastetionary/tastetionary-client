@@ -1,17 +1,18 @@
 'use client';
 
 import { useQuery } from '@tanstack/react-query';
-import { useRouter } from 'next/navigation';
 import { MyReviewItem } from './components/MyReviewItem';
 import IMG_ERROR from '@/assets/common/error.svg';
 import { RestaurantReviewItemType, restaurantReviewRepository } from '@/features/reviews/api';
+import useReviewClick from '@/features/reviews/components/c-review-broswer-noitem/hooks/useReviewClick';
 import useUser from '@/shared/hooks/useUser';
 import BottomButtonContainer from '@/shared/ui/Button/BottomButtonContainer';
 import DefaultButton from '@/shared/ui/Button/DefaultButton';
 import CHeader from '@/shared/ui/c-header';
 
 export default function MyReviews() {
-  const router = useRouter();
+  // 식당을 먼저 골라야 리뷰를 쓸 수 있다. (활동 지역이 없으면 등록 안내부터 띄운다)
+  const { onReviewClick } = useReviewClick();
   const { token, data: userData } = useUser();
   const { data } = useQuery({
     queryKey: ['my-reivews'],
@@ -36,11 +37,7 @@ export default function MyReviews() {
 
             <BottomButtonContainer>
               <footer className="w-full">
-                <DefaultButton
-                  bgColor="yellow"
-                  customStyle="flex w-full py-[12px] px-[16px]"
-                  onClick={() => router.push('/register-review')}
-                >
+                <DefaultButton bgColor="yellow" customStyle="flex w-full py-[12px] px-[16px]" onClick={onReviewClick}>
                   <span className="!font-pretendard text-white">리뷰 작성하기</span>
                 </DefaultButton>
               </footer>

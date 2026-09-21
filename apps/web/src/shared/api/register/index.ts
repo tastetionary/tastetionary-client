@@ -20,19 +20,15 @@ interface PostConfirmAuthCodeParams {
   code: string;
 }
 
+/** 서버 스펙: RegisterProfileRequest */
 interface PostRegisterUserParams {
-  userProperty: {
-    companyData?: {
-      companyName: string;
-      companyEmail?: string;
-    };
-  };
   area: {
-    // category: 'dining_area' | 'activity_area';
-    address: '';
+    address: string;
     latitude: number;
     longitude: number;
   };
+  /** 한글/영문/숫자 3~10자 */
+  nickname?: string;
   account: {
     identification: string;
     password: string;

@@ -71,6 +71,15 @@ const nextConfig = {
       },
     },
   },
+  redirects: async () => {
+    // 약관 문서는 원래 회원가입의 `?step=` 으로 열었다. 퍼널과 분리해 /policy/* 로 옮겼으므로 옛 주소를 넘겨준다.
+    return ['terms-of-service', 'privacy-notice', 'opt-in-marketing'].map(step => ({
+      source: '/sign-up',
+      has: [{ type: 'query', key: 'step', value: step }],
+      destination: `/policy/${step}`,
+      permanent: true,
+    }));
+  },
   rewrites: async () => {
     return [
       {

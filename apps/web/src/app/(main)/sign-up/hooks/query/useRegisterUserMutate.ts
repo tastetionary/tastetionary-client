@@ -6,12 +6,12 @@ interface Props {
 }
 
 const useRegisterUserMutate = ({ onNext }: Props) => {
-  const { mutate } = useMutation({
+  const { mutate, isPending } = useMutation({
     mutationFn: getRegisterRepository().postRegisterUser,
     onSuccess: () => onNext(),
   });
 
-  return { mutate };
+  return { mutate, isPending };
 };
 
 export default useRegisterUserMutate;

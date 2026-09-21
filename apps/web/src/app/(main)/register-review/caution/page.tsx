@@ -31,7 +31,7 @@ export default function RegisterReviewCaution() {
           <DefaultButton
             bgColor="gray"
             customStyle="w-full py-[12px] px-[16px] "
-            onClick={() => router.push('/sign-up?step=terms-of-service')}
+            onClick={() => router.push('/policy/terms-of-service')}
           >
             <span className="body1">서비스 이용약관 보러가기</span>
           </DefaultButton>

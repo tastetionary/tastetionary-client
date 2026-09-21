@@ -67,10 +67,11 @@ export const useSelectResultStore = create<SelectResultState>()(
               longitude: value.longitude,
               reviews: value.reviews,
               bookmark: value.bookmark,
-              ...(value.review?.total &&
-              value.review?.keywords &&
-              value.review?.aggregatePrice &&
-              value.review?.revisitRatio
+              // 0 도 유효한 값이므로(재방문율 0% 등) truthy 가 아니라 존재 여부로 판단한다
+              ...(value.review?.total != null &&
+              value.review?.keywords != null &&
+              value.review?.aggregatePrice != null &&
+              value.review?.revisitRatio != null
                 ? {
                     review: {
                       total: value.review.total,

@@ -1,16 +1,15 @@
 import { useMutation } from '@tanstack/react-query';
-import { useEffect } from 'react';
 import { getRegisterRepository } from '@/shared/api/register';
 import { MODAL_TYPES } from '@/shared/ui/Modal/GlobalModal';
 import useModal from '@/shared/ui/Modal/GlobalModal/hooks/useModal';
 
 interface Props {
-  onNext: () => void;
-  setEmailAuthId?: (value: number) => void;
+  /** 인증 메일 발송에 성공하면 호출된다. historyId 는 이후 인증 코드 확인 요청에 쓴다 */
+  onSent: (historyId: number) => void;
   type?: 'retry';
 }
 
-const useAccountAuthCodeMutate = ({ onNext, setEmailAuthId, type }: Props) => {
+const useAccountAuthCodeMutate = ({ onSent, type }: Props) => {
   const { openModal, closeModal } = useModal();
 
   const emailRetryModal = () => {
@@ -23,19 +22,16 @@ const useAccountAuthCodeMutate = ({ onNext, setEmailAuthId, type }: Props) => {
     });
   };
 
-  const { data, mutate } = useMutation({
+  const { mutate, isPending } = useMutation({
     mutationFn: getRegisterRepository().postAccountAuthCode,
-    onSuccess: () => (type === 'retry' ? emailRetryModal() : onNext()),
+    onSuccess: data => {
+      onSent(data.id);
+
+      if (type === 'retry') emailRetryModal();
+    },
   });
 
-  useEffect(() => {
-    if (data) {
-      const authId = data.id as number;
-      setEmailAuthId?.(authId);
-    }
-  }, [data]);
-
-  return { data, mutate };
+  return { mutate, isPending };
 };
 
 export default useAccountAuthCodeMutate;

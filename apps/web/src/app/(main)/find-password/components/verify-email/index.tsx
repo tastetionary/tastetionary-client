@@ -23,7 +23,12 @@ export default function VerifyEmail({ onNext, setEmailAuthId }: Props) {
     };
   }>();
 
-  const { mutate: accountAuthCodeMutate } = useAccountAuthCodeMutate({ onNext, setEmailAuthId });
+  const { mutate: accountAuthCodeMutate } = useAccountAuthCodeMutate({
+    onSent: historyId => {
+      setEmailAuthId(historyId);
+      onNext();
+    },
+  });
 
   const onEmailAuthRequest = () => {
     accountAuthCodeMutate({ identification: getValues('account.identification'), type: 'email', category: 'password' });

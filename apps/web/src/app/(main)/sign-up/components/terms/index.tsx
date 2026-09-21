@@ -61,7 +61,7 @@ export default function Terms({ onNext }: Props) {
                 title="[필수] 만 14세 이상입니다."
                 onChangeCheckbox={checked => handleChangeAgreeTerms(checked, 'moreThan14')}
                 checked={moreThan14}
-                onNext={() => router.push('/sign-up?step=terms-of-service')}
+                onNext={() => router.push('/policy/terms-of-service')}
               />
 
               {/* 서비스 이용 약관 (완료)*/}
@@ -70,7 +70,7 @@ export default function Terms({ onNext }: Props) {
                 title="[필수] 서비스 이용약관"
                 onChangeCheckbox={checked => handleChangeAgreeTerms(checked, 'service')}
                 checked={service}
-                onNext={() => router.push('/sign-up?step=terms-of-service')}
+                onNext={() => router.push('/policy/terms-of-service')}
               />
 
               {/* 개인정보 처리 방침 (완료)*/}
@@ -79,7 +79,7 @@ export default function Terms({ onNext }: Props) {
                 title="[필수] 개인정보 처리방침"
                 onChangeCheckbox={checked => handleChangeAgreeTerms(checked, 'privacy')}
                 checked={privacy}
-                onNext={() => router.push('/sign-up?step=privacy-notice')}
+                onNext={() => router.push('/policy/privacy-notice')}
               />
 
               {/* 위치 기반 서비스 이용 약관 */}
@@ -88,7 +88,7 @@ export default function Terms({ onNext }: Props) {
                 title="[선택] 위치 기반 서비스 이용 약관"
                 onChangeCheckbox={checked => handleChangeAgreeTerms(checked, 'locationBased')}
                 checked={locationBased}
-                onNext={() => router.push('/sign-up?step=opt-in-marketing')}
+                onNext={() => router.push('/policy/opt-in-marketing')}
               />
             </div>
           </div>

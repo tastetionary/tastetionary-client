@@ -30,7 +30,8 @@ export default function FindPasswordComponent() {
   };
 
   const methods = useForm<FormValue>({
-    mode: 'onBlur',
+    // onBlur 면 이메일을 다 쳐도 포커스를 옮기기 전까지 '인증코드 전송' 버튼이 켜지지 않는다
+    mode: 'onChange',
     defaultValues: {
       account: {
         category: 'email',
@@ -50,10 +51,10 @@ export default function FindPasswordComponent() {
         {step === 'verify-auth-number' && (
           <VerifyAuthNumber
             type="find-password"
+            email={methods.getValues('account.identification')}
+            historyId={emailAuthId}
+            onResent={setEmailAuthId}
             onNext={() => push('/find-password/complete')}
-            emailAuthId={emailAuthId}
-            setEmailAuthId={setEmailAuthId}
-            saveAuthId={authId => methods.setValue('account.authenticationId', authId)}
           />
         )}
       </form>

@@ -3,19 +3,12 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { isAxiosError } from 'axios';
 import { useRouter } from 'next/navigation';
-import { FormProvider, useForm } from 'react-hook-form';
-import RegionSetting from '@/app/(main)/sign-up/components/region-setting';
+import RegionSetting, { RegionArea } from '@/app/(main)/sign-up/components/region-setting';
 import { UserRes } from '@/shared/api/user/getUser';
 import { putSaveRegion } from '@/shared/api/user/saveRegion';
 import useUser from '@/shared/hooks/useUser';
 import { MODAL_TYPES } from '@/shared/ui/Modal/GlobalModal';
 import useModal from '@/shared/ui/Modal/GlobalModal/hooks/useModal';
-
-interface FormValue {
-  address: '';
-  latitude: number;
-  longitude: number;
-}
 
 interface Props {
   category: 'dining_area' | 'activity_area';
@@ -26,10 +19,6 @@ export default function CRegionSetting({ category, onNextPage }: Props) {
   const router = useRouter();
   const queryClient = useQueryClient();
   const { token } = useUser();
-  const methods = useForm<FormValue>({
-    mode: 'onBlur',
-  });
-
   const { openModal, closeModal } = useModal();
 
   const handleCompleteRegionSetting = () => {
@@ -64,8 +53,8 @@ export default function CRegionSetting({ category, onNextPage }: Props) {
     });
   };
 
-  const { mutateAsync: asyncSaveRegion } = useMutation({
-    mutationFn: (data: { address: string; latitude: number; longitude: number }) =>
+  const { mutateAsync: asyncSaveRegion, isPending } = useMutation({
+    mutationFn: (data: RegionArea) =>
       putSaveRegion(
         {
           address: data?.address,
@@ -91,9 +80,7 @@ export default function CRegionSetting({ category, onNextPage }: Props) {
     },
   });
 
-  const handleNext = async () => {
-    const data = methods.watch();
-
+  const handleNext = async (data: RegionArea) => {
     // 지역의 단일 소스는 계정(서버)이므로 로그인 없이는 저장할 수 없다.
     if (!token) {
       return loginRequiredModal();
@@ -112,10 +99,8 @@ export default function CRegionSetting({ category, onNextPage }: Props) {
   };
 
   return (
-    <FormProvider {...methods}>
-      <form className="h-full">
-        <RegionSetting category={category} onNext={handleNext} />
-      </form>
-    </FormProvider>
+    <div className="h-full">
+      <RegionSetting category={category} onNext={handleNext} isSubmitting={isPending} />
+    </div>
   );
 }

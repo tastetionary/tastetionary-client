@@ -47,6 +47,9 @@ importers:
       '@types/react-dom':
         specifier: 19.2.5
         version: 19.2.5(@types/react@19.2.18)
+      '@use-funnel/core':
+        specifier: ^0.1.0
+        version: 0.1.0(react@19.2.8)
       axios:
         specifier: ^1.4.0
         version: 1.18.0
@@ -3517,6 +3520,14 @@ packages:
     resolution: {integrity: sha512-AnzbBERsrLKtk2XSfTbYRLjQPdy116Sty4q+T+Bp3IC4l6jNBvreVPAHmpq9qhXQM7CXZPjLVmGMw9sy+hxQ3w==}
     dependencies:
       csstype: 3.2.3
+
+  /@use-funnel/core@0.1.0(react@19.2.8):
+    resolution: {integrity: sha512-KEjBKTbOh5wd6CQZ1jYWhI6KuGrI9Pjn9CkmUgAYzonsyZE0lsiZ2/1RwsaWcxVO5RJBgfwCM8dRpibwm7An9w==}
+    peerDependencies:
+      react: '>=16.8'
+    dependencies:
+      react: 19.2.8
+    dev: false
 
   /@webassemblyjs/ast@1.14.1:
     resolution: {integrity: sha512-nuBEDgQfm1ccRp/8bCQrx1frohyufl4JlbMMZ4P1wpeOfDhF6FQkxZJ1b/e+PLwr6X1Nhw6OLme5usuBWYBvuQ==}

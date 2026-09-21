@@ -1,51 +1,45 @@
-import { useFormContext } from 'react-hook-form';
-import useAccountAuthCodeMutate from '../../hooks/query/useAccountAuthCodeMutate';
+import { useForm } from 'react-hook-form';
 import useValidationNickname from '../../hooks/query/useValidationNickname';
 import BottomButtonContainer from '@/shared/ui/Button/BottomButtonContainer';
 import DefaultButton from '@/shared/ui/Button/DefaultButton';
 import CHeader from '@/shared/ui/c-header';
 import TextInput from '@/shared/ui/Input/TextInput';
 
-interface Props {
-  onNext: () => void;
+const PASSWORD_PATTERN = /^(?=.*[a-zA-Z])(?=.*\d)(?=.*[@#$%^&+=!?]).{8,}$/;
+
+interface FormValue {
+  password: string;
+  passwordConfirm: string;
+  nickname: string;
 }
 
-export default function UserInfoForm({ onNext }: Props) {
+interface Props {
+  email: string;
+  defaultNickname?: string;
+  onNext: (value: { password: string; nickname: string }) => void;
+}
+
+export default function UserInfoForm({ email, defaultNickname, onNext }: Props) {
   const {
     register,
     getValues,
-    formState: { errors, isDirty, isValid },
-  } = useFormContext<{
-    account: {
-      identification: string;
-      password: string;
-      category: 'email';
-      passwordConfirm: string;
-    };
-    nickname: string;
-  }>();
+    watch,
+    handleSubmit,
+    formState: { errors, isValid },
+  } = useForm<FormValue>({ mode: 'onChange', defaultValues: { nickname: defaultNickname } });
 
-  const accountEmail = getValues('account.identification');
-  const nickname = getValues('nickname');
+  const nickname = watch('nickname');
 
-  // 이메일 주소와 , emailAuthId값을 전달받아서 요청에 보내야함!
-  const { mutate: accountAuthCodeMutate } = useAccountAuthCodeMutate({
-    onNext,
-    // setEmailAuthId,
-    type: 'retry',
-  });
   const { validateNicknameMutate } = useValidationNickname();
-
-  const onEmailAuthRequest = () => {
-    accountAuthCodeMutate({ identification: accountEmail, type: 'email', category: 'account' });
-  };
 
   const handleValidateNickname = () => {
     validateNicknameMutate({ nickname });
   };
 
+  const onSubmit = handleSubmit(value => onNext({ password: value.password, nickname: value.nickname }));
+
   return (
-    <>
+    <form onSubmit={onSubmit}>
       <CHeader title="회원가입" />
 
       <div className="mx-xl mt-xl mb-40">
@@ -59,16 +53,17 @@ export default function UserInfoForm({ onNext }: Props) {
           </p>
         </header>
         <section className="mt-12 [&>div]:mt-3">
-          <TextInput type="text" label="이메일 주소" disabled value={accountEmail} />
+          <TextInput type="text" label="이메일 주소" disabled value={email} />
 
           <TextInput
             type="password"
             label="비밀번호"
             placeholder="영문, 숫자, 특수문자를 조합하여 8자 이상"
-            errorMsg={errors.account?.password ? '영문, 숫자, 특수문자를 조합하여 8자 이상 입력해주세요.' : undefined}
-            {...register('account.password', {
+            errorMsg={errors.password ? '영문, 숫자, 특수문자를 조합하여 8자 이상 입력해주세요.' : undefined}
+            {...register('password', {
               required: '비밀번호를 입력해주세요',
-              pattern: /^(?=.*[a-zA-Z])(?=.*\d)(?=.*[@#$%^&+=!?]).{8,}$/,
+              pattern: PASSWORD_PATTERN,
+              deps: ['passwordConfirm'],
             })}
           />
 
@@ -76,11 +71,10 @@ export default function UserInfoForm({ onNext }: Props) {
             label="비밀번호 확인"
             placeholder="비밀번호 재입력"
             type="password"
-            errorMsg={errors.account?.passwordConfirm ? '비밀번호가 일치하지 않습니다.' : undefined}
-            {...register('account.passwordConfirm', {
+            errorMsg={errors.passwordConfirm ? '비밀번호가 일치하지 않습니다.' : undefined}
+            {...register('passwordConfirm', {
               required: true,
-              pattern: /^(?=.*[a-zA-Z])(?=.*\d)(?=.*[@#$%^&+=!?]).{8,}$/,
-              validate: value => getValues('account.password') === value || '비밀번호가 일치하지 않습니다.',
+              validate: value => getValues('password') === value || '비밀번호가 일치하지 않습니다.',
             })}
           />
 
@@ -89,8 +83,11 @@ export default function UserInfoForm({ onNext }: Props) {
               type="text"
               label="닉네임"
               placeholder="랜덤 닉네임"
+              errorMsg={errors.nickname ? '한글, 영문, 숫자로 3~10자 입력해주세요.' : undefined}
               {...register('nickname', {
                 required: true,
+                // 서버 규칙: 한글/영문/숫자 3~10자
+                pattern: /^[가-힣a-zA-Z0-9]{3,10}$/,
               })}
             />
             <DefaultButton
@@ -108,23 +105,16 @@ export default function UserInfoForm({ onNext }: Props) {
 
       <BottomButtonContainer>
         <footer className="w-full">
-          <div className="flex justify-center gap-2">
-            <p className="!font-pretendard text-sm text-neutral-bg80">인증 코드를 받지 못하셨나요?</p>
-            <DefaultButton bgColor="gray" customStyle="px-[12px] py-[4px]" onClick={onEmailAuthRequest}>
-              <span className="!font-pretendard">메일 재전송</span>
-            </DefaultButton>
-          </div>
           <DefaultButton
             bgColor="yellow"
             customStyle="flex w-full py-[12px] px-[16px] mt-6"
-            disabled={!isDirty || !isValid}
-            onClick={onNext}
-            type="button"
+            disabled={!isValid}
+            type="submit"
           >
             <span className="!font-pretendard text-white">다음</span>
           </DefaultButton>
         </footer>
       </BottomButtonContainer>
-    </>
+    </form>
   );
 }

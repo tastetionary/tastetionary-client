@@ -39,7 +39,7 @@ export default function MyExcluded() {
                 <DefaultButton
                   bgColor="gray"
                   customStyle="flex w-full py-[16px] px-[16px]"
-                  onClick={() => router.push('/register-review')}
+                  onClick={() => router.push('/select-restaurant')}
                 >
                   <span className="!font-pretendard">식당 고르기</span>
                 </DefaultButton>

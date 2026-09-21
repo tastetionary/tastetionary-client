@@ -1,5 +1,4 @@
 import { ChangeEvent, useState } from 'react';
-import { useFormContext } from 'react-hook-form';
 import useAccountAuthCodeMutate from '@/app/(main)/sign-up/hooks/query/useAccountAuthCodeMutate';
 import useConfirmAuthCodeMutate from '@/app/(main)/sign-up/hooks/query/useConfirmAuthCodeMutate';
 import BottomButtonContainer from '@/shared/ui/Button/BottomButtonContainer';
@@ -9,36 +8,37 @@ import CHeader from '@/shared/ui/c-header';
 import TextInput from '@/shared/ui/Input/TextInput';
 
 interface Props {
-  onNext: () => void;
   type: 'register' | 'find-password';
-  emailAuthId: number;
-  setEmailAuthId?: (value: number) => void;
-  saveAuthId?: (authenticationId: number) => void;
+  /** 인증 메일을 보낸 이메일 주소 */
+  email: string;
+  /** 인증 메일을 보낼 때 받은 id */
+  historyId: number;
+  /** 메일을 다시 보내면 id 가 새로 발급된다 */
+  onResent: (historyId: number) => void;
+  /** 회원가입이면 인증이 끝난 authenticationId 가 넘어온다 */
+  onNext: (authenticationId?: number) => void;
 }
 
-export default function VerifyAuthNumber({ onNext, type, setEmailAuthId, emailAuthId, saveAuthId }: Props) {
-  const { getValues } = useFormContext();
+export default function VerifyAuthNumber({ type, email, historyId, onResent, onNext }: Props) {
   const [authNumber, setAuthNumber] = useState('');
 
-  const { mutate: accountAuthCodeMutate } = useAccountAuthCodeMutate({
-    onNext,
-    setEmailAuthId,
-    type: 'retry',
-  });
-  const { mutate: confirmAuthCodeMutate } = useConfirmAuthCodeMutate({ onNext, type, saveAuthId });
-
-  const accountEmail = getValues('account.identification');
+  const { mutate: accountAuthCodeMutate } = useAccountAuthCodeMutate({ onSent: onResent, type: 'retry' });
+  const { mutate: confirmAuthCodeMutate, isPending } = useConfirmAuthCodeMutate({ type, onNext });
 
   const handleChangeAuthNumber = (e: ChangeEvent<HTMLInputElement>) => {
     setAuthNumber(e.target.value);
   };
 
   const onConfirmAuthCode = () => {
-    confirmAuthCodeMutate({ historyId: emailAuthId, code: authNumber });
+    confirmAuthCodeMutate({ historyId, code: authNumber });
   };
 
   const onEmailAuthRequest = () => {
-    accountAuthCodeMutate({ identification: accountEmail, type: 'email', category: 'account' });
+    accountAuthCodeMutate({
+      identification: email,
+      type: 'email',
+      category: type === 'find-password' ? 'password' : 'account',
+    });
   };
 
   return (
@@ -57,7 +57,7 @@ export default function VerifyAuthNumber({ onNext, type, setEmailAuthId, emailAu
           </p>
         </header>
         <section className="mt-12">
-          <TextInput type="text" label="이메일 주소" disabled={true} value={accountEmail} />
+          <TextInput type="text" label="이메일 주소" disabled={true} value={email} />
           <div className="mt-4">
             <TextInput
               type="text"
@@ -82,7 +82,7 @@ export default function VerifyAuthNumber({ onNext, type, setEmailAuthId, emailAu
           <DefaultButton
             bgColor="yellow"
             customStyle="flex w-full py-[12px] px-[16px] mt-6"
-            disabled={authNumber.length === 0 || false}
+            disabled={authNumber.length === 0 || isPending}
             onClick={onConfirmAuthCode}
             type="button"
           >

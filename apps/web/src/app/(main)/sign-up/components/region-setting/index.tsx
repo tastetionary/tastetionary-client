@@ -2,85 +2,95 @@
 
 import { useEffect, useRef, useState } from 'react';
 import { DaumPostcodeEmbed } from 'react-daum-postcode';
-import { useFormContext } from 'react-hook-form';
 import BottomButtonContainer from '@/shared/ui/Button/BottomButtonContainer';
 import DefaultButton from '@/shared/ui/Button/DefaultButton';
 import CHeader from '@/shared/ui/c-header';
 import TextInput from '@/shared/ui/Input/TextInput';
 
-interface Props {
-  onNext: () => void;
-  category?: 'activity_area' | 'dining_area';
+export interface RegionArea {
+  address: string;
+  latitude: number;
+  longitude: number;
 }
 
-export default function RegionSetting({ onNext, category = 'dining_area' }: Props) {
-  const { setValue } = useFormContext();
+interface Props {
+  /** 주소가 좌표로 변환된 뒤에만 호출된다 */
+  onNext: (area: RegionArea) => void;
+  category?: 'activity_area' | 'dining_area';
+  isSubmitting?: boolean;
+}
+
+let kakaoMapSdk: Promise<void> | null = null;
+
+/** 카카오 지도 SDK 는 한 번만 붙인다. (예전에는 주소를 바꿀 때마다 script 태그가 하나씩 늘어났다) */
+const loadKakaoMapSdk = () => {
+  kakaoMapSdk ??= new Promise<void>((resolve, reject) => {
+    // 다른 화면에서 이미 붙인 SDK 가 있으면 그대로 쓴다
+    if (window.kakao?.maps?.load) return window.kakao.maps.load(() => resolve());
+
+    const mapScript = document.createElement('script');
+    mapScript.async = true;
+    mapScript.src = `//dapi.kakao.com/v2/maps/sdk.js?appkey=${process.env.NEXT_PUBLIC_KAKAO_CLIENT_KEY}&libraries=services&autoload=false`;
+    mapScript.addEventListener('load', () => window.kakao.maps.load(() => resolve()));
+    mapScript.addEventListener('error', () => {
+      kakaoMapSdk = null;
+      reject(new Error('kakao map sdk load failed'));
+    });
+    document.head.appendChild(mapScript);
+  });
+
+  return kakaoMapSdk;
+};
+
+export default function RegionSetting({ onNext, category = 'dining_area', isSubmitting = false }: Props) {
   const mapRef = useRef<HTMLDivElement>(null);
   const [address, setAddress] = useState('');
+  // 주소를 좌표로 바꾸는 데 성공해야 값이 생긴다. 이 값이 없으면 다음으로 넘어갈 수 없다.
+  const [area, setArea] = useState<RegionArea | null>(null);
   const [openPostCode, setOpenPostCode] = useState(false);
 
   const completeHandler = (data: any) => {
     setOpenPostCode(false);
+    setArea(null);
     setAddress(data?.address);
   };
 
   useEffect(() => {
-    // DOM을 이용하여 script 태그를 만들어주자.
-    const mapScript = document.createElement('script');
-    // script.async = true 라면,
-    // 해당 스크립트가 다른 페이지와는 비동기적으로 동작함을 의미한다.
-    mapScript.async = true;
-    // script.src에 map을 불러오는 api를 넣어주자.
-    // 여기에서 우리가 기존에 발급 받았던 apiKey를 넣어주면 된다.
-    mapScript.src = `//dapi.kakao.com/v2/maps/sdk.js?appkey=${process.env.NEXT_PUBLIC_KAKAO_CLIENT_KEY}&libraries=services&autoload=false`;
+    if (!address) return;
 
-    // 이제 우리가 만든 script를 document에 붙여주자.
-    document.head.appendChild(mapScript);
+    let ignore = false;
 
-    // script가 완전히 load 된 이후, 실행될 함수
-    const onLoadKakaoMap = () => {
-      window.kakao.maps.load(() => {
-        const mapContainer = document.getElementById('map');
-        const mapOption = {
-          center: new window.kakao.maps.LatLng(33.450701, 126.570667), // 지도의 중심좌표
-          level: 3, // 지도의 확대 레벨
-        };
-        const map = new window.kakao.maps.Map(mapContainer, mapOption);
+    loadKakaoMapSdk()
+      .then(() => {
+        if (ignore || !mapRef.current) return;
 
-        if (address?.length > 0) {
-          // 주소-좌표 변환 객체를 생성합니다
-          var geocoder = new window.kakao.maps.services.Geocoder();
+        const map = new window.kakao.maps.Map(mapRef.current, {
+          center: new window.kakao.maps.LatLng(33.450701, 126.570667),
+          level: 3,
+        });
+        const geocoder = new window.kakao.maps.services.Geocoder();
 
-          // 주소로 좌표를 검색합니다
-          geocoder.addressSearch(address, function (result: any, status: any) {
-            // 정상적으로 검색이 완료됐으면
-            if (status === window.kakao.maps.services.Status.OK) {
-              var coords = new window.kakao.maps.LatLng(result[0].y, result[0].x);
+        geocoder.addressSearch(address, (result: any, status: any) => {
+          if (ignore || status !== window.kakao.maps.services.Status.OK) return;
 
-              // 카카오 LatLng 내부 속성(.Ma/.La)은 SDK 버전에 따라 바뀌므로
-              // 지오코더 결과값(y=위도, x=경도)을 직접 숫자로 변환해 사용한다.
-              setValue('latitude', Number(result[0].y));
-              setValue('longitude', Number(result[0].x));
-              setValue('address', address);
+          // 카카오 LatLng 내부 속성(.Ma/.La)은 SDK 버전에 따라 바뀌므로
+          // 지오코더 결과값(y=위도, x=경도)을 직접 숫자로 변환해 사용한다.
+          const latitude = Number(result[0].y);
+          const longitude = Number(result[0].x);
+          const coords = new window.kakao.maps.LatLng(latitude, longitude);
 
-              // 결과값으로 받은 위치를 마커로 표시합니다
-              var marker = new window.kakao.maps.Marker({
-                map: map,
-                position: coords,
-              });
+          const marker = new window.kakao.maps.Marker({ position: coords });
+          marker.setMap(map);
+          map.setCenter(coords);
 
-              marker.setMap(map);
+          setArea({ address, latitude, longitude });
+        });
+      })
+      .catch(() => {});
 
-              // 지도의 중심을 결과값으로 받은 위치로 이동시킵니다
-              map.setCenter(coords);
-            }
-          });
-        }
-      });
+    return () => {
+      ignore = true;
     };
-
-    // sciprt가 완전히 load 된 이후, 지도를 띄우는 코드를 실행시킨다.
-    mapScript.addEventListener('load', onLoadKakaoMap);
   }, [address]);
 
   return (
@@ -123,7 +133,8 @@ export default function RegionSetting({ onNext, category = 'dining_area' }: Prop
             />
           )}
 
-          <div className="relative mt-lg h-500 w-full">
+          {/* isolate: 카카오 지도 내부의 z-index 가 하단 고정 버튼 위로 올라오지 않게 쌓임 맥락을 가둔다 */}
+          <div className="relative isolate mt-lg h-500 w-full">
             <div id="map" ref={mapRef} style={{ width: address?.length > 0 ? '100%' : 0, height: '100%' }}></div>
           </div>
         </div>
@@ -135,11 +146,9 @@ export default function RegionSetting({ onNext, category = 'dining_area' }: Prop
             <DefaultButton
               bgColor="yellow"
               customStyle="flex w-full py-[12px] px-[16px] mt-6"
-              disabled={address === ''}
-              onClick={e => {
-                e.preventDefault();
-                onNext();
-              }}
+              disabled={!area || isSubmitting}
+              type="button"
+              onClick={() => area && onNext(area)}
             >
               <span className="!font-pretendard text-white">다음</span>
             </DefaultButton>

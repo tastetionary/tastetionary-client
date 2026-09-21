@@ -113,8 +113,8 @@ export default function MyPagePage() {
 
           <CMypageMenu
             items={[
-              { name: '서비스 이용약관', clickEvent: () => push('/sign-up?step=terms-of-service') },
-              { name: '개인정보 처리 방침', clickEvent: () => push('/sign-up?step=privacy-notice') },
+              { name: '서비스 이용약관', clickEvent: () => push('/policy/terms-of-service') },
+              { name: '개인정보 처리 방침', clickEvent: () => push('/policy/privacy-notice') },
             ]}
           />
           {isLoggedIn && <CMypageMenu items={[{ name: '로그아웃', clickEvent: () => logoutModal() }]} />}

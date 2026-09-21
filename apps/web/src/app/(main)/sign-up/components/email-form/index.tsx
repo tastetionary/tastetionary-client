@@ -1,36 +1,34 @@
-import { useFormContext } from 'react-hook-form';
+import { useForm } from 'react-hook-form';
 import useAccountAuthCodeMutate from '../../hooks/query/useAccountAuthCodeMutate';
 import { emailRegex } from '@/shared/constants';
 import BottomButtonContainer from '@/shared/ui/Button/BottomButtonContainer';
 import DefaultButton from '@/shared/ui/Button/DefaultButton';
-// import Header from '@/shared/ui/Header';
 import CHeader from '@/shared/ui/c-header';
 import TextInput from '@/shared/ui/Input/TextInput';
 
 interface Props {
-  onNext: () => void;
-  setEmailAuthId: (value: number) => void;
+  /** 인증 메일 발송에 성공하면 이메일과 발송 id 를 넘겨준다 */
+  onNext: (value: { email: string; historyId: number }) => void;
 }
 
-export default function EmailForm({ onNext, setEmailAuthId }: Props) {
+export default function EmailForm({ onNext }: Props) {
   const {
     register,
     getValues,
-    formState: { errors, isDirty, isValid },
-  } = useFormContext<{
-    account: {
-      identification: string;
-    };
-  }>();
+    handleSubmit,
+    formState: { errors, isValid },
+  } = useForm<{ email: string }>({ mode: 'onChange' });
 
-  const { mutate: accountAuthCodeMutate } = useAccountAuthCodeMutate({ onNext, setEmailAuthId });
+  const { mutate: accountAuthCodeMutate, isPending } = useAccountAuthCodeMutate({
+    onSent: historyId => onNext({ email: getValues('email'), historyId }),
+  });
 
-  const onEmailAuthRequest = () => {
-    accountAuthCodeMutate({ identification: getValues('account.identification'), type: 'email', category: 'account' });
-  };
+  const onEmailAuthRequest = handleSubmit(({ email }) => {
+    accountAuthCodeMutate({ identification: email, type: 'email', category: 'account' });
+  });
 
   return (
-    <>
+    <form onSubmit={onEmailAuthRequest}>
       <CHeader title="회원가입" />
       <div className="mx-xl mt-xl mb-20">
         <header>
@@ -48,8 +46,8 @@ export default function EmailForm({ onNext, setEmailAuthId }: Props) {
             type="text"
             label="이메일 주소"
             placeholder="example@tastetionary.com"
-            errorMsg={errors.account?.identification ? '이메일 형식이 맞지 않습니다.' : undefined}
-            {...register('account.identification', { required: true, pattern: emailRegex })}
+            errorMsg={errors.email ? '이메일 형식이 맞지 않습니다.' : undefined}
+            {...register('email', { required: true, pattern: emailRegex })}
           />
         </section>
       </div>
@@ -58,13 +56,12 @@ export default function EmailForm({ onNext, setEmailAuthId }: Props) {
         <DefaultButton
           bgColor="yellow"
           customStyle="flex w-full py-[12px] px-[16px]"
-          disabled={!isDirty || !isValid}
-          onClick={onEmailAuthRequest}
-          type="button"
+          disabled={!isValid || isPending}
+          type="submit"
         >
           <span className="font-pretendard text-white">다음</span>
         </DefaultButton>
       </BottomButtonContainer>
-    </>
+    </form>
   );
 }
