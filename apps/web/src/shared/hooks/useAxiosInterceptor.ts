@@ -1,6 +1,7 @@
 import * as Sentry from '@sentry/nextjs';
 import { useQueryClient } from '@tanstack/react-query';
 import { AxiosResponse } from 'axios';
+import { destroyCookie } from 'nookies';
 import { useEffect } from 'react';
 import useToken from './useToken';
 import { axiosInstance } from '@/shared/api/http';
@@ -116,6 +117,8 @@ export const useAxiosInterceptor = () => {
       }
 
       if (error.response?.data?.statusCode === 401) {
+        // 만료된 토큰 쿠키를 남겨두면 useUser가 로그인 상태로 보고 ['user']를 다시 요청해 401이 무한 반복된다
+        destroyCookie(null, 'token', { path: '/' });
         serverErrorTrigger('UNAUTHORIZED', ERROR_CODE.UNAUTHORIZED);
         queryClient.removeQueries({ queryKey: ['user'] });
         queryClient.setQueryData(['user'], undefined);
