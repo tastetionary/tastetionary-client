@@ -3,6 +3,7 @@
 import { useQuery } from '@tanstack/react-query';
 import { useRouter } from 'next/navigation';
 import { PreferenceListItem } from '../bookmark/components/BookmarkItem';
+import { PreferenceListStatus } from '../bookmark/components/PreferenceListStatus';
 import IMG_ERROR from '@/assets/common/error.svg';
 import preferenceRepository, { GetPreferenceRes } from '@/shared/api/user/preference';
 import useUser from '@/shared/hooks/useUser';
@@ -12,8 +13,8 @@ import CHeader from '@/shared/ui/c-header';
 
 export default function MyExcluded() {
   const router = useRouter();
-  const { token, data: userData } = useUser();
-  const { data } = useQuery({
+  const { token, isLoggedIn, data: userData } = useUser();
+  const { data, isPending, isError, refetch } = useQuery({
     queryKey: ['my-excluded', token],
     queryFn: async () => {
       return await preferenceRepository().getPreference({ category: 'excluded', token: String(token) });
@@ -21,12 +22,23 @@ export default function MyExcluded() {
     enabled: Boolean(token) && Boolean(userData?.id),
   });
 
+  // 서버가 배열이 아닌 모양을 내려도 화면이 깨지지 않게 한다. (원인 확인 전 임시 방어, QA #10)
+  const list = Array.isArray(data) ? data : [];
+  const isListReady = Array.isArray(data);
+
   return (
     <>
       <CHeader title="추천 제외 식당 관리" />
 
       <div>
-        {data?.length === 0 && (
+        <PreferenceListStatus
+          isLoggedIn={isLoggedIn}
+          isPending={isPending || !isListReady}
+          isError={isError}
+          onRetry={() => refetch()}
+        />
+
+        {isListReady && list.length === 0 && (
           <div className="flex flex-col items-center gap-md">
             <IMG_ERROR />
 
@@ -57,7 +69,7 @@ export default function MyExcluded() {
         )}
 
         <div>
-          {data?.map((item: GetPreferenceRes) => (
+          {list.map((item: GetPreferenceRes) => (
             <PreferenceListItem
               type="excluded"
               key={item.id}
