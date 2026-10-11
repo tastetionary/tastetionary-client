@@ -1,6 +1,6 @@
 export const ERROR_CODE = {
   ERR1000: 'missing required field',
-  ERR1001: '유효하지 않은 닉네임입니다. (banned word)',
+  ERR1001: '사용할 수 없는 닉네임입니다.\n다른 닉네임을 입력해 주세요.',
   ERR1002: '닉네임 형식이 올바르지 않습니다.',
   ERR1003: '중복 닉네임 입니다.',
   ERR1004: '이미 제외된 식당입니다.',

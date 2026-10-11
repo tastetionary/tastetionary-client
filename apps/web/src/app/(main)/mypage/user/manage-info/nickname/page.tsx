@@ -1,6 +1,7 @@
 'use client';
 
-import { useMutation } from '@tanstack/react-query';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
+import { useRouter } from 'next/navigation';
 import { useForm } from 'react-hook-form';
 import useValidationNickname from '@/app/(main)/sign-up/hooks/query/useValidationNickname';
 import userRepository from '@/shared/api/user';
@@ -14,7 +15,9 @@ import { iconToast } from '@/shared/ui/Toast';
 import { cn } from '@/shared/utils/styles.utils';
 
 export default function Nickname() {
-  const { token } = useUser();
+  const { token, data: userData } = useUser();
+  const queryClient = useQueryClient();
+  const router = useRouter();
 
   const {
     register,
@@ -25,23 +28,38 @@ export default function Nickname() {
   });
 
   const nickname = watch().nickname;
+  const currentNickname = userData?.nickname;
 
-  const { validateNicknameMutate, isSuccess } = useValidationNickname();
+  // 지금 쓰고 있는 닉네임을 그대로 넣으면 서버에 묻지 않고 바로 안내한다. (QA #2)
+  const isSameAsCurrent = Boolean(nickname) && nickname === currentNickname;
 
-  const { mutate: updateNickname } = useMutation({
+  const { validateNicknameMutate, isSuccess, variables: validatedVariables } = useValidationNickname();
+
+  // 중복 확인을 통과한 값과 지금 입력값이 같을 때만 변경할 수 있다.
+  // (확인 뒤 입력을 바꾸면 검증되지 않은 닉네임이 그대로 전송되던 문제)
+  const isValidated = isSuccess && validatedVariables?.nickname === nickname;
+
+  const { mutate: updateNickname, isPending: isUpdating } = useMutation({
     mutationFn: userRepository().putProfile,
     onSuccess: () => {
+      // 마이페이지 상단 닉네임은 ['user'] 쿼리를 보므로 바로 새로 받아온다.
+      queryClient.invalidateQueries({ queryKey: ['user'] });
       iconToast('닉네임 변경이 완료되었습니다.', 'check');
+      router.back();
     },
   });
 
   const handleValidateNickname = () => {
+    if (isSameAsCurrent) return;
+
     validateNicknameMutate({ nickname });
   };
 
   const handleUpdateNickname = () => {
     updateNickname({ nickname, token: token! });
   };
+
+  const errorMsg = errors?.nickname?.message ?? (isSameAsCurrent ? '현재 사용 중인 닉네임이에요.' : undefined);
 
   return (
     <>
@@ -60,13 +78,13 @@ export default function Nickname() {
           </header>
 
           <section className="mt-12">
-            <div className={cn('flex w-full gap-[10px]', nickname?.length && !isValid ? 'items-center' : 'items-end')}>
+            <div className={cn('flex w-full gap-[10px]', nickname?.length && errorMsg ? 'items-center' : 'items-end')}>
               <div className="w-[calc(100%-94px)]">
                 <TextInput
                   type="text"
                   label="닉네임"
-                  placeholder="기존 닉네임"
-                  errorMsg={errors?.nickname?.message}
+                  placeholder={currentNickname || '기존 닉네임'}
+                  errorMsg={errorMsg}
                   {...register('nickname', {
                     required: true,
                     maxLength: {
@@ -85,7 +103,7 @@ export default function Nickname() {
                 bgColor="yellow"
                 customStyle="h-48 px-[16px] py-[12px] text-xs"
                 type="button"
-                disabled={!isValid}
+                disabled={!isValid || isSameAsCurrent}
                 onClick={handleValidateNickname}
               >
                 <span className="body2 text-white">중복 확인</span>
@@ -99,7 +117,7 @@ export default function Nickname() {
             bgColor="yellow"
             customStyle="flex w-full py-[12px] px-[16px]"
             type="button"
-            disabled={!isSuccess}
+            disabled={!isValidated || isUpdating}
             onClick={handleUpdateNickname}
           >
             <span className="body2 text-white">변경하기</span>
