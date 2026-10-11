@@ -700,59 +700,6 @@
     @apply fixed top-0 right-0 b-safe left-0 z-[15] flex h-screen w-full items-center justify-center bg-black/50 px-20 transition-visibility duration-250 ease-in-out;
   }
 
-  .toast {
-    .Toastify__toast,
-    .Toastify__toast--error {
-      width: auto;
-      padding: 6px 16px;
-      min-height: 50px;
-      background-color: #253238;
-      margin-bottom: 0;
-      border-radius: 4px !important;
-    }
-
-    &&&.Toastify__toast-container {
-      display: flex;
-      justify-content: center;
-      width: 100% !important;
-      padding: 0 20px;
-      left: unset;
-      transform: unset;
-    }
-
-    .Toastify__toast-icon {
-      width: 24px !important;
-    }
-
-    .Toastify__toast-body {
-      display: flex !important;
-      align-items: center !important;
-      gap: 8px !important;
-      padding: 0 !important;
-      margin: 0 !important;
-
-      div,
-      div > span {
-        font-family: var(--Pretendard-Variable) !important;
-        font-size: 14px !important;
-        font-style: normal !important;
-        font-weight: 400 !important;
-        line-height: 160% !important;
-        text-align: center;
-        color: #ffffff !important;
-        white-space: pre-line !important;
-      }
-    }
-
-    .Toastify__toast-icon {
-      margin: 0 !important;
-    }
-
-    &&&.Toastify__toast-container--top-center {
-      top: 120px;
-    }
-  }
-
   .slider {
     .rc-slider-rail {
       border-radius: 0;
@@ -983,6 +930,66 @@
 
   .button-tab.selected {
     border-bottom: 2px solid #ff5601;
+  }
+}
+
+/*
+ * 토스트 스타일은 @layer 밖(언레이어드)에 둔다.
+ *
+ * react-toastify 의 ReactToastify.css 는 레이어 없이 로드되는데, 카스케이드 규칙상
+ * 언레이어드 선언은 @layer components 안의 선언보다 항상 우선한다(명시도와 무관).
+ * 그래서 레이어 안에 두면 배경색(#253238)이 라이브러리 기본값(흰색)에 밀려
+ * 흰 배경 위에 흰 글씨가 되어 토스트 글씨가 보이지 않았다. (QA #6)
+ * 같은 언레이어드끼리는 명시도로 겨루므로 컨테이너 클래스까지 붙여 명시도를 올린다.
+ */
+.toast.Toastify__toast-container {
+  .Toastify__toast,
+  .Toastify__toast--error {
+    width: auto;
+    padding: 6px 16px;
+    min-height: 50px;
+    background-color: #253238;
+    color: #ffffff;
+    margin-bottom: 0;
+    border-radius: 4px !important;
+  }
+
+  &&& {
+    display: flex;
+    justify-content: center;
+    width: 100% !important;
+    padding: 0 20px;
+    left: unset;
+    transform: unset;
+  }
+
+  .Toastify__toast-icon {
+    width: 24px !important;
+    margin: 0 !important;
+  }
+
+  .Toastify__toast-body {
+    display: flex !important;
+    align-items: center !important;
+    gap: 8px !important;
+    padding: 0 !important;
+    margin: 0 !important;
+
+    div,
+    div > span {
+      font-family: var(--Pretendard-Variable) !important;
+      font-size: 14px !important;
+      font-style: normal !important;
+      font-weight: 400 !important;
+      line-height: 160% !important;
+      text-align: center;
+      color: #ffffff !important;
+      white-space: pre-line !important;
+    }
+  }
+
+  &&&.Toastify__toast-container--top-center {
+    top: 120px;
   }
 }
 
