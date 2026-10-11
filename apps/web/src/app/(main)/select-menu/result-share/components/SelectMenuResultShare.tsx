@@ -9,6 +9,7 @@ import IC_LINK from '@/assets/common/Icons/link.svg';
 import LOGO_KAKAO from '@/assets/logo/sns/logo_kakao.svg';
 import VERTICAL_LOGO from '@/assets/logo/vertical_logo.svg';
 import CRecommendButton from '@/features/recommendation/components/c-recommend-button';
+import { useSelectFoodStore } from '@/features/recommendation/store/useSelectFoodStore';
 import { FoodCategory, FoodKeyword } from '@/shared/types/enums';
 import BottomButtonContainer from '@/shared/ui/Button/BottomButtonContainer';
 import RefreshButton from '@/shared/ui/Button/RefreshButton';
@@ -24,6 +25,15 @@ interface Props {
 
 export default function SelectMenuResultShare({ category, keyword, id, name }: Props) {
   const router = useRouter();
+  const { setFoodCategory, setFoodKeyword } = useSelectFoodStore();
+
+  // "한 번 더 돌리기"는 선택 스토어(category/keyword)를 읽어 추첨을 요청한다.
+  // 공유 링크로 들어온 사람은 스토어가 비어 있어 빈 조건으로 요청했고, 서버는 추첨할 메뉴가 없다고 답했다.
+  // URL 에 실려 온 조건을 스토어에 되돌려 놓아 공유받은 사람도 같은 조건으로 다시 돌릴 수 있게 한다. (QA #5)
+  useEffect(() => {
+    setFoodCategory(category);
+    setFoodKeyword(keyword);
+  }, [category, keyword, setFoodCategory, setFoodKeyword]);
 
   const handleKakaoShare = () => {
     if (typeof window === 'undefined' || !window.Kakao) return;
