@@ -1,6 +1,7 @@
 'use client';
 
 import { useMutation } from '@tanstack/react-query';
+import { AxiosError } from 'axios';
 import { SHA256 } from 'crypto-js';
 import { useRouter } from 'next/navigation';
 import { SubmitHandler, useForm } from 'react-hook-form';
@@ -11,6 +12,9 @@ import DefaultButton from '@/shared/ui/Button/DefaultButton';
 import CHeader from '@/shared/ui/c-header';
 import TextInput from '@/shared/ui/Input/TextInput';
 import ContentLayout from '@/shared/ui/layout/content-layout';
+import { MODAL_TYPES } from '@/shared/ui/Modal/GlobalModal';
+import useModal from '@/shared/ui/Modal/GlobalModal/hooks/useModal';
+import { ERROR_CODE } from '@/shared/utils/error-code';
 
 type FormValue = {
   password: string;
@@ -20,6 +24,32 @@ type FormValue = {
 export default function UpdatePassword() {
   const { token } = useUser();
   const router = useRouter();
+  const { openModal, closeModal } = useModal();
+
+  // 카카오/구글로 가입한 계정에는 비밀번호가 없어 서버가 ERR1009(account not found)를 돌려준다.
+  // GET /user 응답에 로그인 수단이 없어 화면 진입 자체를 막을 수는 없으므로, 여기서 이유를 안내하고 돌려보낸다. (QA #3)
+  const socialAccountModal = () => {
+    openModal(MODAL_TYPES.dialog, {
+      title: '소셜 로그인 계정은\n비밀번호를 사용하지 않아요.',
+      message: '카카오·구글로 가입한 계정은 해당 서비스에서 로그인하므로 비밀번호를 설정할 수 없어요.',
+      confirmText: '확인',
+      needClose: true,
+      handleConfirm: () => {
+        closeModal(MODAL_TYPES.dialog);
+        router.back();
+      },
+    });
+  };
+
+  const failedModal = (errorCode?: string) => {
+    openModal(MODAL_TYPES.dialog, {
+      title: (errorCode && ERROR_CODE[errorCode as keyof typeof ERROR_CODE]) || '비밀번호 변경에 실패했어요.',
+      message: '잠시 후 다시 시도해주세요.',
+      confirmText: '확인',
+      needClose: true,
+      handleConfirm: () => closeModal(MODAL_TYPES.dialog),
+    });
+  };
 
   const {
     register,
@@ -34,6 +64,13 @@ export default function UpdatePassword() {
     mutationFn: authRepository().updatePassword,
     onSuccess: () => {
       router.push('/mypage/user/manage-info/password/complete');
+    },
+    onError: (error: AxiosError<{ errorCode?: string }>) => {
+      const errorCode = error.response?.data?.errorCode;
+
+      if (errorCode === 'ERR1009') return socialAccountModal();
+
+      failedModal(errorCode);
     },
   });
 

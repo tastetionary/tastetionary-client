@@ -59,6 +59,8 @@ const authRepository = (): AuthRepository => {
           headers: {
             Authorization: `Bearer ${token}`,
           },
+          // 소셜 계정(ERR1009 account not found) 안내는 비밀번호 재설정 화면이 직접 한다
+          skipGlobalErrorModal: true,
         }
       ),
     resetPassword: async ({ historyId, code }) =>
