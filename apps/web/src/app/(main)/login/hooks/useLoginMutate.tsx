@@ -1,3 +1,4 @@
+import * as Sentry from '@sentry/nextjs';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { AxiosError } from 'axios';
 import { useRouter } from 'next/navigation';
@@ -70,7 +71,22 @@ const useLoginMutate = () => {
 
       getUserInfo(token);
     },
-    onError: (errors: AxiosError<ErrorType>) => {
+    onError: (errors: AxiosError<ErrorType>, variables) => {
+      // 소셜 로그인 실패는 사용자 화면에 원인이 남지 않는다(서버가 errorCode 없이 401 "Failed to get access token from google" 만 준다).
+      // 어떤 소셜에서, 어떤 redirectUri 로, 서버가 뭐라고 답했는지를 Sentry 에 남겨 QA #1 같은 건을 추적할 수 있게 한다.
+      if (variables.category !== 'email') {
+        Sentry.captureMessage('social login failed', {
+          level: 'warning',
+          tags: { loginCategory: variables.category },
+          extra: {
+            redirectUri: variables.redirectUri,
+            status: errors.response?.status,
+            errorCode: errors.response?.data?.errorCode,
+            originMessage: errors.response?.data?.originMessage,
+          },
+        });
+      }
+
       if (errors.response?.data.originMessage === ERROR_MSG['NO_REGISTER']) {
         noRegisterModal();
         return;
