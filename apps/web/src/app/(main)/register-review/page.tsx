@@ -1,6 +1,6 @@
 'use client';
 
-import { useMutation, useQuery } from '@tanstack/react-query';
+import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
@@ -10,7 +10,7 @@ import ARROW_RIGHT from '@/assets/common/Icons/arrow_right.svg';
 import IC_MAP from '@/assets/common/map.svg';
 import CSelectCategory from '@/features/recommendation/components/c-select-category';
 import CSelectKeyword from '@/features/recommendation/components/c-select-keyword';
-import { restaurantReviewRepository } from '@/features/reviews/api';
+import { RestaurantReviewItemType, restaurantReviewRepository } from '@/features/reviews/api';
 import { getRestaurantReviewOption } from '@/features/reviews/api/option';
 import { useReviewPlaceInfoStore } from '@/features/reviews/store/useReviewPlaceInfoStore';
 import { useReviewStore } from '@/features/reviews/store/useReviewStore';
@@ -33,8 +33,9 @@ interface FormValue {
 export default function RegisterReview() {
   const router = useRouter();
   const searchParams = useSearchParams();
+  const queryClient = useQueryClient();
   const { openModal, closeModal } = useModal();
-  const { token } = useUser();
+  const { token, data: userData } = useUser();
   const { data } = useQuery({
     queryKey: ['restaurant-review-option'],
     queryFn: () => getRestaurantReviewOption(),
@@ -42,15 +43,46 @@ export default function RegisterReview() {
   });
 
   const reviewId = searchParams.get('update');
-  const isUpdate = reviewId && !isNaN(+reviewId);
+  const isUpdate = Boolean(reviewId && !isNaN(+reviewId));
 
-  const { category: reviewCategory, keyword: reviewKeyword, prices: reviewPrice } = useReviewStore();
+  const {
+    category: reviewCategory,
+    keyword: reviewKeyword,
+    prices: reviewPrice,
+    setReviewCategory,
+    setReviewKeyword,
+    setReviewPrice,
+    resetReviewState,
+  } = useReviewStore();
   const { id, latitude, longitude, placeName, place_url, address } = useReviewPlaceInfoStore();
   const [revisit, setRevisit] = useState<null | boolean>(null);
 
   const { register, handleSubmit, watch, setValue } = useForm<FormValue>({
     mode: 'onSubmit',
   });
+
+  // 수정 모드: 리뷰 관리 목록과 같은 쿼리키라 보통 캐시에서 바로 나오고, 새로고침으로 들어와도 다시 받아온다.
+  const { data: myReviews } = useQuery({
+    queryKey: ['my-reivews'],
+    queryFn: () => restaurantReviewRepository().getUsersRestaurantReview({ reviewer_id: userData?.id ?? 0, token }),
+    enabled: isUpdate && Boolean(token) && Boolean(userData?.id),
+  });
+  const editingReview = isUpdate
+    ? myReviews?.reviews.find((review: RestaurantReviewItemType) => String(review.id) === String(reviewId))
+    : undefined;
+
+  // 수정 화면에 기존 작성 내용이 비어 있던 문제: 찾은 리뷰로 선택 스토어·폼·재방문 의사를 채운다. (QA #9)
+  useEffect(() => {
+    if (!editingReview) return;
+
+    if (editingReview.category) setReviewCategory([editingReview.category]);
+    setReviewKeyword(editingReview.keywords ?? []);
+    // 목록 응답의 prices 는 문자열 하나로 온다. 폼은 배열을 쓰므로 모양을 맞춘다.
+    const prices = editingReview.prices;
+    setReviewPrice(Array.isArray(prices) ? prices : prices ? [prices] : []);
+    setValue('review', editingReview.summary ?? '');
+    setRevisit(editingReview.opinion === 'Y' ? true : editingReview.opinion === 'N' ? false : null);
+  }, [editingReview, setReviewCategory, setReviewKeyword, setReviewPrice, setValue]);
 
   const { mutate: registerReview, isSuccess } = useMutation({
     mutationFn: (summary: string) =>
@@ -85,6 +117,9 @@ export default function RegisterReview() {
     mutationFn: restaurantReviewRepository().updateRestaurantReview,
     onSuccess: () => {
       iconToast('리뷰가 수정되었어요', 'check');
+      // 목록이 캐시된 옛 내용을 보여주지 않도록 다시 받아오고, 선택 스토어는 다음 작성에 남지 않게 비운다.
+      queryClient.invalidateQueries({ queryKey: ['my-reivews'] });
+      resetReviewState();
       router.push('/mypage/user/reviews');
     },
   });

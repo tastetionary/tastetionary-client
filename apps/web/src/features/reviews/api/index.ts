@@ -24,6 +24,8 @@ export type RestaurantReviewItemType = {
   createdAt: string;
   external_restaurant_information_id: string;
   id: string;
+  /** 서버 응답에 있을 때만 수정 화면에서 미리 선택된다. (목록 응답에 없으면 undefined) */
+  category?: RestaurantCategory;
   keywords: RestaurantKeyword[];
   opinion: 'Y' | 'N' | null;
   prices:
