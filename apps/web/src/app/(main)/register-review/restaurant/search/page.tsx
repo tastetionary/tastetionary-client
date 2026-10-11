@@ -211,7 +211,8 @@ export default function RestaurantSearch() {
 
                 {placeAddress !== '' && placeAddress === address && (
                   <>
-                    <div className="my-md h-[calc(100vw-64px)] w-full">
+                    {/* 데스크톱에선 100vw 기준 높이가 화면을 넘길 만큼 커져 스크롤이 길어졌다. 고정 높이로 둔다. (QA #7) */}
+                    <div className="my-md h-200 w-full">
                       <div id="map" style={{ width: placeAddress?.length > 0 ? '100%' : 0, height: '100%' }}></div>
                     </div>
 
