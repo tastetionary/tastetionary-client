@@ -97,7 +97,13 @@ export default function RegionSetting({ onNext, category = 'dining_area', isSubm
     <>
       <CHeader title={category === 'activity_area' ? '활동 지역 설정' : '지역 설정'} />
 
-      <div className="relative mt-xl h-full px-xl pb-[120px]">
+      {/*
+       * 지도는 고정 높이 대신 "화면 높이 - 헤더(56px)" 안에서 남는 공간을 채운다.
+       * 긴 화면에서는 하단 "다음" 버튼 바로 위까지 늘어나 아래가 비어 보이지 않고,
+       * 짧은 화면에서는 최소 200px 을 지키고 나머지는 스크롤되어 잘리지 않는다. (QA #7)
+       * pb-[136px] 은 fixed 하단 버튼(패딩 64 + 버튼 46 + 위 여백 24 = 134px) 자리. 120 이었을 땐 지도 아래 8px 이 버튼에 가렸다.
+       */}
+      <div className="relative flex min-h-[calc(100svh-56px)] flex-col px-xl pt-xl pb-[136px]">
         <header>
           <h1 className="title2 font-bold">
             지역을 설정하면 <br />
@@ -108,7 +114,7 @@ export default function RegionSetting({ onNext, category = 'dining_area', isSubm
           </p>
         </header>
 
-        <div className="mt-xl w-full">
+        <div className="mt-xl flex w-full flex-1 flex-col">
           {!openPostCode && (
             <TextInput
               label={category === 'activity_area' ? '활동 지역 검색' : '지역 검색'}
@@ -134,9 +140,14 @@ export default function RegionSetting({ onNext, category = 'dining_area', isSubm
           )}
 
           {/* isolate: 카카오 지도 내부의 z-index 가 하단 고정 버튼 위로 올라오지 않게 쌓임 맥락을 가둔다 */}
-          {/* 높이는 리뷰 작성용 식당 검색 지도와 같은 200px. 500px 이었을 때 모바일에서 "다음" 버튼까지 스크롤해야 했다. (QA #7) */}
-          <div className="relative isolate mt-lg h-200 w-full">
-            <div id="map" ref={mapRef} style={{ width: address?.length > 0 ? '100%' : 0, height: '100%' }}></div>
+          <div className="relative isolate mt-lg min-h-[200px] w-full flex-1">
+            {/* 컨테이너 높이는 flex 로 정해지므로(명시 높이 없음) 자식의 height:100% 는 0 이 된다. absolute 로 채운다. */}
+            <div
+              id="map"
+              ref={mapRef}
+              className="absolute inset-0"
+              style={{ width: address?.length > 0 ? '100%' : 0 }}
+            ></div>
           </div>
         </div>
       </div>
