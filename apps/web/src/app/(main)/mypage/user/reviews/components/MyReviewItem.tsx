@@ -36,7 +36,6 @@ export function MyReviewItem({
   });
 
   const onReviewUpdateClick = () => {
-    // 기존 내용(키워드·가격대·한 줄 리뷰·재방문 의사)은 수정 화면이 ['my-reivews'] 캐시에서 id 로 찾아 채운다.
     router.push(`/register-review?update=${id}`);
     closeModal(MODAL_TYPES.bottom);
     setReviewPlaceInfo({
@@ -48,36 +47,22 @@ export function MyReviewItem({
     });
   };
 
-  // 더보기 메뉴: 식당 이름을 제목으로 두고, 항목은 큼직하게, 아래에 취소 버튼을 둔 액션 시트 (QA #8)
   const reviewOptionModal = () => {
     openModal(MODAL_TYPES.bottom, {
-      variant: 'actionSheet',
       content: (
-        <div className="flex flex-col px-xl pt-xs pb-md">
-          <p className="body3 truncate px-xs pb-xs text-center text-neutral-bg40">{restaurant.name}</p>
-
-          <button type="button" onClick={onReviewUpdateClick} className="body1 w-full py-14 text-center">
+        <div className="px-xl py-xs">
+          <div onClick={onReviewUpdateClick} className="body2 cursor-pointer py-md">
             리뷰 수정
-          </button>
-
-          <button
-            type="button"
+          </div>
+          <div
             onClick={reviewDeleteAskModal}
-            className="body1 w-full border-t border-solid border-neutral-bg10 py-14 text-center text-simentic-r90"
+            className="body2 cursor-pointer border-t border-solid border-neutral-bg20 py-md"
           >
             리뷰 삭제
-          </button>
-
-          <DefaultButton
-            bgColor="gray"
-            type="button"
-            customStyle="mt-xs w-full py-14"
-            onClick={() => closeModal(MODAL_TYPES.bottom)}
-          >
-            <span className="body1">취소</span>
-          </DefaultButton>
+          </div>
         </div>
       ),
+      removeExpandBtn: true,
     });
   };
 

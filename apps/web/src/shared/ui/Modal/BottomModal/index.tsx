@@ -8,11 +8,9 @@ import { cn } from '@/shared/utils/styles.utils';
 interface Props {
   content?: ReactNode;
   removeExpandBtn?: boolean;
-  /** actionSheet: 상단 손잡이와 둥근 모서리를 가진 짧은 선택 메뉴. 펼침 버튼은 쓰지 않는다. */
-  variant?: 'default' | 'actionSheet';
 }
 
-export default function BottomModal({ content, removeExpandBtn, variant = 'default' }: Props) {
+export default function BottomModal({ content, removeExpandBtn }: Props) {
   const { closeModal } = useModal();
 
   const [animate, setAnimate] = useState(false);
@@ -20,8 +18,6 @@ export default function BottomModal({ content, removeExpandBtn, variant = 'defau
 
   const state = animate ? 'visible' : 'default';
   const expandState = expand ? 'expand' : 'fold';
-  const isActionSheet = variant === 'actionSheet';
-  const hideExpandBtn = removeExpandBtn || isActionSheet;
 
   const onClose = () => {
     setAnimate(false);
@@ -42,11 +38,9 @@ export default function BottomModal({ content, removeExpandBtn, variant = 'defau
         if (e.target === e.currentTarget) onClose();
       }}
     >
-      <div className={cn(S.bottomModalContainerVariants({ animation: state, expand: expandState, variant }))}>
-        <div className={cn('flex w-full items-center justify-center', hideExpandBtn ? '' : 'py-12')}>
-          {isActionSheet && <div className="mt-[12px] mb-[4px] h-4 w-40 rounded-2 bg-neutral-bg20" aria-hidden />}
-
-          {!hideExpandBtn && (
+      <div className={cn(S.bottomModalContainerVariants({ animation: state, expand: expandState }))}>
+        <div className={cn('flex w-full  items-center justify-center', removeExpandBtn ? '' : 'py-12')}>
+          {!removeExpandBtn && (
             <div
               className="flex cursor-pointer items-center justify-center gap-4"
               onClick={() => setExpand(prev => !prev)}
