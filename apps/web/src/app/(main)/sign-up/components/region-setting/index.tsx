@@ -134,7 +134,8 @@ export default function RegionSetting({ onNext, category = 'dining_area', isSubm
           )}
 
           {/* isolate: 카카오 지도 내부의 z-index 가 하단 고정 버튼 위로 올라오지 않게 쌓임 맥락을 가둔다 */}
-          <div className="relative isolate mt-lg h-500 w-full">
+          {/* 높이는 리뷰 작성용 식당 검색 지도와 같은 200px. 500px 이었을 때 모바일에서 "다음" 버튼까지 스크롤해야 했다. (QA #7) */}
+          <div className="relative isolate mt-lg h-200 w-full">
             <div id="map" ref={mapRef} style={{ width: address?.length > 0 ? '100%' : 0, height: '100%' }}></div>
           </div>
         </div>
