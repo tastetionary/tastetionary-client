@@ -1,6 +1,30 @@
+import { Metadata } from 'next';
 import SelectMenuResultShare from './components/SelectMenuResultShare';
 import { enumKeysToValues } from '@/features/recommendation/components/c-recommend-button/utils';
 import { FoodCategory, FoodKeyword } from '@/shared/types/enums';
+
+// 링크를 복사해 붙여넣으면 메신저가 이 페이지의 OG 태그로 미리보기를 만든다.
+// 카카오 공유(SelectMenuResultShare 의 sendDefault)와 같은 제목·설명·이미지를 실어 두 경로의 화면을 맞춘다. (QA #11)
+const SHARE_TITLE = '오늘의 점심 메뉴 결재 부탁드립니다';
+const SHARE_DESCRIPTION = '직장인 메뉴/식당 추천 서비스 맛셔너리';
+
+export const metadata: Metadata = {
+  title: SHARE_TITLE,
+  description: SHARE_DESCRIPTION,
+  openGraph: {
+    type: 'website',
+    siteName: '맛셔너리',
+    title: SHARE_TITLE,
+    description: SHARE_DESCRIPTION,
+    images: [{ url: '/image/Share/share_og.png', width: 2400, height: 1200, alt: '맛셔너리 메뉴 품의서' }],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: SHARE_TITLE,
+    description: SHARE_DESCRIPTION,
+    images: ['/image/Share/share_og.png'],
+  },
+};
 
 export default async function SelectMenuResultSharePage({
   searchParams,

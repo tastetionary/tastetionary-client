@@ -18,6 +18,8 @@ const subFont = localFont({
 });
 
 export const metadata: Metadata = {
+  // OG 이미지 같은 URL 메타데이터는 절대 경로여야 해서 상대 경로의 기준 도메인을 정해 둔다.
+  metadataBase: new URL('https://tastetionary.com'),
   title: '맛셔너리',
   description: '직장인 점심 메뉴 & 식당 추첨 서비스 (우리회사 근처 맛집 나무위키)',
 };
